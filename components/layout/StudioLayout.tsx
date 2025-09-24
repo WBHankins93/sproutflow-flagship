@@ -34,13 +34,15 @@ interface SectionProps {
   className?: string;
   padding?: 'default' | 'sm' | 'lg' | 'none';
   background?: 'white' | 'nature' | 'secondary';
+  id?: string;
 }
 
 export const Section: React.FC<SectionProps> = ({
   children,
   className = '',
   padding = 'default',
-  background = 'white'
+  background = 'white',
+  id
 }) => {
   const paddingClasses = {
     default: 'section-padding',
@@ -56,7 +58,7 @@ export const Section: React.FC<SectionProps> = ({
   };
 
   return (
-    <section className={`${paddingClasses[padding]} ${backgroundClasses[background]} ${className}`}>
+    <section id={id} className={`${paddingClasses[padding]} ${backgroundClasses[background]} ${className}`}>
       {children}
     </section>
   );
