@@ -1,7 +1,5 @@
 // tailwind.config.js - Professional Studio Configuration for Tailwind v4
 
-import { Config } from '@tailwindcss/postcss'
-
 export default {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
