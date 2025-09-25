@@ -1,10 +1,8 @@
-// components/sections/ProcessSection.tsx - How We Grow Together
-
 'use client';
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sprout, TreeDeciduous, Flower, Trees, ArrowRight, Clock, Users, Lightbulb, Rocket } from 'lucide-react';
+import { Sprout, Leaf, Flower, Trees, ArrowRight, Clock, Users, Lightbulb, Rocket } from 'lucide-react';
 import { Container, Section, Heading, BodyText, Card } from '../layout/StudioLayout';
 
 type ProcessStep = {
@@ -24,27 +22,27 @@ const ProcessSection: React.FC = () => {
 
   const processSteps: ProcessStep[] = [
     {
-      id: 'seed',
-      title: 'Seed',
-      subtitle: 'Discovery & Understanding',
-      description: 'We start by truly understanding your business, your story, and your dreams. No corporate questionnaires—just genuine conversation about what makes your business special.',
+      id: 'sprout',
+      title: 'Sprout',
+      subtitle: 'Strategic Foundation',
+      description: 'Like a sprout breaking through soil, we build the strategic foundation—your brand positioning, messaging, and the psychological triggers that will make customers trust you instantly.',
       icon: Sprout,
       color: 'accent',
       timeline: '1-2 days',
       details: [
         'Deep-dive conversation about your vision',
-        'Understanding your customers and competition', 
+        'Understanding your customers and competition',
         'Identifying what makes you uniquely valuable',
         'Setting goals that actually matter to your business'
       ],
       outcome: 'Clear roadmap that feels authentically you'
     },
     {
-      id: 'sprout',
-      title: 'Sprout',
-      subtitle: 'Strategic Foundation',
-      description: 'Like a sprout breaking through soil, we build the strategic foundation—your brand positioning, messaging, and the psychological triggers that will make customers trust you instantly.',
-      icon: TreeDeciduous,
+      id: 'leaf',
+      title: 'Leaf',
+      subtitle: 'Growth & Development',
+      description: 'Your business develops its strength and presence. We craft the messaging, visual identity, and strategic framework that will fuel your upcoming transformation.',
+      icon: Leaf,
       color: 'primary',
       timeline: '3-5 days',
       details: [
