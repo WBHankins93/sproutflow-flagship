@@ -6,7 +6,7 @@ import ServicesSection from '@/components/sections/ServicesSection'
 import AboutSection from '@/components/sections/AboutSection'
 import ProcessSection from '@/components/sections/ProcessSection'
 import PortfolioSection from '../components/sections/PortfolioSection'
-// import ContactSection from '../components/sections/ContactSection'
+import ContactSection from '../components/sections/ContactSection'
 
 export default function HomePage() {
   return (
@@ -27,7 +27,7 @@ export default function HomePage() {
       <ServicesSection />
       
       {/* 6. CONVERSATION: Multiple ways to connect */}
-      {/* <ContactSection /> */}
+      <ContactSection />
     </>
   )
 }
