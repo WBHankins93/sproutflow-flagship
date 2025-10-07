@@ -67,6 +67,11 @@ export default function RootLayout({
         {/* Favicon and App Icons */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
+        <meta name="theme-color" content="#5F755E" />
         
         {/* Theme and Viewport */}
         <meta name="theme-color" content="#5F755E" />
@@ -85,8 +90,7 @@ export default function RootLayout({
           >
             Skip to main content
           </a>
-          
-          {/* Header will be added later */}
+
           
           {/* Main Content Area */}
           <main id="main-content" className="flex-grow">
