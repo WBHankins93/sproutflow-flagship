@@ -1,4 +1,3 @@
-// components/sections/PortfolioSection.tsx - Where Small Businesses Come Alive Online
 'use client';
 
 import React, { useState } from 'react';
@@ -45,9 +44,9 @@ const portfolioItems: PortfolioItem[] = [
     id: 'bayou-heritage',
     title: 'Bayou Heritage Tours',
     category: 'Tourism & Experiences',
-    description: 'Family-owned swamp tour business connecting visitors with authentic Louisiana culture',
-    challenge: 'Seasonal bookings were unpredictable, and their DIY website looked outdated compared to larger tour companies',
-    solution: 'Created an immersive booking experience that showcases the unique family heritage and authentic swamp expertise',
+    description: 'Family swamp tour business connecting visitors with authentic Louisiana culture',
+    challenge: 'Unpredictable bookings and an outdated DIY website.',
+    solution: 'Immersive booking experience showcasing their unique heritage.',
     results: [
       {
         metric: 'Online Bookings',
@@ -75,15 +74,15 @@ const portfolioItems: PortfolioItem[] = [
       accent: '#DAA520'
     },
     icon: <MapPin className="w-6 h-6" />,
-    tags: ['Booking System', 'Local Tourism', 'Heritage Storytelling']
+    tags: ['Booking System', 'Local Tourism', 'Heritage']
   },
   {
     id: 'creole-corner',
     title: 'Créole Corner Café',
     category: 'Restaurant & Local Business',
     description: 'Neighborhood café serving traditional Créole comfort food with modern twists',
-    challenge: 'Customers couldn\'t find menu information online, and takeout orders were handled through confusing phone calls',
-    solution: 'Built a warm, inviting digital presence that captures the café\'s homey atmosphere and simplifies ordering',
+    challenge: 'Customers couldnt find menu info, confusing phone orders.',
+    solution: 'Warm digital presence capturing the cafés atmosphere.',
     results: [
       {
         metric: 'Online Orders',
@@ -111,15 +110,15 @@ const portfolioItems: PortfolioItem[] = [
       accent: '#F4E4BC'
     },
     icon: <Coffee className="w-6 h-6" />,
-    tags: ['Online Ordering', 'Menu Showcase', 'Local Community']
+    tags: ['Online Ordering', 'Menu', 'Local']
   },
   {
     id: 'gulf-coast-legal',
     title: 'Gulf Coast Legal',
     category: 'Professional Services',
     description: 'Boutique law firm specializing in small business and maritime law',
-    challenge: 'Potential clients questioned their expertise due to an unprofessional web presence that looked like a template',
-    solution: 'Designed a sophisticated, trustworthy digital presence that communicates legal expertise while remaining approachable',
+    challenge: 'Unprofessional web presence made clients question their expertise.',
+    solution: 'Sophisticated, trustworthy digital presence.',
     results: [
       {
         metric: 'Consultation Requests',
@@ -147,7 +146,7 @@ const portfolioItems: PortfolioItem[] = [
       accent: '#B8860B'
     },
     icon: <Scale className="w-6 h-6" />,
-    tags: ['Professional Credibility', 'Legal Services', 'Trust Building']
+    tags: ['Professional', 'Legal', 'Trust Building']
   }
 ];
 
@@ -158,7 +157,7 @@ export default function PortfolioSection() {
     <section className="py-24 bg-gradient-to-b from-white to-gray-50/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
+        {/* Section Header - SIMPLIFIED */}
         <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -168,7 +167,7 @@ export default function PortfolioSection() {
             className="inline-flex items-center gap-2 text-[#5F755E] font-medium mb-4"
           >
             <div className="w-8 h-px bg-[#5F755E]"></div>
-            <span className="text-sm tracking-wider uppercase">Transformations</span>
+            <span className="text-sm tracking-wider uppercase">Our Work</span>
             <div className="w-8 h-px bg-[#5F755E]"></div>
           </motion.div>
 
@@ -179,8 +178,8 @@ export default function PortfolioSection() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-playfair"
           >
-            Where Small Businesses
-            <span className="block text-[#5F755E]">Come Alive Online</span>
+            Small Businesses,
+            <span className="block text-[#5F755E]">Big Results</span>
           </motion.h2>
 
           <motion.p
@@ -190,9 +189,8 @@ export default function PortfolioSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
           >
-            Real transformations from small businesses who chose growth over settling. 
             These are <span className="font-semibold text-gray-800">demonstration portfolios</span> showcasing 
-            the kind of impact we create for our clients.
+            the kind of transformation we create for our clients.
           </motion.p>
         </div>
 
@@ -300,7 +298,7 @@ export default function PortfolioSection() {
                   <div key={item.id} className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                       
-                      {/* Story Column */}
+                      {/* Story Column - CONDENSED */}
                       <div>
                         <div className="flex items-center gap-3 mb-6">
                           <div 
@@ -319,17 +317,17 @@ export default function PortfolioSection() {
                           <div>
                             <h4 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
                               <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                              The Challenge
+                              Challenge
                             </h4>
-                            <p className="text-gray-600 leading-relaxed">{item.challenge}</p>
+                            <p className="text-gray-600">{item.challenge}</p>
                           </div>
 
                           <div>
                             <h4 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
                               <div className="w-2 h-2 bg-[#5F755E] rounded-full"></div>
-                              Our Solution
+                              Solution
                             </h4>
-                            <p className="text-gray-600 leading-relaxed">{item.solution}</p>
+                            <p className="text-gray-600">{item.solution}</p>
                           </div>
                         </div>
                       </div>
@@ -338,7 +336,7 @@ export default function PortfolioSection() {
                       <div>
                         <h4 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
                           <div className="w-2 h-2 bg-[#C49A45] rounded-full"></div>
-                          Business Impact
+                          Impact
                         </h4>
 
                         <div className="grid grid-cols-1 gap-4">
@@ -366,9 +364,8 @@ export default function PortfolioSection() {
 
                         <div className="mt-6 p-4 bg-gradient-to-r from-[#5F755E]/10 to-[#C49A45]/10 rounded-lg border border-[#5F755E]/20">
                           <p className="text-sm text-gray-700">
-                            <span className="font-semibold">Portfolio Note:</span> This is a demonstration project 
-                            showcasing our design and development capabilities. Results shown represent 
-                            realistic outcomes based on similar client transformations.
+                            <span className="font-semibold">Note:</span> Demo project showcasing our capabilities. 
+                            Results represent realistic outcomes from similar client work.
                           </p>
                         </div>
                       </div>
@@ -379,7 +376,7 @@ export default function PortfolioSection() {
           )}
         </AnimatePresence>
 
-        {/* Call to Action */}
+        {/* CTA - SIMPLIFIED */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -388,19 +385,19 @@ export default function PortfolioSection() {
           className="text-center bg-gradient-to-r from-[#5F755E] to-[#4A5D49] rounded-2xl p-8 md:p-12"
         >
           <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 font-playfair">
-            Ready to Write Your Success Story?
+            Ready for Your Transformation?
           </h3>
           <p className="text-[#B8C7B7] text-lg mb-8 max-w-2xl mx-auto">
-            Every small business deserves to thrive online. Let's create something beautiful together.
+            Let's build something you're proud to show off.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button className="bg-white text-[#5F755E] px-8 py-4 rounded-full font-semibold hover:bg-gray-50 transition-colors inline-flex items-center gap-2 group">
-              <span>Start Our Journey</span>
+              <span>Let's Talk</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <button className="border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold hover:border-white/50 transition-colors inline-flex items-center gap-2">
               <Eye className="w-5 h-5" />
-              <span>View Our Process</span>
+              <span>See Our Process</span>
             </button>
           </div>
         </motion.div>

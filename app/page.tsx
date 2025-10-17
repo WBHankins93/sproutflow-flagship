@@ -1,32 +1,30 @@
-// app/page.tsx - Professional Studio Homepage
-
 import React from 'react'
 import HeroSection from '@/components/sections/HeroSection'
-import ServicesSection from '@/components/sections/ServicesSection'
 import AboutSection from '@/components/sections/AboutSection'
+import PortfolioSection from '@/components/sections/PortfolioSection'
+import ServicesSection from '@/components/sections/ServicesSection'
 import ProcessSection from '@/components/sections/ProcessSection'
-import PortfolioSection from '../components/sections/PortfolioSection'
-import ContactSection from '../components/sections/ContactSection'
+import ContactSection from '@/components/sections/ContactSection'
 
 export default function HomePage() {
   return (
     <>
-      {/* 1. FIRST IMPRESSION: Professional impact */}
+      {/* 1. Hero - First impression */}
       <HeroSection />
       
-      {/* 2. EMPATHY & TRUST: We understand small business challenges */}
-      <AboutSection />
-      
-      {/* 3. METHODOLOGY: Here's how we'll work together */}
-      <ProcessSection />
-      
-      {/* 4. PROOF: Here's evidence it works */}
+      {/* 2. Portfolio - MOVED UP - Show work first */}
       <PortfolioSection />
       
-      {/* 5. INVESTMENT: Now that you're confident, here's how to get started */}
+      {/* 3. Services - Clear pricing */}
       <ServicesSection />
       
-      {/* 6. CONVERSATION: Multiple ways to connect */}
+      {/* 4. Process - How we work */}
+      <ProcessSection />
+      
+      {/* 5. About - Build connection */}
+      <AboutSection />
+      
+      {/* 6. Contact - Convert */}
       <ContactSection />
     </>
   )

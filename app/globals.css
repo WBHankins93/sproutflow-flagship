@@ -1,36 +1,46 @@
+/* app/globals.css - UPDATED (Reduced section padding) */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+/* Professional Design System */
 
-/* CSS Variables - Woods & Waters Palette (Subtle Implementation) */
 :root {
-  /* Primary Brand Colors - Used Sparingly */
+  /* Color Palette - Woods & Waters */
   --primary-green: #5F755E;
+  --text-primary: #626155;
+  --text-secondary: #787870;
+  --text-muted: #A0A098;
+  --nature-accent: #9DB7B5;
+  --background-cream: #E9E2D8;
+  --button-green: #42533C;
+  --header-gray: #445E69;
+  --form-background: #EDDDC0;
   --accent-gold: #C49A45;
+  --border-platinum: #DDE3E2;
   
-  /* Sophisticated Neutrals - Primary Palette */
-  --text-primary: #1a1a1a;
-  --text-secondary: #4a4a4a;
-  --text-muted: #6a6a6a;
+  /* Typography */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
   
-  --bg-primary: #ffffff;
-  --bg-secondary: #fafafa;
-  --bg-tertiary: #f5f5f5;
+  /* Spacing - UPDATED: REDUCED PADDING */
+  --section-padding: clamp(3rem, 6vw, 5rem);
+  --section-padding-sm: clamp(2rem, 4vw, 3rem);
+  --section-padding-lg: clamp(4rem, 8vw, 6rem);
   
-  /* Subtle Nature Accents */
-  --nature-light: #f8f9f7;
-  --nature-border: #e8ebe7;
-  --nature-hover: #f3f5f2;
+  /* Shadows */
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-hard: 0 8px 24px rgba(0, 0, 0, 0.12);
   
-  /* Professional Shadows */
-  --shadow-soft: 0 2px 20px rgba(0, 0, 0, 0.04);
-  --shadow-medium: 0 4px 30px rgba(0, 0, 0, 0.08);
-  --shadow-strong: 0 8px 40px rgba(0, 0, 0, 0.12);
+  /* Border Radius */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
 }
 
-/* Reset & Base Styles */
+/* Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -39,42 +49,20 @@
 
 html {
   scroll-behavior: smooth;
-  font-size: 16px;
-}
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 400;
-  line-height: 1.6;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Professional Typography Scale */
-.heading-hero {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+body {
+  font-family: var(--font-body);
   color: var(--text-primary);
+  background-color: white;
+  line-height: 1.6;
 }
 
-.heading-section {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: var(--text-primary);
-  margin-bottom: 1.5rem;
-}
-
-.heading-subsection {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(1.25rem, 2vw, 1.5rem);
+/* Typography System */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
   font-weight: 600;
   line-height: 1.3;
   letter-spacing: -0.01em;
@@ -171,108 +159,114 @@ body {
   padding: 0 2rem;
 }
 
-/* Professional Section Spacing */
+/* Professional Section Spacing - UPDATED: REDUCED PADDING */
 .section-padding {
-  padding: clamp(4rem, 8vw, 8rem) 0;
+  padding: clamp(3rem, 6vw, 5rem) 0;
 }
 
 .section-padding-sm {
-  padding: clamp(2rem, 4vw, 4rem) 0;
+  padding: clamp(2rem, 4vw, 3rem) 0;
 }
 
 .section-padding-lg {
-  padding: clamp(6rem, 12vw, 12rem) 0;
+  padding: clamp(4rem, 8vw, 6rem) 0;
 }
 
-/* Clean Card System */
-.card-minimal {
-  background: var(--bg-primary);
-  border: 1px solid var(--nature-border);
-  border-radius: 4px;
+/* Card Styles */
+.card {
+  background: white;
+  border: 1px solid var(--border-platinum);
+  border-radius: var(--radius-md);
   padding: 2rem;
   transition: all 0.2s ease;
 }
 
-.card-minimal:hover {
+.card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-medium);
   border-color: var(--primary-green);
 }
 
-/* Professional Form Styles */
-.form-group {
-  margin-bottom: 1.5rem;
+/* Shadow System */
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
 }
 
-.form-label {
-  display: block;
-  font-weight: 500;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-  letter-spacing: 0.01em;
+.shadow-medium {
+  box-shadow: var(--shadow-medium);
 }
 
-.form-input {
-  width: 100%;
-  padding: 0.875rem 1rem;
-  border: 2px solid var(--nature-border);
-  border-radius: 2px;
-  font-size: 1rem;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
-  transition: all 0.2s ease;
+.shadow-hard {
+  box-shadow: var(--shadow-hard);
 }
 
-.form-input:focus {
-  outline: none;
-  border-color: var(--primary-green);
-  background-color: var(--nature-light);
+/* Utility Classes */
+.text-balance {
+  text-wrap: balance;
 }
 
-.form-textarea {
-  width: 100%;
-  min-height: 120px;
-  padding: 0.875rem 1rem;
-  border: 2px solid var(--nature-border);
-  border-radius: 2px;
-  font-size: 1rem;
-  color: var(--text-primary);
-  background-color: var(--bg-primary);
-  resize: vertical;
-  font-family: 'Inter', sans-serif;
-  line-height: 1.5;
-  transition: all 0.2s ease;
+/* Professional Link Styles */
+a {
+  color: var(--primary-green);
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-.form-textarea:focus {
-  outline: none;
-  border-color: var(--primary-green);
-  background-color: var(--nature-light);
+a:hover {
+  color: var(--button-green);
+}
+
+/* Selection Styling */
+::selection {
+  background-color: var(--primary-green);
+  color: white;
+}
+
+/* Focus Styles for Accessibility */
+*:focus-visible {
+  outline: 2px solid var(--primary-green);
+  outline-offset: 2px;
+}
+
+/* Smooth Animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Responsive Typography */
 @media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
   .container,
   .container-wide,
   .container-narrow {
     padding: 0 1rem;
   }
-  
-  .btn-primary,
-  .btn-secondary {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.9rem;
-  }
-  
-  .card-minimal {
-    padding: 1.5rem;
-  }
 }
 
-/* Remove all emoji and cute elements globally */
-.emoji,
-.cute-element,
-.playful-icon {
-  display: none !important;
+/* Print Styles */
+@media print {
+  body {
+    background: white;
+  }
+  
+  .no-print {
+    display: none;
+  }
 }

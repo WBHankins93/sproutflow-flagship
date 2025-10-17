@@ -244,47 +244,7 @@ const HeroSection: React.FC = () => {
           </div>
 
           {/* Social Proof - Small Business Success Stories */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
-            className="mt-20 pt-12 border-t border-nature-200"
-          >
-            <div className="text-center mb-8">
-              <BodyText size="sm" color="muted">
-                Trusted by small businesses ready to compete professionally
-              </BodyText>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-primary-600 mb-2">
-                  Local Coffee Shop
-                </div>
-                <BodyText size="sm" color="muted">
-                  "Now we look as premium as Starbucks"
-                </BodyText>
-              </div>
-              
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-primary-600 mb-2">
-                  Family Law Firm
-                </div>
-                <BodyText size="sm" color="muted">
-                  "Clients trust us before we even meet"
-                </BodyText>
-              </div>
-              
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-primary-600 mb-2">
-                  Local Restaurant
-                </div>
-                <BodyText size="sm" color="muted">
-                  "Bookings doubled in the first month"
-                </BodyText>
-              </div>
-            </div>
-          </motion.div>
+          
         </div>
       </Container>
     </section>
