@@ -123,7 +123,7 @@ const ContactSection: React.FC = () => {
             className="text-center mb-16"
           >
             <Heading level={2} className="mb-8">
-              <span className="text-text-primary">Let's start </span>
+              <span className="text-text-primary">Let&apos;s start </span>
               <span className="text-primary-600 relative">
                 something beautiful
                 <motion.div
@@ -148,7 +148,7 @@ const ContactSection: React.FC = () => {
               </div>
               <BodyText size="sm" color="muted">
                 We believe in real conversations, not corporate questionnaires. 
-                Pick your preferred way to connect, and let's talk like humans.
+                Pick your preferred way to connect, and let&apos;s talk like humans.
               </BodyText>
             </div>
           </motion.div>
@@ -238,7 +238,7 @@ const ContactSection: React.FC = () => {
                 Prefer a different approach?
               </Heading>
               <BodyText size="lg" color="muted">
-                We're flexible. Reach out however feels most comfortable for you.
+                We&apos;re flexible. Reach out however feels most comfortable for you.
               </BodyText>
             </div>
             
@@ -306,7 +306,7 @@ const ContactSection: React.FC = () => {
               </Heading>
               <BodyText size="lg" className="text-white/90 max-w-2xl mx-auto mb-8">
                 Every small business has something special to offer the world. 
-                Let's make sure your audience can see it, feel it, and connect with it.
+                Let&apos;s make sure your audience can see it, feel it, and connect with it.
               </BodyText>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button className="bg-white text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-50 transition-colors inline-flex items-center gap-2 group">

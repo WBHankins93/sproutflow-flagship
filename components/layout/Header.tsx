@@ -40,7 +40,7 @@ export default function Header() {
               href="#contact" 
               className="ml-4 px-6 py-2.5 bg-primary-600 text-white rounded-full font-semibold hover:bg-primary-700 transition-colors"
             >
-              Let's Talk
+              Let&apos;s Talk
             </a>
           </nav>
 

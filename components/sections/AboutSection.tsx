@@ -46,7 +46,7 @@ const AboutSection: React.FC = () => {
               </div>
 
               <Heading level={3} className="mb-3 text-2xl">
-                Hi, I'm Ben 👋
+                Hi, I&apos;m Ben 👋
               </Heading>
               
               <BodyText className="mb-4 leading-relaxed">
@@ -56,13 +56,13 @@ const AboutSection: React.FC = () => {
               </BodyText>
 
               <BodyText className="mb-4 leading-relaxed">
-                <strong className="text-text-primary">Here's the thing:</strong> That local café 
+                <strong className="text-text-primary">Here&apos;s the thing:</strong> That local café 
                 deserves the same trust signals as Starbucks. Your family business should command 
                 the same respect as corporate giants. So I started Sproutflow to level the playing field.
               </BodyText>
 
               <BodyText color="muted" className="italic">
-                When I'm not designing websites, you'll find me exploring New Orleans coffee shops 
+                When I&apos;m not designing websites, you&apos;ll find me exploring New Orleans coffee shops 
                 or hiking Oregon trails—always looking for the next great small business story to tell.
               </BodyText>
             </motion.div>
@@ -97,7 +97,7 @@ const AboutSection: React.FC = () => {
                 <BodyText className="mb-4 leading-relaxed">
                   <strong className="text-text-primary">The problem was obvious:</strong> Small 
                   businesses face the same harsh customer judgment as Fortune 500 companies, 
-                  but don't have access to the same design resources that create instant credibility.
+                  but don&apos;t have access to the same design resources that create instant credibility.
                 </BodyText>
                 <BodyText className="leading-relaxed">
                   So we built Sproutflow—a studio that democratizes professional design. 
@@ -162,7 +162,7 @@ const AboutSection: React.FC = () => {
                   True Partners
                 </Heading>
                 <BodyText size="sm" color="muted">
-                  Your success is our success. We're invested in your growth.
+                  Your success is our success. We&apos;re invested in your growth.
                 </BodyText>
               </Card>
             </Grid>
@@ -180,7 +180,7 @@ const AboutSection: React.FC = () => {
               Ready to Level the Playing Field?
             </Heading>
             <BodyText color="muted" className="mb-8 max-w-xl mx-auto">
-              Let's give your business the professional presence it deserves
+              Let&apos;s give your business the professional presence it deserves
             </BodyText>
             
             <Button
