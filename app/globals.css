@@ -1,272 +1,290 @@
-/* app/globals.css - UPDATED (Reduced section padding) */
+/* globals.css - Enhanced with warmth and personality */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Professional Design System */
-
+/* ===================================
+   ROOT VARIABLES - Warmer Colors
+   =================================== */
 :root {
-  /* Color Palette - Woods & Waters */
-  --primary-green: #5F755E;
-  --text-primary: #626155;
-  --text-secondary: #787870;
-  --text-muted: #A0A098;
-  --nature-accent: #9DB7B5;
-  --background-cream: #E9E2D8;
-  --button-green: #42533C;
-  --header-gray: #445E69;
-  --form-background: #EDDDC0;
-  --accent-gold: #C49A45;
-  --border-platinum: #DDE3E2;
-  
-  /* Typography */
-  --font-display: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
-  
-  /* Spacing - UPDATED: REDUCED PADDING */
-  --section-padding: clamp(3rem, 6vw, 5rem);
-  --section-padding-sm: clamp(2rem, 4vw, 3rem);
-  --section-padding-lg: clamp(4rem, 8vw, 6rem);
-  
-  /* Shadows */
-  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.08);
-  --shadow-hard: 0 8px 24px rgba(0, 0, 0, 0.12);
-  
-  /* Border Radius */
-  --radius-sm: 2px;
-  --radius-md: 4px;
-  --radius-lg: 8px;
+  /* Primary Colors - Nature-inspired */
+  --color-primary-50: #f0f9f4;
+  --color-primary-100: #dcf2e4;
+  --color-primary-200: #bce5cd;
+  --color-primary-300: #8dd2ab;
+  --color-primary-400: #5cb884;
+  --color-primary-500: #3a9d65;
+  --color-primary-600: #5F755E;  /* Your Reseda Green */
+  --color-primary-700: #1f6341;
+  --color-primary-800: #1a4f35;
+  --color-primary-900: #16402c;
+
+  /* Accent Colors - Warm Gold */
+  --color-accent-50: #fef9ed;
+  --color-accent-100: #fdf2d5;
+  --color-accent-200: #fbe4ab;
+  --color-accent-300: #f8d076;
+  --color-accent-400: #f5b94d;
+  --color-accent-500: #C49A45;  /* Your Satin Gold */
+  --color-accent-600: #b8852f;
+  --color-accent-700: #9a6b24;
+  --color-accent-800: #7d5421;
+  --color-accent-900: #66451f;
+
+  /* Nature Colors */
+  --color-nature-50: #f7f7f6;
+  --color-nature-100: #E9E2D8;  /* Your Alabaster */
+  --color-nature-200: #DDE3E2;  /* Your Platinum */
+  --color-nature-300: #9DB7B5;  /* Your Ash Gray */
+  --color-nature-400: #626155;  /* Your Ebony */
+  --color-nature-500: #5F755E;
+  --color-nature-600: #42533C;  /* Your Feldgrau */
+  --color-nature-700: #2d3a28;
+
+  /* Text Colors - Softer */
+  --color-text-primary: #2d2d2d;
+  --color-text-secondary: #4a4a4a;
+  --color-text-muted: #6b6b6b;
 }
 
-/* Base Styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ===================================
+   BASE STYLES - Warmer Feel
+   =================================== */
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  html {
+    @apply scroll-smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-body {
-  font-family: var(--font-body);
-  color: var(--text-primary);
-  background-color: white;
-  line-height: 1.6;
-}
+  body {
+    @apply bg-white text-gray-800 font-body;
+    color: var(--color-text-primary);
+    line-height: 1.7;
+  }
 
-/* Typography System */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-}
+  /* Headings with personality */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
 
-.body-large {
-  font-size: 1.125rem;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  font-weight: 400;
-}
+  h1 {
+    @apply text-5xl md:text-6xl lg:text-7xl;
+  }
 
-.body-regular {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  font-weight: 400;
-}
+  h2 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
 
-.body-small {
-  font-size: 0.875rem;
-  line-height: 1.5;
-  color: var(--text-muted);
-  font-weight: 400;
-}
+  h3 {
+    @apply text-3xl md:text-4xl;
+  }
 
-/* Professional Button System */
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 2rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  text-decoration: none;
-  color: white;
-  background-color: var(--text-primary);
-  border: 2px solid var(--text-primary);
-  border-radius: 2px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
+  h4 {
+    @apply text-2xl md:text-3xl;
+  }
 
-.btn-primary:hover {
-  background-color: var(--primary-green);
-  border-color: var(--primary-green);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-medium);
-}
+  /* Links with warmth */
+  a {
+    @apply transition-colors duration-300;
+  }
 
-.btn-secondary {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 2rem;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  text-decoration: none;
-  color: var(--text-primary);
-  background-color: transparent;
-  border: 2px solid var(--text-primary);
-  border-radius: 2px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-}
-
-.btn-secondary:hover {
-  background-color: var(--text-primary);
-  color: white;
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-medium);
-}
-
-/* Sophisticated Grid System */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.container-wide {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.container-narrow {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-/* Professional Section Spacing - UPDATED: REDUCED PADDING */
-.section-padding {
-  padding: clamp(3rem, 6vw, 5rem) 0;
-}
-
-.section-padding-sm {
-  padding: clamp(2rem, 4vw, 3rem) 0;
-}
-
-.section-padding-lg {
-  padding: clamp(4rem, 8vw, 6rem) 0;
-}
-
-/* Card Styles */
-.card {
-  background: white;
-  border: 1px solid var(--border-platinum);
-  border-radius: var(--radius-md);
-  padding: 2rem;
-  transition: all 0.2s ease;
-}
-
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
-  border-color: var(--primary-green);
-}
-
-/* Shadow System */
-.shadow-soft {
-  box-shadow: var(--shadow-soft);
-}
-
-.shadow-medium {
-  box-shadow: var(--shadow-medium);
-}
-
-.shadow-hard {
-  box-shadow: var(--shadow-hard);
-}
-
-/* Utility Classes */
-.text-balance {
-  text-wrap: balance;
-}
-
-/* Professional Link Styles */
-a {
-  color: var(--primary-green);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-a:hover {
-  color: var(--button-green);
-}
-
-/* Selection Styling */
-::selection {
-  background-color: var(--primary-green);
-  color: white;
-}
-
-/* Focus Styles for Accessibility */
-*:focus-visible {
-  outline: 2px solid var(--primary-green);
-  outline-offset: 2px;
-}
-
-/* Smooth Animations */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  /* Selection color */
+  ::selection {
+    @apply bg-primary-200 text-primary-900;
   }
 }
 
-/* Responsive Typography */
+/* ===================================
+   UTILITY CLASSES - Organic Feel
+   =================================== */
+@layer utilities {
+  /* Gradient Backgrounds */
+  .bg-gradient-radial {
+    background-image: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
+  .bg-gradient-nature {
+    background: linear-gradient(135deg, #5F755E 0%, #42533C 100%);
+  }
+
+  .bg-gradient-warm {
+    background: linear-gradient(135deg, #C49A45 0%, #b8852f 100%);
+  }
+
+  /* Custom Shadows - Softer */
+  .shadow-soft {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  .shadow-nature {
+    box-shadow: 0 10px 40px rgba(95, 117, 94, 0.15);
+  }
+
+  .shadow-3xl {
+    box-shadow: 
+      0 30px 60px -15px rgba(0, 0, 0, 0.25),
+      0 10px 20px -5px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Text Shadows for Readability */
+  .text-shadow-sm {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .text-shadow-md {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 
+      4px 4px 20px rgba(0, 0, 0, 0.9),
+      2px 2px 10px rgba(0, 0, 0, 0.8),
+      0 0 40px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Organic Shapes */
+  .rounded-organic {
+    border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md;
+  }
+
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-md;
+  }
+}
+
+/* ===================================
+   COMPONENT STYLES - Personality
+   =================================== */
+@layer components {
+  /* Buttons with warmth */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700 shadow-lg hover:shadow-xl hover:scale-105;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-primary-700 border-2 border-primary-200 hover:border-primary-300 hover:bg-primary-50;
+  }
+
+  .btn-accent {
+    @apply bg-accent-500 text-white hover:bg-accent-600 shadow-lg hover:shadow-xl;
+  }
+
+  /* Cards with depth */
+  .card {
+    @apply bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300;
+  }
+
+  .card-nature {
+    @apply bg-gradient-to-br from-primary-50 to-white rounded-2xl p-6 border border-primary-100 shadow-nature;
+  }
+
+  /* Input fields - warmer */
+  .input {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-primary-500 focus:ring-4 focus:ring-primary-100 transition-all duration-200;
+  }
+
+  /* Badges */
+  .badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-primary {
+    @apply bg-primary-50 text-primary-700 border border-primary-200;
+  }
+
+  .badge-accent {
+    @apply bg-accent-50 text-accent-700 border border-accent-200;
+  }
+}
+
+/* ===================================
+   ANIMATIONS - Subtle Movement
+   =================================== */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 3s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out;
+}
+
+/* ===================================
+   RESPONSIVE IMPROVEMENTS
+   =================================== */
 @media (max-width: 768px) {
   h1 {
-    font-size: 2rem;
+    @apply text-4xl;
   }
-  
+
   h2 {
-    font-size: 1.75rem;
+    @apply text-3xl;
   }
-  
+
   h3 {
-    font-size: 1.5rem;
-  }
-  
-  .container,
-  .container-wide,
-  .container-narrow {
-    padding: 0 1rem;
+    @apply text-2xl;
   }
 }
 
-/* Print Styles */
+/* ===================================
+   PRINT STYLES
+   =================================== */
 @media print {
   body {
-    background: white;
+    @apply text-black bg-white;
   }
-  
+
   .no-print {
-    display: none;
+    display: none !important;
   }
 }

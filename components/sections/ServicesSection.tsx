@@ -1,167 +1,279 @@
+// components/sections/ServicesSection.tsx - Visual Service Tiers
+
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Container, Section, Grid, Card, Heading, BodyText, Button } from '../layout/StudioLayout';
-import { ArrowRight, Check, Zap, Target, Star } from 'lucide-react';
-import { servicesContent } from '@/data/content';
+import Image from 'next/image';
+import { Zap, Target, Rocket, Check, ArrowRight } from 'lucide-react';
 
-const ServicesSection = () => {
-  const [selectedTier, setSelectedTier] = useState<string | null>(null);
+const serviceTiers = [
+  {
+    id: 'launch',
+    name: 'Launch',
+    icon: <Zap className="w-6 h-6" />,
+    tagline: 'Get online fast',
+    priceRange: '$750 - $1,250',
+    timeline: '5-7 business days',
+    idealFor: 'New businesses and focused market entry',
+    description: 'Strategic website foundation designed to establish immediate professional credibility and drive customer acquisition from day one.',
+    lifestyleImage: '/images/services/launch-lifestyle.jpg', // Placeholder
+    highlights: [
+      'Immediate professional market presence',
+      'Clear customer conversion pathway',
+      'Mobile-optimized for modern shoppers',
+      'SEO foundations for local discovery'
+    ],
+    buttonText: 'Choose Launch',
+    popular: false
+  },
+  {
+    id: 'elevate',
+    name: 'Elevate',
+    icon: <Target className="w-6 h-6" />,
+    tagline: 'Stand out from competitors',
+    priceRange: '$2,000 - $2,500',
+    timeline: '2-3 weeks',
+    idealFor: 'Established businesses ready for competitive advantage',
+    description: 'Comprehensive digital presence that positions your business as the clear choice in your market through strategic design and content architecture.',
+    lifestyleImage: '/images/services/elevate-lifestyle.jpg',
+    highlights: [
+      'Clear market differentiation from competitors',
+      'Improved customer acquisition metrics',
+      'Advanced conversion optimization',
+      'Professional content strategy'
+    ],
+    buttonText: 'Choose Elevate',
+    popular: true
+  },
+  {
+    id: 'thrive',
+    name: 'Thrive',
+    icon: <Rocket className="w-6 h-6" />,
+    tagline: 'Custom competitive advantages',
+    priceRange: 'Starting at $5,000',
+    timeline: '4-8 weeks',
+    idealFor: 'Growing businesses with specific technical requirements',
+    description: 'Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages through advanced functionality.',
+    lifestyleImage: '/images/services/thrive-lifestyle.jpg',
+    highlights: [
+      'Technical competitive advantages in market',
+      'Streamlined business operations',
+      'Platform designed for scaling',
+      'Advanced customer acquisition systems'
+    ],
+    buttonText: 'Choose Thrive',
+    popular: false
+  }
+];
 
+export default function ServicesSection() {
   return (
-    <div>
-      <Section id="services" padding="default" background="white">
-        <Container>
+    <section id="services" className="relative py-24 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
+      
+      {/* Subtle Background Pattern */}
+      <div 
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: `radial-gradient(circle, #5F755E 1px, transparent 1px)`,
+          backgroundSize: '30px 30px'
+        }}
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
         
-        {/* Section Header - SIMPLIFIED */}
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <Heading level={2} className="mb-4">
-            Three ways to work together
-          </Heading>
-          <BodyText size="lg" color="secondary" className="max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 text-primary-600 font-medium mb-6">
+            <div className="w-12 h-px bg-primary-400"></div>
+            <span className="text-sm uppercase tracking-wider">Pricing</span>
+            <div className="w-12 h-px bg-primary-400"></div>
+          </div>
+
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-6">
+            Three Ways to{' '}
+            <span className="text-primary-600">Work Together</span>
+          </h2>
+          
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Pick the tier that matches where you are. You can always grow into more.
-          </BodyText>
+          </p>
         </motion.div>
 
         {/* Service Tiers Grid */}
-        <Grid cols={3} gap="lg" className="mb-16">
-          {servicesContent.tiers.map((tier, index) => {
-            const isPopular = tier.name === "Elevate";
-            const IconComponent = tier.name === "Launch" ? Zap : tier.name === "Elevate" ? Target : Star;
-            
-            return (
-              <motion.div
-                key={tier.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1, ease: "easeOut" }}
-                viewport={{ once: true }}
-              >
-                <Card 
-                  padding="lg" 
-                  className={`h-full flex flex-col relative ${isPopular ? 'border-primary-500 border-2' : ''}`}
-                >
-                  {isPopular && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-                      Most Popular
-                    </div>
-                  )}
+        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+          
+          {serviceTiers.map((tier, index) => (
+            <motion.div
+              key={tier.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className={`relative ${tier.popular ? 'lg:-mt-8' : ''}`}
+            >
+              {/* Popular Badge */}
+              {tier.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
+                  <span className="bg-accent-500 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg">
+                    Most Popular
+                  </span>
+                </div>
+              )}
 
-                  <div className="w-12 h-12 bg-nature-100 rounded-full flex items-center justify-center mb-4">
-                    <IconComponent className="w-6 h-6 text-nature-700" />
+              {/* Card */}
+              <div className={`bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}>
+                
+                {/* Lifestyle Image Header */}
+                <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200">
+                  {/* Placeholder - replace with actual images */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="text-6xl mb-2">{tier.icon}</div>
+                      <p className="text-gray-500 text-sm">Add: {tier.lifestyleImage}</p>
+                    </div>
+                  </div>
+                  
+                  {/* When you add images: */}
+                  {/* <Image 
+                    src={tier.lifestyleImage}
+                    alt={tier.name}
+                    fill
+                    className="object-cover"
+                  /> */}
+
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+                  {/* Tier Badge on Image */}
+                  <div className="absolute bottom-4 left-4">
+                    <div className="flex items-center gap-2 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                      {tier.icon}
+                      <span className="font-bold text-gray-900">{tier.name}</span>
+                    </div>
                   </div>
 
-                  {/* Tier Header */}
-                  <div className="mb-6">
-                    <h3 className="font-display text-2xl font-bold text-text-primary mb-2">
-                      {tier.name}
-                    </h3>
-                    <div className="font-display text-3xl font-bold text-primary-600 mb-2">
+                  {/* Price Badge on Image */}
+                  <div className="absolute bottom-4 right-4">
+                    <div className="bg-primary-600 text-white px-4 py-2 rounded-full font-bold shadow-lg">
                       {tier.priceRange}
                     </div>
-                    <div className="text-sm text-text-muted">
-                      {tier.timeline} • {tier.ideal}
-                    </div>
                   </div>
+                </div>
 
-                  {/* Description - REDUCED TO 1 SENTENCE */}
-                  <BodyText size="sm" color="secondary" className="mb-6">
-                    {tier.description.split('.')[0]}.
-                  </BodyText>
+                {/* Content */}
+                <div className="p-8">
+                  
+                  {/* Tagline */}
+                  <p className="text-primary-600 font-semibold mb-2">{tier.tagline}</p>
+                  
+                  {/* Timeline */}
+                  <p className="text-sm text-gray-500 mb-4">{tier.timeline} • {tier.idealFor}</p>
 
-                  {/* Business Outcomes - TOP 2 ONLY */}
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-text-primary mb-3 text-sm">
-                      What You Get
-                    </h4>
-                    <ul className="space-y-2">
-                      {tier.businessOutcomes.slice(0, 2).map((outcome, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm">
-                          <Check className="w-4 h-4 text-primary-600 shrink-0 mt-0.5" />
-                          <span className="text-text-secondary">{outcome}</span>
-                        </li>
-                      ))}
-                    </ul>
+                  {/* Description */}
+                  <p className="text-gray-600 mb-6 leading-relaxed">
+                    {tier.description}
+                  </p>
+
+                  {/* Highlights */}
+                  <div className="space-y-3 mb-8">
+                    {tier.highlights.map((highlight, idx) => (
+                      <div key={idx} className="flex items-start gap-3">
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary-100 flex items-center justify-center mt-0.5">
+                          <Check className="w-3 h-3 text-primary-600" />
+                        </div>
+                        <span className="text-sm text-gray-700 leading-relaxed">{highlight}</span>
+                      </div>
+                    ))}
                   </div>
-
-                  {/* Technical Includes - COLLAPSIBLE */}
-                  <details className="mb-6 group">
-                    <summary className="font-semibold text-text-primary text-sm cursor-pointer list-none flex items-center justify-between">
-                      <span>Full Details</span>
-                      <span className="text-primary-600 text-xs group-open:rotate-180 transition-transform">▼</span>
-                    </summary>
-                    <ul className="mt-3 space-y-1.5 text-sm text-text-muted">
-                      {tier.technicalIncludes.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-2">
-                          <span className="text-nature-600">•</span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </details>
 
                   {/* CTA Button */}
-                  <div className="mt-auto pt-4">
-                    <Button
-                      variant={isPopular ? "primary" : "secondary"}
-                      className="w-full"
-                      href="#contact"
-                      icon={<ArrowRight className="w-4 h-4" />}
-                      onClick={() => setSelectedTier(tier.id)}
-                    >
-                      Choose {tier.name}
-                    </Button>
-                  </div>
-                </Card>
-              </motion.div>
-            );
-          })}
-        </Grid>
-
-        {/* Add-Ons - SIMPLIFIED */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <Heading level={3} className="mb-6">
-            Add-ons
-          </Heading>
-          
-          <Grid cols={2} gap="md" className="max-w-4xl mx-auto">
-
-
-            {/* Care Plans */}
-            <Card padding="md" className="text-left h-full md:col-span-2">
-              <div className="flex justify-between items-start mb-2">
-                <div>
-                  <h4 className="font-body font-semibold text-text-primary mb-1">
-                    Website Care Plans
-                  </h4>
-                  <BodyText size="sm" color="secondary">
-                    Updates, optimization, support
-                  </BodyText>
+                  <button 
+                    className={`w-full py-4 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 group ${
+                      tier.popular 
+                        ? 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg hover:shadow-xl' 
+                        : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                    }`}
+                  >
+                    {tier.buttonText}
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </button>
                 </div>
-                <span className="font-display font-bold text-primary-600 whitespace-nowrap">
-                  From $150/mo
-                </span>
               </div>
-            </Card>
-          </Grid>
-        </motion.div>
-        </Container>
-      </Section>
-    </div>
-  );
-};
+            </motion.div>
+          ))}
 
-export default ServicesSection;
+        </div>
+
+        {/* Add-on Services */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="bg-white rounded-2xl border border-gray-200 p-8 md:p-10 shadow-lg"
+        >
+          <h3 className="text-2xl font-display font-bold text-gray-900 mb-2 text-center">
+            Add-ons
+          </h3>
+          <p className="text-gray-600 mb-8 text-center">
+            Enhance your website with these optional services
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
+                <Check className="w-5 h-5 text-primary-600" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-1">Website Care Plans</h4>
+                <p className="text-sm text-gray-600">Updates, optimization, support</p>
+                <p className="text-primary-600 font-bold mt-2">From $150/mo</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
+                <Check className="w-5 h-5 text-primary-600" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-1">Logo Design</h4>
+                <p className="text-sm text-gray-600">Professional brand identity</p>
+                <p className="text-primary-600 font-bold mt-2">$300</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
+                <Check className="w-5 h-5 text-primary-600" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-1">SEO Package</h4>
+                <p className="text-sm text-gray-600">Get found on Google locally</p>
+                <p className="text-primary-600 font-bold mt-2">$300</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 p-4 rounded-lg hover:bg-gray-50 transition-colors">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center">
+                <Check className="w-5 h-5 text-primary-600" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-1">Content Writing</h4>
+                <p className="text-sm text-gray-600">Professional copywriting</p>
+                <p className="text-primary-600 font-bold mt-2">$250</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+      </div>
+    </section>
+  );
+}

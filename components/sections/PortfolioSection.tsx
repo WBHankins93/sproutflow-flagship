@@ -1,152 +1,87 @@
+// components/sections/PortfolioSection.tsx - Visual & Story-Driven
+
 'use client';
 
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { 
-  ExternalLink, 
-  TrendingUp, 
-  Users, 
-  Star, 
   MapPin, 
   Coffee, 
-  Scale,
-  ArrowRight,
-  Eye,
+  Scale, 
   Calendar,
-  DollarSign
+  Users,
+  Star,
+  TrendingUp,
+  DollarSign,
+  ArrowRight,
+  ExternalLink
 } from 'lucide-react';
 
-interface PortfolioItem {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  challenge: string;
-  solution: string;
-  results: {
-    metric: string;
-    value: string;
-    description: string;
-    icon: React.ReactNode;
-  }[];
-  image: string;
-  colors: {
-    primary: string;
-    secondary: string;
-    accent: string;
-  };
-  icon: React.ReactNode;
-  tags: string[];
-}
-
-const portfolioItems: PortfolioItem[] = [
+// Portfolio data structure
+const portfolioItems = [
   {
     id: 'bayou-heritage',
     title: 'Bayou Heritage Tours',
     category: 'Tourism & Experiences',
     description: 'Family swamp tour business connecting visitors with authentic Louisiana culture',
-    challenge: 'Unpredictable bookings and an outdated DIY website.',
-    solution: 'Immersive booking experience showcasing their unique heritage.',
-    results: [
-      {
-        metric: 'Online Bookings',
-        value: '+180%',
-        description: 'Direct bookings increased',
-        icon: <Calendar className="w-5 h-5" />
-      },
-      {
-        metric: 'Season Extension',
-        value: '4 months',
-        description: 'Extended profitable season',
-        icon: <TrendingUp className="w-5 h-5" />
-      },
-      {
-        metric: 'Average Booking',
-        value: '$85',
-        description: 'Increased from $45',
-        icon: <DollarSign className="w-5 h-5" />
-      }
-    ],
-    image: '/portfolio/bayou-heritage-mockup.jpg',
+    challenge: 'Competing with corporate tour operators who had slick booking systems',
+    solution: 'Built a warm, story-driven website with seamless booking that captures the authentic bayou experience',
+    heroImage: '/images/portfolio/bayou-heritage-hero.jpg', // You'll add this
+    tags: ['Booking System', 'Local Tourism', 'Heritage Storytelling'],
     colors: {
       primary: '#2D5016',
       secondary: '#8FBC8F',
       accent: '#DAA520'
     },
-    icon: <MapPin className="w-6 h-6" />,
-    tags: ['Booking System', 'Local Tourism', 'Heritage']
+    icon: <MapPin className="w-8 h-8 text-white" />,
+    results: [
+      { metric: 'Online Bookings', value: '+180%', icon: <Calendar className="w-5 h-5" /> },
+      { metric: 'Season Extension', value: '4 months', icon: <TrendingUp className="w-5 h-5" /> },
+      { metric: 'Average Booking', value: '$85', icon: <DollarSign className="w-5 h-5" /> }
+    ]
   },
   {
     id: 'creole-corner',
     title: 'Créole Corner Café',
     category: 'Restaurant & Local Business',
     description: 'Neighborhood café serving traditional Créole comfort food with modern twists',
-    challenge: 'Customers couldnt find menu info, confusing phone orders.',
-    solution: 'Warm digital presence capturing the cafés atmosphere.',
-    results: [
-      {
-        metric: 'Online Orders',
-        value: '+240%',
-        description: 'Digital ordering growth',
-        icon: <Coffee className="w-5 h-5" />
-      },
-      {
-        metric: 'New Customers',
-        value: '+65%',
-        description: 'Through website discovery',
-        icon: <Users className="w-5 h-5" />
-      },
-      {
-        metric: 'Review Rating',
-        value: '4.8★',
-        description: 'Improved from 4.2★',
-        icon: <Star className="w-5 h-5" />
-      }
-    ],
-    image: '/portfolio/creole-corner-mockup.jpg',
+    challenge: 'Customers couldn\'t find menu information online, takeout orders were confusing',
+    solution: 'Created a warm digital presence that captures the café\'s homey atmosphere and simplifies ordering',
+    heroImage: '/images/portfolio/creole-corner-hero.jpg',
+    tags: ['Online Ordering', 'Menu Design', 'Local Restaurant'],
     colors: {
-      primary: '#8B2635',
-      secondary: '#D4A574',
-      accent: '#F4E4BC'
+      primary: '#8B4513',
+      secondary: '#D2691E',
+      accent: '#FFD700'
     },
-    icon: <Coffee className="w-6 h-6" />,
-    tags: ['Online Ordering', 'Menu', 'Local']
+    icon: <Coffee className="w-8 h-8 text-white" />,
+    results: [
+      { metric: 'Online Orders', value: '+240%', icon: <Calendar className="w-5 h-5" /> },
+      { metric: 'New Customers', value: '+65%', icon: <Users className="w-5 h-5" /> },
+      { metric: 'Review Rating', value: '4.8★', icon: <Star className="w-5 h-5" /> }
+    ]
   },
   {
     id: 'gulf-coast-legal',
     title: 'Gulf Coast Legal',
     category: 'Professional Services',
     description: 'Boutique law firm specializing in small business and maritime law',
-    challenge: 'Unprofessional web presence made clients question their expertise.',
-    solution: 'Sophisticated, trustworthy digital presence.',
-    results: [
-      {
-        metric: 'Consultation Requests',
-        value: '+320%',
-        description: 'Quality leads increased',
-        icon: <Scale className="w-5 h-5" />
-      },
-      {
-        metric: 'Case Value',
-        value: '+150%',
-        description: 'Average case size',
-        icon: <TrendingUp className="w-5 h-5" />
-      },
-      {
-        metric: 'Referral Rate',
-        value: '85%',
-        description: 'Client satisfaction',
-        icon: <Users className="w-5 h-5" />
-      }
-    ],
-    image: '/portfolio/gulf-coast-legal-mockup.jpg',
+    challenge: 'Generic law firm site that didn\'t communicate their small business focus',
+    solution: 'Professional yet approachable design that builds trust and clarifies their niche expertise',
+    heroImage: '/images/portfolio/gulf-coast-legal-hero.jpg',
+    tags: ['Professional Services', 'Trust Building', 'Legal'],
     colors: {
-      primary: '#1B365D',
-      secondary: '#4A90A4',
-      accent: '#B8860B'
+      primary: '#1B3A52',
+      secondary: '#4A7BA7',
+      accent: '#C49A45'
     },
-    icon: <Scale className="w-6 h-6" />,
-    tags: ['Professional', 'Legal', 'Trust Building']
+    icon: <Scale className="w-8 h-8 text-white" />,
+    results: [
+      { metric: 'Consultation Requests', value: '+320%', icon: <Calendar className="w-5 h-5" /> },
+      { metric: 'Case Value', value: '+150%', icon: <DollarSign className="w-5 h-5" /> },
+      { metric: 'Referral Rate', value: '85%', icon: <Users className="w-5 h-5" /> }
+    ]
   }
 ];
 
@@ -154,252 +89,207 @@ export default function PortfolioSection() {
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
 
   return (
-    <section className="py-24 bg-gradient-to-b from-white to-gray-50/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="portfolio" className="relative py-20 overflow-hidden">
+      
+      {/* Organic Background Pattern */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-primary-50/20 to-white">
+        <div 
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `radial-gradient(circle, #5F755E 1px, transparent 1px)`,
+            backgroundSize: '30px 30px'
+          }}
+        />
+      </div>
+
+      {/* Floating Decoration */}
+      <motion.div
+        animate={{ 
+          y: [0, -20, 0],
+          rotate: [0, 5, 0]
+        }}
+        transition={{ 
+          duration: 8, 
+          repeat: Infinity,
+          ease: "easeInOut" 
+        }}
+        className="absolute top-20 right-10 w-32 h-32 opacity-10"
+      >
+        <div className="text-primary-300 text-8xl">🌿</div>
+      </motion.div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
         
-        {/* Section Header - SIMPLIFIED */}
-        <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 text-[#5F755E] font-medium mb-4"
-          >
-            <div className="w-8 h-px bg-[#5F755E]"></div>
-            <span className="text-sm tracking-wider uppercase">Our Work</span>
-            <div className="w-8 h-px bg-[#5F755E]"></div>
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-playfair"
-          >
-            Small Businesses,
-            <span className="block text-[#5F755E]">Big Results</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
-          >
-            These are <span className="font-semibold text-gray-800">demonstration portfolios</span> showcasing 
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 text-primary-600 font-medium mb-6">
+            <div className="w-12 h-px bg-primary-400"></div>
+            <span className="text-sm uppercase tracking-wider">Our Work</span>
+            <div className="w-12 h-px bg-primary-400"></div>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-6">
+            Small Businesses,{' '}
+            <span className="text-primary-600">Big Results</span>
+          </h2>
+          
+          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            These are <strong className="text-gray-900">demonstration portfolios</strong> showcasing 
             the kind of transformation we create for our clients.
-          </motion.p>
-        </div>
+          </p>
+        </motion.div>
 
         {/* Portfolio Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-16">
+        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+          
           {portfolioItems.map((item, index) => (
             <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group cursor-pointer"
-              onClick={() => setSelectedItem(selectedItem === item.id ? null : item.id)}
+              viewport={{ once: true }}
+              className="group"
             >
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl hover:border-gray-200 transition-all duration-300">
+              {/* Image Card with Hover Effect */}
+              <div className="relative rounded-3xl overflow-hidden mb-6 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer">
                 
-                {/* Portfolio Image */}
-                <div className="relative h-64 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
-                  <div 
-                    className="absolute inset-0 opacity-10"
-                    style={{ backgroundColor: item.colors.primary }}
-                  ></div>
+                {/* Hero Image - PLACEHOLDER until you add real images */}
+                <div className="aspect-[4/3] relative bg-gradient-to-br from-gray-100 to-gray-200">
+                  {/* Temporary placeholder - replace with actual Image component */}
                   <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-center p-8">
+                      <div className="text-6xl mb-4">{item.icon}</div>
+                      <p className="text-gray-500 font-medium">
+                        Add image: {item.heroImage}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* When you have images, use this: */}
+                  {/* <Image 
+                    src={item.heroImage}
+                    alt={item.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  /> */}
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                  
+                  {/* Demo Badge */}
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-gray-700 shadow-lg">
+                      Demo Portfolio
+                    </span>
+                  </div>
+
+                  {/* Icon Badge - Bottom Left */}
+                  <div className="absolute bottom-4 left-4">
                     <div 
-                      className="w-20 h-20 rounded-full flex items-center justify-center text-white text-2xl"
+                      className="w-16 h-16 rounded-full flex items-center justify-center shadow-xl backdrop-blur-sm"
                       style={{ backgroundColor: item.colors.primary }}
                     >
                       {item.icon}
                     </div>
                   </div>
-                  <div className="absolute top-4 right-4">
-                    <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 text-xs font-medium text-gray-700">
-                      Demo Portfolio
+
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                    <div className="text-white">
+                      <p className="text-sm font-medium mb-1 opacity-90">{item.category}</p>
+                      <h3 className="text-2xl font-display font-bold mb-2">{item.title}</h3>
+                      <p className="text-sm opacity-80 line-clamp-2">{item.solution}</p>
                     </div>
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <div className="bg-white/95 backdrop-blur-sm rounded-lg p-3">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-sm font-semibold text-gray-900">{item.title}</span>
-                        <ExternalLink className="w-4 h-4 text-gray-400 group-hover:text-[#5F755E] transition-colors" />
-                      </div>
-                      <p className="text-xs text-gray-600">{item.category}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Portfolio Content */}
-                <div className="p-6">
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                    {item.description}
-                  </p>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {item.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Quick Results Preview */}
-                  <div className="grid grid-cols-3 gap-3">
-                    {item.results.slice(0, 3).map((result, idx) => (
-                      <div key={idx} className="text-center">
-                        <div className="flex items-center justify-center text-[#5F755E] mb-1">
-                          {result.icon}
-                        </div>
-                        <div className="text-sm font-bold text-gray-900">{result.value}</div>
-                        <div className="text-xs text-gray-500">{result.metric}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Expand Button */}
-                  <div className="mt-4 pt-4 border-t border-gray-100">
-                    <button className="w-full flex items-center justify-center gap-2 text-[#5F755E] hover:text-[#4A5D49] text-sm font-medium transition-colors group">
-                      <span>{selectedItem === item.id ? 'View Less' : 'View Full Story'}</span>
-                      <ArrowRight className={`w-4 h-4 transition-transform ${selectedItem === item.id ? 'rotate-180' : 'group-hover:translate-x-1'}`} />
-                    </button>
                   </div>
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
 
-        {/* Detailed View */}
-        <AnimatePresence>
-          {selectedItem && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.4 }}
-              className="overflow-hidden"
-            >
-              {portfolioItems
-                .filter(item => item.id === selectedItem)
-                .map(item => (
-                  <div key={item.id} className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8 mb-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                      
-                      {/* Story Column - CONDENSED */}
-                      <div>
-                        <div className="flex items-center gap-3 mb-6">
-                          <div 
-                            className="w-12 h-12 rounded-full flex items-center justify-center text-white"
-                            style={{ backgroundColor: item.colors.primary }}
-                          >
-                            {item.icon}
-                          </div>
-                          <div>
-                            <h3 className="text-2xl font-bold text-gray-900 font-playfair">{item.title}</h3>
-                            <p className="text-gray-600">{item.category}</p>
-                          </div>
-                        </div>
+              {/* Content Card */}
+              <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
+                
+                {/* Header */}
+                <div className="mb-4">
+                  <h3 className="text-xl font-display font-bold text-gray-900 mb-1">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm text-gray-500">{item.category}</p>
+                </div>
 
-                        <div className="space-y-6">
-                          <div>
-                            <h4 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                              Challenge
-                            </h4>
-                            <p className="text-gray-600">{item.challenge}</p>
-                          </div>
+                {/* Description */}
+                <p className="text-gray-600 mb-4 leading-relaxed text-sm">
+                  {item.description}
+                </p>
 
-                          <div>
-                            <h4 className="text-lg font-semibold text-gray-900 mb-2 flex items-center gap-2">
-                              <div className="w-2 h-2 bg-[#5F755E] rounded-full"></div>
-                              Solution
-                            </h4>
-                            <p className="text-gray-600">{item.solution}</p>
-                          </div>
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {item.tags.map((tag) => (
+                    <span 
+                      key={tag}
+                      className="text-xs px-3 py-1 bg-primary-50 text-primary-700 rounded-full font-medium"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Results Metrics */}
+                <div className="grid grid-cols-3 gap-3 pt-5 border-t border-gray-100">
+                  {item.results.map((result) => (
+                    <div key={result.metric} className="text-center">
+                      <div className="flex justify-center mb-1">
+                        <div className="w-8 h-8 rounded-full bg-primary-50 flex items-center justify-center text-primary-600">
+                          {result.icon}
                         </div>
                       </div>
-
-                      {/* Results Column */}
-                      <div>
-                        <h4 className="text-lg font-semibold text-gray-900 mb-6 flex items-center gap-2">
-                          <div className="w-2 h-2 bg-[#C49A45] rounded-full"></div>
-                          Impact
-                        </h4>
-
-                        <div className="grid grid-cols-1 gap-4">
-                          {item.results.map((result, idx) => (
-                            <motion.div
-                              key={idx}
-                              initial={{ opacity: 0, x: 20 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: idx * 0.1 }}
-                              className="bg-gray-50 rounded-lg p-4 flex items-center gap-4"
-                            >
-                              <div className="text-[#5F755E]">
-                                {result.icon}
-                              </div>
-                              <div className="flex-1">
-                                <div className="flex items-baseline gap-2 mb-1">
-                                  <span className="text-2xl font-bold text-gray-900">{result.value}</span>
-                                  <span className="text-sm font-medium text-gray-700">{result.metric}</span>
-                                </div>
-                                <p className="text-sm text-gray-600">{result.description}</p>
-                              </div>
-                            </motion.div>
-                          ))}
-                        </div>
-
-                        <div className="mt-6 p-4 bg-gradient-to-r from-[#5F755E]/10 to-[#C49A45]/10 rounded-lg border border-[#5F755E]/20">
-                          <p className="text-sm text-gray-700">
-                            <span className="font-semibold">Note:</span> Demo project showcasing our capabilities. 
-                            Results represent realistic outcomes from similar client work.
-                          </p>
-                        </div>
+                      <div className="text-xl md:text-2xl font-bold text-primary-600 mb-0.5">
+                        {result.value}
+                      </div>
+                      <div className="text-xs text-gray-500 leading-tight">
+                        {result.metric}
                       </div>
                     </div>
-                  </div>
-                ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+                  ))}
+                </div>
 
-        {/* CTA - SIMPLIFIED */}
+                {/* View Case Study Link */}
+                <button 
+                  className="w-full mt-5 py-2.5 text-sm font-semibold text-primary-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-all flex items-center justify-center gap-2 group"
+                  onClick={() => setSelectedItem(item.id)}
+                >
+                  View Full Case Study
+                  <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </button>
+              </div>
+            </motion.div>
+          ))}
+
+        </div>
+
+        {/* Bottom CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center bg-gradient-to-r from-[#5F755E] to-[#4A5D49] rounded-2xl p-8 md:p-12"
+          viewport={{ once: true }}
+          className="text-center"
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 font-playfair">
-            Ready for Your Transformation?
-          </h3>
-          <p className="text-[#B8C7B7] text-lg mb-8 max-w-2xl mx-auto">
-            Let's build something you're proud to show off.
+          <p className="text-gray-600 mb-6 text-lg">
+            Ready to see your business here?
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-[#5F755E] px-8 py-4 rounded-full font-semibold hover:bg-gray-50 transition-colors inline-flex items-center gap-2 group">
-              <span>Let's Talk</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold hover:border-white/50 transition-colors inline-flex items-center gap-2">
-              <Eye className="w-5 h-5" />
-              <span>See Our Process</span>
-            </button>
-          </div>
+          <a 
+            href="#contact"
+            className="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 group"
+          >
+            Start Your Transformation
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </a>
         </motion.div>
 
       </div>

@@ -1,31 +1,34 @@
-import React from 'react'
-import HeroSection from '@/components/sections/HeroSection'
-import AboutSection from '@/components/sections/AboutSection'
-import PortfolioSection from '@/components/sections/PortfolioSection'
-import ServicesSection from '@/components/sections/ServicesSection'
-import ProcessSection from '@/components/sections/ProcessSection'
-import ContactSection from '@/components/sections/ContactSection'
+// app/page.tsx or wherever you're rendering sections
 
-export default function HomePage() {
+import HeroSection from '@/components/sections/HeroSection';
+import PortfolioSection from '@/components/sections/PortfolioSection';
+import ProcessSection from '@/components/sections/ProcessSection';
+import ServicesSection from '@/components/sections/ServicesSection';
+import AboutSection from '@/components/sections/AboutSection';
+import ContactSection from '@/components/sections/ContactSection';
+
+export default function Home() {
   return (
-    <>
-      {/* 1. Hero - First impression */}
+    <main>
+      {/* 1. Emotional Hook */}
       <HeroSection />
       
-      {/* 2. Portfolio - MOVED UP - Show work first */}
+      {/* 2. Prove Value - Impact Stats are in Hero now */}
+      
+      {/* 3. Show Results */}
       <PortfolioSection />
       
-      {/* 3. Services - Clear pricing */}
-      <ServicesSection />
-      
-      {/* 4. Process - How we work */}
+      {/* 4. How We Work (MOVED UP) */}
       <ProcessSection />
       
-      {/* 5. About - Build connection */}
+      {/* 5. Investment Options (AFTER process) */}
+      <ServicesSection />
+      
+      {/* 6. Meet the Team */}
       <AboutSection />
       
-      {/* 6. Contact - Convert */}
+      {/* 7. Final CTA */}
       <ContactSection />
-    </>
-  )
+    </main>
+  );
 }
