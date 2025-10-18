@@ -49,7 +49,7 @@ export const Footer: React.FC = () => {
           
           {/* Contact */}
           <div>
-            <h3 className="font-display text-lg font-semibold mb-4">Let's Connect</h3>
+            <h3 className="font-display text-lg font-semibold mb-4">Let&apos;s Connect</h3>
             <ul className="space-y-2 text-white/80">
               <li>New Orleans, LA</li>
               <li>hello@sproutflowstudio.com</li>
