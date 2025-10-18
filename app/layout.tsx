@@ -1,4 +1,4 @@
-// app/layout.tsx
+// app/layout.tsx - FIXED VERSION (No white space at top)
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
@@ -24,8 +24,8 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "Sproutflow | Professional Web Design for Serious Businesses",
-  description: "Enterprise-level web design for small businesses ready to compete. Custom websites that convert. $750-$5,000. Launch in 1-4 weeks.",
+  title: "Sproutflow | Professional Web Design for Small Businesses",
+  description: "Fortune 500-level design psychology with small business heart. No impossible budgets. Custom websites from $750-$5K.",
 };
 
 export default function RootLayout({
@@ -37,7 +37,8 @@ export default function RootLayout({
         className={`${manrope.variable} ${openSans.variable} ${firaCode.variable} antialiased`}
       >
         <Header />
-        <main className="pt-20">
+        {/* REMOVED pt-20 - header is sticky so no padding needed */}
+        <main>
           {children}
         </main>
       </body>

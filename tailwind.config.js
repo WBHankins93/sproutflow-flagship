@@ -1,119 +1,129 @@
-// tailwind.config.js - Professional Studio Configuration for Tailwind v4
+// tailwind.config.js - Sproutflow Configuration
 
-export default {
+/** @type {import('tailwindcss').Config} */
+module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
-      // Professional Typography
-      fontFamily: {
-        'display': ['Playfair Display', 'serif'],
-        'body': ['Inter', 'system-ui', 'sans-serif'],
-      },
-      
-      // Sophisticated Color Palette - Woods & Waters (Refined)
+      // Woods & Waters Color Palette
       colors: {
-        // Primary Brand (Used Sparingly)
+        // Primary Brand Colors
         primary: {
-          50: '#f8f9f7',
-          100: '#f1f3ef',
-          200: '#e3e7df',
-          300: '#d0d6c8',
-          400: '#a8b5a3',
-          500: '#5F755E', // Main brand color
-          600: '#516545',
-          700: '#435239',
-          800: '#364230',
-          900: '#2d3727',
+          50: '#f3f6f3',
+          100: '#e3e9e3',
+          200: '#c7d4c7',
+          300: '#a3b9a3',
+          400: '#7e9b7e',
+          500: '#5F755E', // Reseda Green - Main brand color
+          600: '#4d5e4c',
+          700: '#3e4a3d',
+          800: '#333d33',
+          900: '#2b322b',
         },
-        
-        // Accent Gold (Strategic Use Only)
+        // Accent Colors
         accent: {
-          50: '#fef9f2',
-          100: '#fef2e2',
-          200: '#fce4c4',
-          300: '#f8d19b',
-          400: '#f4b565',
-          500: '#C49A45', // Accent color
-          600: '#b8883a',
-          700: '#996f2f',
-          800: '#7c5a2a',
-          900: '#654a25',
+          50: '#fef9ed',
+          100: '#fcf0d4',
+          200: '#f8dda8',
+          300: '#f4c571',
+          400: '#efa548',
+          500: '#C49A45', // Satin Sheen Gold
+          600: '#a67d2d',
+          700: '#885f27',
+          800: '#714d26',
+          900: '#604123',
         },
-        
-        // Professional Neutrals (Primary Palette)
-        neutral: {
-          50: '#fafafa',
-          100: '#f5f5f5',
-          200: '#e5e5e5',
-          300: '#d4d4d4',
-          400: '#a3a3a3',
-          500: '#737373',
-          600: '#525252',
-          700: '#404040',
-          800: '#262626',
-          900: '#1a1a1a',
-        },
-        
-        // Subtle Nature Tones
+        // Nature/Green Tones
         nature: {
-          50: '#f8f9f7',
-          100: '#f3f5f2',
-          200: '#e8ebe7',
-          300: '#d5d9d3',
-          400: '#b8beb5',
-          500: '#9db7b5', // Ash Gray from original palette
-          600: '#8ba8a6',
-          700: '#759593',
-          800: '#5f7a78',
-          900: '#4f6462',
+          50: '#f3f6f5',
+          100: '#e3e9e7',
+          200: '#c9d5d2',
+          300: '#9DB7B5', // Ash Gray
+          400: '#7a9c99',
+          500: '#5e817f',
+          600: '#4c6866',
+          700: '#42533C', // Feldgrau
+          800: '#384540',
+          900: '#323c38',
         },
-        
-        // Text System
+        // Text Colors
         text: {
-          primary: '#1a1a1a',
-          secondary: '#4a4a4a',
-          muted: '#6a6a6a',
-          light: '#a3a3a3',
-        }
+          primary: '#626155', // Ebony
+          secondary: '#445E69', // Payne's Gray
+          muted: '#7a7d72',
+        },
+        // Background Colors
+        background: {
+          primary: '#E9E2D8', // Alabaster
+          secondary: '#EDDDC0', // Dutch White
+          card: '#DDE3E2', // Platinum
+        },
       },
-      
-      // Sophisticated Shadows
-      boxShadow: {
-        'soft': '0 2px 20px rgba(0, 0, 0, 0.04)',
-        'medium': '0 4px 30px rgba(0, 0, 0, 0.08)',
-        'strong': '0 8px 40px rgba(0, 0, 0, 0.12)',
-        'nature': '0 4px 20px rgba(95, 117, 94, 0.1)',
+      // Typography
+      fontFamily: {
+        display: ['var(--font-heading)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-body)', 'system-ui', 'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
-      
-      // Professional Typography Scale
       fontSize: {
-        'hero': ['clamp(2.5rem, 5vw, 4rem)', {
-          lineHeight: '1.1',
-          letterSpacing: '-0.02em',
-        }],
-        'section': ['clamp(1.75rem, 3vw, 2.5rem)', {
-          lineHeight: '1.2',
-          letterSpacing: '-0.01em',
-        }],
-        'subsection': ['clamp(1.25rem, 2vw, 1.5rem)', {
-          lineHeight: '1.3',
-          letterSpacing: '-0.01em',
-        }],
-        'body-lg': ['1.125rem', {
-          lineHeight: '1.7',
-        }],
-        'body': ['1rem', {
-          lineHeight: '1.6',
-        }],
-        'body-sm': ['0.875rem', {
-          lineHeight: '1.5',
-        }],
+        // Hero & Display
+        'hero': ['clamp(2.5rem, 6vw, 5rem)', { lineHeight: '1.1', fontWeight: '700' }],
+        'section': ['clamp(2rem, 4vw, 3.5rem)', { lineHeight: '1.2', fontWeight: '600' }],
+        'subsection': ['clamp(1.5rem, 3vw, 2.25rem)', { lineHeight: '1.3', fontWeight: '600' }],
+        
+        // Body Text
+        'body-lg': ['1.125rem', { lineHeight: '1.7' }],
+        'body': ['1rem', { lineHeight: '1.7' }],
+        'body-sm': ['0.875rem', { lineHeight: '1.6' }],
+      },
+      // Spacing
+      spacing: {
+        'section-padding': 'clamp(3rem, 8vw, 8rem)',
+        'section-padding-sm': 'clamp(2rem, 5vw, 5rem)',
+        'section-padding-lg': 'clamp(4rem, 10vw, 12rem)',
+      },
+      // Container
+      maxWidth: {
+        'container': '80rem',
+        'container-wide': '90rem',
+        'container-narrow': '48rem',
+      },
+      // Box Shadows
+      boxShadow: {
+        'soft': '0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06)',
+        'medium': '0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.06)',
+        'nature': '0 10px 40px rgba(95, 117, 94, 0.15)',
+      },
+      // Border Radius
+      borderRadius: {
+        'card': '1rem',
+        'button': '9999px',
+      },
+      // Animations
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'slide-up': 'slideUp 0.5s ease-out',
+        'scale-in': 'scaleIn 0.3s ease-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        scaleIn: {
+          '0%': { transform: 'scale(0.95)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
       },
     },
   },
+  plugins: [],
 }

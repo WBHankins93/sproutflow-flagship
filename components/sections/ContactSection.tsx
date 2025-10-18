@@ -1,77 +1,54 @@
-// components/sections/ContactSection.tsx - Let's Start Something Beautiful
-
+// components/sections/ContactSection.tsx - FIXED VERSION
 'use client';
 
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Calendar, 
-  Coffee, 
-  Rocket, 
-  MessageCircle, 
-  ArrowRight, 
-  Clock, 
-  Users, 
-  Lightbulb,
-  Phone,
-  Mail,
-  MapPin
-} from 'lucide-react';
 import { Container, Section, Heading, BodyText, Card } from '../layout/StudioLayout';
+import { Calendar, Mail, MessageCircle, Clock, ArrowRight, Lightbulb, Rocket, Phone } from 'lucide-react';
+import { useState } from 'react';
 
-type ConversationOption = {
-  id: string;
-  title: string;
-  subtitle: string;
-  description: string;
-  duration: string;
-  bestFor: string[];
-  icon: React.ReactNode;
-  color: 'primary' | 'accent' | 'nature';
-  ctaText: string;
-};
-
-const ContactSection: React.FC = () => {
+const ContactSection = () => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-  const conversationOptions: ConversationOption[] = [
+  const conversationOptions = [
     {
       id: 'quick-chat',
       title: 'Quick Chat',
-      subtitle: 'Perfect for exploring ideas',
-      description: 'A friendly conversation to understand your vision and see if we\'re a good fit. No pressure, just genuine discussion about your business dreams.',
-      duration: '15 minutes',
+      subtitle: 'Coffee-style conversation',
+      description: 'Not ready to commit? Let\'s have a casual conversation about your business, vision, and see if we\'re a good fit.',
+      duration: '15-20 minutes',
       bestFor: [
-        'Initial idea exploration',
-        'Understanding if we\'re aligned',
-        'Getting quick answers to questions',
-        'Learning about our process'
+        'Getting to know each other',
+        'Understanding your vision',
+        'Exploring fit and compatibility',
+        'No pressure, no pitch'
       ],
       icon: <MessageCircle className="w-6 h-6" />,
-      color: 'accent',
-      ctaText: 'Schedule Quick Chat'
-    },
-    {
-      id: 'coffee-conversation',
-      title: 'Coffee & Conversation',
-      subtitle: 'Let\'s dive deep into your vision',
-      description: 'Grab your favorite beverage and let\'s have a real conversation about your business, challenges, and goals. This is where the magic begins.',
-      duration: '30 minutes',
-      bestFor: [
-        'Detailed vision discussion',
-        'Understanding your market',
-        'Exploring transformation possibilities',
-        'Building genuine connection'
-      ],
-      icon: <Coffee className="w-6 h-6" />,
       color: 'primary',
-      ctaText: 'Book Coffee Chat'
+      ctaText: 'Schedule Quick Chat',
+      action: 'https://calendly.com/sproutflow/quick-chat' // Replace with your actual Calendly link
     },
     {
-      id: 'project-planning',
-      title: 'Project Planning Session',
-      subtitle: 'Ready to map out your transformation',
-      description: 'You know what you want, and we\'re ready to make it happen. Let\'s create a detailed roadmap for your business transformation.',
+      id: 'discovery',
+      title: 'Discovery Call',
+      subtitle: 'Deep dive into your needs',
+      description: 'Ready to explore working together? Let\'s discuss your goals, challenges, and how we can help you grow.',
+      duration: '30-45 minutes',
+      bestFor: [
+        'Discussing project scope',
+        'Exploring package options',
+        'Understanding timelines',
+        'Getting preliminary pricing'
+      ],
+      icon: <Calendar className="w-6 h-6" />,
+      color: 'accent',
+      ctaText: 'Book Discovery Call',
+      action: 'https://calendly.com/sproutflow/discovery' // Replace with your actual Calendly link
+    },
+    {
+      id: 'strategy',
+      title: 'Strategy Session',
+      subtitle: 'Detailed project planning',
+      description: 'Let\'s create a detailed roadmap for your business transformation.',
       duration: '60 minutes',
       bestFor: [
         'Detailed project scoping',
@@ -81,7 +58,8 @@ const ContactSection: React.FC = () => {
       ],
       icon: <Rocket className="w-6 h-6" />,
       color: 'nature',
-      ctaText: 'Plan Your Project'
+      ctaText: 'Plan Your Project',
+      action: 'https://calendly.com/sproutflow/strategy' // Replace with your actual Calendly link
     }
   ];
 
@@ -126,13 +104,6 @@ const ContactSection: React.FC = () => {
               <span className="text-text-primary">Let&apos;s start </span>
               <span className="text-primary-600 relative">
                 something beautiful
-                <motion.div
-                  initial={{ width: 0 }}
-                  whileInView={{ width: '100%' }}
-                  transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-                  viewport={{ once: true }}
-                  className="absolute bottom-0 left-0 h-1 bg-accent-500/40 rounded-full"
-                />
               </span>
             </Heading>
             
@@ -156,7 +127,7 @@ const ContactSection: React.FC = () => {
           {/* Conversation Options */}
           <div className="grid lg:grid-cols-3 gap-8 mb-16">
             {conversationOptions.map((option, index) => {
-              const colors = colorMap[option.color];
+              const colors = colorMap[option.color as keyof typeof colorMap];
               const isSelected = selectedOption === option.id;
               
               return (
@@ -214,11 +185,16 @@ const ContactSection: React.FC = () => {
                       </ul>
                     </div>
                     
-                    {/* CTA Button */}
-                    <button className={`w-full ${colors.button} px-6 py-4 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-md`}>
+                    {/* CTA Button - NOW WITH WORKING LINK */}
+                    <a 
+                      href={option.action}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`w-full ${colors.button} px-6 py-4 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-md`}
+                    >
                       <span>{option.ctaText}</span>
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </button>
+                    </a>
                   </Card>
                 </motion.div>
               );
@@ -243,7 +219,10 @@ const ContactSection: React.FC = () => {
             </div>
             
             <div className="grid md:grid-cols-3 gap-6">
-              <div className="text-center group">
+              <a 
+                href="mailto:hello@sproutflowstudio.com"
+                className="text-center group"
+              >
                 <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                   <Mail className="w-6 h-6 text-primary-600" />
                 </div>
@@ -251,72 +230,47 @@ const ContactSection: React.FC = () => {
                 <BodyText size="sm" color="muted" className="mb-3">
                   Traditional but effective. Tell us about your project.
                 </BodyText>
-                <a 
-                  href="mailto:hello@sproutflow.com"
-                  className="text-primary-600 hover:text-primary-700 font-medium transition-colors inline-flex items-center gap-1"
-                >
-                  hello@sproutflow.com
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
-              
-              <div className="text-center group">
+                <span className="text-primary-600 font-medium hover:underline">
+                  hello@sproutflowstudio.com
+                </span>
+              </a>
+
+              <a 
+                href="tel:+15045550000"
+                className="text-center group"
+              >
                 <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
                   <Phone className="w-6 h-6 text-accent-600" />
                 </div>
                 <h4 className="font-semibold text-text-primary mb-2">Give Us a Call</h4>
                 <BodyText size="sm" color="muted" className="mb-3">
-                  Sometimes voice is better. Leave a message if we miss you.
+                  Prefer voice? Let&apos;s have a quick conversation.
                 </BodyText>
-                <a 
-                  href="tel:+15551234567"
-                  className="text-accent-600 hover:text-accent-700 font-medium transition-colors inline-flex items-center gap-1"
-                >
-                  (555) 123-4567
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
-              
+                <span className="text-accent-600 font-medium hover:underline">
+                  (504) 555-GROW
+                </span>
+              </a>
+
               <div className="text-center group">
                 <div className="w-12 h-12 bg-nature-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <MapPin className="w-6 h-6 text-nature-700" />
+                  <MessageCircle className="w-6 h-6 text-nature-700" />
                 </div>
-                <h4 className="font-semibold text-text-primary mb-2">New Orleans Based</h4>
+                <h4 className="font-semibold text-text-primary mb-2">Send a Message</h4>
                 <BodyText size="sm" color="muted" className="mb-3">
-                  Local to the Gulf Coast? We love meeting in person.
+                  Quick questions? Drop us a line anytime.
                 </BodyText>
-                <span className="text-nature-700 font-medium">
-                  Greater New Orleans Area
-                </span>
+                <a 
+                  href="https://m.me/sproutflowstudio" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-nature-700 font-medium hover:underline"
+                >
+                  Message on Facebook
+                </a>
               </div>
             </div>
           </motion.div>
 
-          {/* Final Encouragement */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="text-center mt-16"
-          >
-            <div className="bg-gradient-to-r from-primary-600 to-accent-600 rounded-2xl p-8 lg:p-12 text-white">
-              <Heading level={3} className="text-white mb-4">
-                Your story deserves to be told beautifully
-              </Heading>
-              <BodyText size="lg" className="text-white/90 max-w-2xl mx-auto mb-8">
-                Every small business has something special to offer the world. 
-                Let&apos;s make sure your audience can see it, feel it, and connect with it.
-              </BodyText>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="bg-white text-primary-600 px-8 py-4 rounded-full font-semibold hover:bg-gray-50 transition-colors inline-flex items-center gap-2 group">
-                  <Calendar className="w-5 h-5" />
-                  <span>Start the Conversation</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </Container>
     </Section>

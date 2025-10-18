@@ -1,4 +1,4 @@
-// app/page.tsx or wherever you're rendering sections
+// app/page.tsx - FIXED VERSION
 
 import HeroSection from '@/components/sections/HeroSection';
 import PortfolioSection from '@/components/sections/PortfolioSection';
@@ -6,29 +6,43 @@ import ProcessSection from '@/components/sections/ProcessSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import AboutSection from '@/components/sections/AboutSection';
 import ContactSection from '@/components/sections/ContactSection';
+import { Footer } from '@/components/layout/Footer';
 
 export default function Home() {
   return (
     <main>
       {/* 1. Emotional Hook */}
-      <HeroSection />
+      <section id="home">
+        <HeroSection />
+      </section>
       
-      {/* 2. Prove Value - Impact Stats are in Hero now */}
+      {/* 2. Show Results */}
+      <section id="work">
+        <PortfolioSection />
+      </section>
       
-      {/* 3. Show Results */}
-      <PortfolioSection />
+      {/* 3. How We Work */}
+      <section id="process">
+        <ProcessSection />
+      </section>
       
-      {/* 4. How We Work (MOVED UP) */}
-      <ProcessSection />
+      {/* 4. Investment Options */}
+      <section id="services">
+        <ServicesSection />
+      </section>
       
-      {/* 5. Investment Options (AFTER process) */}
-      <ServicesSection />
+      {/* 5. Meet the Team */}
+      <section id="about">
+        <AboutSection />
+      </section>
       
-      {/* 6. Meet the Team */}
-      <AboutSection />
-      
-      {/* 7. Final CTA */}
-      <ContactSection />
+      {/* 6. Final CTA */}
+      <section id="contact">
+        <ContactSection />
+      </section>
+
+      {/* 7. Footer */}
+      <Footer />
     </main>
   );
 }

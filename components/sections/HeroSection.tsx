@@ -80,7 +80,6 @@ export default function HeroSection() {
               textShadow: '3px 3px 12px rgba(0,0,0,0.9), 1px 1px 6px rgba(0,0,0,0.8)'
             }}
           >
-            Fortune 500-level design psychology.
             <br className="hidden md:block" />
             Small business heart. No impossible budgets.
           </motion.p>
@@ -93,10 +92,10 @@ export default function HeroSection() {
             className="mb-16 md:mb-20"
           >
             <a 
-              href="#impact"
+              href="#contact"
               className="inline-flex items-center gap-3 bg-white text-gray-900 px-10 md:px-14 py-4 md:py-5 rounded-full text-lg md:text-xl font-bold shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 group"
             >
-              See How We Help Small Businesses Win
+              Let&apos;s get started today!
               <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </a>
           </motion.div>
