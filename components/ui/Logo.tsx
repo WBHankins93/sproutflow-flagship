@@ -32,14 +32,8 @@ export const SproutflowLogo: React.FC<LogoProps> = ({
   // Logo path based on variant (we'll export these from Canva)
   const getLogoPath = () => {
     switch (variant) {
-      case 'light':
-        return '/images/logo/sproutflow-logo-light.png';
-      case 'dark':
-        return '/images/logo/sproutflow-logo-dark.png';
-      case 'monochrome':
-        return '/images/logo/sproutflow-logo-mono.png';
       default:
-        return '/images/logo/sproutflow-logo.png'; // main-sprout from Canva
+        return '/images/logo/sproutflow-main-logo.png'; // main-sprout from Canva
     }
   };
 

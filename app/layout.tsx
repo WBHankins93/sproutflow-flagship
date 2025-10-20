@@ -37,7 +37,6 @@ export default function RootLayout({
         className={`${manrope.variable} ${openSans.variable} ${firaCode.variable} antialiased`}
       >
         <Header />
-        {/* REMOVED pt-20 - header is sticky so no padding needed */}
         <main>
           {children}
         </main>
