@@ -33,7 +33,7 @@ export const SproutflowLogo: React.FC<LogoProps> = ({
   const getLogoPath = () => {
     switch (variant) {
       default:
-        return '/images/logo/sproutflow-main-logo.png'; // main-sprout from Canva
+        return '/images/sproutflow-main-logo.png'; // main-sprout from Canva
     }
   };
 
