@@ -11,7 +11,7 @@ export default {
   theme: {
     extend: {
       // ============================================
-      // FONTS - CRITICAL FIX
+      // FONTS
       // ============================================
       fontFamily: {
         // These MUST match the CSS variables from layout.tsx
