@@ -182,13 +182,6 @@ export default function PortfolioSection() {
                   
                   {/* Gradient Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                  
-                  {/* Demo Badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className="bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-gray-700 shadow-lg">
-                      Demo Portfolio
-                    </span>
-                  </div>
 
                   {/* Icon Badge - Bottom Left */}
                   <div className="absolute bottom-4 left-4">

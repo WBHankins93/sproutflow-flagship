@@ -2,27 +2,21 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
-import { Manrope, Open_Sans, Fira_Code } from "next/font/google";
+import { DM_Serif_Display, DM_Sans } from "next/font/google";
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  variable: "--font-heading",
-  display: "swap",  // ✅ ADD THIS
-});
-
-const openSans = Open_Sans({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  variable: "--font-body",
-  display: "swap",  // ✅ ADD THIS
-});
-
-const firaCode = Fira_Code({
+const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
   weight: ["400"],
-  variable: "--font-mono",
-  display: "swap",  // ✅ ADD THIS
+  style: ["normal", "italic"],
+  variable: "--font-heading",
+  display: "swap",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-body",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -36,8 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${manrope.variable} ${openSans.variable} ${firaCode.variable} antialiased font-body`}
-        // ✅ ADDED font-body here - this is the critical fix!
+        className={`${dmSerif.variable} ${dmSans.variable} antialiased font-body`}
       >
         <Header />
         <main>
