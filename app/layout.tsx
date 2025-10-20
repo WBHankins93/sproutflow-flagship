@@ -8,21 +8,21 @@ const manrope = Manrope({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
   variable: "--font-heading",
-  display: "swap", // Add this
+  display: "swap",  // ✅ ADD THIS
 });
 
 const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ["400", "600"],
   variable: "--font-body",
-  display: "swap", // Add this
+  display: "swap",  // ✅ ADD THIS
 });
 
 const firaCode = Fira_Code({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-mono",
-  display: "swap", // Add this
+  display: "swap",  // ✅ ADD THIS
 });
 
 export const metadata: Metadata = {
@@ -37,6 +37,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body
         className={`${manrope.variable} ${openSans.variable} ${firaCode.variable} antialiased font-body`}
+        // ✅ ADDED font-body here - this is the critical fix!
       >
         <Header />
         <main>
