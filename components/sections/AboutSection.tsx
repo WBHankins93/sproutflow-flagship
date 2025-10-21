@@ -130,13 +130,12 @@ const AboutSection: React.FC = () => {
           </div>
 
           {/* Simple CTA */}
-          {/* Simple CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center pt-12 pb-16 border-t border-nature-200"
+            className="text-center pt-12 pb-12 md:pb-16"
           >
             <Heading level={3} className="mb-3">
               Ready to Level the Playing Field?
@@ -154,6 +153,11 @@ const AboutSection: React.FC = () => {
               Start Your Transformation
             </Button>
           </motion.div>
+
+          {/* Centered Divider Line - reduced padding */}
+          <div className="flex justify-center py-8 md:py-12">
+            <div className="w-full max-w-md border-t border-nature-200"></div>
+          </div>
         </div>
       </Container>
     </Section>
