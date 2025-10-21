@@ -1,7 +1,12 @@
+/* app/globals.css - SPROUTFLOW WITH DM SERIF DISPLAY + DM SANS */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ===================================
+   BASE STYLES
+   =================================== */
 @layer base {
   * {
     @apply border-gray-200;
@@ -15,17 +20,18 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Body uses DM Sans */
   body {
     @apply bg-white text-gray-800;
     font-family: var(--font-body), sans-serif;
     line-height: 1.7;
   }
 
-  /* Serif headings for organic, nature-inspired feel */
+  /* Headings use DM Serif Display for organic, nature-inspired feel */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading), serif;
-    font-weight: 400; /* DM Serif Display looks best at normal weight */
-    letter-spacing: -0.01em; /* Slightly tighter for serif */
+    font-weight: 400;
+    letter-spacing: -0.01em;
     line-height: 1.2;
   }
 
@@ -54,7 +60,91 @@
   }
 }
 
-/* Rest of your utility classes remain the same */
+/* ===================================
+   UTILITY CLASSES
+   =================================== */
 @layer utilities {
-  /* Your existing utility classes... */
+  /* Gradient Backgrounds */
+  .bg-gradient-radial {
+    background-image: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
+  .bg-gradient-nature {
+    background: linear-gradient(135deg, #5F755E 0%, #42533C 100%);
+  }
+
+  .bg-gradient-warm {
+    background: linear-gradient(135deg, #C49A45 0%, #b8852f 100%);
+  }
+
+  /* Custom Shadows */
+  .shadow-soft {
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+  }
+
+  .shadow-nature {
+    box-shadow: 0 10px 40px rgba(95, 117, 94, 0.15);
+  }
+
+  .shadow-3xl {
+    box-shadow: 
+      0 30px 60px -15px rgba(0, 0, 0, 0.25),
+      0 10px 20px -5px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Text Shadows for Hero Sections */
+  .text-shadow-sm {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  }
+
+  .text-shadow-md {
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 
+      4px 4px 20px rgba(0, 0, 0, 0.9),
+      2px 2px 10px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white/80 backdrop-blur-md;
+  }
+
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-md;
+  }
+}
+
+/* ===================================
+   COMPONENT STYLES
+   =================================== */
+@layer components {
+  /* Button Variants */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300;
+    font-family: var(--font-body), sans-serif;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700 shadow-lg hover:shadow-xl hover:scale-105;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-primary-700 border-2 border-primary-200 hover:border-primary-300 hover:bg-primary-50;
+  }
+
+  .btn-accent {
+    @apply bg-accent-500 text-white hover:bg-accent-600 shadow-lg hover:shadow-xl;
+  }
+
+  /* Card Styles */
+  .card {
+    @apply bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300;
+  }
+
+  .card-nature {
+    @apply bg-gradient-to-br from-primary-50 to-white rounded-2xl p-6 border border-primary-100 shadow-nature;
+  }
 }

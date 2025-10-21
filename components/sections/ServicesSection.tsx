@@ -14,10 +14,10 @@ const serviceTiers = [
     icon: <Zap className="w-6 h-6" />,
     tagline: 'Get online fast',
     priceRange: '$750 - $1,250',
-    timeline: '5-7 business days',
     idealFor: 'New businesses and focused market entry',
     description: 'Strategic website foundation designed to establish immediate professional credibility and drive customer acquisition from day one.',
-    lifestyleImage: '/images/services/launch-lifestyle.jpg', // Placeholder
+    lifestyleImage: '/images/services/launch-lifestyle.jpg',
+    treeRingImage: '/images/tree-ring-1.jpg', // Image 1
     highlights: [
       'Immediate professional market presence',
       'Clear customer conversion pathway',
@@ -33,10 +33,10 @@ const serviceTiers = [
     icon: <Target className="w-6 h-6" />,
     tagline: 'Stand out from competitors',
     priceRange: '$2,000 - $2,500',
-    timeline: '2-3 weeks',
     idealFor: 'Established businesses ready for competitive advantage',
     description: 'Comprehensive digital presence that positions your business as the clear choice in your market through strategic design and content architecture.',
     lifestyleImage: '/images/services/elevate-lifestyle.jpg',
+    treeRingImage: '/images/tree-ring-3.jpg', // Image 2
     highlights: [
       'Clear market differentiation from competitors',
       'Improved customer acquisition metrics',
@@ -52,10 +52,10 @@ const serviceTiers = [
     icon: <Rocket className="w-6 h-6" />,
     tagline: 'Custom competitive advantages',
     priceRange: 'Starting at $5,000',
-    timeline: '4-8 weeks',
     idealFor: 'Growing businesses with specific technical requirements',
     description: 'Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages through advanced functionality.',
     lifestyleImage: '/images/services/thrive-lifestyle.jpg',
+    treeRingImage: '/images/tree-ring-4.webp', // Image 3
     highlights: [
       'Technical competitive advantages in market',
       'Streamlined business operations',
@@ -128,10 +128,20 @@ export default function ServicesSection() {
               )}
 
               {/* Card */}
-              <div className={`bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}>
+              <div className={`relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}>
                 
+                {/* Tree Ring Background - Subtle */}
+                <div className="absolute inset-0 pointer-events-none opacity-10 z-0">
+                  <Image 
+                    src={tier.treeRingImage}
+                    alt=""
+                    fill
+                    className="object-cover scale-110"
+                  />
+                </div>
+
                 {/* Lifestyle Image Header */}
-                <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200">
+                <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200 z-10">
                   {/* Placeholder - replace with actual images */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center">
@@ -168,13 +178,13 @@ export default function ServicesSection() {
                 </div>
 
                 {/* Content */}
-                <div className="p-8">
+                <div className="relative p-8 z-10">
                   
                   {/* Tagline */}
                   <p className="text-primary-600 font-semibold mb-2">{tier.tagline}</p>
                   
-                  {/* Timeline */}
-                  <p className="text-sm text-gray-500 mb-4">{tier.timeline} • {tier.idealFor}</p>
+                  {/* TIMELINE REMOVED - Only idealFor remains */}
+                  <p className="text-sm text-gray-500 mb-4">{tier.idealFor}</p>
 
                   {/* Description */}
                   <p className="text-gray-600 mb-6 leading-relaxed">

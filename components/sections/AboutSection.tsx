@@ -50,20 +50,24 @@ const AboutSection: React.FC = () => {
               </Heading>
               
               <BodyText className="mb-4 leading-relaxed">
-                Former Fortune 500 infrastructure engineer turned small business advocate. 
-                I spent years building enterprise systems for companies with unlimited budgets—
-                and watched small businesses struggle with the same challenges but none of the resources.
+              I spent years building enterprise infrastructure—the kind of systems that power massive companies. Along the way, I got really good at understanding what makes customers trust a brand instantly.
               </BodyText>
 
               <BodyText className="mb-4 leading-relaxed">
-                <strong className="text-text-primary">Here&apos;s the thing:</strong> That local café 
-                deserves the same trust signals as Starbucks. Your family business should command 
+              Then I started noticing something frustrating: the local businesses I loved weren&apos;t getting recognition online. Not because they weren't professional, but because professional design was out of reach.
+
+              
+              You deserve design that reflects how good you actually are.
+              </BodyText>
+
+              <BodyText className="mb-4 leading-relaxed">
+                <strong className="text-text-primary">I started Sproutflow to change that.</strong>
+                That local café deserves the same trust signals as Starbucks. Your family business should command 
                 the same respect as corporate giants. So I started Sproutflow to level the playing field.
               </BodyText>
 
               <BodyText color="muted" className="italic">
-                When I&apos;m not designing websites, you&apos;ll find me exploring New Orleans coffee shops 
-                or hiking Oregon trails—always looking for the next great small business story to tell.
+              Always collecting stories from small businesses that make communities special.
               </BodyText>
             </motion.div>
 
@@ -80,12 +84,16 @@ const AboutSection: React.FC = () => {
                   Our Mission
                 </div>
                 <Heading level={3} className="mb-4 text-2xl">
-                  Fortune 500 Design. Small Business Heart.
+                  Level the Playing Field
                 </Heading>
                 <BodyText className="leading-relaxed">
-                  We bring enterprise-level design psychology—the kind that builds instant trust 
-                  and credibility—to small businesses at prices that actually make sense. 
-                  Because when customers judge you in 50 milliseconds, you deserve every advantage.
+                  Big companies have design teams that study human psychology. They know exactly how to build trust in 50 milliseconds.
+                </BodyText>
+                <BodyText className="leading-relaxed">
+                  Small businesses? You get DIY tools and hope for the best.
+                </BodyText>
+                <BodyText className="leading-relaxed">
+                  We fix that. Enterprise strategy. Small business pricing. No compromise on quality.
                 </BodyText>
               </div>
 

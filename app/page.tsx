@@ -17,9 +17,9 @@ export default function Home() {
       </section>
       
       {/* 2. Show Results */}
-      <section id="work">
+      {/* <section id="work">
         <PortfolioSection />
-      </section>
+      </section> */}
       
       {/* 3. How We Work */}
       <section id="process">

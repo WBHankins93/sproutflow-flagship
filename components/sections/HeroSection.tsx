@@ -45,10 +45,10 @@ export default function HeroSection() {
               <span className="text-green-600 text-lg">💡</span>
               <span className="font-semibold text-gray-800 text-sm md:text-base">Small Business Focused</span>
             </div>
-            <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20">
+            {/* <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20">
               <span className="text-blue-600 text-lg">📈</span>
               <span className="font-semibold text-gray-800 text-sm md:text-base">$750-$5K Investment</span>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Main Headline */}
