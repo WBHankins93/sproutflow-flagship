@@ -318,7 +318,7 @@ export default function ServicesSection() {
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-3">
                           <Package className="w-4 h-4" />
-                          <h4 className="font-semibold">What's Included:</h4>
+                          <h4 className="font-semibold">What&apos;s Included:</h4>
                         </div>
                         <ul className="space-y-2">
                           {tier.includes.map((item, idx) => (

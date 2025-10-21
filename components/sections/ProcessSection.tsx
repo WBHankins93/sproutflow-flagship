@@ -136,7 +136,7 @@ export default function ProcessSection() {
           </h2>
           
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Four stages. Total transparency. You're involved every step.
+            Four stages. Total transparency. You&apos;re involved every step.
           </p>
         </motion.div>
 
@@ -226,7 +226,7 @@ export default function ProcessSection() {
           className="text-center bg-primary-50 rounded-xl p-6 border border-primary-200 mb-12"
         >
           <p className="text-gray-700 leading-relaxed max-w-3xl mx-auto">
-            <strong className="text-gray-900">Here's our promise:</strong> You'll know exactly what's happening at every stage. 
+            <strong className="text-gray-900">Here&apos;s our promise:</strong> You&apos;ll know exactly what&apos;s happening at every stage. 
             Regular updates, clear timelines, and your feedback welcomed throughout.
           </p>
         </motion.div>
