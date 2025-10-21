@@ -54,7 +54,7 @@ const AboutSection: React.FC = () => {
               </BodyText>
 
               <BodyText className="mb-4 leading-relaxed">
-              Then I started noticing something frustrating: the local businesses I loved weren&apos;t getting recognition online. Not because they weren't professional, but because professional design was out of reach.
+              Then I started noticing something frustrating: the local businesses I loved weren&apos;t getting recognition online. Not because they weren&apos;t professional, but because professional design was out of reach.
 
               
               You deserve design that reflects how good you actually are.
