@@ -1,10 +1,10 @@
-// components/sections/AboutSection.tsx - Streamlined & Scannable
+// components/sections/AboutSection.tsx - Content Updates Only
 
 'use client';
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Zap, Users, ArrowRight } from 'lucide-react';
+import { Heart, Zap, Users, Target, ArrowRight } from 'lucide-react';
 import { Container, Section, Heading, BodyText, Button, Grid, Card } from '../layout/StudioLayout';
 
 const AboutSection: React.FC = () => {
@@ -26,7 +26,7 @@ const AboutSection: React.FC = () => {
             </Heading>
           </motion.div>
 
-          {/* Two-Column Layout: Ben + Sproutflow Story */}
+          {/* Two-Column Layout: Ben + Mission */}
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 mb-20">
             
             {/* LEFT: About Ben (Personal Touch) */}
@@ -50,28 +50,23 @@ const AboutSection: React.FC = () => {
               </Heading>
               
               <BodyText className="mb-4 leading-relaxed">
-              I spent years building enterprise infrastructure—the kind of systems that power massive companies. Along the way, I got really good at understanding what makes customers trust a brand instantly.
+                I&apos;ve spent most of my career building systems for companies with massive budgets. Along the way, I learned what makes customers instantly trust a brand online.
               </BodyText>
 
               <BodyText className="mb-4 leading-relaxed">
-              Then I started noticing something frustrating: the local businesses I loved weren&apos;t getting recognition online. Not because they weren&apos;t professional, but because professional design was out of reach.
-
-              
-              You deserve design that reflects how good you actually are.
+                Then I noticed something that bothered me: the businesses I actually loved—the ones making communities better—looked amateur online. Not because they lacked professionalism. Just because professional design felt financially out of reach.
               </BodyText>
 
               <BodyText className="mb-4 leading-relaxed">
-                <strong className="text-text-primary">I started Sproutflow to change that.</strong>
-                That local café deserves the same trust signals as Starbucks. Your family business should command 
-                the same respect as corporate giants. So I started Sproutflow to level the playing field.
+                So I started Sproutflow to fix that gap. I take what works for Fortune 500 companies and make it work for real businesses at real prices.
               </BodyText>
 
               <BodyText color="muted" className="italic">
-              Always collecting stories from small businesses that make communities special.
+                Collecting stories from small businesses that make communities special.
               </BodyText>
             </motion.div>
 
-            {/* RIGHT: About Sproutflow (Mission-Focused) */}
+            {/* RIGHT: Mission */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -86,103 +81,62 @@ const AboutSection: React.FC = () => {
                 <Heading level={3} className="mb-4 text-2xl">
                   Level the Playing Field
                 </Heading>
-                <BodyText className="leading-relaxed">
-                  Big companies have design teams that study human psychology. They know exactly how to build trust in 50 milliseconds.
+                <BodyText className="mb-4 leading-relaxed">
+                  Big companies have design teams that study human psychology.
                 </BodyText>
-                <BodyText className="leading-relaxed">
-                  Small businesses? You get DIY tools and hope for the best.
+                <BodyText className="mb-4 leading-relaxed">
+                  Small businesses? You get DIY tools and hope for the best. 
                 </BodyText>
-                <BodyText className="leading-relaxed">
+
+                <BodyText className="mb-4 leading-relaxed">
                   We fix that. Enterprise strategy. Small business pricing. No compromise on quality.
                 </BodyText>
               </div>
 
-              {/* Story (Brief) */}
+              {/* What We Stand For (Company Values) */}
               <div className="bg-nature-50 rounded-2xl p-8 border border-nature-200 shadow-sm">
                 <div className="text-nature-700 font-bold text-sm uppercase tracking-wider mb-3">
-                  Our Story
+                  What We Stand For
                 </div>
-                <BodyText className="mb-4 leading-relaxed">
-                  <strong className="text-text-primary">The problem was obvious:</strong> Small 
-                  businesses face the same harsh customer judgment as Fortune 500 companies, 
-                  but don&apos;t have access to the same design resources that create instant credibility.
-                </BodyText>
-                <BodyText className="leading-relaxed">
-                  So we built Sproutflow—a studio that democratizes professional design. 
-                  No corporate bureaucracy. No impossible budgets. Just results that help you compete.
-                </BodyText>
+                
+                <div className="space-y-4">
+                  <div className="flex gap-3">
+                    <Heart className="w-5 h-5 text-nature-700 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-text-primary mb-1">Small Business First</p>
+                      <BodyText className="text-sm">Every decision prioritizes what&apos;s best for small businesses, not what&apos;s easiest for us.</BodyText>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <Target className="w-5 h-5 text-nature-700 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-text-primary mb-1">No BS Pricing</p>
+                      <BodyText className="text-sm">Transparent pricing, clear timelines, honest conversations. No hidden fees.</BodyText>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-3">
+                    <Users className="w-5 h-5 text-nature-700 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-text-primary mb-1">True Partnership</p>
+                      <BodyText className="text-sm">You&apos;re not just a client. We succeed when you succeed.</BodyText>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
 
           </div>
 
-          {/* Values - Compact, Scannable */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="mb-16"
-          >
-            <div className="text-center mb-10">
-              <Heading level={3} className="mb-3">
-                What We Stand For
-              </Heading>
-              <BodyText color="muted" className="max-w-2xl mx-auto">
-                Three principles that guide everything we do
-              </BodyText>
-            </div>
-            
-            <Grid cols={3} gap="md">
-              
-              {/* Value 1: Empathy */}
-              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-                <div className="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Heart className="w-7 h-7 text-primary-600" />
-                </div>
-                <Heading level={3} className="text-lg mb-2">
-                  We Get It
-                </Heading>
-                <BodyText size="sm" color="muted">
-                  Real budgets. Real timelines. Real small business challenges.
-                </BodyText>
-              </Card>
-
-              {/* Value 2: Excellence */}
-              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-                <div className="w-14 h-14 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Zap className="w-7 h-7 text-accent-600" />
-                </div>
-                <Heading level={3} className="text-lg mb-2">
-                  No Compromises
-                </Heading>
-                <BodyText size="sm" color="muted">
-                  Enterprise-quality design at small business prices.
-                </BodyText>
-              </Card>
-
-              {/* Value 3: Partnership */}
-              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-                <div className="w-14 h-14 bg-nature-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="w-7 h-7 text-nature-700" />
-                </div>
-                <Heading level={3} className="text-lg mb-2">
-                  True Partners
-                </Heading>
-                <BodyText size="sm" color="muted">
-                  Your success is our success. We&apos;re invested in your growth.
-                </BodyText>
-              </Card>
-            </Grid>
-          </motion.div>
-
+          {/* Simple CTA */}
           {/* Simple CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center pt-12 border-t border-nature-200"
+            className="text-center pt-12 pb-16 border-t border-nature-200"
           >
             <Heading level={3} className="mb-3">
               Ready to Level the Playing Field?

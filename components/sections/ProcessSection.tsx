@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sprout, Leaf, Flower, Sun, ArrowRight } from 'lucide-react';
+import { Sprout, Leaf, Flower, Sun } from 'lucide-react';
 
 const processSteps = [
   {
@@ -24,10 +24,10 @@ const processSteps = [
     outcome: 'Shared vision and strategic direction',
     color: {
       bg: 'bg-green-50',
-      icon: 'text-green-600',
+      icon: 'text-green-500',
       border: 'border-green-200',
-      accent: 'bg-green-600',
-      timeline: 'text-green-600'
+      accent: 'bg-green-500',
+      gradientColor: 'rgba(34, 197, 94, 0.12)' // Light green
     }
   },
   {
@@ -46,11 +46,11 @@ const processSteps = [
     ],
     outcome: 'Professional design direction',
     color: {
-      bg: 'bg-emerald-50',
-      icon: 'text-emerald-600',
-      border: 'border-emerald-200',
-      accent: 'bg-emerald-600',
-      timeline: 'text-emerald-600'
+      bg: 'bg-green-100',
+      icon: 'text-green-600',
+      border: 'border-green-300',
+      accent: 'bg-green-600',
+      gradientColor: 'rgba(22, 163, 74, 0.15)' // Medium green
     }
   },
   {
@@ -69,18 +69,17 @@ const processSteps = [
     ],
     outcome: 'Beautiful website ready to launch',
     color: {
-      bg: 'bg-primary-50',
-      icon: 'text-primary-600',
-      border: 'border-primary-200',
-      accent: 'bg-primary-600',
-      timeline: 'text-primary-600'
+      bg: 'bg-green-100',
+      icon: 'text-green-700',
+      border: 'border-green-400',
+      accent: 'bg-green-700',
+      gradientColor: 'rgba(21, 128, 61, 0.18)' // Dark green
     }
   },
   {
     id: 'flourish',
     number: 4,
     stage: 'Flourish',
-    timeline: 'Ongoing',
     icon: <Sun className="w-8 h-8" />,
     title: 'Launch & Partnership',
     subtitle: 'Continued success',
@@ -95,9 +94,9 @@ const processSteps = [
     color: {
       bg: 'bg-amber-50',
       icon: 'text-amber-500',
-      border: 'border-amber-200',
+      border: 'border-amber-300',
       accent: 'bg-amber-500',
-      timeline: 'text-amber-600'
+      gradientColor: 'rgba(245, 158, 11, 0.15)' // Bright amber/gold
     }
   }
 ];
@@ -137,7 +136,7 @@ export default function ProcessSection() {
           </h2>
           
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Four stages. Total transparency. You&apos;re involved every step.
+            Four stages. Total transparency. You're involved every step.
           </p>
         </motion.div>
 
@@ -152,57 +151,65 @@ export default function ProcessSection() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              {/* Compact Card */}
-              <div className={`bg-white rounded-2xl p-6 shadow-md border-2 ${step.color.border} hover:shadow-lg transition-shadow h-full`}>
+              {/* Compact Card - NO TIMELINE TAG */}
+              <div className={`relative bg-white rounded-2xl p-6 shadow-md border-2 ${step.color.border} hover:shadow-lg transition-shadow h-full overflow-hidden`}>
                 
-                {/* Header */}
-                <div className="flex items-center justify-between mb-4">
-                  <div className={`w-10 h-10 ${step.color.accent} text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md`}>
-                    {step.number}
+                {/* Gradient Overlay - Top to Bottom Fade */}
+                <div 
+                  className="absolute inset-0 pointer-events-none z-0"
+                  style={{
+                    background: `linear-gradient(to bottom, ${step.color.gradientColor} 0%, transparent 50%)`
+                  }}
+                />
+
+                {/* Content Container - Relative to sit above gradient */}
+                <div className="relative z-10">
+                  {/* Header - Just Number Badge */}
+                  <div className="flex items-center justify-center mb-4">
+                    <div className={`w-10 h-10 ${step.color.accent} text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md`}>
+                      {step.number}
+                    </div>
                   </div>
-                  <div className={`${step.color.bg} ${step.color.timeline} px-2.5 py-1 rounded-full text-xs font-bold`}>
-                    {step.timeline}
+
+                  {/* Icon */}
+                  <div className={`w-16 h-16 mx-auto mb-4 ${step.color.bg} rounded-xl flex items-center justify-center ${step.color.icon}`}>
+                    {step.icon}
                   </div>
-                </div>
 
-                {/* Icon */}
-                <div className={`w-16 h-16 mx-auto mb-4 ${step.color.bg} rounded-xl flex items-center justify-center ${step.color.icon}`}>
-                  {step.icon}
-                </div>
+                  {/* Stage Name */}
+                  <div className="text-center mb-4">
+                    <h3 className={`text-2xl font-display font-bold mb-1 ${step.color.icon}`}>
+                      {step.stage}
+                    </h3>
+                    <p className="text-sm font-semibold text-gray-900 mb-1">
+                      {step.title}
+                    </p>
+                    <p className={`text-xs ${step.color.icon} italic`}>
+                      {step.subtitle}
+                    </p>
+                  </div>
 
-                {/* Stage Name */}
-                <div className="text-center mb-4">
-                  <h3 className={`text-2xl font-display font-bold mb-1 ${step.color.icon}`}>
-                    {step.stage}
-                  </h3>
-                  <p className="text-sm font-semibold text-gray-900 mb-1">
-                    {step.title}
+                  {/* Description */}
+                  <p className="text-sm text-gray-600 mb-4 leading-relaxed text-center">
+                    {step.description}
                   </p>
-                  <p className={`text-xs ${step.color.icon} italic`}>
-                    {step.subtitle}
-                  </p>
-                </div>
 
-                {/* Description */}
-                <p className="text-sm text-gray-600 mb-4 leading-relaxed text-center">
-                  {step.description}
-                </p>
+                  {/* Highlights - Compact */}
+                  <ul className="space-y-1.5 mb-4">
+                    {step.highlights.map((item, idx) => (
+                      <li key={idx} className="flex items-center gap-2 text-xs text-gray-700">
+                        <div className={`w-1 h-1 rounded-full flex-shrink-0 ${step.color.accent}`}></div>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                {/* Highlights - Compact */}
-                <ul className="space-y-1.5 mb-4">
-                  {step.highlights.map((item, idx) => (
-                    <li key={idx} className="flex items-center gap-2 text-xs text-gray-700">
-                      <div className={`w-1 h-1 rounded-full flex-shrink-0 ${step.color.accent}`}></div>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Outcome */}
-                <div className={`${step.color.bg} rounded-lg p-3 border ${step.color.border} text-center`}>
-                  <p className="text-xs font-bold text-gray-900">
-                    {step.outcome}
-                  </p>
+                  {/* Outcome */}
+                  <div className={`${step.color.accent} rounded-lg p-3 border-2 ${step.color.border} text-center`}>
+                    <p className="text-xs font-bold text-white">
+                      {step.outcome}
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -219,7 +226,7 @@ export default function ProcessSection() {
           className="text-center bg-primary-50 rounded-xl p-6 border border-primary-200 mb-12"
         >
           <p className="text-gray-700 leading-relaxed max-w-3xl mx-auto">
-            <strong className="text-gray-900">Here&apos;s our promise:</strong> You&apos;ll know exactly what&apos;s happening at every stage. 
+            <strong className="text-gray-900">Here's our promise:</strong> You'll know exactly what's happening at every stage. 
             Regular updates, clear timelines, and your feedback welcomed throughout.
           </p>
         </motion.div>
