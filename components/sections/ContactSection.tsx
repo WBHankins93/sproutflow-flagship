@@ -231,7 +231,7 @@ const ContactSection = () => {
                   Traditional but effective. Tell us about your project.
                 </BodyText>
                 <span className="text-primary-600 font-medium hover:underline">
-                  hello@sproutflowstudio.com
+                  ben@sproutflow-studio.com
                 </span>
               </a>
 
@@ -247,7 +247,7 @@ const ContactSection = () => {
                   Prefer voice? Let&apos;s have a quick conversation.
                 </BodyText>
                 <span className="text-accent-600 font-medium hover:underline">
-                  (504) 555-GROW
+                  (228) 327-1082
                 </span>
               </a>
 

@@ -115,7 +115,7 @@ export const Footer: React.FC = () => {
                   href="mailto:hello@sproutflowstudio.com"
                   className="hover:text-white transition-colors"
                 >
-                  hello@sproutflowstudio.com
+                  ben@sproutflow-studio.com
                 </a>
               </li>
               <li>
@@ -123,7 +123,7 @@ export const Footer: React.FC = () => {
                   href="tel:+15045550000"
                   className="hover:text-white transition-colors"
                 >
-                  (504) 555-GROW
+                  (228) 327-1082 
                 </a>
               </li>
             </ul>
