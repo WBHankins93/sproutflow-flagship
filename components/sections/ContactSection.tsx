@@ -25,7 +25,7 @@ const ContactSection = () => {
       icon: <MessageCircle className="w-6 h-6" />,
       color: 'primary',
       ctaText: 'Schedule Quick Chat',
-      action: 'https://calendly.com/sproutflow/quick-chat' // Replace with your actual Calendly link
+      action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // Replace with your actual Calendly link
     },
     {
       id: 'discovery',
@@ -42,7 +42,7 @@ const ContactSection = () => {
       icon: <Calendar className="w-6 h-6" />,
       color: 'accent',
       ctaText: 'Book Discovery Call',
-      action: 'https://calendly.com/sproutflow/discovery' // Replace with your actual Calendly link
+      action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // Replace with your actual Calendly link
     },
     {
       id: 'strategy',
@@ -59,7 +59,7 @@ const ContactSection = () => {
       icon: <Rocket className="w-6 h-6" />,
       color: 'nature',
       ctaText: 'Plan Your Project',
-      action: 'https://calendly.com/sproutflow/strategy' // Replace with your actual Calendly link
+      action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // Replace with your actual Calendly link
     }
   ];
 
