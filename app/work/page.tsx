@@ -1,11 +1,24 @@
 // app/work/page.tsx - Sproutflow Work Showcase
 
+import React from 'react';
 import Link from 'next/link';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Code2, FileCode, Layers, Zap, Globe, Database, Palette } from 'lucide-react';
 
 import { workProjects } from '@/data/workProjects';
 import type { ProjectStatus } from '@/data/workProjects';
 import { Footer } from '@/components/layout/Footer';
+
+// Tech stack icon mapping
+const techIcons: Record<string, React.ReactNode> = {
+  'Next.js': <Code2 className="h-3 w-3" />,
+  'TypeScript': <FileCode className="h-3 w-3" />,
+  'Tailwind CSS': <Palette className="h-3 w-3" />,
+  'Vercel': <Globe className="h-3 w-3" />,
+  'Framer Motion': <Zap className="h-3 w-3" />,
+  'React': <Layers className="h-3 w-3" />,
+  'Node.js': <Code2 className="h-3 w-3" />,
+  'PostgreSQL': <Database className="h-3 w-3" />,
+};
 
 const statusStyles: Record<ProjectStatus, string> = {
   Live: 'bg-emerald-100 text-emerald-900 ring-1 ring-inset ring-emerald-200',
@@ -20,7 +33,8 @@ export const metadata = {
 };
 
 export default function WorkPage() {
-  const carouselProjects = [...workProjects, ...workProjects];
+  // Single set of projects for manual scrolling
+  const carouselProjects = workProjects;
 
   return (
     <>
@@ -65,63 +79,59 @@ export default function WorkPage() {
       <section className="relative py-20 md:py-24">
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-primary-50/40 via-white to-white" />
 
-        <div className="mx-auto max-w-[110rem] px-0 md:px-8">
-          <div className="group relative overflow-hidden">
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white via-white/90 to-transparent md:w-32" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white via-white/90 to-transparent md:w-32" />
-
-            <div className="flex animate-carousel-slow gap-6 whitespace-nowrap group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]">
+        <div className="mx-auto max-w-[110rem] px-4 md:px-8">
+          <div className="overflow-x-auto scrollbar-hide">
+            <div className="flex gap-6 pb-4">
               {carouselProjects.map((project, index) => (
                 <article
                   key={`${project.id}-${index}`}
-                  className="relative w-[85vw] max-w-[28rem] flex-shrink-0 whitespace-normal rounded-3xl border border-gray-200 bg-white/95 shadow-lg transition hover:shadow-2xl md:w-[32rem]"
+                  className="flex-shrink-0 w-[85vw] max-w-[28rem] rounded-3xl border border-gray-200 bg-white shadow-lg overflow-hidden md:w-[32rem]"
                 >
+                  {/* Gradient Header Section */}
                   <div
-                    className="pointer-events-none absolute inset-x-0 top-0 h-48 opacity-80"
+                    className="relative px-6 pt-6 pb-8 md:px-8 md:pt-8"
                     style={{
                       backgroundImage: `linear-gradient(135deg, ${project.gradient
                         .filter(Boolean)
                         .join(', ')})`,
                     }}
-                  />
-
-                  <div className="relative flex h-full flex-col gap-8 px-6 pb-8 pt-6 md:px-8 md:pt-10">
-                    <div className="flex flex-col gap-6">
-                      <div className="space-y-4">
-                        <div className="flex flex-wrap items-center gap-3">
-                          <span
-                            className={`rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider ${statusStyles[project.status]}`}
-                          >
-                            {project.status}
-                          </span>
-                          <span className="text-sm font-medium text-white/80">
-                            {project.client}
-                          </span>
-                        </div>
-                        <h2 className="text-2xl font-display font-bold text-white drop-shadow md:text-3xl">
-                          {project.title}
-                        </h2>
-                        <p className="text-sm leading-relaxed text-gray-700 md:text-base">
-                          {project.description}
-                        </p>
-                      </div>
-                      <Link
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex w-fit items-center gap-2 rounded-full border border-white/50 bg-white/80 px-5 py-2 text-xs font-semibold uppercase tracking-widest text-primary-700 shadow-sm transition hover:-translate-y-0.5 hover:bg-white hover:text-primary-800"
+                  >
+                    <div className="flex flex-wrap items-center gap-3 mb-4">
+                      <span
+                        className={`rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider ${statusStyles[project.status]}`}
                       >
-                        View project
-                        <ArrowUpRight className="h-4 w-4" />
-                      </Link>
+                        {project.status}
+                      </span>
+                      <span className="text-sm font-medium text-white/90">
+                        {project.client}
+                      </span>
                     </div>
+                    <h2 className="text-2xl font-display font-bold text-white mb-4 drop-shadow md:text-3xl">
+                      {project.title}
+                    </h2>
+                    <p className="text-sm leading-relaxed text-white/90 mb-6 drop-shadow-sm md:text-base">
+                      {project.description}
+                    </p>
+                    <Link
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/90 px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-primary-700 shadow-sm transition hover:bg-white hover:text-primary-800"
+                    >
+                      View project
+                      <ArrowUpRight className="h-4 w-4" />
+                    </Link>
+                  </div>
+
+                  {/* White Content Section */}
+                  <div className="flex flex-col gap-6 px-6 pb-8 pt-8 md:px-8">
 
                     <div className="grid gap-4 md:grid-cols-2">
-                      <div className="rounded-2xl border border-gray-100 bg-white/85 p-4 shadow-sm">
-                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-primary-700">
+                      <div className="rounded-2xl border border-gray-100 bg-gray-50/50 p-4">
+                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-primary-700 mb-3">
                           Services
                         </p>
-                        <div className="mt-3 flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-2">
                           {project.services.map((service) => (
                             <span
                               key={service}
@@ -132,16 +142,17 @@ export default function WorkPage() {
                           ))}
                         </div>
                       </div>
-                      <div className="rounded-2xl border border-gray-100 bg-white/85 p-4 shadow-sm">
-                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-primary-700">
+                      <div className="rounded-2xl border border-gray-100 bg-gray-50/50 p-4">
+                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-primary-700 mb-3">
                           Stack
                         </p>
-                        <div className="mt-3 flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-2">
                           {project.tech.map((tech) => (
                             <span
                               key={tech}
-                              className="rounded-full bg-gray-900/90 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-wide text-white/90"
+                              className="inline-flex items-center gap-1.5 rounded-full bg-gray-900 px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-wide text-white"
                             >
+                              {techIcons[tech] || <Code2 className="h-3 w-3" />}
                               {tech}
                             </span>
                           ))}
@@ -149,16 +160,16 @@ export default function WorkPage() {
                       </div>
                     </div>
 
-                    {project.highlight ? (
-                      <div className="rounded-2xl border border-primary-200 bg-primary-50/70 p-5 shadow-inner">
-                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-primary-700">
+                    {project.highlight && (
+                      <div className="rounded-2xl border border-primary-200 bg-primary-50/50 p-5">
+                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-primary-700 mb-2">
                           Why it matters
                         </p>
-                        <p className="mt-2 text-sm leading-relaxed text-primary-900">
+                        <p className="text-sm leading-relaxed text-primary-900">
                           {project.highlight}
                         </p>
                       </div>
-                    ) : null}
+                    )}
                   </div>
                 </article>
               ))}
