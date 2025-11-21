@@ -4,16 +4,10 @@
  * Get the blob URL for an image
  * In development, falls back to local /images path
  * In production, uses Vercel Blob Storage
- * Logo images always use local paths (never uploaded to blob storage)
  */
 export function getBlobImageUrl(imagePath: string): string {
   // Remove leading slash if present
   const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-  
-  // Logo images always stay local - never use blob storage
-  if (cleanPath.includes('client-logos') || cleanPath.includes('logo/')) {
-    return `/${cleanPath}`;
-  }
   
   // Check if we have the blob store URL set
   const blobStoreUrl = process.env.NEXT_PUBLIC_BLOB_STORE_URL;
