@@ -8,7 +8,8 @@
         "start": "next start",
         "lint": "next lint",
         "type-check": "tsc --noEmit",
-        "upload-images": "tsx scripts/upload-images-to-blob.ts"
+        "upload-images": "tsx scripts/upload-images-to-blob.ts",
+        "get-blob-url": "tsx scripts/get-blob-store-url.ts"
     },
     "dependencies": {
         "@radix-ui/react-slot": "^1.2.3",

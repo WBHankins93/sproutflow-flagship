@@ -14,6 +14,7 @@ export interface WorkProject {
   tech: string[];
   highlight?: string;
   gradient: [string, string, string?];
+  logo?: string; // Path to client logo image
 }
 
 export const workProjects: WorkProject[] = [
@@ -30,6 +31,7 @@ export const workProjects: WorkProject[] = [
     highlight:
       'This beginner project inspired me to start Sproutflow so I could bring the same crafted web presence to other small businesses.',
     gradient: ['#163323', '#22543D', '#5BA461'],
+    logo: 'work/client-logos/b-logo-back-removed.png',
   },
   {
     id: 'second-line-psychiatry',
@@ -42,8 +44,9 @@ export const workProjects: WorkProject[] = [
     services: ['Web Design', 'Copy Refinement', 'Accessibility'],
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     highlight:
-      'Crafted privacy-conscious consultation flows and storytelling that reflect the practice’s board-certified expertise and cultural roots.',
+      'Crafted privacy-conscious consultation flows and storytelling that reflect the practice\'s board-certified expertise and cultural roots.',
     gradient: ['#0F172A', '#334155', '#60A5FA'],
+    logo: 'work/client-logos/second-line.png',
   },
   {
     id: 'nealy-event-decor',
@@ -58,6 +61,7 @@ export const workProjects: WorkProject[] = [
     highlight:
       'Enabled the client to curate custom décor stories while capturing qualified inquiries for weddings and galas.',
     gradient: ['#3F2B96', '#A8C0FF', '#F8E7F6'],
+    logo: 'work/client-logos/NealyLogo.png',
   },
   {
     id: 'nola-pool-solutions',
@@ -66,12 +70,13 @@ export const workProjects: WorkProject[] = [
     status: 'In Progress',
     description:
       'Shaping a premium maintenance and renovation experience tailored to the Gulf South climate, emphasizing trust, licensing, and rapid quoting.',
-    url: 'https://nolapoolsolutions.vercel.app/',
+    url: 'https://nolapoolsolutions.com/',
     services: ['Positioning', 'Service Packaging', 'Lead Capture'],
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     highlight:
       'Developing a high-performing lead funnel that showcases residential and resort-grade pool care with clear service tiers.',
     gradient: ['#0B2447', '#19376D', '#A5D7E8'],
+    logo: 'work/client-logos/logo.png',
   },
   {
     id: 'bekky-community',
@@ -84,8 +89,9 @@ export const workProjects: WorkProject[] = [
     services: ['Experience Design', 'Member Journey', 'UI Implementation'],
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     highlight:
-      'Designing reusable components for future ecommerce integrations while preserving the brand’s signature purple personality.',
+      'Designing reusable components for future ecommerce integrations while preserving the brand&apos;s signature purple personality.',
     gradient: ['#3B0CA2', '#7F2AEF', '#F58EE5'],
+    logo: 'work/client-logos/bekky-no-background.png',
   },
 ];
 

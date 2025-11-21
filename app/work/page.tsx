@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowUpRight, Code2, FileCode, Layers, Zap, Globe, Database, Palette } from 'lucide-react';
 
 import { workProjects } from '@/data/workProjects';
@@ -62,12 +63,10 @@ export default function WorkPage() {
           <div className="grid gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
             <div className="space-y-6">
               <h1 className="text-4xl font-display font-bold text-gray-900 md:text-6xl">
-                Websites that pair heart with high standards
+                Real websites for real businesses
               </h1>
               <p className="text-lg text-gray-600 md:text-xl">
-                Every build below is grounded in customer interviews, practical
-                automation, and launch-ready polish. Live projects are already
-                in the wild; in-progress builds are shipping in staged releases.
+                Every project starts with listening—to you, your customers, and what actually moves the needle for your business. What you&apos;ll see below are live sites built to work hard from day one, with room to grow as you do.
               </p>
             </div>
             <div className="rounded-3xl border border-primary-200/60 bg-white/70 p-6 shadow-lg backdrop-blur">
@@ -75,9 +74,9 @@ export default function WorkPage() {
                 How I show up
               </p>
               <ul className="mt-4 space-y-3 text-sm text-gray-600">
-                <li>• Translate stakeholder goals into clear product stories</li>
-                <li>• Build composable systems that scale past MVP</li>
-                <li>• Ground every launch in measurable business outcomes</li>
+                <li>• Listen first, build second—your goals drive every decision</li>
+                <li>• Focus on what moves the needle, not just what looks good</li>
+                <li>• Build sites that work hard from launch and grow with you</li>
               </ul>
             </div>
           </div>
@@ -120,15 +119,28 @@ export default function WorkPage() {
                     <p className="text-sm leading-relaxed text-white/90 mb-6 drop-shadow-sm md:text-base">
                       {project.description}
                     </p>
-                    <Link
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/90 px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-primary-700 shadow-sm transition hover:bg-white hover:text-primary-800"
-                    >
-                      View project
-                      <ArrowUpRight className="h-4 w-4" />
-                    </Link>
+                    <div className="flex items-center justify-between gap-3">
+                      <Link
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/90 px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-primary-700 shadow-sm transition hover:bg-white hover:text-primary-800"
+                      >
+                        View project
+                        <ArrowUpRight className="h-4 w-4" />
+                      </Link>
+                      {project.logo && (
+                        <div className="relative h-12 w-12 md:h-14 md:w-14 bg-white/20 backdrop-blur-sm rounded-lg p-2 flex items-center justify-center border border-white/30 flex-shrink-0">
+                          <Image
+                            src={getImageUrl(project.logo)}
+                            alt={`${project.title} logo`}
+                            width={48}
+                            height={48}
+                            className="object-contain max-h-full max-w-full"
+                          />
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   {/* White Content Section */}

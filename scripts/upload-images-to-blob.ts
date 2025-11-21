@@ -65,6 +65,12 @@ async function getAllImageFiles(dir: string, basePath: string = ''): Promise<str
       const subFiles = await getAllImageFiles(fullPath, relativePath);
       files.push(...subFiles);
     } else if (entry.isFile()) {
+      // Skip logo images - they stay local
+      if (relativePath.includes('client-logos') || relativePath.includes('logo/')) {
+        console.log(`⏭️  Skipping logo (stays local): ${relativePath}`);
+        continue;
+      }
+      
       // Only upload image files
       const ext = entry.name.toLowerCase().split('.').pop();
       if (['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'].includes(ext || '')) {
