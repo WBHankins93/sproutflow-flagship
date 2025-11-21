@@ -236,6 +236,22 @@ export interface ServiceTier {
         "Follow-up resource recommendations"
       ],
       timeline: "Scheduled as needed"
+    },
+    
+    {
+      id: "database-image-hosting",
+      name: "Database Provisioning & Image Hosting",
+      price: "Starting at $50/month",
+      description: "Dedicated database and optimized image hosting solution for sites with extensive media libraries and image requirements",
+      businessValue: "Transparent, scalable hosting costs for image-heavy sites with fast load times and reliable storage",
+      deliverables: [
+        "Dedicated database provisioning",
+        "Optimized image hosting and CDN",
+        "Image optimization and compression",
+        "Storage monitoring and reporting",
+        "Scalable pricing based on usage"
+      ],
+      timeline: "Ongoing service"
     }
   ];
   

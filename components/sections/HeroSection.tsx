@@ -4,6 +4,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { ArrowRight, ChevronDown } from 'lucide-react';
+import { getImageUrl } from '@/lib/blob-images';
 
 export default function HeroSection() {
   return (
@@ -14,7 +15,7 @@ export default function HeroSection() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image 
-            src="/images/sprout-hero.jpg" 
+            src={getImageUrl('sprout-hero.jpg')} 
             alt="Growing seedling representing business growth" 
             fill
             className="object-cover"

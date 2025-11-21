@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Sprout, Leaf, Flower, Sun, Infinity, CheckCircle2, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
+import { getImageUrl } from '@/lib/blob-images';
 
 export const metadata = {
   title: 'How We Work | Sproutflow Studio',
@@ -142,7 +143,7 @@ export default function HowWeWorkPage() {
           <div 
             className="h-full w-full bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: 'url(/images/tree-sprouts.jpg)',
+              backgroundImage: `url(${getImageUrl('tree-sprouts.jpg')})`,
             }}
           />
           <div className="absolute inset-0 bg-white/60" />

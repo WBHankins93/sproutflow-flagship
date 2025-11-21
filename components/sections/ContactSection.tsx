@@ -10,23 +10,24 @@ const ContactSection = () => {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const conversationOptions = [
-    {
-      id: 'quick-chat',
-      title: 'Quick Chat',
-      subtitle: 'Coffee-style conversation',
-      description: 'Not ready to commit? Let\'s have a casual conversation about your business, vision, and see if we\'re a good fit.',
-      duration: '15-20 minutes',
-      bestFor: [
-        'Getting to know each other',
-        'Understanding your vision',
-        'Exploring fit and compatibility',
-        'No pressure, no pitch'
-      ],
-      icon: <MessageCircle className="w-6 h-6" />,
-      color: 'primary',
-      ctaText: 'Schedule Quick Chat',
-      action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // Replace with your actual Calendly link
-    },
+    // Temporarily commented out - only offering Discovery Call until Google Workspace budget is available
+    // {
+    //   id: 'quick-chat',
+    //   title: 'Quick Chat',
+    //   subtitle: 'Coffee-style conversation',
+    //   description: 'Not ready to commit? Let\'s have a casual conversation about your business, vision, and see if we\'re a good fit.',
+    //   duration: '15-20 minutes',
+    //   bestFor: [
+    //     'Getting to know each other',
+    //     'Understanding your vision',
+    //     'Exploring fit and compatibility',
+    //     'No pressure, no pitch'
+    //   ],
+    //   icon: <MessageCircle className="w-6 h-6" />,
+    //   color: 'primary',
+    //   ctaText: 'Schedule Quick Chat',
+    //   action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // All options currently link to Discovery Call
+    // },
     {
       id: 'discovery',
       title: 'Discovery Call',
@@ -42,25 +43,26 @@ const ContactSection = () => {
       icon: <Calendar className="w-6 h-6" />,
       color: 'accent',
       ctaText: 'Book Discovery Call',
-      action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // Replace with your actual Calendly link
+      action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // Discovery Call scheduling page
     },
-    {
-      id: 'strategy',
-      title: 'Strategy Session',
-      subtitle: 'Detailed project planning',
-      description: 'Let\'s create a detailed roadmap for your business transformation.',
-      duration: '60 minutes',
-      bestFor: [
-        'Detailed project scoping',
-        'Timeline and milestone planning',
-        'Investment discussion',
-        'Next steps planning'
-      ],
-      icon: <Rocket className="w-6 h-6" />,
-      color: 'nature',
-      ctaText: 'Plan Your Project',
-      action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // Replace with your actual Calendly link
-    }
+    // Temporarily commented out - only offering Discovery Call until Google Workspace budget is available
+    // {
+    //   id: 'strategy',
+    //   title: 'Strategy Session',
+    //   subtitle: 'Detailed project planning',
+    //   description: 'Let\'s create a detailed roadmap for your business transformation.',
+    //   duration: '60 minutes',
+    //   bestFor: [
+    //     'Detailed project scoping',
+    //     'Timeline and milestone planning',
+    //     'Investment discussion',
+    //     'Next steps planning'
+    //   ],
+    //   icon: <Rocket className="w-6 h-6" />,
+    //   color: 'nature',
+    //   ctaText: 'Plan Your Project',
+    //   action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // All options currently link to Discovery Call
+    // }
   ];
 
   const colorMap = {
@@ -125,7 +127,8 @@ const ContactSection = () => {
           </motion.div>
 
           {/* Conversation Options */}
-          <div className="grid lg:grid-cols-3 gap-8 mb-16">
+          {/* Currently showing only Discovery Call - Quick Chat and Strategy Session commented out until Google Workspace budget available */}
+          <div className="grid lg:grid-cols-1 gap-8 mb-16 max-w-md mx-auto">
             {conversationOptions.map((option, index) => {
               const colors = colorMap[option.color as keyof typeof colorMap];
               const isSelected = selectedOption === option.id;

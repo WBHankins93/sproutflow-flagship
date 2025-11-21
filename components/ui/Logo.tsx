@@ -4,6 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { cn } from '../../lib/utils';
+import { getImageUrl } from '@/lib/blob-images';
 
 interface LogoProps {
   variant?: 'primary' | 'light' | 'dark' | 'monochrome';
@@ -33,7 +34,7 @@ export const SproutflowLogo: React.FC<LogoProps> = ({
   const getLogoPath = () => {
     switch (variant) {
       default:
-        return '/images/sproutflow-main-logo.png'; // main-sprout from Canva
+        return getImageUrl('sproutflow-main-logo.png'); // main-sprout from Canva
     }
   };
 

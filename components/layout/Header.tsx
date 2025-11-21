@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
+import { getImageUrl } from '@/lib/blob-images';
 
 type NavLink = {
   label: string;
@@ -76,7 +77,7 @@ export default function Header() {
             }}
           >
             <Image 
-              src="/images/sproutflow-main-logo.png" 
+              src={getImageUrl('sproutflow-main-logo.png')} 
               alt="Sproutflow"
               width={48}  
               height={48}

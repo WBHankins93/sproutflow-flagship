@@ -95,3 +95,17 @@ storybook-static
 *.tgz
 *.tar.gz
 .cache/
+
+# Images - stored in Vercel Blob Storage
+public/images/**/*.jpg
+public/images/**/*.jpeg
+public/images/**/*.png
+public/images/**/*.webp
+public/images/**/*.gif
+public/images/**/*.svg
+public/images/**/*.tiff
+public/images/**/*.TIFF
+public/images/**/*.JPG
+public/images/**/*.JPEG
+public/images/**/*.PNG
+public/images/**/*.WEBP

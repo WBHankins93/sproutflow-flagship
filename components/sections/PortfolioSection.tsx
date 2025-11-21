@@ -17,6 +17,7 @@ import {
   ArrowRight,
   ExternalLink
 } from 'lucide-react';
+import { getImageUrl } from '@/lib/blob-images';
 
 // Portfolio data structure
 const portfolioItems = [
@@ -27,7 +28,7 @@ const portfolioItems = [
     description: 'Family swamp tour business connecting visitors with authentic Louisiana culture',
     challenge: 'Competing with corporate tour operators who had slick booking systems',
     solution: 'Built a warm, story-driven website with seamless booking that captures the authentic bayou experience',
-    heroImage: '/images/portfolio/bayou-heritage-hero.jpg', // You'll add this
+    heroImage: getImageUrl('portfolio/bayou-heritage-hero.jpg'), // You'll add this
     tags: ['Booking System', 'Local Tourism', 'Heritage Storytelling'],
     colors: {
       primary: '#2D5016',
@@ -48,7 +49,7 @@ const portfolioItems = [
     description: 'Neighborhood café serving traditional Créole comfort food with modern twists',
     challenge: 'Customers couldn\'t find menu information online, takeout orders were confusing',
     solution: 'Created a warm digital presence that captures the café\'s homey atmosphere and simplifies ordering',
-    heroImage: '/images/portfolio/creole-corner-hero.jpg',
+    heroImage: getImageUrl('portfolio/creole-corner-hero.jpg'),
     tags: ['Online Ordering', 'Menu Design', 'Local Restaurant'],
     colors: {
       primary: '#8B4513',
@@ -69,7 +70,7 @@ const portfolioItems = [
     description: 'Boutique law firm specializing in small business and maritime law',
     challenge: 'Generic law firm site that didn\'t communicate their small business focus',
     solution: 'Professional yet approachable design that builds trust and clarifies their niche expertise',
-    heroImage: '/images/portfolio/gulf-coast-legal-hero.jpg',
+    heroImage: getImageUrl('portfolio/gulf-coast-legal-hero.jpg'),
     tags: ['Professional Services', 'Trust Building', 'Legal'],
     colors: {
       primary: '#1B3A52',

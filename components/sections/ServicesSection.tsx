@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { Zap, Target, Rocket, Check, ArrowRight, X, Clock, Package } from 'lucide-react';
+import { getImageUrl } from '@/lib/blob-images';
 
 const serviceTiers = [
   {
@@ -16,8 +17,8 @@ const serviceTiers = [
     priceRange: '$750 - $1,250',
     idealFor: 'New businesses and focused market entry',
     description: 'Strategic website foundation designed to establish immediate professional credibility and drive customer acquisition from day one.',
-    lifestyleImage: '/images/service/growth.jpg',
-    treeRingImage: '/images/tree-ring-1.jpg',
+    lifestyleImage: getImageUrl('service/growth.jpg'),
+    treeRingImage: getImageUrl('tree-ring-1.jpg'),
     highlights: [
       'Immediate professional market presence',
       'Clear customer conversion pathway',
@@ -46,8 +47,8 @@ const serviceTiers = [
     priceRange: '$2,000 - $2,500',
     idealFor: 'Established businesses ready for competitive advantage',
     description: 'Comprehensive digital presence that positions your business as the clear choice in your market through strategic design and content architecture.',
-    lifestyleImage: '/images/service/yellow-flower.jpg',
-    treeRingImage: '/images/tree-ring-3.jpg',
+    lifestyleImage: getImageUrl('service/yellow-flower.jpg'),
+    treeRingImage: getImageUrl('tree-ring-3.jpg'),
     highlights: [
       'Clear market differentiation from competitors',
       'Improved customer acquisition metrics',
@@ -76,8 +77,8 @@ const serviceTiers = [
     priceRange: 'Starting at $5,000',
     idealFor: 'Growing businesses with specific technical requirements',
     description: 'Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages through advanced functionality.',
-    lifestyleImage: '/images/service/farm-1.jpg',
-    treeRingImage: '/images/tree-ring-4.webp',
+    lifestyleImage: getImageUrl('service/farm-1.jpg'),
+    treeRingImage: getImageUrl('tree-ring-4.webp'),
     highlights: [
       'Technical competitive advantages in market',
       'Streamlined business operations',
@@ -362,7 +363,7 @@ export default function ServicesSection() {
             Enhance your website with these optional services
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
               <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
                 <Check className="w-6 h-6 text-primary-600" />
@@ -382,6 +383,17 @@ export default function ServicesSection() {
                 <h4 className="font-semibold text-gray-900 mb-2 text-lg">SEO Foundation</h4>
                 <p className="text-sm text-gray-600 mb-3">Get found on Google with local SEO optimization and search strategy</p>
                 <p className="text-primary-600 font-bold text-lg">$300</p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                <Package className="w-6 h-6 text-primary-600" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Database & Image Hosting</h4>
+                <p className="text-sm text-gray-600 mb-3">Dedicated database and optimized image hosting for sites with extensive media libraries</p>
+                <p className="text-primary-600 font-bold text-lg">Starting at $50/mo</p>
               </div>
             </div>
           </div>
