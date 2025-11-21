@@ -29,7 +29,7 @@ export const workProjects: WorkProject[] = [
     services: ['Creative Direction', 'Visual Design', 'Content Strategy'],
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     highlight:
-      'This beginner project inspired me to start Sproutflow so I could bring the same crafted web presence to other small businesses.',
+      'The project that sparked Sproutflow.',
     gradient: ['#163323', '#22543D', '#5BA461'],
     logo: 'work/client-logos/b-logo-back-removed.png',
   },
@@ -44,7 +44,7 @@ export const workProjects: WorkProject[] = [
     services: ['Web Design', 'Copy Refinement', 'Accessibility'],
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     highlight:
-      'Crafted privacy-conscious consultation flows and storytelling that reflect the practice\'s board-certified expertise and cultural roots.',
+      'Privacy-first design that honors New Orleans culture.',
     gradient: ['#0F172A', '#334155', '#60A5FA'],
     logo: 'work/client-logos/second-line.png',
   },
@@ -59,7 +59,7 @@ export const workProjects: WorkProject[] = [
     services: ['Creative Direction', 'CMS Setup', 'Conversion Strategy'],
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     highlight:
-      'Enabled the client to curate custom décor stories while capturing qualified inquiries for weddings and galas.',
+      'Turns visual storytelling into qualified leads.',
     gradient: ['#3F2B96', '#A8C0FF', '#F8E7F6'],
     logo: 'work/client-logos/NealyLogo.png',
   },
@@ -74,7 +74,7 @@ export const workProjects: WorkProject[] = [
     services: ['Positioning', 'Service Packaging', 'Lead Capture'],
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     highlight:
-      'Developing a high-performing lead funnel that showcases residential and resort-grade pool care with clear service tiers.',
+      'A lead funnel built for rapid quoting.',
     gradient: ['#0B2447', '#19376D', '#A5D7E8'],
     logo: 'work/client-logos/logo.png',
   },
@@ -89,7 +89,7 @@ export const workProjects: WorkProject[] = [
     services: ['Experience Design', 'Member Journey', 'UI Implementation'],
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     highlight:
-      'Designing reusable components for future ecommerce integrations while preserving the brand&apos;s signature purple personality.',
+      'Reusable components that keep the purple personality.',
     gradient: ['#3B0CA2', '#7F2AEF', '#F58EE5'],
     logo: 'work/client-logos/bekky-no-background.png',
   },

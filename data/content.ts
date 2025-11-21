@@ -1,20 +1,20 @@
 // data/content.ts - UPDATED (Streamlined add-ons section)
 
 export const heroContent = {
-  headline: "Websites that mean business",
-  subheading: "Professional web design for small businesses ready to compete at the highest level. No templates. No shortcuts. Just results that justify your investment.",
-  description: "We build custom websites that convert visitors into customers and establish your business as the clear choice in your market. Every project is designed to deliver measurable business outcomes.",
+  headline: "Business growth strategy that happens to include a website",
+  subheading: "Most New Orleans agencies focus on affordable website building. We focus on business growth strategy. We bring the strategic thinking of $30,000 NYC agencies to New Orleans small businesses at $3,500-$15,000 because we have lower costs—not because we deliver less value.",
+  description: "Our clients invest in revenue-generating assets, not digital brochures. Every project starts with understanding your business problems and revenue goals—not just how many pages you need.",
   primaryCTA: "Start Your Project",
   secondaryCTA: "View Our Work"
 };
 
 export const aboutContent = {
-  headline: "Built on expertise, delivered with precision",
-  lead: "Sproutflow bridges enterprise-level technical capabilities with the personal attention your business deserves.",
+  headline: "Strategic thinking from NYC and SF agencies, at New Orleans prices",
+  lead: "We deliver the strategic thinking and quality of NYC and SF agencies at 40-50% lower prices because we're based in New Orleans with lower operational costs—not because we cut corners on quality.",
   story: [
     "After years of building infrastructure for Fortune 500 companies and scaling startups, we recognized a gap in the market: small businesses deserved the same level of technical excellence and strategic thinking typically reserved for enterprise clients.",
     "We founded Sproutflow to bring that same precision, reliability, and business focus to companies ready to compete at the highest level. Every project leverages proven methodologies refined through years of enterprise work.",
-    "Our approach is straightforward: understand your business objectives, design for measurable outcomes, and deliver a digital presence that positions you as the clear choice in your market."
+    "Our approach starts with business outcomes: 'What business problems are you trying to solve?' and 'What revenue goals are tied to your digital presence?' Not 'How many pages do you need?' This positions us as a strategic partner rather than a vendor taking orders."
   ],
   credentials: {
     headline: "Proven at scale",
@@ -22,99 +22,107 @@ export const aboutContent = {
       "Enterprise infrastructure background with IBM and Fortune 500 clients",
       "Technical expertise spanning cloud architecture to conversion optimization", 
       "Business-focused approach that prioritizes ROI over vanity metrics",
-      "Track record of delivering projects that exceed performance expectations"
+      "Track record of delivering projects that exceed performance expectations",
+      "New Orleans-based with regional cost advantages, not quality compromises"
     ]
   }
 };
 
 export const servicesContent = {
   headline: "Three service levels, one standard of excellence",
-  description: "Every project receives the same strategic approach and technical precision, scaled to match your business stage and requirements.",
+  description: "Every project receives the same strategic approach and technical precision, scaled to match your business stage and requirements. Frame tiers around client readiness and investment appetite.",
   
   tiers: [
     {
-      id: 'launch',
-      name: "Launch",
-      priceRange: "$750 - $1,250",
-      timeline: "5-7 business days",
-      ideal: "New businesses and focused market entry",
-      description: "Strategic website foundation designed to establish immediate professional credibility and drive customer acquisition from day one.",
+      id: 'foundation',
+      name: "Foundation",
+      priceRange: "$1,800 - $2,400",
+      timeline: "2-3 weeks",
+      ideal: "New businesses or rebrands needing validated presence",
+      description: "Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations—a foundation for long-term growth, not just online presence.",
       businessOutcomes: [
-        "Immediate professional market presence",
-        "Clear customer conversion pathway",
-        "Credibility establishment for business growth",
-        "Foundation for digital marketing initiatives"
+        "Validated professional market presence",
+        "Clear customer conversion pathway aligned with business goals",
+        "Foundation for digital marketing initiatives",
+        "Strategic architecture that scales with growth"
       ],
       technicalIncludes: [
-        "1-3 strategically architected pages",
-        "Mobile-responsive professional design",
-        "Domain setup and business email configuration",
-        "Performance optimization (sub-3 second loading)",
-        "+1 additional features"
+        "5-10 pages with strategic architecture",
+        "Semi-custom design (not pure templates)",
+        "Mobile optimization and performance tuning",
+        "SEO foundation with keyword research",
+        "2-hour strategy session on business goals"
       ]
     },
     {
-      id: 'elevate',
-      name: "Elevate",
-      priceRange: "$2,000 - $2,500",
-      timeline: "2-3 weeks",
-      ideal: "Established businesses ready for competitive advantage",
-      description: "Comprehensive digital presence that positions your business as the clear choice in your market through strategic design and content architecture.",
+      id: 'growth',
+      name: "Growth",
+      priceRange: "$3,800 - $5,500",
+      timeline: "4-6 weeks",
+      ideal: "Established businesses ready to compete for market share",
+      description: "Comprehensive digital presence that positions your business as the clear choice in your market. Custom design reflecting brand personality with conversion optimization and professional copywriting.",
       businessOutcomes: [
         "Clear market differentiation from competitors",
         "Improved customer acquisition metrics",
         "Enhanced brand perception and authority",
-        "Scalable platform for business expansion"
+        "Scalable platform for business expansion",
+        "Tracked revenue growth from digital presence"
       ],
       technicalIncludes: [
-        "Custom 4-6 page architecture",
+        "10-20 pages with conversion optimization",
         "Fully custom responsive design",
-        "Content management system integration",
-        "Advanced performance optimization",
-        "+2 additional features"
+        "Professional copywriting for key pages (5-8 pages)",
+        "Comprehensive SEO strategy with competitive analysis",
+        "Blog integration with content strategy"
       ]
     },
     {
-      id: 'thrive',
-      name: "Thrive",
-      priceRange: "Starting at $5,000",
-      timeline: "4-8 weeks",
-      ideal: "Growing businesses with specific technical requirements",
-      description: "Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages through advanced functionality.",
+      id: 'market-leader',
+      name: "Market Leader",
+      priceRange: "$8,000 - $18,000",
+      timeline: "8-12 weeks",
+      ideal: "Businesses where digital presence drives significant revenue",
+      description: "Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages. Deep strategic planning with advanced functionality for businesses where digital presence is a primary revenue driver.",
       businessOutcomes: [
         "Technical competitive advantages in market",
         "Streamlined business operations and efficiency",
         "Platform designed for significant scaling",
-        "Advanced customer acquisition and retention systems"
+        "Advanced customer acquisition and retention systems",
+        "Measurable ROI from digital investment"
       ],
       technicalIncludes: [
-        "Fully custom website architecture",
-        "Advanced integrations and functionality",
-        "Customer portals and booking systems",
-        "E-commerce capabilities where applicable",
-        "+2 additional features"
+        "20-50+ pages with advanced functionality",
+        "Fully custom design and interactive elements",
+        "Full-site professional copywriting",
+        "Advanced SEO with technical implementations",
+        "Custom integrations (CRM, email marketing, etc.)"
       ]
     }
   ],
   
-  // UPDATED ADD-ONS - Removed Strategy Consultation & Blog Integration
+  // UPDATED ADD-ONS - Enhanced with new services
   addOns: {
     headline: "Strategic enhancements",
     services: [
       { 
-        name: "Logo Design", 
-        price: "$300",
-        description: "Professional brand mark design"
-      },
-      { 
-        name: "SEO Audit & Strategy", 
-        price: "$300",
-        description: "Competitive analysis and recommendations"
-      },
-      { 
         name: "Website Care Plans", 
-        price: "From $150/mo",
-        description: "Ongoing updates, optimization, and support"
+        price: "From $200/mo",
+        description: "True agency-managed hosting with proactive security and priority support"
+      },
+      { 
+        name: "Professional Photography", 
+        price: "$800 - $2,000",
+        description: "High-quality photography that captures your brand professionally"
+      },
+      { 
+        name: "E-commerce Store Design & Integration", 
+        price: "$1,500 - $3,500",
+        description: "Custom design for Shopify/WooCommerce stores to match your website—not building a custom platform"
+      },
+      { 
+        name: "Ongoing SEO Strategy", 
+        price: "$800 - $2,000/mo",
+        description: "Strategic SEO services separate from maintenance - keyword research, content optimization, performance tracking"
       }
     ]
   }
@@ -234,8 +242,8 @@ export const navigationContent = {
 
 export const seoContent = {
   home: {
-    title: "Sproutflow | Professional Web Design for Serious Businesses",
-    description: "Custom website design and development for small businesses ready to compete at the highest level. $750-$5000 projects delivering measurable results.",
-    keywords: ["professional web design", "custom website development", "small business websites", "conversion optimization", "business growth"]
+    title: "Sproutflow | Strategic Web Design for New Orleans Businesses",
+    description: "Business growth strategy that happens to include a website. We bring NYC/SF agency strategic thinking to New Orleans small businesses at $3,500-$15,000. Revenue-generating assets, not digital brochures.",
+    keywords: ["professional web design", "custom website development", "small business websites", "conversion optimization", "business growth", "New Orleans web design", "strategic web design", "business growth strategy"]
   }
 };

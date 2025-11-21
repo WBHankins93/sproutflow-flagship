@@ -81,7 +81,7 @@ export const Footer: React.FC = () => {
                   onClick={(e) => { e.preventDefault(); handleNavClick('#services'); }}
                   className="hover:text-white transition-colors"
                 >
-                  Launch Package
+                  Foundation Package
                 </a>
               </li>
               <li>
@@ -90,7 +90,7 @@ export const Footer: React.FC = () => {
                   onClick={(e) => { e.preventDefault(); handleNavClick('#services'); }}
                   className="hover:text-white transition-colors"
                 >
-                  Elevate Package
+                  Growth Package
                 </a>
               </li>
               <li>
@@ -99,7 +99,7 @@ export const Footer: React.FC = () => {
                   onClick={(e) => { e.preventDefault(); handleNavClick('#services'); }}
                   className="hover:text-white transition-colors"
                 >
-                  Thrive Package
+                  Market Leader Package
                 </a>
               </li>
             </ul>

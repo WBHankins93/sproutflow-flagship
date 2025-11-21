@@ -10,94 +10,94 @@ import { getImageUrl } from '@/lib/blob-images';
 
 const serviceTiers = [
   {
-    id: 'launch',
-    name: 'Launch',
+    id: 'foundation',
+    name: 'Foundation',
     icon: <Zap className="w-6 h-6" />,
-    tagline: 'Get online fast',
-    priceRange: '$750 - $1,250',
-    idealFor: 'New businesses and focused market entry',
-    description: 'Strategic website foundation designed to establish immediate professional credibility and drive customer acquisition from day one.',
+    tagline: 'Strategic foundation for validated presence',
+    priceRange: '$1,800 - $2,400',
+    idealFor: 'New businesses or rebrands needing validated presence',
+    description: 'Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations—a foundation for long-term growth, not just online presence.',
     lifestyleImage: getImageUrl('service/growth.jpg'),
     treeRingImage: getImageUrl('tree-ring-1.jpg'),
     highlights: [
-      'Immediate professional market presence',
-      'Clear customer conversion pathway',
-      'Mobile-optimized for modern shoppers',
-      'SEO foundations for local discovery'
+      'Validated professional market presence',
+      'Clear customer conversion pathway aligned with business goals',
+      'Strategic architecture that scales with growth',
+      'Foundation for digital marketing initiatives'
     ],
-    buttonText: 'Choose Launch',
+    buttonText: 'Learn More',
     popular: false,
     // BACK OF CARD INFO
-    timeline: '5-7 business days',
+    timeline: '2-3 weeks',
     includes: [
-      '1-3 strategic pages',
-      'Mobile responsive design',
-      'Contact form integration',
-      'Basic SEO setup',
-      'Social media links',
-      '30-day support'
+      '5-10 pages with strategic architecture',
+      'Semi-custom design (not pure templates)',
+      'Mobile optimization and performance tuning',
+      'SEO foundation with keyword research',
+      '2-hour strategy session on business goals',
+      'CMS training and documentation'
     ],
-    perfectFor: 'New businesses getting online quickly'
+    perfectFor: 'New businesses or rebrands needing validated presence'
   },
   {
-    id: 'elevate',
-    name: 'Elevate',
+    id: 'growth',
+    name: 'Growth',
     icon: <Target className="w-6 h-6" />,
-    tagline: 'Stand out from competitors',
-    priceRange: '$2,000 - $2,500',
-    idealFor: 'Established businesses ready for competitive advantage',
-    description: 'Comprehensive digital presence that positions your business as the clear choice in your market through strategic design and content architecture.',
+    tagline: 'Competitive differentiation for market share',
+    priceRange: '$3,800 - $5,500',
+    idealFor: 'Established businesses ready to compete for market share',
+    description: 'Comprehensive digital presence that positions your business as the clear choice in your market. Custom design reflecting brand personality with conversion optimization and professional copywriting.',
     lifestyleImage: getImageUrl('service/yellow-flower.jpg'),
     treeRingImage: getImageUrl('tree-ring-3.jpg'),
     highlights: [
       'Clear market differentiation from competitors',
       'Improved customer acquisition metrics',
-      'Advanced conversion optimization',
-      'Professional content strategy'
+      'Tracked revenue growth from digital presence',
+      'Professional copywriting for key pages'
     ],
-    buttonText: 'Choose Elevate',
+    buttonText: 'Learn More',
     popular: true,
     // BACK OF CARD INFO
-    timeline: '2-3 weeks',
+    timeline: '4-6 weeks',
     includes: [
-      '4-6 custom pages',
-      'Advanced animations',
-      'Blog/CMS integration',
-      'Advanced SEO',
-      'Analytics setup',
-      '60-day support'
+      '10-20 pages with conversion optimization',
+      'Fully custom responsive design',
+      'Professional copywriting (5-8 pages)',
+      'Comprehensive SEO with competitive analysis',
+      'Blog integration with content strategy',
+      'Analytics and conversion tracking setup'
     ],
-    perfectFor: 'Businesses ready to dominate their market'
+    perfectFor: 'Established businesses ready to compete for market share'
   },
   {
-    id: 'thrive',
-    name: 'Thrive',
+    id: 'market-leader',
+    name: 'Market Leader',
     icon: <Rocket className="w-6 h-6" />,
-    tagline: 'Custom competitive advantages',
-    priceRange: 'Starting at $5,000',
-    idealFor: 'Growing businesses with specific technical requirements',
-    description: 'Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages through advanced functionality.',
+    tagline: 'Revenue-driving digital presence',
+    priceRange: '$8,000 - $18,000',
+    idealFor: 'Businesses where digital presence drives significant revenue',
+    description: 'Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages. Deep strategic planning with advanced functionality for businesses where digital presence is a primary revenue driver.',
     lifestyleImage: getImageUrl('service/farm-1.jpg'),
     treeRingImage: getImageUrl('tree-ring-4.webp'),
     highlights: [
       'Technical competitive advantages in market',
-      'Streamlined business operations',
-      'Platform designed for scaling',
-      'Advanced customer acquisition systems'
+      'Measurable ROI from digital investment',
+      'Platform designed for significant scaling',
+      'Advanced customer acquisition and retention systems'
     ],
-    buttonText: 'Choose Thrive',
+    buttonText: 'Learn More',
     popular: false,
     // BACK OF CARD INFO
-    timeline: '4-8 weeks',
+    timeline: '8-12 weeks',
     includes: [
-      '8+ comprehensive pages',
-      'Full custom build',
-      'E-commerce/booking systems',
-      'CRM integration',
-      'Custom applications',
-      '90-day priority support'
+      '20-50+ pages with advanced functionality',
+      'Fully custom design and interactive elements',
+      'Full-site professional copywriting',
+      'Advanced SEO with technical implementations',
+      'Custom integrations (CRM, email marketing, etc.)',
+      'Priority support and dedicated account management'
     ],
-    perfectFor: 'Complex needs & growth-focused businesses'
+    perfectFor: 'Businesses where digital presence drives significant revenue'
   }
 ];
 
@@ -106,6 +106,22 @@ export default function ServicesSection() {
 
   const handleFlip = (tierId: string) => {
     setFlippedCard(flippedCard === tierId ? null : tierId);
+  };
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    // Scroll first, then flip card back after scroll completes
+    const element = document.querySelector('#contact');
+    if (element) {
+      const yOffset = -80; // Offset for sticky header
+      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      // Flip card back after scroll animation (typically 500-1000ms)
+      setTimeout(() => {
+        setFlippedCard(null);
+      }, 800);
+    }
   };
 
   return (
@@ -183,7 +199,8 @@ export default function ServicesSection() {
                   <div 
                     style={{ 
                       backfaceVisibility: 'hidden',
-                      WebkitBackfaceVisibility: 'hidden'
+                      WebkitBackfaceVisibility: 'hidden',
+                      pointerEvents: isFlipped ? 'none' : 'auto'
                     }}
                     className={`relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
                   >
@@ -263,7 +280,8 @@ export default function ServicesSection() {
                     style={{ 
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
-                      transform: 'rotateY(180deg)'
+                      transform: 'rotateY(180deg)',
+                      pointerEvents: isFlipped ? 'auto' : 'none'
                     }}
                     className={`absolute inset-0 bg-gradient-to-br from-primary-600 to-primary-700 rounded-3xl overflow-hidden shadow-2xl ${tier.popular ? 'ring-2 ring-primary-500' : ''}`}
                   >
@@ -279,7 +297,7 @@ export default function ServicesSection() {
 
                     <div className="relative h-full p-8 flex flex-col text-white z-10">
                       {/* Header */}
-                      <div className="flex items-center justify-between mb-6">
+                      <div className="flex items-center justify-between mb-6 relative z-20">
                         <div className="flex items-center gap-3">
                           <div className="bg-white/20 p-2 rounded-lg">
                             {tier.icon}
@@ -290,10 +308,17 @@ export default function ServicesSection() {
                           </div>
                         </div>
                         <button
-                          onClick={() => handleFlip(tier.id)}
-                          className="bg-white/20 hover:bg-white/30 p-2 rounded-full transition-colors"
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            setFlippedCard(null);
+                          }}
+                          className="bg-white/20 hover:bg-white/30 p-2 rounded-full transition-colors cursor-pointer relative z-50"
+                          style={{ pointerEvents: 'auto' }}
+                          aria-label="Close card"
                         >
-                          <X className="w-5 h-5" />
+                          <X className="w-5 h-5 pointer-events-none" />
                         </button>
                       </div>
 
@@ -334,6 +359,7 @@ export default function ServicesSection() {
                       {/* CTA Button */}
                       <a
                         href="#contact"
+                        onClick={handleContactClick}
                         className="mt-6 w-full bg-white text-primary-700 py-4 rounded-full font-bold hover:bg-white/90 transition-all duration-300 flex items-center justify-center gap-2 group"
                       >
                         Get Started
@@ -370,8 +396,8 @@ export default function ServicesSection() {
               </div>
               <div>
                 <h4 className="font-semibold text-gray-900 mb-2 text-lg">Website Care Plans</h4>
-                <p className="text-sm text-gray-600 mb-3">Ongoing updates, optimization, and support to keep your site performing at its best</p>
-                <p className="text-primary-600 font-bold text-lg">From $150/mo</p>
+                <p className="text-sm text-gray-600 mb-3">True agency-managed hosting with proactive security and priority support</p>
+                <p className="text-primary-600 font-bold text-lg">From $200/mo</p>
               </div>
             </div>
 
@@ -380,9 +406,9 @@ export default function ServicesSection() {
                 <Check className="w-6 h-6 text-primary-600" />
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 mb-2 text-lg">SEO Foundation</h4>
-                <p className="text-sm text-gray-600 mb-3">Get found on Google with local SEO optimization and search strategy</p>
-                <p className="text-primary-600 font-bold text-lg">$300</p>
+                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Professional Photography</h4>
+                <p className="text-sm text-gray-600 mb-3">High-quality photography that captures your brand and products professionally</p>
+                <p className="text-primary-600 font-bold text-lg">$800 - $2,000</p>
               </div>
             </div>
 
@@ -391,9 +417,9 @@ export default function ServicesSection() {
                 <Package className="w-6 h-6 text-primary-600" />
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Database & Image Hosting</h4>
-                <p className="text-sm text-gray-600 mb-3">Dedicated database and optimized image hosting for sites with extensive media libraries</p>
-                <p className="text-primary-600 font-bold text-lg">Starting at $50/mo</p>
+                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Ongoing SEO Strategy</h4>
+                <p className="text-sm text-gray-600 mb-3">Strategic SEO services separate from maintenance - keyword research, content optimization, and performance tracking</p>
+                <p className="text-primary-600 font-bold text-lg">$800 - $2,000/mo</p>
               </div>
             </div>
           </div>

@@ -18,34 +18,34 @@ export interface ServiceTier {
   
   export const serviceTiers: ServiceTier[] = [
     {
-      id: "launch",
-      name: "Launch",
-      tagline: "Professional foundation for immediate impact",
-      priceRange: "$750 - $1,250",
-      timeline: "5-7 business days",
-      idealFor: "New businesses and focused market entry",
-      description: "Strategic website foundation designed to establish immediate professional credibility and drive customer acquisition from day one.",
+      id: "foundation",
+      name: "Foundation",
+      tagline: "Strategic foundation for validated online presence",
+      priceRange: "$1,800 - $2,400",
+      timeline: "2-3 weeks",
+      idealFor: "New businesses or rebrands needing validated presence",
+      description: "Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations—a foundation for long-term growth, not just online presence.",
       
       businessOutcomes: [
-        "Immediate professional market presence",
-        "Clear customer conversion pathway",
-        "Credibility establishment for business growth",
-        "Foundation for digital marketing initiatives"
+        "Validated professional market presence",
+        "Clear customer conversion pathway aligned with business goals",
+        "Foundation for digital marketing initiatives",
+        "Strategic architecture that scales with growth"
       ],
       
       technicalFeatures: [
-        "1-3 strategically architected pages",
-        "Mobile-responsive professional design", 
-        "Domain setup and business email configuration",
-        "Performance optimization (sub-3 second loading)",
-        "Basic SEO foundation and meta optimization"
+        "5-10 pages with strategic architecture",
+        "Semi-custom design (not pure templates)",
+        "Mobile optimization and performance tuning",
+        "SEO foundation with keyword research",
+        "CMS training and documentation"
       ],
       
       strategicInclusions: [
-        "30-minute business strategy consultation",
+        "2-hour strategy session on business goals",
         "Competitive positioning analysis",
         "Conversion-focused design decisions",
-        "Professional copywriting guidance"
+        "Basic content guidance (not full copywriting)"
       ],
       
       deliverables: [
@@ -53,46 +53,50 @@ export interface ServiceTier {
         "Domain and hosting configuration", 
         "Business email setup",
         "Basic analytics implementation",
-        "Launch checklist and best practices guide"
+        "Launch checklist and best practices guide",
+        "CMS training documentation"
       ],
       
       limitations: [
-        "Template-based foundation (professionally customized)",
-        "Limited custom functionality",
+        "Semi-custom foundation (professionally customized)",
+        "Basic content guidance rather than full copywriting",
         "Standard integrations only"
       ]
     },
     
     {
-      id: "elevate", 
-      name: "Elevate",
-      tagline: "Market differentiation through strategic design",
-      priceRange: "$2,000 - $2,500", 
-      timeline: "2-3 weeks",
-      idealFor: "Established businesses ready for competitive advantage",
-      description: "Comprehensive digital presence that positions your business as the clear choice in your market through strategic design and content architecture.",
+      id: "growth", 
+      name: "Growth",
+      tagline: "Competitive differentiation for market share",
+      priceRange: "$3,800 - $5,500", 
+      timeline: "4-6 weeks",
+      idealFor: "Established businesses ready to compete for market share",
+      description: "Comprehensive digital presence that positions your business as the clear choice in your market. Custom design reflecting brand personality with conversion optimization and professional copywriting.",
       popular: true,
       
       businessOutcomes: [
         "Clear market differentiation from competitors",
         "Improved customer acquisition metrics",
         "Enhanced brand perception and authority",
-        "Scalable platform for business expansion"
+        "Scalable platform for business expansion",
+        "Tracked revenue growth from digital presence"
       ],
       
       technicalFeatures: [
-        "Custom 4-6 page architecture", 
+        "10-20 pages with conversion optimization", 
         "Fully custom responsive design",
         "Content management system integration",
         "Advanced performance optimization",
-        "Comprehensive SEO implementation",
-        "Google Analytics and conversion tracking"
+        "Comprehensive SEO strategy with competitive analysis",
+        "Analytics and conversion tracking setup",
+        "Blog integration with content strategy"
       ],
       
       strategicInclusions: [
         "Brand refinement and visual identity alignment",
         "Competitive analysis and positioning strategy", 
-        "Content strategy and messaging framework",
+        "Customer acquisition strategy consultation",
+        "Professional copywriting for key pages (5-8 pages)",
         "User experience optimization",
         "One round of strategic revisions"
       ],
@@ -103,29 +107,33 @@ export interface ServiceTier {
         "SEO strategy implementation", 
         "Analytics dashboard setup",
         "Content management training",
-        "Performance benchmarking report"
+        "Performance benchmarking report",
+        "Professional copywriting for key pages"
       ]
     },
     
     {
-      id: "thrive",
-      name: "Thrive", 
-      tagline: "Custom solutions for competitive advantage",
-      priceRange: "Starting at $5,000",
-      timeline: "4-8 weeks",
-      idealFor: "Growing businesses with specific technical requirements",
-      description: "Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages through advanced functionality.",
+      id: "market-leader",
+      name: "Market Leader", 
+      tagline: "Revenue-driving digital presence",
+      priceRange: "$8,000 - $18,000",
+      timeline: "8-12 weeks",
+      idealFor: "Businesses where digital presence drives significant revenue",
+      description: "Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages. Deep strategic planning with advanced functionality for businesses where digital presence is a primary revenue driver.",
       
       businessOutcomes: [
         "Technical competitive advantages in market",
         "Streamlined business operations and efficiency",
         "Platform designed for significant scaling",
-        "Advanced customer acquisition and retention systems"
+        "Advanced customer acquisition and retention systems",
+        "Measurable ROI from digital investment"
       ],
       
       technicalFeatures: [
-        "Fully custom website architecture",
-        "Advanced integrations and functionality",
+        "20-50+ pages with advanced functionality",
+        "Fully custom design and interactive elements",
+        "Advanced SEO with technical implementations",
+        "Custom integrations (CRM, email marketing, etc.)",
         "Customer portals and booking systems",
         "E-commerce capabilities where applicable",
         "Database integration and management",
@@ -133,9 +141,12 @@ export interface ServiceTier {
       ],
       
       strategicInclusions: [
+        "Deep strategic planning with competitive research",
         "Comprehensive business analysis and planning",
         "Custom user experience design",
         "Advanced conversion optimization",
+        "Full-site professional copywriting",
+        "Content strategy and quarterly planning",
         "Ongoing technical consultation",
         "Strategic roadmap for future development"
       ],
@@ -146,7 +157,9 @@ export interface ServiceTier {
         "Advanced analytics and reporting systems",
         "Staff training and ongoing support plan", 
         "Performance optimization and monitoring",
-        "Strategic growth recommendations"
+        "Strategic growth recommendations",
+        "Priority support and dedicated account management",
+        "Full-site professional copywriting"
       ]
     }
   ];
@@ -209,16 +222,50 @@ export interface ServiceTier {
     },
     
     {
-      id: "maintenance",
-      name: "Professional Maintenance & Updates",
-      price: "$150/month",
-      description: "Ongoing technical maintenance and strategic optimization",
-      businessValue: "Consistent performance, security, and continuous improvement",
+      id: "maintenance-basic",
+      name: "Website Care - Basic",
+      price: "$200/month",
+      description: "True agency-managed hosting with proactive security and basic support",
+      businessValue: "Consistent performance, security, and peace of mind with faster response times",
       deliverables: [
         "Monthly performance optimization",
         "Security updates and monitoring",
-        "Content updates and modifications",
-        "Monthly performance reports"
+        "Content updates and modifications (up to 2 hours/month)",
+        "Monthly performance reports",
+        "Priority support with faster response times"
+      ],
+      timeline: "Ongoing"
+    },
+    {
+      id: "maintenance-professional",
+      name: "Website Care - Professional",
+      price: "$300/month",
+      description: "Comprehensive maintenance with monthly optimization and enhanced support",
+      businessValue: "Proactive optimization and strategic improvements with dedicated support",
+      deliverables: [
+        "Monthly performance optimization and monitoring",
+        "Security updates and monitoring",
+        "Content updates and modifications (up to 4 hours/month)",
+        "Monthly optimization recommendations",
+        "Priority support with faster response times",
+        "Quarterly strategic review"
+      ],
+      timeline: "Ongoing"
+    },
+    {
+      id: "maintenance-comprehensive",
+      name: "Website Care - Comprehensive",
+      price: "$450/month",
+      description: "Full-service partnership with ongoing optimization and strategic guidance",
+      businessValue: "Continuous improvement and strategic growth support with maximum priority",
+      deliverables: [
+        "Monthly performance optimization and monitoring",
+        "Security updates and monitoring",
+        "Content updates and modifications (up to 6 hours/month)",
+        "Monthly optimization and strategic recommendations",
+        "Priority support with fastest response times",
+        "Quarterly strategic review and planning",
+        "Ongoing conversion optimization"
       ],
       timeline: "Ongoing"
     },
@@ -252,6 +299,66 @@ export interface ServiceTier {
         "Scalable pricing based on usage"
       ],
       timeline: "Ongoing service"
+    },
+    {
+      id: "professional-photography",
+      name: "Professional Photography",
+      price: "$800 - $2,000",
+      description: "High-quality photography that captures your brand and products professionally",
+      businessValue: "Professional imagery that elevates brand perception and conversion rates",
+      deliverables: [
+        "Professional photo shoot (on-location or studio)",
+        "Edited high-resolution images",
+        "Images optimized for web use",
+        "Usage rights and licensing"
+      ],
+      timeline: "1-2 weeks"
+    },
+    {
+      id: "ecommerce-integration",
+      name: "E-commerce Store Design & Integration",
+      price: "$1,500 - $3,500",
+      description: "Custom design and integration for Shopify, WooCommerce, or other e-commerce platforms. This is NOT building a custom e-commerce platform from scratch—we design and customize your existing platform to seamlessly match your custom website brand. Perfect for businesses who want Shopify's proven infrastructure but need it to look and feel like part of their custom website.",
+      businessValue: "Seamless brand experience between your custom website and e-commerce store. Your customers never feel like they've left your site when shopping—it all feels like one cohesive brand experience.",
+      deliverables: [
+        "Custom Shopify/WooCommerce theme design matching your brand",
+        "Seamless integration between custom website and store",
+        "Payment processing and checkout flow configuration",
+        "Product catalog design and layout optimization",
+        "Cross-platform navigation and user experience",
+        "Mobile-optimized shopping experience"
+      ],
+      timeline: "2-4 weeks"
+    },
+    {
+      id: "custom-app-development",
+      name: "Custom Application Development",
+      price: "$3,000 - $15,000",
+      description: "Custom web applications and functionality tailored to specific business needs",
+      businessValue: "Custom solutions that solve unique business challenges and create competitive advantages",
+      deliverables: [
+        "Custom application development",
+        "Technical documentation",
+        "User training and support",
+        "Ongoing maintenance plan"
+      ],
+      timeline: "6-12 weeks"
+    },
+    {
+      id: "ongoing-seo-services",
+      name: "Ongoing SEO Strategy & Optimization",
+      price: "$800 - $2,000/month",
+      description: "Strategic SEO services separate from maintenance. While maintenance handles technical updates and security, SEO services focus on search strategy: keyword research, content optimization recommendations, competitive analysis, and search performance tracking. Best for businesses where organic search is a primary customer acquisition channel.",
+      businessValue: "Sustained organic traffic growth and improved search rankings through strategic optimization",
+      deliverables: [
+        "Monthly SEO audits and strategic recommendations",
+        "Keyword research and content strategy",
+        "On-page optimization recommendations",
+        "Search performance tracking and reporting",
+        "Competitive analysis and opportunity identification",
+        "Note: Implementation of recommendations may be included in maintenance plan or billed separately"
+      ],
+      timeline: "Ongoing"
     }
   ];
   
@@ -260,51 +367,57 @@ export interface ServiceTier {
     features: [
       {
         feature: "Professional Design",
-        launch: "Template-based (customized)",
-        elevate: "Fully custom design",
-        thrive: "Advanced custom architecture"
+        foundation: "Semi-custom (professionally customized)",
+        growth: "Fully custom design",
+        marketLeader: "Advanced custom architecture"
       },
       {
         feature: "Page Count", 
-        launch: "1-3 pages",
-        elevate: "4-6 pages",
-        thrive: "Unlimited strategic pages"
+        foundation: "5-10 pages",
+        growth: "10-20 pages",
+        marketLeader: "20-50+ pages"
       },
       {
         feature: "Timeline",
-        launch: "5-7 business days", 
-        elevate: "2-3 weeks",
-        thrive: "4-8 weeks"
+        foundation: "2-3 weeks", 
+        growth: "4-6 weeks",
+        marketLeader: "8-12 weeks"
       },
       {
         feature: "Content Management",
-        launch: "Basic updates",
-        elevate: "Full CMS integration", 
-        thrive: "Advanced CMS + training"
+        foundation: "Basic CMS + training (headless CMS like Sanity or Contentful for easy content updates)",
+        growth: "Full CMS integration + training (headless CMS for pages, blog, and content management)", 
+        marketLeader: "Advanced CMS + dedicated support (headless CMS with custom content types and workflows)"
       },
       {
         feature: "SEO Optimization",
-        launch: "Basic foundation",
-        elevate: "Comprehensive strategy",
-        thrive: "Advanced optimization"
+        foundation: "SEO foundation with keyword research",
+        growth: "Comprehensive SEO with competitive analysis",
+        marketLeader: "Advanced SEO with technical implementations"
+      },
+      {
+        feature: "Copywriting", 
+        foundation: "Basic content guidance",
+        growth: "Professional copywriting (5-8 pages)",
+        marketLeader: "Full-site professional copywriting"
       },
       {
         feature: "Analytics & Tracking", 
-        launch: "Basic Google Analytics",
-        elevate: "Advanced tracking setup",
-        thrive: "Custom analytics dashboard"
+        foundation: "Basic analytics implementation",
+        growth: "Advanced tracking setup",
+        marketLeader: "Custom analytics dashboard"
       },
       {
         feature: "Integrations",
-        launch: "Standard only",
-        elevate: "Business-focused integrations",
-        thrive: "Custom API integrations"
+        foundation: "Standard only",
+        growth: "Business-focused integrations",
+        marketLeader: "Custom API integrations"
       },
       {
         feature: "Support Level",
-        launch: "Launch support + documentation",
-        elevate: "Strategic consultation + training", 
-        thrive: "Ongoing partnership + consultation"
+        foundation: "Launch support + documentation",
+        growth: "Strategic consultation + training", 
+        marketLeader: "Priority support + dedicated account management"
       }
     ]
   };

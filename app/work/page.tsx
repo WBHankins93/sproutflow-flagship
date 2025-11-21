@@ -179,17 +179,6 @@ export default function WorkPage() {
                         </div>
                       </div>
                     </div>
-
-                    {project.highlight && (
-                      <div className="rounded-2xl border border-primary-200 bg-primary-50/50 p-5">
-                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-primary-700 mb-2">
-                          Why it matters
-                        </p>
-                        <p className="text-sm leading-relaxed text-primary-900">
-                          {project.highlight}
-                        </p>
-                      </div>
-                    )}
                   </div>
                 </article>
               ))}
