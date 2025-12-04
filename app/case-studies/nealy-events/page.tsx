@@ -84,12 +84,12 @@ export default function NealyEventsCaseStudy() {
           </h2>
           
           <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-            Nealy Event Decor creates luxury custom fabrications for high-end events in the Dallas market—from bespoke arches to premium bars and elegant rentals. Despite delivering exceptional work, their old website wasn't converting browsers into consultations.
+            Nealy Event Decor creates luxury custom fabrications for high-end events in the Dallas market—from bespoke arches to premium bars and elegant rentals. Despite delivering exceptional work, their old website wasn&apos;t converting browsers into consultations.
           </p>
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-red-50 border border-red-200 rounded-2xl p-6">
-              <h3 className="font-bold text-gray-900 mb-4">What Wasn't Working</h3>
+              <h3 className="font-bold text-gray-900 mb-4">What Wasn&apos;t Working</h3>
               <ul className="space-y-3">
                 {[
                   'Old site didn\'t reflect luxury positioning',
@@ -208,7 +208,7 @@ export default function NealyEventsCaseStudy() {
           {/* Client Testimonial */}
           <div className="bg-gradient-to-br from-primary-50 to-white rounded-3xl border-2 border-primary-200 p-8 md:p-12">
             <div className="flex items-start gap-6">
-              <div className="text-6xl text-primary-400">"</div>
+              <div className="text-6xl text-primary-400">&quot;</div>
               <div className="flex-1">
                 <p className="text-xl text-gray-700 leading-relaxed mb-6 italic">
                   Working with Sproutflow transformed how potential clients perceive our business. We went from looking like a side hustle to a legitimate luxury brand. The site pays for itself every month.
@@ -270,7 +270,7 @@ export default function NealyEventsCaseStudy() {
             Ready for similar results?
           </h3>
           <p className="text-base text-gray-600 md:text-lg">
-            Let's talk about your business goals and how a strategic website can help you compete in your market.
+            Let&apos;s talk about your business goals and how a strategic website can help you compete in your market.
           </p>
           <Link
             href="/#contact"

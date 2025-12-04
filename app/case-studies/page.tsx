@@ -130,7 +130,7 @@ export default function CaseStudiesPage() {
             Ready to be our next success story?
           </h3>
           <p className="text-base text-gray-600 md:text-lg">
-            Let's talk about your business goals and how a strategic website can help you compete in your market.
+            Let&apos;s talk about your business goals and how a strategic website can help you compete in your market.
           </p>
           <Link
             href="/#contact"
