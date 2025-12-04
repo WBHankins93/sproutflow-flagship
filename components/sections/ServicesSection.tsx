@@ -112,7 +112,7 @@ export default function ServicesSection() {
         </motion.div>
 
         {/* Service Tiers Grid */}
-        <div className="grid lg:grid-cols-4 gap-8 mb-16 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8 mb-16">
           
           {serviceTiers.map((tier, index) => {
             const isFlipped = flippedCard === tier.id;
@@ -124,13 +124,13 @@ export default function ServicesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`relative ${tier.popular ? 'lg:scale-110 lg:z-10' : 'lg:scale-95'}`}
+                className="relative"
                 style={{ perspective: '1000px' }}
               >
                 {/* Popular Badge */}
                 {tier.popular && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
-                    <span className="bg-accent-500 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg">
+                  <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 z-20">
+                    <span className="bg-accent-500 text-white px-3 md:px-4 py-1 md:py-1.5 rounded-full text-xs md:text-sm font-bold shadow-lg whitespace-nowrap">
                       Most Popular
                     </span>
                   </div>
@@ -151,7 +151,7 @@ export default function ServicesSection() {
                       WebkitBackfaceVisibility: 'hidden',
                       pointerEvents: isFlipped ? 'none' : 'auto'
                     }}
-                    className={`relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
+                    className={`relative bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
                   >
                     {/* Tree Ring Background */}
                     <div className="absolute inset-0 pointer-events-none opacity-10 z-0">
@@ -176,35 +176,35 @@ export default function ServicesSection() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 
                       {/* Tier Badge */}
-                      <div className="absolute bottom-4 left-4">
-                        <div className="flex items-center gap-2 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                      <div className="absolute bottom-4 left-4 right-20">
+                        <div className="flex items-center gap-2 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full max-w-fit">
                           {tier.icon}
-                          <span className="font-bold text-gray-900">{tier.name}</span>
+                          <span className="font-bold text-gray-900 whitespace-nowrap text-sm md:text-base">{tier.name}</span>
                         </div>
                       </div>
 
                       {/* Price Badge */}
                       <div className="absolute bottom-4 right-4">
-                        <div className="bg-primary-600 text-white px-4 py-2 rounded-full font-bold shadow-lg">
+                        <div className="bg-primary-600 text-white px-3 py-2 rounded-full font-bold shadow-lg text-xs md:text-sm whitespace-nowrap">
                           {tier.priceRange}
                         </div>
                       </div>
                     </div>
 
                     {/* Content */}
-                    <div className="relative p-8 z-10">
-                      <p className="text-primary-600 font-semibold mb-2">{tier.tagline}</p>
-                      <p className="text-sm text-gray-500 mb-4">{tier.idealFor}</p>
-                      <p className="text-gray-600 mb-6 leading-relaxed">{tier.description}</p>
+                    <div className="relative p-6 md:p-8 z-10 flex-1 flex flex-col">
+                      <p className="text-primary-600 font-semibold mb-2 text-sm md:text-base">{tier.tagline}</p>
+                      <p className="text-xs md:text-sm text-gray-500 mb-4 line-clamp-2">{tier.idealFor}</p>
+                      <p className="text-sm md:text-base text-gray-600 mb-6 leading-relaxed line-clamp-3">{tier.description}</p>
 
                       {/* Highlights */}
-                      <div className="space-y-3 mb-8">
-                        {tier.highlights.map((highlight, idx) => (
-                          <div key={idx} className="flex items-start gap-3">
-                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-primary-100 flex items-center justify-center mt-0.5">
-                              <Check className="w-3 h-3 text-primary-600" />
+                      <div className="space-y-2 md:space-y-3 mb-6 md:mb-8 flex-1">
+                        {tier.highlights.slice(0, 3).map((highlight, idx) => (
+                          <div key={idx} className="flex items-start gap-2 md:gap-3">
+                            <div className="flex-shrink-0 w-4 h-4 md:w-5 md:h-5 rounded-full bg-primary-100 flex items-center justify-center mt-0.5">
+                              <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary-600" />
                             </div>
-                            <span className="text-sm text-gray-700 leading-relaxed">{highlight}</span>
+                            <span className="text-xs md:text-sm text-gray-700 leading-relaxed">{highlight}</span>
                           </div>
                         ))}
                       </div>
@@ -212,14 +212,14 @@ export default function ServicesSection() {
                       {/* CTA Button - FLIP TRIGGER */}
                       <button 
                         onClick={() => handleFlip(tier.id)}
-                        className={`w-full py-4 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 group ${
+                        className={`w-full py-3 md:py-4 rounded-full font-semibold text-sm md:text-base transition-all duration-300 flex items-center justify-center gap-2 group mt-auto ${
                           tier.popular 
                             ? 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg hover:shadow-xl' 
                             : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                         }`}
                       >
                         {tier.buttonText}
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                       </button>
                     </div>
                   </div>
@@ -232,7 +232,7 @@ export default function ServicesSection() {
                       transform: 'rotateY(180deg)',
                       pointerEvents: isFlipped ? 'auto' : 'none'
                     }}
-                    className={`absolute inset-0 bg-gradient-to-br from-primary-600 to-primary-700 rounded-3xl overflow-hidden shadow-2xl ${tier.popular ? 'ring-2 ring-primary-500' : ''}`}
+                    className={`absolute inset-0 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-full flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : ''}`}
                   >
                     {/* Tree Ring Background on Back */}
                     <div className="absolute inset-0 pointer-events-none opacity-10">
@@ -244,16 +244,16 @@ export default function ServicesSection() {
                       />
                     </div>
 
-                    <div className="relative h-full p-8 flex flex-col text-white z-10">
+                    <div className="relative h-full p-6 md:p-8 flex flex-col text-white z-10">
                       {/* Header */}
-                      <div className="flex items-center justify-between mb-6 relative z-20">
-                        <div className="flex items-center gap-3">
-                          <div className="bg-white/20 p-2 rounded-lg">
+                      <div className="flex items-center justify-between mb-4 md:mb-6 relative z-20">
+                        <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
+                          <div className="bg-white/20 p-1.5 md:p-2 rounded-lg flex-shrink-0">
                             {tier.icon}
                           </div>
-                          <div>
-                            <h3 className="font-bold text-2xl">{tier.name}</h3>
-                            <p className="text-white/80 text-sm">{tier.priceRange}</p>
+                          <div className="min-w-0">
+                            <h3 className="font-bold text-lg md:text-2xl truncate">{tier.name}</h3>
+                            <p className="text-white/80 text-xs md:text-sm truncate">{tier.priceRange}</p>
                           </div>
                         </div>
                         <button
@@ -272,34 +272,34 @@ export default function ServicesSection() {
                       </div>
 
                       {/* Perfect For */}
-                      <div className="mb-6">
+                      <div className="mb-4 md:mb-6">
                         <div className="flex items-center gap-2 mb-2">
-                          <Target className="w-4 h-4" />
-                          <h4 className="font-semibold">Perfect For:</h4>
+                          <Target className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+                          <h4 className="font-semibold text-sm md:text-base">Perfect For:</h4>
                         </div>
-                        <p className="text-white/90 text-sm">{tier.perfectFor}</p>
+                        <p className="text-white/90 text-xs md:text-sm">{tier.perfectFor}</p>
                       </div>
 
                       {/* Timeline */}
-                      <div className="mb-6">
+                      <div className="mb-4 md:mb-6">
                         <div className="flex items-center gap-2 mb-2">
-                          <Clock className="w-4 h-4" />
-                          <h4 className="font-semibold">Timeline:</h4>
+                          <Clock className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+                          <h4 className="font-semibold text-sm md:text-base">Timeline:</h4>
                         </div>
-                        <p className="text-white/90 text-sm">{tier.timeline}</p>
+                        <p className="text-white/90 text-xs md:text-sm">{tier.timeline}</p>
                       </div>
 
                       {/* What's Included */}
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-3">
-                          <Package className="w-4 h-4" />
-                          <h4 className="font-semibold">What&apos;s Included:</h4>
+                      <div className="flex-1 min-h-0">
+                        <div className="flex items-center gap-2 mb-2 md:mb-3">
+                          <Package className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
+                          <h4 className="font-semibold text-sm md:text-base">What&apos;s Included:</h4>
                         </div>
-                        <ul className="space-y-2">
+                        <ul className="space-y-1.5 md:space-y-2 overflow-y-auto">
                           {tier.includes.map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-2 text-sm">
-                              <Check className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                              <span className="text-white/90">{item}</span>
+                            <li key={idx} className="flex items-start gap-2">
+                              <Check className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 mt-0.5" />
+                              <span className="text-white/90 text-xs md:text-sm">{item}</span>
                             </li>
                           ))}
                         </ul>
@@ -309,10 +309,10 @@ export default function ServicesSection() {
                       <a
                         href="#contact"
                         onClick={handleContactClick}
-                        className="mt-6 w-full bg-white text-primary-700 py-4 rounded-full font-bold hover:bg-white/90 transition-all duration-300 flex items-center justify-center gap-2 group"
+                        className="mt-4 md:mt-6 w-full bg-white text-primary-700 py-3 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-white/90 transition-all duration-300 flex items-center justify-center gap-2 group"
                       >
                         Get Started
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                       </a>
                     </div>
                   </div>
