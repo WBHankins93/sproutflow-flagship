@@ -10,7 +10,7 @@ export default function Loading() {
           
           {/* Loading Text */}
           <p className="text-text-muted font-body">
-            Loading professional experience...
+            Loading...
           </p>
         </div>
       </div>

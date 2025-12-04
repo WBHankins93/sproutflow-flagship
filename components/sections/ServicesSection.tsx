@@ -5,101 +5,50 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { Zap, Target, Rocket, Check, ArrowRight, X, Clock, Package } from 'lucide-react';
+import { Zap, Target, Rocket, Check, ArrowRight, X, Clock, Package, Sparkles } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
+import { serviceTiers as dataServiceTiers } from '@/data/services';
+import type { ServiceTier } from '@/data/services';
 
-const serviceTiers = [
-  {
-    id: 'foundation',
-    name: 'Foundation',
-    icon: <Zap className="w-6 h-6" />,
-    tagline: 'Strategic foundation for validated presence',
-    priceRange: '$1,800 - $2,400',
-    idealFor: 'New businesses or rebrands needing validated presence',
-    description: 'Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations—a foundation for long-term growth, not just online presence.',
-    lifestyleImage: getImageUrl('service/growth.jpg'),
-    treeRingImage: getImageUrl('tree-ring-1.jpg'),
-    highlights: [
-      'Validated professional market presence',
-      'Clear customer conversion pathway aligned with business goals',
-      'Strategic architecture that scales with growth',
-      'Foundation for digital marketing initiatives'
-    ],
-    buttonText: 'Learn More',
-    popular: false,
-    // BACK OF CARD INFO
-    timeline: '2-3 weeks',
-    includes: [
-      '5-10 pages with strategic architecture',
-      'Semi-custom design (not pure templates)',
-      'Mobile optimization and performance tuning',
-      'SEO foundation with keyword research',
-      '2-hour strategy session on business goals',
-      'CMS training and documentation'
-    ],
-    perfectFor: 'New businesses or rebrands needing validated presence'
+// Icon mapping for service tiers
+const tierIcons: Record<string, React.ReactNode> = {
+  starter: <Sparkles className="w-6 h-6" />,
+  foundation: <Zap className="w-6 h-6" />,
+  growth: <Target className="w-6 h-6" />,
+  'market-leader': <Rocket className="w-6 h-6" />,
+};
+
+// Image mapping for service tiers
+const tierImages: Record<string, { lifestyle: string; treeRing: string }> = {
+  starter: {
+    lifestyle: getImageUrl('service/sprouted.jpg'),
+    treeRing: getImageUrl('tree-ring-1.jpg'),
   },
-  {
-    id: 'growth',
-    name: 'Growth',
-    icon: <Target className="w-6 h-6" />,
-    tagline: 'Competitive differentiation for market share',
-    priceRange: '$3,800 - $5,500',
-    idealFor: 'Established businesses ready to compete for market share',
-    description: 'Comprehensive digital presence that positions your business as the clear choice in your market. Custom design reflecting brand personality with conversion optimization and professional copywriting.',
-    lifestyleImage: getImageUrl('service/yellow-flower.jpg'),
-    treeRingImage: getImageUrl('tree-ring-3.jpg'),
-    highlights: [
-      'Clear market differentiation from competitors',
-      'Improved customer acquisition metrics',
-      'Tracked revenue growth from digital presence',
-      'Professional copywriting for key pages'
-    ],
-    buttonText: 'Learn More',
-    popular: true,
-    // BACK OF CARD INFO
-    timeline: '4-6 weeks',
-    includes: [
-      '10-20 pages with conversion optimization',
-      'Fully custom responsive design',
-      'Professional copywriting (5-8 pages)',
-      'Comprehensive SEO with competitive analysis',
-      'Blog integration with content strategy',
-      'Analytics and conversion tracking setup'
-    ],
-    perfectFor: 'Established businesses ready to compete for market share'
+  foundation: {
+    lifestyle: getImageUrl('service/growth.jpg'),
+    treeRing: getImageUrl('tree-ring-1.jpg'),
   },
-  {
-    id: 'market-leader',
-    name: 'Market Leader',
-    icon: <Rocket className="w-6 h-6" />,
-    tagline: 'Revenue-driving digital presence',
-    priceRange: '$8,000 - $18,000',
-    idealFor: 'Businesses where digital presence drives significant revenue',
-    description: 'Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages. Deep strategic planning with advanced functionality for businesses where digital presence is a primary revenue driver.',
-    lifestyleImage: getImageUrl('service/farm-1.jpg'),
-    treeRingImage: getImageUrl('tree-ring-4.webp'),
-    highlights: [
-      'Technical competitive advantages in market',
-      'Measurable ROI from digital investment',
-      'Platform designed for significant scaling',
-      'Advanced customer acquisition and retention systems'
-    ],
-    buttonText: 'Learn More',
-    popular: false,
-    // BACK OF CARD INFO
-    timeline: '8-12 weeks',
-    includes: [
-      '20-50+ pages with advanced functionality',
-      'Fully custom design and interactive elements',
-      'Full-site professional copywriting',
-      'Advanced SEO with technical implementations',
-      'Custom integrations (CRM, email marketing, etc.)',
-      'Priority support and dedicated account management'
-    ],
-    perfectFor: 'Businesses where digital presence drives significant revenue'
-  }
-];
+  growth: {
+    lifestyle: getImageUrl('service/yellow-flower.jpg'),
+    treeRing: getImageUrl('tree-ring-3.jpg'),
+  },
+  'market-leader': {
+    lifestyle: getImageUrl('service/farm-1.jpg'),
+    treeRing: getImageUrl('tree-ring-4.webp'),
+  },
+};
+
+// Transform data tier to UI tier with additional properties
+const serviceTiers = dataServiceTiers.map((tier: ServiceTier) => ({
+  ...tier,
+  icon: tierIcons[tier.id] || <Zap className="w-6 h-6" />,
+  lifestyleImage: tierImages[tier.id]?.lifestyle || getImageUrl('service/growth.jpg'),
+  treeRingImage: tierImages[tier.id]?.treeRing || getImageUrl('tree-ring-1.jpg'),
+  highlights: tier.businessOutcomes.slice(0, 4), // Use first 4 business outcomes as highlights
+  buttonText: 'Learn More',
+  includes: [...tier.technicalFeatures, ...tier.strategicInclusions].slice(0, 6), // Combine and limit
+  perfectFor: tier.idealFor,
+}));
 
 export default function ServicesSection() {
   const [flippedCard, setFlippedCard] = useState<string | null>(null);
@@ -153,7 +102,7 @@ export default function ServicesSection() {
           </div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-6">
-            Three Ways to{' '}
+            Four Ways to{' '}
             <span className="text-primary-600">Work Together</span>
           </h2>
           
@@ -163,7 +112,7 @@ export default function ServicesSection() {
         </motion.div>
 
         {/* Service Tiers Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16 items-center">
+        <div className="grid lg:grid-cols-4 gap-8 mb-16 items-center">
           
           {serviceTiers.map((tier, index) => {
             const isFlipped = flippedCard === tier.id;
@@ -390,6 +339,8 @@ export default function ServicesSection() {
           </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            
+            {/* 1. Website Care Plans */}
             <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
               <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
                 <Check className="w-6 h-6 text-primary-600" />
@@ -401,27 +352,76 @@ export default function ServicesSection() {
               </div>
             </div>
 
-            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                <Check className="w-6 h-6 text-primary-600" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Professional Photography</h4>
-                <p className="text-sm text-gray-600 mb-3">High-quality photography that captures your brand and products professionally</p>
-                <p className="text-primary-600 font-bold text-lg">$800 - $2,000</p>
-              </div>
-            </div>
-
+            {/* 2. Professional Photography */}
             <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
               <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
                 <Package className="w-6 h-6 text-primary-600" />
               </div>
               <div>
-                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Ongoing SEO Strategy</h4>
-                <p className="text-sm text-gray-600 mb-3">Strategic SEO services separate from maintenance - keyword research, content optimization, and performance tracking</p>
-                <p className="text-primary-600 font-bold text-lg">$800 - $2,000/mo</p>
+                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Professional Photography</h4>
+                <p className="text-sm text-gray-600 mb-3">High-quality photography packages for your website and brand materials</p>
+                <p className="text-primary-600 font-bold text-lg">From $500</p>
+                <p className="text-xs text-gray-500 mt-2">
+                  Essentials: $500 (2hrs, 20 photos) • Professional: $750 (3hrs, 40 photos)
+                </p>
               </div>
             </div>
+
+            {/* 3. SEO Strategy & Optimization */}
+            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                <Check className="w-6 h-6 text-primary-600" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2 text-lg">SEO Strategy</h4>
+                <p className="text-sm text-gray-600 mb-3">Strategic SEO optimization for existing websites—keyword research, content optimization, and performance tracking</p>
+                <p className="text-primary-600 font-bold text-lg">$800 - $2,000</p>
+                <p className="text-xs text-gray-500 mt-2">Perfect for sites that need a boost</p>
+              </div>
+            </div>
+
+            {/* 4. Shopify Design Refresh */}
+            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                <Package className="w-6 h-6 text-primary-600" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Shopify Design Refresh</h4>
+                <p className="text-sm text-gray-600 mb-3">Quick design uplift for existing Shopify stores—template customization to match your brand</p>
+                <p className="text-primary-600 font-bold text-lg">Starting at $800</p>
+              </div>
+            </div>
+
+            {/* 5. Professional Copywriting */}
+            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                <Check className="w-6 h-6 text-primary-600" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Professional Copywriting</h4>
+                <p className="text-sm text-gray-600 mb-3">Transform your content into conversion-focused copy</p>
+                <p className="text-primary-600 font-bold text-lg">$400 - $1,200</p>
+                <p className="text-xs text-gray-500 mt-2">
+                  Small sites: $400-$600 • Established: $800-$1,000 • Complex: $1,200+
+                </p>
+              </div>
+            </div>
+
+            {/* 6. Content & Blog Setup */}
+            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                <Package className="w-6 h-6 text-primary-600" />
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Content & Blog Setup</h4>
+                <p className="text-sm text-gray-600 mb-3">SEO-optimized blog posts and content strategy</p>
+                <p className="text-primary-600 font-bold text-lg">From $250/post</p>
+                <p className="text-xs text-gray-500 mt-2">
+                  Single post: $250 • Full strategy: $600 (3 posts + roadmap)
+                </p>
+              </div>
+            </div>
+
           </div>
         </motion.div>
 

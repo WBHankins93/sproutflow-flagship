@@ -18,10 +18,56 @@ export interface ServiceTier {
   
   export const serviceTiers: ServiceTier[] = [
     {
+      id: "starter",
+      name: "Starter",
+      tagline: "Quick professional presence for new businesses",
+      priceRange: "$850 - $1,500",
+      timeline: "1-2 weeks",
+      idealFor: "Solo entrepreneurs and new businesses needing fast validation",
+      description: "Template-based website with professional customization. Perfect for getting online quickly without sacrificing quality. Limited to 2-3 projects per month.",
+      
+      businessOutcomes: [
+        "Professional online presence in days, not weeks",
+        "Validated market credibility",
+        "Foundation for future growth",
+        "Cost-effective entry point for new businesses"
+      ],
+      
+      technicalFeatures: [
+        "1-3 pages with clean, modern design",
+        "Template-based with brand customization",
+        "Mobile-responsive and performance optimized",
+        "Contact form or scheduling integration",
+        "Basic SEO setup and configuration",
+        "Launch support and training"
+      ],
+      
+      strategicInclusions: [
+        "30-minute brand consultation",
+        "Content guidance and structure",
+        "Basic CMS training",
+        "Launch checklist"
+      ],
+      
+      deliverables: [
+        "Live professional website",
+        "Domain and hosting setup",
+        "Basic CMS training documentation",
+        "1 round of revisions"
+      ],
+      
+      limitations: [
+        "Template-based foundation (professionally customized)",
+        "Limited to 1-3 pages",
+        "Basic integrations only",
+        "Limited availability (2-3 projects per month)"
+      ]
+    },
+    {
       id: "foundation",
       name: "Foundation",
       tagline: "Strategic foundation for validated online presence",
-      priceRange: "$1,800 - $2,400",
+      priceRange: "$2,000 - $2,800",
       timeline: "2-3 weeks",
       idealFor: "New businesses or rebrands needing validated presence",
       description: "Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations—a foundation for long-term growth, not just online presence.",
@@ -68,7 +114,7 @@ export interface ServiceTier {
       id: "growth", 
       name: "Growth",
       tagline: "Competitive differentiation for market share",
-      priceRange: "$3,800 - $5,500", 
+      priceRange: "$3,500 - $5,500", 
       timeline: "4-6 weeks",
       idealFor: "Established businesses ready to compete for market share",
       description: "Comprehensive digital presence that positions your business as the clear choice in your market. Custom design reflecting brand personality with conversion optimization and professional copywriting.",
@@ -116,7 +162,7 @@ export interface ServiceTier {
       id: "market-leader",
       name: "Market Leader", 
       tagline: "Revenue-driving digital presence",
-      priceRange: "$8,000 - $18,000",
+      priceRange: "$7,500+",
       timeline: "8-12 weeks",
       idealFor: "Businesses where digital presence drives significant revenue",
       description: "Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages. Deep strategic planning with advanced functionality for businesses where digital presence is a primary revenue driver.",
