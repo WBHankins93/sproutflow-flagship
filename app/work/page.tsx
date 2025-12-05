@@ -1,9 +1,26 @@
 // app/work/page.tsx - Sproutflow Work Showcase
 
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowUpRight, Code2, FileCode, Layers, Zap, Globe, Database, Palette } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { 
+  ArrowUpRight, 
+  Code2, 
+  FileCode, 
+  Layers, 
+  Zap, 
+  Globe, 
+  Database, 
+  Palette,
+  ExternalLink,
+  Calendar,
+  TrendingUp,
+  Users,
+  CheckCircle2
+} from 'lucide-react';
 
 import { workProjects } from '@/data/workProjects';
 import type { ProjectStatus } from '@/data/workProjects';
@@ -28,25 +45,26 @@ const statusStyles: Record<ProjectStatus, string> = {
     'bg-amber-100 text-amber-900 ring-1 ring-inset ring-amber-200',
 };
 
-export const metadata = {
-  title: 'Our Work | Web Design Portfolio | Sproutflow Studio New Orleans',
-  description:
-    'View our portfolio of professional web design projects for New Orleans businesses. Real websites for real businesses - see how we help small businesses compete with enterprise-level web presence.',
-  keywords: [
-    'web design portfolio New Orleans',
-    'website design examples New Orleans',
-    'small business websites New Orleans',
-    'professional web design portfolio',
-    'New Orleans web design projects'
-  ],
-  alternates: {
-    canonical: '/work',
-  },
+// Icon mapping for project categories
+const categoryIcons: Record<string, React.ReactNode> = {
+  'Personal Project': <Code2 className="w-8 h-8 text-white" />,
+  'Psychiatry': <Users className="w-8 h-8 text-white" />,
+  'Event Decor': <CheckCircle2 className="w-8 h-8 text-white" />,
+  'Pool Solutions': <TrendingUp className="w-8 h-8 text-white" />,
+  'Community Platform': <Zap className="w-8 h-8 text-white" />,
+};
+
+// Get category from client name
+const getCategory = (client: string): string => {
+  if (client.includes('Personal')) return 'Personal Project';
+  if (client.includes('Psychiatry')) return 'Psychiatry';
+  if (client.includes('Event Decor')) return 'Event Decor';
+  if (client.includes('Pool')) return 'Pool Solutions';
+  if (client.includes('Bekky')) return 'Community Platform';
+  return 'Web Design';
 };
 
 export default function WorkPage() {
-  // Single set of projects for manual scrolling
-  const carouselProjects = workProjects;
 
   return (
     <>
@@ -94,105 +112,156 @@ export default function WorkPage() {
       </header>
 
       <section className="relative py-20 md:py-24">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-primary-50/40 via-white to-white" />
+        {/* Organic Background Pattern */}
+        <div className="absolute inset-0 bg-gradient-to-b from-primary-50/40 via-white to-white">
+          <div 
+            className="absolute inset-0 opacity-5"
+            style={{
+              backgroundImage: `radial-gradient(circle, #5F755E 1px, transparent 1px)`,
+              backgroundSize: '30px 30px'
+            }}
+          />
+        </div>
 
-        <div className="mx-auto max-w-[110rem] px-4 md:px-8">
-          <div className="overflow-x-auto scrollbar-hide">
-            <div className="flex gap-6 pb-4">
-              {carouselProjects.map((project, index) => (
-                <article
-                  key={`${project.id}-${index}`}
-                  className="flex-shrink-0 w-[85vw] max-w-[28rem] rounded-3xl border border-gray-200 bg-white shadow-lg overflow-hidden md:w-[32rem]"
+        <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
+          {/* Portfolio Grid */}
+          <div className="grid lg:grid-cols-3 gap-8 mb-16">
+            
+            {workProjects.map((project, index) => {
+              const category = getCategory(project.client);
+              const categoryIcon = categoryIcons[category] || <Code2 className="w-8 h-8 text-white" />;
+              const primaryColor = project.gradient[0] || '#163323';
+              
+              return (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="group"
                 >
-                  {/* Gradient Header Section */}
-                  <div
-                    className="relative px-6 pt-6 pb-8 md:px-8 md:pt-8"
-                    style={{
-                      backgroundImage: `linear-gradient(135deg, ${project.gradient
-                        .filter(Boolean)
-                        .join(', ')})`,
-                    }}
-                  >
-                    <div className="flex flex-wrap items-center gap-3 mb-4">
-                      <span
-                        className={`rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider ${statusStyles[project.status]}`}
-                      >
-                        {project.status}
-                      </span>
-                      <span className="text-sm font-medium text-white/90">
-                        {project.client}
-                      </span>
-                    </div>
-                    <h2 className="text-2xl font-display font-bold text-white mb-4 drop-shadow md:text-3xl">
-                      {project.title}
-                    </h2>
-                    <p className="text-sm leading-relaxed text-white/90 mb-6 drop-shadow-sm md:text-base">
-                      {project.description}
-                    </p>
-                    <div className="flex items-center justify-between gap-3">
-                      <Link
-                        href={project.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/90 px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-primary-700 shadow-sm transition hover:bg-white hover:text-primary-800"
-                      >
-                        View project
-                        <ArrowUpRight className="h-4 w-4" />
-                      </Link>
+                  {/* Image Card with Hover Effect */}
+                  <div className="relative rounded-3xl overflow-hidden mb-6 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer">
+                    
+                    {/* Gradient Background (using project gradient) */}
+                    <div 
+                      className="aspect-[4/3] relative"
+                      style={{
+                        backgroundImage: `linear-gradient(135deg, ${project.gradient.filter(Boolean).join(', ')})`,
+                      }}
+                    >
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+
+                      {/* Status Badge - Top Left */}
+                      <div className="absolute top-4 left-4 z-10">
+                        <span
+                          className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider ${statusStyles[project.status]}`}
+                        >
+                          {project.status}
+                        </span>
+                      </div>
+
+                      {/* Icon Badge - Bottom Left */}
+                      <div className="absolute bottom-4 left-4 z-10">
+                        <div 
+                          className="w-16 h-16 rounded-full flex items-center justify-center shadow-xl backdrop-blur-sm"
+                          style={{ backgroundColor: primaryColor }}
+                        >
+                          {categoryIcon}
+                        </div>
+                      </div>
+
+                      {/* Logo - Bottom Right (if available) */}
                       {project.logo && (
-                        <div className="relative h-12 w-12 md:h-14 md:w-14 bg-white/20 backdrop-blur-sm rounded-lg p-2 flex items-center justify-center border border-white/30 flex-shrink-0">
-                          <Image
-                            src={getImageUrl(project.logo)}
-                            alt={`${project.title} logo`}
-                            width={48}
-                            height={48}
-                            className="object-contain max-h-full max-w-full"
-                          />
+                        <div className="absolute bottom-4 right-4 z-10">
+                          <div className="relative h-12 w-12 md:h-14 md:w-14 bg-white/20 backdrop-blur-sm rounded-lg p-2 flex items-center justify-center border border-white/30">
+                            <Image
+                              src={getImageUrl(project.logo)}
+                              alt={`${project.title} logo`}
+                              width={48}
+                              height={48}
+                              className="object-contain max-h-full max-w-full"
+                            />
+                          </div>
                         </div>
                       )}
-                    </div>
-                  </div>
 
-                  {/* White Content Section */}
-                  <div className="flex flex-col gap-6 px-6 pb-8 pt-8 md:px-8">
-
-                    <div className="grid gap-4 md:grid-cols-2">
-                      <div className="rounded-2xl border border-gray-100 bg-gray-50/50 p-4">
-                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-primary-700 mb-3">
-                          Services
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {project.services.map((service) => (
-                            <span
-                              key={service}
-                              className="rounded-full bg-primary-50 px-3 py-1 text-[0.65rem] font-medium uppercase tracking-wide text-primary-700"
-                            >
-                              {service}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      <div className="rounded-2xl border border-gray-100 bg-gray-50/50 p-4">
-                        <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-primary-700 mb-3">
-                          Stack
-                        </p>
-                        <div className="flex flex-wrap gap-2">
-                          {project.tech.map((tech) => (
-                            <span
-                              key={tech}
-                              className="inline-flex items-center gap-1.5 rounded-full bg-gray-900 px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-wide text-white"
-                            >
-                              {techIcons[tech] || <Code2 className="h-3 w-3" />}
-                              {tech}
-                            </span>
-                          ))}
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div className="text-white">
+                          <p className="text-sm font-medium mb-1 opacity-90">{category}</p>
+                          <h3 className="text-2xl font-display font-bold mb-2">{project.title}</h3>
+                          {project.highlight && (
+                            <p className="text-sm opacity-80 line-clamp-2">{project.highlight}</p>
+                          )}
                         </div>
                       </div>
                     </div>
                   </div>
-                </article>
-              ))}
-            </div>
+
+                  {/* Content Card */}
+                  <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
+                    
+                    {/* Header */}
+                    <div className="mb-4">
+                      <h3 className="text-xl font-display font-bold text-gray-900 mb-1">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm text-gray-500">{project.client}</p>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-gray-600 mb-4 leading-relaxed text-sm">
+                      {project.description}
+                    </p>
+
+                    {/* Tags - Services */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.services.slice(0, 3).map((service) => (
+                        <span 
+                          key={service}
+                          className="text-xs px-3 py-1 bg-primary-50 text-primary-700 rounded-full font-medium"
+                        >
+                          {service}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Tech Stack */}
+                    <div className="mb-5 pb-5 border-b border-gray-100">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+                        Tech Stack
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.tech.slice(0, 4).map((tech) => (
+                          <span
+                            key={tech}
+                            className="inline-flex items-center gap-1 rounded-full bg-gray-900 px-2.5 py-1 text-[0.65rem] font-medium text-white"
+                          >
+                            {techIcons[tech] || <Code2 className="h-2.5 w-2.5" />}
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* View Project Link */}
+                    <Link 
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-2.5 text-sm font-semibold text-primary-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-all flex items-center justify-center gap-2 group"
+                    >
+                      View Live Site
+                      <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </Link>
+                  </div>
+                </motion.div>
+              );
+            })}
+
           </div>
         </div>
       </section>
