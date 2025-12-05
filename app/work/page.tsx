@@ -164,7 +164,8 @@ export default function WorkPage() {
                             src={getImageUrl(project.backgroundImage)}
                             alt={`${project.title} project preview`}
                             fill
-                            className="object-cover"
+                            className="object-contain"
+                            style={{ objectPosition: 'center' }}
                             priority={index < 3}
                           />
                         ) : (
@@ -192,21 +193,6 @@ export default function WorkPage() {
                           >
                             {project.status}
                           </span>
-                        </motion.div>
-
-                        {/* Icon Badge - Bottom Left */}
-                        <motion.div 
-                          className="absolute bottom-4 left-4 z-10"
-                          initial={{ opacity: 0, scale: 0.8 }}
-                          whileInView={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: index * 0.1 + 0.3, type: "spring" }}
-                        >
-                          <div 
-                            className="w-16 h-16 rounded-full flex items-center justify-center shadow-xl backdrop-blur-sm"
-                            style={{ backgroundColor: primaryColor }}
-                          >
-                            {categoryIcon}
-                          </div>
                         </motion.div>
 
                         {/* Hover Overlay */}
