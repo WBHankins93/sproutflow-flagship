@@ -149,9 +149,13 @@ export default function ServicesSection() {
                     style={{ 
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
-                      pointerEvents: isFlipped ? 'none' : 'auto'
+                      transformStyle: 'preserve-3d',
+                      opacity: isFlipped ? 0 : 1,
+                      zIndex: isFlipped ? 0 : 1,
+                      pointerEvents: isFlipped ? 'none' : 'auto',
+                      transition: 'opacity 0.6s ease-in-out'
                     }}
-                    className={`relative bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
+                    className={`relative bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl h-full flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
                   >
                     {/* Tree Ring Background */}
                     <div className="absolute inset-0 pointer-events-none opacity-10 z-0">
@@ -230,7 +234,11 @@ export default function ServicesSection() {
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
                       transform: 'rotateY(180deg)',
-                      pointerEvents: isFlipped ? 'auto' : 'none'
+                      transformStyle: 'preserve-3d',
+                      opacity: isFlipped ? 1 : 0,
+                      zIndex: isFlipped ? 1 : 0,
+                      pointerEvents: isFlipped ? 'auto' : 'none',
+                      transition: 'opacity 0.6s ease-in-out'
                     }}
                     className={`absolute inset-0 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-full flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : ''}`}
                   >
@@ -246,7 +254,10 @@ export default function ServicesSection() {
 
                     {/* Counter-rotate inner content to fix text reversal */}
                     <div 
-                      style={{ transform: 'rotateY(180deg)' }}
+                      style={{ 
+                        transform: 'rotateY(180deg)',
+                        transformStyle: 'preserve-3d'
+                      }}
                       className="relative h-full p-6 md:p-8 flex flex-col text-white z-10"
                     >
                       {/* Header */}
