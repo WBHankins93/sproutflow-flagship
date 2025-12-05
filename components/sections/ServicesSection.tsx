@@ -235,10 +235,7 @@ export default function ServicesSection() {
                       WebkitBackfaceVisibility: 'hidden',
                       transform: 'rotateY(180deg)',
                       transformStyle: 'preserve-3d',
-                      opacity: isFlipped ? 1 : 0,
-                      zIndex: isFlipped ? 1 : 0,
-                      pointerEvents: isFlipped ? 'auto' : 'none',
-                      transition: 'opacity 0.6s ease-in-out'
+                      pointerEvents: isFlipped ? 'auto' : 'none'
                     }}
                     className={`absolute inset-0 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-full flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : ''}`}
                   >
@@ -252,12 +249,11 @@ export default function ServicesSection() {
                       />
                     </div>
 
-                    {/* Inner content - counter-rotate to fix reversed text */}
+                    {/* Inner content - flip horizontally to fix reversed text */}
                     <div 
                       className="relative h-full p-6 md:p-8 flex flex-col text-white z-10"
                       style={{
-                        transform: 'rotateY(180deg)',
-                        WebkitTransform: 'rotateY(180deg)'
+                        transform: 'scaleX(-1)'
                       }}
                     >
                       {/* Header */}
