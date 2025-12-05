@@ -195,54 +195,59 @@ export default function HowWeWorkPage() {
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-primary-50/40 via-white to-white" />
 
         <div className="mx-auto max-w-6xl px-4 md:px-8">
-          <div className="space-y-16">
+          <div className="relative space-y-0">
+            {/* Connecting line running down the left side */}
+            <div className="absolute left-8 top-20 bottom-0 w-0.5 bg-gradient-to-b from-green-300 via-green-400 to-amber-400 hidden md:block" 
+                 style={{ height: 'calc(100% - 10rem)' }} 
+            />
+
             {processSteps.map((step, index) => (
               <div
                 key={step.number}
-                className="relative"
+                className="relative mb-8"
               >
-                <div className="grid gap-8 md:grid-cols-[auto_1fr] md:gap-12">
-                  {/* Step Number & Icon */}
-                  <div className="flex flex-col items-center gap-4">
-                    <div className={`flex h-16 w-16 items-center justify-center rounded-full ${step.color.accent} text-white text-xl font-bold shadow-md`}>
-                      {step.number}
+                {/* Subtle Card Container */}
+                <div className="group relative rounded-2xl border border-gray-200/60 bg-white/40 p-6 md:p-8 shadow-sm backdrop-blur-sm transition-all duration-300 hover:shadow-md hover:bg-white/60 hover:-translate-y-0.5">
+                  <div className="grid gap-8 md:grid-cols-[auto_1fr] md:gap-12">
+                    {/* Step Number & Icon */}
+                    <div className="flex flex-col items-center gap-4">
+                      <div className={`relative z-10 flex h-16 w-16 items-center justify-center rounded-full ${step.color.accent} text-white text-xl font-bold shadow-md transition-transform duration-300 group-hover:scale-110`}>
+                        {step.number}
+                      </div>
+                      <div className={`flex h-12 w-12 items-center justify-center rounded-full ${step.color.bg} ${step.color.icon} transition-all duration-300 group-hover:scale-105`}>
+                        {step.icon}
+                      </div>
                     </div>
-                    <div className={`flex h-12 w-12 items-center justify-center rounded-full ${step.color.bg} ${step.color.icon}`}>
-                      {step.icon}
-                    </div>
-                    {index < processSteps.length - 1 && (
-                      <div className={`hidden h-full w-0.5 ${step.color.border} md:block`} />
-                    )}
-                  </div>
 
-                  {/* Content */}
-                  <div className="flex-1 pb-12 md:pb-16">
-                    <div className="mb-4 flex flex-wrap items-center gap-3">
-                      <h2 className={`text-3xl font-display font-bold ${step.color.text} md:text-4xl`}>
-                        {step.title}
-                      </h2>
-                      <span className={`rounded-full ${step.color.bg} ${step.color.border} border px-4 py-1 text-sm font-semibold ${step.color.text}`}>
-                        {step.duration}
-                      </span>
-                    </div>
-                    <p className="mb-4 text-lg leading-relaxed text-gray-700">
-                      {step.description}
-                    </p>
-                    <p className={`mb-6 text-base font-medium italic ${step.color.text}`}>
-                      {step.highlight}
-                    </p>
-                    <div className={`rounded-2xl border ${step.color.border} ${step.color.bg} p-6`}>
-                      <p className={`mb-4 text-sm font-semibold uppercase tracking-wider ${step.color.text}`}>
-                        What You&apos;ll Get
+                    {/* Content */}
+                    <div className="flex-1">
+                      <div className="mb-4 flex flex-wrap items-center gap-3">
+                        <h2 className={`text-3xl font-display font-bold ${step.color.text} md:text-4xl`}>
+                          {step.title}
+                        </h2>
+                        <span className={`rounded-full ${step.color.bg} ${step.color.border} border px-4 py-1 text-sm font-semibold ${step.color.text}`}>
+                          {step.duration}
+                        </span>
+                      </div>
+                      <p className="mb-4 text-lg leading-relaxed text-gray-700">
+                        {step.description}
                       </p>
-                      <ul className="space-y-3">
-                        {step.deliverables.map((deliverable, idx) => (
-                          <li key={idx} className="flex items-start gap-3">
-                            <CheckCircle2 className={`mt-0.5 h-5 w-5 flex-shrink-0 ${step.color.icon}`} />
-                            <span className="text-gray-700">{deliverable}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      <p className={`mb-6 text-base font-medium italic ${step.color.text}`}>
+                        {step.highlight}
+                      </p>
+                      <div className={`rounded-2xl border ${step.color.border} ${step.color.bg} p-6 shadow-sm`}>
+                        <p className={`mb-4 text-sm font-semibold uppercase tracking-wider ${step.color.text}`}>
+                          What You&apos;ll Get
+                        </p>
+                        <ul className="space-y-3">
+                          {step.deliverables.map((deliverable, idx) => (
+                            <li key={idx} className="flex items-start gap-3">
+                              <CheckCircle2 className={`mt-0.5 h-5 w-5 flex-shrink-0 ${step.color.icon}`} />
+                              <span className="text-gray-700">{deliverable}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -313,4 +318,3 @@ export default function HowWeWorkPage() {
     </>
   );
 }
-
