@@ -15,6 +15,7 @@ export interface WorkProject {
   highlight?: string;
   gradient: [string, string, string?];
   logo?: string; // Path to client logo image
+  backgroundImage?: string; // Path to project background image
 }
 
 export const workProjects: WorkProject[] = [
@@ -32,6 +33,7 @@ export const workProjects: WorkProject[] = [
       'Turns visual storytelling into qualified leads.',
     gradient: ['#3F2B96', '#A8C0FF', '#F8E7F6'],
     logo: 'work/client-logos/NealyLogo.png',
+    backgroundImage: 'work/client-logos/nealy-project.png',
   },
   {
     id: 'second-line-psychiatry',
@@ -47,12 +49,13 @@ export const workProjects: WorkProject[] = [
       'Privacy-first design that honors New Orleans culture.',
     gradient: ['#0F172A', '#334155', '#60A5FA'],
     logo: 'work/client-logos/second-line.png',
+    backgroundImage: 'work/client-logos/second-line-project.png',
   },
   {
     id: 'nola-pool-solutions',
     title: 'NOLA Pool Solutions',
     client: 'NOLA Pool Solutions · Gulf South',
-    status: 'In Progress',
+    status: 'Live',
     description:
       'Shaping a premium maintenance and renovation experience tailored to the Gulf South climate, emphasizing trust, licensing, and rapid quoting.',
     url: 'https://nolapoolsolutions.com/',
@@ -62,6 +65,7 @@ export const workProjects: WorkProject[] = [
       'A lead funnel built for rapid quoting.',
     gradient: ['#0B2447', '#19376D', '#A5D7E8'],
     logo: 'work/client-logos/logo.png',
+    backgroundImage: 'work/client-logos/nps-project.png',
   },
   {
     id: 'bekky-community',
@@ -92,6 +96,7 @@ export const workProjects: WorkProject[] = [
       'The project that sparked Sproutflow.',
     gradient: ['#163323', '#22543D', '#5BA461'],
     logo: 'work/client-logos/b-logo-back-removed.png',
+    backgroundImage: 'work/client-logos/benhankins-project.png',
   },
 ];
 

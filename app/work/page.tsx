@@ -156,13 +156,27 @@ export default function WorkPage() {
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.4 }}
                     >
-                      {/* Gradient Background (using project gradient) */}
-                      <div 
-                        className="aspect-[4/3] relative"
-                        style={{
-                          backgroundImage: `linear-gradient(135deg, ${project.gradient.filter(Boolean).join(', ')})`,
-                        }}
-                      >
+                      {/* Background - Image or Gradient */}
+                      <div className="aspect-[4/3] relative">
+                        {/* Background Image (if available) */}
+                        {project.backgroundImage ? (
+                          <Image
+                            src={getImageUrl(project.backgroundImage)}
+                            alt={`${project.title} project preview`}
+                            fill
+                            className="object-cover"
+                            priority={index < 3}
+                          />
+                        ) : (
+                          /* Gradient Background (fallback) */
+                          <div 
+                            className="absolute inset-0"
+                            style={{
+                              backgroundImage: `linear-gradient(135deg, ${project.gradient.filter(Boolean).join(', ')})`,
+                            }}
+                          />
+                        )}
+                        
                         {/* Gradient Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
 
@@ -194,26 +208,6 @@ export default function WorkPage() {
                             {categoryIcon}
                           </div>
                         </motion.div>
-
-                        {/* Logo - Bottom Right (if available) */}
-                        {project.logo && (
-                          <motion.div 
-                            className="absolute bottom-4 right-4 z-10"
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: index * 0.1 + 0.4, type: "spring" }}
-                          >
-                            <div className="relative h-12 w-12 md:h-14 md:w-14 bg-white/20 backdrop-blur-sm rounded-lg p-2 flex items-center justify-center border border-white/30">
-                              <Image
-                                src={getImageUrl(project.logo)}
-                                alt={`${project.title} logo`}
-                                width={48}
-                                height={48}
-                                className="object-contain max-h-full max-w-full"
-                              />
-                            </div>
-                          </motion.div>
-                        )}
 
                         {/* Hover Overlay */}
                         <motion.div 
