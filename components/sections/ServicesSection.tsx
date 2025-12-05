@@ -21,8 +21,8 @@ const tierIcons: Record<string, React.ReactNode> = {
 // Image mapping for service tiers
 const tierImages: Record<string, { lifestyle: string; treeRing: string }> = {
   starter: {
-    lifestyle: getImageUrl('service/sprouted.jpg'),
-    treeRing: getImageUrl('tree-ring-1.jpg'),
+    lifestyle: getImageUrl('sprout-starter.jpg'),
+    treeRing: getImageUrl('tree-ring-split.jpg'),
   },
   foundation: {
     lifestyle: getImageUrl('service/growth.jpg'),
@@ -164,7 +164,7 @@ export default function ServicesSection() {
                     </div>
 
                     {/* Lifestyle Image Header */}
-                    <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200 z-10">
+                    <div className="relative h-48 bg-gradient-to-br from-gray-100 to-gray-200 z-10 flex-shrink-0">
                       <Image 
                         src={tier.lifestyleImage}
                         alt={tier.name}
@@ -175,30 +175,30 @@ export default function ServicesSection() {
                       {/* Gradient Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 
-                      {/* Tier Badge */}
-                      <div className="absolute bottom-4 left-4 right-20">
+                      {/* Price Badge - Top Right */}
+                      <div className="absolute top-4 right-4">
+                        <div className="bg-primary-600 text-white px-3 py-2 rounded-full font-bold shadow-lg text-xs md:text-sm whitespace-nowrap">
+                          {tier.priceRange}
+                        </div>
+                      </div>
+
+                      {/* Tier Badge - Bottom Left */}
+                      <div className="absolute bottom-4 left-4">
                         <div className="flex items-center gap-2 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full max-w-fit">
                           {tier.icon}
                           <span className="font-bold text-gray-900 whitespace-nowrap text-sm md:text-base">{tier.name}</span>
                         </div>
                       </div>
-
-                      {/* Price Badge */}
-                      <div className="absolute bottom-4 right-4">
-                        <div className="bg-primary-600 text-white px-3 py-2 rounded-full font-bold shadow-lg text-xs md:text-sm whitespace-nowrap">
-                          {tier.priceRange}
-                        </div>
-                      </div>
                     </div>
 
                     {/* Content */}
-                    <div className="relative p-6 md:p-8 z-10 flex-1 flex flex-col">
+                    <div className="relative p-6 md:p-8 z-10 flex-1 flex flex-col min-h-0">
                       <p className="text-primary-600 font-semibold mb-2 text-sm md:text-base">{tier.tagline}</p>
                       <p className="text-xs md:text-sm text-gray-500 mb-4 line-clamp-2">{tier.idealFor}</p>
                       <p className="text-sm md:text-base text-gray-600 mb-6 leading-relaxed line-clamp-3">{tier.description}</p>
 
                       {/* Highlights */}
-                      <div className="space-y-2 md:space-y-3 mb-6 md:mb-8 flex-1">
+                      <div className="space-y-2 md:space-y-3 mb-6 md:mb-8 flex-1 min-h-0">
                         {tier.highlights.slice(0, 3).map((highlight, idx) => (
                           <div key={idx} className="flex items-start gap-2 md:gap-3">
                             <div className="flex-shrink-0 w-4 h-4 md:w-5 md:h-5 rounded-full bg-primary-100 flex items-center justify-center mt-0.5">
@@ -329,99 +329,127 @@ export default function ServicesSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="bg-white rounded-2xl border border-gray-200 p-8 md:p-10 shadow-lg"
+          className="relative rounded-2xl border border-gray-200 p-8 md:p-10 shadow-lg overflow-hidden"
         >
-          <h3 className="text-2xl font-display font-bold text-gray-900 mb-2 text-center">
-            Add-ons
-          </h3>
-          <p className="text-gray-600 mb-8 text-center">
-            Enhance your website with these optional services
-          </p>
+          {/* Background with subtle gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-50/30 via-white to-primary-50/20 z-0" />
+          
+          {/* Content */}
+          <div className="relative z-10">
+            <h3 className="text-2xl font-display font-bold text-gray-900 mb-2 text-center">
+              Add-ons
+            </h3>
+            <p className="text-gray-600 mb-8 text-center">
+              Enhance your website with these optional services
+            </p>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            
-            {/* 1. Website Care Plans */}
-            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                <Check className="w-6 h-6 text-primary-600" />
+          {/* CATEGORY A: Website Enhancements */}
+          <div className="mb-12">
+            <h4 className="text-lg font-semibold text-primary-700 mb-6 text-center">
+              Website Enhancements
+            </h4>
+            <p className="text-sm text-gray-500 mb-6 text-center max-w-2xl mx-auto">
+              Services that extend or improve your website
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              
+              {/* Shopify Design Refresh */}
+              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                  <Package className="w-6 h-6 text-primary-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Shopify Design Refresh</h4>
+                  <p className="text-sm text-gray-600 mb-3">Quick design uplift for existing Shopify stores—template customization to match your brand</p>
+                  <p className="text-primary-600 font-bold text-lg">Starting at $800</p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Website Care Plans</h4>
-                <p className="text-sm text-gray-600 mb-3">True agency-managed hosting with proactive security and priority support</p>
-                <p className="text-primary-600 font-bold text-lg">From $200/mo</p>
+
+              {/* Professional Photography */}
+              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                  <Package className="w-6 h-6 text-primary-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Professional Photography</h4>
+                  <p className="text-sm text-gray-600 mb-3">High-quality photography packages for your website and brand materials</p>
+                  <p className="text-primary-600 font-bold text-lg">From $500</p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Essentials: $500 (2hrs, 20 photos) • Professional: $750 (3hrs, 40 photos)
+                  </p>
+                </div>
               </div>
+
+              {/* Content & Blog Setup */}
+              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                  <Package className="w-6 h-6 text-primary-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Content & Blog Setup</h4>
+                  <p className="text-sm text-gray-600 mb-3">SEO-optimized blog posts and content strategy</p>
+                  <p className="text-primary-600 font-bold text-lg">From $250/post</p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Single post: $250 • Full strategy: $600 (3 posts + roadmap)
+                  </p>
+                </div>
+              </div>
+
             </div>
+          </div>
 
-            {/* 2. Professional Photography */}
-            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                <Package className="w-6 h-6 text-primary-600" />
+          {/* CATEGORY B: Optimization & Strategy */}
+          <div>
+            <h4 className="text-lg font-semibold text-primary-700 mb-6 text-center">
+              Optimization & Strategy
+            </h4>
+            <p className="text-sm text-gray-500 mb-6 text-center max-w-2xl mx-auto">
+              Services that improve performance or ongoing support
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              
+              {/* SEO Strategy & Optimization */}
+              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                  <Check className="w-6 h-6 text-primary-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">SEO Strategy</h4>
+                  <p className="text-sm text-gray-600 mb-3">Strategic SEO optimization for existing websites—keyword research, content optimization, and performance tracking</p>
+                  <p className="text-primary-600 font-bold text-lg">$800 - $2,000</p>
+                  <p className="text-xs text-gray-500 mt-2">Perfect for sites that need a boost</p>
+                </div>
               </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Professional Photography</h4>
-                <p className="text-sm text-gray-600 mb-3">High-quality photography packages for your website and brand materials</p>
-                <p className="text-primary-600 font-bold text-lg">From $500</p>
-                <p className="text-xs text-gray-500 mt-2">
-                  Essentials: $500 (2hrs, 20 photos) • Professional: $750 (3hrs, 40 photos)
-                </p>
+
+              {/* Professional Copywriting */}
+              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                  <Check className="w-6 h-6 text-primary-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Professional Copywriting</h4>
+                  <p className="text-sm text-gray-600 mb-3">Transform your content into conversion-focused copy</p>
+                  <p className="text-primary-600 font-bold text-lg">$400 - $1,200</p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Small sites: $400-$600 • Established: $800-$1,000 • Complex: $1,200+
+                  </p>
+                </div>
               </div>
+
+              {/* Website Care Plans */}
+              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                  <Check className="w-6 h-6 text-primary-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Website Care Plans</h4>
+                  <p className="text-sm text-gray-600 mb-3">True agency-managed hosting with proactive security and priority support</p>
+                  <p className="text-primary-600 font-bold text-lg">From $200/mo</p>
+                </div>
+              </div>
+
             </div>
-
-            {/* 3. SEO Strategy & Optimization */}
-            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                <Check className="w-6 h-6 text-primary-600" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2 text-lg">SEO Strategy</h4>
-                <p className="text-sm text-gray-600 mb-3">Strategic SEO optimization for existing websites—keyword research, content optimization, and performance tracking</p>
-                <p className="text-primary-600 font-bold text-lg">$800 - $2,000</p>
-                <p className="text-xs text-gray-500 mt-2">Perfect for sites that need a boost</p>
-              </div>
-            </div>
-
-            {/* 4. Shopify Design Refresh */}
-            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                <Package className="w-6 h-6 text-primary-600" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Shopify Design Refresh</h4>
-                <p className="text-sm text-gray-600 mb-3">Quick design uplift for existing Shopify stores—template customization to match your brand</p>
-                <p className="text-primary-600 font-bold text-lg">Starting at $800</p>
-              </div>
-            </div>
-
-            {/* 5. Professional Copywriting */}
-            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                <Check className="w-6 h-6 text-primary-600" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Professional Copywriting</h4>
-                <p className="text-sm text-gray-600 mb-3">Transform your content into conversion-focused copy</p>
-                <p className="text-primary-600 font-bold text-lg">$400 - $1,200</p>
-                <p className="text-xs text-gray-500 mt-2">
-                  Small sites: $400-$600 • Established: $800-$1,000 • Complex: $1,200+
-                </p>
-              </div>
-            </div>
-
-            {/* 6. Content & Blog Setup */}
-            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                <Package className="w-6 h-6 text-primary-600" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2 text-lg">Content & Blog Setup</h4>
-                <p className="text-sm text-gray-600 mb-3">SEO-optimized blog posts and content strategy</p>
-                <p className="text-primary-600 font-bold text-lg">From $250/post</p>
-                <p className="text-xs text-gray-500 mt-2">
-                  Single post: $250 • Full strategy: $600 (3 posts + roadmap)
-                </p>
-              </div>
-            </div>
-
+          </div>
           </div>
         </motion.div>
 

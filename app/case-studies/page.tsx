@@ -7,8 +7,18 @@ import { Footer } from '@/components/layout/Footer';
 import { getImageUrl } from '@/lib/blob-images';
 
 export const metadata = {
-  title: 'Case Studies | Sproutflow Studio',
-  description: 'Real results for real businesses. See how we help small businesses compete with enterprise-level web presence.',
+  title: 'Case Studies | Web Design Success Stories | Sproutflow Studio New Orleans',
+  description: 'Real results for real businesses in New Orleans. See how we help small businesses compete with enterprise-level web presence. 300% increase in inquiries, 45% higher project value.',
+  keywords: [
+    'web design case studies New Orleans',
+    'website design success stories',
+    'small business web design results',
+    'New Orleans web design portfolio',
+    'web design testimonials'
+  ],
+  alternates: {
+    canonical: '/case-studies',
+  },
 };
 
 export default function CaseStudiesPage() {

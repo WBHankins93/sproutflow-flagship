@@ -71,6 +71,7 @@ export interface ServiceTier {
       timeline: "2-3 weeks",
       idealFor: "New businesses or rebrands needing validated presence",
       description: "Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations—a foundation for long-term growth, not just online presence.",
+      popular: true,
       
       businessOutcomes: [
         "Validated professional market presence",
@@ -114,11 +115,10 @@ export interface ServiceTier {
       id: "growth", 
       name: "Growth",
       tagline: "Competitive differentiation for market share",
-      priceRange: "$3,500 - $5,500", 
+      priceRange: "$3,500 - $5,500",
       timeline: "4-6 weeks",
       idealFor: "Established businesses ready to compete for market share",
       description: "Comprehensive digital presence that positions your business as the clear choice in your market. Custom design reflecting brand personality with conversion optimization and professional copywriting.",
-      popular: true,
       
       businessOutcomes: [
         "Clear market differentiation from competitors",

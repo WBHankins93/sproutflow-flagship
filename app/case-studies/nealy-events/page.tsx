@@ -7,8 +7,18 @@ import { Footer } from '@/components/layout/Footer';
 import { getImageUrl } from '@/lib/blob-images';
 
 export const metadata = {
-  title: 'Nealy Events Case Study | Sproutflow Studio',
-  description: '300% increase in qualified inquiries through strategic web design and luxury brand positioning.',
+  title: 'Nealy Events Case Study | 300% Increase in Inquiries | Sproutflow Studio',
+  description: 'See how Nealy Event Decor achieved a 300% increase in qualified inquiries and 45% higher project value through strategic web design and luxury brand positioning in Dallas, TX.',
+  keywords: [
+    'Nealy Events case study',
+    'web design success story',
+    'luxury event decor website',
+    'web design results',
+    'website conversion optimization'
+  ],
+  alternates: {
+    canonical: '/case-studies/nealy-events',
+  },
 };
 
 export default function NealyEventsCaseStudy() {

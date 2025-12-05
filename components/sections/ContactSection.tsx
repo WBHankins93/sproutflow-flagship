@@ -144,9 +144,20 @@ const ContactSection = () => {
                   onMouseLeave={() => setSelectedOption(null)}
                   className="group"
                 >
-                  <Card className={`${colors.bg} ${colors.border} border-2 h-full transition-all duration-300 ${
+                  <Card className={`${colors.bg} ${colors.border} border-2 h-full transition-all duration-300 relative overflow-hidden ${
                     isSelected ? 'shadow-nature scale-105' : 'hover:shadow-soft'
                   }`}>
+                    {/* Subtle background pattern */}
+                    <div className="absolute inset-0 opacity-5 pointer-events-none">
+                      <div 
+                        className="w-full h-full"
+                        style={{
+                          backgroundImage: `radial-gradient(circle, #5F755E 1px, transparent 1px)`,
+                          backgroundSize: '40px 40px'
+                        }}
+                      />
+                    </div>
+                    <div className="relative z-10">
                     
                     {/* Option Header */}
                     <div className="text-center mb-6">
@@ -198,6 +209,7 @@ const ContactSection = () => {
                       <span>{option.ctaText}</span>
                       <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                     </a>
+                    </div>
                   </Card>
                 </motion.div>
               );

@@ -6,9 +6,19 @@ import { Footer } from '@/components/layout/Footer';
 import { getImageUrl } from '@/lib/blob-images';
 
 export const metadata = {
-  title: 'How We Work | Sproutflow Studio',
+  title: 'How We Work | Our Process | Sproutflow Studio New Orleans',
   description:
-    'Our transparent, enterprise-grade process designed for small businesses. From discovery to launch and beyond.',
+    'Our transparent, enterprise-grade web design process for small businesses in New Orleans. From discovery to launch and beyond. See how we work with clients.',
+  keywords: [
+    'web design process New Orleans',
+    'website development process',
+    'how we work New Orleans',
+    'web design workflow',
+    'small business web design process'
+  ],
+  alternates: {
+    canonical: '/how-we-work',
+  },
 };
 
 const processSteps = [
