@@ -140,7 +140,7 @@ export default function ServicesSection() {
                 <motion.div
                   animate={{ rotateY: isFlipped ? 180 : 0 }}
                   transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
-                  style={{ transformStyle: 'preserve-3d' }}
+                  style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
                   className="relative"
                 >
                   
@@ -252,13 +252,13 @@ export default function ServicesSection() {
                       />
                     </div>
 
-                    {/* Counter-rotate inner content to fix text reversal */}
+                    {/* Inner content - counter-rotate to fix reversed text */}
                     <div 
-                      style={{ 
-                        transform: 'rotateY(180deg)',
-                        transformStyle: 'preserve-3d'
-                      }}
                       className="relative h-full p-6 md:p-8 flex flex-col text-white z-10"
+                      style={{
+                        transform: 'rotateY(180deg)',
+                        WebkitTransform: 'rotateY(180deg)'
+                      }}
                     >
                       {/* Header */}
                       <div className="flex items-center justify-between mb-4 md:mb-6 relative z-20">
