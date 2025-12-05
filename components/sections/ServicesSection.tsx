@@ -21,7 +21,7 @@ const tierIcons: Record<string, React.ReactNode> = {
 // Image mapping for service tiers
 const tierImages: Record<string, { lifestyle: string; treeRing: string }> = {
   starter: {
-    lifestyle: getImageUrl('sprout-starter.jpg'),
+    lifestyle: getImageUrl('sprout.jpg'),
     treeRing: getImageUrl('tree-ring-split.jpg'),
   },
   foundation: {
@@ -45,7 +45,7 @@ const serviceTiers = dataServiceTiers.map((tier: ServiceTier) => ({
   lifestyleImage: tierImages[tier.id]?.lifestyle || getImageUrl('service/growth.jpg'),
   treeRingImage: tierImages[tier.id]?.treeRing || getImageUrl('tree-ring-1.jpg'),
   highlights: tier.businessOutcomes.slice(0, 4), // Use first 4 business outcomes as highlights
-  buttonText: 'Learn More',
+    buttonText: 'Learn More',
   includes: [...tier.technicalFeatures, ...tier.strategicInclusions].slice(0, 6), // Combine and limit
   perfectFor: tier.idealFor,
 }));
@@ -336,12 +336,12 @@ export default function ServicesSection() {
           
           {/* Content */}
           <div className="relative z-10">
-            <h3 className="text-2xl font-display font-bold text-gray-900 mb-2 text-center">
-              Add-ons
-            </h3>
-            <p className="text-gray-600 mb-8 text-center">
-              Enhance your website with these optional services
-            </p>
+          <h3 className="text-2xl font-display font-bold text-gray-900 mb-2 text-center">
+            Add-ons
+          </h3>
+          <p className="text-gray-600 mb-8 text-center">
+            Enhance your website with these optional services
+          </p>
 
           {/* CATEGORY A: Website Enhancements */}
           <div className="mb-12">
@@ -351,7 +351,7 @@ export default function ServicesSection() {
             <p className="text-sm text-gray-500 mb-6 text-center max-w-2xl mx-auto">
               Services that extend or improve your website
             </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               
               {/* Shopify Design Refresh */}
               <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
@@ -366,8 +366,8 @@ export default function ServicesSection() {
               </div>
 
               {/* Professional Photography */}
-              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
                   <Package className="w-6 h-6 text-primary-600" />
                 </div>
                 <div>
@@ -384,8 +384,8 @@ export default function ServicesSection() {
               <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
                 <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
                   <Package className="w-6 h-6 text-primary-600" />
-                </div>
-                <div>
+              </div>
+              <div>
                   <h4 className="font-semibold text-gray-900 mb-2 text-lg">Content & Blog Setup</h4>
                   <p className="text-sm text-gray-600 mb-3">SEO-optimized blog posts and content strategy</p>
                   <p className="text-primary-600 font-bold text-lg">From $250/post</p>
@@ -409,21 +409,21 @@ export default function ServicesSection() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
               
               {/* SEO Strategy & Optimization */}
-              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                  <Check className="w-6 h-6 text-primary-600" />
-                </div>
-                <div>
+            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                <Check className="w-6 h-6 text-primary-600" />
+              </div>
+              <div>
                   <h4 className="font-semibold text-gray-900 mb-2 text-lg">SEO Strategy</h4>
                   <p className="text-sm text-gray-600 mb-3">Strategic SEO optimization for existing websites—keyword research, content optimization, and performance tracking</p>
-                  <p className="text-primary-600 font-bold text-lg">$800 - $2,000</p>
+                <p className="text-primary-600 font-bold text-lg">$800 - $2,000</p>
                   <p className="text-xs text-gray-500 mt-2">Perfect for sites that need a boost</p>
                 </div>
-              </div>
+            </div>
 
               {/* Professional Copywriting */}
-              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
+              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
                   <Check className="w-6 h-6 text-primary-600" />
                 </div>
                 <div>
@@ -440,16 +440,16 @@ export default function ServicesSection() {
               <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
                 <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
                   <Check className="w-6 h-6 text-primary-600" />
-                </div>
-                <div>
+              </div>
+              <div>
                   <h4 className="font-semibold text-gray-900 mb-2 text-lg">Website Care Plans</h4>
                   <p className="text-sm text-gray-600 mb-3">True agency-managed hosting with proactive security and priority support</p>
                   <p className="text-primary-600 font-bold text-lg">From $200/mo</p>
                 </div>
               </div>
 
+              </div>
             </div>
-          </div>
           </div>
         </motion.div>
 
