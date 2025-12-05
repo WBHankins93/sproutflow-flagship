@@ -7,7 +7,7 @@ import { resolve } from 'path';
 // Load environment variables from .env.local
 config({ path: resolve(process.cwd(), '.env.local') });
 
-import { put } from '@vercel/blob';
+import { put, del } from '@vercel/blob';
 import { readdir, readFile } from 'fs/promises';
 import { join } from 'path';
 
@@ -33,11 +33,15 @@ async function uploadImage(filePath: string, relativePath: string): Promise<Uplo
     const fileBuffer = await readFile(filePath);
     const blobPath = `images/${relativePath}`;
     
+    // Allow overwrite for logo files since they may be updated
+    const isLogoFile = relativePath.includes('logo/');
+    
     console.log(`📤 Uploading: ${blobPath}...`);
     
     const blob = await put(blobPath, fileBuffer, {
       access: 'public',
       token: BLOB_READ_WRITE_TOKEN,
+      ...(isLogoFile && { addRandomSuffix: false }),
     });
     
     console.log(`✅ Uploaded: ${blob.url}`);
@@ -49,6 +53,49 @@ async function uploadImage(filePath: string, relativePath: string): Promise<Uplo
     };
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    
+    // If it's a logo file and already exists, delete first then upload
+    if (errorMessage.includes('already exists') && relativePath.includes('logo/')) {
+      try {
+        const blobPath = `images/${relativePath}`;
+        const blobStoreUrl = process.env.NEXT_PUBLIC_BLOB_STORE_URL;
+        const fullBlobUrl = blobStoreUrl ? `${blobStoreUrl}/${blobPath}` : `https://kektfntppap5yky4.public.blob.vercel-storage.com/${blobPath}`;
+        
+        console.log(`🗑️  Deleting existing logo: ${blobPath}...`);
+        try {
+          await del(fullBlobUrl, { token: BLOB_READ_WRITE_TOKEN });
+          console.log(`✅ Deleted existing logo`);
+        } catch (deleteError) {
+          // If delete fails, continue anyway - might not exist or already deleted
+          console.log(`⚠️  Could not delete (may not exist): ${deleteError instanceof Error ? deleteError.message : 'Unknown error'}`);
+        }
+        
+        const fileBuffer = await readFile(filePath);
+        console.log(`🔄 Uploading new logo: ${blobPath}...`);
+        
+        const blob = await put(blobPath, fileBuffer, {
+          access: 'public',
+          token: BLOB_READ_WRITE_TOKEN,
+        });
+        
+        console.log(`✅ Uploaded: ${blob.url}`);
+        
+        return {
+          success: true,
+          path: blobPath,
+          url: blob.url,
+        };
+      } catch (retryError) {
+        const retryErrorMessage = retryError instanceof Error ? retryError.message : 'Unknown error';
+        console.error(`❌ Failed to overwrite ${relativePath}: ${retryErrorMessage}`);
+        return {
+          success: false,
+          path: relativePath,
+          error: retryErrorMessage,
+        };
+      }
+    }
+    
     console.error(`❌ Failed to upload ${relativePath}: ${errorMessage}`);
     
     return {
