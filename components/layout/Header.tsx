@@ -78,7 +78,7 @@ export default function Header() {
             }}
           >
             <Image 
-              src={getImageUrl('sproutflow-main-logo.png')} 
+              src={getImageUrl('logo/main-logo-Photoroom.png')} 
               alt="Sproutflow"
               width={48}  
               height={48}

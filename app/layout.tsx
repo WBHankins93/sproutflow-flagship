@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     description: "Professional web design and development for small businesses in New Orleans, LA. Custom websites from $850-$7,500+.",
     images: [
       {
-        url: `${siteUrl}/images/sproutflow-main-logo.png`,
+        url: `${siteUrl}/images/logo/main-logo-Photoroom.png`,
         width: 1200,
         height: 630,
         alt: "Sproutflow Studio - Professional Web Design",
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sproutflow Studio | Professional Web Design in New Orleans, LA",
     description: "Professional web design and development for small businesses in New Orleans, LA.",
-    images: [`${siteUrl}/images/sproutflow-main-logo.png`],
+    images: [`${siteUrl}/images/logo/main-logo-Photoroom.png`],
     creator: "@sproutflowstudio",
   },
   robots: {

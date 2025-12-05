@@ -9,8 +9,8 @@ const localBusinessSchema = {
   "name": "Sproutflow Studio",
   "alternateName": "Sproutflow",
   "url": siteUrl,
-  "logo": `${siteUrl}/images/sproutflow-main-logo.png`,
-  "image": `${siteUrl}/images/sproutflow-main-logo.png`,
+  "logo": `${siteUrl}/images/logo/main-logo-Photoroom.png`,
+  "image": `${siteUrl}/images/logo/main-logo-Photoroom.png`,
   "description": "Professional web design and development for small businesses in New Orleans, LA. Custom websites from $850-$7,500+.",
   "address": {
     "@type": "PostalAddress",
