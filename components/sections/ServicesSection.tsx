@@ -136,24 +136,20 @@ export default function ServicesSection() {
                   </div>
                 )}
 
-                {/* Flip Container */}
-                <motion.div
-                  animate={{ rotateY: isFlipped ? 180 : 0 }}
-                  transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
-                  style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+                {/* Flip Container - RESTRUCTURED */}
+                <div
                   className="relative"
+                  style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
                 >
                   
                   {/* FRONT OF CARD */}
-                  <div 
+                  <motion.div 
+                    animate={{ rotateY: isFlipped ? -180 : 0 }}
+                    transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
                     style={{ 
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
                       transformStyle: 'preserve-3d',
-                      opacity: isFlipped ? 0 : 1,
-                      zIndex: isFlipped ? 0 : 1,
-                      pointerEvents: isFlipped ? 'none' : 'auto',
-                      transition: 'opacity 0.6s ease-in-out'
                     }}
                     className={`relative bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl h-full flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
                   >
@@ -226,18 +222,21 @@ export default function ServicesSection() {
                         <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                       </button>
                     </div>
-                  </div>
+                  </motion.div>
 
-                  {/* BACK OF CARD */}
-                  <div 
+                  {/* BACK OF CARD - FIXED */}
+                  <motion.div 
+                    initial={{ rotateY: 180 }}
+                    animate={{ rotateY: isFlipped ? 0 : 180 }}
+                    transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
                     style={{ 
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
-                      transform: 'rotateY(180deg)',
                       transformStyle: 'preserve-3d',
-                      pointerEvents: isFlipped ? 'auto' : 'none'
+                      position: 'absolute',
+                      inset: 0,
                     }}
-                    className={`absolute inset-0 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-full flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : ''}`}
+                    className={`bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-full flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : ''}`}
                   >
                     {/* Tree Ring Background on Back */}
                     <div className="absolute inset-0 pointer-events-none opacity-10">
@@ -249,12 +248,9 @@ export default function ServicesSection() {
                       />
                     </div>
 
-                    {/* Inner content - flip horizontally to fix reversed text */}
+                    {/* Inner content - NO scaleX NEEDED */}
                     <div 
                       className="relative h-full p-6 md:p-8 flex flex-col text-white z-10"
-                      style={{
-                        transform: 'scaleX(-1)'
-                      }}
                     >
                       {/* Header */}
                       <div className="flex items-center justify-between mb-4 md:mb-6 relative z-20">
@@ -326,8 +322,8 @@ export default function ServicesSection() {
                         <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                       </a>
                     </div>
-                  </div>
-                </motion.div>
+                  </motion.div>
+                </div>
               </motion.div>
             );
           })}
