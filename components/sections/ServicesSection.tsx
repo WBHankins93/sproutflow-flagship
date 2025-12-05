@@ -244,7 +244,11 @@ export default function ServicesSection() {
                       />
                     </div>
 
-                    <div className="relative h-full p-6 md:p-8 flex flex-col text-white z-10">
+                    {/* Counter-rotate inner content to fix text reversal */}
+                    <div 
+                      style={{ transform: 'rotateY(180deg)' }}
+                      className="relative h-full p-6 md:p-8 flex flex-col text-white z-10"
+                    >
                       {/* Header */}
                       <div className="flex items-center justify-between mb-4 md:mb-6 relative z-20">
                         <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
@@ -263,11 +267,11 @@ export default function ServicesSection() {
                             e.stopPropagation();
                             setFlippedCard(null);
                           }}
-                          className="bg-white/20 hover:bg-white/30 p-2 rounded-full transition-colors cursor-pointer relative z-50"
+                          className="bg-white/20 hover:bg-white/30 active:bg-white/40 p-2 md:p-2 rounded-full transition-colors cursor-pointer relative z-50 flex-shrink-0"
                           style={{ pointerEvents: 'auto' }}
                           aria-label="Close card"
                         >
-                          <X className="w-5 h-5 pointer-events-none" />
+                          <X className="w-4 h-4 md:w-5 md:h-5 pointer-events-none text-white" />
                         </button>
                       </div>
 
