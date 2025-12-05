@@ -81,18 +81,18 @@ export default function Header() {
             <Image 
               src={getImageUrl('logo/logo-design-Photoroom.png')} 
               alt="Sproutflow Studio"
-              width={56}  
-              height={56}
-              className="h-14 w-auto"
+              width={80}  
+              height={80}
+              className="h-20 w-auto"
               priority
             />
             {/* Logo Words */}
             <Image 
               src={getImageUrl('logo/logo-words-Photoroom.png')} 
               alt="Sproutflow Studio"
-              width={160}  
-              height={56}
-              className="h-14 w-auto"
+              width={240}  
+              height={80}
+              className="h-20 w-auto"
               priority
             />
           </Link>
