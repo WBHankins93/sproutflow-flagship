@@ -77,17 +77,24 @@ export default function Header() {
               handleHomeLink(e);
             }}
           >
+            {/* Logo Design Icon */}
             <Image 
-              src={getImageUrl('logo/main-logo-Photoroom.png')} 
-              alt="Sproutflow"
-              width={48}  
-              height={48}
-              className="h-12 w-auto"
+              src={getImageUrl('logo/logo-design-Photoroom.png')} 
+              alt="Sproutflow Studio"
+              width={56}  
+              height={56}
+              className="h-14 w-auto"
               priority
             />
-            <span className="font-display text-2xl md:text-3xl font-semibold text-text-primary">
-              Sproutflow
-            </span>
+            {/* Logo Words */}
+            <Image 
+              src={getImageUrl('logo/logo-words-Photoroom.png')} 
+              alt="Sproutflow Studio"
+              width={160}  
+              height={56}
+              className="h-14 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}

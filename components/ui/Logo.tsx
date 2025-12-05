@@ -15,10 +15,10 @@ interface LogoProps {
 }
 
 const LOGO_SIZES = {
-  sm: { width: 32, height: 32, textSize: 'text-lg' },
-  md: { width: 48, height: 48, textSize: 'text-xl' },
-  lg: { width: 64, height: 64, textSize: 'text-2xl' },
-  xl: { width: 96, height: 96, textSize: 'text-3xl' }
+  sm: { designWidth: 40, designHeight: 40, wordsWidth: 120, wordsHeight: 40 },
+  md: { designWidth: 56, designHeight: 56, wordsWidth: 160, wordsHeight: 56 },
+  lg: { designWidth: 72, designHeight: 72, wordsWidth: 200, wordsHeight: 72 },
+  xl: { designWidth: 96, designHeight: 96, wordsWidth: 260, wordsHeight: 96 }
 } as const;
 
 export const SproutflowLogo: React.FC<LogoProps> = ({ 
@@ -28,64 +28,36 @@ export const SproutflowLogo: React.FC<LogoProps> = ({
   className,
   animated = false
 }) => {
-  const { width, height, textSize } = LOGO_SIZES[size];
-  
-  // Logo path based on variant (we'll export these from Canva)
-  const getLogoPath = () => {
-    switch (variant) {
-      default:
-        return getImageUrl('logo/main-logo-Photoroom.png'); // main-logo-Photoroom
-    }
-  };
-
-  const getTextColors = () => {
-    switch (variant) {
-      case 'light':
-        return { primary: 'text-white', secondary: 'text-white/80' };
-      case 'dark':
-        return { primary: 'text-neutral-900', secondary: 'text-neutral-600' };
-      case 'monochrome':
-        return { primary: 'text-neutral-900', secondary: 'text-neutral-600' };
-      default:
-        return { primary: 'text-primary-500', secondary: 'text-text-secondary' }; // Using existing color system
-    }
-  };
-
-  const textColors = getTextColors();
+  const { designWidth, designHeight, wordsWidth, wordsHeight } = LOGO_SIZES[size];
   
   const LogoContent = (
     <div className={cn(
       "flex items-center gap-3 transition-all duration-300",
       className
     )}>
-      {/* Logo Mark */}
+      {/* Logo Design Icon */}
       <div className="relative flex-shrink-0">
         <Image
-          src={getLogoPath()}
-          alt="Sproutflow Studio - Where Small Businesses Come Alive Online"
-          width={width}
-          height={height}
+          src={getImageUrl('logo/logo-design-Photoroom.png')}
+          alt="Sproutflow Studio"
+          width={designWidth}
+          height={designHeight}
           className="object-contain"
           priority
         />
       </div>
       
-      {/* Brand Text - Using existing typography system */}
+      {/* Logo Words - Replaces text */}
       {showText && (
-        <div className="flex flex-col">
-          <span className={cn(
-            "font-display font-semibold tracking-tight leading-none",
-            textSize,
-            textColors.primary
-          )}>
-            Sproutflow
-          </span>
-          <span className={cn(
-            "text-xs font-body font-medium tracking-wider uppercase leading-none mt-0.5",
-            textColors.secondary
-          )}>
-            Studio
-          </span>
+        <div className="relative flex-shrink-0">
+          <Image
+            src={getImageUrl('logo/logo-words-Photoroom.png')}
+            alt="Sproutflow Studio"
+            width={wordsWidth}
+            height={wordsHeight}
+            className="object-contain"
+            priority
+          />
         </div>
       )}
     </div>
