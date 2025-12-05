@@ -135,128 +135,171 @@ export default function WorkPage() {
               return (
                 <motion.div
                   key={project.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
+                  initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.1,
+                    type: "spring",
+                    stiffness: 100
+                  }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  whileHover={{ y: -8 }}
                   className="group"
                 >
-                  {/* Image Card with Hover Effect */}
-                  <div className="relative rounded-3xl overflow-hidden mb-6 shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer">
+                  {/* Unified Card Container */}
+                  <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 h-full flex flex-col">
                     
-                    {/* Gradient Background (using project gradient) */}
-                    <div 
-                      className="aspect-[4/3] relative"
-                      style={{
-                        backgroundImage: `linear-gradient(135deg, ${project.gradient.filter(Boolean).join(', ')})`,
-                      }}
+                    {/* Image Section */}
+                    <motion.div 
+                      className="relative overflow-hidden"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.4 }}
                     >
-                      {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                      {/* Gradient Background (using project gradient) */}
+                      <div 
+                        className="aspect-[4/3] relative"
+                        style={{
+                          backgroundImage: `linear-gradient(135deg, ${project.gradient.filter(Boolean).join(', ')})`,
+                        }}
+                      >
+                        {/* Gradient Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
 
-                      {/* Status Badge - Top Left */}
-                      <div className="absolute top-4 left-4 z-10">
-                        <span
-                          className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider ${statusStyles[project.status]}`}
+                        {/* Status Badge - Top Left */}
+                        <motion.div 
+                          className="absolute top-4 left-4 z-10"
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 + 0.2 }}
                         >
-                          {project.status}
-                        </span>
-                      </div>
-
-                      {/* Icon Badge - Bottom Left */}
-                      <div className="absolute bottom-4 left-4 z-10">
-                        <div 
-                          className="w-16 h-16 rounded-full flex items-center justify-center shadow-xl backdrop-blur-sm"
-                          style={{ backgroundColor: primaryColor }}
-                        >
-                          {categoryIcon}
-                        </div>
-                      </div>
-
-                      {/* Logo - Bottom Right (if available) */}
-                      {project.logo && (
-                        <div className="absolute bottom-4 right-4 z-10">
-                          <div className="relative h-12 w-12 md:h-14 md:w-14 bg-white/20 backdrop-blur-sm rounded-lg p-2 flex items-center justify-center border border-white/30">
-                            <Image
-                              src={getImageUrl(project.logo)}
-                              alt={`${project.title} logo`}
-                              width={48}
-                              height={48}
-                              className="object-contain max-h-full max-w-full"
-                            />
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Hover Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                        <div className="text-white">
-                          <p className="text-sm font-medium mb-1 opacity-90">{category}</p>
-                          <h3 className="text-2xl font-display font-bold mb-2">{project.title}</h3>
-                          {project.highlight && (
-                            <p className="text-sm opacity-80 line-clamp-2">{project.highlight}</p>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Content Card */}
-                  <div className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
-                    
-                    {/* Header */}
-                    <div className="mb-4">
-                      <h3 className="text-xl font-display font-bold text-gray-900 mb-1">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-gray-500">{project.client}</p>
-                    </div>
-
-                    {/* Description */}
-                    <p className="text-gray-600 mb-4 leading-relaxed text-sm">
-                      {project.description}
-                    </p>
-
-                    {/* Tags - Services */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.services.slice(0, 3).map((service) => (
-                        <span 
-                          key={service}
-                          className="text-xs px-3 py-1 bg-primary-50 text-primary-700 rounded-full font-medium"
-                        >
-                          {service}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Tech Stack */}
-                    <div className="mb-5 pb-5 border-b border-gray-100">
-                      <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
-                        Tech Stack
-                      </p>
-                      <div className="flex flex-wrap gap-2">
-                        {project.tech.slice(0, 4).map((tech) => (
                           <span
-                            key={tech}
-                            className="inline-flex items-center gap-1 rounded-full bg-gray-900 px-2.5 py-1 text-[0.65rem] font-medium text-white"
+                            className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider ${statusStyles[project.status]}`}
                           >
-                            {techIcons[tech] || <Code2 className="h-2.5 w-2.5" />}
-                            {tech}
+                            {project.status}
                           </span>
+                        </motion.div>
+
+                        {/* Icon Badge - Bottom Left */}
+                        <motion.div 
+                          className="absolute bottom-4 left-4 z-10"
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: index * 0.1 + 0.3, type: "spring" }}
+                        >
+                          <div 
+                            className="w-16 h-16 rounded-full flex items-center justify-center shadow-xl backdrop-blur-sm"
+                            style={{ backgroundColor: primaryColor }}
+                          >
+                            {categoryIcon}
+                          </div>
+                        </motion.div>
+
+                        {/* Logo - Bottom Right (if available) */}
+                        {project.logo && (
+                          <motion.div 
+                            className="absolute bottom-4 right-4 z-10"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: index * 0.1 + 0.4, type: "spring" }}
+                          >
+                            <div className="relative h-12 w-12 md:h-14 md:w-14 bg-white/20 backdrop-blur-sm rounded-lg p-2 flex items-center justify-center border border-white/30">
+                              <Image
+                                src={getImageUrl(project.logo)}
+                                alt={`${project.title} logo`}
+                                width={48}
+                                height={48}
+                                className="object-contain max-h-full max-w-full"
+                              />
+                            </div>
+                          </motion.div>
+                        )}
+
+                        {/* Hover Overlay */}
+                        <motion.div 
+                          className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex items-end p-6"
+                          initial={{ opacity: 0 }}
+                          whileHover={{ opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <div className="text-white">
+                            <p className="text-sm font-medium mb-1 opacity-90">{category}</p>
+                            <h3 className="text-2xl font-display font-bold mb-2">{project.title}</h3>
+                            {project.highlight && (
+                              <p className="text-sm opacity-80 line-clamp-2">{project.highlight}</p>
+                            )}
+                          </div>
+                        </motion.div>
+                      </div>
+                    </motion.div>
+
+                    {/* Content Section */}
+                    <div className="p-6 flex-1 flex flex-col">
+                      
+                      {/* Header with Title and Description */}
+                      <div className="mb-4">
+                        <h3 className="text-xl font-display font-bold text-gray-900 mb-2">
+                          {project.title}
+                        </h3>
+                        <p className="text-sm text-gray-500 mb-3">{project.client}</p>
+                        <p className="text-gray-600 leading-relaxed text-sm">
+                          {project.description}
+                        </p>
+                      </div>
+
+                      {/* Tags - Services */}
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.services.slice(0, 3).map((service, idx) => (
+                          <motion.span 
+                            key={service}
+                            className="text-xs px-3 py-1 bg-primary-50 text-primary-700 rounded-full font-medium"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: index * 0.1 + idx * 0.05 + 0.5 }}
+                          >
+                            {service}
+                          </motion.span>
                         ))}
                       </div>
-                    </div>
 
-                    {/* View Project Link */}
-                    <Link 
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full py-2.5 text-sm font-semibold text-primary-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-all flex items-center justify-center gap-2 group"
-                    >
-                      View Live Site
-                      <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </Link>
+                      {/* Tech Stack */}
+                      <div className="mb-5 pb-5 border-b border-gray-100 flex-1">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+                          Tech Stack
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.slice(0, 4).map((tech, idx) => (
+                            <motion.span
+                              key={tech}
+                              className="inline-flex items-center gap-1 rounded-full bg-gray-900 px-2.5 py-1 text-[0.65rem] font-medium text-white"
+                              initial={{ opacity: 0, y: 10 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              transition={{ delay: index * 0.1 + idx * 0.05 + 0.6 }}
+                            >
+                              {techIcons[tech] || <Code2 className="h-2.5 w-2.5" />}
+                              {tech}
+                            </motion.span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* View Project Link */}
+                      <motion.div
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="group"
+                      >
+                        <Link 
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-2.5 text-sm font-semibold text-primary-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-all flex items-center justify-center gap-2"
+                        >
+                          View Live Site
+                          <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </Link>
+                      </motion.div>
+                    </div>
                   </div>
                 </motion.div>
               );

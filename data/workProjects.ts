@@ -19,19 +19,19 @@ export interface WorkProject {
 
 export const workProjects: WorkProject[] = [
   {
-    id: 'personal-portfolio',
-    title: 'Ben Hankins Portfolio',
-    client: 'Personal Project · New Orleans, LA',
+    id: 'nealy-event-decor',
+    title: 'Nealy Event Decor',
+    client: 'Nealy Event Decor · Dallas, TX',
     status: 'Live',
     description:
-      'First end-to-end build that paired storytelling with motion to launch my personal brand online and experiment with modern UI patterns.',
-    url: 'https://benhankins.vercel.app/',
-    services: ['Creative Direction', 'Visual Design', 'Content Strategy'],
-    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+      'Designed a luxury fabrication showcase with editorial gallery layouts that highlight bespoke arches, bars, and premium rentals for high-end events.',
+    url: 'https://nealyevents.com/',
+    services: ['Creative Direction', 'CMS Setup', 'Conversion Strategy'],
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     highlight:
-      'The project that sparked Sproutflow.',
-    gradient: ['#163323', '#22543D', '#5BA461'],
-    logo: 'work/client-logos/b-logo-back-removed.png',
+      'Turns visual storytelling into qualified leads.',
+    gradient: ['#3F2B96', '#A8C0FF', '#F8E7F6'],
+    logo: 'work/client-logos/NealyLogo.png',
   },
   {
     id: 'second-line-psychiatry',
@@ -47,21 +47,6 @@ export const workProjects: WorkProject[] = [
       'Privacy-first design that honors New Orleans culture.',
     gradient: ['#0F172A', '#334155', '#60A5FA'],
     logo: 'work/client-logos/second-line.png',
-  },
-  {
-    id: 'nealy-event-decor',
-    title: 'Nealy Event Decor',
-    client: 'Nealy Event Decor · Dallas, TX',
-    status: 'Live',
-    description:
-      'Designed a luxury fabrication showcase with editorial gallery layouts that highlight bespoke arches, bars, and premium rentals for high-end events.',
-    url: 'https://nealyevents.com/',
-    services: ['Creative Direction', 'CMS Setup', 'Conversion Strategy'],
-    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
-    highlight:
-      'Turns visual storytelling into qualified leads.',
-    gradient: ['#3F2B96', '#A8C0FF', '#F8E7F6'],
-    logo: 'work/client-logos/NealyLogo.png',
   },
   {
     id: 'nola-pool-solutions',
@@ -92,6 +77,21 @@ export const workProjects: WorkProject[] = [
       'Reusable components that keep the purple personality.',
     gradient: ['#3B0CA2', '#7F2AEF', '#F58EE5'],
     logo: 'work/client-logos/bekky-no-background.png',
+  },
+  {
+    id: 'personal-portfolio',
+    title: 'Ben Hankins Portfolio',
+    client: 'Personal Project · New Orleans, LA',
+    status: 'Live',
+    description:
+      'An end-to-end build that paired storytelling with motion to launch a personal brand online and experiment with modern UI patterns.',
+    url: 'https://benhankins.vercel.app/',
+    services: ['Creative Direction', 'Visual Design', 'Content Strategy'],
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    highlight:
+      'The project that sparked Sproutflow.',
+    gradient: ['#163323', '#22543D', '#5BA461'],
+    logo: 'work/client-logos/b-logo-back-removed.png',
   },
 ];
 
