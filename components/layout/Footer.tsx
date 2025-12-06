@@ -50,9 +50,9 @@ export const Footer: React.FC = () => {
             <Image 
               src={getImageUrl('logo/main-logo-Photoroom.png')} 
               alt="Sproutflow Studio"
-              width={600}  
-              height={200}
-              className="h-auto w-full max-w-md mb-6"
+              width={550}  
+              height={183}
+              className="h-32 md:h-36 w-auto mb-6"
               priority
             />
             <BodyText className="text-white/80 mb-6 max-w-md">
