@@ -72,27 +72,18 @@ export default function Header() {
           {/* Logo + Brand */}
           <Link 
             href="/" 
-            className="flex items-center gap-3 hover:opacity-90 transition-opacity"
+            className="flex items-center hover:opacity-90 transition-opacity"
             onClick={(e) => {
               handleHomeLink(e);
             }}
           >
-            {/* Logo Design Icon */}
+            {/* Main Logo */}
             <Image 
-              src={getImageUrl('logo/logo-design-Photoroom.png')} 
+              src={getImageUrl('logo/main-logo-Photoroom.png')} 
               alt="Sproutflow Studio"
-              width={112}  
-              height={112}
-              className="h-28 w-auto"
-              priority
-            />
-            {/* Logo Words */}
-            <Image 
-              src={getImageUrl('logo/logo-words-Photoroom.png')} 
-              alt="Sproutflow Studio"
-              width={320}  
-              height={112}
-              className="h-28 w-auto"
+              width={300}  
+              height={100}
+              className="h-16 md:h-20 w-auto"
               priority
             />
           </Link>
