@@ -2,9 +2,10 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { Container, Heading, BodyText } from './StudioLayout';
-import { SproutflowLogo } from '../ui/Logo';
 import { Linkedin, Twitter, Instagram, Facebook } from 'lucide-react';
+import { getImageUrl } from '@/lib/blob-images';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -40,16 +41,19 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-neutral-800 text-white pt-4 pb-16">
+    <footer className="bg-neutral-800 text-white py-16">
       <Container>
         <div className="grid md:grid-cols-4 gap-8">
           
           {/* Company Info with Logo - Left aligned */}
-          <div className="md:col-span-2 -mt-2">
-            <SproutflowLogo 
-              variant="light"
-              size="lg"
-              className="mb-6"
+          <div className="md:col-span-2">
+            <Image 
+              src={getImageUrl('logo/main-logo-Photoroom.png')} 
+              alt="Sproutflow Studio"
+              width={400}  
+              height={133}
+              className="h-20 w-auto mb-6"
+              priority
             />
             <BodyText className="text-white/80 mb-6 max-w-md">
               Where small businesses come alive online. Enterprise psychology with 
