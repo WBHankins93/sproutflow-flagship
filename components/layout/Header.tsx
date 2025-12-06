@@ -21,10 +21,10 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks: NavLink[] = [
-    { label: 'Work', href: '/work', type: 'route' },
     { label: 'How We Work', href: '/how-we-work', type: 'route' },
     { label: 'Process', href: '#process', type: 'anchor' },
     { label: 'Services', href: '#services', type: 'anchor' },
+    { label: 'Portfolio', href: '/work', type: 'route' },
     { label: 'Case Studies', href: '/case-studies', type: 'route' },
     { label: 'About', href: '#about', type: 'anchor' },
   ];
@@ -81,9 +81,9 @@ export default function Header() {
             <Image 
               src={getImageUrl('logo/main-logo-Photoroom.png')} 
               alt="Sproutflow Studio"
-              width={500}  
-              height={167}
-              className="h-24 md:h-28 w-auto"
+              width={550}  
+              height={183}
+              className="h-28 md:h-32 w-auto"
               priority
             />
           </Link>

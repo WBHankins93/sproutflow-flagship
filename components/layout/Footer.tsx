@@ -46,13 +46,11 @@ export const Footer: React.FC = () => {
           
           {/* Company Info with Logo - Left aligned */}
           <div className="md:col-span-2">
-            <div className="flex justify-start">
-              <SproutflowLogo 
-                variant="light"
-                size="lg"
-                className="mb-6"
-              />
-            </div>
+            <SproutflowLogo 
+              variant="light"
+              size="lg"
+              className="mb-6"
+            />
             <BodyText className="text-white/80 mb-6 max-w-md">
               Where small businesses come alive online. Enterprise psychology with 
               small business heart – because every growth story deserves professional quality.
