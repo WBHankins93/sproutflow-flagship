@@ -15,10 +15,10 @@ interface LogoProps {
 }
 
 const LOGO_SIZES = {
-  sm: { designWidth: 360, designHeight: 360, wordsWidth: 1080, wordsHeight: 360 },
-  md: { designWidth: 480, designHeight: 480, wordsWidth: 1440, wordsHeight: 480 },
-  lg: { designWidth: 600, designHeight: 600, wordsWidth: 1800, wordsHeight: 600 },
-  xl: { designWidth: 720, designHeight: 720, wordsWidth: 2160, wordsHeight: 720 }
+  sm: { designWidth: 80, designHeight: 80, wordsWidth: 240, wordsHeight: 80 },
+  md: { designWidth: 112, designHeight: 112, wordsWidth: 320, wordsHeight: 112 },
+  lg: { designWidth: 144, designHeight: 144, wordsWidth: 400, wordsHeight: 144 },
+  xl: { designWidth: 192, designHeight: 192, wordsWidth: 520, wordsHeight: 192 }
 } as const;
 
 export const SproutflowLogo: React.FC<LogoProps> = ({ 
