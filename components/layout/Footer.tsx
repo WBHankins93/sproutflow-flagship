@@ -40,12 +40,12 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-neutral-800 text-white py-16">
+    <footer className="bg-neutral-800 text-white pt-4 pb-16">
       <Container>
         <div className="grid md:grid-cols-4 gap-8">
           
           {/* Company Info with Logo - Left aligned */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-2 -mt-2">
             <SproutflowLogo 
               variant="light"
               size="lg"
