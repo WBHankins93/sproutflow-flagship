@@ -2,7 +2,7 @@
 'use client';
 
 import React from 'react';
-import { Container, Heading, BodyText } from './StudioLayout';
+import { BodyText } from './StudioLayout';
 import { SproutflowLogo } from '../ui/Logo';
 import { Linkedin, Twitter, Instagram, Facebook } from 'lucide-react';
 
@@ -40,18 +40,18 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-neutral-800 text-white py-16">
-      <Container>
-        <div className="grid md:grid-cols-4 gap-8">
+    <footer className="bg-neutral-800 text-white py-12">
+      <div className="max-w-5xl mx-auto px-4 md:px-8">
+        <div className="grid md:grid-cols-[1.3fr_1fr_1fr] gap-8 md:gap-12">
           
-          {/* Company Info with Logo */}
-          <div className="md:col-span-2">
+          {/* Company Info with Logo - Slightly wider */}
+          <div>
             <SproutflowLogo 
               variant="light"
               size="lg"
-              className="mb-6"
+              className="mb-4"
             />
-            <BodyText className="text-white/80 mb-6 max-w-md">
+            <BodyText className="text-white/80 mb-4 text-sm">
               Where small businesses come alive online. Enterprise psychology with 
               small business heart – because every growth story deserves professional quality.
             </BodyText>
@@ -71,10 +71,10 @@ export const Footer: React.FC = () => {
             </div>
           </div>
           
-          {/* Quick Links */}
+          {/* Services */}
           <div>
             <h3 className="font-display text-lg font-semibold mb-4">Services</h3>
-            <ul className="space-y-2 text-white/80">
+            <ul className="space-y-2 text-white/80 text-sm">
               <li>
                 <a 
                   href="#services" 
@@ -105,10 +105,10 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
           
-          {/* Contact */}
+          {/* Let's Connect */}
           <div>
             <h3 className="font-display text-lg font-semibold mb-4">Let&apos;s Connect</h3>
-            <ul className="space-y-2 text-white/80">
+            <ul className="space-y-2 text-white/80 text-sm">
               <li>New Orleans, LA</li>
               <li>
                 <a 
@@ -135,7 +135,7 @@ export const Footer: React.FC = () => {
             &copy; {currentYear} Sproutflow Studio. All rights reserved. Growing together since 2025.
           </BodyText>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 };

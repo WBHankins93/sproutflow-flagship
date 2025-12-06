@@ -81,9 +81,9 @@ export default function Header() {
             <Image 
               src={getImageUrl('logo/main-logo-Photoroom.png')} 
               alt="Sproutflow Studio"
-              width={300}  
-              height={100}
-              className="h-16 md:h-20 w-auto"
+              width={400}  
+              height={133}
+              className="h-20 md:h-24 w-auto"
               priority
             />
           </Link>
