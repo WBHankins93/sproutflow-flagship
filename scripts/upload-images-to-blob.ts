@@ -54,8 +54,8 @@ async function uploadImage(filePath: string, relativePath: string): Promise<Uplo
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     
-    // If it's a logo file and already exists, delete first then upload
-    if (errorMessage.includes('already exists') && relativePath.includes('logo/')) {
+    // If it's a logo file or nealy-case-study and already exists, delete first then upload
+    if (errorMessage.includes('already exists') && (relativePath.includes('logo/') || relativePath.includes('nealy-case-study'))) {
       try {
         const blobPath = `images/${relativePath}`;
         const blobStoreUrl = process.env.NEXT_PUBLIC_BLOB_STORE_URL;
