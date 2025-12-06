@@ -28,7 +28,7 @@ export default function NealyEventsCaseStudy() {
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image 
-            src={getImageUrl('work/nealy-hero.jpg')}
+            src={getImageUrl('nealy-case-study.png')}
             alt="Nealy Events luxury fabrications"
             fill
             className="object-cover"

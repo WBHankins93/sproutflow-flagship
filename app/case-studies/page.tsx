@@ -68,7 +68,7 @@ export default function CaseStudiesPage() {
                 {/* Image */}
                 <div className="relative aspect-[4/3] md:aspect-auto">
                   <Image 
-                    src={getImageUrl('work/nealy-hero.jpg')}
+                    src={getImageUrl('work/client-logos/nealy-project.png')}
                     alt="Nealy Events website showcase"
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
