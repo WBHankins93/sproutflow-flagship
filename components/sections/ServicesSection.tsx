@@ -402,7 +402,6 @@ export default function ServicesSection() {
 
               </div>
             </div>
-          </div>
 
           {/* CATEGORY B: Website Enhancements */}
           <div>
@@ -445,6 +444,7 @@ export default function ServicesSection() {
               </div>
 
             </div>
+          </div>
           </div>
         </motion.div>
 
