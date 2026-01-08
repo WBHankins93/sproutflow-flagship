@@ -37,6 +37,10 @@ const techIcons: Record<string, React.ReactNode> = {
   'React': <Layers className="h-3 w-3" />,
   'Node.js': <Code2 className="h-3 w-3" />,
   'PostgreSQL': <Database className="h-3 w-3" />,
+  'Shopify Liquid': <FileCode className="h-3 w-3" />,
+  'JavaScript': <Code2 className="h-3 w-3" />,
+  'CSS': <Palette className="h-3 w-3" />,
+  'Shopify': <Globe className="h-3 w-3" />,
 };
 
 const statusStyles: Record<ProjectStatus, string> = {
