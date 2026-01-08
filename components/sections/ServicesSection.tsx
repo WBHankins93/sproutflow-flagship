@@ -338,8 +338,8 @@ export default function ServicesSection() {
           viewport={{ once: true }}
           className="relative rounded-2xl border border-gray-200 p-8 md:p-10 shadow-lg overflow-hidden"
         >
-          {/* Background with subtle gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-50/30 via-white to-primary-50/20 z-0" />
+          {/* Background with gradient matching site colors */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-accent-50/40 to-nature-50/50 z-0" />
           
           {/* Content */}
           <div className="relative z-10">
@@ -350,51 +350,8 @@ export default function ServicesSection() {
             Enhance your website with these optional services
           </p>
 
-          {/* CATEGORY A: Website Enhancements */}
+          {/* CATEGORY A: Optimization & Strategy */}
           <div className="mb-12">
-            <h4 className="text-lg font-semibold text-primary-700 mb-6 text-center">
-              Website Enhancements
-            </h4>
-            <p className="text-sm text-gray-500 mb-6 text-center max-w-2xl mx-auto">
-              Services that extend or improve your website
-            </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              
-              {/* Shopify Design Refresh */}
-              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                  <Package className="w-6 h-6 text-primary-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Shopify Design Refresh</h4>
-                  <p className="text-sm text-gray-600 mb-3">Quick design uplift for existing Shopify stores—template customization to match your brand</p>
-                  <p className="text-primary-600 font-bold text-lg">Starting at $1,000</p>
-                  <p className="text-xs text-gray-500 mt-2">
-                    Pricing varies based on scope and complexity
-                  </p>
-                </div>
-              </div>
-
-              {/* Content & Blog Setup */}
-              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                  <Package className="w-6 h-6 text-primary-600" />
-              </div>
-              <div>
-                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Content & Blog Setup</h4>
-                  <p className="text-sm text-gray-600 mb-3">SEO-optimized blog posts and content strategy</p>
-                  <p className="text-primary-600 font-bold text-lg">From $250/post</p>
-                  <p className="text-xs text-gray-500 mt-2">
-                    Single post: $250 • Full strategy: $600 (3 posts + roadmap)
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          {/* CATEGORY B: Optimization & Strategy */}
-          <div>
             <h4 className="text-lg font-semibold text-primary-700 mb-6 text-center">
               Optimization & Strategy
             </h4>
@@ -444,6 +401,49 @@ export default function ServicesSection() {
               </div>
 
               </div>
+            </div>
+          </div>
+
+          {/* CATEGORY B: Website Enhancements */}
+          <div>
+            <h4 className="text-lg font-semibold text-primary-700 mb-6 text-center">
+              Website Enhancements
+            </h4>
+            <p className="text-sm text-gray-500 mb-6 text-center max-w-2xl mx-auto">
+              Services that extend or improve your website
+            </p>
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto justify-items-center">
+              
+              {/* Shopify Design Refresh */}
+              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 w-full">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                  <Package className="w-6 h-6 text-primary-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Shopify Design Refresh</h4>
+                  <p className="text-sm text-gray-600 mb-3">Quick design uplift for existing Shopify stores—template customization to match your brand</p>
+                  <p className="text-primary-600 font-bold text-lg">Starting at $1,000</p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Pricing varies based on scope and complexity
+                  </p>
+                </div>
+              </div>
+
+              {/* Content & Blog Setup */}
+              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 w-full">
+                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
+                  <Package className="w-6 h-6 text-primary-600" />
+              </div>
+              <div>
+                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Content & Blog Setup</h4>
+                  <p className="text-sm text-gray-600 mb-3">SEO-optimized blog posts and content strategy</p>
+                  <p className="text-primary-600 font-bold text-lg">From $250/post</p>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Single post: $250 • Full strategy: $600 (3 posts + roadmap)
+                  </p>
+                </div>
+              </div>
+
             </div>
           </div>
         </motion.div>
