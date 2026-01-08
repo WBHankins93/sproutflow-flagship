@@ -76,7 +76,7 @@ export const workProjects: WorkProject[] = [
       'Designed an edgy, neon-drenched e-commerce experience for an EDM festival clothing brand that celebrates bold style and festival culture with a distinctive toxic green aesthetic.',
     url: 'https://bigbuttassociation.com/',
     services: ['Brand Identity', 'E-commerce Design', 'Visual Design'],
-    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+    tech: ['Shopify Liquid', 'JavaScript', 'CSS', 'Shopify'],
     highlight:
       'Where bass meets booty and style meets statement.',
     gradient: ['#00FF00', '#FFD700', '#9D4EDD'],
