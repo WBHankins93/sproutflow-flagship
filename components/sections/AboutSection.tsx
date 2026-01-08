@@ -128,36 +128,43 @@ const AboutSection: React.FC = () => {
             </motion.div>
 
           </div>
+        </div>
+      </Container>
 
-          {/* Simple CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center pt-12 pb-12 md:pb-16"
-          >
-            <Heading level={3} className="mb-3">
-              Ready to Level the Playing Field?
-            </Heading>
-            <BodyText color="muted" className="mb-8 max-w-xl mx-auto">
-              Let&apos;s give your business the professional presence it deserves
-            </BodyText>
-            
-            <Button
-              variant="primary"
-              size="lg"
-              href="#contact"
-              icon={<ArrowRight className="w-5 h-5" />}
+      {/* Full-Width Green CTA Section */}
+      <div className="w-full bg-primary-600 py-16 md:py-20">
+        <Container>
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="text-center"
             >
-              Start Your Transformation
-            </Button>
-          </motion.div>
-
-          {/* Centered Divider Line - reduced padding */}
-          <div className="flex justify-center py-8 md:py-12">
-            <div className="w-full max-w-md border-t border-nature-200"></div>
+              <Heading level={3} className="mb-3 text-white">
+                Ready to Level the Playing Field?
+              </Heading>
+              <BodyText className="mb-8 max-w-xl mx-auto text-white/90">
+                Let&apos;s give your business the professional presence it deserves
+              </BodyText>
+              
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 bg-white text-primary-600 hover:bg-white/90 px-10 py-4 text-lg font-medium rounded-full transition-all duration-200 hover:shadow-lg"
+              >
+                <ArrowRight className="w-5 h-5" />
+                Start Your Transformation
+              </a>
+            </motion.div>
           </div>
+        </Container>
+      </div>
+
+      {/* Centered Divider Line - reduced padding */}
+      <Container>
+        <div className="flex justify-center py-8 md:py-12">
+          <div className="w-full max-w-md border-t border-nature-200"></div>
         </div>
       </Container>
     </Section>
