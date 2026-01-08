@@ -28,8 +28,8 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/30"></div>
         </div>
 
-        {/* Hero Content - Centered */}
-        <div className="relative z-10 text-center px-4 md:px-8 max-w-6xl mx-auto">
+        {/* Hero Content - Centered with mobile top padding to account for header */}
+        <div className="relative z-10 text-center px-4 md:px-8 max-w-6xl mx-auto pt-32 md:pt-0">
           
           {/* Trust Badges - Floating above headline */}
           <motion.div 
