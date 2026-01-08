@@ -4,8 +4,10 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { Heart, Zap, Users, Target, ArrowRight } from 'lucide-react';
 import { Container, Section, Heading, BodyText, Button, Grid, Card } from '../layout/StudioLayout';
+import { getImageUrl } from '@/lib/blob-images';
 
 const AboutSection: React.FC = () => {
   return (
@@ -36,13 +38,16 @@ const AboutSection: React.FC = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              {/* Photo Placeholder */}
-              <div className="bg-gradient-to-br from-primary-100 to-nature-100 rounded-2xl aspect-square mb-6 flex items-center justify-center border-2 border-primary-200">
-                <div className="text-center p-8">
-                  {/* Temporary placeholder - replace with actual photo */}
-                  <div className="w-32 h-32 bg-primary-200 rounded-full mx-auto mb-4"></div>
-                  <p className="text-primary-600 font-medium">Your Photo Here</p>
-                </div>
+              {/* Photo */}
+              <div className="relative rounded-2xl overflow-hidden mb-6 aspect-square border-2 border-primary-200 shadow-lg">
+                <Image 
+                  src={getImageUrl('ben-photo.png')} 
+                  alt="Ben Hankins, Founder of Sproutflow Studio"
+                  fill
+                  className="object-cover"
+                  priority
+                  quality={90}
+                />
               </div>
 
               <Heading level={3} className="mb-3 text-2xl">
