@@ -368,21 +368,9 @@ export default function ServicesSection() {
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2 text-lg">Shopify Design Refresh</h4>
                   <p className="text-sm text-gray-600 mb-3">Quick design uplift for existing Shopify stores—template customization to match your brand</p>
-                  <p className="text-primary-600 font-bold text-lg">Starting at $800</p>
-                </div>
-              </div>
-
-              {/* Professional Photography */}
-            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                  <Package className="w-6 h-6 text-primary-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Professional Photography</h4>
-                  <p className="text-sm text-gray-600 mb-3">High-quality photography packages for your website and brand materials</p>
-                  <p className="text-primary-600 font-bold text-lg">From $500</p>
+                  <p className="text-primary-600 font-bold text-lg">Starting at $1,000</p>
                   <p className="text-xs text-gray-500 mt-2">
-                    Essentials: $500 (2hrs, 20 photos) • Professional: $750 (3hrs, 40 photos)
+                    Pricing varies based on scope and complexity
                   </p>
                 </div>
               </div>
