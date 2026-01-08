@@ -39,7 +39,7 @@ const AboutSection: React.FC = () => {
               viewport={{ once: true }}
             >
               {/* Photo */}
-              <div className="relative rounded-2xl overflow-hidden mb-6 aspect-square border-2 border-primary-200 shadow-lg">
+              <div className="relative w-full rounded-2xl overflow-hidden mb-6 aspect-square border-2 border-primary-200 shadow-lg bg-gray-100">
                 <Image 
                   src={getImageUrl('ben-photo.png')} 
                   alt="Ben Hankins, Founder of Sproutflow Studio"
@@ -47,6 +47,7 @@ const AboutSection: React.FC = () => {
                   className="object-cover"
                   priority
                   quality={90}
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
 
