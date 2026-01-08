@@ -338,8 +338,8 @@ export default function ServicesSection() {
           viewport={{ once: true }}
           className="relative rounded-2xl border border-gray-200 p-8 md:p-10 shadow-lg overflow-hidden"
         >
-          {/* Background with gradient matching site colors */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-accent-50/40 to-nature-50/50 z-0" />
+          {/* Background with more noticeable gradient matching site colors */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-100 via-accent-100/60 to-nature-100/70 z-0" />
           
           {/* Content */}
           <div className="relative z-10">

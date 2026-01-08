@@ -131,8 +131,8 @@ const AboutSection: React.FC = () => {
         </div>
       </Container>
 
-      {/* Full-Width Gradient CTA Section */}
-      <div className="w-full bg-gradient-to-br from-primary-50 via-accent-50/40 to-nature-50/50 py-16 md:py-20">
+      {/* Full-Width Green CTA Section */}
+      <div className="w-full bg-primary-600 py-16 md:py-20">
         <Container>
           <div className="max-w-4xl mx-auto">
             <motion.div
@@ -142,21 +142,20 @@ const AboutSection: React.FC = () => {
               viewport={{ once: true }}
               className="text-center"
             >
-              <Heading level={3} className="mb-3">
+              <Heading level={3} className="mb-3 text-white">
                 Ready to Level the Playing Field?
               </Heading>
-              <BodyText color="muted" className="mb-8 max-w-xl mx-auto">
+              <BodyText className="mb-8 max-w-xl mx-auto text-white/90">
                 Let&apos;s give your business the professional presence it deserves
               </BodyText>
               
-              <Button
-                variant="primary"
-                size="lg"
+              <a
                 href="#contact"
-                icon={<ArrowRight className="w-5 h-5" />}
+                className="inline-flex items-center gap-2 bg-white text-primary-600 hover:bg-white/90 px-10 py-4 text-lg font-medium rounded-full transition-all duration-200 hover:shadow-lg"
               >
+                <ArrowRight className="w-5 h-5" />
                 Start Your Transformation
-              </Button>
+              </a>
             </motion.div>
           </div>
         </Container>
