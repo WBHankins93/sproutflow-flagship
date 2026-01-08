@@ -52,6 +52,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
   'Event Decor': <CheckCircle2 className="w-8 h-8 text-white" />,
   'Pool Solutions': <TrendingUp className="w-8 h-8 text-white" />,
   'Community Platform': <Zap className="w-8 h-8 text-white" />,
+  'Festival Brand': <Zap className="w-8 h-8 text-white" />,
 };
 
 // Get category from client name
@@ -60,7 +61,7 @@ const getCategory = (client: string): string => {
   if (client.includes('Psychiatry')) return 'Psychiatry';
   if (client.includes('Event Decor')) return 'Event Decor';
   if (client.includes('Pool')) return 'Pool Solutions';
-  if (client.includes('Bekky')) return 'Community Platform';
+  if (client.includes('Big Butt Association') || client.includes('Bekky')) return 'Festival Brand';
   return 'Web Design';
 };
 
