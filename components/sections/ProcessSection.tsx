@@ -163,7 +163,7 @@ export default function ProcessSection() {
                 />
 
                 {/* Content Container - Relative to sit above gradient */}
-                <div className="relative z-10">
+                <div className="relative z-10 flex flex-col h-full">
                   {/* Header - Just Number Badge */}
                   <div className="flex items-center justify-center mb-4">
                     <div className={`w-10 h-10 ${step.color.accent} text-white rounded-full flex items-center justify-center font-bold text-lg shadow-md`}>
@@ -204,8 +204,8 @@ export default function ProcessSection() {
                     ))}
                   </ul>
 
-                  {/* Outcome */}
-                  <div className={`${step.color.accent} rounded-lg p-3 border-2 ${step.color.border} text-center`}>
+                  {/* Outcome - Pushed to bottom with mt-auto */}
+                  <div className={`mt-auto ${step.color.accent} rounded-lg p-3 border-2 ${step.color.border} text-center`}>
                     <p className="text-xs font-bold text-white">
                       {step.outcome}
                     </p>
