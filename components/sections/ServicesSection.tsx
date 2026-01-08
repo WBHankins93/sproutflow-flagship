@@ -420,8 +420,8 @@ export default function ServicesSection() {
                   <Package className="w-6 h-6 text-primary-600" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Shopify Design Refresh</h4>
-                  <p className="text-sm text-gray-600 mb-3">Quick design uplift for existing Shopify stores—template customization to match your brand</p>
+                  <h4 className="font-semibold text-black mb-2 text-lg">Shopify Design Refresh</h4>
+                  <p className="text-sm text-black mb-3">Quick design uplift for existing Shopify stores—template customization to match your brand</p>
                   <p className="text-primary-600 font-bold text-lg">Starting at $1,000</p>
                   <p className="text-xs text-gray-500 mt-2">
                     Pricing varies based on scope and complexity
@@ -435,8 +435,8 @@ export default function ServicesSection() {
                   <Package className="w-6 h-6 text-primary-600" />
               </div>
               <div>
-                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Content & Blog Setup</h4>
-                  <p className="text-sm text-gray-600 mb-3">SEO-optimized blog posts and content strategy</p>
+                  <h4 className="font-semibold text-black mb-2 text-lg">Content & Blog Setup</h4>
+                  <p className="text-sm text-black mb-3">SEO-optimized blog posts and content strategy</p>
                   <p className="text-primary-600 font-bold text-lg">From $250/post</p>
                   <p className="text-xs text-gray-500 mt-2">
                     Single post: $250 • Full strategy: $600 (3 posts + roadmap)
