@@ -11,7 +11,7 @@ const localBusinessSchema = {
   "url": siteUrl,
   "logo": `${siteUrl}/images/logo/main-logo-Photoroom.png`,
   "image": `${siteUrl}/images/logo/main-logo-Photoroom.png`,
-  "description": "Professional web design and development for small businesses in New Orleans, LA. Custom websites from $850-$7,500+.",
+  "description": "Professional web design and development for small businesses in New Orleans, LA.",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "New Orleans",

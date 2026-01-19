@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     default: "Sproutflow Studio | Professional Web Design in New Orleans, LA",
     template: "%s | Sproutflow Studio"
   },
-  description: "Professional web design and development for small businesses in New Orleans, LA. Custom websites from $850-$7,500+. Enterprise-level strategy with small business heart.",
+  description: "Professional web design and development for small businesses in New Orleans, LA. Enterprise-level strategy with small business heart.",
   keywords: [
     "web design New Orleans",
     "website design New Orleans",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Sproutflow Studio",
     title: "Sproutflow Studio | Professional Web Design in New Orleans, LA",
-    description: "Professional web design and development for small businesses in New Orleans, LA. Custom websites from $850-$7,500+.",
+    description: "Professional web design and development for small businesses in New Orleans, LA.",
     images: [
       {
         url: `${siteUrl}/images/logo/main-logo-Photoroom.png`,

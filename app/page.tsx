@@ -11,7 +11,7 @@ import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: 'Professional Web Design in New Orleans, LA | Custom Websites for Small Businesses',
-  description: 'Professional web design and development for small businesses in New Orleans, LA. Custom websites from $850-$7,500+. Enterprise-level strategy with small business heart. Local web design services.',
+  description: 'Professional web design and development for small businesses in New Orleans, LA. Enterprise-level strategy with small business heart. Local web design services.',
   keywords: [
     'web design New Orleans',
     'website design New Orleans',
