@@ -1,6 +1,3 @@
-/// <reference types="jest" />
-/// <reference types="@testing-library/jest-dom" />
-
 /**
  * HIGH PRIORITY TESTS: Contact Links Functionality
  * 

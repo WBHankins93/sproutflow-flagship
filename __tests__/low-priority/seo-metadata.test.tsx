@@ -1,6 +1,3 @@
-/// <reference types="jest" />
-/// <reference types="@testing-library/jest-dom" />
-
 /**
  * LOW PRIORITY TESTS: SEO & Metadata
  * 
@@ -244,7 +241,8 @@ describe('SEO Metadata - Robots.txt', () => {
     const robots = await import('@/app/robots')
     const robotsData = robots.default()
     
-    const allAgentsRule = robotsData.rules.find((rule: any) => rule.userAgent === '*')
+    const rules = Array.isArray(robotsData.rules) ? robotsData.rules : [robotsData.rules]
+    const allAgentsRule = rules.find((rule: any) => rule.userAgent === '*')
     expect(allAgentsRule).toBeDefined()
     expect(allAgentsRule?.allow).toBe('/')
   })
@@ -253,7 +251,8 @@ describe('SEO Metadata - Robots.txt', () => {
     const robots = await import('@/app/robots')
     const robotsData = robots.default()
     
-    const allAgentsRule = robotsData.rules.find((rule: any) => rule.userAgent === '*')
+    const rules = Array.isArray(robotsData.rules) ? robotsData.rules : [robotsData.rules]
+    const allAgentsRule = rules.find((rule: any) => rule.userAgent === '*')
     expect(allAgentsRule?.disallow).toBeDefined()
     expect(Array.isArray(allAgentsRule?.disallow)).toBe(true)
     expect(allAgentsRule?.disallow).toContain('/api/')

@@ -1,6 +1,3 @@
-/// <reference types="jest" />
-/// <reference types="@testing-library/jest-dom" />
-
 /**
  * MEDIUM PRIORITY TESTS: Component Props Validation
  * 

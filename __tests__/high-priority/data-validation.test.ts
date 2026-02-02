@@ -1,5 +1,3 @@
-/// <reference types="jest" />
-
 /**
  * HIGH PRIORITY TESTS: Data Validation
  * 

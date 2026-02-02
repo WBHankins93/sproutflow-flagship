@@ -36,6 +36,7 @@
       "**/*.tsx",
       ".next/types/**/*.ts",
       "jest.d.ts",
+      "testing-library.d.ts",
       "jest.setup.js"
     ],
     "exclude": ["node_modules"],
