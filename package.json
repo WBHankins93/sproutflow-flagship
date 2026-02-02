@@ -8,6 +8,9 @@
         "start": "next start",
         "lint": "next lint",
         "type-check": "tsc --noEmit",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage",
         "upload-images": "tsx scripts/upload-images-to-blob.ts",
         "get-blob-url": "tsx scripts/get-blob-store-url.ts"
     },
@@ -35,6 +38,12 @@
         "postcss": "^8.5.6",
         "tailwindcss": "^3.4.17",
         "tsx": "^4.20.6",
-        "typescript": "^5"
+        "typescript": "^5",
+        "@testing-library/react": "^14.1.2",
+        "@testing-library/jest-dom": "^6.1.5",
+        "@testing-library/user-event": "^14.5.1",
+        "jest": "^29.7.0",
+        "jest-environment-jsdom": "^29.7.0",
+        "@types/jest": "^29.5.11"
     }
 }

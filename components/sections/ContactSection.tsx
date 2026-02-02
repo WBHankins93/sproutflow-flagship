@@ -235,7 +235,7 @@ const ContactSection = () => {
             
             <div className="grid md:grid-cols-3 gap-6">
               <a 
-                href="mailto:hello@sproutflowstudio.com"
+                href="mailto:ben@sproutflow-studio.com"
                 className="text-center group"
               >
                 <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
@@ -251,7 +251,7 @@ const ContactSection = () => {
               </a>
 
               <a 
-                href="tel:+15045550000"
+                href="tel:+12283271082"
                 className="text-center group"
               >
                 <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">

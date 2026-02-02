@@ -116,7 +116,7 @@ export const Footer: React.FC = () => {
               <li>New Orleans, LA</li>
               <li>
                 <a 
-                  href="mailto:hello@sproutflowstudio.com"
+                  href="mailto:ben@sproutflow-studio.com"
                   className="hover:text-white transition-colors"
                 >
                   ben@sproutflow-studio.com
@@ -124,7 +124,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="tel:+15045550000"
+                  href="tel:+12283271082"
                   className="hover:text-white transition-colors"
                 >
                   (228) 327-1082 

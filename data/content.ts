@@ -36,7 +36,7 @@ export const servicesContent = {
     {
       id: 'foundation',
       name: "Foundation",
-      priceRange: "$1,800 - $2,400",
+      priceRange: "$2,000 - $2,800",
       timeline: "2-3 weeks",
       ideal: "New businesses or rebrands needing validated presence",
       description: "Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations—a foundation for long-term growth, not just online presence.",
@@ -79,7 +79,7 @@ export const servicesContent = {
     {
       id: 'market-leader',
       name: "Market Leader",
-      priceRange: "$8,000 - $18,000",
+      priceRange: "$7,500+",
       timeline: "8-12 weeks",
       ideal: "Businesses where digital presence drives significant revenue",
       description: "Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages. Deep strategic planning with advanced functionality for businesses where digital presence is a primary revenue driver.",
@@ -217,8 +217,8 @@ export const contactContent = {
   ],
   
   businessInfo: {
-    email: "hello@sproutflow.com",
-    phone: "+1 (555) 123-4567",
+    email: "ben@sproutflow-studio.com",
+    phone: "(228) 327-1082",
     address: "New Orleans, LA • Portland, OR",
     availability: "Monday - Friday, 9 AM - 6 PM CST"
   }
