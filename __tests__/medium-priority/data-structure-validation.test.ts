@@ -1,3 +1,5 @@
+/// <reference types="jest" />
+
 /**
  * MEDIUM PRIORITY TESTS: Data Structure Validation
  * 

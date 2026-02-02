@@ -1,3 +1,6 @@
+/// <reference types="jest" />
+/// <reference types="@testing-library/jest-dom" />
+
 /**
  * LOW PRIORITY TESTS: Accessibility
  * 
@@ -71,7 +74,7 @@ describe('Accessibility - Link Accessibility', () => {
     const { container } = render(<Footer />)
     const externalLinks = container.querySelectorAll('a[target="_blank"]')
     
-    externalLinks.forEach(link => {
+    externalLinks.forEach((link: Element) => {
       expect(link.getAttribute('rel')).toContain('noopener')
     })
   })
@@ -80,7 +83,7 @@ describe('Accessibility - Link Accessibility', () => {
     const { container } = render(<Header />)
     const links = container.querySelectorAll('a')
     
-    links.forEach(link => {
+    links.forEach((link: Element) => {
       const text = link.textContent?.trim()
       // Links should have meaningful text, not just icons
       if (text) {

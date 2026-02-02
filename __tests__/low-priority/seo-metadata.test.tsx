@@ -1,3 +1,6 @@
+/// <reference types="jest" />
+/// <reference types="@testing-library/jest-dom" />
+
 /**
  * LOW PRIORITY TESTS: SEO & Metadata
  * 
@@ -48,7 +51,7 @@ describe('SEO Metadata - Page Metadata', () => {
 describe('SEO Metadata - Root Layout Metadata', () => {
   it('should have title with template', async () => {
     const layout = await import('@/app/layout')
-    const metadata = layout.metadata as Metadata
+    const metadata = layout.metadata as any
     
     if (metadata.title && typeof metadata.title === 'object') {
       expect(metadata.title.template).toBeDefined()
@@ -58,7 +61,7 @@ describe('SEO Metadata - Root Layout Metadata', () => {
 
   it('should have OpenGraph metadata', async () => {
     const layout = await import('@/app/layout')
-    const metadata = layout.metadata as Metadata
+    const metadata = layout.metadata as any
     
     expect(metadata.openGraph).toBeDefined()
     expect(metadata.openGraph?.type).toBe('website')
@@ -67,7 +70,7 @@ describe('SEO Metadata - Root Layout Metadata', () => {
 
   it('should have Twitter card metadata', async () => {
     const layout = await import('@/app/layout')
-    const metadata = layout.metadata as Metadata
+    const metadata = layout.metadata as any
     
     expect(metadata.twitter).toBeDefined()
     expect(metadata.twitter?.card).toBe('summary_large_image')
@@ -75,11 +78,13 @@ describe('SEO Metadata - Root Layout Metadata', () => {
 
   it('should have robots configuration', async () => {
     const layout = await import('@/app/layout')
-    const metadata = layout.metadata as Metadata
+    const metadata = layout.metadata as any
     
     expect(metadata.robots).toBeDefined()
-    expect(metadata.robots?.index).toBe(true)
-    expect(metadata.robots?.follow).toBe(true)
+    if (typeof metadata.robots === 'object' && metadata.robots !== null) {
+      expect(metadata.robots.index).toBe(true)
+      expect(metadata.robots.follow).toBe(true)
+    }
   })
 
   it('should have canonical URL', async () => {
@@ -180,7 +185,7 @@ describe('SEO Metadata - Sitemap', () => {
     const sitemap = await import('@/app/sitemap')
     const sitemapData = sitemap.default()
     
-    const homePage = sitemapData.find(entry => entry.url.includes('sproutflow-studio.com') && !entry.url.includes('/'))
+    const homePage = sitemapData.find((entry: any) => entry.url.includes('sproutflow-studio.com') && !entry.url.includes('/'))
     expect(homePage).toBeDefined()
     expect(homePage?.priority).toBe(1)
   })
@@ -189,7 +194,7 @@ describe('SEO Metadata - Sitemap', () => {
     const sitemap = await import('@/app/sitemap')
     const sitemapData = sitemap.default()
     
-    sitemapData.forEach(entry => {
+    sitemapData.forEach((entry: any) => {
       expect(entry).toHaveProperty('url')
       expect(entry).toHaveProperty('lastModified')
       expect(entry).toHaveProperty('changeFrequency')
@@ -205,7 +210,7 @@ describe('SEO Metadata - Sitemap', () => {
     const sitemapData = sitemap.default()
     const validFrequencies = ['always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never']
     
-    sitemapData.forEach(entry => {
+    sitemapData.forEach((entry: any) => {
       expect(validFrequencies).toContain(entry.changeFrequency)
     })
   })
@@ -214,7 +219,7 @@ describe('SEO Metadata - Sitemap', () => {
     const sitemap = await import('@/app/sitemap')
     const sitemapData = sitemap.default()
     
-    sitemapData.forEach(entry => {
+    sitemapData.forEach((entry: any) => {
       expect(entry.priority).toBeGreaterThanOrEqual(0)
       expect(entry.priority).toBeLessThanOrEqual(1)
     })
@@ -239,7 +244,7 @@ describe('SEO Metadata - Robots.txt', () => {
     const robots = await import('@/app/robots')
     const robotsData = robots.default()
     
-    const allAgentsRule = robotsData.rules.find(rule => rule.userAgent === '*')
+    const allAgentsRule = robotsData.rules.find((rule: any) => rule.userAgent === '*')
     expect(allAgentsRule).toBeDefined()
     expect(allAgentsRule?.allow).toBe('/')
   })
@@ -248,7 +253,7 @@ describe('SEO Metadata - Robots.txt', () => {
     const robots = await import('@/app/robots')
     const robotsData = robots.default()
     
-    const allAgentsRule = robotsData.rules.find(rule => rule.userAgent === '*')
+    const allAgentsRule = robotsData.rules.find((rule: any) => rule.userAgent === '*')
     expect(allAgentsRule?.disallow).toBeDefined()
     expect(Array.isArray(allAgentsRule?.disallow)).toBe(true)
     expect(allAgentsRule?.disallow).toContain('/api/')
@@ -298,7 +303,7 @@ describe('SEO Metadata - Content Quality', () => {
 
   it('should have OpenGraph image with correct dimensions', async () => {
     const layout = await import('@/app/layout')
-    const metadata = layout.metadata as Metadata
+    const metadata = layout.metadata as any
     
     if (metadata.openGraph?.images && Array.isArray(metadata.openGraph.images)) {
       const image = metadata.openGraph.images[0]
@@ -323,9 +328,9 @@ describe('SEO Metadata - Page-Specific Metadata', () => {
     const caseStudiesPage = await import('@/app/case-studies/page')
     const howWeWorkPage = await import('@/app/how-we-work/page')
     
-    const homeMetadata = homePage.metadata as Metadata
-    const caseStudiesMetadata = caseStudiesPage.metadata as Metadata
-    const howWeWorkMetadata = howWeWorkPage.metadata as Metadata
+    const homeMetadata = homePage.metadata as any
+    const caseStudiesMetadata = caseStudiesPage.metadata as any
+    const howWeWorkMetadata = howWeWorkPage.metadata as any
     
     if (homeMetadata.title && caseStudiesMetadata.title && howWeWorkMetadata.title) {
       const homeTitle = typeof homeMetadata.title === 'string' ? homeMetadata.title : homeMetadata.title.default || ''

@@ -1,3 +1,5 @@
+/// <reference types="jest" />
+
 /**
  * HIGH PRIORITY TESTS: Image URL Generation
  * 
@@ -8,15 +10,22 @@
 import { getImageUrl, getBlobImageUrl } from '@/lib/blob-images'
 
 describe('Image URL Generation', () => {
-  const originalEnv = process.env
+  const originalEnv = { ...process.env }
 
   beforeEach(() => {
     jest.resetModules()
-    process.env = { ...originalEnv }
+    // Reset env vars
+    Object.keys(process.env).forEach(key => {
+      delete (process.env as any)[key]
+    })
+    Object.assign(process.env, originalEnv)
   })
 
   afterEach(() => {
-    process.env = originalEnv
+    Object.keys(process.env).forEach(key => {
+      delete (process.env as any)[key]
+    })
+    Object.assign(process.env, originalEnv)
   })
 
   describe('getImageUrl', () => {
@@ -39,16 +48,16 @@ describe('Image URL Generation', () => {
 
   describe('getBlobImageUrl - Development Mode', () => {
     it('should return local path in development when blob URL is not set', () => {
-      process.env.NODE_ENV = 'development'
-      delete process.env.NEXT_PUBLIC_BLOB_STORE_URL
+      ;(process.env as any).NODE_ENV = 'development'
+      delete (process.env as any).NEXT_PUBLIC_BLOB_STORE_URL
 
       const result = getBlobImageUrl('images/test.jpg')
       expect(result).toBe('/images/test.jpg')
     })
 
     it('should remove leading slash from paths', () => {
-      process.env.NODE_ENV = 'development'
-      delete process.env.NEXT_PUBLIC_BLOB_STORE_URL
+      ;(process.env as any).NODE_ENV = 'development'
+      delete (process.env as any).NEXT_PUBLIC_BLOB_STORE_URL
 
       const result = getBlobImageUrl('/images/test.jpg')
       expect(result).toBe('/images/test.jpg')
@@ -57,24 +66,24 @@ describe('Image URL Generation', () => {
 
   describe('getBlobImageUrl - Production Mode', () => {
     it('should use blob store URL when set', () => {
-      process.env.NODE_ENV = 'production'
-      process.env.NEXT_PUBLIC_BLOB_STORE_URL = 'https://blob.vercel-storage.com'
+      ;(process.env as any).NODE_ENV = 'production'
+      ;(process.env as any).NEXT_PUBLIC_BLOB_STORE_URL = 'https://blob.vercel-storage.com'
 
       const result = getBlobImageUrl('images/test.jpg')
       expect(result).toBe('https://blob.vercel-storage.com/images/test.jpg')
     })
 
     it('should handle blob URL with trailing slash', () => {
-      process.env.NODE_ENV = 'production'
-      process.env.NEXT_PUBLIC_BLOB_STORE_URL = 'https://blob.vercel-storage.com/'
+      ;(process.env as any).NODE_ENV = 'production'
+      ;(process.env as any).NEXT_PUBLIC_BLOB_STORE_URL = 'https://blob.vercel-storage.com/'
 
       const result = getBlobImageUrl('images/test.jpg')
       expect(result).toBe('https://blob.vercel-storage.com/images/test.jpg')
     })
 
     it('should fallback to local path if blob URL is not set', () => {
-      process.env.NODE_ENV = 'production'
-      delete process.env.NEXT_PUBLIC_BLOB_STORE_URL
+      ;(process.env as any).NODE_ENV = 'production'
+      delete (process.env as any).NEXT_PUBLIC_BLOB_STORE_URL
 
       const result = getBlobImageUrl('images/test.jpg')
       expect(result).toBe('/images/test.jpg')
@@ -83,8 +92,8 @@ describe('Image URL Generation', () => {
 
   describe('getBlobImageUrl - Development with Blob Override', () => {
     it('should use blob URL in development if explicitly set', () => {
-      process.env.NODE_ENV = 'development'
-      process.env.NEXT_PUBLIC_BLOB_STORE_URL = 'https://blob.vercel-storage.com'
+      ;(process.env as any).NODE_ENV = 'development'
+      ;(process.env as any).NEXT_PUBLIC_BLOB_STORE_URL = 'https://blob.vercel-storage.com'
 
       const result = getBlobImageUrl('images/test.jpg')
       expect(result).toBe('https://blob.vercel-storage.com/images/test.jpg')

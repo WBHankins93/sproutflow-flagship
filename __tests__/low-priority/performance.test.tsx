@@ -1,3 +1,6 @@
+/// <reference types="jest" />
+/// <reference types="@testing-library/jest-dom" />
+
 /**
  * LOW PRIORITY TESTS: Performance
  * 
@@ -39,7 +42,7 @@ describe('Performance - Resource Loading', () => {
     const images = container.querySelectorAll('img')
     
     // Images should have width/height for layout stability
-    images.forEach(img => {
+    images.forEach((img: Element) => {
       // Next.js Image component handles this, but we verify images exist
       expect(img).toBeInTheDocument()
     })
