@@ -57,7 +57,7 @@ export const servicesContent = {
     {
       id: 'growth',
       name: "Growth",
-      priceRange: "$3,800 - $5,500",
+      priceRange: "$3,500 - $5,500",
       timeline: "4-6 weeks",
       ideal: "Established businesses ready to compete for market share",
       description: "Comprehensive digital presence that positions your business as the clear choice in your market. Custom design reflecting brand personality with conversion optimization and professional copywriting.",

@@ -13,8 +13,16 @@ describe('Data Consistency - Service Tiers', () => {
     const servicesIds = new Set(serviceTiers.map(tier => tier.id))
     const contentIds = new Set(servicesContent.tiers.map(tier => tier.id))
     
-    expect(servicesIds.size).toBe(contentIds.size)
-    servicesIds.forEach(id => {
+    // Check that all content tiers exist in services.ts
+    // Note: services.ts may have additional tiers (like 'starter') not in content.ts
+    contentIds.forEach(id => {
+      expect(servicesIds.has(id)).toBe(true)
+    })
+    
+    // Check that common tiers match
+    const commonTiers = ['foundation', 'growth', 'market-leader']
+    commonTiers.forEach(id => {
+      expect(servicesIds.has(id)).toBe(true)
       expect(contentIds.has(id)).toBe(true)
     })
   })

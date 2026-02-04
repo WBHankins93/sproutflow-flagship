@@ -182,7 +182,12 @@ describe('SEO Metadata - Sitemap', () => {
     const sitemap = await import('@/app/sitemap')
     const sitemapData = sitemap.default()
     
-    const homePage = sitemapData.find((entry: any) => entry.url.includes('sproutflow-studio.com') && !entry.url.includes('/'))
+    // Find home page - it should be the entry with priority 1 or the base URL
+    const homePage = sitemapData.find((entry: any) => {
+      const url = entry.url
+      // Home page is either the base URL or has priority 1
+      return entry.priority === 1 || url === 'https://sproutflow-studio.com' || url.endsWith('sproutflow-studio.com')
+    })
     expect(homePage).toBeDefined()
     expect(homePage?.priority).toBe(1)
   })

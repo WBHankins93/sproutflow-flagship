@@ -52,11 +52,12 @@ describe('Component Interactions - Header Mobile Menu', () => {
     const menuButton = screen.getByLabelText('Toggle menu')
     fireEvent.click(menuButton)
     
-    // Check for navigation links
-    expect(screen.getByText('How We Work')).toBeInTheDocument()
-    expect(screen.getByText('Services')).toBeInTheDocument()
-    expect(screen.getByText('Portfolio')).toBeInTheDocument()
-    expect(screen.getByText('Case Studies')).toBeInTheDocument()
+    // Check for navigation links (use getAllByText since they appear in both desktop and mobile nav)
+    const howWeWorkLinks = screen.getAllByText('How We Work')
+    expect(howWeWorkLinks.length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Services').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Portfolio').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Case Studies').length).toBeGreaterThan(0)
   })
 })
 
@@ -64,11 +65,11 @@ describe('Component Interactions - ServicesSection Card Flips', () => {
   it('should render service tier cards', () => {
     render(<ServicesSection />)
     
-    // Check for service tier names
-    expect(screen.getByText('Starter')).toBeInTheDocument()
-    expect(screen.getByText('Foundation')).toBeInTheDocument()
-    expect(screen.getByText('Growth')).toBeInTheDocument()
-    expect(screen.getByText('Market Leader')).toBeInTheDocument()
+    // Check for service tier names (use getAllByText since names appear multiple times)
+    expect(screen.getAllByText('Starter').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Foundation').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Growth').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Market Leader').length).toBeGreaterThan(0)
   })
 
   it('should have "Learn More" buttons on service cards', () => {
@@ -81,9 +82,9 @@ describe('Component Interactions - ServicesSection Card Flips', () => {
   it('should display price ranges on service cards', () => {
     render(<ServicesSection />)
     
-    // Check for price ranges
-    expect(screen.getByText(/\$2,000 - \$2,800/)).toBeInTheDocument()
-    expect(screen.getByText(/\$7,500\+/)).toBeInTheDocument()
+    // Check for price ranges (use getAllByText since prices appear multiple times)
+    expect(screen.getAllByText(/\$2,000 - \$2,800/).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/\$7,500\+/).length).toBeGreaterThan(0)
   })
 
   it('should show "Most Popular" badge on Foundation tier', () => {
