@@ -34,7 +34,7 @@ export interface ServiceTier {
       ],
       
       technicalFeatures: [
-        "1-3 pages with clean, modern design",
+        "1-5 pages with clean, modern design",
         "Template-based with brand customization",
         "Mobile-responsive and performance optimized",
         "Contact form or scheduling integration",
@@ -58,7 +58,7 @@ export interface ServiceTier {
       
       limitations: [
         "Template-based foundation (professionally customized)",
-        "Limited to 1-3 pages",
+        "Limited to 1-5 pages",
         "Basic integrations only",
         "Limited availability (2-3 projects per month)"
       ]

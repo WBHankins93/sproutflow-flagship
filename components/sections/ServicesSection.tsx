@@ -2,10 +2,10 @@
 
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { Zap, Target, Rocket, Check, ArrowRight, X, Clock, Package, Sparkles } from 'lucide-react';
+import { Zap, Target, Rocket, Check, ArrowRight, X, Clock, Package, Sparkles, RotateCcw } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
 import { serviceTiers as dataServiceTiers } from '@/data/services';
 import type { ServiceTier } from '@/data/services';
@@ -53,9 +53,27 @@ const serviceTiers = dataServiceTiers.map((tier: ServiceTier) => ({
 
 export default function ServicesSection() {
   const [flippedCard, setFlippedCard] = useState<string | null>(null);
+  const [isHoverable, setIsHoverable] = useState(false);
+
+  useEffect(() => {
+    // Check if device supports hover (desktop)
+    setIsHoverable(window.matchMedia('(hover: hover)').matches);
+  }, []);
 
   const handleFlip = (tierId: string) => {
     setFlippedCard(flippedCard === tierId ? null : tierId);
+  };
+
+  const handleMouseEnter = (tierId: string) => {
+    if (isHoverable) {
+      setFlippedCard(tierId);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (isHoverable) {
+      setFlippedCard(null);
+    }
   };
 
   const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -141,6 +159,8 @@ export default function ServicesSection() {
                 <div
                   className="relative"
                   style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+                  onMouseEnter={() => handleMouseEnter(tier.id)}
+                  onMouseLeave={handleMouseLeave}
                 >
                   
                   {/* FRONT OF CARD */}
@@ -152,7 +172,7 @@ export default function ServicesSection() {
                       WebkitBackfaceVisibility: 'hidden',
                       transformStyle: 'preserve-3d',
                     }}
-                    className={`relative bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl h-full flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
+                    className={`relative bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl h-full flex flex-col transition-all duration-300 hover:scale-[1.02] ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
                   >
                     {/* Tree Ring Background */}
                     <div className="absolute inset-0 pointer-events-none opacity-10 z-0">
@@ -178,7 +198,7 @@ export default function ServicesSection() {
 
                       {/* Price Badge - Top Right */}
                       <div className="absolute top-4 right-4">
-                        <div className="bg-primary-600 text-white px-3 py-2 rounded-full font-bold shadow-lg text-xs md:text-sm whitespace-nowrap">
+                        <div className="bg-primary-600 text-white px-3 py-2 rounded-full font-bold shadow-lg text-xs md:text-sm whitespace-nowrap transition-transform duration-300 hover:scale-110">
                           {tier.priceRange}
                         </div>
                       </div>
@@ -187,16 +207,16 @@ export default function ServicesSection() {
                       <div className="absolute bottom-4 left-4">
                         <div className="flex items-center gap-2 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full max-w-fit">
                           {tier.icon}
-                          <span className="font-bold text-text-primary whitespace-nowrap text-sm md:text-base">{tier.name}</span>
+                          <span className="font-display font-bold text-text-primary whitespace-nowrap text-sm md:text-base">{tier.name}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Content */}
                     <div className="relative p-6 md:p-8 z-10 flex-1 flex flex-col min-h-0">
-                      <p className="text-primary-600 font-semibold mb-2 text-sm md:text-base">{tier.tagline}</p>
-                      <p className="text-xs md:text-sm text-text-muted mb-4 line-clamp-2">{tier.idealFor}</p>
-                      <p className="text-sm md:text-base text-text-secondary mb-6 leading-relaxed line-clamp-3">{tier.description}</p>
+                      <p className="font-display text-primary-600 font-semibold italic mb-2 text-sm md:text-base">{tier.tagline}</p>
+                      <p className="font-body text-xs md:text-sm text-text-muted mb-4 line-clamp-2">{tier.idealFor}</p>
+                      <p className="font-body text-sm md:text-base text-text-secondary mb-6 leading-relaxed line-clamp-3 font-medium">{tier.description}</p>
 
                       {/* Highlights */}
                       <div className="space-y-2 md:space-y-3 mb-6 md:mb-8 flex-1 min-h-0">
@@ -205,23 +225,32 @@ export default function ServicesSection() {
                             <div className="flex-shrink-0 w-4 h-4 md:w-5 md:h-5 rounded-full bg-primary-100 flex items-center justify-center mt-0.5">
                               <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary-600" />
                             </div>
-                            <span className="text-xs md:text-sm text-text-primary leading-relaxed">{highlight}</span>
+                            <span className="font-body text-xs md:text-sm text-text-primary leading-relaxed font-medium">{highlight}</span>
                           </div>
                         ))}
                       </div>
 
                       {/* CTA Button - FLIP TRIGGER */}
-                      <button 
-                        onClick={() => handleFlip(tier.id)}
-                        className={`w-full py-3 md:py-4 rounded-full font-semibold text-sm md:text-base transition-all duration-300 flex items-center justify-center gap-2 group mt-auto ${
-                          tier.popular 
-                            ? 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg hover:shadow-xl' 
-                            : 'bg-gray-100 text-text-primary hover:bg-gray-200'
-                        }`}
-                      >
-                        {tier.buttonText}
-                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-                      </button>
+                      <div className="mt-auto">
+                        <button 
+                          onClick={() => handleFlip(tier.id)}
+                          className={`w-full py-3 md:py-4 rounded-full font-semibold text-sm md:text-base transition-all duration-300 flex items-center justify-center gap-2 group ${
+                            tier.popular 
+                              ? 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg hover:shadow-xl hover:scale-105' 
+                              : 'bg-gray-100 text-text-primary hover:bg-gray-200 hover:scale-105'
+                          }`}
+                        >
+                          {tier.buttonText}
+                          <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+                        </button>
+                        {/* Mobile click indicator */}
+                        {!isHoverable && (
+                          <p className="text-xs text-text-muted text-center mt-2 flex items-center justify-center gap-1">
+                            <RotateCcw className="w-3 h-3" />
+                            Tap to flip
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </motion.div>
 
@@ -260,8 +289,8 @@ export default function ServicesSection() {
                             {tier.icon}
                           </div>
                           <div className="min-w-0">
-                            <h3 className="font-bold text-lg md:text-2xl truncate">{tier.name}</h3>
-                            <p className="text-white/80 text-xs md:text-sm truncate">{tier.priceRange}</p>
+                            <h3 className="font-display font-bold text-lg md:text-2xl truncate">{tier.name}</h3>
+                            <p className="font-body text-white/80 text-xs md:text-sm truncate">{tier.priceRange}</p>
                           </div>
                         </div>
                         <button
@@ -283,31 +312,31 @@ export default function ServicesSection() {
                       <div className="mb-4 md:mb-6">
                         <div className="flex items-center gap-2 mb-2">
                           <Target className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
-                          <h4 className="font-semibold text-sm md:text-base">Perfect For:</h4>
+                          <h4 className="font-display font-semibold text-sm md:text-base">Perfect For:</h4>
                         </div>
-                        <p className="text-white/90 text-xs md:text-sm">{tier.perfectFor}</p>
+                        <p className="font-body text-white/90 text-xs md:text-sm">{tier.perfectFor}</p>
                       </div>
 
                       {/* Timeline */}
                       <div className="mb-4 md:mb-6">
                         <div className="flex items-center gap-2 mb-2">
                           <Clock className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
-                          <h4 className="font-semibold text-sm md:text-base">Timeline:</h4>
+                          <h4 className="font-display font-semibold text-sm md:text-base">Timeline:</h4>
                         </div>
-                        <p className="text-white/90 text-xs md:text-sm">{tier.timeline}</p>
+                        <p className="font-body text-white/90 text-xs md:text-sm">{tier.timeline}</p>
                       </div>
 
                       {/* What's Included */}
-                      <div className="flex-1 min-h-0">
+                      <div className="flex-1 min-h-0 flex flex-col">
                         <div className="flex items-center gap-2 mb-2 md:mb-3">
                           <Package className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
-                          <h4 className="font-semibold text-sm md:text-base">What&apos;s Included:</h4>
+                          <h4 className="font-display font-semibold text-sm md:text-base">What&apos;s Included:</h4>
                         </div>
-                        <ul className="space-y-1.5 md:space-y-2 overflow-y-auto">
+                        <ul className="space-y-1.5 md:space-y-2 overflow-y-auto flex-1 min-h-0 pr-1 pb-2">
                           {tier.includes.map((item, idx) => (
                             <li key={idx} className="flex items-start gap-2">
                               <Check className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 mt-0.5" />
-                              <span className="text-white/90 text-xs md:text-sm">{item}</span>
+                              <span className="font-body text-white/90 text-xs md:text-sm">{item}</span>
                             </li>
                           ))}
                         </ul>
@@ -317,7 +346,7 @@ export default function ServicesSection() {
                       <a
                         href="#contact"
                         onClick={handleContactClick}
-                        className="mt-4 md:mt-6 w-full bg-white text-primary-700 py-3 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-white/90 transition-all duration-300 flex items-center justify-center gap-2 group"
+                        className="mt-4 md:mt-6 w-full bg-white text-primary-700 py-3 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-white/90 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg"
                       >
                         Get Started
                         <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
