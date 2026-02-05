@@ -90,6 +90,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
+  icons: {
+    icon: '/images/logo/logo-design-Photoroom.png',
+    shortcut: '/images/logo/logo-design-Photoroom.png',
+    apple: '/images/logo/logo-design-Photoroom.png',
+  },
 };
 
 export default function RootLayout({
