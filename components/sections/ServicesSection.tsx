@@ -165,10 +165,10 @@ export default function ServicesSection() {
                   
                   {/* FRONT OF CARD */}
                   <motion.div 
-                    animate={{ rotateY: isFlipped ? -180 : 0, scale: isFlipped ? 0.95 : 1 }}
+                    animate={{ rotateY: isFlipped ? -180 : 0 }}
                     transition={{ 
-                      duration: 0.4, 
-                      ease: [0.4, 0, 0.2, 1]
+                      duration: 0.3, 
+                      ease: "easeOut"
                     }}
                     style={{ 
                       backfaceVisibility: 'hidden',
@@ -261,10 +261,10 @@ export default function ServicesSection() {
                   {/* BACK OF CARD - FIXED */}
                   <motion.div 
                     initial={{ rotateY: 180 }}
-                    animate={{ rotateY: isFlipped ? 0 : 180, scale: isFlipped ? 1 : 0.95 }}
+                    animate={{ rotateY: isFlipped ? 0 : 180 }}
                     transition={{ 
-                      duration: 0.4, 
-                      ease: [0.4, 0, 0.2, 1]
+                      duration: 0.3, 
+                      ease: "easeOut"
                     }}
                     style={{ 
                       backfaceVisibility: 'hidden',
