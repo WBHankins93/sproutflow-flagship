@@ -3,7 +3,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight, ChevronDown, Award, Heart } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
 
 export default function HeroSection() {
@@ -39,11 +39,11 @@ export default function HeroSection() {
             className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8 md:mb-12"
           >
             <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20">
-              <span className="text-yellow-500 text-lg">⭐</span>
+              <Award className="w-4 h-4 text-accent-500" />
               <span className="font-semibold text-gray-800 text-sm md:text-base">Enterprise-Grade Design</span>
             </div>
             <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20">
-              <span className="text-green-600 text-lg">💡</span>
+              <Heart className="w-4 h-4 text-primary-600" />
               <span className="font-semibold text-gray-800 text-sm md:text-base">Small Business Focused</span>
             </div>
             {/* <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20">
