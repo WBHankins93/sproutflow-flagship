@@ -219,8 +219,7 @@ export default function ServicesSection() {
                     {/* Content */}
                     <div className="relative p-6 md:p-8 z-10 flex-1 flex flex-col min-h-0">
                       <p className="font-display text-primary-600 font-semibold italic mb-2 text-sm md:text-base">{tier.tagline}</p>
-                      <p className="font-body text-xs md:text-sm text-text-muted mb-4 line-clamp-2">{tier.idealFor}</p>
-                      <p className="font-body text-sm md:text-base text-text-secondary mb-6 leading-relaxed line-clamp-3 font-medium">{tier.description}</p>
+                      <p className="font-body text-xs md:text-sm text-text-muted mb-6 line-clamp-2">{tier.idealFor}</p>
 
                       {/* Highlights */}
                       <div className="space-y-2 md:space-y-3 mb-6 md:mb-8 flex-1 min-h-0">
@@ -314,6 +313,11 @@ export default function ServicesSection() {
                         >
                           <X className="w-3 h-3 md:w-4 md:h-4 pointer-events-none text-white" />
                         </button>
+                      </div>
+
+                      {/* Description */}
+                      <div className="mb-2 md:mb-3 flex-shrink-0">
+                        <p className="font-body text-white/90 text-[11px] md:text-xs leading-snug">{tier.description}</p>
                       </div>
 
                       {/* Perfect For */}
