@@ -94,7 +94,7 @@ export default function HeroSection() {
           >
             <a 
               href="#contact"
-              className="inline-flex items-center gap-3 bg-white text-gray-900 px-10 md:px-14 py-4 md:py-5 rounded-full text-lg md:text-xl font-bold shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 group"
+              className="inline-flex items-center gap-3 bg-white text-text-primary px-10 md:px-14 py-4 md:py-5 rounded-full text-lg md:text-xl font-bold shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 group"
             >
               Let&apos;s get started today!
               <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />

@@ -5,6 +5,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Sprout, Leaf, Flower, Sun } from 'lucide-react';
+import { Container } from '../layout/StudioLayout';
 
 const processSteps = [
   {
@@ -23,11 +24,11 @@ const processSteps = [
     ],
     outcome: 'Shared vision and strategic direction',
     color: {
-      bg: 'bg-green-50',
-      icon: 'text-green-500',
-      border: 'border-green-200',
-      accent: 'bg-green-500',
-      gradientColor: 'rgba(34, 197, 94, 0.12)' // Light green
+      bg: 'bg-primary-50',
+      icon: 'text-primary-500',
+      border: 'border-primary-200',
+      accent: 'bg-primary-500',
+      gradientColor: 'rgba(95, 117, 94, 0.12)' // Primary brand color
     }
   },
   {
@@ -46,11 +47,11 @@ const processSteps = [
     ],
     outcome: 'Professional design direction',
     color: {
-      bg: 'bg-green-100',
-      icon: 'text-green-600',
-      border: 'border-green-300',
-      accent: 'bg-green-600',
-      gradientColor: 'rgba(22, 163, 74, 0.15)' // Medium green
+      bg: 'bg-primary-100',
+      icon: 'text-primary-600',
+      border: 'border-primary-300',
+      accent: 'bg-primary-600',
+      gradientColor: 'rgba(95, 117, 94, 0.15)' // Primary brand color
     }
   },
   {
@@ -69,11 +70,11 @@ const processSteps = [
     ],
     outcome: 'Beautiful website ready to launch',
     color: {
-      bg: 'bg-green-100',
-      icon: 'text-green-700',
-      border: 'border-green-400',
-      accent: 'bg-green-700',
-      gradientColor: 'rgba(21, 128, 61, 0.18)' // Dark green
+      bg: 'bg-nature-100',
+      icon: 'text-nature-700',
+      border: 'border-nature-300',
+      accent: 'bg-nature-700',
+      gradientColor: 'rgba(66, 83, 60, 0.18)' // Nature/Feldgrau color
     }
   },
   {
@@ -92,11 +93,11 @@ const processSteps = [
     ],
     outcome: 'Thriving business with confidence',
     color: {
-      bg: 'bg-amber-50',
-      icon: 'text-amber-500',
-      border: 'border-amber-300',
-      accent: 'bg-amber-500',
-      gradientColor: 'rgba(245, 158, 11, 0.15)' // Bright amber/gold
+      bg: 'bg-accent-50',
+      icon: 'text-accent-500',
+      border: 'border-accent-300',
+      accent: 'bg-accent-500',
+      gradientColor: 'rgba(196, 154, 69, 0.15)' // Accent gold color
     }
   }
 ];
@@ -114,7 +115,7 @@ export default function ProcessSection() {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
+      <Container className="relative z-10">
         
         {/* Header */}
         <motion.div
@@ -130,12 +131,12 @@ export default function ProcessSection() {
             <div className="w-12 h-px bg-primary-400"></div>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-text-primary mb-4">
             How We{' '}
             <span className="text-primary-600">Grow Together</span>
           </h2>
           
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
             Four stages. Total transparency. You&apos;re involved every step.
           </p>
         </motion.div>
@@ -181,7 +182,7 @@ export default function ProcessSection() {
                     <h3 className={`text-2xl font-display font-bold mb-1 ${step.color.icon}`}>
                       {step.stage}
                     </h3>
-                    <p className="text-sm font-semibold text-gray-900 mb-1">
+                    <p className="text-sm font-semibold text-text-primary mb-1">
                       {step.title}
                     </p>
                     <p className={`text-xs ${step.color.icon} italic`}>
@@ -190,14 +191,14 @@ export default function ProcessSection() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm text-gray-600 mb-4 leading-relaxed text-center">
+                  <p className="text-sm text-text-secondary mb-4 leading-relaxed text-center">
                     {step.description}
                   </p>
 
                   {/* Highlights - Compact */}
                   <ul className="space-y-1.5 mb-4">
                     {step.highlights.map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-xs text-gray-700">
+                      <li key={idx} className="flex items-center gap-2 text-xs text-text-primary">
                         <div className={`w-1 h-1 rounded-full flex-shrink-0 ${step.color.accent}`}></div>
                         <span>{item}</span>
                       </li>
@@ -225,13 +226,13 @@ export default function ProcessSection() {
           viewport={{ once: true }}
           className="text-center bg-primary-50 rounded-xl p-6 border border-primary-200 mb-12"
         >
-          <p className="text-gray-700 leading-relaxed max-w-3xl mx-auto">
-            <strong className="text-gray-900">Here&apos;s our promise:</strong> You&apos;ll know exactly what&apos;s happening at every stage. 
+          <p className="text-text-secondary leading-relaxed max-w-3xl mx-auto">
+            <strong className="text-text-primary">Here&apos;s our promise:</strong> You&apos;ll know exactly what&apos;s happening at every stage. 
             Regular updates, clear timelines, and your feedback welcomed throughout.
           </p>
         </motion.div>
 
-      </div>
+      </Container>
     </section>
   );
 }

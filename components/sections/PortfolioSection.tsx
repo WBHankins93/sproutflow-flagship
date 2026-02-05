@@ -18,6 +18,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
+import { Container } from '../layout/StudioLayout';
 
 // Portfolio data structure
 const portfolioItems = [
@@ -119,7 +120,7 @@ export default function PortfolioSection() {
         <div className="text-primary-300 text-8xl">🌿</div>
       </motion.div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
+      <Container className="relative z-10">
         
         {/* Header */}
         <motion.div
@@ -135,13 +136,13 @@ export default function PortfolioSection() {
             <div className="w-12 h-px bg-primary-400"></div>
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-primary mb-6">
             Small Businesses,{' '}
             <span className="text-primary-600">Big Results</span>
           </h2>
           
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            These are <strong className="text-gray-900">demonstration portfolios</strong> showcasing 
+          <p className="text-xl md:text-2xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
+            These are <strong className="text-text-primary">demonstration portfolios</strong> showcasing 
             the kind of transformation we create for our clients.
           </p>
         </motion.div>
@@ -167,7 +168,7 @@ export default function PortfolioSection() {
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center p-8">
                       <div className="text-6xl mb-4">{item.icon}</div>
-                      <p className="text-gray-500 font-medium">
+                      <p className="text-text-muted font-medium">
                         Add image: {item.heroImage}
                       </p>
                     </div>
@@ -210,14 +211,14 @@ export default function PortfolioSection() {
                 
                 {/* Header */}
                 <div className="mb-4">
-                  <h3 className="text-xl font-display font-bold text-gray-900 mb-1">
+                  <h3 className="text-xl font-display font-bold text-text-primary mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-gray-500">{item.category}</p>
+                  <p className="text-sm text-text-muted">{item.category}</p>
                 </div>
 
                 {/* Description */}
-                <p className="text-gray-600 mb-4 leading-relaxed text-sm">
+                <p className="text-text-secondary mb-4 leading-relaxed text-sm">
                   {item.description}
                 </p>
 
@@ -245,7 +246,7 @@ export default function PortfolioSection() {
                       <div className="text-xl md:text-2xl font-bold text-primary-600 mb-0.5">
                         {result.value}
                       </div>
-                      <div className="text-xs text-gray-500 leading-tight">
+                      <div className="text-xs text-text-muted leading-tight">
                         {result.metric}
                       </div>
                     </div>
@@ -274,7 +275,7 @@ export default function PortfolioSection() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <p className="text-gray-600 mb-6 text-lg">
+          <p className="text-text-secondary mb-6 text-lg">
             Ready to see your business here?
           </p>
           <a 
@@ -286,7 +287,7 @@ export default function PortfolioSection() {
           </a>
         </motion.div>
 
-      </div>
+      </Container>
     </section>
   );
 }

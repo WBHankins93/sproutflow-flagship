@@ -15,8 +15,8 @@ export default {
       // ============================================
       fontFamily: {
         // These MUST match the CSS variables from layout.tsx
-        display: ['var(--font-heading)', 'sans-serif'],  // Manrope for headings
-        body: ['var(--font-body)', 'sans-serif'],        // Open Sans for body
+        display: ['var(--font-heading)', 'sans-serif'],  // DM Serif Display for headings
+        body: ['var(--font-body)', 'sans-serif'],        // DM Sans for body
         mono: ['var(--font-mono)', 'monospace'],         // Fira Code for code
       },
       

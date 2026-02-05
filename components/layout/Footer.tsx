@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-neutral-800 text-white py-12 md:py-16">
+    <footer className="bg-primary-900 text-white py-12 md:py-16">
       <Container>
         <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
           

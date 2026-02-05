@@ -9,6 +9,7 @@ import { Zap, Target, Rocket, Check, ArrowRight, X, Clock, Package, Sparkles } f
 import { getImageUrl } from '@/lib/blob-images';
 import { serviceTiers as dataServiceTiers } from '@/data/services';
 import type { ServiceTier } from '@/data/services';
+import { Container } from '../layout/StudioLayout';
 
 // Icon mapping for service tiers
 const tierIcons: Record<string, React.ReactNode> = {
@@ -85,7 +86,7 @@ export default function ServicesSection() {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
+      <Container className="relative z-10">
         
         {/* Header */}
         <motion.div
@@ -101,12 +102,12 @@ export default function ServicesSection() {
             <div className="w-12 h-px bg-primary-400"></div>
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-primary mb-6">
             Four Ways to{' '}
             <span className="text-primary-600">Work Together</span>
           </h2>
           
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
             Pick the tier that matches where you are. You can always grow into more.
           </p>
         </motion.div>
@@ -186,7 +187,7 @@ export default function ServicesSection() {
                       <div className="absolute bottom-4 left-4">
                         <div className="flex items-center gap-2 bg-white/95 backdrop-blur-sm px-3 py-1.5 rounded-full max-w-fit">
                           {tier.icon}
-                          <span className="font-bold text-gray-900 whitespace-nowrap text-sm md:text-base">{tier.name}</span>
+                          <span className="font-bold text-text-primary whitespace-nowrap text-sm md:text-base">{tier.name}</span>
                         </div>
                       </div>
                     </div>
@@ -194,8 +195,8 @@ export default function ServicesSection() {
                     {/* Content */}
                     <div className="relative p-6 md:p-8 z-10 flex-1 flex flex-col min-h-0">
                       <p className="text-primary-600 font-semibold mb-2 text-sm md:text-base">{tier.tagline}</p>
-                      <p className="text-xs md:text-sm text-gray-500 mb-4 line-clamp-2">{tier.idealFor}</p>
-                      <p className="text-sm md:text-base text-gray-600 mb-6 leading-relaxed line-clamp-3">{tier.description}</p>
+                      <p className="text-xs md:text-sm text-text-muted mb-4 line-clamp-2">{tier.idealFor}</p>
+                      <p className="text-sm md:text-base text-text-secondary mb-6 leading-relaxed line-clamp-3">{tier.description}</p>
 
                       {/* Highlights */}
                       <div className="space-y-2 md:space-y-3 mb-6 md:mb-8 flex-1 min-h-0">
@@ -204,7 +205,7 @@ export default function ServicesSection() {
                             <div className="flex-shrink-0 w-4 h-4 md:w-5 md:h-5 rounded-full bg-primary-100 flex items-center justify-center mt-0.5">
                               <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary-600" />
                             </div>
-                            <span className="text-xs md:text-sm text-gray-700 leading-relaxed">{highlight}</span>
+                            <span className="text-xs md:text-sm text-text-primary leading-relaxed">{highlight}</span>
                           </div>
                         ))}
                       </div>
@@ -215,7 +216,7 @@ export default function ServicesSection() {
                         className={`w-full py-3 md:py-4 rounded-full font-semibold text-sm md:text-base transition-all duration-300 flex items-center justify-center gap-2 group mt-auto ${
                           tier.popular 
                             ? 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg hover:shadow-xl' 
-                            : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                            : 'bg-gray-100 text-text-primary hover:bg-gray-200'
                         }`}
                       >
                         {tier.buttonText}
@@ -343,10 +344,10 @@ export default function ServicesSection() {
           
           {/* Content */}
           <div className="relative z-10">
-          <h3 className="text-2xl font-display font-bold text-gray-900 mb-2 text-center">
+          <h3 className="text-2xl font-display font-bold text-text-primary mb-2 text-center">
             Add-ons
           </h3>
-          <p className="text-gray-600 mb-8 text-center">
+          <p className="text-text-secondary mb-8 text-center">
             Enhance your website with these optional services
           </p>
 
@@ -355,7 +356,7 @@ export default function ServicesSection() {
             <h4 className="text-lg font-semibold text-primary-700 mb-6 text-center">
               Optimization & Strategy
             </h4>
-            <p className="text-sm text-gray-500 mb-6 text-center max-w-2xl mx-auto">
+            <p className="text-sm text-text-muted mb-6 text-center max-w-2xl mx-auto">
               Services that improve performance or ongoing support
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -366,10 +367,10 @@ export default function ServicesSection() {
                 <Check className="w-6 h-6 text-primary-600" />
               </div>
               <div>
-                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">SEO Strategy</h4>
-                  <p className="text-sm text-gray-600 mb-3">Strategic SEO optimization for existing websites—keyword research, content optimization, and performance tracking</p>
+                  <h4 className="font-semibold text-text-primary mb-2 text-lg">SEO Strategy</h4>
+                  <p className="text-sm text-text-secondary mb-3">Strategic SEO optimization for existing websites—keyword research, content optimization, and performance tracking</p>
                 <p className="text-primary-600 font-bold text-lg">$800 - $2,000</p>
-                  <p className="text-xs text-gray-500 mt-2">Perfect for sites that need a boost</p>
+                  <p className="text-xs text-text-muted mt-2">Perfect for sites that need a boost</p>
                 </div>
             </div>
 
@@ -379,10 +380,10 @@ export default function ServicesSection() {
                   <Check className="w-6 h-6 text-primary-600" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Professional Copywriting</h4>
-                  <p className="text-sm text-gray-600 mb-3">Transform your content into conversion-focused copy</p>
+                  <h4 className="font-semibold text-text-primary mb-2 text-lg">Professional Copywriting</h4>
+                  <p className="text-sm text-text-secondary mb-3">Transform your content into conversion-focused copy</p>
                   <p className="text-primary-600 font-bold text-lg">$400 - $1,200</p>
-                  <p className="text-xs text-gray-500 mt-2">
+                  <p className="text-xs text-text-muted mt-2">
                     Small sites: $400-$600 • Established: $800-$1,000 • Complex: $1,200+
                   </p>
                 </div>
@@ -394,8 +395,8 @@ export default function ServicesSection() {
                   <Check className="w-6 h-6 text-primary-600" />
               </div>
               <div>
-                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Website Care Plans</h4>
-                  <p className="text-sm text-gray-600 mb-3">True agency-managed hosting with proactive security and priority support</p>
+                  <h4 className="font-semibold text-text-primary mb-2 text-lg">Website Care Plans</h4>
+                  <p className="text-sm text-text-secondary mb-3">True agency-managed hosting with proactive security and priority support</p>
                   <p className="text-primary-600 font-bold text-lg">From $200/mo</p>
                 </div>
               </div>
@@ -408,7 +409,7 @@ export default function ServicesSection() {
             <h4 className="text-lg font-semibold text-primary-700 mb-6 text-center">
               Website Enhancements
             </h4>
-            <p className="text-sm text-gray-500 mb-6 text-center max-w-2xl mx-auto">
+            <p className="text-sm text-text-muted mb-6 text-center max-w-2xl mx-auto">
               Services that extend or improve your website
             </p>
           <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto justify-items-center">
@@ -419,10 +420,10 @@ export default function ServicesSection() {
                   <Package className="w-6 h-6 text-primary-600" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Shopify Design Refresh</h4>
-                  <p className="text-sm text-gray-600 mb-3">Quick design uplift for existing Shopify stores—template customization to match your brand</p>
+                  <h4 className="font-semibold text-text-primary mb-2 text-lg">Shopify Design Refresh</h4>
+                  <p className="text-sm text-text-secondary mb-3">Quick design uplift for existing Shopify stores—template customization to match your brand</p>
                   <p className="text-primary-600 font-bold text-lg">Starting at $1,000</p>
-                  <p className="text-xs text-gray-500 mt-2">
+                  <p className="text-xs text-text-muted mt-2">
                     Pricing varies based on scope and complexity
                   </p>
                 </div>
@@ -434,10 +435,10 @@ export default function ServicesSection() {
                   <Package className="w-6 h-6 text-primary-600" />
               </div>
               <div>
-                  <h4 className="font-semibold text-gray-900 mb-2 text-lg">Content & Blog Setup</h4>
-                  <p className="text-sm text-gray-600 mb-3">SEO-optimized blog posts and content strategy</p>
+                  <h4 className="font-semibold text-text-primary mb-2 text-lg">Content & Blog Setup</h4>
+                  <p className="text-sm text-text-secondary mb-3">SEO-optimized blog posts and content strategy</p>
                   <p className="text-primary-600 font-bold text-lg">From $250/post</p>
-                  <p className="text-xs text-gray-500 mt-2">
+                  <p className="text-xs text-text-muted mt-2">
                     Single post: $250 • Full strategy: $600 (3 posts + roadmap)
                   </p>
                 </div>
@@ -448,7 +449,7 @@ export default function ServicesSection() {
           </div>
         </motion.div>
 
-      </div>
+      </Container>
     </section>
   );
 }

@@ -54,7 +54,7 @@ export const Section: React.FC<SectionProps> = ({
   const backgroundClasses = {
     white: 'bg-white',
     nature: 'bg-nature-50',
-    secondary: 'bg-neutral-50'
+    secondary: 'bg-nature-50'
   };
 
   return (
@@ -125,7 +125,7 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <div className={`
-      bg-white border border-nature-200 rounded-md
+      bg-white border border-nature-200 rounded-2xl
       ${paddingClasses[padding]}
       ${hoverClasses}
       ${className}
@@ -216,7 +216,7 @@ export const Button: React.FC<ButtonProps> = ({
   className = '',
   icon
 }) => {
-  const baseClasses = 'inline-flex items-center gap-2 font-body font-medium rounded-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-medium';
+  const baseClasses = 'inline-flex items-center gap-2 font-body font-medium rounded-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-medium';
   
   const variantClasses = {
     primary: 'text-white bg-text-primary border-2 border-text-primary hover:bg-primary-500 hover:border-primary-500',
