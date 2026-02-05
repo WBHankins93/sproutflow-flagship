@@ -89,7 +89,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6 lg:gap-8">
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navLinks.map((link) => {
               const isActive = link.type === 'route' && pathname === link.href;
               return (
@@ -124,7 +124,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
@@ -141,7 +141,7 @@ export default function Header() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-nature-200 bg-white shadow-lg">
+        <div className="lg:hidden border-t border-nature-200 bg-white shadow-lg">
           <nav className="px-4 py-4 space-y-3">
             {navLinks.map((link) => (
               <a
