@@ -144,7 +144,7 @@ export default function ServicesSection() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 className="relative"
-                style={{ perspective: '1000px' }}
+                style={{ perspective: '1200px' }}
               >
                 {/* Popular Badge */}
                 {tier.popular && (
@@ -158,19 +158,23 @@ export default function ServicesSection() {
                 {/* Flip Container - RESTRUCTURED */}
                 <div
                   className="relative"
-                  style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
+                  style={{ transformStyle: 'preserve-3d', perspective: '1200px' }}
                   onMouseEnter={() => handleMouseEnter(tier.id)}
                   onMouseLeave={handleMouseLeave}
                 >
                   
                   {/* FRONT OF CARD */}
                   <motion.div 
-                    animate={{ rotateY: isFlipped ? -180 : 0 }}
-                    transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
+                    animate={{ rotateY: isFlipped ? -180 : 0, scale: isFlipped ? 0.95 : 1 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      ease: [0.4, 0, 0.2, 1]
+                    }}
                     style={{ 
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
                       transformStyle: 'preserve-3d',
+                      willChange: 'transform',
                     }}
                     className={`relative bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl h-full flex flex-col transition-all duration-300 hover:scale-[1.02] ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
                   >
@@ -257,14 +261,18 @@ export default function ServicesSection() {
                   {/* BACK OF CARD - FIXED */}
                   <motion.div 
                     initial={{ rotateY: 180 }}
-                    animate={{ rotateY: isFlipped ? 0 : 180 }}
-                    transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
+                    animate={{ rotateY: isFlipped ? 0 : 180, scale: isFlipped ? 1 : 0.95 }}
+                    transition={{ 
+                      duration: 0.4, 
+                      ease: [0.4, 0, 0.2, 1]
+                    }}
                     style={{ 
                       backfaceVisibility: 'hidden',
                       WebkitBackfaceVisibility: 'hidden',
                       transformStyle: 'preserve-3d',
                       position: 'absolute',
                       inset: 0,
+                      willChange: 'transform',
                     }}
                     className={`bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-full flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : ''}`}
                   >
@@ -280,17 +288,17 @@ export default function ServicesSection() {
 
                     {/* Inner content - NO scaleX NEEDED */}
                     <div 
-                      className="relative h-full p-6 md:p-8 flex flex-col text-white z-10"
+                      className="relative h-full p-4 md:p-5 flex flex-col text-white z-10 overflow-hidden"
                     >
                       {/* Header */}
-                      <div className="flex items-center justify-between mb-4 md:mb-6 relative z-20">
-                        <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
-                          <div className="bg-white/20 p-1.5 md:p-2 rounded-lg flex-shrink-0">
-                            {tier.icon}
+                      <div className="flex items-center justify-between mb-2 md:mb-3 relative z-20 flex-shrink-0">
+                        <div className="flex items-center gap-1.5 md:gap-2 min-w-0 flex-1">
+                          <div className="bg-white/20 p-1 md:p-1.5 rounded-lg flex-shrink-0">
+                            <div className="w-3 h-3 md:w-4 md:h-4">{tier.icon}</div>
                           </div>
                           <div className="min-w-0">
-                            <h3 className="font-display font-bold text-lg md:text-2xl truncate">{tier.name}</h3>
-                            <p className="font-body text-white/80 text-xs md:text-sm truncate">{tier.priceRange}</p>
+                            <h3 className="font-display font-bold text-xs md:text-base truncate">{tier.name}</h3>
+                            <p className="font-body text-white/80 text-[11px] md:text-xs truncate">{tier.priceRange}</p>
                           </div>
                         </div>
                         <button
@@ -300,43 +308,43 @@ export default function ServicesSection() {
                             e.stopPropagation();
                             setFlippedCard(null);
                           }}
-                          className="bg-white/20 hover:bg-white/30 active:bg-white/40 p-2 md:p-2 rounded-full transition-colors cursor-pointer relative z-50 flex-shrink-0"
+                          className="bg-white/20 hover:bg-white/30 active:bg-white/40 p-1.5 md:p-2 rounded-full transition-colors cursor-pointer relative z-50 flex-shrink-0"
                           style={{ pointerEvents: 'auto' }}
                           aria-label="Close card"
                         >
-                          <X className="w-4 h-4 md:w-5 md:h-5 pointer-events-none text-white" />
+                          <X className="w-3 h-3 md:w-4 md:h-4 pointer-events-none text-white" />
                         </button>
                       </div>
 
                       {/* Perfect For */}
-                      <div className="mb-4 md:mb-6">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Target className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
-                          <h4 className="font-display font-semibold text-sm md:text-base">Perfect For:</h4>
+                      <div className="mb-2 md:mb-2.5 flex-shrink-0">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <Target className="w-2.5 h-2.5 md:w-3 md:h-3 flex-shrink-0" />
+                          <h4 className="font-display font-semibold text-[11px] md:text-xs">Perfect For:</h4>
                         </div>
-                        <p className="font-body text-white/90 text-xs md:text-sm">{tier.perfectFor}</p>
+                        <p className="font-body text-white/90 text-[11px] md:text-xs leading-snug line-clamp-2">{tier.perfectFor}</p>
                       </div>
 
                       {/* Timeline */}
-                      <div className="mb-4 md:mb-6">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Clock className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
-                          <h4 className="font-display font-semibold text-sm md:text-base">Timeline:</h4>
+                      <div className="mb-2 md:mb-2.5 flex-shrink-0">
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <Clock className="w-2.5 h-2.5 md:w-3 md:h-3 flex-shrink-0" />
+                          <h4 className="font-display font-semibold text-[11px] md:text-xs">Timeline:</h4>
                         </div>
-                        <p className="font-body text-white/90 text-xs md:text-sm">{tier.timeline}</p>
+                        <p className="font-body text-white/90 text-[11px] md:text-xs leading-snug">{tier.timeline}</p>
                       </div>
 
                       {/* What's Included */}
-                      <div className="flex-1 min-h-0 flex flex-col">
-                        <div className="flex items-center gap-2 mb-2 md:mb-3">
-                          <Package className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0" />
-                          <h4 className="font-display font-semibold text-sm md:text-base">What&apos;s Included:</h4>
+                      <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
+                        <div className="flex items-center gap-1.5 mb-1 md:mb-1.5 flex-shrink-0">
+                          <Package className="w-2.5 h-2.5 md:w-3 md:h-3 flex-shrink-0" />
+                          <h4 className="font-display font-semibold text-[11px] md:text-xs">What&apos;s Included:</h4>
                         </div>
-                        <ul className="space-y-1.5 md:space-y-2 overflow-y-auto flex-1 min-h-0 pr-1 pb-2">
+                        <ul className="space-y-0.5 md:space-y-1 flex-1 min-h-0 overflow-hidden">
                           {tier.includes.map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-2">
-                              <Check className="w-3 h-3 md:w-4 md:h-4 flex-shrink-0 mt-0.5" />
-                              <span className="font-body text-white/90 text-xs md:text-sm">{item}</span>
+                            <li key={idx} className="flex items-start gap-1.5 min-w-0">
+                              <Check className="w-2.5 h-2.5 md:w-3 md:h-3 flex-shrink-0 mt-0.5" />
+                              <span className="font-body text-white/90 text-[11px] md:text-xs leading-snug flex-1">{item}</span>
                             </li>
                           ))}
                         </ul>
@@ -346,10 +354,10 @@ export default function ServicesSection() {
                       <a
                         href="#contact"
                         onClick={handleContactClick}
-                        className="mt-4 md:mt-6 w-full bg-white text-primary-700 py-3 md:py-4 rounded-full font-bold text-sm md:text-base hover:bg-white/90 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group shadow-lg"
+                        className="mt-2 md:mt-2.5 w-full bg-white text-primary-700 py-2 md:py-2.5 rounded-full font-bold text-[11px] md:text-xs hover:bg-white/90 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-1.5 group shadow-lg flex-shrink-0"
                       >
                         Get Started
-                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
                       </a>
                     </div>
                   </motion.div>
