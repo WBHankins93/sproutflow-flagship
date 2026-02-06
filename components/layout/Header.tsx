@@ -22,8 +22,6 @@ export default function Header() {
 
   const navLinks: NavLink[] = [
     { label: 'How We Work', href: '/how-we-work', type: 'route' },
-    { label: 'Process', href: '#process', type: 'anchor' },
-    { label: 'Services', href: '#services', type: 'anchor' },
     { label: 'Portfolio', href: '/work', type: 'route' },
     { label: 'Case Studies', href: '/case-studies', type: 'route' },
     { label: 'About', href: '#about', type: 'anchor' },
