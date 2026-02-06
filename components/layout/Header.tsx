@@ -83,7 +83,7 @@ export default function Header() {
               alt="Sproutflow Studio"
               width={550}  
               height={183}
-              className="h-28 md:h-32 w-auto"
+              className="h-12 md:h-14 w-auto"
               priority
             />
           </Link>
