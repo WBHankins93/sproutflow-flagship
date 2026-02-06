@@ -29,7 +29,7 @@ export default function CaseStudiesPage() {
           <div 
             className="h-full w-full bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: `url(${getImageUrl('case-studies/title-background.png')})`,
+              backgroundImage: `url(${getImageUrl('case-studies/bonsai.jpg')})`,
             }}
           />
           <div className="absolute inset-0 bg-white/60" />
