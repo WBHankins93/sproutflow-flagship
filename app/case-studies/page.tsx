@@ -26,6 +26,12 @@ export default function CaseStudiesPage() {
     <>
       <header className="relative border-b border-nature-200 bg-gradient-to-br from-white via-primary-50/40 to-primary-100/20">
         <div className="absolute inset-0 -z-10">
+          <div 
+            className="h-full w-full bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${getImageUrl('case-studies/title-background.png')})`,
+            }}
+          />
           <div className="absolute inset-0 bg-white/60" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,197,94,0.18),_transparent_55%)] opacity-40" />
         </div>
