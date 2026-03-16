@@ -205,6 +205,8 @@ interface ButtonProps {
   onClick?: () => void;
   className?: string;
   icon?: React.ReactNode;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -214,9 +216,11 @@ export const Button: React.FC<ButtonProps> = ({
   href,
   onClick,
   className = '',
-  icon
+  icon,
+  type = 'button',
+  disabled = false
 }) => {
-  const baseClasses = 'inline-flex items-center gap-2 font-body font-medium rounded-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-medium';
+  const baseClasses = 'inline-flex items-center gap-2 font-body font-medium rounded-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-medium disabled:opacity-60 disabled:pointer-events-none disabled:translate-y-0';
   
   const variantClasses = {
     primary: 'text-white bg-text-primary border-2 border-text-primary hover:bg-primary-500 hover:border-primary-500',
@@ -247,7 +251,7 @@ export const Button: React.FC<ButtonProps> = ({
   }
 
   return (
-    <button onClick={onClick} className={classes}>
+    <button type={type} onClick={onClick} className={classes} disabled={disabled}>
       {content}
     </button>
   );
