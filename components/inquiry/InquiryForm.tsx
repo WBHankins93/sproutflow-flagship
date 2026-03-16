@@ -72,7 +72,7 @@ function Label({
 }
 
 const inputBase =
-  'w-full rounded-lg border border-nature-200 bg-white px-4 py-3 text-body font-body text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors';
+  'w-full min-h-[44px] rounded-lg border border-nature-200 bg-white px-4 py-3 text-body font-body text-text-primary placeholder:text-text-muted focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 transition-colors';
 
 export function InquiryForm() {
   const [data, setData] = useState<InquiryFormData>(initialFormData);
@@ -151,7 +151,7 @@ export function InquiryForm() {
 
   if (submitted) {
     return (
-      <div className="mx-auto max-w-xl space-y-6 rounded-2xl border border-nature-200 bg-nature-50/50 p-8 text-center">
+      <div className="mx-auto max-w-xl space-y-6 rounded-2xl border border-nature-200 bg-nature-50/50 p-6 sm:p-8 text-center">
         <Heading level={2} className="text-primary-800">
           Thanks for reaching out.
         </Heading>
@@ -178,7 +178,7 @@ export function InquiryForm() {
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-10">
+    <form onSubmit={handleSubmit} className="space-y-10 pb-4">
       {/* 1. Contact Information */}
       <FormSection title="Contact Information">
         <div className="grid gap-6 sm:grid-cols-2">
@@ -462,12 +462,12 @@ export function InquiryForm() {
         </div>
       </FormSection>
 
-      <div className="pt-4">
+      <div className="pt-6 pb-16 md:pb-20">
         <Button
           type="submit"
           variant="primary"
           size="lg"
-          className="w-full sm:w-auto"
+          className="w-full sm:w-auto min-h-[48px] [touch-action:manipulation]"
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Sending…' : 'Submit inquiry'}
