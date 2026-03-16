@@ -74,7 +74,7 @@ const localBusinessSchema = {
         "itemOffered": {
           "@type": "Service",
           "name": "Market Leader Website Package",
-          "description": "Revenue-driving digital presence",
+          "description": "Revenue-generating digital platform for serious business growth",
           "priceRange": "$7,500+"
         }
       }

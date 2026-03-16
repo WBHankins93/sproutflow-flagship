@@ -47,10 +47,11 @@ export const servicesContent = {
         "Strategic architecture that scales with growth"
       ],
       technicalIncludes: [
-        "5-10 pages with strategic architecture",
-        "Semi-custom design (not pure templates)",
+        "Semi-custom design aligned with your business goals",
         "Mobile optimization and performance tuning",
         "SEO foundation with keyword research",
+        "Basic CMS: edit pages, images, blog posts, and metadata",
+        "Clear customer conversion pathways",
         "2-hour strategy session on business goals"
       ]
     },
@@ -69,9 +70,9 @@ export const servicesContent = {
         "Tracked revenue growth from digital presence"
       ],
       technicalIncludes: [
-        "10-20 pages with conversion optimization",
         "Fully custom responsive design",
-        "Professional copywriting for key pages (5-8 pages)",
+        "Conversion-focused user experience",
+        "Professional copywriting for key pages",
         "Comprehensive SEO strategy with competitive analysis",
         "Blog integration with content strategy"
       ]
@@ -81,21 +82,22 @@ export const servicesContent = {
       name: "Market Leader",
       priceRange: "$7,500+",
       timeline: "8-12 weeks",
-      ideal: "Businesses where digital presence drives significant revenue",
-      description: "Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages. Deep strategic planning with advanced functionality for businesses where digital presence is a primary revenue driver.",
+      ideal: "Companies where the website is a core growth engine driving measurable revenue",
+      description: "Fully custom digital platform designed to solve specific business challenges and generate measurable competitive advantage. This tier goes beyond website design to create a scalable digital foundation where marketing, customer acquisition, and operations work together to drive revenue.",
       businessOutcomes: [
-        "Technical competitive advantages in market",
-        "Streamlined business operations and efficiency",
-        "Platform designed for significant scaling",
-        "Advanced customer acquisition and retention systems",
-        "Measurable ROI from digital investment"
+        "Revenue-focused digital architecture built for measurable growth",
+        "Advanced conversion optimization across the full customer journey",
+        "Custom integrations connecting your website to core business systems",
+        "Scalable platform designed for long-term competitive advantage",
+        "Unified digital foundation where marketing and operations drive revenue"
       ],
       technicalIncludes: [
-        "20-50+ pages with advanced functionality",
+        "Revenue-focused digital architecture built around your business model",
         "Fully custom design and interactive elements",
-        "Full-site professional copywriting",
+        "Full content platform with CRM integrations, marketing automation, and multi-user workflows",
         "Advanced SEO with technical implementations",
-        "Custom integrations (CRM, email marketing, etc.)"
+        "Full-site professional copywriting",
+        "Custom integrations with your business systems (CRM, email marketing, operations)"
       ]
     }
   ],

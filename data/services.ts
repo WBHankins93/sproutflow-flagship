@@ -45,20 +45,20 @@ export interface ServiceTier {
       strategicInclusions: [
         "30-minute brand consultation",
         "Content guidance and structure",
-        "Basic CMS training",
         "Launch checklist"
       ],
-      
+
       deliverables: [
         "Live professional website",
         "Domain and hosting setup",
-        "Basic CMS training documentation",
+        "Launch documentation",
         "1 round of revisions"
       ],
-      
+
       limitations: [
         "Template-based foundation (professionally customized)",
         "Limited to 1-5 pages",
+        "No CMS — static or template-based site only",
         "Basic integrations only",
         "Limited availability (2-3 projects per month)"
       ]
@@ -81,11 +81,11 @@ export interface ServiceTier {
       ],
       
       technicalFeatures: [
-        "5-10 pages with strategic architecture",
-        "Semi-custom design (not pure templates)",
+        "Semi-custom design aligned with your business goals",
         "Mobile optimization and performance tuning",
         "SEO foundation with keyword research",
-        "CMS training and documentation"
+        "Basic CMS: edit pages, images, blog posts, and metadata",
+        "Clear customer conversion pathways"
       ],
       
       strategicInclusions: [
@@ -129,9 +129,9 @@ export interface ServiceTier {
       ],
       
       technicalFeatures: [
-        "10-20 pages with conversion optimization", 
         "Fully custom responsive design",
-        "Content management system integration",
+        "Conversion-focused user experience",
+        "Structured CMS with scalable content architecture and SEO controls",
         "Advanced performance optimization",
         "Comprehensive SEO strategy with competitive analysis",
         "Analytics and conversion tracking setup",
@@ -160,29 +160,29 @@ export interface ServiceTier {
     
     {
       id: "market-leader",
-      name: "Market Leader", 
-      tagline: "Revenue-driving digital presence",
+      name: "Market Leader",
+      tagline: "Custom digital platform designed to generate measurable revenue growth",
       priceRange: "$7,500+",
       timeline: "8-12 weeks",
-      idealFor: "Businesses where digital presence drives significant revenue",
-      description: "Fully custom solutions designed to solve specific business challenges and create measurable competitive advantages. Deep strategic planning with advanced functionality for businesses where digital presence is a primary revenue driver.",
-      
+      idealFor: "Companies where the website is a core growth engine driving measurable revenue",
+      description: "Fully custom digital platform designed to solve specific business challenges and generate measurable competitive advantage. This tier goes beyond website design to create a scalable digital foundation where marketing, customer acquisition, and operations work together to drive revenue.",
+
       businessOutcomes: [
-        "Technical competitive advantages in market",
-        "Streamlined business operations and efficiency",
-        "Platform designed for significant scaling",
-        "Advanced customer acquisition and retention systems",
-        "Measurable ROI from digital investment"
+        "Revenue-focused digital architecture built for measurable growth",
+        "Advanced conversion optimization across the full customer journey",
+        "Custom integrations connecting your website to core business systems",
+        "Scalable platform designed for long-term competitive advantage",
+        "Unified digital foundation where marketing and operations drive revenue"
       ],
-      
+
       technicalFeatures: [
-        "20-50+ pages with advanced functionality",
+        "Revenue-focused digital architecture built around your business model",
         "Fully custom design and interactive elements",
+        "Full content platform: advanced CMS with custom content models, CRM integrations, marketing automation, and multi-user publishing workflows",
         "Advanced SEO with technical implementations",
-        "Custom integrations (CRM, email marketing, etc.)",
-        "Customer portals and booking systems",
-        "E-commerce capabilities where applicable",
-        "Database integration and management",
+        "Custom integrations with your business systems (CRM, email marketing, operations)",
+        "Advanced analytics and revenue tracking",
+        "Customer portals, booking systems, and e-commerce where applicable",
         "API integrations and third-party connections"
       ],
       
@@ -418,10 +418,10 @@ export interface ServiceTier {
         marketLeader: "Advanced custom architecture"
       },
       {
-        feature: "Page Count", 
+        feature: "Typical Scope (internal scoping reference only)",
         foundation: "5-10 pages",
         growth: "10-20 pages",
-        marketLeader: "20-50+ pages"
+        marketLeader: "20+ pages, scales with business needs"
       },
       {
         feature: "Timeline",
@@ -431,9 +431,9 @@ export interface ServiceTier {
       },
       {
         feature: "Content Management",
-        foundation: "Basic CMS + training (headless CMS like Sanity or Contentful for easy content updates)",
-        growth: "Full CMS integration + training (headless CMS for pages, blog, and content management)", 
-        marketLeader: "Advanced CMS + dedicated support (headless CMS with custom content types and workflows)"
+        foundation: "Basic CMS: edit pages, images, blog posts, and metadata",
+        growth: "Structured CMS with scalable content architecture and SEO controls",
+        marketLeader: "Full content platform: advanced content models, CRM integrations, marketing automation, multi-user workflows"
       },
       {
         feature: "SEO Optimization",
