@@ -1,7 +1,7 @@
 // app/how-we-work/page.tsx - How We Work With Clients
 
 import Link from 'next/link';
-import { Sprout, Leaf, Flower, Sun, Infinity, CheckCircle2, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { Sprout, Leaf, Layers, Code2, Rocket, Infinity, CheckCircle2, ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { getImageUrl } from '@/lib/blob-images';
 
@@ -65,15 +65,16 @@ const processSteps = [
   },
   {
     number: 3,
-    title: 'Build & Collaboration',
-    duration: '2-4 weeks, depending on scope',
-    icon: <Flower className="w-6 h-6" />,
-    description: "We don't disappear after you sign. You'll get regular updates and opportunities to provide feedback throughout the project.",
-    highlight: 'No surprises. No missed expectations.',
+    title: 'Design',
+    duration: '1-2 weeks, depending on scope',
+    icon: <Layers className="w-6 h-6" />,
+    description: "Design is where strategy becomes visual. We translate your goals and audience into layouts, components, and a visual system—then hand you the keys for review before a single line of code is written.",
+    highlight: 'Nothing moves to build until you sign off on the design.',
     deliverables: [
-      '2-3 progress check-ins during the project',
-      'A staging environment where you can preview the work',
-      'Opportunities to provide feedback before final delivery',
+      'Moodboard and visual direction for your approval',
+      'Wireframes for all key pages',
+      'High-fidelity desktop and mobile mockups',
+      'Two rounds of revisions included',
     ],
     color: {
       bg: 'bg-green-100',
@@ -85,15 +86,38 @@ const processSteps = [
   },
   {
     number: 4,
-    title: 'White-Glove Handoff & Training',
+    title: 'Build & Review',
+    duration: '2-3 weeks, depending on scope',
+    icon: <Code2 className="w-6 h-6" />,
+    description: "Approved designs get converted into a fast, maintainable, real-content site. You have access to a staging environment throughout—so there are zero surprises on launch day.",
+    highlight: 'No surprises. No missed expectations.',
+    deliverables: [
+      'Staging URL with full site build and real content loaded',
+      'Responsive across mobile, tablet, and desktop',
+      'Forms, integrations, and CMS fully tested',
+      'Performance and accessibility baseline documented',
+    ],
+    color: {
+      bg: 'bg-teal-50',
+      icon: 'text-teal-600',
+      border: 'border-teal-300',
+      accent: 'bg-teal-600',
+      text: 'text-teal-800',
+    },
+  },
+  {
+    number: 5,
+    title: 'Launch & Handoff',
     duration: '1-2 days',
-    icon: <Sun className="w-6 h-6" />,
-    description: "We don't just hand you a website and wish you luck. We provide comprehensive training and documentation.",
+    icon: <Rocket className="w-6 h-6" />,
+    description: "We manage the full go-live: DNS migration, SSL verification, analytics confirmation, and Search Console submission. Then we hand you complete ownership—with training, documentation, and a 48-hour post-launch monitoring window.",
     highlight: 'You leave confident and ready to manage your site.',
     deliverables: [
-      'Training on how to update content yourself',
-      'Documentation for common tasks',
-      'Post-launch support to ensure everything runs smoothly',
+      'Managed DNS cutover and SSL verification',
+      'Analytics and Search Console confirmed live',
+      'Recorded training session on managing your site',
+      'Full credentials and documentation handoff',
+      '48-hour post-launch monitoring and support window',
     ],
     color: {
       bg: 'bg-amber-50',
@@ -104,16 +128,17 @@ const processSteps = [
     },
   },
   {
-    number: 5,
+    number: 6,
     title: 'Ongoing Support',
     duration: 'Optional',
     icon: <Infinity className="w-6 h-6" />,
     description: 'Many clients opt for monthly maintenance packages where we handle updates, monitoring, and enhancements.',
     highlight: 'Your business grows, and your website grows with it.',
     deliverables: [
-      'Content updates',
-      'Performance monitoring',
-      'Security updates',
+      'Content updates and page additions',
+      'Performance and uptime monitoring',
+      'Security and dependency updates',
+      'Monthly analytics report with insights',
       'Feature enhancements as your business grows',
     ],
     color: {

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sproutflow Studio — Project Lifecycle Architecture</title>
+  <style>
+    :root {
+      --green-dark:    #1a3d2b;
+      --green-mid:     #2d6a4f;
+      --green-light:   #52b788;
+      --green-pale:    #d8f3dc;
+      --accent:        #74c69d;
+      --warn:          #f4a261;
+      --neutral-50:    #f9fafb;
+      --neutral-100:   #f3f4f6;
+      --neutral-200:   #e5e7eb;
+      --neutral-600:   #4b5563;
+      --neutral-800:   #1f2937;
+      --white:         #ffffff;
+      --font:          'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      background: var(--neutral-50);
+      color: var(--neutral-800);
+      min-height: 100vh;
+      padding: 48px 32px 80px;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .header .badge {
+      display: inline-block;
+      background: var(--green-pale);
+      color: var(--green-mid);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--green-dark);
+      letter-spacing: -.02em;
+      margin-bottom: 10px;
+    }
+    .header p {
+      font-size: 15px;
+      color: var(--neutral-600);
+      max-width: 520px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── Timeline spine ── */
+    .timeline {
+      position: relative;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--green-light), var(--green-mid));
+      transform: translateX(-50%);
+      border-radius: 2px;
+      z-index: 0;
+    }
+
+    /* ── Phase block ── */
+    .phase {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+    .phase:nth-child(odd)  { flex-direction: row; }
+    .phase:nth-child(even) { flex-direction: row-reverse; }
+
+    /* ── Node (circle on spine) ── */
+    .node {
+      flex: 0 0 56px;
+      align-self: center;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .node-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 3px solid var(--green-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 0 6px var(--neutral-50), 0 4px 16px rgba(82,183,136,.25);
+      z-index: 2;
+    }
+    .node-number {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--green-mid);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Card ── */
+    .card {
+      flex: 1;
+      background: var(--white);
+      border: 1px solid var(--neutral-200);
+      border-radius: 16px;
+      padding: 28px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.05);
+      max-width: 420px;
+      transition: box-shadow .2s;
+    }
+    .card:hover { box-shadow: 0 6px 28px rgba(0,0,0,.09); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .phase-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+    .card h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 6px;
+    }
+    .card .duration {
+      font-size: 12px;
+      color: var(--neutral-600);
+      font-weight: 500;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .card .duration::before {
+      content: '⏱';
+      font-size: 11px;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--neutral-600);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+
+    /* ── Sub-sections ── */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--green-mid);
+      margin-bottom: 8px;
+    }
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+    .pill {
+      font-size: 12px;
+      font-weight: 500;
+      background: var(--green-pale);
+      color: var(--green-dark);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+    .pill.warn { background: #fff3e0; color: #b45309; }
+    .pill.neutral { background: var(--neutral-100); color: var(--neutral-600); }
+
+    .deliverable-list {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+    .deliverable-list li {
+      font-size: 13px;
+      color: var(--neutral-600);
+      padding: 5px 0 5px 20px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .deliverable-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--green-light);
+      font-weight: 700;
+    }
+
+    /* ── Gate badge ── */
+    .gate {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--warn);
+      background: #fff8f1;
+      border: 1px solid #fde8c8;
+      border-radius: 8px;
+      padding: 5px 10px;
+    }
+    .gate::before { content: '🔒'; font-size: 11px; }
+
+    /* ── Phase-specific accent colors ── */
+    .phase-1 .node-circle { border-color: #a8dadc; }
+    .phase-1 .phase-tag   { background: #e8f7f8; color: #2a7a7e; }
+    .phase-1 .gate        { color: #2a7a7e; background: #e8f7f8; border-color: #a8dadc; }
+    .phase-1 .gate::before { content: '🔒'; }
+
+    .phase-2 .node-circle { border-color: #b5ead7; }
+    .phase-2 .phase-tag   { background: var(--green-pale); color: var(--green-mid); }
+
+    .phase-3 .node-circle { border-color: #cdb4db; }
+    .phase-3 .phase-tag   { background: #f3eef8; color: #6b3fa0; }
+    .phase-3 .gate        { color: #6b3fa0; background: #f3eef8; border-color: #cdb4db; }
+    .phase-3 .gate::before { content: '🔒'; }
+
+    .phase-4 .node-circle { border-color: #ffd6a5; }
+    .phase-4 .phase-tag   { background: #fff3e0; color: #b45309; }
+    .phase-4 .gate        { color: #b45309; background: #fff3e0; border-color: #ffd6a5; }
+    .phase-4 .gate::before { content: '🚀'; }
+
+    .phase-5 .node-circle { border-color: var(--green-light); }
+    .phase-5 .phase-tag   { background: var(--green-pale); color: var(--green-dark); }
+
+    /* ── Legend ── */
+    .legend {
+      max-width: 980px;
+      margin: 56px auto 0;
+      background: var(--white);
+      border: 1px solid var(--neutral-200);
+      border-radius: 16px;
+      padding: 28px 36px;
+    }
+    .legend h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--green-dark);
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+    .legend-item p { font-size: 13px; color: var(--neutral-600); line-height: 1.5; }
+    .legend-item strong { color: var(--neutral-800); display: block; }
+
+    /* ── Client touchpoints strip ── */
+    .touchpoints {
+      max-width: 980px;
+      margin: 24px auto 0;
+      display: flex;
+      align-items: stretch;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--neutral-200);
+    }
+    .tp-label {
+      background: var(--green-dark);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      padding: 16px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tp-cells {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      flex: 1;
+    }
+    .tp-cell {
+      padding: 14px 16px;
+      border-right: 1px solid var(--neutral-200);
+      font-size: 12px;
+    }
+    .tp-cell:last-child { border-right: none; }
+    .tp-cell .phase-name {
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-bottom: 8px;
+    }
+    .tp-cell ul { list-style: none; }
+    .tp-cell ul li {
+      color: var(--neutral-600);
+      padding: 2px 0 2px 14px;
+      position: relative;
+      font-size: 11.5px;
+      line-height: 1.4;
+    }
+    .tp-cell ul li::before { content: '·'; position: absolute; left: 4px; color: var(--green-light); font-weight: 900; }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      font-size: 12px;
+      color: var(--neutral-600);
+    }
+    .footer strong { color: var(--green-mid); }
+
+    /* ── Responsive ── */
+    @media (max-width: 720px) {
+      .timeline::before { left: 28px; }
+      .phase, .phase:nth-child(even) { flex-direction: column; align-items: flex-start; }
+      .node { align-self: flex-start; }
+      .card { max-width: 100%; }
+      .tp-cells { grid-template-columns: 1fr 1fr; }
+      .tp-label { writing-mode: horizontal-tb; transform: none; padding: 10px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="badge">Sproutflow Studio — Internal Reference</div>
+    <h1>Project Lifecycle Architecture</h1>
+    <p>The end-to-end system used from contract signature through long-term client partnership — every phase, gate, deliverable, and client touchpoint.</p>
+  </div>
+
+  <!-- Timeline -->
+  <div class="timeline">
+
+    <!-- Phase 1: Kickoff -->
+    <div class="phase phase-1">
+      <div class="node">
+        <div class="node-circle">🤝</div>
+        <span class="node-number">01</span>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="phase-tag">Kickoff</span>
+        </div>
+        <h2>Project Kickoff</h2>
+        <div class="duration">Days 1–3 after contract signing</div>
+        <p>Align on goals, constraints, success metrics, and communication norms before any work begins. Ambiguity surfaced here costs nothing. Ambiguity discovered in build costs weeks.</p>
+        <div class="section-label">Key Activities</div>
+        <div class="pill-list">
+          <span class="pill">Kickoff call (60–90 min)</span>
+          <span class="pill">Intake questionnaire review</span>
+          <span class="pill">Project brief creation</span>
+          <span class="pill">Stakeholder alignment</span>
+          <span class="pill">Tool access & credentials</span>
+          <span class="pill">Communication cadence set</span>
+        </div>
+        <div class="section-label">Deliverables</div>
+        <ul class="deliverable-list">
+          <li>Signed project brief (goals, audience, success KPIs)</li>
+          <li>Finalized sitemap / page list</li>
+          <li>Project board set up (tasks, milestones, timeline)</li>
+          <li>Shared asset folder with brand files</li>
+        </ul>
+        <div class="gate">Gate: Brief approved by client before design begins</div>
+      </div>
+    </div>
+
+    <!-- Phase 2: Design -->
+    <div class="phase phase-2">
+      <div class="node">
+        <div class="node-circle">🎨</div>
+        <span class="node-number">02</span>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="phase-tag">Design</span>
+        </div>
+        <h2>Design & Creative Direction</h2>
+        <div class="duration">Week 1–2 (varies by package)</div>
+        <p>Translate strategy into a visual system. The goal is not just aesthetics — it's creating a layout logic that drives conversion, trust, and clarity at every scroll depth.</p>
+        <div class="section-label">Key Activities</div>
+        <div class="pill-list">
+          <span class="pill">Moodboard / style direction</span>
+          <span class="pill">Wireframes (key pages)</span>
+          <span class="pill">Hi-fi mockups in Figma</span>
+          <span class="pill">Responsive breakpoints</span>
+          <span class="pill">Copy placeholder / structure</span>
+          <span class="pill">Design review rounds (2x)</span>
+        </div>
+        <div class="section-label">Deliverables</div>
+        <ul class="deliverable-list">
+          <li>Approved moodboard / direction</li>
+          <li>Wireframes for all key pages</li>
+          <li>High-fidelity desktop + mobile designs (Figma)</li>
+          <li>Component inventory (buttons, cards, nav, footer)</li>
+        </ul>
+        <div class="gate">Gate: Final design sign-off before any code is written</div>
+      </div>
+    </div>
+
+    <!-- Phase 3: Build -->
+    <div class="phase phase-3">
+      <div class="node">
+        <div class="node-circle">⚙️</div>
+        <span class="node-number">03</span>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="phase-tag">Build</span>
+        </div>
+        <h2>Development & Build</h2>
+        <div class="duration">Week 2–4 (varies by scope)</div>
+        <p>Convert approved designs into a performant, maintainable codebase. Staging environment is live throughout — no surprises on launch day. Real content is loaded as it becomes available.</p>
+        <div class="section-label">Key Activities</div>
+        <div class="pill-list">
+          <span class="pill">Dev environment setup</span>
+          <span class="pill">Component build (top-down)</span>
+          <span class="pill">CMS integration</span>
+          <span class="pill">Forms & integrations</span>
+          <span class="pill">Real content load-in</span>
+          <span class="pill">Performance & SEO baseline</span>
+          <span class="pill">Cross-browser QA</span>
+          <span class="pill">Accessibility pass</span>
+        </div>
+        <div class="section-label">Deliverables</div>
+        <ul class="deliverable-list">
+          <li>Staging URL with full site build</li>
+          <li>Responsive across mobile, tablet, desktop</li>
+          <li>Lighthouse scores documented (performance, a11y, SEO)</li>
+          <li>All forms tested and integrated</li>
+          <li>Content fully loaded (no placeholder text)</li>
+        </ul>
+        <div class="gate">Gate: Client staging review + QA sign-off before launch</div>
+      </div>
+    </div>
+
+    <!-- Phase 4: Launch -->
+    <div class="phase phase-4">
+      <div class="node">
+        <div class="node-circle">🚀</div>
+        <span class="node-number">04</span>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="phase-tag">Launch</span>
+        </div>
+        <h2>Launch & Handoff</h2>
+        <div class="duration">Day of launch + 48-hr stabilization window</div>
+        <p>White-glove go-live. DNS migration, cache warming, and post-launch monitoring handled by the studio. Client is trained and handed full ownership with confidence, not confusion.</p>
+        <div class="section-label">Key Activities</div>
+        <div class="pill-list">
+          <span class="pill">Pre-launch checklist run</span>
+          <span class="pill">DNS cutover</span>
+          <span class="pill">SSL verification</span>
+          <span class="pill">Analytics verified</span>
+          <span class="pill">Search Console submitted</span>
+          <span class="pill">48-hr monitoring window</span>
+          <span class="pill">Client walkthrough/training</span>
+        </div>
+        <div class="section-label">Deliverables</div>
+        <ul class="deliverable-list">
+          <li>Live site confirmed fully functional</li>
+          <li>Credentials & access doc handed off securely</li>
+          <li>Client training session (recorded)</li>
+          <li>Site documentation (how-to edits, CMS guide)</li>
+          <li>Project retrospective notes (internal)</li>
+        </ul>
+        <div class="gate">🚀 Live — 48-hr monitoring period begins immediately</div>
+      </div>
+    </div>
+
+    <!-- Phase 5: Maintenance -->
+    <div class="phase phase-5">
+      <div class="node">
+        <div class="node-circle">🌱</div>
+        <span class="node-number">05</span>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span class="phase-tag">Maintenance</span>
+        </div>
+        <h2>Ongoing Care & Growth</h2>
+        <div class="duration">Monthly — ongoing partnership</div>
+        <p>The site is a living asset, not a finished artifact. Care plans protect uptime, performance, and security while creating a structured channel for iteration and expansion over time.</p>
+        <div class="section-label">Care Plan Tiers</div>
+        <div class="pill-list">
+          <span class="pill">Basic — updates + uptime monitoring</span>
+          <span class="pill">Growth — + content changes + monthly report</span>
+          <span class="pill">Partner — + priority support + iteration sprints</span>
+        </div>
+        <div class="section-label">Recurring Activities</div>
+        <ul class="deliverable-list">
+          <li>Plugin / dependency updates & security patches</li>
+          <li>Uptime and performance monitoring</li>
+          <li>Content edits and page additions (by tier)</li>
+          <li>Monthly analytics report with insights</li>
+          <li>Quarterly strategy check-in (Partner tier)</li>
+          <li>Conversion audits and A/B iteration (Partner tier)</li>
+        </ul>
+        <div class="section-label" style="margin-top:4px;">Watch for Escalation Triggers</div>
+        <div class="pill-list">
+          <span class="pill warn">Performance regression</span>
+          <span class="pill warn">Security vulnerability</span>
+          <span class="pill warn">Traffic spike / infra limit</span>
+          <span class="pill warn">Major rebrand signal</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /timeline -->
+
+  <!-- Client Touchpoints Strip -->
+  <div class="touchpoints">
+    <div class="tp-label">Client Touchpoints</div>
+    <div class="tp-cells">
+      <div class="tp-cell">
+        <div class="phase-name" style="color:#2a7a7e;">Kickoff</div>
+        <ul>
+          <li>Kickoff call</li>
+          <li>Questionnaire review</li>
+          <li>Brief approval</li>
+        </ul>
+      </div>
+      <div class="tp-cell">
+        <div class="phase-name" style="color:#2d6a4f;">Design</div>
+        <ul>
+          <li>Moodboard review</li>
+          <li>Wireframe feedback</li>
+          <li>2× design reviews</li>
+          <li>Final sign-off</li>
+        </ul>
+      </div>
+      <div class="tp-cell">
+        <div class="phase-name" style="color:#6b3fa0;">Build</div>
+        <ul>
+          <li>Staging preview</li>
+          <li>Content load-in</li>
+          <li>QA review</li>
+          <li>Launch approval</li>
+        </ul>
+      </div>
+      <div class="tp-cell">
+        <div class="phase-name" style="color:#b45309;">Launch</div>
+        <ul>
+          <li>Go-live notification</li>
+          <li>Training session</li>
+          <li>Handoff call</li>
+          <li>48-hr check-in</li>
+        </ul>
+      </div>
+      <div class="tp-cell">
+        <div class="phase-name" style="color:#1a3d2b;">Maintenance</div>
+        <ul>
+          <li>Monthly report</li>
+          <li>Change requests</li>
+          <li>Quarterly strategy</li>
+          <li>Renewal review</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <h3>How to Read This Architecture</h3>
+    <div class="legend-grid">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#52b788;"></div>
+        <p><strong>Phase Cards</strong>Timeline flows left-to-right alternating. Each card covers one phase with activities, deliverables, and an exit gate.</p>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#f4a261;"></div>
+        <p><strong>Gates (🔒)</strong>Hard stops requiring explicit client approval. Work on the next phase cannot begin until the gate is cleared.</p>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#a8dadc;"></div>
+        <p><strong>Deliverables (✓)</strong>Tangible outputs committed per phase. These are what the client receives and what the studio is accountable for.</p>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#cdb4db;"></div>
+        <p><strong>Client Touchpoints</strong>The bottom strip maps every scheduled client interaction per phase to prevent surprise and set expectations.</p>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#ffd6a5;"></div>
+        <p><strong>Escalation Pills</strong>Orange pills in Maintenance flag conditions that should prompt proactive client outreach or scope conversation.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <strong>Sproutflow Studio</strong> · Project Lifecycle Architecture · Internal Reference v1.0 · March 2026
+  </div>
+
+</body>
+</html>
