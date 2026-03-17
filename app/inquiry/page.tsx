@@ -1,6 +1,6 @@
 // app/inquiry/page.tsx - Project intake and contact page
 
-import { Container, Section, Heading, BodyText } from '@/components/layout/StudioLayout';
+import { Container, Section } from '@/components/layout/StudioLayout';
 import { Footer } from '@/components/layout/Footer';
 import { InquiryForm } from '@/components/inquiry/InquiryForm';
 import { getImageUrl } from '@/lib/blob-images';
@@ -29,17 +29,36 @@ export default function InquiryPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,197,94,0.18),_transparent_55%)] opacity-40" />
         </div>
 
-        <div className="mx-auto flex max-w-container flex-col gap-8 px-4 py-16 md:px-8 md:py-20">
-          <div className="mx-auto max-w-2xl text-center md:text-left">
-            <Heading level={1} className="mb-4 text-primary-800">
-              Start Your Project
-            </Heading>
-            <BodyText size="lg" color="secondary" className="mb-4">
-              Tell us a little about your project. Most inquiries take about 3–5 minutes to complete.
-            </BodyText>
-            <BodyText size="base" color="muted">
-              Not ready for a call yet? No problem. Share a few details here and we’ll follow up with the best next steps.
-            </BodyText>
+        <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-24 md:px-8 md:py-28">
+          <div className="inline-flex items-center gap-2 text-primary-700">
+            <span className="h-px w-12 bg-primary-500/60" />
+            <span className="text-sm font-semibold uppercase tracking-[0.24em]">
+              Get Started
+            </span>
+            <span className="h-px w-12 bg-primary-500/60" />
+          </div>
+          <div className="grid gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
+            <div className="space-y-6">
+              <h1 className="text-4xl font-display font-bold text-gray-900 md:text-6xl">
+                Start Your Project
+              </h1>
+              <p className="text-lg text-gray-600 md:text-xl">
+                Tell us a little about your project. Most inquiries take about 3–5 minutes to complete.
+              </p>
+              <p className="text-base text-gray-600">
+                Not ready for a call yet? No problem. Share a few details here and we’ll follow up with the best next steps.
+              </p>
+            </div>
+            <div className="rounded-3xl border border-primary-200/60 bg-white/70 p-6 shadow-lg backdrop-blur">
+              <p className="text-sm font-semibold uppercase tracking-widest text-primary-700">
+                What to Expect
+              </p>
+              <ul className="mt-4 space-y-3 text-sm text-gray-600">
+                <li>• Takes about 3–5 minutes to complete</li>
+                <li>• We respond within 24 hours</li>
+                <li>• No commitment—just the next steps</li>
+              </ul>
+            </div>
           </div>
         </div>
       </header>

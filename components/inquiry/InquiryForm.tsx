@@ -178,7 +178,7 @@ export function InquiryForm() {
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-10 pb-4">
+    <form onSubmit={handleSubmit} className="space-y-10 pb-4 pt-8 md:pt-10">
       {/* 1. Contact Information */}
       <FormSection title="Contact Information">
         <div className="grid gap-6 sm:grid-cols-2">
