@@ -143,7 +143,7 @@ export default function ServicesSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="relative"
+                className="relative min-h-[480px] md:min-h-[520px]"
                 style={{ perspective: '1200px' }}
               >
                 {/* Popular Badge */}
@@ -157,7 +157,7 @@ export default function ServicesSection() {
 
                 {/* Flip Container - RESTRUCTURED */}
                 <div
-                  className="relative"
+                  className="relative h-full"
                   style={{ transformStyle: 'preserve-3d', perspective: '1200px' }}
                   onMouseEnter={() => handleMouseEnter(tier.id)}
                   onMouseLeave={handleMouseLeave}
@@ -176,7 +176,7 @@ export default function ServicesSection() {
                       transformStyle: 'preserve-3d',
                       willChange: 'transform',
                     }}
-                    className={`relative bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl h-full flex flex-col transition-all duration-300 hover:scale-[1.02] ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
+                    className={`relative bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl h-full min-h-[480px] md:min-h-[520px] flex flex-col transition-all duration-300 hover:scale-[1.02] ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
                   >
                     {/* Tree Ring Background */}
                     <div className="absolute inset-0 pointer-events-none opacity-10 z-0">
@@ -273,7 +273,7 @@ export default function ServicesSection() {
                       inset: 0,
                       willChange: 'transform',
                     }}
-                    className={`bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-full flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : ''}`}
+                    className={`bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-full min-h-[480px] md:min-h-[520px] flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : ''}`}
                   >
                     {/* Tree Ring Background on Back */}
                     <div className="absolute inset-0 pointer-events-none opacity-10">
