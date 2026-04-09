@@ -76,20 +76,8 @@ export default function ServicesSection() {
     }
   };
 
-  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    // Scroll first, then flip card back after scroll completes
-    const element = document.querySelector('#contact');
-    if (element) {
-      const yOffset = -80; // Offset for sticky header
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-      // Flip card back after scroll animation (typically 500-1000ms)
-      setTimeout(() => {
-        setFlippedCard(null);
-      }, 800);
-    }
+  const handleContactClick = () => {
+    setFlippedCard(null);
   };
 
   return (
@@ -356,7 +344,7 @@ export default function ServicesSection() {
 
                       {/* CTA Button */}
                       <a
-                        href="#contact"
+                        href="/inquiry"
                         onClick={handleContactClick}
                         className="mt-2 md:mt-2.5 w-full bg-white text-primary-700 py-2 md:py-2.5 rounded-full font-bold text-[11px] md:text-xs hover:bg-white/90 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-1.5 group shadow-lg flex-shrink-0"
                       >

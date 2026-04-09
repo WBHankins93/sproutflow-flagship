@@ -6,9 +6,9 @@ import { InquiryForm } from '@/components/inquiry/InquiryForm';
 import { getImageUrl } from '@/lib/blob-images';
 
 export const metadata = {
-  title: 'Start Your Project | Inquiry & Contact | Sproutflow Studio',
+  title: 'Web Design Consultation | Start Your Project | Sproutflow Studio',
   description:
-    'Tell us about your project. Submit your inquiry in about 3–5 minutes. We’ll review and get back to you within 24 hours.',
+    'Request a web design consultation for your business. Share your goals in 3–5 minutes, and we’ll follow up within 24 hours with clear next steps.',
   alternates: {
     canonical: '/inquiry',
   },

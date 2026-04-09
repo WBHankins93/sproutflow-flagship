@@ -283,7 +283,7 @@ export default function NealyEventsCaseStudy() {
             Let&apos;s talk about your business goals and how a strategic website can help you compete in your market.
           </p>
           <Link
-            href="/#contact"
+            href="/inquiry"
             className="inline-flex items-center gap-3 rounded-full bg-primary-600 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary-700"
           >
             Book a Discovery Call
@@ -302,4 +302,3 @@ export default function NealyEventsCaseStudy() {
     </>
   );
 }
-

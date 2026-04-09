@@ -5,6 +5,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Sprout, Leaf, Flower, Sun } from 'lucide-react';
+import Link from 'next/link';
 import { Container } from '../layout/StudioLayout';
 
 const processSteps = [
@@ -230,6 +231,27 @@ export default function ProcessSection() {
             <strong className="text-text-primary">Here&apos;s our promise:</strong> You&apos;ll know exactly what&apos;s happening at every stage. 
             Regular updates, clear timelines, and your feedback welcomed throughout.
           </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+        >
+          <Link
+            href="/how-we-work"
+            className="inline-flex items-center justify-center rounded-full border border-primary-300 px-6 py-3 text-sm font-semibold text-primary-700 transition hover:bg-primary-50"
+          >
+            See Full Process
+          </Link>
+          <Link
+            href="/inquiry"
+            className="inline-flex items-center justify-center rounded-full bg-primary-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary-700"
+          >
+            Book a Discovery Call
+          </Link>
         </motion.div>
 
       </Container>

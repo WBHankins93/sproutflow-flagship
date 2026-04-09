@@ -62,13 +62,9 @@ export default function HeroSection() {
               textShadow: '4px 4px 20px rgba(0,0,0,0.9), 2px 2px 10px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.5)'
             }}
           >
-            Your small business
+            Web Design for Small Businesses
             <br />
-            <span className="text-green-300">
-              deserves to compete
-            </span>
-            <br />
-            with the big leagues
+            <span className="text-green-300">That Need More Qualified Leads</span>
           </motion.h1>
 
           {/* Value Proposition */}
@@ -81,8 +77,7 @@ export default function HeroSection() {
               textShadow: '3px 3px 12px rgba(0,0,0,0.9), 1px 1px 6px rgba(0,0,0,0.8)'
             }}
           >
-            <br className="hidden md:block" />
-            Small business heart. No impossible budgets.
+            Strategic websites built to convert the right clients—without enterprise-level overhead.
           </motion.p>
 
           {/* Primary CTA */}
@@ -92,13 +87,22 @@ export default function HeroSection() {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="mb-16 md:mb-20"
           >
-            <a 
-              href="#contact"
+            <a
+              href="/inquiry"
               className="inline-flex items-center gap-3 bg-white text-text-primary px-10 md:px-14 py-4 md:py-5 rounded-full text-lg md:text-xl font-bold shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 group"
             >
-              Let&apos;s get started today!
+              Book a Discovery Call
               <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </a>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm text-white/90">
+              <a href="/work" className="hover:text-white underline underline-offset-4">
+                View Portfolio
+              </a>
+              <span aria-hidden>•</span>
+              <a href="/case-studies" className="hover:text-white underline underline-offset-4">
+                See Case Studies
+              </a>
+            </div>
           </motion.div>
 
           {/* Scroll Indicator */}
