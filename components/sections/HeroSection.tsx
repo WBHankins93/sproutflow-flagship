@@ -77,7 +77,7 @@ export default function HeroSection() {
               textShadow: '3px 3px 12px rgba(0,0,0,0.9), 1px 1px 6px rgba(0,0,0,0.8)'
             }}
           >
-            Strategic websites built to convert the right clients—without enterprise-level overhead.
+            Strategic websites built to convert the right clients without enterprise-level overhead.
           </motion.p>
 
           {/* Primary CTA */}
