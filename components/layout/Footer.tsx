@@ -3,6 +3,7 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Container, Heading, BodyText } from './StudioLayout';
 import { Linkedin, Twitter, Instagram, Facebook } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
@@ -32,13 +33,6 @@ export const Footer: React.FC = () => {
       icon: Facebook
     }
   ];
-
-  const handleNavClick = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <footer className="bg-primary-900 text-white py-12 md:py-16">
@@ -77,34 +71,27 @@ export const Footer: React.FC = () => {
           
           {/* Quick Links */}
           <div>
-            <h3 className="font-display text-lg font-semibold mb-4">Services</h3>
+            <h3 className="font-display text-lg font-semibold mb-4">Explore</h3>
             <ul className="space-y-2 text-white/80">
               <li>
-                <a 
-                  href="#services" 
-                  onClick={(e) => { e.preventDefault(); handleNavClick('#services'); }}
-                  className="hover:text-white transition-colors"
-                >
-                  Foundation Package
-                </a>
+                <Link href="/#services" className="hover:text-white transition-colors">
+                  Services & Pricing
+                </Link>
               </li>
               <li>
-                <a 
-                  href="#services" 
-                  onClick={(e) => { e.preventDefault(); handleNavClick('#services'); }}
-                  className="hover:text-white transition-colors"
-                >
-                  Growth Package
-                </a>
+                <Link href="/work" className="hover:text-white transition-colors">
+                  Portfolio
+                </Link>
               </li>
               <li>
-                <a 
-                  href="#services" 
-                  onClick={(e) => { e.preventDefault(); handleNavClick('#services'); }}
-                  className="hover:text-white transition-colors"
-                >
-                  Market Leader Package
-                </a>
+                <Link href="/case-studies" className="hover:text-white transition-colors">
+                  Case Studies
+                </Link>
+              </li>
+              <li>
+                <Link href="/how-we-work" className="hover:text-white transition-colors">
+                  How We Work
+                </Link>
               </li>
             </ul>
           </div>
