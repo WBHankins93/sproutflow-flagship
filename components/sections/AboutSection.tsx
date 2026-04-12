@@ -160,7 +160,7 @@ const AboutSection: React.FC = () => {
                 className="inline-flex items-center gap-2 bg-white text-primary-600 hover:bg-white/90 px-10 py-4 text-lg font-medium rounded-full transition-all duration-200 hover:shadow-lg"
               >
                 <ArrowRight className="w-5 h-5" />
-                Start Your Transformation
+                See if we&apos;re a fit
               </a>
             </motion.div>
           </div>

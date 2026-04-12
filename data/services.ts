@@ -20,7 +20,7 @@ export interface ServiceTier {
     {
       id: "starter",
       name: "Starter",
-      tagline: "Quick professional presence for new businesses",
+      tagline: "Get online with a clean, credible presence",
       priceRange: "$850 - $1,500",
       timeline: "1-2 weeks",
       idealFor: "Solo entrepreneurs and new businesses needing fast validation",
@@ -66,7 +66,7 @@ export interface ServiceTier {
     {
       id: "foundation",
       name: "Foundation",
-      tagline: "Strategic foundation for validated online presence",
+      tagline: "Turn your website into a lead generation tool",
       priceRange: "$2,000 - $2,800",
       timeline: "2-3 weeks",
       idealFor: "New businesses or rebrands needing validated presence",
@@ -114,7 +114,7 @@ export interface ServiceTier {
     {
       id: "growth", 
       name: "Growth",
-      tagline: "Competitive differentiation for market share",
+      tagline: "Scale your business with a high-performing digital engine",
       priceRange: "$3,500 - $5,500",
       timeline: "4-6 weeks",
       idealFor: "Established businesses ready to compete for market share",
@@ -161,7 +161,7 @@ export interface ServiceTier {
     {
       id: "market-leader",
       name: "Market Leader",
-      tagline: "Custom digital platform designed to generate measurable revenue growth",
+      tagline: "Build a revenue-driving platform for long-term scale",
       priceRange: "$7,500+",
       timeline: "8-12 weeks",
       idealFor: "Companies where the website is a core growth engine driving measurable revenue",

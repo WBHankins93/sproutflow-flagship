@@ -3,7 +3,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowRight, ChevronDown, Award, Heart } from 'lucide-react';
+import { ArrowRight, ChevronDown, Award, Heart, CheckCircle2 } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
 
 export default function HeroSection() {
@@ -40,11 +40,11 @@ export default function HeroSection() {
           >
             <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20">
               <Award className="w-4 h-4 text-accent-500" />
-              <span className="font-semibold text-gray-800 text-sm md:text-base">Enterprise-Grade Design</span>
+              <span className="font-semibold text-gray-800 text-sm md:text-base">Enterprise-Level Thinking</span>
             </div>
             <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20">
               <Heart className="w-4 h-4 text-primary-600" />
-              <span className="font-semibold text-gray-800 text-sm md:text-base">Small Business Focused</span>
+              <span className="font-semibold text-gray-800 text-sm md:text-base">Built for Small Businesses</span>
             </div>
             {/* <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20">
               <span className="text-blue-600 text-lg">📈</span>
@@ -62,9 +62,9 @@ export default function HeroSection() {
               textShadow: '4px 4px 20px rgba(0,0,0,0.9), 2px 2px 10px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.5)'
             }}
           >
-            Web Design for Small Businesses
+            Websites that turn visitors
             <br />
-            <span className="text-green-300">That Need More Qualified Leads</span>
+            <span className="text-green-300">into paying customers</span>
           </motion.h1>
 
           {/* Value Proposition */}
@@ -77,7 +77,8 @@ export default function HeroSection() {
               textShadow: '3px 3px 12px rgba(0,0,0,0.9), 1px 1px 6px rgba(0,0,0,0.8)'
             }}
           >
-            Strategic websites built to convert the right clients without enterprise-level overhead.
+            We design and build high-performing websites for small businesses that need more leads,
+            better credibility, and real results — not just a redesign.
           </motion.p>
 
           {/* Primary CTA */}
@@ -91,16 +92,24 @@ export default function HeroSection() {
               href="/inquiry"
               className="inline-flex items-center gap-3 bg-white text-text-primary px-10 md:px-14 py-4 md:py-5 rounded-full text-lg md:text-xl font-bold shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 group"
             >
-              Book a Discovery Call
+              Start Your Project
               <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </a>
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/95">
+              {['Increase inbound leads', 'Improve conversion rates', 'Build trust instantly'].map((point) => (
+                <div key={point} className="inline-flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-green-300" />
+                  <span>{point}</span>
+                </div>
+              ))}
+            </div>
             <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm text-white/90">
               <a href="/work" className="hover:text-white underline underline-offset-4">
                 View Portfolio
               </a>
               <span aria-hidden>•</span>
-              <a href="/case-studies" className="hover:text-white underline underline-offset-4">
-                See Case Studies
+              <a href="/inquiry" className="hover:text-white underline underline-offset-4">
+                See if we&apos;re a fit
               </a>
             </div>
           </motion.div>

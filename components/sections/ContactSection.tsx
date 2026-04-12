@@ -42,7 +42,7 @@ const ContactSection = () => {
       ],
       icon: <Calendar className="w-6 h-6" />,
       color: 'accent',
-      ctaText: 'Book Discovery Call',
+      ctaText: 'Start your project',
       action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // Discovery Call scheduling page
     },
     // Temporarily commented out - only offering Discovery Call until Google Workspace budget is available

@@ -116,7 +116,7 @@ export default function Header() {
               }}
               className="ml-4 px-6 py-2.5 bg-primary-600 text-white rounded-full font-semibold hover:bg-primary-700 transition-colors"
             >
-              Book Discovery Call
+              Get a quote
             </a>
           </nav>
 
@@ -162,7 +162,7 @@ export default function Header() {
               }}
               className="block w-full px-6 py-3 bg-primary-600 text-white text-center rounded-full font-semibold hover:bg-primary-700 transition-colors mt-4"
             >
-              Book Discovery Call
+              Get a quote
             </a>
           </nav>
         </div>

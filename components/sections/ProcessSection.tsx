@@ -138,7 +138,7 @@ export default function ProcessSection() {
           </h2>
           
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-            Four stages. Total transparency. You&apos;re involved every step.
+            Four stages, clear milestones, and consistent communication so you always know what happens next.
           </p>
         </motion.div>
 
@@ -228,8 +228,8 @@ export default function ProcessSection() {
           className="text-center bg-primary-50 rounded-xl p-6 border border-primary-200 mb-12"
         >
           <p className="text-text-secondary leading-relaxed max-w-3xl mx-auto">
-            <strong className="text-text-primary">Here&apos;s our promise:</strong> You&apos;ll know exactly what&apos;s happening at every stage. 
-            Regular updates, clear timelines, and your feedback welcomed throughout.
+            <strong className="text-text-primary">Here&apos;s our promise:</strong> You&apos;ll always know what&apos;s happening next.
+            Clear milestones before moving forward, predictable communication, and no vague timelines after kickoff.
           </p>
         </motion.div>
 
@@ -250,7 +250,7 @@ export default function ProcessSection() {
             href="/inquiry"
             className="inline-flex items-center justify-center rounded-full bg-primary-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary-700"
           >
-            Book a Discovery Call
+            Start your project
           </Link>
         </motion.div>
 
