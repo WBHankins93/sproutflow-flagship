@@ -1,11 +1,11 @@
-// components/sections/ServicesSection.tsx - Card Flip Version
+// components/sections/ServicesSection.tsx - Simplified Pricing Cards
 
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Zap, Target, Rocket, Check, ArrowRight, X, Clock, Package, Sparkles, RotateCcw } from 'lucide-react';
+import { Zap, Target, Rocket, Check, ArrowRight, Package, Sparkles } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
 import { serviceTiers as dataServiceTiers } from '@/data/services';
 import type { ServiceTier } from '@/data/services';
@@ -45,41 +45,12 @@ const serviceTiers = dataServiceTiers.map((tier: ServiceTier) => ({
   icon: tierIcons[tier.id] || <Zap className="w-6 h-6" />,
   lifestyleImage: tierImages[tier.id]?.lifestyle || getImageUrl('service/growth.jpg'),
   treeRingImage: tierImages[tier.id]?.treeRing || getImageUrl('tree-ring-1.jpg'),
-  highlights: tier.businessOutcomes.slice(0, 4), // Use first 4 business outcomes as highlights
-    buttonText: 'See tier details',
-  includes: [...tier.technicalFeatures, ...tier.strategicInclusions].slice(0, 6), // Combine and limit
-  perfectFor: tier.idealFor,
+  highlights: tier.businessOutcomes.slice(0, 2),
+  services: [...tier.technicalFeatures, ...tier.strategicInclusions].slice(0, 3),
+  buttonText: 'Start this tier',
 }));
 
 export default function ServicesSection() {
-  const [flippedCard, setFlippedCard] = useState<string | null>(null);
-  const [isHoverable, setIsHoverable] = useState(false);
-
-  useEffect(() => {
-    // Check if device supports hover (desktop)
-    setIsHoverable(window.matchMedia('(hover: hover)').matches);
-  }, []);
-
-  const handleFlip = (tierId: string) => {
-    setFlippedCard(flippedCard === tierId ? null : tierId);
-  };
-
-  const handleMouseEnter = (tierId: string) => {
-    if (isHoverable) {
-      setFlippedCard(tierId);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (isHoverable) {
-      setFlippedCard(null);
-    }
-  };
-
-  const handleContactClick = () => {
-    setFlippedCard(null);
-  };
-
   return (
     <section id="services" className="relative py-24 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
       
@@ -121,51 +92,28 @@ export default function ServicesSection() {
         {/* Service Tiers Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8 mb-16">
           
-          {serviceTiers.map((tier, index) => {
-            const isFlipped = flippedCard === tier.id;
-            
-            return (
-              <motion.div
-                key={tier.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="relative min-h-[480px] md:min-h-[520px]"
-                style={{ perspective: '1200px' }}
-              >
-                {/* Popular Badge */}
-                {tier.popular && (
-                  <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 z-20">
-                    <span className="bg-accent-500 text-white px-3 md:px-4 py-1 md:py-1.5 rounded-full text-xs md:text-sm font-bold shadow-lg whitespace-nowrap">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
+          {serviceTiers.map((tier, index) => (
+            <motion.div
+              key={tier.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: index * 0.08, ease: 'easeOut' }}
+              whileHover={{ y: -6 }}
+              viewport={{ once: true }}
+              className="relative min-h-[480px] md:min-h-[520px]"
+            >
+              {/* Popular Badge */}
+              {tier.popular && (
+                <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 z-20">
+                  <span className="bg-accent-500 text-white px-3 md:px-4 py-1 md:py-1.5 rounded-full text-xs md:text-sm font-bold shadow-lg whitespace-nowrap">
+                    Most Popular
+                  </span>
+                </div>
+              )}
 
-                {/* Flip Container - RESTRUCTURED */}
-                <div
-                  className="relative h-full"
-                  style={{ transformStyle: 'preserve-3d', perspective: '1200px' }}
-                  onMouseEnter={() => handleMouseEnter(tier.id)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  
-                  {/* FRONT OF CARD */}
-                  <motion.div 
-                    animate={{ rotateY: isFlipped ? -180 : 0 }}
-                    transition={{ 
-                      duration: 0.3, 
-                      ease: "easeOut"
-                    }}
-                    style={{ 
-                      backfaceVisibility: 'hidden',
-                      WebkitBackfaceVisibility: 'hidden',
-                      transformStyle: 'preserve-3d',
-                      willChange: 'transform',
-                    }}
-                    className={`relative bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl h-full min-h-[480px] md:min-h-[520px] flex flex-col transition-all duration-300 hover:scale-[1.02] ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
-                  >
+              <div
+                className={`relative bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl h-full min-h-[480px] md:min-h-[520px] flex flex-col transition-shadow duration-300 ${tier.popular ? 'ring-2 ring-primary-500' : 'border border-gray-200'}`}
+              >
                     {/* Tree Ring Background */}
                     <div className="absolute inset-0 pointer-events-none opacity-10 z-0">
                       <Image 
@@ -207,157 +155,48 @@ export default function ServicesSection() {
                     {/* Content */}
                     <div className="relative p-6 md:p-8 z-10 flex-1 flex flex-col min-h-0">
                       <p className="font-display text-primary-600 font-semibold italic mb-2 text-sm md:text-base">{tier.tagline}</p>
-                      <p className="font-body text-xs md:text-sm text-text-muted mb-2">Best for</p>
-                      <p className="font-body text-xs md:text-sm text-text-muted mb-6 line-clamp-2">{tier.idealFor}</p>
+                      <p className="font-body text-xs md:text-sm text-text-muted mb-5 line-clamp-2">{tier.idealFor}</p>
 
-                      {/* Highlights */}
-                      <div className="space-y-2 md:space-y-3 mb-6 md:mb-8 flex-1 min-h-0">
-                        {tier.highlights.slice(0, 3).map((highlight, idx) => (
-                          <div key={idx} className="flex items-start gap-2 md:gap-3">
-                            <div className="flex-shrink-0 w-4 h-4 md:w-5 md:h-5 rounded-full bg-primary-100 flex items-center justify-center mt-0.5">
-                              <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary-600" />
+                      <div className="mb-5">
+                        <p className="font-body text-xs uppercase tracking-wide text-text-muted mb-2">You get</p>
+                        <div className="space-y-2">
+                          {tier.services.map((service, idx) => (
+                            <div key={idx} className="flex items-start gap-2 md:gap-3">
+                              <div className="flex-shrink-0 w-4 h-4 md:w-5 md:h-5 rounded-full bg-primary-100 flex items-center justify-center mt-0.5">
+                                <Check className="w-2.5 h-2.5 md:w-3 md:h-3 text-primary-600" />
+                              </div>
+                              <span className="font-body text-xs md:text-sm text-text-primary leading-relaxed font-medium">{service}</span>
                             </div>
-                            <span className="font-body text-xs md:text-sm text-text-primary leading-relaxed font-medium">{highlight}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="space-y-2 md:space-y-3 mb-6 md:mb-8 flex-1 min-h-0">
+                        {tier.highlights.map((highlight, idx) => (
+                          <div key={idx} className="flex items-start gap-2 md:gap-3">
+                            <Target className="w-4 h-4 md:w-5 md:h-5 text-primary-500 flex-shrink-0 mt-0.5" />
+                            <span className="font-body text-xs md:text-sm text-text-secondary leading-relaxed">{highlight}</span>
                           </div>
                         ))}
                       </div>
 
-                      {/* CTA Button - FLIP TRIGGER */}
                       <div className="mt-auto">
-                        <button 
-                          onClick={() => handleFlip(tier.id)}
+                        <a
+                          href="/inquiry"
                           className={`w-full py-3 md:py-4 rounded-full font-semibold text-sm md:text-base transition-all duration-300 flex items-center justify-center gap-2 group ${
                             tier.popular 
-                              ? 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg hover:shadow-xl hover:scale-105' 
-                              : 'bg-gray-100 text-text-primary hover:bg-gray-200 hover:scale-105'
+                              ? 'bg-primary-600 text-white hover:bg-primary-700 shadow-lg hover:shadow-xl' 
+                              : 'bg-gray-100 text-text-primary hover:bg-gray-200'
                           }`}
                         >
                           {tier.buttonText}
                           <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-                        </button>
-                        {/* Mobile click indicator */}
-                        {!isHoverable && (
-                          <p className="text-xs text-text-muted text-center mt-2 flex items-center justify-center gap-1">
-                            <RotateCcw className="w-3 h-3" />
-                            Tap to flip
-                          </p>
-                        )}
+                        </a>
                       </div>
                     </div>
-                  </motion.div>
-
-                  {/* BACK OF CARD - FIXED */}
-                  <motion.div 
-                    initial={{ rotateY: 180 }}
-                    animate={{ rotateY: isFlipped ? 0 : 180 }}
-                    transition={{ 
-                      duration: 0.3, 
-                      ease: "easeOut"
-                    }}
-                    style={{ 
-                      backfaceVisibility: 'hidden',
-                      WebkitBackfaceVisibility: 'hidden',
-                      transformStyle: 'preserve-3d',
-                      position: 'absolute',
-                      inset: 0,
-                      willChange: 'transform',
-                    }}
-                    className={`bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl h-full min-h-[480px] md:min-h-[520px] flex flex-col ${tier.popular ? 'ring-2 ring-primary-500' : ''}`}
-                  >
-                    {/* Tree Ring Background on Back */}
-                    <div className="absolute inset-0 pointer-events-none opacity-10">
-                      <Image 
-                        src={tier.treeRingImage}
-                        alt=""
-                        fill
-                        className="object-cover scale-110"
-                      />
-                    </div>
-
-                    {/* Inner content - NO scaleX NEEDED */}
-                    <div 
-                      className="relative h-full p-4 md:p-5 flex flex-col text-white z-10 overflow-hidden"
-                    >
-                      {/* Header */}
-                      <div className="flex items-center justify-between mb-2 md:mb-3 relative z-20 flex-shrink-0">
-                        <div className="flex items-center gap-1.5 md:gap-2 min-w-0 flex-1">
-                          <div className="bg-white/20 p-1 md:p-1.5 rounded-lg flex-shrink-0">
-                            <div className="w-3 h-3 md:w-4 md:h-4">{tier.icon}</div>
-                          </div>
-                          <div className="min-w-0">
-                            <h3 className="font-display font-bold text-xs md:text-base truncate">{tier.name}</h3>
-                            <p className="font-body text-white/80 text-[11px] md:text-xs truncate">{tier.priceRange}</p>
-                          </div>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            e.stopPropagation();
-                            setFlippedCard(null);
-                          }}
-                          className="bg-white/20 hover:bg-white/30 active:bg-white/40 p-1.5 md:p-2 rounded-full transition-colors cursor-pointer relative z-50 flex-shrink-0"
-                          style={{ pointerEvents: 'auto' }}
-                          aria-label="Close card"
-                        >
-                          <X className="w-3 h-3 md:w-4 md:h-4 pointer-events-none text-white" />
-                        </button>
-                      </div>
-
-                      {/* Description */}
-                      <div className="mb-2 md:mb-3 flex-shrink-0">
-                        <p className="font-body text-white/90 text-[11px] md:text-xs leading-snug">{tier.description}</p>
-                      </div>
-
-                      {/* Perfect For */}
-                      <div className="mb-2 md:mb-2.5 flex-shrink-0">
-                        <div className="flex items-center gap-1.5 mb-0.5">
-                          <Target className="w-2.5 h-2.5 md:w-3 md:h-3 flex-shrink-0" />
-                          <h4 className="font-display font-semibold text-[11px] md:text-xs">Best for:</h4>
-                        </div>
-                        <p className="font-body text-white/90 text-[11px] md:text-xs leading-snug line-clamp-2">{tier.perfectFor}</p>
-                      </div>
-
-                      {/* Timeline */}
-                      <div className="mb-2 md:mb-2.5 flex-shrink-0">
-                        <div className="flex items-center gap-1.5 mb-0.5">
-                          <Clock className="w-2.5 h-2.5 md:w-3 md:h-3 flex-shrink-0" />
-                          <h4 className="font-display font-semibold text-[11px] md:text-xs">Timeline:</h4>
-                        </div>
-                        <p className="font-body text-white/90 text-[11px] md:text-xs leading-snug">{tier.timeline}</p>
-                      </div>
-
-                      {/* What's Included */}
-                      <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
-                        <div className="flex items-center gap-1.5 mb-1 md:mb-1.5 flex-shrink-0">
-                          <Package className="w-2.5 h-2.5 md:w-3 md:h-3 flex-shrink-0" />
-                          <h4 className="font-display font-semibold text-[11px] md:text-xs">You&apos;ll get:</h4>
-                        </div>
-                        <ul className="space-y-0.5 md:space-y-1 flex-1 min-h-0 overflow-hidden">
-                          {tier.includes.map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-1.5 min-w-0">
-                              <Check className="w-2.5 h-2.5 md:w-3 md:h-3 flex-shrink-0 mt-0.5" />
-                              <span className="font-body text-white/90 text-[11px] md:text-xs leading-snug flex-1">{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
-                      {/* CTA Button */}
-                      <a
-                        href="/inquiry"
-                        onClick={handleContactClick}
-                        className="mt-2 md:mt-2.5 w-full bg-white text-primary-700 py-2 md:py-2.5 rounded-full font-bold text-[11px] md:text-xs hover:bg-white/90 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-1.5 group shadow-lg flex-shrink-0"
-                      >
-                        Get a quote
-                        <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-                      </a>
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.div>
-            );
-          })}
+              </div>
+            </motion.div>
+          ))}
 
         </div>
 
