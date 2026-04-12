@@ -46,7 +46,7 @@ const serviceTiers = dataServiceTiers.map((tier: ServiceTier) => ({
   lifestyleImage: tierImages[tier.id]?.lifestyle || getImageUrl('service/growth.jpg'),
   treeRingImage: tierImages[tier.id]?.treeRing || getImageUrl('tree-ring-1.jpg'),
   highlights: tier.businessOutcomes.slice(0, 4), // Use first 4 business outcomes as highlights
-    buttonText: 'Learn More',
+    buttonText: 'See tier details',
   includes: [...tier.technicalFeatures, ...tier.strategicInclusions].slice(0, 6), // Combine and limit
   perfectFor: tier.idealFor,
 }));
@@ -114,7 +114,7 @@ export default function ServicesSection() {
           </h2>
           
           <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
-            Pick the tier that matches where you are. You can always grow into more.
+            Outcome-first packages built to improve trust, increase leads, and support sustainable growth.
           </p>
         </motion.div>
 
@@ -207,6 +207,7 @@ export default function ServicesSection() {
                     {/* Content */}
                     <div className="relative p-6 md:p-8 z-10 flex-1 flex flex-col min-h-0">
                       <p className="font-display text-primary-600 font-semibold italic mb-2 text-sm md:text-base">{tier.tagline}</p>
+                      <p className="font-body text-xs md:text-sm text-text-muted mb-2">Best for</p>
                       <p className="font-body text-xs md:text-sm text-text-muted mb-6 line-clamp-2">{tier.idealFor}</p>
 
                       {/* Highlights */}
@@ -312,7 +313,7 @@ export default function ServicesSection() {
                       <div className="mb-2 md:mb-2.5 flex-shrink-0">
                         <div className="flex items-center gap-1.5 mb-0.5">
                           <Target className="w-2.5 h-2.5 md:w-3 md:h-3 flex-shrink-0" />
-                          <h4 className="font-display font-semibold text-[11px] md:text-xs">Perfect For:</h4>
+                          <h4 className="font-display font-semibold text-[11px] md:text-xs">Best for:</h4>
                         </div>
                         <p className="font-body text-white/90 text-[11px] md:text-xs leading-snug line-clamp-2">{tier.perfectFor}</p>
                       </div>
@@ -330,7 +331,7 @@ export default function ServicesSection() {
                       <div className="flex-1 min-h-0 flex flex-col overflow-hidden">
                         <div className="flex items-center gap-1.5 mb-1 md:mb-1.5 flex-shrink-0">
                           <Package className="w-2.5 h-2.5 md:w-3 md:h-3 flex-shrink-0" />
-                          <h4 className="font-display font-semibold text-[11px] md:text-xs">What&apos;s Included:</h4>
+                          <h4 className="font-display font-semibold text-[11px] md:text-xs">You&apos;ll get:</h4>
                         </div>
                         <ul className="space-y-0.5 md:space-y-1 flex-1 min-h-0 overflow-hidden">
                           {tier.includes.map((item, idx) => (
@@ -348,7 +349,7 @@ export default function ServicesSection() {
                         onClick={handleContactClick}
                         className="mt-2 md:mt-2.5 w-full bg-white text-primary-700 py-2 md:py-2.5 rounded-full font-bold text-[11px] md:text-xs hover:bg-white/90 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-1.5 group shadow-lg flex-shrink-0"
                       >
-                        Get Started
+                        Get a quote
                         <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
                       </a>
                     </div>
@@ -359,6 +360,20 @@ export default function ServicesSection() {
           })}
 
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="mb-12 rounded-2xl border border-primary-200 bg-primary-50 p-6 text-center"
+        >
+          <h3 className="mb-2 text-xl font-display font-semibold text-text-primary">Who we&apos;re the best fit for</h3>
+          <p className="mx-auto max-w-3xl text-sm md:text-base text-text-secondary leading-relaxed">
+            Sproutflow Studio is built for owners who want a strategic, professional web presence that drives results.
+            If you&apos;re only looking for the cheapest possible option, we may not be the right fit—and that&apos;s okay.
+          </p>
+        </motion.div>
 
         {/* Add-on Services */}
         <motion.div
