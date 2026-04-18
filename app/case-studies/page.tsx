@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
 import { getImageUrl } from '@/lib/blob-images';
 
@@ -50,7 +50,7 @@ export default function CaseStudiesPage() {
               Real Results for Real Businesses
             </h1>
             <p className="text-lg text-gray-600 md:text-xl max-w-3xl">
-              See how we help small businesses compete at the enterprise level—without the enterprise budget. Every project starts with understanding your goals, not just building a website.
+              See how we help small businesses compete at the enterprise level, without the enterprise budget. Every project starts with understanding your goals, not just building a website.
             </p>
           </div>
         </div>
@@ -116,24 +116,92 @@ export default function CaseStudiesPage() {
             </Link>
           </div>
 
-          {/* Coming Soon */}
+          {/* More Case Studies Grid */}
           <div>
-            <h2 className="text-2xl font-display font-bold text-gray-900 mb-8">More Success Stories Coming Soon</h2>
-            
-            <div className="grid md:grid-cols-3 gap-6">
-              {[1, 2, 3].map((i) => (
-                <div 
-                  key={i}
-                  className="bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200 p-8 text-center"
-                >
-                  <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">📈</span>
+            <h2 className="text-2xl font-display font-bold text-gray-900 mb-8">More Success Stories</h2>
+
+            <div className="grid md:grid-cols-2 gap-8">
+
+              {/* NOLA Pool Solutions */}
+              <Link href="/case-studies/nola-pool-solutions" className="block group">
+                <div className="bg-white rounded-3xl border-2 border-[#0B2447]/20 overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                  <div className="relative aspect-[16/9]">
+                    <Image
+                      src={getImageUrl('work/client-logos/nps-project.png')}
+                      alt="NOLA Pool Solutions website"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <span className="inline-flex items-center gap-1 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                        ● Live
+                      </span>
+                    </div>
                   </div>
-                  <p className="text-gray-500 font-medium">
-                    New case study launching soon
-                  </p>
+                  <div className="p-6">
+                    <h3 className="text-xl font-display font-bold text-gray-900 mb-2">NOLA Pool Solutions</h3>
+                    <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                      From zero web presence to New Orleans metro area leader. Built a lead capture system that
+                      fills calendars further in advance and ranks #1 locally.
+                    </p>
+                    <div className="flex gap-6 mb-4">
+                      <div>
+                        <div className="text-2xl font-bold text-[#0B2447]">#1</div>
+                        <div className="text-xs text-gray-500">Local Google ranking</div>
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-[#0B2447]">3 wks</div>
+                        <div className="text-xs text-gray-500">Delivery</div>
+                      </div>
+                    </div>
+                    <div className="inline-flex items-center gap-2 text-primary-600 font-semibold text-sm group-hover:gap-3 transition-all">
+                      Read Case Study <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </Link>
+
+              {/* DJN Services */}
+              <Link href="/case-studies/djn-services" className="block group">
+                <div className="bg-white rounded-3xl border-2 border-gray-900/15 overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                  <div className="relative aspect-[16/9]">
+                    <Image
+                      src={getImageUrl('work/client-logos/djn-project.png')}
+                      alt="DJN Services LLC website"
+                      fill
+                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <span className="inline-flex items-center gap-1 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                        ● Live
+                      </span>
+                    </div>
+                  </div>
+                  <div className="p-6">
+                    <h3 className="text-xl font-display font-bold text-gray-900 mb-2">DJN Services LLC</h3>
+                    <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                      20 years of veteran-owned welding and hauling work, finally represented online.
+                      Complete before/after — from basic template to authoritative brand.
+                    </p>
+                    <div className="flex gap-6 mb-4">
+                      <div>
+                        <div className="text-2xl font-bold text-gray-900">20 yrs</div>
+                        <div className="text-xs text-gray-500">In business</div>
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-gray-900">2 wks</div>
+                        <div className="text-xs text-gray-500">Delivery</div>
+                      </div>
+                    </div>
+                    <div className="inline-flex items-center gap-2 text-primary-600 font-semibold text-sm group-hover:gap-3 transition-all">
+                      Read Case Study <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+
             </div>
           </div>
         </div>

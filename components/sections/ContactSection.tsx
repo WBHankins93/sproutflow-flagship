@@ -104,7 +104,7 @@ const ContactSection = () => {
           >
             <Heading level={2} className="mb-8">
               <span className="text-text-primary">Let&apos;s start </span>
-              <span className="text-primary-600 relative">
+              <span className="text-primary-600 relative italic">
                 something beautiful
               </span>
             </Heading>

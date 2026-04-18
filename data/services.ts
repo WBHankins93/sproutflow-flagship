@@ -58,7 +58,7 @@ export interface ServiceTier {
       limitations: [
         "Template-based foundation (professionally customized)",
         "Limited to 1-5 pages",
-        "No CMS — static or template-based site only",
+        "No CMS: static or template-based site only",
         "Basic integrations only",
         "Limited availability (2-3 projects per month)"
       ]
@@ -70,7 +70,7 @@ export interface ServiceTier {
       priceRange: "$2,000 - $2,800",
       timeline: "2-3 weeks",
       idealFor: "New businesses or rebrands needing validated presence",
-      description: "Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations—a foundation for long-term growth, not just online presence.",
+      description: "Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations. A foundation for long-term growth, not just online presence.",
       popular: true,
       
       businessOutcomes: [
@@ -364,8 +364,8 @@ export interface ServiceTier {
       id: "ecommerce-integration",
       name: "E-commerce Store Design & Integration",
       price: "$1,500 - $3,500",
-      description: "Custom design and integration for Shopify, WooCommerce, or other e-commerce platforms. This is NOT building a custom e-commerce platform from scratch—we design and customize your existing platform to seamlessly match your custom website brand. Perfect for businesses who want Shopify's proven infrastructure but need it to look and feel like part of their custom website.",
-      businessValue: "Seamless brand experience between your custom website and e-commerce store. Your customers never feel like they've left your site when shopping—it all feels like one cohesive brand experience.",
+      description: "Custom design and integration for Shopify, WooCommerce, or other e-commerce platforms. This is NOT building a custom e-commerce platform from scratch. We design and customize your existing platform to seamlessly match your custom website brand. Perfect for businesses who want Shopify's proven infrastructure but need it to look and feel like part of their custom website.",
+      businessValue: "Seamless brand experience between your custom website and e-commerce store. Your customers never feel like they've left your site when shopping. It all feels like one cohesive brand experience.",
       deliverables: [
         "Custom Shopify/WooCommerce theme design matching your brand",
         "Seamless integration between custom website and store",

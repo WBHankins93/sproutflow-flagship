@@ -64,7 +64,7 @@ export default function HeroSection() {
           >
             Websites that turn visitors
             <br />
-            <span className="text-green-300">into paying customers</span>
+            <span className="text-green-300 italic">into paying customers</span>
           </motion.h1>
 
           {/* Value Proposition */}
@@ -77,8 +77,7 @@ export default function HeroSection() {
               textShadow: '3px 3px 12px rgba(0,0,0,0.9), 1px 1px 6px rgba(0,0,0,0.8)'
             }}
           >
-            We design and build high-performing websites for small businesses that need more leads,
-            better credibility, and real results — not just a redesign.
+            We design and build high-performing websites for small businesses that need more leads, better credibility, and real results. Not just a redesign.
           </motion.p>
 
           {/* Primary CTA */}

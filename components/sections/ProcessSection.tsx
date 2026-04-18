@@ -134,7 +134,7 @@ export default function ProcessSection() {
 
           <h2 className="text-4xl md:text-5xl font-display font-bold text-text-primary mb-4">
             How We{' '}
-            <span className="text-primary-600">Grow Together</span>
+            <span className="text-primary-600 italic">Grow Together</span>
           </h2>
           
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
@@ -192,7 +192,7 @@ export default function ProcessSection() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm text-text-secondary mb-4 leading-relaxed text-center">
+                  <p className="text-sm text-text-secondary mb-4 leading-relaxed text-center font-body">
                     {step.description}
                   </p>
 

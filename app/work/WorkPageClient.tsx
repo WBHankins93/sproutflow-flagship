@@ -99,7 +99,7 @@ export default function WorkPage() {
                 Real websites for real businesses
               </h1>
               <p className="text-lg text-gray-600 md:text-xl">
-                Every project starts with listening—to you, your customers, and what actually moves the needle for your business. What you&apos;ll see below are live sites built to work hard from day one, with room to grow as you do.
+                Every project starts with listening. To you, your customers, and what actually moves the needle for your business. What you&apos;ll see below are live sites built to work hard from day one, with room to grow as you do.
               </p>
             </div>
             <div className="rounded-3xl border border-primary-200/60 bg-white/70 p-6 shadow-lg backdrop-blur">
@@ -107,7 +107,7 @@ export default function WorkPage() {
                 How I show up
               </p>
               <ul className="mt-4 space-y-3 text-sm text-gray-600">
-                <li>• Listen first, build second—your goals drive every decision</li>
+                <li>• Listen first, build second. Your goals drive every decision</li>
                 <li>• Focus on what moves the needle, not just what looks good</li>
                 <li>• Build sites that work hard from launch and grow with you</li>
               </ul>

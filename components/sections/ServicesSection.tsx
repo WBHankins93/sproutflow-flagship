@@ -5,7 +5,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Zap, Target, Rocket, Check, ArrowRight, Package, Sparkles } from 'lucide-react';
+import { Zap, Target, Rocket, Check, ArrowRight, Package, Sparkles, ChevronDown } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
 import { serviceTiers as dataServiceTiers } from '@/data/services';
 import type { ServiceTier } from '@/data/services';
@@ -50,6 +50,155 @@ const serviceTiers = dataServiceTiers.map((tier: ServiceTier) => ({
   buttonText: 'Start this tier',
 }));
 
+// Add-on accordion data
+const addOnCategories = [
+  {
+    id: 'optimization',
+    title: 'Optimization & Strategy',
+    subtitle: 'Performance and ongoing support',
+    items: [
+      {
+        name: 'SEO Strategy',
+        description: 'Keyword research, content optimization, and performance tracking',
+        price: '$800 - $2,000',
+        icon: <Check className="w-5 h-5 text-primary-600" />,
+      },
+      {
+        name: 'Professional Copywriting',
+        description: 'Conversion-focused copy for your website',
+        price: '$400 - $1,200',
+        icon: <Check className="w-5 h-5 text-primary-600" />,
+      },
+      {
+        name: 'Website Care Plans',
+        description: 'Agency-managed hosting with proactive security',
+        price: 'From $200/mo',
+        icon: <Check className="w-5 h-5 text-primary-600" />,
+      },
+    ],
+  },
+  {
+    id: 'enhancements',
+    title: 'Website Enhancements',
+    subtitle: 'Extend or improve your website',
+    items: [
+      {
+        name: 'Shopify Design Refresh',
+        description: 'Template customization to match your brand',
+        price: 'Starting at $1,000',
+        icon: <Package className="w-5 h-5 text-primary-600" />,
+      },
+      {
+        name: 'Content & Blog Setup',
+        description: 'SEO-optimized blog posts and content strategy',
+        price: 'From $250/post',
+        icon: <Package className="w-5 h-5 text-primary-600" />,
+      },
+    ],
+  },
+];
+
+function AddOnsAccordion() {
+  const [openCategory, setOpenCategory] = useState<string | null>(null);
+
+  const toggleCategory = (id: string) => {
+    setOpenCategory(openCategory === id ? null : id);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="relative rounded-2xl border border-gray-200 overflow-hidden shadow-lg"
+    >
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-100 via-accent-100/60 to-nature-100/70 z-0" />
+
+      <div className="relative z-10 p-6 md:p-8">
+        <h3 className="text-2xl font-display font-bold text-text-primary mb-1 text-center">
+          Add-ons
+        </h3>
+        <p className="text-sm text-text-secondary mb-6 text-center">
+          Optional services to enhance your website
+        </p>
+
+        <div className="space-y-3 max-w-3xl mx-auto">
+          {addOnCategories.map((category) => {
+            const isOpen = openCategory === category.id;
+            return (
+              <div
+                key={category.id}
+                className="rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm overflow-hidden transition-shadow hover:shadow-md"
+              >
+                {/* Accordion Header */}
+                <button
+                  onClick={() => toggleCategory(category.id)}
+                  className="w-full flex items-center justify-between p-5 text-left group"
+                >
+                  <div>
+                    <h4 className="font-semibold text-text-primary text-lg group-hover:text-primary-700 transition-colors">
+                      {category.title}
+                    </h4>
+                    <p className="text-sm text-text-muted mt-0.5">{category.subtitle}</p>
+                  </div>
+                  <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="flex-shrink-0 ml-4"
+                  >
+                    <ChevronDown className="w-5 h-5 text-text-muted" />
+                  </motion.div>
+                </button>
+
+                {/* Accordion Content */}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 pb-5 pt-1">
+                        <div className="space-y-3">
+                          {category.items.map((item) => (
+                            <div
+                              key={item.name}
+                              className="flex items-start gap-3 p-3 rounded-lg bg-white/60 border border-gray-100"
+                            >
+                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary-50 flex items-center justify-center mt-0.5">
+                                {item.icon}
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                                  <h5 className="font-semibold text-text-primary text-[0.95rem]">
+                                    {item.name}
+                                  </h5>
+                                  <span className="text-primary-600 font-bold text-sm whitespace-nowrap">
+                                    {item.price}
+                                  </span>
+                                </div>
+                                <p className="text-sm text-text-secondary mt-1">{item.description}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function ServicesSection() {
   return (
     <section id="services" className="relative py-24 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
@@ -81,7 +230,7 @@ export default function ServicesSection() {
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-primary mb-6">
             Four Ways to{' '}
-            <span className="text-primary-600">Work Together</span>
+            <span className="text-primary-600 italic">Work Together</span>
           </h2>
           
           <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
@@ -210,127 +359,12 @@ export default function ServicesSection() {
           <h3 className="mb-2 text-xl font-display font-semibold text-text-primary">Who we&apos;re the best fit for</h3>
           <p className="mx-auto max-w-3xl text-sm md:text-base text-text-secondary leading-relaxed">
             Sproutflow Studio is built for owners who want a strategic, professional web presence that drives results.
-            If you&apos;re only looking for the cheapest possible option, we may not be the right fit—and that&apos;s okay.
+            If you&apos;re only looking for the cheapest possible option, we may not be the right fit. And that&apos;s okay.
           </p>
         </motion.div>
 
-        {/* Add-on Services */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="relative rounded-2xl border border-gray-200 p-8 md:p-10 shadow-lg overflow-hidden"
-        >
-          {/* Background with more noticeable gradient matching site colors */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-100 via-accent-100/60 to-nature-100/70 z-0" />
-          
-          {/* Content */}
-          <div className="relative z-10">
-          <h3 className="text-2xl font-display font-bold text-text-primary mb-2 text-center">
-            Add-ons
-          </h3>
-          <p className="text-text-secondary mb-8 text-center">
-            Enhance your website with these optional services
-          </p>
-
-          {/* CATEGORY A: Optimization & Strategy */}
-          <div className="mb-12">
-            <h4 className="text-lg font-semibold text-primary-700 mb-6 text-center">
-              Optimization & Strategy
-            </h4>
-            <p className="text-sm text-text-muted mb-6 text-center max-w-2xl mx-auto">
-              Services that improve performance or ongoing support
-            </p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              
-              {/* SEO Strategy & Optimization */}
-            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                <Check className="w-6 h-6 text-primary-600" />
-              </div>
-              <div>
-                  <h4 className="font-semibold text-text-primary mb-2 text-lg">SEO Strategy</h4>
-                  <p className="text-sm text-text-secondary mb-3">Strategic SEO optimization for existing websites—keyword research, content optimization, and performance tracking</p>
-                <p className="text-primary-600 font-bold text-lg">$800 - $2,000</p>
-                  <p className="text-xs text-text-muted mt-2">Perfect for sites that need a boost</p>
-                </div>
-            </div>
-
-              {/* Professional Copywriting */}
-            <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-              <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                  <Check className="w-6 h-6 text-primary-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-text-primary mb-2 text-lg">Professional Copywriting</h4>
-                  <p className="text-sm text-text-secondary mb-3">Transform your content into conversion-focused copy</p>
-                  <p className="text-primary-600 font-bold text-lg">$400 - $1,200</p>
-                  <p className="text-xs text-text-muted mt-2">
-                    Small sites: $400-$600 • Established: $800-$1,000 • Complex: $1,200+
-                  </p>
-                </div>
-              </div>
-
-              {/* Website Care Plans */}
-              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                  <Check className="w-6 h-6 text-primary-600" />
-              </div>
-              <div>
-                  <h4 className="font-semibold text-text-primary mb-2 text-lg">Website Care Plans</h4>
-                  <p className="text-sm text-text-secondary mb-3">True agency-managed hosting with proactive security and priority support</p>
-                  <p className="text-primary-600 font-bold text-lg">From $200/mo</p>
-                </div>
-              </div>
-
-              </div>
-            </div>
-
-          {/* CATEGORY B: Website Enhancements */}
-          <div>
-            <h4 className="text-lg font-semibold text-primary-700 mb-6 text-center">
-              Website Enhancements
-            </h4>
-            <p className="text-sm text-text-muted mb-6 text-center max-w-2xl mx-auto">
-              Services that extend or improve your website
-            </p>
-          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto justify-items-center">
-              
-              {/* Shopify Design Refresh */}
-              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 w-full">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                  <Package className="w-6 h-6 text-primary-600" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-text-primary mb-2 text-lg">Shopify Design Refresh</h4>
-                  <p className="text-sm text-text-secondary mb-3">Quick design uplift for existing Shopify stores—template customization to match your brand</p>
-                  <p className="text-primary-600 font-bold text-lg">Starting at $1,000</p>
-                  <p className="text-xs text-text-muted mt-2">
-                    Pricing varies based on scope and complexity
-                  </p>
-                </div>
-              </div>
-
-              {/* Content & Blog Setup */}
-              <div className="flex items-start gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors border border-gray-100 w-full">
-                <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                  <Package className="w-6 h-6 text-primary-600" />
-              </div>
-              <div>
-                  <h4 className="font-semibold text-text-primary mb-2 text-lg">Content & Blog Setup</h4>
-                  <p className="text-sm text-text-secondary mb-3">SEO-optimized blog posts and content strategy</p>
-                  <p className="text-primary-600 font-bold text-lg">From $250/post</p>
-                  <p className="text-xs text-text-muted mt-2">
-                    Single post: $250 • Full strategy: $600 (3 posts + roadmap)
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-          </div>
-        </motion.div>
+        {/* Add-on Services - Accordion */}
+        <AddOnsAccordion />
 
       </Container>
     </section>

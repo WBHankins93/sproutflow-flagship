@@ -2,15 +2,15 @@
 
 export const heroContent = {
   headline: "Business growth strategy that happens to include a website",
-  subheading: "Most New Orleans agencies focus on affordable website building. We focus on business growth strategy. We bring the strategic thinking of $30,000 NYC agencies to New Orleans small businesses at $3,500-$15,000 because we have lower costs—not because we deliver less value.",
-  description: "Our clients invest in revenue-generating assets, not digital brochures. Every project starts with understanding your business problems and revenue goals—not just how many pages you need.",
+  subheading: "Most New Orleans agencies focus on affordable website building. We focus on business growth strategy. We bring the strategic thinking of $30,000 NYC agencies to New Orleans small businesses at $3,500-$15,000 because we have lower costs, not because we deliver less value.",
+  description: "Our clients invest in revenue-generating assets, not digital brochures. Every project starts with understanding your business problems and revenue goals, not just how many pages you need.",
   primaryCTA: "Start Your Project",
   secondaryCTA: "View Our Work"
 };
 
 export const aboutContent = {
   headline: "Strategic thinking from NYC and SF agencies, at New Orleans prices",
-  lead: "We deliver the strategic thinking and quality of NYC and SF agencies at 40-50% lower prices because we're based in New Orleans with lower operational costs—not because we cut corners on quality.",
+  lead: "We deliver the strategic thinking and quality of NYC and SF agencies at 40-50% lower prices because we're based in New Orleans with lower operational costs, not because we cut corners on quality.",
   story: [
     "After years of building infrastructure for Fortune 500 companies and scaling startups, we recognized a gap in the market: small businesses deserved the same level of technical excellence and strategic thinking typically reserved for enterprise clients.",
     "We founded Sproutflow to bring that same precision, reliability, and business focus to companies ready to compete at the highest level. Every project leverages proven methodologies refined through years of enterprise work.",
@@ -39,7 +39,7 @@ export const servicesContent = {
       priceRange: "$2,000 - $2,800",
       timeline: "2-3 weeks",
       ideal: "New businesses or rebrands needing validated presence",
-      description: "Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations—a foundation for long-term growth, not just online presence.",
+      description: "Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations. A foundation for long-term growth, not just online presence.",
       businessOutcomes: [
         "Validated professional market presence",
         "Clear customer conversion pathway aligned with business goals",
@@ -119,7 +119,7 @@ export const servicesContent = {
       { 
         name: "E-commerce Store Design & Integration", 
         price: "$1,500 - $3,500",
-        description: "Custom design for Shopify/WooCommerce stores to match your website—not building a custom platform"
+        description: "Custom design for Shopify/WooCommerce stores to match your website, not building a custom platform"
       },
       { 
         name: "Ongoing SEO Strategy", 

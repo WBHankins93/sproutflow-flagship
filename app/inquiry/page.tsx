@@ -56,7 +56,7 @@ export default function InquiryPage() {
               <ul className="mt-4 space-y-3 text-sm text-gray-600">
                 <li>• Takes about 3–5 minutes to complete</li>
                 <li>• We respond within 24 hours</li>
-                <li>• No commitment—just the next steps</li>
+                <li>• No commitment, just the next steps</li>
               </ul>
             </div>
           </div>

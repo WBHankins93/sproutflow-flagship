@@ -28,7 +28,7 @@ const processSteps = [
     duration: '30-45 minutes',
     icon: <Sprout className="w-6 h-6" />,
     description: 'We start by understanding your business, not your website. What problems are you trying to solve? Who are your customers? What does success look like?',
-    highlight: "This isn't a sales call—it's a consulting session where we figure out if we're the right fit.",
+    highlight: "This isn't a sales call. It's a consulting session where we figure out if we're the right fit.",
     deliverables: [
       'Deep understanding of your business goals',
       'Clear identification of target audience',
@@ -68,7 +68,7 @@ const processSteps = [
     title: 'Design',
     duration: '1-2 weeks, depending on scope',
     icon: <Layers className="w-6 h-6" />,
-    description: "Design is where strategy becomes visual. We translate your goals and audience into layouts, components, and a visual system—then hand you the keys for review before a single line of code is written.",
+    description: "Design is where strategy becomes visual. We translate your goals and audience into layouts, components, and a visual system, then hand you the keys for review before a single line of code is written.",
     highlight: 'Nothing moves to build until you sign off on the design.',
     deliverables: [
       'Moodboard and visual direction for your approval',
@@ -89,7 +89,7 @@ const processSteps = [
     title: 'Build & Review',
     duration: '2-3 weeks, depending on scope',
     icon: <Code2 className="w-6 h-6" />,
-    description: "Approved designs get converted into a fast, maintainable, real-content site. You have access to a staging environment throughout—so there are zero surprises on launch day.",
+    description: "Approved designs get converted into a fast, maintainable, real-content site. You have access to a staging environment throughout, so there are zero surprises on launch day.",
     highlight: 'No surprises. No missed expectations.',
     deliverables: [
       'Staging URL with full site build and real content loaded',
@@ -110,7 +110,7 @@ const processSteps = [
     title: 'Launch & Handoff',
     duration: '1-2 days',
     icon: <Rocket className="w-6 h-6" />,
-    description: "We manage the full go-live: DNS migration, SSL verification, analytics confirmation, and Search Console submission. Then we hand you complete ownership—with training, documentation, and a 48-hour post-launch monitoring window.",
+    description: "We manage the full go-live: DNS migration, SSL verification, analytics confirmation, and Search Console submission. Then we hand you complete ownership, with training, documentation, and a 48-hour post-launch monitoring window.",
     highlight: 'You leave confident and ready to manage your site.',
     deliverables: [
       'Managed DNS cutover and SSL verification',
@@ -199,7 +199,7 @@ export default function HowWeWorkPage() {
                 How We Work With Clients
               </h1>
               <p className="text-lg text-gray-600 md:text-xl">
-                At Sproutflow Studio, we don&apos;t just build websites—we build solutions. Our process mirrors enterprise consulting methodologies, scaled for small businesses who deserve the same level of professionalism and care.
+                At Sproutflow Studio, we don&apos;t just build websites. We build solutions. Our process mirrors enterprise consulting methodologies, scaled for small businesses who deserve the same level of professionalism and care.
               </p>
             </div>
             <div className="rounded-3xl border border-primary-200/60 bg-white/70 p-6 shadow-lg backdrop-blur">
@@ -333,7 +333,7 @@ export default function HowWeWorkPage() {
               <Link href="/#process" className="text-primary-600 hover:text-primary-700 underline">
                 How We Grow Together
               </Link>
-              {' '}— our visual process overview
+              , our visual process overview
             </p>
           </div>
         </div>

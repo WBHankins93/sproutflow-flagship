@@ -60,7 +60,7 @@ const AboutSection: React.FC = () => {
               </BodyText>
 
               <BodyText className="mb-4 leading-relaxed">
-                Then I noticed something that bothered me: the businesses I actually loved—the ones making communities better—looked amateur online. Not because they lacked professionalism. Just because professional design felt financially out of reach.
+                Then I noticed something that bothered me: the businesses I actually loved, the ones making communities better, looked amateur online. Not because they lacked professionalism. Just because professional design felt financially out of reach.
               </BodyText>
 
               <BodyText className="mb-4 leading-relaxed">

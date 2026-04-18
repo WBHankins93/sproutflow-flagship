@@ -54,10 +54,10 @@ export const workProjects: WorkProject[] = [
   {
     id: 'nola-pool-solutions',
     title: 'NOLA Pool Solutions',
-    client: 'NOLA Pool Solutions · Gulf South',
+    client: 'NOLA Pool Solutions · New Orleans Metro',
     status: 'Live',
     description:
-      'Shaping a premium maintenance and renovation experience tailored to the Gulf South climate, emphasizing trust, licensing, and rapid quoting.',
+      'Shaping a premium maintenance and renovation experience for the New Orleans metro area, emphasizing trust, licensing, and rapid quoting.',
     url: 'https://nolapoolsolutions.com/',
     services: ['Positioning', 'Service Packaging', 'Lead Capture'],
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
@@ -89,15 +89,31 @@ export const workProjects: WorkProject[] = [
     client: 'Personal Project · New Orleans, LA',
     status: 'Live',
     description:
-      'An end-to-end build that paired storytelling with motion to launch a personal brand online and experiment with modern UI patterns.',
+      'A bold, dark-themed personal portfolio with neon green accents showcasing 6+ years of building customer-facing applications across enterprise architecture and production reliability.',
     url: 'https://benhankins.vercel.app/',
     services: ['Creative Direction', 'Visual Design', 'Content Strategy'],
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     highlight:
       'The project that sparked Sproutflow.',
-    gradient: ['#163323', '#22543D', '#5BA461'],
+    gradient: ['#0A0A0A', '#1A1A1A', '#00FF41'],
     logo: 'work/client-logos/b-logo-back-removed.png',
     backgroundImage: 'work/client-logos/benhankins-project.png',
+  },
+  {
+    id: 'djn-services',
+    title: 'DJN Services LLC',
+    client: 'DJN Services LLC · North Alabama',
+    status: 'Live',
+    description:
+      'A rugged, high-contrast site for a welding, hauling, and removal company built around fast response, clear pricing, and same-day scheduling for residential and commercial clients.',
+    url: 'https://djnservices.com/',
+    services: ['Web Design', 'Brand Positioning', 'Lead Capture'],
+    tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+    highlight:
+      'Reliable work. Built to last.',
+    gradient: ['#1A1A1A', '#FF6B00', '#FF8C00'],
+    logo: 'work/client-logos/djn-logo.webp',
+    backgroundImage: 'work/client-logos/djn-project.png',
   },
 ];
 
