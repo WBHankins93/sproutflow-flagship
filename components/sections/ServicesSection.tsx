@@ -2,8 +2,8 @@
 
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { Zap, Target, Rocket, Check, ArrowRight, Package, Sparkles, ChevronDown } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
