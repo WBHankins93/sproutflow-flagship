@@ -113,7 +113,7 @@ export const workProjects: WorkProject[] = [
       'Reliable work. Built to last.',
     gradient: ['#1A1A1A', '#FF6B00', '#FF8C00'],
     logo: 'work/client-logos/djn-logo.webp',
-    backgroundImage: 'work/client-logos/djn-project.png',
+    backgroundImage: 'work/client-logos/djn-new-home-page.png',
   },
 ];
 

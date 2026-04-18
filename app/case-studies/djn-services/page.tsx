@@ -29,7 +29,7 @@ export default function DJNServicesCaseStudy() {
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0 bg-[#1A1A1A]">
           <Image
-            src={getImageUrl('work/client-logos/djn-project.png')}
+            src={getImageUrl('work/client-logos/djn-new-home-page.png')}
             alt="DJN Services LLC website"
             fill
             className="object-contain"
@@ -151,8 +151,8 @@ export default function DJNServicesCaseStudy() {
             The old site had the information. It just wasn&apos;t working hard enough.
           </p>
 
+          {/* Homepage before/after */}
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Before */}
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-100 text-red-600 text-sm font-bold">✕</span>
@@ -172,7 +172,6 @@ export default function DJNServicesCaseStudy() {
               </p>
             </div>
 
-            {/* After */}
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-green-100 text-green-600 text-sm font-bold">✓</span>
@@ -180,8 +179,8 @@ export default function DJNServicesCaseStudy() {
               </div>
               <div className="rounded-2xl overflow-hidden border-2 border-primary-200 shadow-md">
                 <Image
-                  src={getImageUrl('work/client-logos/djn-project.png')}
-                  alt="DJN Services new website"
+                  src="/images/case-studies/djn-new-home-page.png"
+                  alt="DJN Services new homepage"
                   width={700}
                   height={440}
                   className="w-full"
@@ -193,9 +192,13 @@ export default function DJNServicesCaseStudy() {
             </div>
           </div>
 
-          {/* Before services comparison */}
+          {/* Services before/after */}
           <div className="grid md:grid-cols-2 gap-8 mt-8">
             <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-100 text-red-600 text-sm font-bold">✕</span>
+                <h3 className="text-lg font-bold text-gray-900">Before</h3>
+              </div>
               <div className="rounded-2xl overflow-hidden border-2 border-red-200 shadow-md">
                 <Image
                   src="/images/case-studies/djn-before-services.png"
@@ -210,6 +213,32 @@ export default function DJNServicesCaseStudy() {
               </p>
             </div>
             <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-green-100 text-green-600 text-sm font-bold">✓</span>
+                <h3 className="text-lg font-bold text-gray-900">After</h3>
+              </div>
+              <div className="rounded-2xl overflow-hidden border-2 border-primary-200 shadow-md">
+                <Image
+                  src="/images/case-studies/djn-services-after.png"
+                  alt="DJN Services new services page"
+                  width={700}
+                  height={440}
+                  className="w-full"
+                />
+              </div>
+              <p className="text-sm text-gray-500 mt-3 text-center">
+                Clean service cards — easy to scan, clear pricing and action
+              </p>
+            </div>
+          </div>
+
+          {/* About before/after */}
+          <div className="grid md:grid-cols-2 gap-8 mt-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-red-100 text-red-600 text-sm font-bold">✕</span>
+                <h3 className="text-lg font-bold text-gray-900">Before</h3>
+              </div>
               <div className="rounded-2xl overflow-hidden border-2 border-red-200 shadow-md">
                 <Image
                   src="/images/case-studies/djn-before-about.png"
@@ -221,6 +250,24 @@ export default function DJNServicesCaseStudy() {
               </div>
               <p className="text-sm text-gray-500 mt-3 text-center">
                 Veteran-owned story buried in dense paragraphs — never front and center
+              </p>
+            </div>
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-green-100 text-green-600 text-sm font-bold">✓</span>
+                <h3 className="text-lg font-bold text-gray-900">After</h3>
+              </div>
+              <div className="rounded-2xl overflow-hidden border-2 border-primary-200 shadow-md">
+                <Image
+                  src="/images/case-studies/djn-after-about.png"
+                  alt="DJN Services new about page"
+                  width={700}
+                  height={440}
+                  className="w-full"
+                />
+              </div>
+              <p className="text-sm text-gray-500 mt-3 text-center">
+                Veteran-owned story front and center — builds trust immediately
               </p>
             </div>
           </div>

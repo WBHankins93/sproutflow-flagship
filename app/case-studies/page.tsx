@@ -167,7 +167,7 @@ export default function CaseStudiesPage() {
                 <div className="bg-white rounded-3xl border-2 border-gray-900/15 overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
                   <div className="relative aspect-[16/9] bg-[#1A1A1A]">
                     <Image
-                      src={getImageUrl('work/client-logos/djn-project.png')}
+                      src={getImageUrl('work/client-logos/djn-new-home-page.png')}
                       alt="DJN Services LLC website"
                       fill
                       className="object-contain group-hover:scale-105 transition-transform duration-500"
