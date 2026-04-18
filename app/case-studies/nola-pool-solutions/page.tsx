@@ -39,34 +39,36 @@ export default function NOLAPoolCaseStudy() {
         </div>
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 text-white/90 mb-6">
-            <span className="h-px w-12 bg-white/60" />
-            <span className="text-sm font-semibold uppercase tracking-[0.24em]">Case Study</span>
-            <span className="h-px w-12 bg-white/60" />
-          </div>
-
-          <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-6 drop-shadow-lg">
-            NOLA Pool Solutions
-          </h1>
-
-          <p className="text-xl md:text-2xl text-white/90 mb-10 drop-shadow-md">
-            From invisible to area leader in 3 weeks
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-8 text-white">
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-1">Zero</div>
-              <div className="text-sm text-white/80">Starting point — no website</div>
+          <div className="backdrop-blur-md bg-black/35 border border-white/15 rounded-3xl px-8 md:px-14 py-10 md:py-12 shadow-2xl">
+            <div className="inline-flex items-center gap-2 text-white/90 mb-6">
+              <span className="h-px w-12 bg-white/60" />
+              <span className="text-sm font-semibold uppercase tracking-[0.24em]">Case Study</span>
+              <span className="h-px w-12 bg-white/60" />
             </div>
-            <div className="w-px bg-white/30 hidden sm:block" />
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-1">#1</div>
-              <div className="text-sm text-white/80">Local Google ranking</div>
-            </div>
-            <div className="w-px bg-white/30 hidden sm:block" />
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-1">3 weeks</div>
-              <div className="text-sm text-white/80">Delivery timeline</div>
+
+            <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-6 drop-shadow-lg">
+              NOLA Pool Solutions
+            </h1>
+
+            <p className="text-xl md:text-2xl text-white/90 mb-10 drop-shadow-md">
+              From invisible to area leader in 3 weeks
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-8 text-white">
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-1">Zero</div>
+                <div className="text-sm text-white/80">Starting point — no website</div>
+              </div>
+              <div className="w-px bg-white/30 hidden sm:block" />
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-1">#1</div>
+                <div className="text-sm text-white/80">Local Google ranking</div>
+              </div>
+              <div className="w-px bg-white/30 hidden sm:block" />
+              <div className="text-center">
+                <div className="text-4xl font-bold mb-1">3 weeks</div>
+                <div className="text-sm text-white/80">Delivery timeline</div>
+              </div>
             </div>
           </div>
         </div>
