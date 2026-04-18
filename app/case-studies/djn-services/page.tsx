@@ -160,7 +160,7 @@ export default function DJNServicesCaseStudy() {
               </div>
               <div className="rounded-2xl overflow-hidden border-2 border-red-200 shadow-md">
                 <Image
-                  src="/images/case-studies/djn-before-home.png"
+                  src={getImageUrl('case-studies/djn-before-home.png')}
                   alt="DJN Services old homepage"
                   width={700}
                   height={440}
@@ -179,7 +179,7 @@ export default function DJNServicesCaseStudy() {
               </div>
               <div className="rounded-2xl overflow-hidden border-2 border-primary-200 shadow-md">
                 <Image
-                  src="/images/case-studies/djn-new-home-page.png"
+                  src={getImageUrl('case-studies/djn-new-home-page.png')}
                   alt="DJN Services new homepage"
                   width={700}
                   height={440}
@@ -201,7 +201,7 @@ export default function DJNServicesCaseStudy() {
               </div>
               <div className="rounded-2xl overflow-hidden border-2 border-red-200 shadow-md">
                 <Image
-                  src="/images/case-studies/djn-before-services.png"
+                  src={getImageUrl('case-studies/djn-before-services.png')}
                   alt="DJN Services old services page"
                   width={700}
                   height={440}
@@ -219,7 +219,7 @@ export default function DJNServicesCaseStudy() {
               </div>
               <div className="rounded-2xl overflow-hidden border-2 border-primary-200 shadow-md">
                 <Image
-                  src="/images/case-studies/djn-services-after.png"
+                  src={getImageUrl('case-studies/djn-services-after.png')}
                   alt="DJN Services new services page"
                   width={700}
                   height={440}
@@ -241,7 +241,7 @@ export default function DJNServicesCaseStudy() {
               </div>
               <div className="rounded-2xl overflow-hidden border-2 border-red-200 shadow-md">
                 <Image
-                  src="/images/case-studies/djn-before-about.png"
+                  src={getImageUrl('case-studies/djn-before-about.png')}
                   alt="DJN Services old about page"
                   width={700}
                   height={440}
@@ -259,7 +259,7 @@ export default function DJNServicesCaseStudy() {
               </div>
               <div className="rounded-2xl overflow-hidden border-2 border-primary-200 shadow-md">
                 <Image
-                  src="/images/case-studies/djn-after-about.png"
+                  src={getImageUrl('case-studies/djn-after-about.png')}
                   alt="DJN Services new about page"
                   width={700}
                   height={440}
