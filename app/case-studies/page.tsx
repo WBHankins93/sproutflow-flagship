@@ -165,12 +165,12 @@ export default function CaseStudiesPage() {
               {/* DJN Services */}
               <Link href="/case-studies/djn-services" className="block group">
                 <div className="bg-white rounded-3xl border-2 border-gray-900/15 overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
-                  <div className="relative aspect-[16/9]">
+                  <div className="relative aspect-[16/9] bg-[#1A1A1A]">
                     <Image
                       src={getImageUrl('work/client-logos/djn-project.png')}
                       alt="DJN Services LLC website"
                       fill
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      className="object-contain group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                     <div className="absolute bottom-4 left-4">

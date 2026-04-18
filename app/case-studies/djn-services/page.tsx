@@ -27,15 +27,15 @@ export default function DJNServicesCaseStudy() {
     <>
       {/* Hero */}
       <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 bg-[#1A1A1A]">
           <Image
             src={getImageUrl('work/client-logos/djn-project.png')}
             alt="DJN Services LLC website"
             fill
-            className="object-cover object-top"
+            className="object-contain"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/80" />
         </div>
 
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
@@ -184,7 +184,7 @@ export default function DJNServicesCaseStudy() {
                   alt="DJN Services new website"
                   width={700}
                   height={440}
-                  className="w-full object-cover"
+                  className="w-full"
                 />
               </div>
               <p className="text-sm text-gray-500 mt-3 text-center">
