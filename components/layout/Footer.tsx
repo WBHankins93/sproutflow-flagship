@@ -41,10 +41,10 @@ export const Footer: React.FC = () => {
           
           {/* Company Info with Logo - Left aligned */}
           <div>
-            <Image 
-              src={getImageUrl('logo/main-logo-Photoroom.png')} 
+            <Image
+              src={getImageUrl('logo/sproutflow-white-logo.png')}
               alt="Sproutflow Studio"
-              width={650}  
+              width={650}
               height={217}
               className="h-40 md:h-44 w-auto mb-6"
               priority
