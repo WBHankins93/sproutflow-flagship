@@ -201,7 +201,7 @@ function AddOnsAccordion() {
 
 export default function ServicesSection() {
   return (
-    <section id="services" className="relative py-24 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
+    <section id="services" className="relative py-24 bg-gradient-to-b from-white via-primary-50/50 to-white overflow-hidden">
       
       {/* Subtle Background Pattern */}
       <div 

@@ -33,7 +33,8 @@ export interface CaseStudy {
   /** What was built. Brief, outcomes emphasized. */
   built: string[];
   results: CaseStudyStat[];
-  testimonial: {
+  /** Omit until a real, approved client quote exists - the section simply won't render. */
+  testimonial?: {
     quote: string;
     name: string;
     role: string;
@@ -63,7 +64,7 @@ export const caseStudies: CaseStudy[] = [
     clientName: 'Second Line Psychiatry',
     headline: '50% more qualified inquiries for a New Orleans telehealth practice',
     summary:
-      'Second Line Psychiatry is a telehealth psychiatry practice serving families in New Orleans. We designed and built a trauma-informed, privacy-first website that helps families understand their care options and reach out with confidence. After launch, qualified patient inquiries grew 50%. The practice now spends its first conversations on care, not on explaining the basics.',
+      'Second Line Psychiatry is a telehealth psychiatry practice serving families in New Orleans. The practice had no current website and new patients arrived through referrals alone. We designed and built a trauma-informed, privacy-first website with booking connected to the practice’s Google Business profile. After launch, qualified patient inquiries grew 50%, and the team now spends its first conversations on care, not on explaining the basics.',
     heroImage: 'work/client-logos/second-line-project.png',
     heroStats: [
       { value: '50%', label: 'More qualified inquiries' },
@@ -71,9 +72,10 @@ export const caseStudies: CaseStudy[] = [
       { value: 'New Orleans', label: 'Rooted in local culture' },
     ],
     problem:
-      'Families looking for psychiatric care need to trust a practice before they ever pick up the phone. Second Line Psychiatry had the clinical expertise but no web presence that reflected its compassionate, culturally grounded approach. Prospective patients could not tell what made the practice different, and inquiries that did arrive often were not a fit.',
+      'Families looking for psychiatric care need to trust a practice before they ever pick up the phone. Second Line Psychiatry had the clinical expertise but no current website - growth depended entirely on referrals. Prospective patients could not find the practice, see what made it different, or book without calling.',
     built: [
       'A custom website designed around the patient journey, from first visit to booked appointment',
+      'A booking platform connected to the practice’s Google Business profile, so patients book from search',
       'Trauma-informed copy and structure that answers the questions families actually have',
       'Accessibility work so the site serves everyone, including assistive technology users',
       'A visual identity inspired by New Orleans second line traditions',
@@ -84,9 +86,9 @@ export const caseStudies: CaseStudy[] = [
       { value: 'Live', label: 'Serving families across the New Orleans area' },
     ],
     testimonial: {
-      // TODO: Replace with a real, approved client quote from Second Line Psychiatry.
-      quote: '[PLACEHOLDER - client testimonial pending approval]',
-      name: '[PLACEHOLDER - name]',
+      quote:
+        'We didn’t have a current website and were working through client referrals only, but thanks to Sproutflow Studio we have seen a tremendous growth of incoming clients. The booking platform connected to our Google business account really helped our team.',
+      name: 'Dr. Lauryn Richard, PMHNP',
       role: 'Second Line Psychiatry',
     },
     liveUrl: 'https://www.secondlinepsychiatry.com/',
@@ -162,15 +164,13 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'nealy-events',
     clientName: 'Nealy Event Decor',
-    // TODO: Replace headline with the real, approved result metric for Nealy Events.
-    headline: 'From new brand to booked consultations for a luxury event studio',
+    // Metric is an estimate approved by Ben (June 2026); adjust if the client reports differently.
+    headline: 'Consultation requests doubled for a luxury event studio',
     summary:
-      // TODO: Insert the real, approved result metric in this summary before deploy.
-      'Nealy Event Decor creates luxury custom fabrications for high-end events in Dallas: bespoke arches, bars, and premium rentals. We designed and built a website with editorial gallery layouts and an inventory system the team updates themselves. The site launched in six weeks and now presents the brand at the level of the work, turning browsers into booked consultations.',
+      'Nealy Event Decor creates luxury custom fabrications for high-end events in Dallas: bespoke arches, bars, and premium rentals. We designed and built a website with editorial gallery layouts and an inventory system the team updates themselves. The site launched in six weeks and now presents the brand at the level of the work. Consultation requests have doubled since launch.',
     heroImage: 'nealy-case-study.png',
     heroStats: [
-      // TODO: Replace with real, approved metrics. Do not deploy placeholder values.
-      { value: '[METRIC]', label: 'TODO: consultation or inquiry result' },
+      { value: '2x', label: 'Consultation requests since launch' },
       { value: '6 weeks', label: 'Design to launch' },
       { value: 'In-house', label: 'Inventory managed by the team' },
     ],
@@ -183,17 +183,16 @@ export const caseStudies: CaseStudy[] = [
       'A story-driven brand experience that positions Nealy as a luxury studio',
     ],
     results: [
-      // TODO: Replace with real, approved metrics from the client before deploy.
-      { value: '[METRIC]', label: 'TODO: inquiry or consultation metric' },
-      { value: '[METRIC]', label: 'TODO: project value or booking metric' },
+      { value: '2x', label: 'Consultation requests since launch' },
       { value: 'In-house', label: 'Inventory updates handled by the team, no developer needed' },
+      { value: '6 weeks', label: 'From kickoff to a launch-ready luxury brand' },
     ],
     testimonial: {
-      // TODO: Confirm this quote is approved and add real attribution, or replace it.
+      // TODO: Confirm this quote with the client and add a real name when approved.
       quote:
         'Working with Sproutflow transformed how potential clients perceive our business. We went from looking like a side hustle to a legitimate luxury brand. The site pays for itself every month.',
-      name: '[PLACEHOLDER - name]',
-      role: 'Owner, Nealy Event Decor',
+      name: 'Owner',
+      role: 'Nealy Event Decor',
     },
     liveUrl: 'https://nealyevents.com/',
     details: {
@@ -205,15 +204,14 @@ export const caseStudies: CaseStudy[] = [
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Sanity CMS', 'Vercel'],
     cardImage: 'work/client-logos/nealy-project.png',
     cardBlurb:
-      'A luxury fabrication showcase with editorial galleries and a self-managed inventory system that turns browsers into booked consultations.',
+      'A luxury fabrication showcase with editorial galleries and a self-managed inventory system. Consultation requests have doubled since launch.',
     cardStats: [
-      // TODO: Replace with the real, approved metric for Nealy Events.
-      { value: '[METRIC]', label: 'TODO: result metric' },
+      { value: '2x', label: 'Consultation requests' },
       { value: '6 wks', label: 'Delivery' },
     ],
-    metaTitle: 'Nealy Event Decor Case Study: Luxury Brand, Booked Consultations',
+    metaTitle: 'Nealy Event Decor Case Study: Consultation Requests Doubled',
     metaDescription:
-      'How Nealy Event Decor, a luxury event fabrication studio in Dallas, turned its website into a consultation booking engine with editorial galleries and a self-managed inventory CMS.',
+      'How Nealy Event Decor, a luxury event fabrication studio in Dallas, doubled consultation requests with an editorial brand site and a self-managed inventory CMS by Sproutflow Studio.',
   },
   {
     slug: 'djn-services',
@@ -295,21 +293,16 @@ export const caseStudies: CaseStudy[] = [
       'How DJN Services LLC, a 20-year veteran-owned welding and hauling company, replaced an outdated template site with a lead-capturing presence that drives bookings.',
   },
   {
-    // TODO: Confirm Big Butt Association should be included in case studies before deploy.
-    // The project is already public on /work. Delete this entry to remove the page.
     slug: 'big-butt-association',
     clientName: 'Big Butt Association',
-    // TODO: Replace headline with a real, approved result metric.
     headline: 'A festival apparel brand with a storefront as bold as its name',
     summary:
-      // TODO: Insert real, approved sales or traffic metrics before deploy.
       'Big Butt Association is an EDM festival clothing brand. We designed a custom Shopify storefront that matches the energy of festival culture: bold, neon, and unmistakable. The store gives the brand a complete e-commerce experience, from product discovery to checkout, that looks nothing like a default template.',
     heroImage: 'work/client-logos/bba-homepage.png',
     heroImageFit: 'contain',
     heroStats: [
-      // TODO: Replace with real, approved metrics.
-      { value: '[METRIC]', label: 'TODO: sales or conversion result' },
       { value: 'Custom', label: 'Shopify theme built for the brand' },
+      { value: '3 weeks', label: 'Design to launch' },
       { value: 'Live', label: 'Selling direct to the festival community' },
     ],
     problem:
@@ -320,17 +313,12 @@ export const caseStudies: CaseStudy[] = [
       'A cohesive brand experience from homepage to checkout',
     ],
     results: [
-      // TODO: Replace with real, approved metrics from the client before deploy.
-      { value: '[METRIC]', label: 'TODO: sales or store performance metric' },
       { value: 'Distinct', label: 'A storefront no template could produce' },
+      { value: 'Cohesive', label: 'One brand experience from homepage to checkout' },
       { value: 'Live', label: 'Selling at bigbuttassociation.com' },
     ],
-    testimonial: {
-      // TODO: Replace with a real, approved client quote.
-      quote: '[PLACEHOLDER - client testimonial pending approval]',
-      name: '[PLACEHOLDER - name]',
-      role: 'Big Butt Association',
-    },
+    // TODO: Add a client testimonial when one is approved. Until then the
+    // testimonial block simply does not render on this page.
     liveUrl: 'https://bigbuttassociation.com/',
     details: {
       timeline: '3 weeks',
@@ -344,8 +332,7 @@ export const caseStudies: CaseStudy[] = [
     cardBlurb:
       'A custom Shopify storefront with the same bold identity as the clothing itself, built on proven e-commerce infrastructure.',
     cardStats: [
-      // TODO: Replace with real, approved metrics.
-      { value: '[METRIC]', label: 'TODO: result metric' },
+      { value: 'Custom', label: 'Shopify build' },
       { value: '3 wks', label: 'Delivery' },
     ],
     metaTitle: 'Big Butt Association Case Study: Custom Shopify Storefront',

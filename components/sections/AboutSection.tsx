@@ -11,7 +11,7 @@ import { getImageUrl } from '@/lib/blob-images';
 
 const AboutSection: React.FC = () => {
   return (
-    <Section id="about" background="white" padding="lg">
+    <Section id="about" background="nature" padding="lg">
       <Container>
         <div className="max-w-6xl mx-auto">
           

@@ -222,7 +222,7 @@ const ContactSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true, margin: "-100px" }}
-            className="bg-gray-50 rounded-2xl p-8 lg:p-12"
+            className="bg-primary-50/60 border border-primary-100 rounded-2xl p-8 lg:p-12"
           >
             <div className="text-center mb-8">
               <Heading level={3} className="mb-4">

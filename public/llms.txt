@@ -28,10 +28,10 @@ This is what very few local providers offer, and what extends projects into the 
 - Website care plans (hosting, security, updates) from $200/month
 
 ## Client Results
-- Second Line Psychiatry (New Orleans telehealth practice): 50% more qualified inquiries after launch
+- Second Line Psychiatry (New Orleans telehealth practice): 50% more qualified inquiries after launch, with booking connected to the practice's Google Business profile
 - NOLA Pool Solutions (New Orleans metro): 30% customer acquisition growth and a #1 local Google ranking, starting from no website
 - DJN Services LLC (North Alabama welding and hauling, veteran-owned): more bookings through a new quote-form site, delivered in 2 weeks
-- Nealy Event Decor (Dallas luxury event fabrication): editorial brand site with a self-managed inventory CMS that books consultations
+- Nealy Event Decor (Dallas luxury event fabrication): consultation requests doubled after launching an editorial brand site with a self-managed inventory CMS
 
 ## Key Pages
 - Home: https://sproutflow-studio.com/

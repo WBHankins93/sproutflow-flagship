@@ -18,17 +18,17 @@ const results = [
     href: '/case-studies/nola-pool-solutions',
   },
   {
-    // TODO: Replace with the real, approved Nealy Events result metric.
-    // "Zero-to-traction launch" is the existing site claim; swap in a number when confirmed.
+    // Estimate approved by Ben (June 2026). Adjust here and in data/caseStudies.ts
+    // if the client reports a different number.
     client: 'Nealy Events',
-    result: 'Zero-to-traction launch',
+    result: '2x consultation requests',
     href: '/case-studies/nealy-events',
   },
 ];
 
 export default function TrustBarSection() {
   return (
-    <section className="relative bg-nature-800 py-10 md:py-12">
+    <section className="relative bg-primary-800 py-10 md:py-12">
       <Container>
         <div className="grid gap-6 md:grid-cols-3 md:gap-8">
           {results.map((item, index) => (

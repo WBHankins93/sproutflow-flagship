@@ -36,10 +36,9 @@ const systems = [
   },
 ];
 
-// TODO: Confirm each proof point below is approved as a public reference before deploy.
 const proofPoints = [
-  // TODO: confirm public reference is approved
-  'Custom multi-tenant operations platform for a 64-location service business',
+  // Deal not closed - presented as a capability with a working demo, no client named.
+  'Multi-tenant operations platform that runs 64 locations from one dashboard - working demo available on request',
   // TODO: confirm inclusion
   'AI-powered resume screening product (Greenlit), live in beta',
   // TODO: confirm inclusion
@@ -48,7 +47,7 @@ const proofPoints = [
 
 export default function BusinessSystemsSection() {
   return (
-    <section id="business-systems" className="relative py-24 bg-nature-800 text-white overflow-hidden">
+    <section id="business-systems" className="relative py-24 bg-primary-800 text-white overflow-hidden">
       {/* Subtle texture overlay */}
       <div
         className="absolute inset-0 opacity-5"
@@ -67,15 +66,15 @@ export default function BusinessSystemsSection() {
           viewport={{ once: true }}
           className="text-center mb-14"
         >
-          <div className="inline-flex items-center gap-2 text-green-300 font-medium mb-6">
-            <div className="w-12 h-px bg-green-300/60"></div>
+          <div className="inline-flex items-center gap-2 text-primary-300 font-medium mb-6">
+            <div className="w-12 h-px bg-primary-300/60"></div>
             <span className="text-sm uppercase tracking-wider">Beyond the Website</span>
-            <div className="w-12 h-px bg-green-300/60"></div>
+            <div className="w-12 h-px bg-primary-300/60"></div>
           </div>
 
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
             Already have a website?{' '}
-            <span className="text-green-300 italic">The next bottleneck is what happens after the click.</span>
+            <span className="text-primary-300 italic">The next bottleneck is what happens after the click.</span>
           </h2>
 
           <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
@@ -94,7 +93,7 @@ export default function BusinessSystemsSection() {
               viewport={{ once: true }}
               className="bg-white/10 backdrop-blur-sm rounded-2xl p-7 border border-white/10 hover:bg-white/15 transition-colors"
             >
-              <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center text-green-300 mb-5">
+              <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center text-primary-300 mb-5">
                 {item.icon}
               </div>
               <h3 className="text-xl font-display font-bold mb-3">{item.title}</h3>
@@ -111,13 +110,13 @@ export default function BusinessSystemsSection() {
           viewport={{ once: true }}
           className="rounded-2xl border border-white/15 bg-white/5 p-7 md:p-8 mb-12"
         >
-          <p className="text-sm font-semibold uppercase tracking-widest text-green-300 mb-5">
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary-300 mb-5">
             Systems we have shipped
           </p>
           <ul className="grid gap-4 md:grid-cols-3">
             {proofPoints.map((point) => (
               <li key={point} className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-green-300 flex-shrink-0 mt-0.5" />
+                <CheckCircle2 className="w-5 h-5 text-primary-300 flex-shrink-0 mt-0.5" />
                 <span className="text-sm text-white/85 leading-relaxed">{point}</span>
               </li>
             ))}
@@ -137,7 +136,7 @@ export default function BusinessSystemsSection() {
           </p>
           <a
             href="/inquiry"
-            className="inline-flex items-center gap-3 bg-white text-nature-800 px-10 py-4 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
+            className="inline-flex items-center gap-3 bg-white text-primary-800 px-10 py-4 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
           >
             Book a Discovery Call
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

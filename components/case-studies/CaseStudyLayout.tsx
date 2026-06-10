@@ -154,7 +154,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
 
                 <div>
                   <div className="flex items-center gap-3 mb-4">
-                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-green-100 text-green-600 text-sm font-bold">✓</span>
+                    <span className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-primary-100 text-primary-700 text-sm font-bold">✓</span>
                     <h3 className="text-lg font-bold text-gray-900">After</h3>
                   </div>
                   <div className="rounded-2xl overflow-hidden border-2 border-primary-200 shadow-md">
@@ -219,21 +219,23 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
             ))}
           </div>
 
-          {/* Testimonial */}
-          <div className="bg-gradient-to-br from-primary-50 to-white rounded-3xl border-2 border-primary-200 p-8 md:p-12">
-            <div className="flex items-start gap-6">
-              <div className="text-6xl text-primary-400 font-display leading-none">&quot;</div>
-              <div className="flex-1">
-                <p className="text-xl text-gray-700 leading-relaxed mb-6 italic font-display">
-                  {caseStudy.testimonial.quote}
-                </p>
-                <div>
-                  <div className="font-bold text-gray-900">{caseStudy.testimonial.name}</div>
-                  <div className="text-gray-600">{caseStudy.testimonial.role}</div>
+          {/* Testimonial - only renders when a real, approved quote exists */}
+          {caseStudy.testimonial && (
+            <div className="bg-gradient-to-br from-primary-50 to-white rounded-3xl border-2 border-primary-200 p-8 md:p-12">
+              <div className="flex items-start gap-6">
+                <div className="text-6xl text-primary-400 font-display leading-none">&quot;</div>
+                <div className="flex-1">
+                  <p className="text-xl text-gray-700 leading-relaxed mb-6 italic font-display">
+                    {caseStudy.testimonial.quote}
+                  </p>
+                  <div>
+                    <div className="font-bold text-gray-900">{caseStudy.testimonial.name}</div>
+                    <div className="text-gray-600">{caseStudy.testimonial.role}</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </section>
 

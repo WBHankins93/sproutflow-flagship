@@ -32,11 +32,14 @@ const professionalServiceSchema = {
   telephone: '+1-228-327-1082',
   email: 'ben@sproutflow-studio.com',
   priceRange: '$850 - $7,500+',
-  // TODO: Replace placeholders with real profile URLs (LinkedIn company page,
-  // Google Business Profile share link, directory profiles) before deploy.
+  // Synced with the social links in components/layout/Footer.tsx.
+  // TODO: Verify each handle is live, and add the Google Business Profile
+  // share link plus any directory profiles when available.
   sameAs: [
-    '[PLACEHOLDER - LinkedIn company page URL]',
-    '[PLACEHOLDER - directory profile URLs]',
+    'https://linkedin.com/company/sproutflow-studio',
+    'https://instagram.com/sproutflowstudio',
+    'https://facebook.com/sproutflowstudio',
+    'https://twitter.com/sproutflowstudio',
   ],
   areaServed: [
     {

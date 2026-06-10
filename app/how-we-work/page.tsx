@@ -35,11 +35,11 @@ const processSteps = [
       'Alignment on project scope and expectations',
     ],
     color: {
-      bg: 'bg-green-50',
-      icon: 'text-green-500',
-      border: 'border-green-200',
-      accent: 'bg-green-500',
-      text: 'text-green-700',
+      bg: 'bg-primary-50',
+      icon: 'text-primary-500',
+      border: 'border-primary-200',
+      accent: 'bg-primary-500',
+      text: 'text-primary-700',
     },
   },
   {
@@ -56,11 +56,11 @@ const processSteps = [
       'Technical approach & platform recommendations',
     ],
     color: {
-      bg: 'bg-green-100',
-      icon: 'text-green-600',
-      border: 'border-green-300',
-      accent: 'bg-green-600',
-      text: 'text-green-700',
+      bg: 'bg-primary-100',
+      icon: 'text-primary-600',
+      border: 'border-primary-300',
+      accent: 'bg-primary-600',
+      text: 'text-primary-700',
     },
   },
   {
@@ -77,11 +77,11 @@ const processSteps = [
       'Two rounds of revisions included',
     ],
     color: {
-      bg: 'bg-green-100',
-      icon: 'text-green-700',
-      border: 'border-green-400',
-      accent: 'bg-green-700',
-      text: 'text-green-800',
+      bg: 'bg-primary-100',
+      icon: 'text-primary-700',
+      border: 'border-primary-400',
+      accent: 'bg-primary-700',
+      text: 'text-primary-800',
     },
   },
   {
@@ -98,11 +98,11 @@ const processSteps = [
       'Performance and accessibility baseline documented',
     ],
     color: {
-      bg: 'bg-teal-50',
-      icon: 'text-teal-600',
-      border: 'border-teal-300',
-      accent: 'bg-teal-600',
-      text: 'text-teal-800',
+      bg: 'bg-nature-50',
+      icon: 'text-nature-600',
+      border: 'border-nature-300',
+      accent: 'bg-nature-600',
+      text: 'text-nature-800',
     },
   },
   {
@@ -120,11 +120,11 @@ const processSteps = [
       '48-hour post-launch monitoring and support window',
     ],
     color: {
-      bg: 'bg-amber-50',
-      icon: 'text-amber-500',
-      border: 'border-amber-300',
-      accent: 'bg-amber-500',
-      text: 'text-amber-700',
+      bg: 'bg-accent-50',
+      icon: 'text-accent-500',
+      border: 'border-accent-300',
+      accent: 'bg-accent-500',
+      text: 'text-accent-700',
     },
   },
   {
@@ -142,11 +142,11 @@ const processSteps = [
       'Feature enhancements as your business grows',
     ],
     color: {
-      bg: 'bg-amber-100',
-      icon: 'text-amber-600',
-      border: 'border-amber-400',
-      accent: 'bg-amber-600',
-      text: 'text-amber-800',
+      bg: 'bg-accent-100',
+      icon: 'text-accent-600',
+      border: 'border-accent-400',
+      accent: 'bg-accent-600',
+      text: 'text-accent-800',
     },
   },
 ];
@@ -161,8 +161,8 @@ const results = [
     description: 'lead generation increase (psychiatry practice)',
   },
   {
-    metric: 'Zero-to-traction',
-    description: 'launch (event decor startup)',
+    metric: '2x',
+    description: 'consultation requests (event decor studio)',
   },
   {
     metric: '30%',
@@ -182,7 +182,7 @@ export default function HowWeWorkPage() {
             }}
           />
           <div className="absolute inset-0 bg-white/60" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,197,94,0.18),_transparent_55%)] opacity-40" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(95,117,94,0.18),_transparent_55%)] opacity-40" />
         </div>
 
         <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-24 md:px-8 md:py-28">
@@ -222,7 +222,7 @@ export default function HowWeWorkPage() {
         <div className="mx-auto max-w-6xl px-4 md:px-8">
           <div className="relative space-y-0">
             {/* Connecting line running down the left side */}
-            <div className="absolute left-8 top-20 bottom-0 w-0.5 bg-gradient-to-b from-green-300 via-green-400 to-amber-400 hidden md:block" 
+            <div className="absolute left-8 top-20 bottom-0 w-0.5 bg-gradient-to-b from-primary-300 via-primary-400 to-accent-400 hidden md:block" 
                  style={{ height: 'calc(100% - 10rem)' }} 
             />
 

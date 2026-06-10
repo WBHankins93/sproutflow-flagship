@@ -32,7 +32,7 @@ export default function CaseStudiesPage() {
             }}
           />
           <div className="absolute inset-0 bg-white/60" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,197,94,0.18),_transparent_55%)] opacity-40" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(95,117,94,0.18),_transparent_55%)] opacity-40" />
         </div>
 
         <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-24 md:px-8 md:py-28">
@@ -127,7 +127,7 @@ export default function CaseStudiesPage() {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                       <div className="absolute bottom-4 left-4">
-                        <span className="inline-flex items-center gap-1 bg-green-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
+                        <span className="inline-flex items-center gap-1 bg-primary-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
                           ● Live
                         </span>
                       </div>

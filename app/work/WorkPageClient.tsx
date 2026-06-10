@@ -44,9 +44,9 @@ const techIcons: Record<string, React.ReactNode> = {
 };
 
 const statusStyles: Record<ProjectStatus, string> = {
-  Live: 'bg-emerald-100 text-emerald-900 ring-1 ring-inset ring-emerald-200',
+  Live: 'bg-primary-100 text-primary-900 ring-1 ring-inset ring-primary-200',
   'In Progress':
-    'bg-amber-100 text-amber-900 ring-1 ring-inset ring-amber-200',
+    'bg-accent-100 text-accent-900 ring-1 ring-inset ring-accent-200',
 };
 
 // Icon mapping for project categories
@@ -82,7 +82,7 @@ export default function WorkPage() {
             }}
           />
           <div className="absolute inset-0 bg-white/60" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,197,94,0.18),_transparent_55%)] opacity-40" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(95,117,94,0.18),_transparent_55%)] opacity-40" />
         </div>
 
         <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-24 md:px-8 md:py-28">

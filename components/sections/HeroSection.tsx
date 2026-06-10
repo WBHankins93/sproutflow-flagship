@@ -10,7 +10,7 @@ export default function HeroSection() {
   return (
     <>
       {/* Full-Screen Image Hero */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
@@ -28,8 +28,9 @@ export default function HeroSection() {
           <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/30"></div>
         </div>
 
-        {/* Hero Content - Centered with mobile top padding to account for header */}
-        <div className="relative z-10 text-center px-4 md:px-8 max-w-6xl mx-auto pt-32 md:pt-0">
+        {/* Hero Content - Centered, with vertical padding so badges and the scroll
+            indicator never touch the header or the section below on any viewport */}
+        <div className="relative z-10 text-center px-4 md:px-8 max-w-6xl mx-auto py-20 md:py-24">
           
           {/* Trust Badges - Floating above headline */}
           <motion.div 
@@ -64,7 +65,7 @@ export default function HeroSection() {
           >
             Custom websites and the business systems behind them.
             <br />
-            <span className="text-green-300 italic">Built in New Orleans with enterprise-grade engineering, priced for small business.</span>
+            <span className="text-primary-200 italic">Built in New Orleans with enterprise-grade engineering, priced for small business.</span>
           </motion.h1>
 
           {/* Value Proposition */}
@@ -85,7 +86,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="mb-16 md:mb-20"
+            className="mb-10 md:mb-12"
           >
             <a
               href="/inquiry"
@@ -103,7 +104,7 @@ export default function HeroSection() {
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/95">
               {['Websites that win clients', 'Systems that keep them', 'Automation that saves hours'].map((point) => (
                 <div key={point} className="inline-flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-green-300" />
+                  <CheckCircle2 className="h-4 w-4 text-primary-200" />
                   <span>{point}</span>
                 </div>
               ))}

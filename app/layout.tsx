@@ -96,7 +96,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    // data-scroll-behavior lets Next.js disable smooth scrolling while it resets
+    // scroll position on route changes - fixes pages loading scrolled to the bottom
+    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
       <body
         className={`${dmSerif.variable} ${dmSans.variable} antialiased font-body`}
       >

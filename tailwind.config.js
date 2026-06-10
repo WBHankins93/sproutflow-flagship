@@ -95,7 +95,7 @@ export default {
         // Text Colors
         text: {
           primary: '#626155',   // Ebony
-          secondary: '#445E69', // Payne's Gray
+          secondary: '#57604F', // Warm gray-green (replaced Payne's Gray #445E69 - read too blue/turquoise)
           muted: '#7a7d72',
         },
         
