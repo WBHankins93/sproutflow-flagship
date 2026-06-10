@@ -6,9 +6,9 @@ import { InquiryForm } from '@/components/inquiry/InquiryForm';
 import { getImageUrl } from '@/lib/blob-images';
 
 export const metadata = {
-  title: 'Web Design Consultation | Start Your Project | Sproutflow Studio',
+  title: 'Book a Discovery Call',
   description:
-    'Request a web design consultation for your business. Share your goals in 3–5 minutes, and we’ll follow up within 24 hours with clear next steps.',
+    'Start your project with Sproutflow Studio. Share your goals in 3 to 5 minutes and we respond within 24 hours with clear next steps and a path to a fixed quote.',
   alternates: {
     canonical: '/inquiry',
   },
@@ -43,7 +43,7 @@ export default function InquiryPage() {
                 Start Your Project
               </h1>
               <p className="text-lg text-gray-600 md:text-xl">
-                Tell us a little about your project. Most inquiries take about 3–5 minutes to complete.
+                Tell us a little about your project. Most inquiries take about 3 to 5 minutes to complete.
               </p>
               <p className="text-base text-gray-600">
                 Not ready for a call yet? No problem. Share a few details here and we’ll follow up with the best next steps.
@@ -54,7 +54,7 @@ export default function InquiryPage() {
                 What to Expect
               </p>
               <ul className="mt-4 space-y-3 text-sm text-gray-600">
-                <li>• Takes about 3–5 minutes to complete</li>
+                <li>• Takes about 3 to 5 minutes to complete</li>
                 <li>• We respond within 24 hours</li>
                 <li>• No commitment, just the next steps</li>
               </ul>

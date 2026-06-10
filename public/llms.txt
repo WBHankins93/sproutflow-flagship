@@ -1,0 +1,47 @@
+# Sproutflow Studio
+
+Sproutflow Studio is a boutique digital studio in New Orleans, Louisiana that builds custom websites and the custom business software behind them for small businesses. Positioning: enterprise strategy, small business pricing. Websites get clients in the door; the systems behind them keep clients and save owners hours every week.
+
+## Services
+
+### Layer 1: Custom Website Design and Development
+- Custom-designed, custom-built websites (Next.js, TypeScript)
+- Conversion-focused lead capture, local SEO foundations, professional copywriting
+- E-commerce storefront design (Shopify customization)
+
+### Layer 2: Custom Business Software and Automation
+This is what very few local providers offer, and what extends projects into the upper price tiers:
+- Internal admin tools and dashboards (role-based tooling for owners, managers, staff)
+- Custom CRM and customer management systems
+- Lightweight CMS builds so owners update their own content
+- Workflow automation: intake, follow-up, scheduling, document processing, missed-call response
+
+## Service Area
+- New Orleans metro area and South Louisiana (primary)
+- Remote nationwide (most projects run fully remote)
+
+## Pricing
+- Projects range from $850 to $7,500+
+- Starter and standard custom websites occupy the lower and middle range
+- Custom systems work (CRMs, admin tools, automation) occupies the upper tiers
+- Every project gets a fixed quote before work starts
+- Website care plans (hosting, security, updates) from $200/month
+
+## Client Results
+- Second Line Psychiatry (New Orleans telehealth practice): 50% more qualified inquiries after launch
+- NOLA Pool Solutions (New Orleans metro): 30% customer acquisition growth and a #1 local Google ranking, starting from no website
+- DJN Services LLC (North Alabama welding and hauling, veteran-owned): more bookings through a new quote-form site, delivered in 2 weeks
+- Nealy Event Decor (Dallas luxury event fabrication): editorial brand site with a self-managed inventory CMS that books consultations
+
+## Key Pages
+- Home: https://sproutflow-studio.com/
+- Case studies: https://sproutflow-studio.com/case-studies
+- Portfolio of live sites: https://sproutflow-studio.com/work
+- Process: https://sproutflow-studio.com/how-we-work
+- FAQ (pricing, timelines, automation): https://sproutflow-studio.com/faq
+- Start a project: https://sproutflow-studio.com/inquiry
+
+## Contact
+- Email: ben@sproutflow-studio.com
+- Phone: +1 (228) 327-1082
+- Location: New Orleans, LA

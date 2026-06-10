@@ -6,9 +6,9 @@ import { Footer } from '@/components/layout/Footer';
 import { getImageUrl } from '@/lib/blob-images';
 
 export const metadata = {
-  title: 'Web Design Process for Small Businesses | Sproutflow Studio',
+  title: 'How We Work',
   description:
-    'See our step-by-step web design process for small businesses, from discovery and planning to launch, handoff, and ongoing support.',
+    'Our web design process for small businesses takes 2 to 6 weeks for most projects: discovery, fixed-quote proposal, design, build, launch, and optional ongoing support. Based in New Orleans, working remotely nationwide.',
   keywords: [
     'web design process New Orleans',
     'website development process',
@@ -28,7 +28,7 @@ const processSteps = [
     duration: '30-45 minutes',
     icon: <Sprout className="w-6 h-6" />,
     description: 'We start by understanding your business, not your website. What problems are you trying to solve? Who are your customers? What does success look like?',
-    highlight: "This isn't a sales call. It's a consulting session where we figure out if we're the right fit.",
+    highlight: 'Bring your goals. Leave with a clear plan and a fixed quote.',
     deliverables: [
       'Deep understanding of your business goals',
       'Clear identification of target audience',
@@ -319,7 +319,7 @@ export default function HowWeWorkPage() {
               Ready to Work Together?
             </h3>
             <p className="text-base text-gray-600 md:text-lg">
-              Schedule a discovery call and let&apos;s see if we&apos;re the right fit for your project.
+              Bring your goals. Leave with a clear plan and a fixed quote.
             </p>
             <Link
               href="/#contact"

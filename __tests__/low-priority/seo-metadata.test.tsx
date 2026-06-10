@@ -114,13 +114,13 @@ describe('SEO Metadata - Structured Data', () => {
     }
   })
 
-  it('should have LocalBusiness schema type', () => {
+  it('should have ProfessionalService and Organization schema types', () => {
     const { container } = render(<StructuredData />)
     const script = container.querySelector('script[type="application/ld+json"]')
     
     if (script?.textContent) {
       const schema = JSON.parse(script.textContent)
-      expect(schema['@type']).toBe('LocalBusiness')
+      expect(schema['@type']).toEqual(['ProfessionalService', 'Organization'])
       expect(schema['@context']).toBe('https://schema.org')
     }
   })

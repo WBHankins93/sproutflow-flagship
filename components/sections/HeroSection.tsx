@@ -57,14 +57,14 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-display font-bold text-white leading-tight mb-6 md:mb-8"
+            className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight mb-6 md:mb-8"
             style={{
               textShadow: '4px 4px 20px rgba(0,0,0,0.9), 2px 2px 10px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.5)'
             }}
           >
-            Websites that turn visitors
+            Custom websites and the business systems behind them.
             <br />
-            <span className="text-green-300 italic">into paying customers</span>
+            <span className="text-green-300 italic">Built in New Orleans with enterprise-grade engineering, priced for small business.</span>
           </motion.h1>
 
           {/* Value Proposition */}
@@ -77,7 +77,7 @@ export default function HeroSection() {
               textShadow: '3px 3px 12px rgba(0,0,0,0.9), 1px 1px 6px rgba(0,0,0,0.8)'
             }}
           >
-            We design and build high-performing websites for small businesses that need more leads, better credibility, and real results. Not just a redesign.
+            Your website gets clients in the door. Your systems keep them. We build both - custom Next.js sites, internal admin tools, CRMs, and the automation that connects them.
           </motion.p>
 
           {/* Primary CTA */}
@@ -91,11 +91,17 @@ export default function HeroSection() {
               href="/inquiry"
               className="inline-flex items-center gap-3 bg-white text-text-primary px-10 md:px-14 py-4 md:py-5 rounded-full text-lg md:text-xl font-bold shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 group"
             >
-              Start Your Project
+              Book a Discovery Call
               <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
             </a>
+            <p
+              className="mt-5 text-base md:text-lg text-white/95 font-medium"
+              style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}
+            >
+              Bring your goals. Leave with a clear plan and a fixed quote.
+            </p>
             <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/95">
-              {['Increase inbound leads', 'Improve conversion rates', 'Build trust instantly'].map((point) => (
+              {['Websites that win clients', 'Systems that keep them', 'Automation that saves hours'].map((point) => (
                 <div key={point} className="inline-flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-green-300" />
                   <span>{point}</span>
@@ -107,8 +113,8 @@ export default function HeroSection() {
                 View Portfolio
               </a>
               <span aria-hidden>•</span>
-              <a href="/inquiry" className="hover:text-white underline underline-offset-4">
-                See if we&apos;re a fit
+              <a href="/case-studies" className="hover:text-white underline underline-offset-4">
+                See Client Results
               </a>
             </div>
           </motion.div>

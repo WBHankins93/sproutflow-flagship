@@ -131,7 +131,7 @@ export default function ValuePropsSection() {
                 href="/inquiry"
                 className="inline-flex items-center gap-2 bg-white text-nature-800 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap group"
               >
-                See if we&apos;re a fit
+                Book a Discovery Call
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
             </div>

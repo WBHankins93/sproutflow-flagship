@@ -15,7 +15,7 @@ const valuePoints = [
     icon: <TrendingUp className="h-6 w-6 text-primary-600" />,
     title: 'Conversion is the real goal',
     description:
-      'A better site guides visitors to take action—book a call, request a quote, or make contact with confidence.',
+      'A better site guides visitors to take action: book a call, request a quote, or make contact with confidence.',
   },
   {
     icon: <Handshake className="h-6 w-6 text-primary-600" />,
@@ -39,7 +39,7 @@ const supportItems = [
   {
     icon: <LifeBuoy className="h-5 w-5 text-white" />,
     title: 'Responsive technical support',
-    description: 'When questions or issues come up, you have a partner—not a disappearing freelancer.',
+    description: 'When questions or issues come up, you have a partner, not a disappearing freelancer.',
   },
 ];
 

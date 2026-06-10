@@ -224,17 +224,20 @@ export default function ServicesSection() {
         >
           <div className="inline-flex items-center gap-2 text-primary-600 font-medium mb-6">
             <div className="w-12 h-px bg-primary-400"></div>
-            <span className="text-sm uppercase tracking-wider">Pricing</span>
+            <span className="text-sm uppercase tracking-wider">Websites &amp; Pricing</span>
             <div className="w-12 h-px bg-primary-400"></div>
           </div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-primary mb-6">
-            Four Ways to{' '}
-            <span className="text-primary-600 italic">Work Together</span>
+            Custom Web Design,{' '}
+            <span className="text-primary-600 italic">Four Ways to Start</span>
           </h2>
-          
+
           <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
-            Outcome-first packages built to improve trust, increase leads, and support sustainable growth.
+            Your website is the front door. These packages cover custom web design and development for New Orleans small businesses, scaled to where your business is today.
+          </p>
+          <p className="mt-4 text-base text-text-muted max-w-3xl mx-auto leading-relaxed">
+            Websites start this range. Systems work extends it. The upper tiers are where custom CRMs, admin tools, and automation come in.
           </p>
         </motion.div>
 
@@ -358,7 +361,7 @@ export default function ServicesSection() {
         >
           <h3 className="mb-2 text-xl font-display font-semibold text-text-primary">Who we&apos;re the best fit for</h3>
           <p className="mx-auto max-w-3xl text-sm md:text-base text-text-secondary leading-relaxed">
-            Sproutflow Studio is built for owners who want a strategic, professional web presence that drives results.
+            Sproutflow Studio is built for owners who want a web presence that drives results, and systems that save real hours.
             If you&apos;re only looking for the cheapest possible option, we may not be the right fit. And that&apos;s okay.
           </p>
         </motion.div>

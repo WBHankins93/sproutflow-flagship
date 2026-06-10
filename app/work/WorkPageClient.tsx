@@ -104,7 +104,7 @@ export default function WorkPage() {
             </div>
             <div className="rounded-3xl border border-primary-200/60 bg-white/70 p-6 shadow-lg backdrop-blur">
               <p className="text-sm font-semibold uppercase tracking-widest text-primary-700">
-                How I show up
+                How we show up
               </p>
               <ul className="mt-4 space-y-3 text-sm text-gray-600">
                 <li>• Listen first, build second. Your goals drive every decision</li>

@@ -52,19 +52,19 @@ const AboutSection: React.FC = () => {
               </div>
 
               <Heading level={3} className="mb-3 text-2xl">
-                Hi, I&apos;m Ben 👋
+                Meet Ben, Our Founder 👋
               </Heading>
-              
+
               <BodyText className="mb-4 leading-relaxed">
-                I&apos;ve spent most of my career building systems for companies with massive budgets. Along the way, I learned what makes customers instantly trust a brand online.
+                Sproutflow founder Ben Hankins spent most of his career building systems for companies with massive budgets. Along the way, he learned what makes customers instantly trust a brand online, and what keeps an operation running behind the scenes.
               </BodyText>
 
               <BodyText className="mb-4 leading-relaxed">
-                Then I noticed something that bothered me: the businesses I actually loved, the ones making communities better, looked amateur online. Not because they lacked professionalism. Just because professional design felt financially out of reach.
+                He also noticed a gap: the businesses making communities better often looked amateur online. Not because they lacked professionalism. Professional design and real software were simply priced out of reach.
               </BodyText>
 
               <BodyText className="mb-4 leading-relaxed">
-                So I started Sproutflow to fix that gap. I take what works for Fortune 500 companies and make it work for real businesses at real prices.
+                Sproutflow exists to close that gap. We take what works for Fortune 500 companies and make it work for real businesses at real prices.
               </BodyText>
 
               <BodyText color="muted" className="italic">
@@ -160,7 +160,7 @@ const AboutSection: React.FC = () => {
                 className="inline-flex items-center gap-2 bg-white text-primary-600 hover:bg-white/90 px-10 py-4 text-lg font-medium rounded-full transition-all duration-200 hover:shadow-lg"
               >
                 <ArrowRight className="w-5 h-5" />
-                See if we&apos;re a fit
+                Book a Discovery Call
               </a>
             </motion.div>
           </div>
