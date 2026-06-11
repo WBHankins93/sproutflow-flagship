@@ -9,6 +9,7 @@ import {
   WEBSITE_PLATFORMS,
   PROJECT_SCOPE_OPTIONS,
   TIMELINE_OPTIONS,
+  DECISION_MAKER_OPTIONS,
   REFERRAL_SOURCES,
   type InquiryFormData,
 } from '@/types/inquiry';
@@ -30,6 +31,7 @@ const initialFormData: InquiryFormData = {
   projectScope: '',
   budgetRange: '',
   timeline: '',
+  decisionMaker: '',
   projectDetails: '',
   referralSource: '',
 };
@@ -130,6 +132,7 @@ export function InquiryForm() {
       project_scope: data.projectScope,
       budget_range: data.budgetRange,
       timeline: data.timeline,
+      decision_maker: data.decisionMaker,
       project_details: data.projectDetails,
       referral_source: data.referralSource,
     };
@@ -419,7 +422,29 @@ export function InquiryForm() {
         </div>
       </FormSection>
 
-      {/* 8. Project Details */}
+      {/* 8. Decision Maker */}
+      <FormSection title="Decision Making">
+        <p className="text-body font-body text-text-secondary mb-3">
+          Are you the person who will make the final decision on this project?
+        </p>
+        <div className="space-y-2">
+          {DECISION_MAKER_OPTIONS.map((value) => (
+            <label key={value} className="flex items-center gap-3 cursor-pointer group">
+              <input
+                type="radio"
+                name="decisionMaker"
+                value={value}
+                checked={data.decisionMaker === value}
+                onChange={update('decisionMaker')}
+                className="h-4 w-4 border-nature-300 text-primary-600 focus:ring-primary-500"
+              />
+              <span className="text-body font-body text-text-primary group-hover:text-text-secondary">{value}</span>
+            </label>
+          ))}
+        </div>
+      </FormSection>
+
+      {/* 9. Project Details */}
       <FormSection title="Project Details">
         <Label htmlFor="inquiry-project-details">Tell us a little about your business and what you&apos;re hoping this project will accomplish.</Label>
         <textarea
@@ -440,7 +465,7 @@ export function InquiryForm() {
         )}
       </FormSection>
 
-      {/* 9. Referral Source */}
+      {/* 10. Referral Source */}
       <FormSection title="Referral Source">
         <p className="text-body font-body text-text-secondary mb-3">
           How did you hear about Sproutflow?

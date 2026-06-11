@@ -2,13 +2,12 @@ import type { Metadata } from 'next';
 import WorkPageClient from './WorkPageClient';
 
 export const metadata: Metadata = {
-  title: 'Web Design Portfolio | Small Business Website Examples | Sproutflow Studio',
+  title: 'Web Design Portfolio',
   description:
-    'Explore live website projects built for small businesses. See examples of conversion-focused web design, strategy, and development by Sproutflow Studio.',
+    'Live websites built for real small businesses by Sproutflow Studio in New Orleans: telehealth, trades, events, e-commerce, and more. Every site is in production and working for its owner.',
   keywords: [
     'web design portfolio',
     'small business website examples',
-    'web design case studies',
     'New Orleans web design portfolio',
     'conversion focused web design',
   ],

@@ -47,7 +47,7 @@ const supportItems = [
 
 export default function ValuePropsSection() {
   return (
-    <section className="relative py-20 md:py-28 bg-white overflow-hidden">
+    <section className="relative py-20 md:py-28 bg-gradient-to-b from-white via-primary-50/40 to-white overflow-hidden">
       {/* Subtle dot pattern */}
       <div
         className="absolute inset-0 opacity-[0.03]"
@@ -113,7 +113,7 @@ export default function ValuePropsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="relative rounded-2xl bg-nature-800 text-white overflow-hidden"
+          className="relative rounded-2xl bg-primary-800 text-white overflow-hidden"
         >
           {/* Subtle texture overlay */}
           <div className="absolute inset-0 opacity-5" style={{
@@ -129,9 +129,9 @@ export default function ValuePropsSection() {
               </h3>
               <a
                 href="/inquiry"
-                className="inline-flex items-center gap-2 bg-white text-nature-800 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap group"
+                className="inline-flex items-center gap-2 bg-white text-primary-800 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap group"
               >
-                See if we&apos;re a fit
+                Book a Discovery Call
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
             </div>

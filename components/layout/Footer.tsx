@@ -50,8 +50,8 @@ export const Footer: React.FC = () => {
               priority
             />
             <BodyText className="text-white/80 mb-6 max-w-md">
-              Where small businesses come alive online. Enterprise psychology with 
-              small business heart – because every growth story deserves professional quality.
+              Custom websites and the business systems behind them. Built in New Orleans
+              with enterprise-grade engineering, priced for small business.
             </BodyText>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
@@ -91,6 +91,11 @@ export const Footer: React.FC = () => {
               <li>
                 <Link href="/how-we-work" className="hover:text-white transition-colors">
                   How We Work
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="hover:text-white transition-colors">
+                  FAQ
                 </Link>
               </li>
             </ul>

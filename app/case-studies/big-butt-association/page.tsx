@@ -1,18 +1,18 @@
-// app/case-studies/nealy-events/page.tsx
+// app/case-studies/big-butt-association/page.tsx
 
 import CaseStudyLayout from '@/components/case-studies/CaseStudyLayout';
 import { getCaseStudy } from '@/data/caseStudies';
 
-const caseStudy = getCaseStudy('nealy-events')!;
+const caseStudy = getCaseStudy('big-butt-association')!;
 
 export const metadata = {
   title: { absolute: `${caseStudy.metaTitle} | Sproutflow Studio` },
   description: caseStudy.metaDescription,
   alternates: {
-    canonical: '/case-studies/nealy-events',
+    canonical: '/case-studies/big-butt-association',
   },
 };
 
-export default function NealyEventsCaseStudy() {
+export default function BigButtAssociationCaseStudy() {
   return <CaseStudyLayout caseStudy={caseStudy} />;
 }

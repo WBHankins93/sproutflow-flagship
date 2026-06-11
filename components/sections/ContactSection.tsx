@@ -31,19 +31,20 @@ const ContactSection = () => {
     {
       id: 'discovery',
       title: 'Discovery Call',
-      subtitle: 'Deep dive into your needs',
-      description: 'Ready to explore working together? Let\'s discuss your goals, challenges, and how we can help you grow.',
+      subtitle: 'Diagnosis, not a pitch',
+      description: 'Ready to explore working together? Start with a short project application. It takes about five minutes, and you pick a call time right after you submit.',
       duration: '30-45 minutes',
       bestFor: [
-        'Discussing project scope',
-        'Exploring package options',
-        'Understanding timelines',
-        'Getting preliminary pricing'
+        'Defining what a new client is worth to you',
+        'Discussing project scope and timelines',
+        'Matching the right package to your stage',
+        'Leaving with a clear plan and a fixed quote'
       ],
       icon: <Calendar className="w-6 h-6" />,
       color: 'accent',
       ctaText: 'Start your project',
-      action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // Discovery Call scheduling page
+      // Qualification flow: application first, calendar link after submission.
+      action: '/inquiry'
     },
     // Temporarily commented out - only offering Discovery Call until Google Workspace budget is available
     // {
@@ -117,11 +118,12 @@ const ContactSection = () => {
             <div className="bg-accent-50 border border-accent-200 rounded-lg p-6 max-w-2xl mx-auto">
               <div className="flex items-center gap-3 mb-3">
                 <Lightbulb className="w-5 h-5 text-accent-600" />
-                <span className="font-semibold text-accent-700">No Forms Required</span>
+                <span className="font-semibold text-accent-700">Five Minutes Before We Talk</span>
               </div>
               <BodyText size="sm" color="muted">
-                We believe in real conversations, not corporate questionnaires. 
-                Pick your preferred way to connect, and let&apos;s talk like humans.
+                Every call starts with a short application about your business, goals, and budget.
+                It means our first conversation is about your growth, not the basics.
+                Bring your goals. Leave with a clear plan and a fixed quote.
               </BodyText>
             </div>
           </motion.div>
@@ -199,11 +201,12 @@ const ContactSection = () => {
                       </ul>
                     </div>
                     
-                    {/* CTA Button - NOW WITH WORKING LINK */}
-                    <a 
+                    {/* CTA Button - external links open a new tab, internal routes stay in-app */}
+                    <a
                       href={option.action}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      {...(option.action.startsWith('http')
+                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        : {})}
                       className={`w-full ${colors.button} px-6 py-4 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-md`}
                     >
                       <span>{option.ctaText}</span>
@@ -222,7 +225,7 @@ const ContactSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true, margin: "-100px" }}
-            className="bg-gray-50 rounded-2xl p-8 lg:p-12"
+            className="bg-primary-50/60 border border-primary-100 rounded-2xl p-8 lg:p-12"
           >
             <div className="text-center mb-8">
               <Heading level={3} className="mb-4">

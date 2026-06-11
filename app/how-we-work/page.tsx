@@ -6,9 +6,9 @@ import { Footer } from '@/components/layout/Footer';
 import { getImageUrl } from '@/lib/blob-images';
 
 export const metadata = {
-  title: 'Web Design Process for Small Businesses | Sproutflow Studio',
+  title: 'How We Work',
   description:
-    'See our step-by-step web design process for small businesses, from discovery and planning to launch, handoff, and ongoing support.',
+    'Our web design process for small businesses takes 2 to 6 weeks for most projects: discovery, fixed-quote proposal, design, build, launch, and optional ongoing support. Based in New Orleans, working remotely nationwide.',
   keywords: [
     'web design process New Orleans',
     'website development process',
@@ -27,19 +27,19 @@ const processSteps = [
     title: 'Discovery Call',
     duration: '30-45 minutes',
     icon: <Sprout className="w-6 h-6" />,
-    description: 'We start by understanding your business, not your website. What problems are you trying to solve? Who are your customers? What does success look like?',
-    highlight: "This isn't a sales call. It's a consulting session where we figure out if we're the right fit.",
+    description: 'We start by understanding your business, not your website. What does a new customer cost you today? What is one worth? What happens if your site does nothing? The call is a diagnosis, not a pitch.',
+    highlight: 'Bring your goals. Leave with a clear plan and a fixed quote.',
     deliverables: [
       'Deep understanding of your business goals',
       'Clear identification of target audience',
       'Alignment on project scope and expectations',
     ],
     color: {
-      bg: 'bg-green-50',
-      icon: 'text-green-500',
-      border: 'border-green-200',
-      accent: 'bg-green-500',
-      text: 'text-green-700',
+      bg: 'bg-primary-50',
+      icon: 'text-primary-500',
+      border: 'border-primary-200',
+      accent: 'bg-primary-500',
+      text: 'text-primary-700',
     },
   },
   {
@@ -47,7 +47,7 @@ const processSteps = [
     title: 'Proposal & Planning',
     duration: '2-3 days',
     icon: <Leaf className="w-6 h-6" />,
-    description: 'After our discovery call, we provide a detailed proposal that includes everything you need to make an informed decision.',
+    description: 'After our discovery call, we provide a detailed proposal that includes everything you need to make an informed decision. We only write proposals for projects we are confident we can deliver, so a proposal from us is a commitment, not a maybe.',
     highlight: "You'll know exactly what you're getting before we start.",
     deliverables: [
       'Project scope & deliverables',
@@ -56,11 +56,11 @@ const processSteps = [
       'Technical approach & platform recommendations',
     ],
     color: {
-      bg: 'bg-green-100',
-      icon: 'text-green-600',
-      border: 'border-green-300',
-      accent: 'bg-green-600',
-      text: 'text-green-700',
+      bg: 'bg-primary-100',
+      icon: 'text-primary-600',
+      border: 'border-primary-300',
+      accent: 'bg-primary-600',
+      text: 'text-primary-700',
     },
   },
   {
@@ -77,11 +77,11 @@ const processSteps = [
       'Two rounds of revisions included',
     ],
     color: {
-      bg: 'bg-green-100',
-      icon: 'text-green-700',
-      border: 'border-green-400',
-      accent: 'bg-green-700',
-      text: 'text-green-800',
+      bg: 'bg-primary-100',
+      icon: 'text-primary-700',
+      border: 'border-primary-400',
+      accent: 'bg-primary-700',
+      text: 'text-primary-800',
     },
   },
   {
@@ -98,11 +98,11 @@ const processSteps = [
       'Performance and accessibility baseline documented',
     ],
     color: {
-      bg: 'bg-teal-50',
-      icon: 'text-teal-600',
-      border: 'border-teal-300',
-      accent: 'bg-teal-600',
-      text: 'text-teal-800',
+      bg: 'bg-nature-50',
+      icon: 'text-nature-600',
+      border: 'border-nature-300',
+      accent: 'bg-nature-600',
+      text: 'text-nature-800',
     },
   },
   {
@@ -120,11 +120,11 @@ const processSteps = [
       '48-hour post-launch monitoring and support window',
     ],
     color: {
-      bg: 'bg-amber-50',
-      icon: 'text-amber-500',
-      border: 'border-amber-300',
-      accent: 'bg-amber-500',
-      text: 'text-amber-700',
+      bg: 'bg-accent-50',
+      icon: 'text-accent-500',
+      border: 'border-accent-300',
+      accent: 'bg-accent-500',
+      text: 'text-accent-700',
     },
   },
   {
@@ -142,11 +142,11 @@ const processSteps = [
       'Feature enhancements as your business grows',
     ],
     color: {
-      bg: 'bg-amber-100',
-      icon: 'text-amber-600',
-      border: 'border-amber-400',
-      accent: 'bg-amber-600',
-      text: 'text-amber-800',
+      bg: 'bg-accent-100',
+      icon: 'text-accent-600',
+      border: 'border-accent-400',
+      accent: 'bg-accent-600',
+      text: 'text-accent-800',
     },
   },
 ];
@@ -161,8 +161,8 @@ const results = [
     description: 'lead generation increase (psychiatry practice)',
   },
   {
-    metric: 'Zero-to-traction',
-    description: 'launch (event decor startup)',
+    metric: '2x',
+    description: 'consultation requests (event decor studio)',
   },
   {
     metric: '30%',
@@ -182,7 +182,7 @@ export default function HowWeWorkPage() {
             }}
           />
           <div className="absolute inset-0 bg-white/60" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,197,94,0.18),_transparent_55%)] opacity-40" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(95,117,94,0.18),_transparent_55%)] opacity-40" />
         </div>
 
         <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-24 md:px-8 md:py-28">
@@ -222,7 +222,7 @@ export default function HowWeWorkPage() {
         <div className="mx-auto max-w-6xl px-4 md:px-8">
           <div className="relative space-y-0">
             {/* Connecting line running down the left side */}
-            <div className="absolute left-8 top-20 bottom-0 w-0.5 bg-gradient-to-b from-green-300 via-green-400 to-amber-400 hidden md:block" 
+            <div className="absolute left-8 top-20 bottom-0 w-0.5 bg-gradient-to-b from-primary-300 via-primary-400 to-accent-400 hidden md:block" 
                  style={{ height: 'calc(100% - 10rem)' }} 
             />
 
@@ -319,7 +319,7 @@ export default function HowWeWorkPage() {
               Ready to Work Together?
             </h3>
             <p className="text-base text-gray-600 md:text-lg">
-              Schedule a discovery call and let&apos;s see if we&apos;re the right fit for your project.
+              Bring your goals. Leave with a clear plan and a fixed quote.
             </p>
             <Link
               href="/#contact"

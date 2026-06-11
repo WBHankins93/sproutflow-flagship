@@ -25,21 +25,21 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.c
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Sproutflow Studio | Professional Web Design in New Orleans, LA",
-    template: "%s | Sproutflow Studio"
+    default: "Sproutflow Studio | Web Design & Custom Business Software in New Orleans, LA",
+    template: "%s | Sproutflow Studio - New Orleans Web Design"
   },
-  description: "Professional web design and development for small businesses in New Orleans, LA. Enterprise-level strategy with small business heart.",
+  description: "Custom websites and the business systems behind them: web design, admin tools, CRMs, and automation for small businesses in New Orleans, LA.",
   keywords: [
     "web design New Orleans",
     "website design New Orleans",
     "custom website development New Orleans",
     "small business web design",
-    "professional website design",
+    "custom software development New Orleans",
+    "CRM systems small business",
+    "workflow automation New Orleans",
     "New Orleans web designer",
     "local web design",
-    "business website New Orleans",
-    "responsive web design",
-    "SEO web design New Orleans"
+    "business website New Orleans"
   ],
   authors: [{ name: "Sproutflow Studio" }],
   creator: "Sproutflow Studio",
@@ -54,8 +54,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "Sproutflow Studio",
-    title: "Sproutflow Studio | Professional Web Design in New Orleans, LA",
-    description: "Professional web design and development for small businesses in New Orleans, LA.",
+    title: "Sproutflow Studio | Web Design & Custom Business Software in New Orleans, LA",
+    description: "Custom websites and the business systems behind them. Web design, admin tools, CRMs, and automation for small businesses in New Orleans, LA.",
     images: [
       {
         url: `${siteUrl}/images/logo/main-logo-Photoroom.png`,
@@ -67,8 +67,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Sproutflow Studio | Professional Web Design in New Orleans, LA",
-    description: "Professional web design and development for small businesses in New Orleans, LA.",
+    title: "Sproutflow Studio | Web Design & Custom Business Software in New Orleans, LA",
+    description: "Custom websites and the business systems behind them. Web design, admin tools, CRMs, and automation for small businesses in New Orleans, LA.",
     images: [`${siteUrl}/images/logo/main-logo-Photoroom.png`],
     creator: "@sproutflowstudio",
   },
@@ -96,7 +96,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    // data-scroll-behavior lets Next.js disable smooth scrolling while it resets
+    // scroll position on route changes - fixes pages loading scrolled to the bottom
+    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
       <body
         className={`${dmSerif.variable} ${dmSans.variable} antialiased font-body`}
       >
