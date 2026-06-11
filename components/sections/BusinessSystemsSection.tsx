@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { LayoutDashboard, Users, FileEdit, Workflow, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { LayoutDashboard, Users, FileEdit, Workflow, ArrowRight } from 'lucide-react';
 import { Container } from '../layout/StudioLayout';
 
 const systems = [
@@ -36,14 +36,8 @@ const systems = [
   },
 ];
 
-const proofPoints = [
-  // Deal not closed - presented as a capability with a working demo, no client named.
-  'Multi-tenant operations platform that runs 64 locations from one dashboard - working demo available on request',
-  // TODO: confirm inclusion
-  'AI-powered resume screening product (Greenlit), live in beta',
-  // TODO: confirm inclusion
-  'Missed-call automation systems for trade businesses',
-];
+// Single proof point. The platform is a working demo, no client named.
+// Personal projects (Greenlit, missed-call systems) intentionally not mentioned.
 
 export default function BusinessSystemsSection() {
   return (
@@ -102,25 +96,21 @@ export default function BusinessSystemsSection() {
           ))}
         </div>
 
-        {/* Proof points */}
+        {/* Proof point */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="rounded-2xl border border-white/15 bg-white/5 p-7 md:p-8 mb-12"
+          className="rounded-2xl border border-white/15 bg-white/5 p-7 md:p-8 mb-12 text-center"
         >
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary-300 mb-5">
-            Systems we have shipped
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary-300 mb-4">
+            See it working
           </p>
-          <ul className="grid gap-4 md:grid-cols-3">
-            {proofPoints.map((point) => (
-              <li key={point} className="flex items-start gap-3">
-                <CheckCircle2 className="w-5 h-5 text-primary-300 flex-shrink-0 mt-0.5" />
-                <span className="text-sm text-white/85 leading-relaxed">{point}</span>
-              </li>
-            ))}
-          </ul>
+          <p className="text-white/85 leading-relaxed max-w-2xl mx-auto">
+            We built a multi-tenant operations platform that runs 64 locations from one dashboard.
+            Ask for a walkthrough on your discovery call.
+          </p>
         </motion.div>
 
         {/* Pricing connection + CTA */}
