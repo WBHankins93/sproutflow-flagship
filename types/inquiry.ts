@@ -5,6 +5,7 @@ export const PROJECT_TYPES = [
   'Website redesign',
   'Improve an existing site',
   'E-commerce website',
+  'Internal tools, CRM, or automation',
   'Landing pages',
   'Not sure yet',
 ] as const;
@@ -14,6 +15,7 @@ export const PROJECT_GOALS = [
   'Launch a new business',
   'Improve credibility',
   'Increase conversions',
+  'Save time with automation or internal tools',
   'Replace an outdated website',
 ] as const;
 
@@ -37,9 +39,15 @@ export const PROJECT_SCOPE_OPTIONS = [
 
 export const TIMELINE_OPTIONS = [
   'As soon as possible',
-  '1–2 months',
-  '3–6 months',
+  '1-2 months',
+  '3-6 months',
   'Just exploring options',
+] as const;
+
+export const DECISION_MAKER_OPTIONS = [
+  'Yes, I make the final decision',
+  'I decide together with a partner',
+  "I'm researching for someone else",
 ] as const;
 
 export const REFERRAL_SOURCES = [
@@ -57,6 +65,7 @@ export type HasWebsite = (typeof HAS_WEBSITE_OPTIONS)[number];
 export type WebsitePlatform = (typeof WEBSITE_PLATFORMS)[number];
 export type ProjectScope = (typeof PROJECT_SCOPE_OPTIONS)[number];
 export type Timeline = (typeof TIMELINE_OPTIONS)[number];
+export type DecisionMaker = (typeof DECISION_MAKER_OPTIONS)[number];
 export type ReferralSource = (typeof REFERRAL_SOURCES)[number];
 
 export interface InquiryFormData {
@@ -72,6 +81,7 @@ export interface InquiryFormData {
   projectScope: string;
   budgetRange: string;
   timeline: string;
+  decisionMaker: string;
   projectDetails: string;
   referralSource: string;
 }

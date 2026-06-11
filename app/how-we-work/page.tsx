@@ -27,7 +27,7 @@ const processSteps = [
     title: 'Discovery Call',
     duration: '30-45 minutes',
     icon: <Sprout className="w-6 h-6" />,
-    description: 'We start by understanding your business, not your website. What problems are you trying to solve? Who are your customers? What does success look like?',
+    description: 'We start by understanding your business, not your website. What does a new customer cost you today? What is one worth? What happens if your site does nothing? The call is a diagnosis, not a pitch.',
     highlight: 'Bring your goals. Leave with a clear plan and a fixed quote.',
     deliverables: [
       'Deep understanding of your business goals',
@@ -47,7 +47,7 @@ const processSteps = [
     title: 'Proposal & Planning',
     duration: '2-3 days',
     icon: <Leaf className="w-6 h-6" />,
-    description: 'After our discovery call, we provide a detailed proposal that includes everything you need to make an informed decision.',
+    description: 'After our discovery call, we provide a detailed proposal that includes everything you need to make an informed decision. We only write proposals for projects we are confident we can deliver, so a proposal from us is a commitment, not a maybe.',
     highlight: "You'll know exactly what you're getting before we start.",
     deliverables: [
       'Project scope & deliverables',
