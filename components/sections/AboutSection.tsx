@@ -40,8 +40,10 @@ const AboutSection: React.FC = () => {
             >
               {/* Photo */}
               <div className="relative w-full rounded-2xl overflow-hidden mb-6 aspect-square border-2 border-primary-200 shadow-lg bg-gray-100">
-                <Image 
-                  src={getImageUrl('ben-photo.png')} 
+                {/* Versioned filename: blob URLs are CDN-cached for 30 days, so photo
+                    updates must ship under a new name to bust the image cache */}
+                <Image
+                  src={getImageUrl('ben-hankins-2026.png')}
                   alt="Ben Hankins, Founder of Sproutflow Studio"
                   fill
                   className="object-cover"
