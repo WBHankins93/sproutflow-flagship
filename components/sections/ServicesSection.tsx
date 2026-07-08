@@ -2,10 +2,10 @@
 
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Zap, Target, Rocket, Check, ArrowRight, Package, Sparkles, ChevronDown } from 'lucide-react';
+import { Zap, Target, Rocket, Check, ArrowRight, Package, Sparkles } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
 import { serviceTiers as dataServiceTiers } from '@/data/services';
 import type { ServiceTier } from '@/data/services';
@@ -58,21 +58,23 @@ const addOnCategories = [
     subtitle: 'Performance and ongoing support',
     items: [
       {
-        name: 'SEO Strategy',
-        description: 'Keyword research, content optimization, and performance tracking',
-        price: '$800 - $2,000',
+        name: 'SEO Growth Package (monthly)',
+        description: 'Ongoing keyword tracking, metadata updates, and small on-page improvements',
+        // {{CONFIRM PRICING: $300-$800/mo}}
+        price: 'Ask on your discovery call',
         icon: <Check className="w-5 h-5 text-primary-600" />,
       },
       {
-        name: 'Professional Copywriting',
-        description: 'Conversion-focused copy for your website',
-        price: '$400 - $1,200',
+        name: 'Maintenance & Hosting Retainer',
+        description: 'Security updates, backups, and uptime monitoring',
+        // {{CONFIRM PRICING: starting $75-$150/mo}}
+        price: 'Ask on your discovery call',
         icon: <Check className="w-5 h-5 text-primary-600" />,
       },
       {
-        name: 'Website Care Plans',
-        description: 'Agency-managed hosting with proactive security',
-        price: 'From $200/mo',
+        name: 'Quarterly Performance Review',
+        description: 'Analytics reporting and a strategy check-in',
+        price: 'Ask on your discovery call',
         icon: <Check className="w-5 h-5 text-primary-600" />,
       },
     ],
@@ -83,15 +85,33 @@ const addOnCategories = [
     subtitle: 'Extend or improve your website',
     items: [
       {
-        name: 'Shopify Design Refresh',
-        description: 'Template customization to match your brand',
-        price: 'Starting at $1,000',
+        name: 'Additional pages beyond your package scope',
+        description: 'Expand your site with new service, location, team, or landing pages',
+        price: 'Ask on your discovery call',
         icon: <Package className="w-5 h-5 text-primary-600" />,
       },
       {
-        name: 'Content & Blog Setup',
-        description: 'SEO-optimized blog posts and content strategy',
-        price: 'From $250/post',
+        name: 'Copywriting / content pass',
+        description: 'Sharpen page copy, calls to action, and content structure',
+        price: 'Ask on your discovery call',
+        icon: <Package className="w-5 h-5 text-primary-600" />,
+      },
+      {
+        name: 'Custom photography coordination',
+        description: 'Plan and coordinate original visuals that fit your brand',
+        price: 'Ask on your discovery call',
+        icon: <Package className="w-5 h-5 text-primary-600" />,
+      },
+      {
+        name: 'Booking or scheduling integration',
+        description: 'Connect booking flows so visitors can take action immediately',
+        price: 'Ask on your discovery call',
+        icon: <Package className="w-5 h-5 text-primary-600" />,
+      },
+      {
+        name: 'Email marketing integration',
+        description: 'Connect your site to your email platform and list-building workflows',
+        price: 'Ask on your discovery call',
         icon: <Package className="w-5 h-5 text-primary-600" />,
       },
     ],
@@ -99,12 +119,6 @@ const addOnCategories = [
 ];
 
 function AddOnsAccordion() {
-  const [openCategory, setOpenCategory] = useState<string | null>(null);
-
-  const toggleCategory = (id: string) => {
-    setOpenCategory(openCategory === id ? null : id);
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -124,75 +138,46 @@ function AddOnsAccordion() {
           Optional services to enhance your website
         </p>
 
-        <div className="space-y-3 max-w-3xl mx-auto">
-          {addOnCategories.map((category) => {
-            const isOpen = openCategory === category.id;
-            return (
+        <div className="grid gap-4 md:grid-cols-2">
+          {addOnCategories.map((category) => (
               <div
                 key={category.id}
                 className="rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm overflow-hidden transition-shadow hover:shadow-md"
               >
-                {/* Accordion Header */}
-                <button
-                  onClick={() => toggleCategory(category.id)}
-                  className="w-full flex items-center justify-between p-5 text-left group"
-                >
-                  <div>
-                    <h4 className="font-semibold text-text-primary text-lg group-hover:text-primary-700 transition-colors">
+                <div className="p-5">
+                  <div className="mb-4">
+                    <h4 className="font-semibold text-text-primary text-lg">
                       {category.title}
                     </h4>
                     <p className="text-sm text-text-muted mt-0.5">{category.subtitle}</p>
                   </div>
-                  <motion.div
-                    animate={{ rotate: isOpen ? 180 : 0 }}
-                    transition={{ duration: 0.25 }}
-                    className="flex-shrink-0 ml-4"
-                  >
-                    <ChevronDown className="w-5 h-5 text-text-muted" />
-                  </motion.div>
-                </button>
 
-                {/* Accordion Content */}
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeInOut' }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-5 pb-5 pt-1">
-                        <div className="space-y-3">
-                          {category.items.map((item) => (
-                            <div
-                              key={item.name}
-                              className="flex items-start gap-3 p-3 rounded-lg bg-white/60 border border-gray-100"
-                            >
-                              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary-50 flex items-center justify-center mt-0.5">
-                                {item.icon}
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                                  <h5 className="font-semibold text-text-primary text-[0.95rem]">
-                                    {item.name}
-                                  </h5>
-                                  <span className="text-primary-600 font-bold text-sm whitespace-nowrap">
-                                    {item.price}
-                                  </span>
-                                </div>
-                                <p className="text-sm text-text-secondary mt-1">{item.description}</p>
-                              </div>
-                            </div>
-                          ))}
+                  <div className="space-y-3">
+                    {category.items.map((item) => (
+                      <div
+                        key={item.name}
+                        className="flex items-start gap-3 p-3 rounded-lg bg-white/60 border border-gray-100"
+                      >
+                        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary-50 flex items-center justify-center mt-0.5">
+                          {item.icon}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex flex-wrap items-baseline justify-between gap-2">
+                            <h5 className="font-semibold text-text-primary text-[0.95rem]">
+                              {item.name}
+                            </h5>
+                            <span className="text-primary-600 font-bold text-sm">
+                              {item.price}
+                            </span>
+                          </div>
+                          <p className="text-sm text-text-secondary mt-1">{item.description}</p>
                         </div>
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    ))}
+                  </div>
+                </div>
               </div>
-            );
-          })}
+          ))}
         </div>
       </div>
     </motion.div>
@@ -235,9 +220,6 @@ export default function ServicesSection() {
 
           <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
             Your website is the front door. These packages cover custom web design and development for New Orleans small businesses, scaled to where your business is today.
-          </p>
-          <p className="mt-4 text-base text-text-muted max-w-3xl mx-auto leading-relaxed">
-            Websites start this range. Systems work extends it. The upper tiers are where custom CRMs, admin tools, and automation come in.
           </p>
         </motion.div>
 

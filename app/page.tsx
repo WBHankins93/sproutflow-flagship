@@ -41,8 +41,8 @@ export default function Home() {
       <TrustBarSection />
       <ValuePropsSection />
       <ProcessSection />
-      <ServicesSection />
       <BusinessSystemsSection />
+      <ServicesSection />
       <AboutSection />
       <ContactSection />
       <Footer />

@@ -36,6 +36,21 @@ const systems = [
   },
 ];
 
+const systemPricingBands = [
+  {
+    band: 'Single-location tool',
+    fit: 'One dashboard, basic CRM, one workflow automated',
+  },
+  {
+    band: 'Multi-location platform',
+    fit: 'Multi-tenant system, roughly 2-15 locations',
+  },
+  {
+    band: 'Enterprise franchise rollout',
+    fit: '40+ locations, phased per-store implementation',
+  },
+];
+
 // Single proof point. The platform is a working demo, no client named.
 // Personal projects (Greenlit, missed-call systems) intentionally not mentioned.
 
@@ -108,12 +123,13 @@ export default function BusinessSystemsSection() {
             See it working
           </p>
           <p className="text-white/85 leading-relaxed max-w-2xl mx-auto">
+            {/* {{CONFIRM: is this a live client deployment or capability/demo language?}} */}
             We built a multi-tenant operations platform that runs 64 locations from one dashboard.
             Ask for a walkthrough on your discovery call.
           </p>
         </motion.div>
 
-        {/* Pricing connection + CTA */}
+        {/* Pricing bands + CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -121,14 +137,22 @@ export default function BusinessSystemsSection() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <p className="text-white/85 max-w-2xl mx-auto mb-8 leading-relaxed">
-            Websites start our pricing range. Systems work extends it. The upper tiers are where custom CRMs, admin tools, and automation come in.
-          </p>
+          <div className="mx-auto mb-8 max-w-4xl overflow-hidden rounded-2xl border border-white/15 bg-white/5 text-left">
+            {systemPricingBands.map((item) => (
+              <div
+                key={item.band}
+                className="grid gap-3 border-b border-white/10 p-5 last:border-b-0 md:grid-cols-[1.1fr_1.6fr] md:items-center"
+              >
+                <p className="font-display text-lg font-bold text-white">{item.band}</p>
+                <p className="text-sm leading-relaxed text-white/75">{item.fit}</p>
+              </div>
+            ))}
+          </div>
           <a
             href="/inquiry"
             className="inline-flex items-center gap-3 bg-white text-primary-800 px-10 py-4 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
           >
-            Book a Discovery Call
+            Ask for a Walkthrough
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>

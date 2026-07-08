@@ -1,6 +1,6 @@
 /**
  * MEDIUM PRIORITY TESTS: Component Rendering
- * 
+ *
  * Tests to ensure components render correctly with proper props
  * and conditional rendering logic.
  */
@@ -20,14 +20,14 @@ describe('Component Rendering - Header', () => {
   it('should render navigation links', () => {
     render(<Header />)
     expect(screen.getByText('How We Work')).toBeInTheDocument()
-    expect(screen.getByText('Services')).toBeInTheDocument()
     expect(screen.getByText('Portfolio')).toBeInTheDocument()
     expect(screen.getByText('Case Studies')).toBeInTheDocument()
+    expect(screen.getByText('About')).toBeInTheDocument()
   })
 
   it('should render contact CTA button', () => {
     render(<Header />)
-    expect(screen.getByText("Let's Talk")).toBeInTheDocument()
+    expect(screen.getByText('Get a quote')).toBeInTheDocument()
   })
 })
 
@@ -38,11 +38,13 @@ describe('Component Rendering - Footer', () => {
     expect(logo).toBeInTheDocument()
   })
 
-  it('should render service links', () => {
+  it('should render explore links', () => {
     render(<Footer />)
-    expect(screen.getByText('Foundation Package')).toBeInTheDocument()
-    expect(screen.getByText('Growth Package')).toBeInTheDocument()
-    expect(screen.getByText('Market Leader Package')).toBeInTheDocument()
+    expect(screen.getByText('Services & Pricing')).toBeInTheDocument()
+    expect(screen.getByText('Portfolio')).toBeInTheDocument()
+    expect(screen.getByText('Case Studies')).toBeInTheDocument()
+    expect(screen.getByText('How We Work')).toBeInTheDocument()
+    expect(screen.getByText('FAQ')).toBeInTheDocument()
   })
 
   it('should render contact information', () => {
@@ -62,18 +64,22 @@ describe('Component Rendering - Footer', () => {
 describe('Component Rendering - HeroSection', () => {
   it('should render hero headline', () => {
     render(<HeroSection />)
-    expect(screen.getByText(/Your small business/i)).toBeInTheDocument()
+    expect(
+      screen.getByText(/Custom websites and the business systems behind them/i)
+    ).toBeInTheDocument()
   })
 
-  it('should render CTA button', () => {
+  it('should render CTA button linking to the inquiry application', () => {
     render(<HeroSection />)
-    expect(screen.getByText(/Let's get started today!/i)).toBeInTheDocument()
+    const cta = screen.getByText('Book a Discovery Call').closest('a')
+    expect(cta).toBeInTheDocument()
+    expect(cta).toHaveAttribute('href', '/inquiry')
   })
 
   it('should render trust badges', () => {
     render(<HeroSection />)
-    expect(screen.getByText('Enterprise-Grade Design')).toBeInTheDocument()
-    expect(screen.getByText('Small Business Focused')).toBeInTheDocument()
+    expect(screen.getByText('Enterprise-Level Thinking')).toBeInTheDocument()
+    expect(screen.getByText('Built for Small Businesses')).toBeInTheDocument()
   })
 })
 

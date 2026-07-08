@@ -42,7 +42,7 @@ const ContactSection = () => {
       ],
       icon: <Calendar className="w-6 h-6" />,
       color: 'accent',
-      ctaText: 'Start your project',
+      ctaText: 'Book a Discovery Call',
       // Qualification flow: application first, calendar link after submission.
       action: '/inquiry'
     },

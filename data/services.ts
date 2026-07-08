@@ -20,11 +20,11 @@ export interface ServiceTier {
     {
       id: "starter",
       name: "Starter",
-      tagline: "Get online with a clean, credible presence",
+      tagline: "Get online with a clean, credible presence. A fast, affordable starting point. Every tier above this one is fully custom.",
       priceRange: "$850 - $1,500",
       timeline: "1-2 weeks",
       idealFor: "Solo entrepreneurs and new businesses needing fast validation",
-      description: "Template-based website with professional customization. Perfect for getting online quickly without sacrificing quality. Limited to 2-3 projects per month.",
+      description: "Semi-templated website with professional customization. Perfect for getting online quickly without sacrificing quality. Limited to 2-3 projects per month.",
       
       businessOutcomes: [
         "Professional online presence in days, not weeks",
@@ -35,7 +35,7 @@ export interface ServiceTier {
       
       technicalFeatures: [
         "1-5 pages with clean, modern design",
-        "Template-based with brand customization",
+        "Semi-templated by design - full custom development begins at our Foundation tier",
         "Mobile-responsive and performance optimized",
         "Contact form or scheduling integration",
         "Basic SEO setup and configuration",
@@ -56,7 +56,7 @@ export interface ServiceTier {
       ],
 
       limitations: [
-        "Template-based foundation (professionally customized)",
+        "Semi-templated foundation (professionally customized)",
         "Limited to 1-5 pages",
         "No CMS: static or template-based site only",
         "Basic integrations only",

@@ -15,15 +15,7 @@ const processSteps = [
     stage: 'Sprout',
     icon: <Sprout className="w-8 h-8" />,
     title: 'Strategic Foundation',
-    subtitle: 'Breaking through limitations',
-    description: 'We break through the surface together, establishing the foundation for everything to come.',
-    highlights: [
-      'Deep dive into your business',
-      'Understand your customers',
-      'Map your competitive edge',
-      'Create clear roadmap'
-    ],
-    outcome: 'Shared vision and strategic direction',
+    description: 'We map your business, your customers, and your competitive edge before anything gets built.',
     color: {
       bg: 'bg-primary-50',
       icon: 'text-primary-500',
@@ -38,15 +30,7 @@ const processSteps = [
     stage: 'Leaf',
     icon: <Leaf className="w-8 h-8" />,
     title: 'Growth & Development',
-    subtitle: 'Building strength and framework',
-    description: 'We develop the structure and messaging that will help your business thrive.',
-    highlights: [
-      'Craft resonant messaging',
-      'Design site architecture',
-      'Develop brand voice',
-      'Build content strategy'
-    ],
-    outcome: 'Professional design direction',
+    description: 'We craft your messaging and design direction.',
     color: {
       bg: 'bg-primary-100',
       icon: 'text-primary-600',
@@ -61,15 +45,7 @@ const processSteps = [
     stage: 'Bloom',
     icon: <Flower className="w-8 h-8" />,
     title: 'Design & Development',
-    subtitle: 'Beautiful transformation',
-    description: 'Your business blooms as we build a website that captures attention and converts.',
-    highlights: [
-      'Build fast, secure site',
-      'Implement conversion design',
-      'Integrate tools & systems',
-      'Test everything thoroughly'
-    ],
-    outcome: 'Beautiful website ready to launch',
+    description: 'We build a fast, secure, conversion-focused site.',
     color: {
       bg: 'bg-nature-100',
       icon: 'text-nature-700',
@@ -84,15 +60,7 @@ const processSteps = [
     stage: 'Flourish',
     icon: <Sun className="w-8 h-8" />,
     title: 'Launch & Partnership',
-    subtitle: 'Continued success',
-    description: 'We launch your site and ensure you have everything needed to flourish.',
-    highlights: [
-      'Smooth launch process',
-      'Train you on management',
-      'Set up analytics',
-      'Ongoing support available'
-    ],
-    outcome: 'Thriving business with confidence',
+    description: 'We launch, train you on management, and stay on for support.',
     color: {
       bg: 'bg-accent-50',
       icon: 'text-accent-500',
@@ -179,37 +147,15 @@ export default function ProcessSection() {
                   </div>
 
                   {/* Stage Name */}
-                  <div className="text-center mb-4">
+                  <div className="text-center mb-4 flex-1">
                     <h3 className={`text-2xl font-display font-bold mb-1 ${step.color.icon}`}>
                       {step.stage}
                     </h3>
                     <p className="text-sm font-semibold text-text-primary mb-1">
                       {step.title}
                     </p>
-                    <p className={`text-xs ${step.color.icon} italic`}>
-                      {step.subtitle}
-                    </p>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm text-text-secondary mb-4 leading-relaxed text-center font-body">
-                    {step.description}
-                  </p>
-
-                  {/* Highlights - Compact */}
-                  <ul className="space-y-1.5 mb-4">
-                    {step.highlights.map((item, idx) => (
-                      <li key={idx} className="flex items-center gap-2 text-xs text-text-primary">
-                        <div className={`w-1 h-1 rounded-full flex-shrink-0 ${step.color.accent}`}></div>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Outcome - Pushed to bottom with mt-auto */}
-                  <div className={`mt-auto ${step.color.accent} rounded-lg p-3 border-2 ${step.color.border} text-center`}>
-                    <p className="text-xs font-bold text-white">
-                      {step.outcome}
+                    <p className="text-sm text-text-secondary leading-relaxed text-center font-body">
+                      {step.description}
                     </p>
                   </div>
                 </div>
@@ -244,13 +190,7 @@ export default function ProcessSection() {
             href="/how-we-work"
             className="inline-flex items-center justify-center rounded-full border border-primary-300 px-6 py-3 text-sm font-semibold text-primary-700 transition hover:bg-primary-50"
           >
-            See Full Process
-          </Link>
-          <Link
-            href="/inquiry"
-            className="inline-flex items-center justify-center rounded-full bg-primary-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-primary-700"
-          >
-            Start your project
+            See the Full Process
           </Link>
         </motion.div>
 
