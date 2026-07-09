@@ -3,6 +3,7 @@
 import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
 import TrustBarSection from '@/components/sections/TrustBarSection';
+import HomeTestimonialsSection from '@/components/sections/HomeTestimonialsSection';
 import ValuePropsSection from '@/components/sections/ValuePropsSection';
 import ProcessSection from '@/components/sections/ProcessSection';
 import ServicesSection from '@/components/sections/ServicesSection';
@@ -39,6 +40,7 @@ export default function Home() {
     <main>
       <HeroSection />
       <TrustBarSection />
+      <HomeTestimonialsSection />
       <ValuePropsSection />
       <ProcessSection />
       <BusinessSystemsSection />

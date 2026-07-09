@@ -2,12 +2,11 @@
 
 'use client';
 
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { 
-  ArrowUpRight, 
   Code2, 
   FileCode, 
   Layers, 
@@ -16,10 +15,6 @@ import {
   Database, 
   Palette,
   ExternalLink,
-  Calendar,
-  TrendingUp,
-  Users,
-  CheckCircle2
 } from 'lucide-react';
 
 import { workProjects } from '@/data/workProjects';
@@ -49,27 +44,28 @@ const statusStyles: Record<ProjectStatus, string> = {
     'bg-accent-100 text-accent-900 ring-1 ring-inset ring-accent-200',
 };
 
-// Icon mapping for project categories
-const categoryIcons: Record<string, React.ReactNode> = {
-  'Personal Project': <Code2 className="w-8 h-8 text-white" />,
-  'Psychiatry': <Users className="w-8 h-8 text-white" />,
-  'Event Decor': <CheckCircle2 className="w-8 h-8 text-white" />,
-  'Pool Solutions': <TrendingUp className="w-8 h-8 text-white" />,
-  'Community Platform': <Zap className="w-8 h-8 text-white" />,
-  'Festival Brand': <Zap className="w-8 h-8 text-white" />,
-};
+const filterOptions = [
+  'All',
+  'Service Business',
+  'Professional Services',
+  'Personal Brand',
+] as const;
 
-// Get category from client name
-const getCategory = (client: string): string => {
-  if (client.includes('Personal')) return 'Personal Project';
-  if (client.includes('Psychiatry')) return 'Psychiatry';
-  if (client.includes('Event Decor')) return 'Event Decor';
-  if (client.includes('Pool')) return 'Pool Solutions';
-  if (client.includes('Big Butt Association') || client.includes('Bekky')) return 'Festival Brand';
-  return 'Web Design';
-};
+type PortfolioFilter = (typeof filterOptions)[number];
 
 export default function WorkPage() {
+  const [activeFilter, setActiveFilter] = useState<PortfolioFilter>('All');
+  const sortedProjects = useMemo(
+    () => [...workProjects].sort((a, b) => a.sortPriority - b.sortPriority),
+    []
+  );
+  const filteredProjects = useMemo(
+    () =>
+      activeFilter === 'All'
+        ? sortedProjects
+        : sortedProjects.filter((project) => project.category === activeFilter),
+    [activeFilter, sortedProjects]
+  );
 
   return (
     <>
@@ -85,7 +81,7 @@ export default function WorkPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(95,117,94,0.18),_transparent_55%)] opacity-40" />
         </div>
 
-        <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-24 md:px-8 md:py-28">
+        <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-16 md:gap-10 md:px-8 md:py-28">
           <div className="inline-flex items-center gap-2 text-primary-700">
             <span className="h-px w-12 bg-primary-500/60" />
             <span className="text-sm font-semibold uppercase tracking-[0.24em]">
@@ -93,16 +89,16 @@ export default function WorkPage() {
             </span>
             <span className="h-px w-12 bg-primary-500/60" />
           </div>
-          <div className="grid gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
-            <div className="space-y-6">
-              <h1 className="text-4xl font-display font-bold text-gray-900 md:text-6xl">
+          <div className="grid min-w-0 gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
+            <div className="min-w-0 space-y-5 md:space-y-6">
+              <h1 className="text-3xl font-display font-bold leading-tight text-gray-900 sm:text-4xl md:text-6xl">
                 Real websites for real businesses
               </h1>
-              <p className="text-lg text-gray-600 md:text-xl">
+              <p className="text-base leading-relaxed text-gray-600 sm:text-lg md:text-xl">
                 Every project starts with listening. To you, your customers, and what actually moves the needle for your business. What you&apos;ll see below are live sites built to work hard from day one, with room to grow as you do.
               </p>
             </div>
-            <div className="rounded-3xl border border-primary-200/60 bg-white/70 p-6 shadow-lg backdrop-blur">
+            <div className="rounded-2xl border border-primary-200/60 bg-white/80 p-5 shadow-lg backdrop-blur md:rounded-3xl md:p-6">
               <p className="text-sm font-semibold uppercase tracking-widest text-primary-700">
                 How we show up
               </p>
@@ -129,13 +125,33 @@ export default function WorkPage() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
+          <div className="-mx-4 mb-10 flex gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:px-0 sm:pb-0">
+            {filterOptions.map((filter) => {
+              const isActive = activeFilter === filter;
+
+              return (
+                <button
+                  key={filter}
+                  type="button"
+                  onClick={() => setActiveFilter(filter)}
+                  className={`shrink-0 rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+                    isActive
+                      ? 'border-primary-700 bg-primary-700 text-white'
+                      : 'border-primary-200 bg-white text-primary-800 hover:border-primary-500'
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  {filter}
+                </button>
+              );
+            })}
+          </div>
+
           {/* Portfolio Grid */}
           <div className="grid lg:grid-cols-3 gap-8 mb-16">
             
-            {workProjects.map((project, index) => {
-              const category = getCategory(project.client);
-              const categoryIcon = categoryIcons[category] || <Code2 className="w-8 h-8 text-white" />;
-              const primaryColor = project.gradient[0] || '#163323';
+            {filteredProjects.map((project, index) => {
+              const category = project.category;
               
               return (
                 <motion.div
@@ -153,7 +169,7 @@ export default function WorkPage() {
                   className="group"
                 >
                   {/* Unified Card Container */}
-                  <div className="bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 h-full flex flex-col">
+                  <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-lg transition-all duration-500 hover:shadow-2xl md:rounded-3xl">
                     
                     {/* Image Section */}
                     <motion.div 
@@ -219,11 +235,11 @@ export default function WorkPage() {
                     </motion.div>
 
                     {/* Content Section */}
-                    <div className="p-6 flex-1 flex flex-col">
+                    <div className="flex flex-1 flex-col p-5 md:p-6">
                       
                       {/* Header with Title and Description */}
                       <div className="mb-4">
-                        <h3 className="text-xl font-display font-bold text-gray-900 mb-2">
+                        <h3 className="text-xl font-display font-bold leading-tight text-gray-900 mb-2">
                           {project.title}
                         </h3>
                         <p className="text-sm text-gray-500 mb-3">{project.client}</p>
@@ -278,7 +294,7 @@ export default function WorkPage() {
                           href={project.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="w-full py-2.5 text-sm font-semibold text-primary-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-all flex items-center justify-center gap-2"
+                          className="flex w-full items-center justify-center gap-2 rounded-full bg-primary-50 py-3 text-sm font-semibold text-primary-700 transition-all hover:bg-primary-100 hover:text-primary-800"
                         >
                           View Live Site
                           <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -316,4 +332,3 @@ export default function WorkPage() {
     </>
   );
 }
-

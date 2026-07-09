@@ -6,12 +6,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Heart, Zap, Users, Target, ArrowRight } from 'lucide-react';
-import { Container, Section, Heading, BodyText, Button, Grid, Card } from '../layout/StudioLayout';
+import { Container, Section, Heading, BodyText } from '../layout/StudioLayout';
 import { getImageUrl } from '@/lib/blob-images';
 
 const AboutSection: React.FC = () => {
   return (
-    <Section id="about" background="nature" padding="lg">
+    <Section id="about" background="nature" padding="lg" className="overflow-hidden">
       <Container>
         <div className="max-w-6xl mx-auto">
           
@@ -24,8 +24,11 @@ const AboutSection: React.FC = () => {
             className="text-center mb-16"
           >
             <Heading level={2} className="mb-4">
-              Meet the Team Behind Your Success
+              Meet Ben
             </Heading>
+            <BodyText size="lg" className="mx-auto max-w-2xl">
+              You work directly with the founder, no handoffs to juniors.
+            </BodyText>
           </motion.div>
 
           {/* Two-Column Layout: Ben + Mission */}
@@ -52,7 +55,7 @@ const AboutSection: React.FC = () => {
               </div>
 
               <Heading level={3} className="mb-3 text-2xl">
-                Meet Ben, Our Founder 👋
+                Founder-direct from the first conversation
               </Heading>
 
               <BodyText className="mb-4 leading-relaxed">
@@ -88,7 +91,7 @@ const AboutSection: React.FC = () => {
                   Level the Playing Field
                 </Heading>
                 <BodyText className="mb-4 leading-relaxed">
-                  Big companies have design teams that study human psychology.
+                  Big companies have specialists that study human psychology.
                 </BodyText>
                 <BodyText className="mb-4 leading-relaxed">
                   Small businesses? You get DIY tools and hope for the best. 

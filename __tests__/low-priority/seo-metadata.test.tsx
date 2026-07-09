@@ -133,7 +133,7 @@ describe('SEO Metadata - Structured Data', () => {
       const schema = JSON.parse(script.textContent)
       expect(schema.name).toBe('Sproutflow Studio')
       expect(schema.email).toBe('ben@sproutflow-studio.com')
-      expect(schema.telephone).toBe('+1-228-327-1082')
+      expect(schema.telephone).toBe('+1-504-326-1676')
     }
   })
 

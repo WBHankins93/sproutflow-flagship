@@ -70,7 +70,6 @@ export const metadata: Metadata = {
     title: "Sproutflow Studio | Web Design & Custom Business Software in New Orleans, LA",
     description: "Custom websites and the business systems behind them. Web design, admin tools, CRMs, and automation for small businesses in New Orleans, LA.",
     images: [`${siteUrl}/images/logo/main-logo-Photoroom.png`],
-    creator: "@sproutflowstudio",
   },
   robots: {
     index: true,

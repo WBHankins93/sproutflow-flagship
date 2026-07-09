@@ -109,6 +109,12 @@ const addOnCategories = [
         icon: <Package className="w-5 h-5 text-primary-600" />,
       },
       {
+        name: 'Shopify builds and rebuilds',
+        description: 'Launch or rebuild a Shopify storefront with stronger presentation, product flow, and conversion paths',
+        price: 'Ask on your discovery call',
+        icon: <Package className="w-5 h-5 text-primary-600" />,
+      },
+      {
         name: 'Email marketing integration',
         description: 'Connect your site to your email platform and list-building workflows',
         price: 'Ask on your discovery call',

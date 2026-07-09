@@ -55,8 +55,8 @@ describe('Data Validation - Service Pricing Consistency', () => {
 
 describe('Data Validation - Contact Information Consistency', () => {
   const CORRECT_EMAIL = 'ben@sproutflow-studio.com'
-  const CORRECT_PHONE_DISPLAY = '(228) 327-1082'
-  const CORRECT_PHONE_TEL = '+12283271082'
+  const CORRECT_PHONE_DISPLAY = '(504) 326-1676'
+  const CORRECT_PHONE_TEL = '+15043261676'
 
   it('should have correct email in content.ts', () => {
     expect(servicesContent).toBeDefined()
@@ -91,6 +91,8 @@ describe('Data Validation - Work Projects Structure', () => {
       expect(project).toHaveProperty('id')
       expect(project).toHaveProperty('title')
       expect(project).toHaveProperty('client')
+      expect(project).toHaveProperty('category')
+      expect(project).toHaveProperty('sortPriority')
       expect(project).toHaveProperty('status')
       expect(project).toHaveProperty('description')
       expect(project).toHaveProperty('url')
@@ -99,6 +101,8 @@ describe('Data Validation - Work Projects Structure', () => {
       expect(project).toHaveProperty('gradient')
       
       expect(['Live', 'In Progress']).toContain(project.status)
+      expect(typeof project.category).toBe('string')
+      expect(typeof project.sortPriority).toBe('number')
       expect(Array.isArray(project.services)).toBe(true)
       expect(Array.isArray(project.tech)).toBe(true)
       expect(Array.isArray(project.gradient)).toBe(true)

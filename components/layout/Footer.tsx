@@ -1,11 +1,8 @@
-// components/layout/Footer.tsx - FIXED VERSION
-'use client';
-
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Container, Heading, BodyText } from './StudioLayout';
-import { Linkedin, Twitter, Instagram, Facebook } from 'lucide-react';
+import { Container, BodyText } from './StudioLayout';
+import { Linkedin } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
 
 export const Footer: React.FC = () => {
@@ -14,23 +11,8 @@ export const Footer: React.FC = () => {
   const socialLinks = [
     {
       name: 'LinkedIn',
-      href: 'https://linkedin.com/company/sproutflow-studio', // Update with real link
+      href: 'https://linkedin.com/company/sproutflow-studio',
       icon: Linkedin
-    },
-    {
-      name: 'Twitter',
-      href: 'https://twitter.com/sproutflowstudio', // Update with real link
-      icon: Twitter
-    },
-    {
-      name: 'Instagram',
-      href: 'https://instagram.com/sproutflowstudio', // Update with real link
-      icon: Instagram
-    },
-    {
-      name: 'Facebook',
-      href: 'https://facebook.com/sproutflowstudio', // Update with real link
-      icon: Facebook
     }
   ];
 
@@ -94,6 +76,11 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
+                <Link href="/how-we-handle-your-data" className="hover:text-white transition-colors">
+                  How We Handle Your Data
+                </Link>
+              </li>
+              <li>
                 <Link href="/faq" className="hover:text-white transition-colors">
                   FAQ
                 </Link>
@@ -116,10 +103,10 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <a 
-                  href="tel:+12283271082"
+                  href="tel:+15043261676"
                   className="hover:text-white transition-colors"
                 >
-                  (228) 327-1082 
+                  (504) 326-1676
                 </a>
               </li>
             </ul>

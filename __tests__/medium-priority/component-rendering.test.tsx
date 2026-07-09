@@ -44,6 +44,7 @@ describe('Component Rendering - Footer', () => {
     expect(screen.getByText('Portfolio')).toBeInTheDocument()
     expect(screen.getByText('Case Studies')).toBeInTheDocument()
     expect(screen.getByText('How We Work')).toBeInTheDocument()
+    expect(screen.getByText('How We Handle Your Data')).toBeInTheDocument()
     expect(screen.getByText('FAQ')).toBeInTheDocument()
   })
 
@@ -51,7 +52,7 @@ describe('Component Rendering - Footer', () => {
     render(<Footer />)
     expect(screen.getByText('New Orleans, LA')).toBeInTheDocument()
     expect(screen.getByText('ben@sproutflow-studio.com')).toBeInTheDocument()
-    expect(screen.getByText('(228) 327-1082')).toBeInTheDocument()
+    expect(screen.getByText('(504) 326-1676')).toBeInTheDocument()
   })
 
   it('should render copyright notice', () => {

@@ -17,8 +17,9 @@ export const metadata = {
 };
 
 const featuredSlug = 'second-line-psychiatry';
-const featured = caseStudies.find((cs) => cs.slug === featuredSlug)!;
-const rest = caseStudies.filter((cs) => cs.slug !== featuredSlug);
+const listedCaseStudies = caseStudies.filter((cs) => cs.slug !== 'big-butt-association');
+const featured = listedCaseStudies.find((cs) => cs.slug === featuredSlug)!;
+const rest = listedCaseStudies.filter((cs) => cs.slug !== featuredSlug);
 
 export default function CaseStudiesPage() {
   return (
