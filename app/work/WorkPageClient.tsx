@@ -2,12 +2,11 @@
 
 'use client';
 
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { 
-  ArrowUpRight, 
   Code2, 
   FileCode, 
   Layers, 
@@ -16,10 +15,6 @@ import {
   Database, 
   Palette,
   ExternalLink,
-  Calendar,
-  TrendingUp,
-  Users,
-  CheckCircle2
 } from 'lucide-react';
 
 import { workProjects } from '@/data/workProjects';
@@ -49,27 +44,28 @@ const statusStyles: Record<ProjectStatus, string> = {
     'bg-accent-100 text-accent-900 ring-1 ring-inset ring-accent-200',
 };
 
-// Icon mapping for project categories
-const categoryIcons: Record<string, React.ReactNode> = {
-  'Personal Project': <Code2 className="w-8 h-8 text-white" />,
-  'Psychiatry': <Users className="w-8 h-8 text-white" />,
-  'Event Decor': <CheckCircle2 className="w-8 h-8 text-white" />,
-  'Pool Solutions': <TrendingUp className="w-8 h-8 text-white" />,
-  'Community Platform': <Zap className="w-8 h-8 text-white" />,
-  'Festival Brand': <Zap className="w-8 h-8 text-white" />,
-};
+const filterOptions = [
+  'All',
+  'Service Business',
+  'Professional Services',
+  'Personal Brand',
+] as const;
 
-// Get category from client name
-const getCategory = (client: string): string => {
-  if (client.includes('Personal')) return 'Personal Project';
-  if (client.includes('Psychiatry')) return 'Psychiatry';
-  if (client.includes('Event Decor')) return 'Event Decor';
-  if (client.includes('Pool')) return 'Pool Solutions';
-  if (client.includes('Big Butt Association') || client.includes('Bekky')) return 'Festival Brand';
-  return 'Web Design';
-};
+type PortfolioFilter = (typeof filterOptions)[number];
 
 export default function WorkPage() {
+  const [activeFilter, setActiveFilter] = useState<PortfolioFilter>('All');
+  const sortedProjects = useMemo(
+    () => [...workProjects].sort((a, b) => a.sortPriority - b.sortPriority),
+    []
+  );
+  const filteredProjects = useMemo(
+    () =>
+      activeFilter === 'All'
+        ? sortedProjects
+        : sortedProjects.filter((project) => project.category === activeFilter),
+    [activeFilter, sortedProjects]
+  );
 
   return (
     <>
@@ -129,13 +125,33 @@ export default function WorkPage() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
+          <div className="mb-10 flex flex-wrap items-center justify-center gap-3">
+            {filterOptions.map((filter) => {
+              const isActive = activeFilter === filter;
+
+              return (
+                <button
+                  key={filter}
+                  type="button"
+                  onClick={() => setActiveFilter(filter)}
+                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+                    isActive
+                      ? 'border-primary-700 bg-primary-700 text-white'
+                      : 'border-primary-200 bg-white text-primary-800 hover:border-primary-500'
+                  }`}
+                  aria-pressed={isActive}
+                >
+                  {filter}
+                </button>
+              );
+            })}
+          </div>
+
           {/* Portfolio Grid */}
           <div className="grid lg:grid-cols-3 gap-8 mb-16">
             
-            {workProjects.map((project, index) => {
-              const category = getCategory(project.client);
-              const categoryIcon = categoryIcons[category] || <Code2 className="w-8 h-8 text-white" />;
-              const primaryColor = project.gradient[0] || '#163323';
+            {filteredProjects.map((project, index) => {
+              const category = project.category;
               
               return (
                 <motion.div
@@ -316,4 +332,3 @@ export default function WorkPage() {
     </>
   );
 }
-

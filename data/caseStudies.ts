@@ -187,13 +187,6 @@ export const caseStudies: CaseStudy[] = [
       { value: 'In-house', label: 'Inventory updates handled by the team, no developer needed' },
       { value: '6 weeks', label: 'From kickoff to a launch-ready luxury brand' },
     ],
-    testimonial: {
-      // TODO: Confirm this quote with the client and add a real name when approved.
-      quote:
-        'Working with Sproutflow transformed how potential clients perceive our business. We went from looking like a side hustle to a legitimate luxury brand. The site pays for itself every month.',
-      name: 'Owner',
-      role: 'Nealy Event Decor',
-    },
     liveUrl: 'https://nealyevents.com/',
     details: {
       timeline: '6 weeks',
@@ -239,12 +232,6 @@ export const caseStudies: CaseStudy[] = [
       { value: 'Online', label: 'A presence that finally matches 20 years of reputation' },
       { value: '2 wks', label: 'From outdated template to live, converting site' },
     ],
-    testimonial: {
-      quote:
-        'The new site has helped tremendously. It’s already driving more bookings through the form, and it’s great to finally have something that represents the business the way it deserves.',
-      name: 'Owner',
-      role: 'DJN Services LLC',
-    },
     liveUrl: 'https://djnservices.com/',
     beforeAfter: [
       {

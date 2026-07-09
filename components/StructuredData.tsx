@@ -29,17 +29,11 @@ const professionalServiceSchema = {
     latitude: '29.9511',
     longitude: '-90.0715',
   },
-  telephone: '+1-228-327-1082',
+  telephone: '+1-504-326-1676',
   email: 'ben@sproutflow-studio.com',
   priceRange: '$850 - $7,500+',
-  // Synced with the social links in components/layout/Footer.tsx.
-  // TODO: Verify each handle is live, and add the Google Business Profile
-  // share link plus any directory profiles when available.
   sameAs: [
     'https://linkedin.com/company/sproutflow-studio',
-    'https://instagram.com/sproutflowstudio',
-    'https://facebook.com/sproutflowstudio',
-    'https://twitter.com/sproutflowstudio',
   ],
   areaServed: [
     {

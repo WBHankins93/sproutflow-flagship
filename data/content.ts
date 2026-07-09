@@ -220,7 +220,7 @@ export const contactContent = {
   
   businessInfo: {
     email: "ben@sproutflow-studio.com",
-    phone: "(228) 327-1082",
+    phone: "(504) 326-1676",
     address: "New Orleans, LA • Portland, OR",
     availability: "Monday - Friday, 9 AM - 6 PM CST"
   }

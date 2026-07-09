@@ -3,7 +3,7 @@
 
 import { motion } from 'framer-motion';
 import { Container, Section, Heading, BodyText, Card } from '../layout/StudioLayout';
-import { Calendar, Mail, MessageCircle, Clock, ArrowRight, Lightbulb, Rocket, Phone } from 'lucide-react';
+import { Calendar, Mail, Clock, ArrowRight, Lightbulb, Phone } from 'lucide-react';
 import { useState } from 'react';
 
 const ContactSection = () => {
@@ -237,7 +237,7 @@ const ContactSection = () => {
             </div>
             
             <div className="grid md:grid-cols-3 gap-6">
-              <a 
+              <a
                 href="mailto:ben@sproutflow-studio.com"
                 className="text-center group"
               >
@@ -253,8 +253,8 @@ const ContactSection = () => {
                 </span>
               </a>
 
-              <a 
-                href="tel:+12283271082"
+              <a
+                href="tel:+15043261676"
                 className="text-center group"
               >
                 <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
@@ -265,27 +265,25 @@ const ContactSection = () => {
                   Prefer voice? Let&apos;s have a quick conversation.
                 </BodyText>
                 <span className="text-accent-600 font-medium hover:underline">
-                  (228) 327-1082
+                  (504) 326-1676
                 </span>
               </a>
 
-              <div className="text-center group">
+              <a
+                href="mailto:ben@sproutflow-studio.com"
+                className="text-center group"
+              >
                 <div className="w-12 h-12 bg-nature-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <MessageCircle className="w-6 h-6 text-nature-700" />
+                  <Mail className="w-6 h-6 text-nature-700" />
                 </div>
                 <h4 className="font-semibold text-text-primary mb-2">Send a Message</h4>
                 <BodyText size="sm" color="muted" className="mb-3">
                   Quick questions? Drop us a line anytime.
                 </BodyText>
-                <a 
-                  href="https://m.me/sproutflowstudio" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-nature-700 font-medium hover:underline"
-                >
-                  Message on Facebook
-                </a>
-              </div>
+                <span className="text-nature-700 font-medium hover:underline">
+                  Email us directly
+                </span>
+              </a>
             </div>
           </motion.div>
 

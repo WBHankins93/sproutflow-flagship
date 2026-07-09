@@ -18,8 +18,8 @@ describe('Contact Links - Footer', () => {
 
   it('should have correct phone tel link', () => {
     render(<Footer />)
-    const phoneLink = screen.getByText('(228) 327-1082').closest('a')
-    expect(phoneLink).toHaveAttribute('href', 'tel:+12283271082')
+    const phoneLink = screen.getByText('(504) 326-1676').closest('a')
+    expect(phoneLink).toHaveAttribute('href', 'tel:+15043261676')
   })
 
   it('should display correct email address', () => {
@@ -29,7 +29,7 @@ describe('Contact Links - Footer', () => {
 
   it('should display correct phone number', () => {
     render(<Footer />)
-    expect(screen.getByText('(228) 327-1082')).toBeInTheDocument()
+    expect(screen.getByText('(504) 326-1676')).toBeInTheDocument()
   })
 })
 
@@ -42,8 +42,8 @@ describe('Contact Links - ContactSection', () => {
 
   it('should have correct phone tel link', () => {
     render(<ContactSection />)
-    const phoneLink = screen.getByText('(228) 327-1082').closest('a')
-    expect(phoneLink).toHaveAttribute('href', 'tel:+12283271082')
+    const phoneLink = screen.getByText('(504) 326-1676').closest('a')
+    expect(phoneLink).toHaveAttribute('href', 'tel:+15043261676')
   })
 
   it('should display correct email address', () => {
@@ -53,14 +53,14 @@ describe('Contact Links - ContactSection', () => {
 
   it('should display correct phone number', () => {
     render(<ContactSection />)
-    expect(screen.getByText('(228) 327-1082')).toBeInTheDocument()
+    expect(screen.getByText('(504) 326-1676')).toBeInTheDocument()
   })
 })
 
 describe('Contact Links - Format Validation', () => {
   const CORRECT_EMAIL = 'ben@sproutflow-studio.com'
-  const CORRECT_PHONE_DISPLAY = '(228) 327-1082'
-  const CORRECT_PHONE_TEL = '+12283271082'
+  const CORRECT_PHONE_DISPLAY = '(504) 326-1676'
+  const CORRECT_PHONE_TEL = '+15043261676'
 
   it('should validate email format matches expected', () => {
     const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -80,7 +80,7 @@ describe('Contact Links - Format Validation', () => {
   it('should convert display phone to tel format correctly', () => {
     // Remove all non-digit characters except leading +
     const telFormat = CORRECT_PHONE_DISPLAY.replace(/\D/g, '')
-    expect(telFormat).toBe('2283271082')
+    expect(telFormat).toBe('5043261676')
     expect(`+1${telFormat}`).toBe(CORRECT_PHONE_TEL)
   })
 })

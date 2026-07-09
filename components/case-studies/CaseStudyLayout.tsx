@@ -7,8 +7,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, ArrowRight, ExternalLink, Check } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
+import Testimonial from '@/components/Testimonial';
 import { getImageUrl } from '@/lib/blob-images';
 import type { CaseStudy } from '@/data/caseStudies';
+import { getTestimonialForCaseStudy } from '@/data/testimonials';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.com';
 
@@ -47,6 +49,8 @@ function BreadcrumbSchema({ caseStudy }: { caseStudy: CaseStudy }) {
 }
 
 export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy }) {
+  const testimonial = getTestimonialForCaseStudy(caseStudy.slug);
+
   return (
     <>
       <BreadcrumbSchema caseStudy={caseStudy} />
@@ -219,22 +223,9 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
             ))}
           </div>
 
-          {/* Testimonial - only renders when a real, approved quote exists */}
-          {caseStudy.testimonial && (
-            <div className="bg-gradient-to-br from-primary-50 to-white rounded-3xl border-2 border-primary-200 p-8 md:p-12">
-              <div className="flex items-start gap-6">
-                <div className="text-6xl text-primary-400 font-display leading-none">&quot;</div>
-                <div className="flex-1">
-                  <p className="text-xl text-gray-700 leading-relaxed mb-6 italic font-display">
-                    {caseStudy.testimonial.quote}
-                  </p>
-                  <div>
-                    <div className="font-bold text-gray-900">{caseStudy.testimonial.name}</div>
-                    <div className="text-gray-600">{caseStudy.testimonial.role}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {/* Testimonial - rendered only from approved testimonial data */}
+          {testimonial && (
+            <Testimonial testimonial={testimonial} variant="compact" />
           )}
         </div>
       </section>

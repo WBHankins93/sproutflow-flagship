@@ -58,7 +58,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight mb-6 md:mb-8"
+            className="max-w-full break-words text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight mb-6 md:mb-8"
             style={{
               textShadow: '4px 4px 20px rgba(0,0,0,0.9), 2px 2px 10px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.5)'
             }}
@@ -73,7 +73,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-xl md:text-3xl text-white font-semibold mb-10 md:mb-12 max-w-4xl mx-auto leading-relaxed"
+            className="max-w-full break-words text-lg sm:text-xl md:text-3xl text-white font-semibold mb-10 md:mb-12 md:max-w-4xl mx-auto leading-relaxed"
             style={{
               textShadow: '3px 3px 12px rgba(0,0,0,0.9), 1px 1px 6px rgba(0,0,0,0.8)'
             }}
