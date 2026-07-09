@@ -18,6 +18,8 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    max-width: 100%;
     overflow-x: hidden;
   }
 
@@ -26,7 +28,15 @@
     @apply bg-white text-gray-800;
     font-family: var(--font-body), sans-serif;
     line-height: 1.7;
+    width: 100%;
+    max-width: 100%;
     overflow-x: hidden;
+  }
+
+  img,
+  video,
+  canvas {
+    max-width: 100%;
   }
 
   /* Headings use DM Serif Display for organic, nature-inspired feel */

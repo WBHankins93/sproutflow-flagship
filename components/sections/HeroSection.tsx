@@ -10,7 +10,7 @@ export default function HeroSection() {
   return (
     <>
       {/* Full-Screen Image Hero */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden md:min-h-screen">
         
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
@@ -30,22 +30,22 @@ export default function HeroSection() {
 
         {/* Hero Content - Centered, with vertical padding so badges and the scroll
             indicator never touch the header or the section below on any viewport */}
-        <div className="relative z-10 text-center px-4 md:px-8 max-w-6xl mx-auto py-20 md:py-24">
+        <div className="relative z-10 mx-auto max-w-6xl px-4 py-12 text-center sm:py-16 md:px-8 md:py-24">
           
           {/* Trust Badges - Floating above headline */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-wrap justify-center gap-3 md:gap-4 mb-8 md:mb-12"
+            className="mb-6 flex flex-wrap justify-center gap-2 md:mb-12 md:gap-4"
           >
-            <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20">
+            <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/95 px-3 py-2 shadow-lg backdrop-blur-md md:px-4">
               <Award className="w-4 h-4 text-accent-500" />
-              <span className="font-semibold text-gray-800 text-sm md:text-base">Enterprise-Level Thinking</span>
+              <span className="text-xs font-semibold text-gray-800 sm:text-sm md:text-base">Enterprise-Level Thinking</span>
             </div>
-            <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20">
+            <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/95 px-3 py-2 shadow-lg backdrop-blur-md md:px-4">
               <Heart className="w-4 h-4 text-primary-600" />
-              <span className="font-semibold text-gray-800 text-sm md:text-base">Built for Small Businesses</span>
+              <span className="text-xs font-semibold text-gray-800 sm:text-sm md:text-base">Built for Small Businesses</span>
             </div>
             {/* <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20">
               <span className="text-blue-600 text-lg">📈</span>
@@ -58,14 +58,16 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="max-w-full break-words text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-display font-bold text-white leading-tight mb-6 md:mb-8"
+            className="mx-auto mb-5 max-w-[22rem] text-3xl font-bold leading-[1.08] text-white sm:max-w-2xl sm:text-4xl md:mb-8 md:max-w-full md:text-6xl lg:text-7xl"
             style={{
               textShadow: '4px 4px 20px rgba(0,0,0,0.9), 2px 2px 10px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.5)'
             }}
           >
             Custom websites and the business systems behind them.
-            <br />
-            <span className="text-primary-200 italic">Built in New Orleans with enterprise-grade engineering, priced for small business.</span>
+            <span className="hidden md:inline">
+              <br />
+              <span className="text-primary-200 italic">Built in New Orleans with enterprise-grade engineering, priced for small business.</span>
+            </span>
           </motion.h1>
 
           {/* Value Proposition */}
@@ -73,12 +75,17 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="max-w-full break-words text-lg sm:text-xl md:text-3xl text-white font-semibold mb-10 md:mb-12 md:max-w-4xl mx-auto leading-relaxed"
+            className="mx-auto mb-8 max-w-[21rem] text-base font-semibold leading-relaxed text-white sm:max-w-2xl sm:text-xl md:mb-12 md:max-w-4xl md:text-3xl"
             style={{
               textShadow: '3px 3px 12px rgba(0,0,0,0.9), 1px 1px 6px rgba(0,0,0,0.8)'
             }}
           >
-            Your website gets clients in the door. Your systems keep them. We build both - custom Next.js sites, internal admin tools, CRMs, and the automation that connects them.
+            <span className="md:hidden">
+              Websites that win clients. Systems that keep them.
+            </span>
+            <span className="hidden md:inline">
+              Your website gets clients in the door. Your systems keep them. We build both - custom Next.js sites, internal admin tools, CRMs, and the automation that connects them.
+            </span>
           </motion.p>
 
           {/* Primary CTA */}
@@ -86,11 +93,11 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="mb-10 md:mb-12"
+            className="mb-8 md:mb-12"
           >
             <a
               href="/inquiry"
-              className="inline-flex items-center gap-3 bg-white text-text-primary px-10 md:px-14 py-4 md:py-5 rounded-full text-lg md:text-xl font-bold shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 group"
+              className="group inline-flex w-full max-w-xs items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-base font-bold text-text-primary shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-3xl sm:w-auto md:px-14 md:py-5 md:text-xl"
             >
               Book a Discovery Call
               <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
@@ -101,7 +108,7 @@ export default function HeroSection() {
             >
               Bring your goals. Leave with a clear plan and a fixed quote.
             </p>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/95">
+            <div className="mx-auto mt-6 flex max-w-xs flex-col items-start gap-2 text-left text-sm text-white/95 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:text-center">
               {['Websites that win clients', 'Systems that keep them', 'Automation that saves hours'].map((point) => (
                 <div key={point} className="inline-flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-primary-200" />
