@@ -9,21 +9,21 @@ import { Container } from '../layout/StudioLayout';
 const valueProps = [
   {
     icon: <Shield className="w-6 h-6" />,
-    title: 'Trust starts in seconds',
+    title: 'Be understood faster',
     description:
-      'Your website is often your first impression. A professional presence helps serious buyers trust you faster.',
+      'Clear positioning helps the right buyer quickly understand what you do, who it is for, and why they should trust you.',
   },
   {
     icon: <TrendingUp className="w-6 h-6" />,
-    title: 'Conversion is the real goal',
+    title: 'Turn attention into action',
     description:
-      'A better site guides visitors to take action: book a call, request a quote, or make contact with confidence.',
+      'Focused pages guide visitors toward one useful next step: call, book, request a quote, or buy.',
   },
   {
     icon: <DollarSign className="w-6 h-6" />,
-    title: 'One great client can justify the investment',
+    title: 'Know what is working',
     description:
-      'For many small businesses, a single high-value project won through your website can cover the cost of doing it right.',
+      'Analytics and conversion tracking show where leads come from and where the customer journey needs improvement.',
   },
 ];
 
@@ -67,12 +67,10 @@ export default function ValuePropsSection() {
           className="text-center mb-14"
         >
           <h2 className="text-4xl md:text-5xl lg:text-[3.25rem] font-display text-text-primary mb-5 leading-tight">
-            A better website does more than
-            <br className="hidden sm:block" />
-            <span className="italic"> look good</span>
+            A better website should make buying easier
           </h2>
           <p className="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto font-body leading-relaxed">
-            Enterprise-level thinking, built for small businesses that need credibility, conversion, and measurable momentum.
+            The job is simple: help the right person understand your value, trust your business, and take the next step.
           </p>
         </motion.div>
 
@@ -125,19 +123,19 @@ export default function ValuePropsSection() {
             {/* Header row */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
               <h3 className="text-2xl md:text-[1.7rem] font-display font-bold leading-tight">
-                We don&apos;t disappear after launch
+                Support that continues after launch
               </h3>
               <a
                 href="/inquiry"
                 className="inline-flex items-center gap-2 bg-white text-primary-800 px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-100 transition-colors whitespace-nowrap group"
               >
-                Explore Support Options
+                Ask about support
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
               </a>
             </div>
 
             <p className="text-white/80 text-sm mb-8 font-body max-w-2xl">
-              You get support beyond launch so your site keeps performing as your business grows.
+              Maintenance, reporting, and improvements are optional. Your site and accounts still belong to you.
             </p>
 
             {/* Support Cards */}

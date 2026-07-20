@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     absolute: 'Custom Websites & Business Systems | Sproutflow Studio - New Orleans Web Design',
   },
   description:
-    'Sproutflow Studio builds custom websites and the business systems behind them for small businesses in New Orleans, LA. Custom Next.js sites, internal admin tools, CRMs, and workflow automation. Enterprise-grade engineering, priced for small business.',
+    'Sproutflow Studio builds custom websites, CRMs, admin tools, and workflow automation for small businesses in New Orleans. Clear scope, fixed quotes, and founder-led delivery.',
   keywords: [
     'web design New Orleans',
     'website design New Orleans',

@@ -3,19 +3,16 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import StructuredData from "@/components/StructuredData";
-import { DM_Serif_Display, DM_Sans } from "next/font/google";
+import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google";
 
-const dmSerif = DM_Serif_Display({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
   variable: "--font-heading",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const sourceSans = Source_Sans_3({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
   display: "swap",
 });
@@ -99,7 +96,7 @@ export default function RootLayout({
     // scroll position on route changes - fixes pages loading scrolled to the bottom
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
       <body
-        className={`${dmSerif.variable} ${dmSans.variable} antialiased font-body`}
+        className={`${bricolage.variable} ${sourceSans.variable} antialiased font-body`}
       >
         <StructuredData />
         <Header />

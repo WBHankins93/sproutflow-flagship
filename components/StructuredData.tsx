@@ -17,7 +17,7 @@ const professionalServiceSchema = {
   image: `${siteUrl}/images/logo/main-logo-Photoroom.png`,
   description:
     'Sproutflow Studio builds custom websites and custom business software for small businesses. Web design and development, internal admin tools, CRM systems, CMS builds, and workflow automation. Based in New Orleans, LA.',
-  slogan: 'Enterprise strategy. Small business pricing.',
+  slogan: 'Websites that win clients. Systems that make growth easier.',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'New Orleans',

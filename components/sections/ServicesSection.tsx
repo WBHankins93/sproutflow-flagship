@@ -45,9 +45,9 @@ const serviceTiers = dataServiceTiers.map((tier: ServiceTier) => ({
   icon: tierIcons[tier.id] || <Zap className="w-6 h-6" />,
   lifestyleImage: tierImages[tier.id]?.lifestyle || getImageUrl('service/growth.jpg'),
   treeRingImage: tierImages[tier.id]?.treeRing || getImageUrl('tree-ring-1.jpg'),
-  highlights: tier.businessOutcomes.slice(0, 2),
+  highlights: tier.businessOutcomes.slice(0, 1),
   services: [...tier.technicalFeatures, ...tier.strategicInclusions].slice(0, 3),
-  buttonText: 'Start this tier',
+  buttonText: 'Discuss this option',
 }));
 
 // Add-on accordion data
@@ -138,26 +138,32 @@ function AddOnsAccordion() {
 
       <div className="relative z-10 p-6 md:p-8">
         <h3 className="text-2xl font-display font-bold text-text-primary mb-1 text-center">
-          Add-ons
+          Optional support
         </h3>
         <p className="text-sm text-text-secondary mb-6 text-center">
-          Optional services to enhance your website
+          Add only what your project needs. We quote each item after scope is clear.
         </p>
 
         <div className="grid gap-4 md:grid-cols-2">
           {addOnCategories.map((category) => (
-              <div
+              <details
                 key={category.id}
-                className="rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm overflow-hidden transition-shadow hover:shadow-md"
+                className="group rounded-xl border border-gray-200 bg-white/80 backdrop-blur-sm overflow-hidden transition-shadow hover:shadow-md"
               >
-                <div className="p-5">
-                  <div className="mb-4">
+                <summary className="cursor-pointer list-none p-5 focus-visible:outline-offset-[-3px]">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
                     <h4 className="font-semibold text-text-primary text-lg">
                       {category.title}
                     </h4>
                     <p className="text-sm text-text-muted mt-0.5">{category.subtitle}</p>
+                    </div>
+                    <span className="text-sm font-semibold text-primary-700 group-open:hidden">View</span>
+                    <span className="hidden text-sm font-semibold text-primary-700 group-open:inline">Close</span>
                   </div>
+                </summary>
 
+                <div className="border-t border-gray-200 p-5 pt-4">
                   <div className="space-y-3">
                     {category.items.map((item) => (
                       <div
@@ -168,21 +174,16 @@ function AddOnsAccordion() {
                           {item.icon}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="flex flex-wrap items-baseline justify-between gap-2">
-                            <h5 className="font-semibold text-text-primary text-[0.95rem]">
-                              {item.name}
-                            </h5>
-                            <span className="text-primary-600 font-bold text-sm">
-                              {item.price}
-                            </span>
-                          </div>
+                          <h5 className="font-semibold text-text-primary text-[0.95rem]">
+                            {item.name}
+                          </h5>
                           <p className="text-sm text-text-secondary mt-1">{item.description}</p>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-              </div>
+              </details>
           ))}
         </div>
       </div>
@@ -215,17 +216,16 @@ export default function ServicesSection() {
         >
           <div className="inline-flex items-center gap-2 text-primary-600 font-medium mb-6">
             <div className="w-12 h-px bg-primary-400"></div>
-            <span className="text-sm uppercase tracking-wider">Websites &amp; Pricing</span>
+            <span className="text-sm uppercase tracking-wider">Website packages and pricing</span>
             <div className="w-12 h-px bg-primary-400"></div>
           </div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-text-primary mb-6">
-            Custom Web Design,{' '}
-            <span className="text-primary-600 italic">Four Ways to Start</span>
+            Choose the right starting point
           </h2>
 
           <p className="text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed">
-            Your website is the front door. These packages cover custom web design and development for New Orleans small businesses, scaled to where your business is today.
+            Transparent ranges, clear scope, and a fixed quote before work begins. Start where your business is today and leave room to grow.
           </p>
         </motion.div>
 
@@ -245,7 +245,7 @@ export default function ServicesSection() {
               {/* Popular Badge */}
               {tier.popular && (
                 <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 z-20">
-                  <span className="bg-accent-500 text-white px-3 md:px-4 py-1 md:py-1.5 rounded-full text-xs md:text-sm font-bold shadow-lg whitespace-nowrap">
+                  <span className="bg-accent-300 text-primary-900 px-3 md:px-4 py-1 md:py-1.5 rounded-full text-xs md:text-sm font-bold shadow-lg whitespace-nowrap">
                     Most Popular
                   </span>
                 </div>
@@ -298,7 +298,7 @@ export default function ServicesSection() {
                       <p className="font-body text-xs md:text-sm text-text-muted mb-5 line-clamp-2">{tier.idealFor}</p>
 
                       <div className="mb-5">
-                        <p className="font-body text-xs uppercase tracking-wide text-text-muted mb-2">You get</p>
+                        <p className="font-body text-xs uppercase tracking-wide text-text-muted mb-2">Included</p>
                         <div className="space-y-2">
                           {tier.services.map((service, idx) => (
                             <div key={idx} className="flex items-start gap-2 md:gap-3">
@@ -347,10 +347,9 @@ export default function ServicesSection() {
           viewport={{ once: true }}
           className="mb-12 rounded-2xl border border-primary-200 bg-primary-50 p-6 text-center"
         >
-          <h3 className="mb-2 text-xl font-display font-semibold text-text-primary">Who we&apos;re the best fit for</h3>
+          <h3 className="mb-2 text-xl font-display font-semibold text-text-primary">A good fit if</h3>
           <p className="mx-auto max-w-3xl text-sm md:text-base text-text-secondary leading-relaxed">
-            Sproutflow Studio is built for owners who want a web presence that drives results, and systems that save real hours.
-            If you&apos;re only looking for the cheapest possible option, we may not be the right fit. And that&apos;s okay.
+            You want a clearer customer path, stronger proof, and a partner who can also improve the systems behind the site. If price is the only deciding factor, a DIY builder may be the better fit.
           </p>
         </motion.div>
 

@@ -6,7 +6,7 @@ import { InquiryForm } from '@/components/inquiry/InquiryForm';
 import { getImageUrl } from '@/lib/blob-images';
 
 export const metadata = {
-  title: 'Book a Discovery Call',
+  title: 'Start a Project',
   description:
     'Start your project with Sproutflow Studio. Share your goals in 3 to 5 minutes and we respond within 24 hours with clear next steps and a path to a fixed quote.',
   alternates: {
@@ -33,30 +33,30 @@ export default function InquiryPage() {
           <div className="inline-flex items-center gap-2 text-primary-700">
             <span className="h-px w-12 bg-primary-500/60" />
             <span className="text-sm font-semibold uppercase tracking-[0.24em]">
-              Get Started
+              Start a project
             </span>
             <span className="h-px w-12 bg-primary-500/60" />
           </div>
           <div className="grid gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
             <div className="space-y-6">
               <h1 className="text-4xl font-display font-bold text-gray-900 md:text-6xl">
-                Start Your Project
+                Tell us what you want to improve
               </h1>
               <p className="text-lg text-gray-600 md:text-xl">
-                Tell us a little about your project. Most inquiries take about 3 to 5 minutes to complete.
+                Share the basics in about 3–5 minutes. Best guesses are fine—we&apos;ll help clarify the scope.
               </p>
               <p className="text-base text-gray-600">
-                Not ready for a call yet? No problem. Share a few details here and we’ll follow up with the best next steps.
+                We review every inquiry ourselves and reply within one business day.
               </p>
             </div>
             <div className="rounded-3xl border border-primary-200/60 bg-white/70 p-6 shadow-lg backdrop-blur">
               <p className="text-sm font-semibold uppercase tracking-widest text-primary-700">
-                What to Expect
+                What happens next
               </p>
               <ul className="mt-4 space-y-3 text-sm text-gray-600">
-                <li>• Takes about 3 to 5 minutes to complete</li>
-                <li>• We respond within 24 hours</li>
-                <li>• No commitment, just the next steps</li>
+                <li>• We review your goals and current setup</li>
+                <li>• You receive a recommended next step</li>
+                <li>• Any project begins with a fixed quote</li>
               </ul>
             </div>
           </div>

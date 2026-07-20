@@ -15,8 +15,8 @@ export default {
       // ============================================
       fontFamily: {
         // These MUST match the CSS variables from layout.tsx
-        display: ['var(--font-heading)', 'sans-serif'],  // DM Serif Display for headings
-        body: ['var(--font-body)', 'sans-serif'],        // DM Sans for body
+        display: ['var(--font-heading)', 'var(--font-body)', 'sans-serif'],
+        body: ['var(--font-body)', 'sans-serif'],
         mono: ['var(--font-mono)', 'monospace'],         // Fira Code for code
       },
       
@@ -96,7 +96,7 @@ export default {
         text: {
           primary: '#626155',   // Ebony
           secondary: '#57604F', // Warm gray-green (replaced Payne's Gray #445E69 - read too blue/turquoise)
-          muted: '#7a7d72',
+          muted: '#686d63',
         },
         
         // Background Colors

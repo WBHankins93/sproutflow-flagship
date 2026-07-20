@@ -20,23 +20,23 @@ export interface ServiceTier {
     {
       id: "starter",
       name: "Starter",
-      tagline: "Get online with a clean, credible presence. A fast, affordable starting point. Every tier above this one is fully custom.",
+      tagline: "A clear, credible site without a long build",
       priceRange: "$850 - $1,500",
       timeline: "1-2 weeks",
-      idealFor: "Solo entrepreneurs and new businesses needing fast validation",
+      idealFor: "For solo owners and new businesses",
       description: "Semi-templated website with professional customization. Perfect for getting online quickly without sacrificing quality. Limited to 2-3 projects per month.",
       
       businessOutcomes: [
-        "Professional online presence in days, not weeks",
-        "Validated market credibility",
+        "Launch a credible presence quickly",
+        "Give buyers a clear next step",
         "Foundation for future growth",
         "Cost-effective entry point for new businesses"
       ],
       
       technicalFeatures: [
-        "1-5 pages with clean, modern design",
-        "Semi-templated by design - full custom development begins at our Foundation tier",
-        "Mobile-responsive and performance optimized",
+        "1–5 professionally designed pages",
+        "A customized, semi-templated foundation",
+        "Mobile, performance, and basic SEO setup",
         "Contact form or scheduling integration",
         "Basic SEO setup and configuration",
         "Launch support and training"
@@ -66,24 +66,24 @@ export interface ServiceTier {
     {
       id: "foundation",
       name: "Foundation",
-      tagline: "Turn your website into a lead generation tool",
+      tagline: "Turn your website into a focused lead tool",
       priceRange: "$2,000 - $2,800",
       timeline: "2-3 weeks",
-      idealFor: "New businesses or rebrands needing validated presence",
+      idealFor: "For growing businesses and rebrands",
       description: "Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations. A foundation for long-term growth, not just online presence.",
       popular: true,
       
       businessOutcomes: [
-        "Validated professional market presence",
-        "Clear customer conversion pathway aligned with business goals",
+        "Build trust with a stronger market presence",
+        "Guide visitors toward one clear conversion path",
         "Foundation for digital marketing initiatives",
         "Strategic architecture that scales with growth"
       ],
       
       technicalFeatures: [
-        "Semi-custom design aligned with your business goals",
-        "Mobile optimization and performance tuning",
-        "SEO foundation with keyword research",
+        "Semi-custom design tied to your business goals",
+        "Mobile and performance optimization",
+        "SEO foundation and keyword research",
         "Basic CMS: edit pages, images, blog posts, and metadata",
         "Clear customer conversion pathways"
       ],
@@ -114,15 +114,15 @@ export interface ServiceTier {
     {
       id: "growth", 
       name: "Growth",
-      tagline: "Scale your business with a high-performing digital engine",
+      tagline: "A custom site built to compete and convert",
       priceRange: "$3,500 - $5,500",
       timeline: "4-6 weeks",
-      idealFor: "Established businesses ready to compete for market share",
+      idealFor: "For established businesses ready to grow",
       description: "Comprehensive digital presence that positions your business as the clear choice in your market. Custom design reflecting brand personality with conversion optimization and professional copywriting.",
       
       businessOutcomes: [
-        "Clear market differentiation from competitors",
-        "Improved customer acquisition metrics",
+        "Stand apart from close competitors",
+        "Measure and improve customer acquisition",
         "Enhanced brand perception and authority",
         "Scalable platform for business expansion",
         "Tracked revenue growth from digital presence"
@@ -130,8 +130,8 @@ export interface ServiceTier {
       
       technicalFeatures: [
         "Fully custom responsive design",
-        "Conversion-focused user experience",
-        "Structured CMS with scalable content architecture and SEO controls",
+        "Conversion-focused copy and user experience",
+        "Scalable CMS and SEO controls",
         "Advanced performance optimization",
         "Comprehensive SEO strategy with competitive analysis",
         "Analytics and conversion tracking setup",
@@ -161,24 +161,24 @@ export interface ServiceTier {
     {
       id: "market-leader",
       name: "Market Leader",
-      tagline: "Build a revenue-driving platform for long-term scale",
+      tagline: "Connect marketing, customer flow, and operations",
       priceRange: "$7,500+",
       timeline: "8-12 weeks",
-      idealFor: "Companies where the website is a core growth engine driving measurable revenue",
+      idealFor: "For companies where the website drives revenue",
       description: "Fully custom digital platform designed to solve specific business challenges and generate measurable competitive advantage. This tier goes beyond website design to create a scalable digital foundation where marketing, customer acquisition, and operations work together to drive revenue.",
 
       businessOutcomes: [
-        "Revenue-focused digital architecture built for measurable growth",
-        "Advanced conversion optimization across the full customer journey",
+        "Connect the full path from visit to revenue",
+        "Improve conversion across the customer journey",
         "Custom integrations connecting your website to core business systems",
         "Scalable platform designed for long-term competitive advantage",
         "Unified digital foundation where marketing and operations drive revenue"
       ],
 
       technicalFeatures: [
-        "Revenue-focused digital architecture built around your business model",
-        "Fully custom design and interactive elements",
-        "Full content platform: advanced CMS with custom content models, CRM integrations, marketing automation, and multi-user publishing workflows",
+        "Architecture built around your business model",
+        "Custom design and interactive workflows",
+        "Advanced CMS, CRM, and marketing integrations",
         "Advanced SEO with technical implementations",
         "Custom integrations with your business systems (CRM, email marketing, operations)",
         "Advanced analytics and revenue tracking",

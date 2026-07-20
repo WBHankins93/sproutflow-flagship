@@ -32,7 +32,7 @@ const faqs: { question: string; answer: string }[] = [
   {
     question: "What's the difference between a custom site and a Squarespace or Wix template?",
     answer:
-      'A template gives you a layout. A custom site gives you strategy, speed, and room to grow. We build with modern frameworks, which means faster load times, stronger SEO, and no platform lock-in. When you need more than a website later, like booking flows, dashboards, or automation, a custom build can grow into it.',
+      'A template is usually the fastest, lowest-cost way to publish a standard site. A custom build is a better fit when your positioning, customer journey, integrations, or growth plans do not fit a standard layout. We recommend the simpler option when it can do the job well.',
   },
   {
     question: 'I already have a website. What else can you build for my business?',
@@ -94,10 +94,10 @@ export default function FAQPage() {
 
           <div className="space-y-6">
             <h1 className="text-4xl font-display font-bold text-gray-900 md:text-6xl">
-              Frequently Asked Questions
+              Frequently asked questions
             </h1>
             <p className="text-lg text-gray-600 md:text-xl max-w-3xl">
-              Straight answers on pricing, timelines, custom systems, and how we work. If your question is not here, ask us directly on a discovery call.
+              Straight answers on pricing, timelines, ownership, and how we work. If your question is not here, send us a note.
             </p>
           </div>
         </div>
@@ -130,13 +130,13 @@ export default function FAQPage() {
             Still have questions?
           </h3>
           <p className="text-base text-gray-600 md:text-lg">
-            Bring your goals. Leave with a clear plan and a fixed quote.
+            Send the question with a little context. We&apos;ll point you in the right direction.
           </p>
           <Link
             href="/inquiry"
             className="inline-flex items-center gap-3 rounded-full bg-primary-600 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary-700"
           >
-            Book a Discovery Call
+            Ask your question
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
