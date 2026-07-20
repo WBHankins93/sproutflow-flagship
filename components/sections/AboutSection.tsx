@@ -5,7 +5,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { Heart, Zap, Users, Target, ArrowRight } from 'lucide-react';
+import { Heart, Users, Target } from 'lucide-react';
 import { Container, Section, Heading, BodyText } from '../layout/StudioLayout';
 import { getImageUrl } from '@/lib/blob-images';
 
@@ -27,7 +27,7 @@ const AboutSection: React.FC = () => {
               Meet Ben
             </Heading>
             <BodyText size="lg" className="mx-auto max-w-2xl">
-              You work directly with the founder, no handoffs to juniors.
+              You work directly with the founder—no sales handoff and no mystery team after kickoff.
             </BodyText>
           </motion.div>
 
@@ -59,19 +59,19 @@ const AboutSection: React.FC = () => {
               </Heading>
 
               <BodyText className="mb-4 leading-relaxed">
-                Sproutflow founder Ben Hankins spent most of his career building systems for companies with massive budgets. Along the way, he learned what makes customers instantly trust a brand online, and what keeps an operation running behind the scenes.
+                Ben Hankins spent years building and operating software for large companies. He brings the same care for reliability, security, and clear communication to small-business projects.
               </BodyText>
 
               <BodyText className="mb-4 leading-relaxed">
-                He also noticed a gap: the businesses making communities better often looked amateur online. Not because they lacked professionalism. Professional design and real software were simply priced out of reach.
+                Sproutflow started after he saw too many excellent local businesses held back by unclear websites and disconnected tools.
               </BodyText>
 
               <BodyText className="mb-4 leading-relaxed">
-                Sproutflow exists to close that gap. We take what works for Fortune 500 companies and make it work for real businesses at real prices.
+                The goal is practical: make your business easier to trust, easier to buy from, and easier to run.
               </BodyText>
 
               <BodyText color="muted" className="italic">
-                Collecting stories from small businesses that make communities special.
+                Based in New Orleans and working with businesses nationwide.
               </BodyText>
             </motion.div>
 
@@ -88,17 +88,10 @@ const AboutSection: React.FC = () => {
                   Our Mission
                 </div>
                 <Heading level={3} className="mb-4 text-2xl">
-                  Level the Playing Field
+                  Give good businesses better tools
                 </Heading>
                 <BodyText className="mb-4 leading-relaxed">
-                  Big companies have specialists that study human psychology.
-                </BodyText>
-                <BodyText className="mb-4 leading-relaxed">
-                  Small businesses? You get DIY tools and hope for the best. 
-                </BodyText>
-
-                <BodyText className="mb-4 leading-relaxed">
-                  We fix that. Enterprise strategy. Small business pricing. No compromise on quality.
+                  Clear strategy, careful design, and dependable engineering should not be reserved for companies with huge budgets.
                 </BodyText>
               </div>
 
@@ -112,24 +105,24 @@ const AboutSection: React.FC = () => {
                   <div className="flex gap-3">
                     <Heart className="w-5 h-5 text-nature-700 flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-semibold text-text-primary mb-1">Small Business First</p>
-                      <BodyText className="text-sm">Every decision prioritizes what&apos;s best for small businesses, not what&apos;s easiest for us.</BodyText>
+                      <p className="font-semibold text-text-primary mb-1">Small business first</p>
+                      <BodyText className="text-sm">Recommendations should fit your goals, team, and budget—not ours.</BodyText>
                     </div>
                   </div>
 
                   <div className="flex gap-3">
                     <Target className="w-5 h-5 text-nature-700 flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-semibold text-text-primary mb-1">No BS Pricing</p>
-                      <BodyText className="text-sm">Transparent pricing, clear timelines, honest conversations. No hidden fees.</BodyText>
+                      <p className="font-semibold text-text-primary mb-1">Clear scope and pricing</p>
+                      <BodyText className="text-sm">You approve the deliverables, timeline, and fixed quote before work starts.</BodyText>
                     </div>
                   </div>
 
                   <div className="flex gap-3">
                     <Users className="w-5 h-5 text-nature-700 flex-shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-semibold text-text-primary mb-1">True Partnership</p>
-                      <BodyText className="text-sm">You&apos;re not just a client. We succeed when you succeed.</BodyText>
+                      <p className="font-semibold text-text-primary mb-1">Direct partnership</p>
+                      <BodyText className="text-sm">You work with the person responsible for the strategy and the build.</BodyText>
                     </div>
                   </div>
                 </div>
@@ -140,42 +133,6 @@ const AboutSection: React.FC = () => {
         </div>
       </Container>
 
-      {/* Full-Width Green CTA Section */}
-      <div className="w-full bg-primary-600 py-16 md:py-20">
-        <Container>
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="text-center"
-            >
-              <Heading level={3} className="mb-3 text-white">
-                Ready to Level the Playing Field?
-              </Heading>
-              <BodyText className="mb-8 max-w-xl mx-auto text-white/90">
-                Let&apos;s give your business the professional presence it deserves
-              </BodyText>
-              
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 bg-white text-primary-600 hover:bg-white/90 px-10 py-4 text-lg font-medium rounded-full transition-all duration-200 hover:shadow-lg"
-              >
-                <ArrowRight className="w-5 h-5" />
-                Start the Conversation
-              </a>
-            </motion.div>
-          </div>
-        </Container>
-      </div>
-
-      {/* Centered Divider Line - reduced padding */}
-      <Container>
-        <div className="flex justify-center py-8 md:py-12">
-          <div className="w-full max-w-md border-t border-nature-200"></div>
-        </div>
-      </Container>
     </Section>
   );
 };

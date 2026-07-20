@@ -153,20 +153,16 @@ const processSteps = [
 
 const results = [
   {
-    metric: '5 clients',
-    description: 'delivered 100% on-time, on-budget',
-  },
-  {
     metric: '50%',
-    description: 'lead generation increase (psychiatry practice)',
+    description: 'more qualified inquiries for a psychiatry practice',
   },
   {
     metric: '2x',
-    description: 'consultation requests (event decor studio)',
+    description: 'consultation requests for an event decor studio',
   },
   {
     metric: '30%',
-    description: 'customer acquisition growth (pool maintenance service)',
+    description: 'customer acquisition growth for a pool service',
   },
 ];
 
@@ -189,27 +185,27 @@ export default function HowWeWorkPage() {
           <div className="inline-flex items-center gap-2 text-primary-700">
             <span className="h-px w-12 bg-primary-500/60" />
             <span className="text-sm font-semibold uppercase tracking-[0.24em]">
-              Our Process
+              How we work
             </span>
             <span className="h-px w-12 bg-primary-500/60" />
           </div>
           <div className="grid gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
             <div className="space-y-6">
               <h1 className="text-4xl font-display font-bold text-gray-900 md:text-6xl">
-                How We Work With Clients
+                Know what happens before work begins
               </h1>
               <p className="text-lg text-gray-600 md:text-xl">
-                At Sproutflow Studio, we don&apos;t just build websites. We build solutions. Our process mirrors enterprise consulting methodologies, scaled for small businesses who deserve the same level of professionalism and care.
+                Clear decisions, written approvals, and direct access to the person doing the work—from discovery through launch.
               </p>
             </div>
             <div className="rounded-3xl border border-primary-200/60 bg-white/70 p-6 shadow-lg backdrop-blur">
               <p className="text-sm font-semibold uppercase tracking-widest text-primary-700">
-                Our Promise
+                What you can expect
               </p>
               <ul className="mt-4 space-y-3 text-sm text-gray-600">
-                <li>• Enterprise strategy, small business pricing</li>
-                <li>• Total transparency at every stage</li>
-                <li>• You&apos;re involved every step of the way</li>
+                <li>• A fixed quote before work starts</li>
+                <li>• A clear owner for every next step</li>
+                <li>• No design or launch surprises</li>
               </ul>
             </div>
           </div>
@@ -287,10 +283,10 @@ export default function HowWeWorkPage() {
         <div className="mx-auto max-w-6xl px-4 md:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-display font-bold text-gray-900 md:text-4xl mb-4">
-              Results So Far
+              Client outcomes
             </h2>
             <p className="text-lg text-gray-600">
-              Real outcomes from real businesses we&apos;ve worked with
+              Attributed results from live client projects
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -316,25 +312,18 @@ export default function HowWeWorkPage() {
         <div className="mx-auto max-w-4xl px-4 md:px-8">
           <div className="flex flex-col items-center gap-6 rounded-3xl border border-primary-200 bg-primary-50/60 px-6 py-12 text-center md:px-12">
             <h3 className="text-3xl font-display font-semibold text-gray-900 md:text-4xl">
-              Ready to Work Together?
+              Have a project in mind?
             </h3>
             <p className="text-base text-gray-600 md:text-lg">
-              Bring your goals. Leave with a clear plan and a fixed quote.
+              Tell us what you want to improve. We&apos;ll reply with the clearest next step.
             </p>
             <Link
-              href="/#contact"
+              href="/inquiry"
               className="inline-flex items-center gap-3 rounded-full bg-primary-600 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary-700"
             >
-              Schedule a Discovery Call
+              Start a project
               <ArrowRight className="h-5 w-5" />
             </Link>
-            <p className="mt-4 text-sm text-gray-500">
-              Or learn more about{' '}
-              <Link href="/#process" className="text-primary-600 hover:text-primary-700 underline">
-                How We Grow Together
-              </Link>
-              , our visual process overview
-            </p>
           </div>
         </div>
       </section>

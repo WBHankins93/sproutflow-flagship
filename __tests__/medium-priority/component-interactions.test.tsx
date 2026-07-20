@@ -54,9 +54,9 @@ describe('Component Interactions - Header Mobile Menu', () => {
     fireEvent.click(menuButton)
 
     // Check for navigation links (use getAllByText since they appear in both desktop and mobile nav)
-    expect(screen.getAllByText('How We Work').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Portfolio').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Case Studies').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('How we work').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Work').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Results').length).toBeGreaterThan(0)
     expect(screen.getAllByText('About').length).toBeGreaterThan(0)
   })
 })
@@ -75,7 +75,7 @@ describe('Component Interactions - ServicesSection Tier Cards', () => {
   it('should have a CTA on each service card routing to the inquiry application', () => {
     render(<ServicesSection />)
 
-    const tierButtons = screen.getAllByText('Start this tier')
+    const tierButtons = screen.getAllByText('Discuss this option')
     expect(tierButtons.length).toBe(4)
     tierButtons.forEach((button) => {
       expect(button.closest('a')).toHaveAttribute('href', '/inquiry')
@@ -101,7 +101,7 @@ describe('Component Interactions - ContactSection', () => {
   it('should render contact options', () => {
     render(<ContactSection />)
 
-    expect(screen.getByText('Discovery Call')).toBeInTheDocument()
+    expect(screen.getByText('Tell us what you want to improve')).toBeInTheDocument()
   })
 
   it('should route the discovery CTA to the inquiry application, not the calendar', () => {
@@ -109,7 +109,7 @@ describe('Component Interactions - ContactSection', () => {
 
     // Qualification funnel: calendar time comes after the application is
     // submitted, so the contact section must never link to the calendar.
-    const cta = screen.getByText('Book a Discovery Call').closest('a')
+    const cta = screen.getByText('Tell us about your project').closest('a')
     expect(cta).toHaveAttribute('href', '/inquiry')
     expect(cta).not.toHaveAttribute('target')
 
@@ -120,8 +120,8 @@ describe('Component Interactions - ContactSection', () => {
   it('should display alternative contact methods', () => {
     render(<ContactSection />)
 
-    expect(screen.getByText('Send an Email')).toBeInTheDocument()
-    expect(screen.getByText('Give Us a Call')).toBeInTheDocument()
+    expect(screen.getByText('Email')).toBeInTheDocument()
+    expect(screen.getByText('Phone')).toBeInTheDocument()
   })
 })
 
@@ -136,10 +136,10 @@ describe('Component Interactions - Navigation Links', () => {
   it('should have correct route links in header', () => {
     render(<Header />)
 
-    const workLink = screen.getByText('Portfolio').closest('a')
+    const workLink = screen.getByText('Work').closest('a')
     expect(workLink).toHaveAttribute('href', '/work')
 
-    const caseStudiesLink = screen.getByText('Case Studies').closest('a')
+    const caseStudiesLink = screen.getByText('Results').closest('a')
     expect(caseStudiesLink).toHaveAttribute('href', '/case-studies')
   })
 })

@@ -58,7 +58,7 @@ export default function ValueSupportSection() {
             A better website does more than look good
           </h2>
           <p className="text-lg text-text-secondary">
-            Enterprise-level thinking, built for small businesses that need credibility, conversion, and measurable momentum.
+            Clear strategy, careful execution, and practical support for small businesses that need credibility and measurable results.
           </p>
         </motion.div>
 

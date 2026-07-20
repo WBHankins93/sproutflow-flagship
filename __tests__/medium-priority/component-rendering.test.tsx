@@ -19,15 +19,15 @@ describe('Component Rendering - Header', () => {
 
   it('should render navigation links', () => {
     render(<Header />)
-    expect(screen.getByText('How We Work')).toBeInTheDocument()
-    expect(screen.getByText('Portfolio')).toBeInTheDocument()
-    expect(screen.getByText('Case Studies')).toBeInTheDocument()
+    expect(screen.getByText('How we work')).toBeInTheDocument()
+    expect(screen.getByText('Work')).toBeInTheDocument()
+    expect(screen.getByText('Results')).toBeInTheDocument()
     expect(screen.getByText('About')).toBeInTheDocument()
   })
 
   it('should render contact CTA button', () => {
     render(<Header />)
-    expect(screen.getByText('Get a quote')).toBeInTheDocument()
+    expect(screen.getByText('Start a project')).toBeInTheDocument()
   })
 })
 
@@ -66,21 +66,21 @@ describe('Component Rendering - HeroSection', () => {
   it('should render hero headline', () => {
     render(<HeroSection />)
     expect(
-      screen.getByText(/Custom websites and the business systems behind them/i)
+      screen.getByText(/Websites that win the right clients/i)
     ).toBeInTheDocument()
   })
 
   it('should render CTA button linking to the inquiry application', () => {
     render(<HeroSection />)
-    const cta = screen.getByText('Book a Discovery Call').closest('a')
+    const cta = screen.getByText('Tell us about your project').closest('a')
     expect(cta).toBeInTheDocument()
     expect(cta).toHaveAttribute('href', '/inquiry')
   })
 
   it('should render trust badges', () => {
     render(<HeroSection />)
-    expect(screen.getByText('Enterprise-Level Thinking')).toBeInTheDocument()
-    expect(screen.getByText('Built for Small Businesses')).toBeInTheDocument()
+    expect(screen.getByText('New Orleans based')).toBeInTheDocument()
+    expect(screen.getByText('Founder-led from start to launch')).toBeInTheDocument()
   })
 })
 

@@ -85,7 +85,7 @@ export default function WorkPage() {
           <div className="inline-flex items-center gap-2 text-primary-700">
             <span className="h-px w-12 bg-primary-500/60" />
             <span className="text-sm font-semibold uppercase tracking-[0.24em]">
-              Selected Work
+              Selected work
             </span>
             <span className="h-px w-12 bg-primary-500/60" />
           </div>
@@ -95,17 +95,17 @@ export default function WorkPage() {
                 Real websites for real businesses
               </h1>
               <p className="text-base leading-relaxed text-gray-600 sm:text-lg md:text-xl">
-                Every project starts with listening. To you, your customers, and what actually moves the needle for your business. What you&apos;ll see below are live sites built to work hard from day one, with room to grow as you do.
+                Live client work across service businesses, professional practices, and local brands. Each project connects a clear customer path to a specific business goal.
               </p>
             </div>
             <div className="rounded-2xl border border-primary-200/60 bg-white/80 p-5 shadow-lg backdrop-blur md:rounded-3xl md:p-6">
               <p className="text-sm font-semibold uppercase tracking-widest text-primary-700">
-                How we show up
+                What every project includes
               </p>
               <ul className="mt-4 space-y-3 text-sm text-gray-600">
-                <li>• Listen first, build second. Your goals drive every decision</li>
-                <li>• Focus on what moves the needle, not just what looks good</li>
-                <li>• Build sites that work hard from launch and grow with you</li>
+                <li>• Strategy before layout</li>
+                <li>• Real content before launch</li>
+                <li>• Mobile, performance, and handoff testing</li>
               </ul>
             </div>
           </div>
@@ -313,17 +313,16 @@ export default function WorkPage() {
       <section className="py-16">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 rounded-3xl border border-primary-200 bg-primary-50/60 px-6 py-12 text-center md:px-12">
           <h3 className="text-3xl font-display font-semibold text-gray-900 md:text-4xl">
-            Have a project you want to launch with confidence?
+            Have a project in mind?
           </h3>
           <p className="text-base text-gray-600 md:text-lg">
-            Let’s talk about your goals, timelines, and how we can ship something
-            that actually moves the business forward.
+            Tell us what needs to change. We&apos;ll reply with a practical next step.
           </p>
           <Link
             href="/inquiry"
             className="inline-flex items-center gap-3 rounded-full bg-primary-600 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary-700"
           >
-            Book a Discovery Call
+            Start a project
           </Link>
         </div>
       </section>

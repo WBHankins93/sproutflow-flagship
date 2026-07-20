@@ -1,25 +1,25 @@
 // data/content.ts - UPDATED (Streamlined add-ons section)
 
 export const heroContent = {
-  headline: "Business growth strategy that happens to include a website",
-  subheading: "Most New Orleans agencies focus on affordable website building. We focus on business growth strategy. We bring the strategic thinking of $30,000 NYC agencies to New Orleans small businesses at $3,500-$15,000 because we have lower costs, not because we deliver less value.",
-  description: "Our clients invest in revenue-generating assets, not digital brochures. Every project starts with understanding your business problems and revenue goals, not just how many pages you need.",
-  primaryCTA: "Start Your Project",
-  secondaryCTA: "View Our Work"
+  headline: "Websites that win the right clients—and systems that make growth easier",
+  subheading: "Sproutflow designs and builds custom websites, CRMs, admin tools, and automation for small businesses.",
+  description: "One founder-led partner from the first strategy call through launch and support. Clear scope and a fixed quote before work begins.",
+  primaryCTA: "Tell us about your project",
+  secondaryCTA: "See client results"
 };
 
 export const aboutContent = {
-  headline: "Strategic thinking from NYC and SF agencies, at New Orleans prices",
-  lead: "We deliver the strategic thinking and quality of NYC and SF agencies at 40-50% lower prices because we're based in New Orleans with lower operational costs, not because we cut corners on quality.",
+  headline: "Founder-led strategy, design, and development",
+  lead: "You work directly with the person responsible for the strategy and the build, from first conversation through launch.",
   story: [
-    "After years of building infrastructure for Fortune 500 companies and scaling startups, we recognized a gap in the market: small businesses deserved the same level of technical excellence and strategic thinking typically reserved for enterprise clients.",
-    "We founded Sproutflow to bring that same precision, reliability, and business focus to companies ready to compete at the highest level. Every project leverages proven methodologies refined through years of enterprise work.",
-    "Our approach starts with business outcomes: 'What business problems are you trying to solve?' and 'What revenue goals are tied to your digital presence?' Not 'How many pages do you need?' This positions us as a strategic partner rather than a vendor taking orders."
+    "Ben Hankins spent years building and operating software for large companies, with a focus on reliability, security, and clear delivery.",
+    "Sproutflow started after he saw strong local businesses held back by unclear websites and disconnected tools.",
+    "Every project starts with the buyer, the business goal, and the operational problem—not a page count."
   ],
   credentials: {
     headline: "Proven at scale",
     points: [
-      "Enterprise infrastructure background with IBM and Fortune 500 clients",
+      "Infrastructure background with IBM and Fortune 500 clients",
       "Technical expertise spanning cloud architecture to conversion optimization", 
       "Business-focused approach that prioritizes ROI over vanity metrics",
       "Track record of delivering projects that exceed performance expectations",
@@ -153,7 +153,7 @@ export const processContent = {
       name: 'Develop',
       subtitle: 'Technical Excellence',
       duration: '1-2 weeks',
-      description: 'Enterprise-grade development with conversion optimization, performance focus, and attention to every technical detail.'
+      description: 'Careful development with conversion, performance, accessibility, and real-device testing.'
     },
     {
       id: 'deploy',
@@ -191,8 +191,8 @@ export const portfolioContent = {
 };
 
 export const contactContent = {
-  headline: "Let's start something beautiful",
-  description: "Every great partnership begins with a conversation. Choose the option that feels right for where you are in your journey.",
+  headline: "Tell us what you want to improve",
+  description: "Share the basics in about five minutes. We reply within one business day with the clearest next step.",
   
   conversationOptions: [
     {
@@ -245,7 +245,7 @@ export const navigationContent = {
 export const seoContent = {
   home: {
     title: "Sproutflow | Strategic Web Design for New Orleans Businesses",
-    description: "Business growth strategy that happens to include a website. We bring NYC/SF agency strategic thinking to New Orleans small businesses at $3,500-$15,000. Revenue-generating assets, not digital brochures.",
+    description: "Founder-led websites and business systems for New Orleans small businesses. Clear scope, fixed quotes, and practical tools built around your growth goals.",
     keywords: ["professional web design", "custom website development", "small business websites", "conversion optimization", "business growth", "New Orleans web design", "strategic web design", "business growth strategy"]
   }
 };

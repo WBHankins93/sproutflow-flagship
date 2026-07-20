@@ -40,17 +40,17 @@ export default function CaseStudiesPage() {
           <div className="inline-flex items-center gap-2 text-primary-700">
             <span className="h-px w-12 bg-primary-500/60" />
             <span className="text-sm font-semibold uppercase tracking-[0.24em]">
-              Case Studies
+              Case studies
             </span>
             <span className="h-px w-12 bg-primary-500/60" />
           </div>
 
           <div className="space-y-6">
             <h1 className="text-4xl font-display font-bold text-gray-900 md:text-6xl">
-              Real Results for Real Businesses
+              Results buyers can verify
             </h1>
             <p className="text-lg text-gray-600 md:text-xl max-w-3xl">
-              Every project below is a live site for a real client. The headline of each case study is the business result, not the design. Where we build systems behind the website, we measure those too.
+              These are live client projects with attributed outcomes, project details, and links to the work.
             </p>
           </div>
         </div>
@@ -63,7 +63,7 @@ export default function CaseStudiesPage() {
 
           {/* Featured Case Study */}
           <div className="mb-16">
-            <h2 className="text-2xl font-display font-bold text-gray-900 mb-8">Featured Result</h2>
+            <h2 className="text-2xl font-display font-bold text-gray-900 mb-8">Featured result</h2>
 
             <Link href={`/case-studies/${featured.slug}`} className="block group">
               <div className="grid md:grid-cols-2 gap-8 bg-white rounded-3xl border-2 border-primary-200 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
@@ -103,7 +103,7 @@ export default function CaseStudiesPage() {
                   </div>
 
                   <div className="inline-flex items-center gap-2 text-primary-600 font-semibold group-hover:gap-4 transition-all">
-                    View Full Case Study
+                    View full case study
                     <ArrowRight className="w-5 h-5" />
                   </div>
                 </div>
@@ -113,7 +113,7 @@ export default function CaseStudiesPage() {
 
           {/* More Case Studies Grid */}
           <div>
-            <h2 className="text-2xl font-display font-bold text-gray-900 mb-8">More Results</h2>
+            <h2 className="text-2xl font-display font-bold text-gray-900 mb-8">More results</h2>
 
             <div className="grid md:grid-cols-2 gap-8">
               {rest.map((cs) => (
@@ -147,7 +147,7 @@ export default function CaseStudiesPage() {
                         ))}
                       </div>
                       <div className="inline-flex items-center gap-2 text-primary-600 font-semibold text-sm group-hover:gap-3 transition-all">
-                        Read Case Study <ArrowRight className="w-4 h-4" />
+                        Read case study <ArrowRight className="w-4 h-4" />
                       </div>
                     </div>
                   </div>
@@ -162,16 +162,16 @@ export default function CaseStudiesPage() {
       <section className="py-16">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 rounded-3xl border border-primary-200 bg-primary-50/60 px-6 py-12 text-center md:px-12">
           <h3 className="text-3xl font-display font-semibold text-gray-900 md:text-4xl">
-            Ready to be our next case study?
+            Want a clearer path to results?
           </h3>
           <p className="text-base text-gray-600 md:text-lg">
-            Bring your goals. Leave with a clear plan and a fixed quote.
+            Tell us what you want to improve. We&apos;ll recommend the most practical next step.
           </p>
           <Link
             href="/inquiry"
             className="inline-flex items-center gap-3 rounded-full bg-primary-600 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary-700"
           >
-            Book a Discovery Call
+            Start a project
             <ArrowRight className="w-5 h-5" />
           </Link>
         </div>

@@ -12,10 +12,10 @@ const processSteps = [
   {
     id: 'sprout',
     number: 1,
-    stage: 'Sprout',
+    stage: 'Plan',
     icon: <Sprout className="w-8 h-8" />,
-    title: 'Strategic Foundation',
-    description: 'We map your business, your customers, and your competitive edge before anything gets built.',
+    title: 'Strategy and scope',
+    description: 'We define the buyer, the business goal, the project scope, and a fixed quote.',
     color: {
       bg: 'bg-primary-50',
       icon: 'text-primary-500',
@@ -27,10 +27,10 @@ const processSteps = [
   {
     id: 'leaf',
     number: 2,
-    stage: 'Leaf',
+    stage: 'Write and design',
     icon: <Leaf className="w-8 h-8" />,
-    title: 'Growth & Development',
-    description: 'We craft your messaging and design direction.',
+    title: 'Message and direction',
+    description: 'We shape the copy, page structure, and visual direction before development starts.',
     color: {
       bg: 'bg-primary-100',
       icon: 'text-primary-600',
@@ -42,10 +42,10 @@ const processSteps = [
   {
     id: 'bloom',
     number: 3,
-    stage: 'Bloom',
+    stage: 'Build and test',
     icon: <Flower className="w-8 h-8" />,
-    title: 'Design & Development',
-    description: 'We build a fast, secure, conversion-focused site.',
+    title: 'Development and review',
+    description: 'We build with real content, then test the experience across devices.',
     color: {
       bg: 'bg-nature-100',
       icon: 'text-nature-700',
@@ -57,10 +57,10 @@ const processSteps = [
   {
     id: 'flourish',
     number: 4,
-    stage: 'Flourish',
+    stage: 'Launch and support',
     icon: <Sun className="w-8 h-8" />,
-    title: 'Launch & Partnership',
-    description: 'We launch, train you on management, and stay on for support.',
+    title: 'Handoff and next steps',
+    description: 'We launch, train you, transfer ownership, and stay available if you want support.',
     color: {
       bg: 'bg-accent-50',
       icon: 'text-accent-500',
@@ -96,17 +96,16 @@ export default function ProcessSection() {
         >
           <div className="inline-flex items-center gap-2 text-primary-600 font-medium mb-4">
             <div className="w-12 h-px bg-primary-400"></div>
-            <span className="text-sm uppercase tracking-wider">Our Process</span>
+            <span className="text-sm uppercase tracking-wider">What happens next</span>
             <div className="w-12 h-px bg-primary-400"></div>
           </div>
 
           <h2 className="text-4xl md:text-5xl font-display font-bold text-text-primary mb-4">
-            How We{' '}
-            <span className="text-primary-600 italic">Grow Together</span>
+            A clear path from first call to launch
           </h2>
           
           <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-            Four stages, clear milestones, and consistent communication so you always know what happens next.
+            Four stages, clear approvals, and no mystery about who owns the next step.
           </p>
         </motion.div>
 
@@ -174,8 +173,7 @@ export default function ProcessSection() {
           className="text-center bg-primary-50 rounded-xl p-6 border border-primary-200 mb-12"
         >
           <p className="text-text-secondary leading-relaxed max-w-3xl mx-auto">
-            <strong className="text-text-primary">Here&apos;s our promise:</strong> You&apos;ll always know what&apos;s happening next.
-            Clear milestones before moving forward, predictable communication, and no vague timelines after kickoff.
+            <strong className="text-text-primary">Our promise:</strong> You&apos;ll know what is happening, what we need from you, and what comes next.
           </p>
         </motion.div>
 
@@ -190,7 +188,7 @@ export default function ProcessSection() {
             href="/how-we-work"
             className="inline-flex items-center justify-center rounded-full border border-primary-300 px-6 py-3 text-sm font-semibold text-primary-700 transition hover:bg-primary-50"
           >
-            See the Full Process
+            See the full process
           </Link>
         </motion.div>
 

@@ -14,25 +14,25 @@ const systems = [
     icon: <LayoutDashboard className="w-6 h-6" />,
     title: 'Internal admin tools and dashboards',
     description:
-      'Role-based tools for owners, managers, and staff. See jobs, customers, and numbers in one place instead of five apps and a spreadsheet.',
+      'Give owners and staff one place to see jobs, customers, and the numbers that matter.',
   },
   {
     icon: <Users className="w-6 h-6" />,
     title: 'Custom CRM and customer management',
     description:
-      'Track every lead, customer, and job in a system built around how your business actually works. No per-seat software bloat you only use 10% of.',
+      'Track leads, customers, and jobs in a system shaped around the way your business actually works.',
   },
   {
     icon: <FileEdit className="w-6 h-6" />,
     title: 'Lightweight CMS builds',
     description:
-      'Update your own content. Change a price, add a photo, post an update. No developer needed and no waiting.',
+      'Change a price, add a photo, or publish an update without waiting for a developer.',
   },
   {
     icon: <Workflow className="w-6 h-6" />,
     title: 'Workflow automation',
     description:
-      'Intake, follow-up, scheduling, and document processing that run on their own. Hours back every week, and fewer leads slipping through.',
+      'Automate repeat intake, follow-up, scheduling, and document tasks so fewer leads slip through.',
   },
 ];
 
@@ -77,17 +77,16 @@ export default function BusinessSystemsSection() {
         >
           <div className="inline-flex items-center gap-2 text-primary-300 font-medium mb-6">
             <div className="w-12 h-px bg-primary-300/60"></div>
-            <span className="text-sm uppercase tracking-wider">Beyond the Website</span>
+            <span className="text-sm uppercase tracking-wider">Behind the website</span>
             <div className="w-12 h-px bg-primary-300/60"></div>
           </div>
 
           <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-            Already have a website?{' '}
-            <span className="text-primary-300 italic">The next bottleneck is what happens after the click.</span>
+            When the website works, make the business behind it work better
           </h2>
 
           <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-            We build the internal tools and automation that handle it. Anyone can sell you a website. Very few local providers can build the operations layer behind it. That is where we are different.
+            We build practical internal tools and automation for the work that happens after a lead comes in.
           </p>
         </motion.div>
 
@@ -120,12 +119,11 @@ export default function BusinessSystemsSection() {
           className="rounded-2xl border border-white/15 bg-white/5 p-7 md:p-8 mb-12 text-center"
         >
           <p className="text-sm font-semibold uppercase tracking-widest text-primary-300 mb-4">
-            See it working
+            Working example
           </p>
           <p className="text-white/85 leading-relaxed max-w-2xl mx-auto">
             {/* {{CONFIRM: is this a live client deployment or capability/demo language?}} */}
-            We built a multi-tenant operations platform that runs 64 locations from one dashboard.
-            Ask for a walkthrough on your discovery call.
+            We built a multi-location operations platform that brings 64 locations into one dashboard. Ask to see the workflow during your project call.
           </p>
         </motion.div>
 
@@ -152,7 +150,7 @@ export default function BusinessSystemsSection() {
             href="/inquiry"
             className="inline-flex items-center gap-3 bg-white text-primary-800 px-10 py-4 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
           >
-            Ask for a Walkthrough
+            Discuss a business system
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
         </motion.div>

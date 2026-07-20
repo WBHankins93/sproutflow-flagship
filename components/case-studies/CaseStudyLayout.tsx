@@ -72,7 +72,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
           <div className="backdrop-blur-md bg-black/35 border border-white/15 rounded-3xl px-8 md:px-14 py-10 md:py-12 shadow-2xl">
             <div className="inline-flex items-center gap-2 text-white/90 mb-6">
               <span className="h-px w-12 bg-white/60" />
-              <span className="text-sm font-semibold uppercase tracking-[0.24em]">Case Study</span>
+              <span className="text-sm font-semibold uppercase tracking-[0.24em]">Case study</span>
               <span className="h-px w-12 bg-white/60" />
             </div>
 
@@ -107,7 +107,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
             className="inline-flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Case Studies
+            Back to case studies
           </Link>
         </div>
       </div>
@@ -124,7 +124,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
       {/* The Problem */}
       <section className="py-16 bg-gradient-to-b from-primary-50/40 to-white">
         <div className="max-w-4xl mx-auto px-4 md:px-8">
-          <h2 className="text-3xl font-display font-bold text-gray-900 mb-6">The Problem</h2>
+          <h2 className="text-3xl font-display font-bold text-gray-900 mb-6">The problem</h2>
           <p className="text-lg text-gray-600 leading-relaxed">{caseStudy.problem}</p>
         </div>
       </section>
@@ -134,7 +134,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
         <section className="py-16 bg-gray-50">
           <div className="max-w-6xl mx-auto px-4 md:px-8">
             <h2 className="text-3xl font-display font-bold text-gray-900 mb-12 text-center">
-              Before &amp; After
+              Before and after
             </h2>
 
             {caseStudy.beforeAfter.map((pair, i) => (
@@ -181,7 +181,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
       {/* What We Built */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 md:px-8">
-          <h2 className="text-3xl font-display font-bold text-gray-900 mb-6">What We Built</h2>
+          <h2 className="text-3xl font-display font-bold text-gray-900 mb-6">What we built</h2>
           <div className="bg-white rounded-2xl border border-primary-200 p-8">
             <ul className="space-y-3">
               {caseStudy.built.map((item, i) => (
@@ -200,7 +200,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-primary-600 font-semibold hover:text-primary-700 transition-colors"
             >
-              View Live Site
+              View live site
               <ExternalLink className="w-5 h-5" />
             </Link>
           </div>
@@ -211,7 +211,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
       <section className="py-16 bg-gradient-to-b from-primary-50/40 to-white">
         <div className="max-w-6xl mx-auto px-4 md:px-8">
           <h2 className="text-3xl font-display font-bold text-gray-900 mb-12 text-center">
-            The Result
+            The result
           </h2>
 
           <div className="grid md:grid-cols-3 gap-6 mb-12">
@@ -233,11 +233,11 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
       {/* Project Details */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 md:px-8">
-          <h2 className="text-3xl font-display font-bold text-gray-900 mb-8">Project Details</h2>
+          <h2 className="text-3xl font-display font-bold text-gray-900 mb-8">Project details</h2>
 
           <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white rounded-2xl border border-gray-200 p-6">
-              <h3 className="font-semibold text-gray-900 mb-3">Timeline &amp; Services</h3>
+              <h3 className="font-semibold text-gray-900 mb-3">Timeline and services</h3>
               <ul className="space-y-2 text-gray-700">
                 <li><strong>Timeline:</strong> {caseStudy.details.timeline}</li>
                 <li><strong>Services:</strong> {caseStudy.details.services}</li>
@@ -250,7 +250,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
             </div>
 
             <div className="bg-white rounded-2xl border border-gray-200 p-6">
-              <h3 className="font-semibold text-gray-900 mb-3">Technology Stack</h3>
+              <h3 className="font-semibold text-gray-900 mb-3">Technology stack</h3>
               <div className="flex flex-wrap gap-2">
                 {caseStudy.stack.map((tech) => (
                   <span
@@ -270,16 +270,16 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
       <section className="py-16 bg-white">
         <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 rounded-3xl border-2 border-primary-200 bg-primary-50/60 px-6 py-12 text-center md:px-12">
           <h3 className="text-3xl font-display font-semibold text-gray-900 md:text-4xl">
-            Ready for results like these?
+            Have a similar goal?
           </h3>
           <p className="text-base text-gray-600 md:text-lg">
-            Bring your goals. Leave with a clear plan and a fixed quote.
+            Tell us what you want to improve. We&apos;ll recommend the clearest next step.
           </p>
           <Link
             href="/inquiry"
             className="inline-flex items-center gap-3 rounded-full bg-primary-600 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary-700"
           >
-            Book a Discovery Call
+            Start a project
             <ArrowRight className="w-5 h-5" />
           </Link>
           <Link href="/case-studies" className="text-sm text-gray-600 hover:text-primary-600 transition-colors">

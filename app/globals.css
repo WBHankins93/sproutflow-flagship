@@ -1,4 +1,4 @@
-/* app/globals.css - SPROUTFLOW WITH DM SERIF DISPLAY + DM SANS */
+/* app/globals.css - SPROUTFLOW TYPOGRAPHY & READABILITY SYSTEM */
 
 @tailwind base;
 @tailwind components;
@@ -27,7 +27,8 @@
   body {
     @apply bg-white text-gray-800;
     font-family: var(--font-body), sans-serif;
-    line-height: 1.7;
+    font-size: 1rem;
+    line-height: 1.65;
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
@@ -39,32 +40,38 @@
     max-width: 100%;
   }
 
-  /* Headings use DM Serif Display for organic, nature-inspired feel */
+  /* Bricolage gives the brand a distinct voice without reducing body readability. */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading), serif;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-    line-height: 1.2;
+    font-family: var(--font-heading), var(--font-body), sans-serif;
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    text-wrap: balance;
   }
 
   h1 {
-    @apply text-5xl md:text-6xl lg:text-7xl;
+    font-size: clamp(2.5rem, 6vw, 4.75rem);
   }
 
   h2 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    font-size: clamp(2rem, 4vw, 3.25rem);
   }
 
   h3 {
-    @apply text-3xl md:text-4xl;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
   }
 
   h4 {
-    @apply text-2xl md:text-3xl;
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
   }
 
   a {
     @apply transition-colors duration-300;
+  }
+
+  :focus-visible {
+    outline: 3px solid #C49A45;
+    outline-offset: 3px;
   }
 
   ::selection {
@@ -76,6 +83,13 @@
    UTILITY CLASSES
    =================================== */
 @layer utilities {
+  .reading-width {
+    max-width: 68ch;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
   /* Gradient Backgrounds */
   .bg-gradient-radial {
     background-image: radial-gradient(circle, var(--tw-gradient-stops));
@@ -139,6 +153,21 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* ===================================
    COMPONENT STYLES
    =================================== */
@@ -158,7 +187,7 @@
   }
 
   .btn-accent {
-    @apply bg-accent-500 text-white hover:bg-accent-600 shadow-lg hover:shadow-xl;
+    @apply bg-accent-700 text-white hover:bg-accent-800 shadow-lg hover:shadow-xl;
   }
 
   /* Card Styles */

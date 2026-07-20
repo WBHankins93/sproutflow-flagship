@@ -1,296 +1,98 @@
-// components/sections/ContactSection.tsx - FIXED VERSION
 'use client';
 
 import { motion } from 'framer-motion';
-import { Container, Section, Heading, BodyText, Card } from '../layout/StudioLayout';
-import { Calendar, Mail, Clock, ArrowRight, Lightbulb, Phone } from 'lucide-react';
-import { useState } from 'react';
+import { ArrowRight, Calendar, CheckCircle2, Mail, Phone } from 'lucide-react';
+import { BodyText, Container, Heading, Section } from '../layout/StudioLayout';
 
-const ContactSection = () => {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+const callBenefits = [
+  'A recommendation based on your goals and budget',
+  'A realistic scope and timeline',
+  'A fixed quote before any work begins',
+];
 
-  const conversationOptions = [
-    // Temporarily commented out - only offering Discovery Call until Google Workspace budget is available
-    // {
-    //   id: 'quick-chat',
-    //   title: 'Quick Chat',
-    //   subtitle: 'Coffee-style conversation',
-    //   description: 'Not ready to commit? Let\'s have a casual conversation about your business, vision, and see if we\'re a good fit.',
-    //   duration: '15-20 minutes',
-    //   bestFor: [
-    //     'Getting to know each other',
-    //     'Understanding your vision',
-    //     'Exploring fit and compatibility',
-    //     'No pressure, no pitch'
-    //   ],
-    //   icon: <MessageCircle className="w-6 h-6" />,
-    //   color: 'primary',
-    //   ctaText: 'Schedule Quick Chat',
-    //   action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // All options currently link to Discovery Call
-    // },
-    {
-      id: 'discovery',
-      title: 'Discovery Call',
-      subtitle: 'Diagnosis, not a pitch',
-      description: 'Ready to explore working together? Start with a short project application. It takes about five minutes, and you pick a call time right after you submit.',
-      duration: '30-45 minutes',
-      bestFor: [
-        'Defining what a new client is worth to you',
-        'Discussing project scope and timelines',
-        'Matching the right package to your stage',
-        'Leaving with a clear plan and a fixed quote'
-      ],
-      icon: <Calendar className="w-6 h-6" />,
-      color: 'accent',
-      ctaText: 'Book a Discovery Call',
-      // Qualification flow: application first, calendar link after submission.
-      action: '/inquiry'
-    },
-    // Temporarily commented out - only offering Discovery Call until Google Workspace budget is available
-    // {
-    //   id: 'strategy',
-    //   title: 'Strategy Session',
-    //   subtitle: 'Detailed project planning',
-    //   description: 'Let\'s create a detailed roadmap for your business transformation.',
-    //   duration: '60 minutes',
-    //   bestFor: [
-    //     'Detailed project scoping',
-    //     'Timeline and milestone planning',
-    //     'Investment discussion',
-    //     'Next steps planning'
-    //   ],
-    //   icon: <Rocket className="w-6 h-6" />,
-    //   color: 'nature',
-    //   ctaText: 'Plan Your Project',
-    //   action: 'https://calendar.app.google/hMkRd7yqsovDwZuL7' // All options currently link to Discovery Call
-    // }
-  ];
-
-  const colorMap = {
-    primary: {
-      bg: 'bg-primary-50',
-      border: 'border-primary-200',
-      icon: 'text-primary-600',
-      accent: 'text-primary-600',
-      button: 'bg-primary-600 hover:bg-primary-700 text-white'
-    },
-    accent: {
-      bg: 'bg-accent-50',
-      border: 'border-accent-200', 
-      icon: 'text-accent-600',
-      accent: 'text-accent-600',
-      button: 'bg-accent-600 hover:bg-accent-700 text-white'
-    },
-    nature: {
-      bg: 'bg-nature-50',
-      border: 'border-nature-200',
-      icon: 'text-nature-700',
-      accent: 'text-nature-700',
-      button: 'bg-nature-600 hover:bg-nature-700 text-white'
-    }
-  } as const;
-
+export default function ContactSection() {
   return (
     <Section id="contact" background="white" padding="lg">
       <Container>
-        <div className="max-w-7xl mx-auto">
-          
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="text-center mb-16"
-          >
-            <Heading level={2} className="mb-8">
-              <span className="text-text-primary">Let&apos;s start </span>
-              <span className="text-primary-600 relative italic">
-                something beautiful
-              </span>
-            </Heading>
-            
-            <BodyText size="lg" className="max-w-3xl mx-auto leading-relaxed mb-8">
-              Every great partnership begins with a conversation. Choose the option that feels 
-              right for where you are in your journey.
-            </BodyText>
-
-            <div className="bg-accent-50 border border-accent-200 rounded-lg p-6 max-w-2xl mx-auto">
-              <div className="flex items-center gap-3 mb-3">
-                <Lightbulb className="w-5 h-5 text-accent-600" />
-                <span className="font-semibold text-accent-700">Five Minutes Before We Talk</span>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55 }}
+          viewport={{ once: true, margin: '-80px' }}
+          className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-primary-200 bg-primary-50/60 shadow-sm"
+        >
+          <div className="grid gap-0 lg:grid-cols-[1.25fr_0.75fr]">
+            <div className="p-7 sm:p-10 lg:p-12">
+              <div className="mb-5 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.16em] text-primary-700">
+                <Calendar className="h-4 w-4" />
+                Start a project
               </div>
-              <BodyText size="sm" color="muted">
-                Every call starts with a short application about your business, goals, and budget.
-                It means our first conversation is about your growth, not the basics.
-                Bring your goals. Leave with a clear plan and a fixed quote.
-              </BodyText>
-            </div>
-          </motion.div>
 
-          {/* Conversation Options */}
-          {/* Currently showing only Discovery Call - Quick Chat and Strategy Session commented out until Google Workspace budget available */}
-          <div className="grid lg:grid-cols-1 gap-8 mb-16 max-w-md mx-auto">
-            {conversationOptions.map((option, index) => {
-              const colors = colorMap[option.color as keyof typeof colorMap];
-              const isSelected = selectedOption === option.id;
-              
-              return (
-                <motion.div
-                  key={option.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.2, ease: "easeOut" }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  onMouseEnter={() => setSelectedOption(option.id)}
-                  onMouseLeave={() => setSelectedOption(null)}
-                  className="group"
-                >
-                  <Card className={`${colors.bg} ${colors.border} border-2 h-full transition-all duration-300 relative overflow-hidden ${
-                    isSelected ? 'shadow-nature scale-105' : 'hover:shadow-soft'
-                  }`}>
-                    {/* Subtle background pattern */}
-                    <div className="absolute inset-0 opacity-5 pointer-events-none">
-                      <div 
-                        className="w-full h-full"
-                        style={{
-                          backgroundImage: `radial-gradient(circle, #5F755E 1px, transparent 1px)`,
-                          backgroundSize: '40px 40px'
-                        }}
-                      />
-                    </div>
-                    <div className="relative z-10">
-                    
-                    {/* Option Header */}
-                    <div className="text-center mb-6">
-                      <div className={`w-16 h-16 ${colors.bg} rounded-full flex items-center justify-center mx-auto mb-4 border-2 ${colors.border} shadow-soft`}>
-                        <div className={colors.icon}>
-                          {option.icon}
-                        </div>
-                      </div>
-                      
-                      <h3 className={`text-2xl font-display font-bold ${colors.accent} mb-2`}>
-                        {option.title}
-                      </h3>
-                      
-                      <h4 className="text-lg font-semibold text-text-primary mb-3">
-                        {option.subtitle}
-                      </h4>
-                      
-                      <div className="flex items-center justify-center gap-2 mb-4">
-                        <Clock className="w-4 h-4 text-text-muted" />
-                        <span className="text-sm text-text-muted font-medium">{option.duration}</span>
-                      </div>
-                    </div>
-                    
-                    {/* Option Description */}
-                    <BodyText className="mb-6 text-center leading-relaxed">
-                      {option.description}
-                    </BodyText>
-                    
-                    {/* Best For List */}
-                    <div className="mb-8">
-                      <h5 className="font-semibold text-text-primary mb-3 text-center">Perfect for:</h5>
-                      <ul className="space-y-2">
-                        {option.bestFor.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-2">
-                            <div className={`w-1.5 h-1.5 ${colors.bg.replace('50', '400')} rounded-full mt-2 flex-shrink-0`} />
-                            <BodyText size="sm" color="muted">{item}</BodyText>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    {/* CTA Button - external links open a new tab, internal routes stay in-app */}
-                    <a
-                      href={option.action}
-                      {...(option.action.startsWith('http')
-                        ? { target: '_blank', rel: 'noopener noreferrer' }
-                        : {})}
-                      className={`w-full ${colors.button} px-6 py-4 rounded-full font-semibold transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-md`}
-                    >
-                      <span>{option.ctaText}</span>
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </a>
-                    </div>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Alternative Contact Methods */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: true, margin: "-100px" }}
-            className="bg-primary-50/60 border border-primary-100 rounded-2xl p-8 lg:p-12"
-          >
-            <div className="text-center mb-8">
-              <Heading level={3} className="mb-4">
-                Prefer a different approach?
+              <Heading level={2} className="mb-5">
+                Tell us what you want to improve
               </Heading>
-              <BodyText size="lg" color="muted">
-                We&apos;re flexible. Reach out however feels most comfortable for you.
+
+              <BodyText size="lg" className="reading-width mb-7 text-pretty">
+                Share the basics in about five minutes. We&apos;ll review your project and reply within one business day with the clearest next step.
               </BodyText>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-6">
-              <a
-                href="mailto:ben@sproutflow-studio.com"
-                className="text-center group"
-              >
-                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <Mail className="w-6 h-6 text-primary-600" />
-                </div>
-                <h4 className="font-semibold text-text-primary mb-2">Send an Email</h4>
-                <BodyText size="sm" color="muted" className="mb-3">
-                  Traditional but effective. Tell us about your project.
-                </BodyText>
-                <span className="text-primary-600 font-medium hover:underline">
-                  ben@sproutflow-studio.com
-                </span>
-              </a>
+
+              <ul className="mb-8 space-y-3">
+                {callBenefits.map((benefit) => (
+                  <li key={benefit} className="flex items-start gap-3 text-text-secondary">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-primary-600" />
+                    <span>{benefit}</span>
+                  </li>
+                ))}
+              </ul>
 
               <a
-                href="tel:+15043261676"
-                className="text-center group"
+                href="/inquiry"
+                className="group inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-primary-700 px-7 py-3.5 font-semibold text-white shadow-md transition hover:bg-primary-800 sm:w-auto"
               >
-                <div className="w-12 h-12 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <Phone className="w-6 h-6 text-accent-600" />
-                </div>
-                <h4 className="font-semibold text-text-primary mb-2">Give Us a Call</h4>
-                <BodyText size="sm" color="muted" className="mb-3">
-                  Prefer voice? Let&apos;s have a quick conversation.
-                </BodyText>
-                <span className="text-accent-600 font-medium hover:underline">
-                  (504) 326-1676
-                </span>
-              </a>
-
-              <a
-                href="mailto:ben@sproutflow-studio.com"
-                className="text-center group"
-              >
-                <div className="w-12 h-12 bg-nature-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <Mail className="w-6 h-6 text-nature-700" />
-                </div>
-                <h4 className="font-semibold text-text-primary mb-2">Send a Message</h4>
-                <BodyText size="sm" color="muted" className="mb-3">
-                  Quick questions? Drop us a line anytime.
-                </BodyText>
-                <span className="text-nature-700 font-medium hover:underline">
-                  Email us directly
-                </span>
+                Tell us about your project
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
               </a>
             </div>
-          </motion.div>
 
-        </div>
+            <aside className="border-t border-primary-200 bg-white/75 p-7 sm:p-10 lg:border-l lg:border-t-0 lg:p-12">
+              <h3 className="mb-3 text-xl font-display font-semibold text-text-primary">
+                Prefer to contact Ben directly?
+              </h3>
+              <p className="mb-7 text-text-secondary">
+                A short note is enough. You do not need a finished brief.
+              </p>
+
+              <div className="space-y-4">
+                <a
+                  href="mailto:ben@sproutflow-studio.com"
+                  className="group flex items-center gap-4 rounded-xl border border-gray-200 bg-white p-4 hover:border-primary-300"
+                >
+                  <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-primary-100 text-primary-700">
+                    <Mail className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-text-primary">Email</span>
+                    <span className="break-all text-sm text-text-secondary group-hover:text-primary-700">ben@sproutflow-studio.com</span>
+                  </span>
+                </a>
+
+                <a
+                  href="tel:+15043261676"
+                  className="group flex items-center gap-4 rounded-xl border border-gray-200 bg-white p-4 hover:border-primary-300"
+                >
+                  <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-accent-100 text-accent-700">
+                    <Phone className="h-5 w-5" />
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-text-primary">Phone</span>
+                    <span className="text-sm text-text-secondary group-hover:text-primary-700">(504) 326-1676</span>
+                  </span>
+                </a>
+              </div>
+            </aside>
+          </div>
+        </motion.div>
       </Container>
     </Section>
   );
-};
-
-export default ContactSection;
+}

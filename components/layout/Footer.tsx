@@ -32,8 +32,7 @@ export const Footer: React.FC = () => {
               priority
             />
             <BodyText className="text-white/80 mb-6 max-w-md">
-              Custom websites and the business systems behind them. Built in New Orleans
-              with enterprise-grade engineering, priced for small business.
+              Custom websites and business systems for small companies that want clearer growth and less manual work. Founder-led in New Orleans.
             </BodyText>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
@@ -90,7 +89,7 @@ export const Footer: React.FC = () => {
           
           {/* Contact */}
           <div>
-            <h3 className="font-display text-lg font-semibold mb-4">Let&apos;s Connect</h3>
+            <h3 className="font-display text-lg font-semibold mb-4">Contact</h3>
             <ul className="space-y-2 text-white/80">
               <li>New Orleans, LA</li>
               <li>
