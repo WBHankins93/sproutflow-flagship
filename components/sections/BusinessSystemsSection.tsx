@@ -1,53 +1,160 @@
-import Link from 'next/link';
-import { ArrowRight, Boxes, Gauge, Workflow } from 'lucide-react';
+// components/sections/BusinessSystemsSection.tsx - Layer 2: custom business software
+//
+// The differentiator behind the website offer. Websites are the front door;
+// this section sells the operations layer that justifies the upper price tiers.
+'use client';
 
-const capabilities = [
-  { icon: Gauge, title: 'See the work', copy: 'Dashboards that put jobs, customers, and operating numbers in one place.' },
-  { icon: Workflow, title: 'Move it forward', copy: 'Automated intake, follow-up, scheduling, and document work.' },
-  { icon: Boxes, title: 'Run every location', copy: 'Shared platforms with the right configuration and access for each location.' },
+import React from 'react';
+import { motion } from 'framer-motion';
+import { LayoutDashboard, Users, FileEdit, Workflow, ArrowRight } from 'lucide-react';
+import { Container } from '../layout/StudioLayout';
+
+const systems = [
+  {
+    icon: <LayoutDashboard className="w-6 h-6" />,
+    title: 'Internal admin tools and dashboards',
+    description:
+      'Give owners and staff one place to see jobs, customers, and the numbers that matter.',
+  },
+  {
+    icon: <Users className="w-6 h-6" />,
+    title: 'Custom CRM and customer management',
+    description:
+      'Track leads, customers, and jobs in a system shaped around the way your business actually works.',
+  },
+  {
+    icon: <FileEdit className="w-6 h-6" />,
+    title: 'Lightweight CMS builds',
+    description:
+      'Change a price, add a photo, or publish an update without waiting for a developer.',
+  },
+  {
+    icon: <Workflow className="w-6 h-6" />,
+    title: 'Workflow automation',
+    description:
+      'Automate repeat intake, follow-up, scheduling, and document tasks so fewer leads slip through.',
+  },
 ];
+
+const systemPricingBands = [
+  {
+    band: 'Single-location tool',
+    fit: 'One dashboard, basic CRM, one workflow automated',
+  },
+  {
+    band: 'Multi-location platform',
+    fit: 'Multi-tenant system, roughly 2-15 locations',
+  },
+  {
+    band: 'Enterprise franchise rollout',
+    fit: '40+ locations, phased per-store implementation',
+  },
+];
+
+// Single proof point. The platform is a working demo, no client named.
+// Personal projects (Greenlit, missed-call systems) intentionally not mentioned.
 
 export default function BusinessSystemsSection() {
   return (
-    <section className="bg-primary-900 text-white">
-      <div className="border-b border-white/15">
-        <div className="mx-auto max-w-[90rem] px-5 py-16 md:px-8 md:py-24">
-          <p className="eyebrow text-primary-200">Behind the website</p>
-          <h2 className="mt-6 max-w-[17ch] text-5xl leading-[0.98] md:text-7xl">
-            When the website works, make the business behind it work <em className="text-primary-200">better.</em>
-          </h2>
-        </div>
-      </div>
+    <section id="business-systems" className="relative py-24 bg-primary-800 text-white overflow-hidden">
+      {/* Subtle texture overlay */}
+      <div
+        className="absolute inset-0 opacity-5"
+        style={{
+          backgroundImage: `radial-gradient(circle, #fff 1px, transparent 1px)`,
+          backgroundSize: '24px 24px',
+        }}
+      />
 
-      <div className="mx-auto grid max-w-[90rem] lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="border-b border-white/15 p-6 md:p-10 lg:border-b-0 lg:border-r">
-          <p className="eyebrow text-white/45">Working product demo</p>
-          <p className="mt-5 font-body text-7xl font-bold tabular-nums text-primary-200 md:text-8xl">64</p>
-          <p className="mt-2 max-w-sm font-display text-3xl leading-tight">locations designed to operate through one platform.</p>
-          <p className="mt-5 max-w-md text-sm leading-relaxed text-white/60">
-            Built around a real franchise operations problem, ready to demonstrate live, and designed to connect with existing systems rather than replace everything at once.
-          </p>
-        </div>
-
-        <div>
-          {capabilities.map((item) => (
-            <div key={item.title} className="grid gap-4 border-b border-white/15 p-6 last:border-b-0 sm:grid-cols-[auto_0.7fr_1.3fr] sm:items-center md:p-8">
-              <item.icon className="h-5 w-5 text-primary-200" />
-              <h3 className="font-body text-lg font-bold tracking-normal">{item.title}</h3>
-              <p className="text-sm leading-relaxed text-white/60">{item.copy}</p>
-            </div>
-          ))}
-          <div className="border-t border-white/15 p-6 md:p-8">
-            <Link
-              href="/business-systems"
-              className="inline-flex min-h-12 items-center gap-2 rounded-[0.35rem] bg-white px-6 py-3 font-bold text-primary-900"
-            >
-              Explore business systems
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+      <Container className="relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-14"
+        >
+          <div className="inline-flex items-center gap-2 text-primary-300 font-medium mb-6">
+            <div className="w-12 h-px bg-primary-300/60"></div>
+            <span className="text-sm uppercase tracking-wider">Behind the website</span>
+            <div className="w-12 h-px bg-primary-300/60"></div>
           </div>
+
+          <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
+            When the website works, make the business behind it work better
+          </h2>
+
+          <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+            We build practical internal tools and automation for the work that happens after a lead comes in.
+          </p>
+        </motion.div>
+
+        {/* Systems Grid */}
+        <div className="grid md:grid-cols-2 gap-5 lg:gap-6 mb-12">
+          {systems.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
+              viewport={{ once: true }}
+              className="bg-white/10 backdrop-blur-sm rounded-2xl p-7 border border-white/10 hover:bg-white/15 transition-colors"
+            >
+              <div className="w-12 h-12 rounded-xl bg-white/15 flex items-center justify-center text-primary-300 mb-5">
+                {item.icon}
+              </div>
+              <h3 className="text-xl font-display font-bold mb-3">{item.title}</h3>
+              <p className="text-[0.95rem] text-white/75 leading-relaxed">{item.description}</p>
+            </motion.div>
+          ))}
         </div>
-      </div>
+
+        {/* Proof point */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="rounded-2xl border border-white/15 bg-white/5 p-7 md:p-8 mb-12 text-center"
+        >
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary-300 mb-4">
+            Working example
+          </p>
+          <p className="text-white/85 leading-relaxed max-w-2xl mx-auto">
+            {/* {{CONFIRM: is this a live client deployment or capability/demo language?}} */}
+            We built a multi-location operations platform that brings 64 locations into one dashboard. Ask to see the workflow during your project call.
+          </p>
+        </motion.div>
+
+        {/* Pricing bands + CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <div className="mx-auto mb-8 max-w-4xl overflow-hidden rounded-2xl border border-white/15 bg-white/5 text-left">
+            {systemPricingBands.map((item) => (
+              <div
+                key={item.band}
+                className="grid gap-3 border-b border-white/10 p-5 last:border-b-0 md:grid-cols-[1.1fr_1.6fr] md:items-center"
+              >
+                <p className="font-display text-lg font-bold text-white">{item.band}</p>
+                <p className="text-sm leading-relaxed text-white/75">{item.fit}</p>
+              </div>
+            ))}
+          </div>
+          <a
+            href="/inquiry"
+            className="inline-flex items-center gap-3 bg-white text-primary-800 px-10 py-4 rounded-full text-lg font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 group"
+          >
+            Discuss a business system
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </motion.div>
+      </Container>
     </section>
   );
 }

@@ -25,8 +25,7 @@
 
   /* Body uses DM Sans */
   body {
-    @apply text-gray-800;
-    background: #f7f4ec;
+    @apply bg-white text-gray-800;
     font-family: var(--font-body), sans-serif;
     font-size: 1rem;
     line-height: 1.65;
@@ -44,9 +43,9 @@
   /* Bricolage gives the brand a distinct voice without reducing body readability. */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading), var(--font-body), sans-serif;
-    font-weight: 500;
-    letter-spacing: -0.035em;
-    line-height: 1.03;
+    font-weight: 650;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
     text-wrap: balance;
   }
 
@@ -70,11 +69,6 @@
     @apply transition-colors duration-300;
   }
 
-  button,
-  a {
-    -webkit-tap-highlight-color: transparent;
-  }
-
   :focus-visible {
     outline: 3px solid #C49A45;
     outline-offset: 3px;
@@ -83,43 +77,6 @@
   ::selection {
     @apply bg-primary-200 text-primary-900;
   }
-}
-
-.skip-link {
-  position: fixed;
-  left: 1rem;
-  top: 1rem;
-  z-index: 100;
-  transform: translateY(-180%);
-  border-radius: 0.35rem;
-  background: #182019;
-  color: white;
-  padding: 0.75rem 1rem;
-  font-weight: 700;
-}
-
-.skip-link:focus {
-  transform: translateY(0);
-}
-
-.paper-grain {
-  background-image:
-    radial-gradient(rgba(40, 69, 47, 0.08) 0.65px, transparent 0.65px),
-    radial-gradient(rgba(40, 69, 47, 0.045) 0.55px, transparent 0.55px);
-  background-position: 0 0, 7px 11px;
-  background-size: 15px 17px, 19px 23px;
-}
-
-.eyebrow {
-  font-family: var(--font-body), sans-serif;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.editorial-rule {
-  border-color: rgba(40, 69, 47, 0.24);
 }
 
 /* ===================================
@@ -217,8 +174,7 @@
 @layer components {
   /* Button Variants */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-semibold transition-all duration-300;
-    border-radius: 0.35rem;
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold transition-all duration-300;
     font-family: var(--font-body), sans-serif;
   }
 
@@ -236,12 +192,10 @@
 
   /* Card Styles */
   .card {
-    @apply bg-white p-6 border border-gray-100 transition-shadow duration-300;
-    border-radius: 0.45rem;
+    @apply bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover:shadow-lg transition-shadow duration-300;
   }
 
   .card-nature {
-    @apply bg-gradient-to-br from-primary-50 to-white p-6 border border-primary-100 shadow-nature;
-    border-radius: 0.45rem;
+    @apply bg-gradient-to-br from-primary-50 to-white rounded-2xl p-6 border border-primary-100 shadow-nature;
   }
 }

@@ -14,12 +14,13 @@ describe('Data Consistency - Service Tiers', () => {
     const contentIds = new Set(servicesContent.tiers.map(tier => tier.id))
     
     // Check that all content tiers exist in services.ts
+    // Note: services.ts may have additional tiers (like 'starter') not in content.ts
     contentIds.forEach(id => {
       expect(servicesIds.has(id)).toBe(true)
     })
     
     // Check that common tiers match
-    const commonTiers = ['launch', 'core', 'custom']
+    const commonTiers = ['foundation', 'growth', 'market-leader']
     commonTiers.forEach(id => {
       expect(servicesIds.has(id)).toBe(true)
       expect(contentIds.has(id)).toBe(true)
@@ -64,7 +65,7 @@ describe('Data Consistency - Service Tier Structure', () => {
   })
 
   it('should have valid price range format', () => {
-    const priceRangeRegex = /^(?:Starting at )?\$[\d,]+(?: fixed)?(?: \+ Care)?$/
+    const priceRangeRegex = /^\$[\d,]+(?: - \$[\d,]+)?\+?$/
     
     serviceTiers.forEach(tier => {
       expect(priceRangeRegex.test(tier.priceRange)).toBe(true)

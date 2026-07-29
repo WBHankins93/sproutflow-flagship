@@ -10,7 +10,7 @@ import { Footer } from '@/components/layout/Footer';
 export const metadata = {
   title: 'FAQ: Website Costs, Timelines & Custom Systems',
   description:
-    'Sproutflow website pricing starts at $500 for Launch, $2,000 for Core, and $4,500 for Custom. Straight answers on timelines, systems, and support.',
+    'Most small business websites in New Orleans cost $850 to $7,500+. Answers on pricing, timelines, custom vs. template sites, business automation, CRMs, and what to have ready before you start.',
   alternates: {
     canonical: '/faq',
   },
@@ -22,12 +22,12 @@ const faqs: { question: string; answer: string }[] = [
   {
     question: 'How much does a small business website cost in New Orleans?',
     answer:
-      'Launch is $500 fixed plus a required $200 monthly Care plan for 12 months. Core websites start at $2,000. Custom websites start at $4,500 and have no preset ceiling. Every Core and Custom project gets a written scope and fixed quote before work starts.',
+      'Most of our projects run between $850 and $7,500+. A template-based starter site sits at the low end, and a fully custom site with professional copywriting lands in the middle. What moves a project into the upper range is custom systems work: CRMs, internal admin tools, and automation built around your operations. Every project gets a fixed quote before work starts.',
   },
   {
     question: 'How long does a custom website take to build?',
     answer:
-      'Launch sites take 5 to 7 business days after client content is received. Most Core and Custom websites take 2 to 8 weeks, depending on content, approvals, and integrations. Business systems use a separate pilot-first plan.',
+      'Most custom websites take 2 to 6 weeks from kickoff to launch. A starter site can be live in 1 to 2 weeks, while larger platform builds with custom systems run 8 to 12 weeks. The biggest variable is usually content decisions, and we guide those so the timeline holds.',
   },
   {
     question: "What's the difference between a custom site and a Squarespace or Wix template?",
@@ -37,7 +37,7 @@ const faqs: { question: string; answer: string }[] = [
   {
     question: 'I already have a website. What else can you build for my business?',
     answer:
-      'We build internal admin tools, operating dashboards, workflow automation, and multi-location platforms. The work is scoped around a specific operating problem, such as intake, follow-up, scheduling, or cross-location visibility.',
+      'We build the systems behind your website: internal admin tools and dashboards, custom CRM and customer management systems, lightweight CMS setups so you can update your own content, and workflow automation for intake, follow-up, and scheduling. Your website gets clients in the door. These systems keep them and save you hours every week.',
   },
   {
     question: 'Can you automate parts of my business, like missed calls or customer follow-up?',
@@ -57,7 +57,7 @@ const faqs: { question: string; answer: string }[] = [
   {
     question: 'Do you handle hosting and maintenance after launch?',
     answer:
-      'Yes. Care is $200 per month for managed hosting, security updates, performance monitoring, and small content changes. Growth is $400 per month and adds Google Business Profile management, review support, and ongoing SEO/GEO work. You retain ownership of your domain, site, and accounts.',
+      'Yes. Website care plans start at $200 per month and cover managed hosting, security updates, performance monitoring, and content changes. You own everything either way: your domain, your site, and your accounts.',
   },
 ];
 

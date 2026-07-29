@@ -1,69 +1,123 @@
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Container, BodyText } from './StudioLayout';
 import { Linkedin } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
 
-export function Footer() {
+export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  
+  const socialLinks = [
+    {
+      name: 'LinkedIn',
+      href: 'https://linkedin.com/company/sproutflow-studio',
+      icon: Linkedin
+    }
+  ];
 
   return (
-    <footer className="border-t border-white/15 bg-primary-900 pb-24 pt-14 text-white md:pb-14 md:pt-20">
-      <div className="mx-auto max-w-[90rem] px-5 md:px-8">
-        <div className="grid gap-12 border-b border-white/15 pb-12 md:grid-cols-[1.4fr_0.7fr_0.7fr]">
+    <footer className="bg-primary-900 text-white py-12 md:py-16">
+      <Container>
+        <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
+          
+          {/* Company Info with Logo - Left aligned */}
           <div>
             <Image
               src={getImageUrl('logo/sproutflow-white-logo.png')}
               alt="Sproutflow Studio"
               width={650}
               height={217}
-              className="mb-5 h-24 w-auto"
+              className="h-40 md:h-44 w-auto mb-6"
+              priority
             />
-            <p className="max-w-xl font-display text-2xl italic leading-snug text-white/90 md:text-3xl">
-              When the website works, make the business behind it work better.
-            </p>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-white/65">
-              Founder-led websites and business systems, based in New Orleans and working nationwide.
-            </p>
-          </div>
-
-          <div>
-            <p className="eyebrow mb-4 text-white/50">Explore</p>
-            <ul className="space-y-3 text-sm text-white/75">
-              <li><Link href="/#pricing" className="hover:text-white">Website pricing</Link></li>
-              <li><Link href="/business-systems" className="hover:text-white">Business systems</Link></li>
-              <li><Link href="/work" className="hover:text-white">Work</Link></li>
-              <li><Link href="/how-we-work" className="hover:text-white">Process</Link></li>
-              <li><Link href="/faq" className="hover:text-white">FAQ</Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <p className="eyebrow mb-4 text-white/50">Contact</p>
-            <ul className="space-y-3 text-sm text-white/75">
-              <li>New Orleans, Louisiana</li>
-              <li><a href="mailto:ben@sproutflow-studio.com" className="hover:text-white">ben@sproutflow-studio.com</a></li>
-              <li><a href="tel:+15043261676" className="hover:text-white">(504) 326-1676</a></li>
-              <li>
+            <BodyText className="text-white/80 mb-6 max-w-md">
+              Custom websites and business systems for small companies that want clearer growth and less manual work. Founder-led in New Orleans.
+            </BodyText>
+            <div className="flex space-x-4">
+              {socialLinks.map((social) => (
                 <a
-                  href="https://linkedin.com/company/sproutflow-studio"
+                  key={social.name}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Sproutflow Studio on LinkedIn"
-                  className="inline-flex items-center gap-2 hover:text-white"
+                  className="text-white/60 hover:text-white transition-colors"
+                  aria-label={social.name}
                 >
-                  <Linkedin className="h-4 w-4" />
-                  LinkedIn
+                  <social.icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
+          </div>
+          
+          {/* Quick Links */}
+          <div>
+            <h3 className="font-display text-lg font-semibold mb-4">Explore</h3>
+            <ul className="space-y-2 text-white/80">
+              <li>
+                <Link href="/#services" className="hover:text-white transition-colors">
+                  Services & Pricing
+                </Link>
+              </li>
+              <li>
+                <Link href="/work" className="hover:text-white transition-colors">
+                  Portfolio
+                </Link>
+              </li>
+              <li>
+                <Link href="/case-studies" className="hover:text-white transition-colors">
+                  Case Studies
+                </Link>
+              </li>
+              <li>
+                <Link href="/how-we-work" className="hover:text-white transition-colors">
+                  How We Work
+                </Link>
+              </li>
+              <li>
+                <Link href="/how-we-handle-your-data" className="hover:text-white transition-colors">
+                  How We Handle Your Data
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="hover:text-white transition-colors">
+                  FAQ
+                </Link>
+              </li>
+            </ul>
+          </div>
+          
+          {/* Contact */}
+          <div>
+            <h3 className="font-display text-lg font-semibold mb-4">Contact</h3>
+            <ul className="space-y-2 text-white/80">
+              <li>New Orleans, LA</li>
+              <li>
+                <a 
+                  href="mailto:ben@sproutflow-studio.com"
+                  className="hover:text-white transition-colors"
+                >
+                  ben@sproutflow-studio.com
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="tel:+15043261676"
+                  className="hover:text-white transition-colors"
+                >
+                  (504) 326-1676
                 </a>
               </li>
             </ul>
           </div>
         </div>
-
-        <div className="flex flex-col gap-3 pt-7 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>&copy; {currentYear} Sproutflow Studio.</p>
-          <Link href="/how-we-handle-your-data" className="hover:text-white">How we handle your data</Link>
+        
+        <div className="border-t border-white/20 mt-12 pt-8 text-center text-white/60">
+          <BodyText size="sm">
+            &copy; {currentYear} Sproutflow Studio. All rights reserved. Growing together since 2025.
+          </BodyText>
         </div>
-      </div>
+      </Container>
     </footer>
   );
-}
+};

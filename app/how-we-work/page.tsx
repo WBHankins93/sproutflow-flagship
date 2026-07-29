@@ -9,6 +9,13 @@ export const metadata = {
   title: 'How We Work',
   description:
     'Our web design process for small businesses takes 2 to 6 weeks for most projects: discovery, fixed-quote proposal, design, build, launch, and optional ongoing support. Based in New Orleans, working remotely nationwide.',
+  keywords: [
+    'web design process New Orleans',
+    'website development process',
+    'how we work New Orleans',
+    'web design workflow',
+    'small business web design process'
+  ],
   alternates: {
     canonical: '/how-we-work',
   },
@@ -126,7 +133,7 @@ const processSteps = [
     duration: 'Optional',
     icon: <Infinity className="w-6 h-6" />,
     description: 'Many clients opt for monthly maintenance packages where we handle updates, monitoring, and enhancements.',
-    highlight: 'Care is $200 per month. Growth is $400 per month.',
+    highlight: 'Your business grows, and your website grows with it.',
     deliverables: [
       'Content updates and page additions',
       'Performance and uptime monitoring',
