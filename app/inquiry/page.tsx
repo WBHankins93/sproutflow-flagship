@@ -1,51 +1,73 @@
-import type { Metadata } from 'next';
-import { Check } from 'lucide-react';
+// app/inquiry/page.tsx - Project intake and contact page
+
+import { Container, Section } from '@/components/layout/StudioLayout';
 import { Footer } from '@/components/layout/Footer';
 import { InquiryForm } from '@/components/inquiry/InquiryForm';
+import { getImageUrl } from '@/lib/blob-images';
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Start a Project',
   description:
-    'Tell Sproutflow Studio what you want to improve. Ben reviews every inquiry and replies within one business day.',
-  alternates: { canonical: '/inquiry' },
+    'Start your project with Sproutflow Studio. Share your goals in 3 to 5 minutes and we respond within 24 hours with clear next steps and a path to a fixed quote.',
+  alternates: {
+    canonical: '/inquiry',
+  },
 };
-
-const nextSteps = [
-  'Ben reviews the business, goal, and current setup.',
-  'You get a recommendation for the clearest next step.',
-  'Any Core or Custom project begins with a written scope and fixed quote.',
-];
 
 export default function InquiryPage() {
   return (
     <>
-      <section className="paper-grain border-b border-primary-900/15 bg-[#f7f4ec]">
-        <div className="mx-auto grid max-w-[90rem] gap-10 px-5 py-16 md:px-8 md:py-24 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <div>
-            <p className="eyebrow text-primary-700">Start a project</p>
-            <h1 className="mt-6 max-w-[11ch] text-6xl leading-[0.92] text-primary-900 md:text-8xl">
-              Tell Ben what is not working.
-            </h1>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-text-secondary">
-              You do not need a finished brief or the right technical language. Start with the business and the result you want.
-            </p>
-          </div>
-          <div className="border-t border-primary-900/20">
-            {nextSteps.map((step) => (
-              <div key={step} className="flex gap-3 border-b border-primary-900/20 py-5 text-sm leading-relaxed text-text-secondary">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary-700" />
-                {step}
-              </div>
-            ))}
-          </div>
+      <header className="relative border-b border-nature-200 bg-gradient-to-br from-white via-primary-50/40 to-primary-100/20">
+        <div className="absolute inset-0 -z-10">
+          <div
+            className="h-full w-full bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage: `url(${getImageUrl('project-tree.jpg')})`,
+            }}
+          />
+          <div className="absolute inset-0 bg-white/60" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(95,117,94,0.18),_transparent_55%)] opacity-40" />
         </div>
-      </section>
 
-      <section className="bg-[#e5ebe2] py-16 md:py-24">
-        <div className="mx-auto max-w-3xl px-5 md:px-8">
-          <InquiryForm />
+        <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-24 md:px-8 md:py-28">
+          <div className="inline-flex items-center gap-2 text-primary-700">
+            <span className="h-px w-12 bg-primary-500/60" />
+            <span className="text-sm font-semibold uppercase tracking-[0.24em]">
+              Start a project
+            </span>
+            <span className="h-px w-12 bg-primary-500/60" />
+          </div>
+          <div className="grid gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
+            <div className="space-y-6">
+              <h1 className="text-4xl font-display font-bold text-gray-900 md:text-6xl">
+                Tell us what you want to improve
+              </h1>
+              <p className="text-lg text-gray-600 md:text-xl">
+                Share the basics in about 3–5 minutes. Best guesses are fine—we&apos;ll help clarify the scope.
+              </p>
+              <p className="text-base text-gray-600">
+                We review every inquiry ourselves and reply within one business day.
+              </p>
+            </div>
+            <div className="rounded-3xl border border-primary-200/60 bg-white/70 p-6 shadow-lg backdrop-blur">
+              <p className="text-sm font-semibold uppercase tracking-widest text-primary-700">
+                What happens next
+              </p>
+              <ul className="mt-4 space-y-3 text-sm text-gray-600">
+                <li>• We review your goals and current setup</li>
+                <li>• You receive a recommended next step</li>
+                <li>• Any project begins with a fixed quote</li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </section>
+      </header>
+
+      <Section padding="lg" background="white" className="pb-8 md:pb-12">
+        <Container size="narrow" className="px-4 sm:px-6 md:px-8">
+          <InquiryForm />
+        </Container>
+      </Section>
 
       <Footer />
     </>

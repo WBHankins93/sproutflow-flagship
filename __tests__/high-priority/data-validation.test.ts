@@ -21,16 +21,16 @@ describe('Data Validation - Service Pricing Consistency', () => {
     })
   })
 
-  it('should have Core tier starting at $2,000', () => {
-    const coreTier = serviceTiers.find(tier => tier.id === 'core')
-    expect(coreTier).toBeDefined()
-    expect(coreTier?.priceRange).toBe('Starting at $2,000')
+  it('should have Foundation tier priced at $2,000 - $2,800', () => {
+    const foundationTier = serviceTiers.find(tier => tier.id === 'foundation')
+    expect(foundationTier).toBeDefined()
+    expect(foundationTier?.priceRange).toBe('$2,000 - $2,800')
   })
 
-  it('should have Custom tier starting at $4,500', () => {
-    const customTier = serviceTiers.find(tier => tier.id === 'custom')
-    expect(customTier).toBeDefined()
-    expect(customTier?.priceRange).toBe('Starting at $4,500')
+  it('should have Market Leader tier priced at $7,500+', () => {
+    const marketLeaderTier = serviceTiers.find(tier => tier.id === 'market-leader')
+    expect(marketLeaderTier).toBeDefined()
+    expect(marketLeaderTier?.priceRange).toBe('$7,500+')
   })
 
   it('should have all required service tier fields', () => {

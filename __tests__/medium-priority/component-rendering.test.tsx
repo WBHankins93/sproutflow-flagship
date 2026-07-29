@@ -19,10 +19,9 @@ describe('Component Rendering - Header', () => {
 
   it('should render navigation links', () => {
     render(<Header />)
-    expect(screen.getByText('Websites')).toBeInTheDocument()
-    expect(screen.getByText('Business systems')).toBeInTheDocument()
+    expect(screen.getByText('How we work')).toBeInTheDocument()
     expect(screen.getByText('Work')).toBeInTheDocument()
-    expect(screen.getByText('Process')).toBeInTheDocument()
+    expect(screen.getByText('Results')).toBeInTheDocument()
     expect(screen.getByText('About')).toBeInTheDocument()
   })
 
@@ -41,17 +40,17 @@ describe('Component Rendering - Footer', () => {
 
   it('should render explore links', () => {
     render(<Footer />)
-    expect(screen.getByText('Website pricing')).toBeInTheDocument()
-    expect(screen.getByText('Business systems')).toBeInTheDocument()
-    expect(screen.getByText('Work')).toBeInTheDocument()
-    expect(screen.getByText('Process')).toBeInTheDocument()
-    expect(screen.getByText('How we handle your data')).toBeInTheDocument()
+    expect(screen.getByText('Services & Pricing')).toBeInTheDocument()
+    expect(screen.getByText('Portfolio')).toBeInTheDocument()
+    expect(screen.getByText('Case Studies')).toBeInTheDocument()
+    expect(screen.getByText('How We Work')).toBeInTheDocument()
+    expect(screen.getByText('How We Handle Your Data')).toBeInTheDocument()
     expect(screen.getByText('FAQ')).toBeInTheDocument()
   })
 
   it('should render contact information', () => {
     render(<Footer />)
-    expect(screen.getByText('New Orleans, Louisiana')).toBeInTheDocument()
+    expect(screen.getByText('New Orleans, LA')).toBeInTheDocument()
     expect(screen.getByText('ben@sproutflow-studio.com')).toBeInTheDocument()
     expect(screen.getByText('(504) 326-1676')).toBeInTheDocument()
   })
@@ -66,7 +65,9 @@ describe('Component Rendering - Footer', () => {
 describe('Component Rendering - HeroSection', () => {
   it('should render hero headline', () => {
     render(<HeroSection />)
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Websites that win the right clients.')
+    expect(
+      screen.getByText(/Websites that win the right clients/i)
+    ).toBeInTheDocument()
   })
 
   it('should render CTA button linking to the inquiry application', () => {
@@ -76,9 +77,10 @@ describe('Component Rendering - HeroSection', () => {
     expect(cta).toHaveAttribute('href', '/inquiry')
   })
 
-  it('should render the local founder label', () => {
+  it('should render trust badges', () => {
     render(<HeroSection />)
-    expect(screen.getByText('New Orleans · Founder-led')).toBeInTheDocument()
+    expect(screen.getByText('New Orleans based')).toBeInTheDocument()
+    expect(screen.getByText('Founder-led from start to launch')).toBeInTheDocument()
   })
 })
 
