@@ -18,195 +18,45 @@ export interface ServiceTier {
   
   export const serviceTiers: ServiceTier[] = [
     {
-      id: "starter",
-      name: "Starter",
-      tagline: "A clear, credible site without a long build",
-      priceRange: "$850 - $1,500",
-      timeline: "1-2 weeks",
-      idealFor: "For solo owners and new businesses",
-      description: "Semi-templated website with professional customization. Perfect for getting online quickly without sacrificing quality. Limited to 2-3 projects per month.",
-      
-      businessOutcomes: [
-        "Launch a credible presence quickly",
-        "Give buyers a clear next step",
-        "Foundation for future growth",
-        "Cost-effective entry point for new businesses"
-      ],
-      
-      technicalFeatures: [
-        "1–5 professionally designed pages",
-        "A customized, semi-templated foundation",
-        "Mobile, performance, and basic SEO setup",
-        "Contact form or scheduling integration",
-        "Basic SEO setup and configuration",
-        "Launch support and training"
-      ],
-      
-      strategicInclusions: [
-        "30-minute brand consultation",
-        "Content guidance and structure",
-        "Launch checklist"
-      ],
-
-      deliverables: [
-        "Live professional website",
-        "Domain and hosting setup",
-        "Launch documentation",
-        "1 round of revisions"
-      ],
-
-      limitations: [
-        "Semi-templated foundation (professionally customized)",
-        "Limited to 1-5 pages",
-        "No CMS: static or template-based site only",
-        "Basic integrations only",
-        "Limited availability (2-3 projects per month)"
-      ]
+      id: "launch",
+      name: "Launch",
+      tagline: "A credible site without a long sales process",
+      priceRange: "$500 fixed + Care",
+      timeline: "5-7 business days",
+      idealFor: "For a solo owner who needs a simple, credible place to be found online",
+      description: "A productized three-page website using a proven template foundation and content supplied by the client.",
+      businessOutcomes: ["Create a credible online presence", "Give customers a clear way to make contact"],
+      technicalFeatures: ["Up to three pages", "Google Business Profile setup", "Mobile, performance, contact form, and basic SEO"],
+      strategicInclusions: ["Published intake instead of a discovery call", "One revision round"],
+      deliverables: ["Live website", "Google Business Profile setup", "Launch handoff"],
+      limitations: ["Client-supplied content", "Template foundation", "Care plan required for 12 months"]
     },
     {
-      id: "foundation",
-      name: "Foundation",
-      tagline: "Turn your website into a focused lead tool",
-      priceRange: "$2,000 - $2,800",
-      timeline: "2-3 weeks",
-      idealFor: "For growing businesses and rebrands",
-      description: "Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations. A foundation for long-term growth, not just online presence.",
+      id: "core",
+      name: "Core",
+      tagline: "A focused website built to win more of the right work",
+      priceRange: "Starting at $2,000",
+      timeline: "2-4 weeks",
+      idealFor: "For an established small business that needs a stronger website and a clear lead path",
+      description: "Semi-custom design, content management, SEO foundations, and conversion tracking.",
       popular: true,
-      
-      businessOutcomes: [
-        "Build trust with a stronger market presence",
-        "Guide visitors toward one clear conversion path",
-        "Foundation for digital marketing initiatives",
-        "Strategic architecture that scales with growth"
-      ],
-      
-      technicalFeatures: [
-        "Semi-custom design tied to your business goals",
-        "Mobile and performance optimization",
-        "SEO foundation and keyword research",
-        "Basic CMS: edit pages, images, blog posts, and metadata",
-        "Clear customer conversion pathways"
-      ],
-      
-      strategicInclusions: [
-        "2-hour strategy session on business goals",
-        "Competitive positioning analysis",
-        "Conversion-focused design decisions",
-        "Basic content guidance (not full copywriting)"
-      ],
-      
-      deliverables: [
-        "Fully functional professional website",
-        "Domain and hosting configuration", 
-        "Business email setup",
-        "Basic analytics implementation",
-        "Launch checklist and best practices guide",
-        "CMS training documentation"
-      ],
-      
-      limitations: [
-        "Semi-custom foundation (professionally customized)",
-        "Basic content guidance rather than full copywriting",
-        "Standard integrations only"
-      ]
+      businessOutcomes: ["Make the business easier to understand and trust", "Turn more visits into qualified inquiries"],
+      technicalFeatures: ["Semi-custom responsive design", "Content management system", "SEO foundation and conversion tracking"],
+      strategicInclusions: ["Positioning and page planning", "Content guidance", "Conversion path design"],
+      deliverables: ["Live website", "CMS training", "Analytics and launch handoff"]
     },
-    
     {
-      id: "growth", 
-      name: "Growth",
-      tagline: "A custom site built to compete and convert",
-      priceRange: "$3,500 - $5,500",
-      timeline: "4-6 weeks",
-      idealFor: "For established businesses ready to grow",
-      description: "Comprehensive digital presence that positions your business as the clear choice in your market. Custom design reflecting brand personality with conversion optimization and professional copywriting.",
-      
-      businessOutcomes: [
-        "Stand apart from close competitors",
-        "Measure and improve customer acquisition",
-        "Enhanced brand perception and authority",
-        "Scalable platform for business expansion",
-        "Tracked revenue growth from digital presence"
-      ],
-      
-      technicalFeatures: [
-        "Fully custom responsive design",
-        "Conversion-focused copy and user experience",
-        "Scalable CMS and SEO controls",
-        "Advanced performance optimization",
-        "Comprehensive SEO strategy with competitive analysis",
-        "Analytics and conversion tracking setup",
-        "Blog integration with content strategy"
-      ],
-      
-      strategicInclusions: [
-        "Brand refinement and visual identity alignment",
-        "Competitive analysis and positioning strategy", 
-        "Customer acquisition strategy consultation",
-        "Professional copywriting for key pages (5-8 pages)",
-        "User experience optimization",
-        "One round of strategic revisions"
-      ],
-      
-      deliverables: [
-        "Fully custom website with CMS",
-        "Brand guideline documentation",
-        "SEO strategy implementation", 
-        "Analytics dashboard setup",
-        "Content management training",
-        "Performance benchmarking report",
-        "Professional copywriting for key pages"
-      ]
-    },
-    
-    {
-      id: "market-leader",
-      name: "Market Leader",
-      tagline: "Connect marketing, customer flow, and operations",
-      priceRange: "$7,500+",
-      timeline: "8-12 weeks",
-      idealFor: "For companies where the website drives revenue",
-      description: "Fully custom digital platform designed to solve specific business challenges and generate measurable competitive advantage. This tier goes beyond website design to create a scalable digital foundation where marketing, customer acquisition, and operations work together to drive revenue.",
-
-      businessOutcomes: [
-        "Connect the full path from visit to revenue",
-        "Improve conversion across the customer journey",
-        "Custom integrations connecting your website to core business systems",
-        "Scalable platform designed for long-term competitive advantage",
-        "Unified digital foundation where marketing and operations drive revenue"
-      ],
-
-      technicalFeatures: [
-        "Architecture built around your business model",
-        "Custom design and interactive workflows",
-        "Advanced CMS, CRM, and marketing integrations",
-        "Advanced SEO with technical implementations",
-        "Custom integrations with your business systems (CRM, email marketing, operations)",
-        "Advanced analytics and revenue tracking",
-        "Customer portals, booking systems, and e-commerce where applicable",
-        "API integrations and third-party connections"
-      ],
-      
-      strategicInclusions: [
-        "Deep strategic planning with competitive research",
-        "Comprehensive business analysis and planning",
-        "Custom user experience design",
-        "Advanced conversion optimization",
-        "Full-site professional copywriting",
-        "Content strategy and quarterly planning",
-        "Ongoing technical consultation",
-        "Strategic roadmap for future development"
-      ],
-      
-      deliverables: [
-        "Fully custom web application",
-        "Technical documentation and architecture guide",
-        "Advanced analytics and reporting systems",
-        "Staff training and ongoing support plan", 
-        "Performance optimization and monitoring",
-        "Strategic growth recommendations",
-        "Priority support and dedicated account management",
-        "Full-site professional copywriting"
-      ]
+      id: "custom",
+      name: "Custom",
+      tagline: "Original design and deeper functionality without a preset ceiling",
+      priceRange: "Starting at $4,500",
+      timeline: "4-8+ weeks",
+      idealFor: "For a business that needs custom copy, original interaction, catalogs, or integrations",
+      description: "Fully custom design and copy with application features, integrations, and motion as the scope requires.",
+      businessOutcomes: ["Stand apart in a crowded market", "Support a more complex buyer journey or operating model"],
+      technicalFeatures: ["Fully custom responsive design", "Catalogs and application features", "Integrations and custom workflows"],
+      strategicInclusions: ["Positioning and content strategy", "Custom copy", "Original interaction direction"],
+      deliverables: ["Custom production website", "Documentation and training", "Analytics and launch support"]
     }
   ];
   

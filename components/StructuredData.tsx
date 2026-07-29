@@ -16,8 +16,8 @@ const professionalServiceSchema = {
   logo: `${siteUrl}/images/logo/main-logo-Photoroom.png`,
   image: `${siteUrl}/images/logo/main-logo-Photoroom.png`,
   description:
-    'Sproutflow Studio builds custom websites and custom business software for small businesses. Web design and development, internal admin tools, CRM systems, CMS builds, and workflow automation. Based in New Orleans, LA.',
-  slogan: 'Websites that win clients. Systems that make growth easier.',
+    'Sproutflow Studio builds founder-led websites, internal tools, workflow automation, and multi-location platforms. Based in New Orleans, LA.',
+  slogan: 'When the website works, make the business behind it work better.',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'New Orleans',
@@ -31,7 +31,7 @@ const professionalServiceSchema = {
   },
   telephone: '+1-504-326-1676',
   email: 'ben@sproutflow-studio.com',
-  priceRange: '$850 - $7,500+',
+  priceRange: '$500 - $4,500+',
   sameAs: [
     'https://linkedin.com/company/sproutflow-studio',
   ],
@@ -61,7 +61,6 @@ const professionalServiceSchema = {
     'web design',
     'web development',
     'custom software development',
-    'CRM systems',
     'internal business tools',
     'admin dashboards',
     'workflow automation',
@@ -79,7 +78,7 @@ const professionalServiceSchema = {
           '@type': 'Service',
           name: 'Custom Website Design and Development',
           description:
-            'Custom Next.js websites for small businesses: design, development, copywriting, local SEO, and conversion-focused lead capture. Projects range from starter sites to fully custom platforms.',
+            'Websites for small businesses, from a productized three-page Launch site to fully custom design, copy, catalogs, and integrations.',
           provider: { '@id': `${siteUrl}#organization` },
           areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
         },
@@ -90,7 +89,7 @@ const professionalServiceSchema = {
           '@type': 'Service',
           name: 'Custom Business Software and Automation',
           description:
-            'Custom business systems behind the website: internal admin tools and dashboards, custom CRM and customer management systems, lightweight CMS builds, and workflow automation for intake, follow-up, scheduling, and document processing.',
+            'Internal tools, workflow automation, and multi-location platforms for intake, follow-up, scheduling, document processing, and operational visibility.',
           provider: { '@id': `${siteUrl}#organization` },
           areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
         },

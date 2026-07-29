@@ -21,7 +21,7 @@ describe('Component Interactions - Header Mobile Menu', () => {
     render(<Header />)
 
     // Find mobile menu button
-    const menuButton = screen.getByLabelText('Toggle menu')
+    const menuButton = screen.getByLabelText('Open menu')
     expect(menuButton).toBeInTheDocument()
 
     // Menu should not be visible initially (on desktop, but we can test the button)
@@ -37,7 +37,7 @@ describe('Component Interactions - Header Mobile Menu', () => {
     const user = userEvent.setup()
     render(<Header />)
 
-    const menuButton = screen.getByLabelText('Toggle menu')
+    const menuButton = screen.getByLabelText('Open menu')
     await user.click(menuButton)
 
     // Click again to close
@@ -50,13 +50,14 @@ describe('Component Interactions - Header Mobile Menu', () => {
     render(<Header />)
 
     // Open mobile menu first
-    const menuButton = screen.getByLabelText('Toggle menu')
+    const menuButton = screen.getByLabelText('Open menu')
     fireEvent.click(menuButton)
 
     // Check for navigation links (use getAllByText since they appear in both desktop and mobile nav)
-    expect(screen.getAllByText('How we work').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Websites').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Business systems').length).toBeGreaterThan(0)
     expect(screen.getAllByText('Work').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Results').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Process').length).toBeGreaterThan(0)
     expect(screen.getAllByText('About').length).toBeGreaterThan(0)
   })
 })
@@ -66,34 +67,32 @@ describe('Component Interactions - ServicesSection Tier Cards', () => {
     render(<ServicesSection />)
 
     // Check for service tier names (use getAllByText since names appear multiple times)
-    expect(screen.getAllByText('Starter').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Foundation').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Growth').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Market Leader').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Launch').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Core').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Custom').length).toBeGreaterThan(0)
   })
 
   it('should have a CTA on each service card routing to the inquiry application', () => {
     render(<ServicesSection />)
 
-    const tierButtons = screen.getAllByText('Discuss this option')
-    expect(tierButtons.length).toBe(4)
-    tierButtons.forEach((button) => {
-      expect(button.closest('a')).toHaveAttribute('href', '/inquiry')
-    })
+    expect(screen.getByText('Discuss core').closest('a')).toHaveAttribute('href', '/inquiry?package=core')
+    expect(screen.getByText('Discuss custom').closest('a')).toHaveAttribute('href', '/inquiry?package=custom')
+    expect(screen.getByText('Start here').closest('a')).toHaveAttribute('href', '/launch')
   })
 
   it('should display price ranges on service cards', () => {
     render(<ServicesSection />)
 
     // Check for price ranges (use getAllByText since prices appear multiple times)
-    expect(screen.getAllByText(/\$2,000 - \$2,800/).length).toBeGreaterThan(0)
-    expect(screen.getAllByText(/\$7,500\+/).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/Starting at \$2,000/).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/Starting at \$4,500/).length).toBeGreaterThan(0)
   })
 
-  it('should show "Most Popular" badge on Foundation tier', () => {
+  it('should publish recurring plan prices', () => {
     render(<ServicesSection />)
 
-    expect(screen.getByText('Most Popular')).toBeInTheDocument()
+    expect(screen.getByText('$200/month')).toBeInTheDocument()
+    expect(screen.getByText('$400/month')).toBeInTheDocument()
   })
 })
 
@@ -101,7 +100,7 @@ describe('Component Interactions - ContactSection', () => {
   it('should render contact options', () => {
     render(<ContactSection />)
 
-    expect(screen.getByText('Tell us what you want to improve')).toBeInTheDocument()
+    expect(screen.getByText('Tell me what you want to improve.')).toBeInTheDocument()
   })
 
   it('should route the discovery CTA to the inquiry application, not the calendar', () => {
@@ -120,8 +119,8 @@ describe('Component Interactions - ContactSection', () => {
   it('should display alternative contact methods', () => {
     render(<ContactSection />)
 
-    expect(screen.getByText('Email')).toBeInTheDocument()
-    expect(screen.getByText('Phone')).toBeInTheDocument()
+    expect(screen.getByText('ben@sproutflow-studio.com')).toBeInTheDocument()
+    expect(screen.getByText('(504) 326-1676')).toBeInTheDocument()
   })
 })
 
@@ -130,7 +129,7 @@ describe('Component Interactions - Navigation Links', () => {
     render(<Header />)
 
     const aboutLink = screen.getByText('About').closest('a')
-    expect(aboutLink).toHaveAttribute('href', '#about')
+    expect(aboutLink).toHaveAttribute('href', '/#about')
   })
 
   it('should have correct route links in header', () => {
@@ -139,16 +138,16 @@ describe('Component Interactions - Navigation Links', () => {
     const workLink = screen.getByText('Work').closest('a')
     expect(workLink).toHaveAttribute('href', '/work')
 
-    const caseStudiesLink = screen.getByText('Results').closest('a')
-    expect(caseStudiesLink).toHaveAttribute('href', '/case-studies')
+    const systemsLink = screen.getByText('Business systems').closest('a')
+    expect(systemsLink).toHaveAttribute('href', '/business-systems')
   })
 })
 
 describe('Component Interactions - Footer Navigation', () => {
-  it('should link Services & Pricing to the homepage services section', () => {
+  it('should link Website pricing to the homepage pricing section', () => {
     render(<Footer />)
 
-    const servicesLink = screen.getByText('Services & Pricing').closest('a')
-    expect(servicesLink).toHaveAttribute('href', '/#services')
+    const pricingLink = screen.getByText('Website pricing').closest('a')
+    expect(pricingLink).toHaveAttribute('href', '/#pricing')
   })
 })

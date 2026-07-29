@@ -1,169 +1,123 @@
-// components/layout/Header.tsx - FIXED VERSION
 'use client';
 
 import { useState } from 'react';
-import type { MouseEvent as ReactMouseEvent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { usePathname } from 'next/navigation';
+import { ArrowUpRight, Menu, Phone, X } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
 
-type NavLink = {
-  label: string;
-  href: string;
-  type: 'route' | 'anchor';
-};
+const navLinks = [
+  { label: 'Websites', href: '/#pricing' },
+  { label: 'Business systems', href: '/business-systems' },
+  { label: 'Work', href: '/work' },
+  { label: 'Process', href: '/how-we-work' },
+  { label: 'About', href: '/#about' },
+];
 
 export default function Header() {
-  const router = useRouter();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navLinks: NavLink[] = [
-    { label: 'How we work', href: '/how-we-work', type: 'route' },
-    { label: 'Work', href: '/work', type: 'route' },
-    { label: 'Results', href: '/case-studies', type: 'route' },
-    { label: 'About', href: '#about', type: 'anchor' },
-  ];
-
-  const closeMobileMenu = () => setMobileMenuOpen(false);
-
-  const handleHomeLink = (event: ReactMouseEvent<HTMLAnchorElement>) => {
-    closeMobileMenu();
-    if (pathname === '/') {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const handleNavClick = (link: NavLink) => {
-    closeMobileMenu();
-
-    if (link.type === 'route') {
-      if (pathname !== link.href) {
-        router.push(link.href);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-      return;
-    }
-
-    if (pathname !== '/') {
-      const target = link.href.startsWith('#') ? `/${link.href}` : link.href;
-      router.push(target);
-      return;
-    }
-
-    const element = document.querySelector(link.href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      window.history.replaceState(null, '', link.href);
-    }
-  };
-
   return (
-    <header className="sticky top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 border-b border-nature-200">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between h-16">
-          
-          {/* Logo + Brand */}
-          <Link 
-            href="/" 
-            className="flex items-center hover:opacity-90 transition-opacity"
-            onClick={(e) => {
-              handleHomeLink(e);
-            }}
-          >
-            {/* Main Logo */}
-            <Image 
-              src={getImageUrl('logo/main-logo-Photoroom.png')} 
-              alt="Sproutflow Studio"
-              width={550}  
-              height={183}
-              className="h-12 md:h-14 w-auto"
-              priority
-            />
-          </Link>
+    <header className="sticky top-0 z-50 border-b border-primary-900/15 bg-[#f7f4ec]/95 backdrop-blur-md">
+      <div className="mx-auto flex min-h-[72px] max-w-[90rem] items-center justify-between gap-5 px-5 md:px-8">
+        <Link href="/" className="flex shrink-0 items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
+          <Image
+            src={getImageUrl('logo/main-logo-Photoroom.png')}
+            alt="Sproutflow Studio"
+            width={550}
+            height={183}
+            className="h-11 w-auto"
+            priority
+          />
+          <span className="hidden max-w-[15rem] border-l border-primary-900/20 pl-3 font-display text-sm italic leading-tight text-primary-900 xl:block">
+            When the website works, make the business behind it work better.
+          </span>
+        </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {navLinks.map((link) => {
-              const isActive = link.type === 'route' && pathname === link.href;
-              return (
-              <a
+        <nav className="hidden items-center gap-5 lg:flex" aria-label="Main navigation">
+          {navLinks.map((link) => {
+            const active = link.href === '/business-systems'
+              ? pathname === '/business-systems'
+              : link.href === '/work'
+                ? pathname === '/work'
+                : link.href === '/how-we-work'
+                  ? pathname === '/how-we-work'
+                  : false;
+            return (
+              <Link
                 key={link.href}
                 href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link);
-                }}
-                className={`text-base font-medium transition-colors ${
-                  isActive
-                    ? 'text-primary-600'
-                    : 'text-text-secondary hover:text-primary-600'
-                }`}
+                className={`text-sm font-semibold ${active ? 'text-primary-800' : 'text-text-secondary hover:text-primary-800'}`}
               >
                 {link.label}
-              </a>
+              </Link>
             );
-            })}
-            <a 
-              href="/inquiry"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick({ label: "Contact", href: "/inquiry", type: "route" });
-              }}
-              className="ml-4 px-6 py-2.5 bg-primary-600 text-white rounded-full font-semibold hover:bg-primary-700 transition-colors"
-            >
-              Start a project
-            </a>
-          </nav>
+          })}
+        </nav>
 
-          {/* Mobile Menu Button */}
-          <button 
-            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
+        <div className="hidden items-center gap-4 lg:flex">
+          <a
+            href="tel:+15043261676"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-text-secondary hover:text-primary-800"
           >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-gray-700" />
-            ) : (
-              <Menu className="w-6 h-6 text-gray-700" />
-            )}
-          </button>
-
+            <Phone className="h-4 w-4" />
+            (504) 326-1676
+          </a>
+          <Link
+            href="/inquiry"
+            className="inline-flex min-h-11 items-center gap-2 rounded-[0.35rem] bg-primary-900 px-5 py-2.5 text-sm font-bold text-white hover:bg-primary-700"
+          >
+            Start a project
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
+
+        <button
+          type="button"
+          className="flex h-11 w-11 items-center justify-center rounded-[0.35rem] border border-primary-900/20 text-primary-900 lg:hidden"
+          onClick={() => setMobileMenuOpen((open) => !open)}
+          aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-navigation"
+        >
+          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-nature-200 bg-white shadow-lg">
-          <nav className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link);
-                }}
-                className="block px-4 py-2 text-base font-medium text-text-secondary hover:text-primary-600 hover:bg-nature-50 rounded-lg transition-colors"
+        <div id="mobile-navigation" className="border-t border-primary-900/15 bg-[#f7f4ec] lg:hidden">
+          <nav className="mx-auto max-w-[90rem] px-5 py-5" aria-label="Mobile navigation">
+            <div className="grid">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex min-h-12 items-center justify-between border-b border-primary-900/10 text-base font-semibold text-primary-900"
+                >
+                  {link.label}
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              ))}
+            </div>
+            <div className="mt-5 grid gap-3">
+              <Link
+                href="/inquiry"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex min-h-12 items-center justify-center rounded-[0.35rem] bg-primary-900 px-5 font-bold text-white"
               >
-                {link.label}
+                Tell us about your project
+              </Link>
+              <a
+                href="tel:+15043261676"
+                className="flex min-h-11 items-center justify-center gap-2 text-sm font-semibold text-text-secondary"
+              >
+                <Phone className="h-4 w-4" />
+                (504) 326-1676
               </a>
-            ))}
-            <a 
-              href="/inquiry"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick({ label: "Contact", href: "/inquiry", type: "route" });
-              }}
-              className="block w-full px-6 py-3 bg-primary-600 text-white text-center rounded-full font-semibold hover:bg-primary-700 transition-colors mt-4"
-            >
-              Start a project
-            </a>
+            </div>
           </nav>
         </div>
       )}

@@ -52,16 +52,16 @@ export default {
       colors: {
         // Primary Brand Colors (Reseda Green)
         primary: {
-          50: '#f3f6f3',
-          100: '#e3e9e3',
-          200: '#c7d4c7',
-          300: '#a3b9a3',
-          400: '#7e9b7e',
-          500: '#5F755E', // Main brand color
-          600: '#4d5e4c',
-          700: '#3e4a3d',
-          800: '#333d33',
-          900: '#2b322b',
+          50: '#f0f4ef',
+          100: '#dde7dc',
+          200: '#bfd0bd',
+          300: '#96b092',
+          400: '#6f906e',
+          500: '#4f7453',
+          600: '#3b5d42',
+          700: '#2e4a35',
+          800: '#243b2b',
+          900: '#18291e',
         },
         
         // Accent Colors (Satin Sheen Gold)
@@ -71,7 +71,7 @@ export default {
           200: '#f8dda8',
           300: '#f4c571',
           400: '#efa548',
-          500: '#C49A45', // Accent gold
+          500: '#B98436', // Accent ochre
           600: '#a67d2d',
           700: '#885f27',
           800: '#714d26',
@@ -94,16 +94,16 @@ export default {
         
         // Text Colors
         text: {
-          primary: '#626155',   // Ebony
-          secondary: '#57604F', // Warm gray-green (replaced Payne's Gray #445E69 - read too blue/turquoise)
-          muted: '#686d63',
+          primary: '#182019',
+          secondary: '#465047',
+          muted: '#687169',
         },
         
         // Background Colors
         background: {
-          primary: '#E9E2D8',   // Alabaster
-          secondary: '#EDDDC0', // Dutch White
-          card: '#DDE3E2',      // Platinum
+          primary: '#F7F4EC',
+          secondary: '#E9E2D5',
+          card: '#E2E9E1',
         },
       },
       

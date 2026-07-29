@@ -31,18 +31,18 @@ describe('Data Structure Validation - Service Tiers', () => {
     })
   })
 
-  it('should have limitations array for starter tier', () => {
-    const starterTier = serviceTiers.find(tier => tier.id === 'starter')
-    expect(starterTier).toBeDefined()
-    expect(starterTier?.limitations).toBeDefined()
-    expect(Array.isArray(starterTier?.limitations)).toBe(true)
+  it('should have limitations array for Launch tier', () => {
+    const launchTier = serviceTiers.find(tier => tier.id === 'launch')
+    expect(launchTier).toBeDefined()
+    expect(launchTier?.limitations).toBeDefined()
+    expect(Array.isArray(launchTier?.limitations)).toBe(true)
   })
 
-  it('should have popular flag only on foundation tier', () => {
-    const foundationTier = serviceTiers.find(tier => tier.id === 'foundation')
-    const otherTiers = serviceTiers.filter(tier => tier.id !== 'foundation')
+  it('should have popular flag only on Core tier', () => {
+    const coreTier = serviceTiers.find(tier => tier.id === 'core')
+    const otherTiers = serviceTiers.filter(tier => tier.id !== 'core')
     
-    expect(foundationTier?.popular).toBe(true)
+    expect(coreTier?.popular).toBe(true)
     otherTiers.forEach(tier => {
       expect(tier.popular).toBeFalsy()
     })
@@ -153,10 +153,9 @@ describe('Data Structure Validation - Work Projects', () => {
 
 describe('Data Structure Validation - Cross-Reference', () => {
   it('should have consistent service tier count', () => {
-    // Should have 4 tiers: starter, foundation, growth, market-leader
-    expect(serviceTiers.length).toBe(4)
+    expect(serviceTiers.length).toBe(3)
     
-    const expectedIds = ['starter', 'foundation', 'growth', 'market-leader']
+    const expectedIds = ['launch', 'core', 'custom']
     const actualIds = serviceTiers.map(tier => tier.id)
     
     expectedIds.forEach(id => {

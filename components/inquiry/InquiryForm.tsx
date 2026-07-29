@@ -73,6 +73,7 @@ const inputBase =
   'w-full min-h-12 rounded-xl border border-nature-200 bg-white px-4 py-3 font-body text-text-primary placeholder:text-text-muted focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600/20 transition-colors';
 
 export function InquiryForm() {
+  const [step, setStep] = useState<1 | 2>(1);
   const [data, setData] = useState<InquiryFormData>(initialFormData);
   const [errors, setErrors] = useState<Partial<Record<keyof InquiryFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -105,6 +106,10 @@ export function InquiryForm() {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (step === 1) {
+      if (validate()) setStep(2);
+      return;
+    }
     if (submitGuard.current || isSubmitting || !validate()) return;
 
     const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
@@ -175,8 +180,14 @@ export function InquiryForm() {
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-10 pb-6 pt-4 md:pt-6">
-      <FormSection title="Your details" description="Only your name and email are required.">
+    <form onSubmit={handleSubmit} className="border border-primary-900/20 bg-white p-6 md:p-10">
+      <div className="mb-8 flex items-center justify-between border-b border-primary-900/15 pb-4">
+        <p className="eyebrow text-primary-700">Project brief</p>
+        <p className="text-xs font-bold text-text-muted">Step {step} of 2</p>
+      </div>
+
+      {step === 1 && (
+      <FormSection title="Start with the basics" description="Name, email, and business. That is enough to begin.">
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <Label htmlFor="inquiry-name" required>Name</Label>
@@ -224,24 +235,36 @@ export function InquiryForm() {
               autoComplete="organization"
             />
           </div>
-
-          <div>
-            <Label htmlFor="inquiry-current-website-url">Current website</Label>
-            <input
-              id="inquiry-current-website-url"
-              type="url"
-              name="currentWebsiteUrl"
-              value={data.currentWebsiteUrl}
-              onChange={update('currentWebsiteUrl')}
-              className={inputBase}
-              placeholder="https://"
-              inputMode="url"
-            />
-          </div>
         </div>
+        <button
+          type="button"
+          onClick={() => {
+            if (validate()) setStep(2);
+          }}
+          className="mt-7 inline-flex min-h-12 items-center gap-2 rounded-[0.35rem] bg-primary-900 px-6 py-3 font-bold text-white"
+        >
+          Continue
+          <ArrowRight className="h-4 w-4" />
+        </button>
       </FormSection>
+      )}
 
+      {step === 2 && (
+      <div className="space-y-10">
       <FormSection title="The project" description="Best guesses are fine. We will clarify the details together.">
+        <div>
+          <Label htmlFor="inquiry-current-website-url">Current website</Label>
+          <input
+            id="inquiry-current-website-url"
+            type="url"
+            name="currentWebsiteUrl"
+            value={data.currentWebsiteUrl}
+            onChange={update('currentWebsiteUrl')}
+            className={inputBase}
+            placeholder="https://"
+            inputMode="url"
+          />
+        </div>
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <Label htmlFor="inquiry-project-type">What do you need?</Label>
@@ -302,15 +325,26 @@ export function InquiryForm() {
       </FormSection>
 
       <div className="border-t border-nature-200 pt-7">
-        <Button type="submit" variant="primary" size="lg" className="min-h-12 w-full sm:w-auto" disabled={isSubmitting}>
-          {isSubmitting ? 'Sending…' : 'Send project details'}
-        </Button>
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <button
+            type="button"
+            onClick={() => setStep(1)}
+            className="min-h-12 rounded-[0.35rem] border border-primary-900/25 px-6 py-3 font-bold text-primary-900"
+          >
+            Back
+          </button>
+          <Button type="submit" variant="primary" size="lg" className="min-h-12 w-full rounded-[0.35rem] sm:w-auto" disabled={isSubmitting}>
+            {isSubmitting ? 'Sending…' : 'Send project details'}
+          </Button>
+        </div>
         <p className="mt-4 flex items-start gap-2 text-sm text-text-muted">
           <LockKeyhole className="mt-0.5 h-4 w-4 flex-none" />
           <span>We use these details only to respond to your inquiry. Read <a href="/how-we-handle-your-data" className="font-semibold text-primary-700 underline underline-offset-2">how we handle your data</a>.</span>
         </p>
         {isSubmitting && <p className="mt-2 text-sm text-text-muted">Keep this page open while the form sends.</p>}
       </div>
+      </div>
+      )}
     </form>
   );
 }
