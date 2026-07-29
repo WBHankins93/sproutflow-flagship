@@ -1,127 +1,66 @@
-// components/sections/HeroSection.tsx
-'use client';
-
-import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { ArrowRight, MapPin, UserRound, CheckCircle2 } from 'lucide-react';
-import { getImageUrl } from '@/lib/blob-images';
+import Link from 'next/link';
+import { ArrowDownRight, ArrowRight, MapPin } from 'lucide-react';
 
 export default function HeroSection() {
   return (
-    <>
-      {/* Full-Screen Image Hero */}
-      <section className="relative flex min-h-[calc(100svh-4rem)] items-center justify-center overflow-hidden md:min-h-screen">
-        
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image 
-            src={getImageUrl('sprout-hero.jpg')} 
-            alt="Growing seedling representing business growth" 
-            fill
-            className="object-cover"
-            priority
-            quality={90}
-          />
-          {/* Sophisticated gradient overlay for better text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/50"></div>
-          {/* Additional vignette for depth */}
-          <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/30"></div>
-        </div>
-
-        {/* Hero Content - Centered, with vertical padding so badges and the scroll
-            indicator never touch the header or the section below on any viewport */}
-        <div className="relative z-10 mx-auto max-w-6xl px-4 py-12 text-center sm:py-16 md:px-8 md:py-24">
-          
-          {/* Trust Badges - Floating above headline */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-6 flex flex-wrap justify-center gap-2 md:mb-12 md:gap-4"
-          >
-            <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/95 px-3 py-2 shadow-lg backdrop-blur-md md:px-4">
-              <MapPin className="w-4 h-4 text-accent-600" />
-              <span className="text-xs font-semibold text-gray-800 sm:text-sm md:text-base">New Orleans based</span>
-            </div>
-            <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/95 px-3 py-2 shadow-lg backdrop-blur-md md:px-4">
-              <UserRound className="w-4 h-4 text-primary-600" />
-              <span className="text-xs font-semibold text-gray-800 sm:text-sm md:text-base">Founder-led from start to launch</span>
-            </div>
-            {/* <div className="flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg border border-white/20">
-              <span className="text-blue-600 text-lg">📈</span>
-              <span className="font-semibold text-gray-800 text-sm md:text-base">$750-$5K Investment</span>
-            </div> */}
-          </motion.div>
-
-          {/* Main Headline */}
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mx-auto mb-5 max-w-[22rem] text-3xl font-bold leading-[1.08] text-white sm:max-w-2xl sm:text-4xl md:mb-8 md:max-w-full md:text-6xl lg:text-7xl"
-            style={{
-              textShadow: '4px 4px 20px rgba(0,0,0,0.9), 2px 2px 10px rgba(0,0,0,0.8), 0 0 40px rgba(0,0,0,0.5)'
-            }}
-          >
-            Websites that win the right clients—and systems that make growth easier.
-          </motion.h1>
-
-          {/* Value Proposition */}
-          <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="mx-auto mb-8 max-w-[21rem] text-base font-semibold leading-relaxed text-white sm:max-w-2xl sm:text-lg md:mb-10 md:max-w-3xl md:text-xl lg:text-2xl"
-            style={{
-              textShadow: '3px 3px 12px rgba(0,0,0,0.9), 1px 1px 6px rgba(0,0,0,0.8)'
-            }}
-          >
-            Sproutflow designs and builds custom websites, CRMs, admin tools, and automation for small businesses. One partner from the first strategy call through launch and support.
-          </motion.p>
-
-          {/* Primary CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="mb-8 md:mb-12"
-          >
-            <a
+    <section className="paper-grain relative overflow-hidden border-b border-primary-900/15 bg-[#f7f4ec]">
+      <div className="mx-auto grid min-h-[650px] max-w-[90rem] items-center gap-12 px-5 py-16 md:px-8 md:py-24 lg:min-h-[720px] lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <div className="relative z-10 min-w-0">
+          <p className="eyebrow mb-6 flex items-center gap-2 text-primary-700">
+            <MapPin className="h-3.5 w-3.5" />
+            New Orleans · Founder-led
+          </p>
+          <h1 className="max-w-[12ch] text-[clamp(3.4rem,7.5vw,7.5rem)] leading-[0.89] text-primary-900">
+            Websites that win the <em className="font-normal text-primary-600">right</em> clients.
+          </h1>
+          <p className="mt-8 max-w-[39rem] text-lg leading-relaxed text-text-secondary md:text-xl">
+            Strategy, copy, design, and development for small businesses ready to look as good as the work they do.
+          </p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <Link
               href="/inquiry"
-              className="group inline-flex w-full max-w-xs items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-base font-bold text-text-primary shadow-2xl transition-all duration-300 hover:scale-105 hover:shadow-3xl sm:w-auto md:px-14 md:py-5 md:text-xl"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[0.35rem] bg-primary-900 px-6 py-3 font-bold text-white hover:bg-primary-700"
             >
               Tell us about your project
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-            </a>
-            <p
-              className="mt-5 text-base md:text-lg text-white/95 font-medium"
-              style={{ textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/case-studies"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[0.35rem] border border-primary-900/35 px-6 py-3 font-bold text-primary-900 hover:bg-white/60"
             >
-              Takes 3–5 minutes. We reply within one business day.
-            </p>
-            <div className="mx-auto mt-6 flex max-w-xs flex-col items-start gap-2 text-left text-sm text-white/95 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:text-center">
-              {['Win more qualified inquiries', 'Cut repeat admin work', 'Own what we build'].map((point) => (
-                <div key={point} className="inline-flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary-200" />
-                  <span>{point}</span>
-                </div>
-              ))}
-            </div>
-            <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-sm text-white/90">
-              <a href="/case-studies" className="hover:text-white underline underline-offset-4">
-                See client results
-              </a>
-              <span aria-hidden>•</span>
-              <a href="/work" className="hover:text-white underline underline-offset-4">
-                View our work
-              </a>
-            </div>
-          </motion.div>
-
+              See client results
+              <ArrowDownRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <p className="mt-4 text-sm text-text-muted">
+            About five minutes. Ben replies within one business day.
+          </p>
         </div>
-      </section>
 
-      
-    </>
+        <div className="relative mx-auto hidden w-full min-w-0 max-w-3xl pb-12 lg:block lg:pb-0">
+          <div className="absolute -right-16 -top-12 h-64 w-64 rounded-full border border-primary-700/20" />
+          <div className="absolute -right-5 -top-1 h-40 w-40 rounded-full bg-[#d9a558]" />
+          <div className="absolute -left-6 top-16 h-52 w-52 rounded-full bg-[#c7d9de]" />
+          <div className="relative ml-auto aspect-[1.25] w-[92%] overflow-hidden border border-primary-900/20 bg-primary-900 shadow-[18px_22px_0_rgba(40,69,47,0.12)]">
+            <Image
+              src="/images/nealy-case-study.png"
+              alt="Nealy Event Decor website designed and built by Sproutflow Studio"
+              fill
+              className="object-cover object-center"
+              priority
+              sizes="(max-width: 1024px) 92vw, 52vw"
+            />
+          </div>
+          <div className="absolute -bottom-2 left-0 max-w-[17rem] border border-primary-900/20 bg-[#f7f4ec] p-5 shadow-lg">
+            <p className="eyebrow text-primary-700">Recent work</p>
+            <p className="mt-2 font-display text-2xl leading-tight text-primary-900">Nealy Event Decor</p>
+            <p className="mt-2 text-sm leading-relaxed text-text-secondary">
+              A custom catalog, gallery, wishlist, and inquiry path—built around how clients actually plan an event.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }

@@ -1,57 +1,39 @@
-// components/sections/TrustBarSection.tsx - Client-attributed results bar
-'use client';
-
-import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import { Container } from '../layout/StudioLayout';
+import { ArrowUpRight } from 'lucide-react';
 
 const results = [
-  {
-    client: 'Second Line Psychiatry',
-    result: '50% more qualified inquiries',
-    href: '/case-studies/second-line-psychiatry',
-  },
-  {
-    client: 'NOLA Pool Solutions',
-    result: '30% customer acquisition growth',
-    href: '/case-studies/nola-pool-solutions',
-  },
-  {
-    // Estimate approved by Ben (June 2026). Adjust here and in data/caseStudies.ts
-    // if the client reports a different number.
-    client: 'Nealy Events',
-    result: '2x consultation requests',
-    href: '/case-studies/nealy-events',
-  },
+  { metric: '50%', label: 'more qualified inquiries', client: 'Second Line Psychiatry', href: '/case-studies/second-line-psychiatry' },
+  { metric: '30%', label: 'customer acquisition growth', client: 'NOLA Pool Solutions', href: '/case-studies/nola-pool-solutions' },
+  { metric: '2×', label: 'consultation requests', client: 'Nealy Events', href: '/case-studies/nealy-events' },
 ];
 
 export default function TrustBarSection() {
   return (
-    <section className="relative bg-primary-800 py-10 md:py-12">
-      <Container>
-        <div className="grid gap-6 md:grid-cols-3 md:gap-8">
-          {results.map((item, index) => (
-            <motion.div
-              key={item.client}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Link href={item.href} className="group block text-center md:text-left">
-                <p className="text-2xl md:text-3xl font-display font-bold text-white mb-1">
-                  {item.result}
-                </p>
-                <p className="inline-flex items-center gap-2 text-sm font-medium text-white/70 group-hover:text-white transition-colors">
-                  {item.client}
-                  <ArrowRight className="w-3.5 h-3.5 opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                </p>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </Container>
+    <section className="bg-white" aria-label="Client results">
+      <div className="mx-auto grid max-w-[90rem] border-x border-primary-900/15 lg:grid-cols-[1fr_1fr_1fr_1.35fr]">
+        {results.map((result) => (
+          <Link
+            key={result.client}
+            href={result.href}
+            className="group border-b border-primary-900/15 p-6 hover:bg-primary-50 lg:border-b-0 lg:border-r md:p-8"
+          >
+            <p className="font-body text-4xl font-bold tabular-nums text-primary-900">{result.metric}</p>
+            <p className="mt-1 text-sm font-semibold text-primary-900">{result.label}</p>
+            <p className="mt-3 inline-flex items-center gap-1 text-xs text-text-muted">
+              {result.client}
+              <ArrowUpRight className="h-3 w-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </p>
+          </Link>
+        ))}
+        <figure className="bg-primary-900 p-7 text-white md:p-8">
+          <blockquote className="font-display text-xl leading-snug md:text-2xl">
+            “We were working through referrals only. Now we see a tremendous growth of incoming clients.”
+          </blockquote>
+          <figcaption className="mt-4 text-xs leading-relaxed text-white/60">
+            Dr. Lauryn Richard, PMHNP · Second Line Psychiatry
+          </figcaption>
+        </figure>
+      </div>
     </section>
   );
 }

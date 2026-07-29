@@ -1,9 +1,9 @@
 // data/content.ts - UPDATED (Streamlined add-ons section)
 
 export const heroContent = {
-  headline: "Websites that win the right clients—and systems that make growth easier",
-  subheading: "Sproutflow designs and builds custom websites, CRMs, admin tools, and automation for small businesses.",
-  description: "One founder-led partner from the first strategy call through launch and support. Clear scope and a fixed quote before work begins.",
+  headline: "Websites that win the right clients.",
+  subheading: "Strategy, copy, design, and development for small businesses ready to look as good as the work they do.",
+  description: "Founder-led from the first conversation through launch and support. Clear scope and a fixed quote before work begins.",
   primaryCTA: "Tell us about your project",
   secondaryCTA: "See client results"
 };
@@ -29,75 +29,59 @@ export const aboutContent = {
 };
 
 export const servicesContent = {
-  headline: "Three service levels, one standard of excellence",
-  description: "Every project receives the same strategic approach and technical precision, scaled to match your business stage and requirements. Frame tiers around client readiness and investment appetite.",
+  headline: "A clear place to start",
+  description: "Published starting prices, defined scope, and a fixed quote before work begins.",
   
   tiers: [
     {
-      id: 'foundation',
-      name: "Foundation",
-      priceRange: "$2,000 - $2,800",
-      timeline: "2-3 weeks",
-      ideal: "New businesses or rebrands needing validated presence",
-      description: "Strategic discovery process that ensures your website aligns with business goals. Custom solutions rather than template installations. A foundation for long-term growth, not just online presence.",
+      id: 'launch',
+      name: "Launch",
+      priceRange: "$500 fixed + Care",
+      timeline: "5-7 business days",
+      ideal: "Solo owners who need a simple, credible place to be found online",
+      description: "A productized three-page website on a proven template foundation.",
       businessOutcomes: [
-        "Validated professional market presence",
-        "Clear customer conversion pathway aligned with business goals",
-        "Foundation for digital marketing initiatives",
-        "Strategic architecture that scales with growth"
+        "Create a credible online presence",
+        "Give customers a clear way to make contact"
       ],
       technicalIncludes: [
-        "Semi-custom design aligned with your business goals",
-        "Mobile optimization and performance tuning",
-        "SEO foundation with keyword research",
-        "Basic CMS: edit pages, images, blog posts, and metadata",
-        "Clear customer conversion pathways",
-        "2-hour strategy session on business goals"
+        "Up to three pages",
+        "Google Business Profile setup",
+        "Mobile, contact form, and basic SEO"
       ]
     },
     {
-      id: 'growth',
-      name: "Growth",
-      priceRange: "$3,500 - $5,500",
-      timeline: "4-6 weeks",
-      ideal: "Established businesses ready to compete for market share",
-      description: "Comprehensive digital presence that positions your business as the clear choice in your market. Custom design reflecting brand personality with conversion optimization and professional copywriting.",
+      id: 'core',
+      name: "Core",
+      priceRange: "Starting at $2,000",
+      timeline: "2-4 weeks",
+      ideal: "Established small businesses that need a stronger lead path",
+      description: "Semi-custom design, content management, SEO foundations, and conversion tracking.",
       businessOutcomes: [
-        "Clear market differentiation from competitors",
-        "Improved customer acquisition metrics",
-        "Enhanced brand perception and authority",
-        "Scalable platform for business expansion",
-        "Tracked revenue growth from digital presence"
+        "Make the business easier to understand and trust",
+        "Turn more visits into qualified inquiries"
       ],
       technicalIncludes: [
-        "Fully custom responsive design",
-        "Conversion-focused user experience",
-        "Professional copywriting for key pages",
-        "Comprehensive SEO strategy with competitive analysis",
-        "Blog integration with content strategy"
+        "Semi-custom responsive design",
+        "Content management system",
+        "SEO foundation and conversion tracking"
       ]
     },
     {
-      id: 'market-leader',
-      name: "Market Leader",
-      priceRange: "$7,500+",
-      timeline: "8-12 weeks",
-      ideal: "Companies where the website is a core growth engine driving measurable revenue",
-      description: "Fully custom digital platform designed to solve specific business challenges and generate measurable competitive advantage. This tier goes beyond website design to create a scalable digital foundation where marketing, customer acquisition, and operations work together to drive revenue.",
+      id: 'custom',
+      name: "Custom",
+      priceRange: "Starting at $4,500",
+      timeline: "4-8+ weeks",
+      ideal: "Businesses that need custom copy, original interaction, catalogs, or integrations",
+      description: "Fully custom design and copy with application features, integrations, and motion as the scope requires.",
       businessOutcomes: [
-        "Revenue-focused digital architecture built for measurable growth",
-        "Advanced conversion optimization across the full customer journey",
-        "Custom integrations connecting your website to core business systems",
-        "Scalable platform designed for long-term competitive advantage",
-        "Unified digital foundation where marketing and operations drive revenue"
+        "Stand apart in a crowded market",
+        "Support a more complex buyer journey or operating model"
       ],
       technicalIncludes: [
-        "Revenue-focused digital architecture built around your business model",
-        "Fully custom design and interactive elements",
-        "Full content platform with CRM integrations, marketing automation, and multi-user workflows",
-        "Advanced SEO with technical implementations",
-        "Full-site professional copywriting",
-        "Custom integrations with your business systems (CRM, email marketing, operations)"
+        "Fully custom responsive design and copy",
+        "Catalogs and application features",
+        "Integrations and custom workflows"
       ]
     }
   ],

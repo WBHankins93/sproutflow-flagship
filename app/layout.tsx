@@ -3,15 +3,15 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import StructuredData from "@/components/StructuredData";
-import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google";
+import { Newsreader, Schibsted_Grotesk } from "next/font/google";
 
-const bricolage = Bricolage_Grotesque({
+const newsreader = Newsreader({
   subsets: ["latin"],
   variable: "--font-heading",
   display: "swap",
 });
 
-const sourceSans = Source_Sans_3({
+const schibsted = Schibsted_Grotesk({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -25,19 +25,7 @@ export const metadata: Metadata = {
     default: "Sproutflow Studio | Web Design & Custom Business Software in New Orleans, LA",
     template: "%s | Sproutflow Studio - New Orleans Web Design"
   },
-  description: "Custom websites and the business systems behind them: web design, admin tools, CRMs, and automation for small businesses in New Orleans, LA.",
-  keywords: [
-    "web design New Orleans",
-    "website design New Orleans",
-    "custom website development New Orleans",
-    "small business web design",
-    "custom software development New Orleans",
-    "CRM systems small business",
-    "workflow automation New Orleans",
-    "New Orleans web designer",
-    "local web design",
-    "business website New Orleans"
-  ],
+  description: "When the website works, make the business behind it work better. Founder-led websites, internal tools, and workflow automation from New Orleans.",
   authors: [{ name: "Sproutflow Studio" }],
   creator: "Sproutflow Studio",
   publisher: "Sproutflow Studio",
@@ -52,7 +40,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Sproutflow Studio",
     title: "Sproutflow Studio | Web Design & Custom Business Software in New Orleans, LA",
-    description: "Custom websites and the business systems behind them. Web design, admin tools, CRMs, and automation for small businesses in New Orleans, LA.",
+    description: "When the website works, make the business behind it work better. Founder-led websites and business systems from New Orleans.",
     images: [
       {
         url: `${siteUrl}/images/logo/main-logo-Photoroom.png`,
@@ -65,7 +53,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Sproutflow Studio | Web Design & Custom Business Software in New Orleans, LA",
-    description: "Custom websites and the business systems behind them. Web design, admin tools, CRMs, and automation for small businesses in New Orleans, LA.",
+    description: "Founder-led websites and business systems from New Orleans.",
     images: [`${siteUrl}/images/logo/main-logo-Photoroom.png`],
   },
   robots: {
@@ -96,11 +84,12 @@ export default function RootLayout({
     // scroll position on route changes - fixes pages loading scrolled to the bottom
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
       <body
-        className={`${bricolage.variable} ${sourceSans.variable} antialiased font-body`}
+        className={`${newsreader.variable} ${schibsted.variable} antialiased font-body`}
       >
+        <a className="skip-link" href="#main-content">Skip to content</a>
         <StructuredData />
         <Header />
-        <main>
+        <main id="main-content">
           {children}
         </main>
       </body>
