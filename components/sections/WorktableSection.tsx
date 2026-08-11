@@ -49,7 +49,7 @@ export default function WorktableSection() {
               Each project starts with a business problem, not a visual trend. The finished work is live, attributable, and built around a useful customer action.
             </p>
             <Link href="/work" className="inline-flex min-h-11 items-center gap-2 border-b border-primary-700 pb-1 font-semibold text-primary-800 hover:text-primary-600">
-              See all client work
+              See the work and results
               <ArrowUpRight className="h-4 w-4" />
             </Link>
           </div>

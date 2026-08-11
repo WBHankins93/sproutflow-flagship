@@ -9,6 +9,7 @@ import { render, screen } from '@testing-library/react'
 import Header from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import HeroSection from '@/components/sections/HeroSection'
+import WorkPage from '@/app/work/page'
 
 describe('Component Rendering - Header', () => {
   it('should render header with logo', () => {
@@ -19,10 +20,8 @@ describe('Component Rendering - Header', () => {
 
   it('should render navigation links', () => {
     render(<Header />)
-    expect(screen.getByText('How we work')).toBeInTheDocument()
     expect(screen.getByText('Services')).toBeInTheDocument()
     expect(screen.getByText('Work')).toBeInTheDocument()
-    expect(screen.getByText('Results')).toBeInTheDocument()
     expect(screen.getByText('About')).toBeInTheDocument()
   })
 
@@ -42,9 +41,8 @@ describe('Component Rendering - Footer', () => {
   it('should render explore links', () => {
     render(<Footer />)
     expect(screen.getByText('Services')).toBeInTheDocument()
-    expect(screen.getByText('Portfolio')).toBeInTheDocument()
-    expect(screen.getByText('Case Studies')).toBeInTheDocument()
-    expect(screen.getByText('How We Work')).toBeInTheDocument()
+    expect(screen.getByText('Work & Results')).toBeInTheDocument()
+    expect(screen.getByText('About')).toBeInTheDocument()
     expect(screen.getByText('How We Handle Your Data')).toBeInTheDocument()
     expect(screen.getByText('FAQ')).toBeInTheDocument()
   })
@@ -90,5 +88,17 @@ describe('Component Rendering - Conditional Logic', () => {
     // Test that components don't crash with empty props
     const { container } = render(<Header />)
     expect(container).toBeTruthy()
+  })
+})
+
+describe('Component Rendering - Unified Work Page', () => {
+  it('should present client work and results in one destination', () => {
+    const { container } = render(<WorkPage />)
+
+    expect(screen.getByText('One place for the work and what changed.')).toBeInTheDocument()
+    expect(screen.getByText('50%')).toBeInTheDocument()
+    expect(screen.getByText('30%')).toBeInTheDocument()
+    expect(container.querySelector('a[href="/case-studies/second-line-psychiatry"]')).toBeInTheDocument()
+    expect(container.querySelector('section[aria-label="Client work and results"]')).toBeInTheDocument()
   })
 })

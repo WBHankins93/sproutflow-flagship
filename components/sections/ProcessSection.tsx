@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
 import { Container } from '../layout/StudioLayout';
 
 const processSteps = [
@@ -38,10 +36,9 @@ export default function ProcessSection() {
             <p className="mt-6 max-w-md text-lg leading-relaxed text-text-secondary">
               You always know what is happening, what we need from you, and what comes next.
             </p>
-            <Link href="/how-we-work" className="group mt-8 inline-flex min-h-11 items-center gap-2 border-b border-primary-700 pb-1 font-semibold text-primary-800 hover:text-primary-600">
-              See the full process
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
+            <p className="mt-8 max-w-sm border-l-2 border-accent-500 pl-4 text-sm font-semibold leading-relaxed text-primary-800">
+              A fixed quote before work begins. Written approvals at the decisions that matter. Direct access to Ben throughout.
+            </p>
           </div>
 
           <ol className="border-t border-primary-900/20 lg:col-span-7 lg:col-start-6">

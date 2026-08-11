@@ -22,9 +22,7 @@ export default function Header() {
 
   const navLinks: NavLink[] = [
     { label: 'Services', href: '#services', type: 'anchor' },
-    { label: 'How we work', href: '/how-we-work', type: 'route' },
     { label: 'Work', href: '/work', type: 'route' },
-    { label: 'Results', href: '/case-studies', type: 'route' },
     { label: 'About', href: '#about', type: 'anchor' },
   ];
 
@@ -90,7 +88,10 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
             {navLinks.map((link) => {
-              const isActive = link.type === 'route' && pathname === link.href;
+              const isActive = link.type === 'route' && (
+                pathname === link.href ||
+                (link.href === '/work' && pathname.startsWith('/case-studies/'))
+              );
               return (
               <a
                 key={link.href}
@@ -123,7 +124,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button 
-            className="lg:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-lg hover:bg-gray-100 transition-colors lg:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
@@ -150,7 +151,7 @@ export default function Header() {
                   e.preventDefault();
                   handleNavClick(link);
                 }}
-                className="block px-4 py-2 text-base font-medium text-text-secondary hover:text-primary-600 hover:bg-nature-50 rounded-lg transition-colors"
+                className="flex min-h-11 items-center rounded-lg px-4 py-2 text-base font-medium text-text-secondary hover:bg-nature-50 hover:text-primary-600 transition-colors"
               >
                 {link.label}
               </a>

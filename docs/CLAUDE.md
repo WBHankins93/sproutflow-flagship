@@ -10,7 +10,7 @@ Sproutflow Studio flagship marketing site built with:
 - TypeScript 5
 - Tailwind CSS 3
 
-Primary purpose: marketing site + service/pricing showcase + inquiry intake flow.
+Primary purpose: proof-led studio marketing site + service paths + inquiry intake flow.
 
 ## Commands
 
@@ -31,10 +31,10 @@ npm run get-blob-url   # Print NEXT_PUBLIC_BLOB_STORE_URL from Blob store
 
 Pages under `app/`:
 - `/` (`app/page.tsx`)
-- `/work` (`app/work/page.tsx`)
-- `/how-we-work` (`app/how-we-work/page.tsx`)
-- `/case-studies` (`app/case-studies/page.tsx`)
-- `/case-studies/nealy-events` (`app/case-studies/nealy-events/page.tsx`)
+- `/work` (`app/work/page.tsx`) - unified portfolio, results, and case-study discovery
+- `/how-we-work` redirects to the concise homepage process
+- `/case-studies` redirects to `/work`
+- `/case-studies/[project]` - individual project stories kept for deeper proof and SEO
 - `/inquiry` (`app/inquiry/page.tsx`) - primary contact + project intake page
 
 Global route metadata/sitemap:
@@ -58,7 +58,7 @@ Global route metadata/sitemap:
 
 ### Important implementation details
 - `app/layout.tsx` already renders `<Header />` and wraps route content with `<main>`. Route pages should generally return a fragment and include `<Footer />` themselves.
-- `Header` CTA "Let's Talk" routes to `/inquiry` on desktop and mobile.
+- `Header` CTA "Start a project" routes to `/inquiry` on desktop and mobile.
 - Inquiry form submits directly to Formspree from the client and shows an in-page success state.
 - `components/layout/StudioLayout.tsx` `Button` supports `type` and `disabled` (used by form submit state).
 
@@ -78,7 +78,7 @@ Global route metadata/sitemap:
 
 - Tailwind config: `tailwind.config.js`
 - Global styles: `app/globals.css`
-- Fonts: DM Serif Display (headings), DM Sans (body) loaded in `app/layout.tsx`
+- Fonts: Bricolage Grotesk (display), DM Sans (body) loaded in `app/layout.tsx`
 - Core brand colors:
   - Primary: `#5F755E`
   - Accent: `#C49A45`
