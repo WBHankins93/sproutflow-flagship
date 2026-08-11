@@ -238,6 +238,23 @@ describe('SEO Metadata - Sitemap', () => {
   })
 })
 
+describe('SEO Metadata - Legacy Redirects', () => {
+  it('should permanently redirect retired index routes', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const nextConfig = require('../../next.config.js')
+    const redirects = await nextConfig.redirects()
+    const howWeWorkRedirect = redirects.find((redirect: any) => redirect.source === '/how-we-work')
+    const caseStudiesRedirect = redirects.find((redirect: any) => redirect.source === '/case-studies')
+
+    expect(howWeWorkRedirect).toBeDefined()
+    expect(howWeWorkRedirect.destination).toBe('/#process')
+    expect(howWeWorkRedirect.permanent).toBe(true)
+    expect(caseStudiesRedirect).toBeDefined()
+    expect(caseStudiesRedirect.destination).toBe('/work')
+    expect(caseStudiesRedirect.permanent).toBe(true)
+  })
+})
+
 describe('SEO Metadata - Robots.txt', () => {
   it('should have robots export', async () => {
     const robots = await import('@/app/robots')
