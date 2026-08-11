@@ -62,7 +62,7 @@ export const servicePaths: ServicePath[] = [
   {
     id: 'growth-support',
     eyebrow: 'Growth and support',
-    title: 'Keep improving after launch',
+    title: 'Ongoing growth and support',
     outcome: 'Protect the work you have already done and make the next improvement with evidence.',
     description:
       'Ongoing help stays optional. Add only the maintenance, content, search, or conversion work your business needs as it changes.',
