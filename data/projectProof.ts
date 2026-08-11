@@ -65,4 +65,17 @@ export const projectProof: ProjectProof[] = [
     canvasColor: '#E7E0D7',
     inkColor: '#2C2119',
   },
+  {
+    id: 'big-butt-association',
+    name: 'Big Butt Association',
+    location: 'Online apparel brand',
+    result: 'Custom Shopify storefront',
+    screenshot: 'work/client-logos/bba-homepage.png',
+    screenshotAlt: 'Big Butt Association Shopify homepage shown inside a browser frame',
+    logo: 'work/client-logos/bekky-no-background.png',
+    href: '/case-studies/big-butt-association',
+    liveUrl: 'https://bigbuttassociation.com/',
+    canvasColor: '#F4D8E9',
+    inkColor: '#5E2147',
+  },
 ];

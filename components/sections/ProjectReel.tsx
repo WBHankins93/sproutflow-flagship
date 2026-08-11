@@ -92,7 +92,7 @@ export default function ProjectReel() {
       </div>
 
       <div className="mt-4 grid grid-cols-[1fr_auto] gap-3">
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4" aria-label="Choose a featured project">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-5" aria-label="Choose a featured project">
           {projectProof.map((project, index) => (
             <button
               key={project.id}
