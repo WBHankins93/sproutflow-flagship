@@ -67,7 +67,7 @@ describe('Component Interactions - ServicesSection Paths', () => {
 
     expect(screen.getByText('Websites that earn trust')).toBeInTheDocument()
     expect(screen.getByText('Systems that remove friction')).toBeInTheDocument()
-    expect(screen.getByText('Keep improving after launch')).toBeInTheDocument()
+    expect(screen.getByText('Ongoing growth and support')).toBeInTheDocument()
   })
 
   it('should have a CTA on each service path routing to the inquiry application', () => {
