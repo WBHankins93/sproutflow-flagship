@@ -28,8 +28,8 @@ function BreadcrumbSchema({ caseStudy }: { caseStudy: CaseStudy }) {
       {
         '@type': 'ListItem',
         position: 2,
-        name: 'Case Studies',
-        item: `${siteUrl}/case-studies`,
+        name: 'Work',
+        item: `${siteUrl}/work`,
       },
       {
         '@type': 'ListItem',
@@ -103,11 +103,11 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 md:px-8 py-4">
           <Link
-            href="/case-studies"
+            href="/work"
             className="inline-flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to case studies
+            Back to all work
           </Link>
         </div>
       </div>
@@ -282,8 +282,8 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
             Start a project
             <ArrowRight className="w-5 h-5" />
           </Link>
-          <Link href="/case-studies" className="text-sm text-gray-600 hover:text-primary-600 transition-colors">
-            Back to all case studies
+          <Link href="/work" className="text-sm text-gray-600 hover:text-primary-600 transition-colors">
+            Back to all work
           </Link>
         </div>
       </section>

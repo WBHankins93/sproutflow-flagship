@@ -37,9 +37,9 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <ServicesSection />
       <WorktableSection />
       <HomeTestimonialsSection />
-      <ServicesSection />
       <ProcessSection />
       <AboutSection />
       <ContactSection />

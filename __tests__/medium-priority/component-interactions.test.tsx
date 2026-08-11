@@ -54,9 +54,7 @@ describe('Component Interactions - Header Mobile Menu', () => {
     fireEvent.click(menuButton)
 
     // Check for navigation links (use getAllByText since they appear in both desktop and mobile nav)
-    expect(screen.getAllByText('How we work').length).toBeGreaterThan(0)
     expect(screen.getAllByText('Work').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Results').length).toBeGreaterThan(0)
     expect(screen.getAllByText('About').length).toBeGreaterThan(0)
   })
 })
@@ -138,8 +136,7 @@ describe('Component Interactions - Navigation Links', () => {
     const workLink = screen.getByText('Work').closest('a')
     expect(workLink).toHaveAttribute('href', '/work')
 
-    const caseStudiesLink = screen.getByText('Results').closest('a')
-    expect(caseStudiesLink).toHaveAttribute('href', '/case-studies')
+    expect(screen.queryByText('Results')).not.toBeInTheDocument()
   })
 })
 

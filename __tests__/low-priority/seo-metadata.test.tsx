@@ -178,6 +178,16 @@ describe('SEO Metadata - Sitemap', () => {
     expect(sitemapData.length).toBeGreaterThan(0)
   })
 
+  it('should keep legacy index routes out of the sitemap', async () => {
+    const sitemap = await import('@/app/sitemap')
+    const sitemapData = sitemap.default()
+    const urls = sitemapData.map((entry: any) => entry.url)
+
+    expect(urls).not.toContain('https://sproutflow-studio.com/how-we-work')
+    expect(urls).not.toContain('https://sproutflow-studio.com/case-studies')
+    expect(urls).toContain('https://sproutflow-studio.com/work')
+  })
+
   it('should have home page in sitemap with highest priority', async () => {
     const sitemap = await import('@/app/sitemap')
     const sitemapData = sitemap.default()

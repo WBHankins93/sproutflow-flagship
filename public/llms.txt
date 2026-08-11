@@ -20,12 +20,10 @@ This is what very few local providers offer, and what extends projects into the 
 - New Orleans metro area and South Louisiana (primary)
 - Remote nationwide (most projects run fully remote)
 
-## Pricing
-- Projects range from $850 to $7,500+
-- Starter and standard custom websites occupy the lower and middle range
-- Custom systems work (CRMs, admin tools, automation) occupies the upper tiers
-- Every project gets a fixed quote before work starts
-- Website care plans (hosting, security, updates) from $200/month
+## Starting a Project
+- Visitors can share what they need and a comfortable budget range without diagnosing the project first
+- Sproutflow recommends a practical scope and provides a fixed quote before work starts
+- Ongoing support is optional and shaped around the client’s actual needs
 
 ## Client Results
 - Second Line Psychiatry (New Orleans telehealth practice): 50% more qualified inquiries after launch, with booking connected to the practice's Google Business profile
@@ -35,9 +33,7 @@ This is what very few local providers offer, and what extends projects into the 
 
 ## Key Pages
 - Home: https://sproutflow-studio.com/
-- Case studies: https://sproutflow-studio.com/case-studies
-- Portfolio of live sites: https://sproutflow-studio.com/work
-- Process: https://sproutflow-studio.com/how-we-work
+- Work, results, and project stories: https://sproutflow-studio.com/work
 - FAQ (pricing, timelines, automation): https://sproutflow-studio.com/faq
 - Start a project: https://sproutflow-studio.com/inquiry
 
