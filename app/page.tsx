@@ -2,8 +2,8 @@
 
 import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
+import CustomerPathSection from '@/components/sections/CustomerPathSection';
 import WorktableSection from '@/components/sections/WorktableSection';
-import HomeTestimonialsSection from '@/components/sections/HomeTestimonialsSection';
 import ProcessSection from '@/components/sections/ProcessSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import AboutSection from '@/components/sections/AboutSection';
@@ -37,9 +37,9 @@ export default function Home() {
   return (
     <>
       <HeroSection />
+      <CustomerPathSection />
       <ServicesSection />
       <WorktableSection />
-      <HomeTestimonialsSection />
       <ProcessSection />
       <AboutSection />
       <ContactSection />

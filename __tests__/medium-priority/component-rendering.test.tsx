@@ -27,7 +27,7 @@ describe('Component Rendering - Header', () => {
 
   it('should render contact CTA button', () => {
     render(<Header />)
-    expect(screen.getByText('Start a project')).toBeInTheDocument()
+    expect(screen.getByText('Tell me about your project')).toBeInTheDocument()
   })
 })
 
@@ -41,7 +41,7 @@ describe('Component Rendering - Footer', () => {
   it('should render explore links', () => {
     render(<Footer />)
     expect(screen.getByText('Services')).toBeInTheDocument()
-    expect(screen.getByText('Work & Results')).toBeInTheDocument()
+    expect(screen.getByText('Work')).toBeInTheDocument()
     expect(screen.getByText('About')).toBeInTheDocument()
     expect(screen.getByText('How We Handle Your Data')).toBeInTheDocument()
     expect(screen.getByText('FAQ')).toBeInTheDocument()
@@ -65,21 +65,21 @@ describe('Component Rendering - HeroSection', () => {
   it('should render hero headline', () => {
     render(<HeroSection />)
     expect(
-      screen.getByText(/Clear websites/i)
+      screen.getByText(/Make it easier for customers to choose you/i)
     ).toBeInTheDocument()
   })
 
   it('should render CTA button linking to the inquiry application', () => {
     render(<HeroSection />)
-    const cta = screen.getByText('Tell us what you need').closest('a')
+    const cta = screen.getByText('Tell me about your project').closest('a')
     expect(cta).toBeInTheDocument()
     expect(cta).toHaveAttribute('href', '/inquiry')
   })
 
   it('should render trust badges', () => {
     render(<HeroSection />)
-    expect(screen.getByText('New Orleans based')).toBeInTheDocument()
-    expect(screen.getByText('Founder-led from first call to launch')).toBeInTheDocument()
+    expect(screen.getByText(/New Orleans studio/i)).toBeInTheDocument()
+    expect(screen.getByText(/Working directly with Ben/i)).toBeInTheDocument()
   })
 })
 
@@ -95,10 +95,10 @@ describe('Component Rendering - Unified Work Page', () => {
   it('should present client work and results in one destination', () => {
     const { container } = render(<WorkPage />)
 
-    expect(screen.getByText('One place for the work and what changed.')).toBeInTheDocument()
-    expect(screen.getByText('50%')).toBeInTheDocument()
-    expect(screen.getByText('30%')).toBeInTheDocument()
+    expect(screen.getByText('What changed, shown with the work.')).toBeInTheDocument()
+    expect(screen.getByText('50% more qualified inquiries')).toBeInTheDocument()
+    expect(screen.getByText('30% customer acquisition growth')).toBeInTheDocument()
     expect(container.querySelector('a[href="/case-studies/second-line-psychiatry"]')).toBeInTheDocument()
-    expect(container.querySelector('section[aria-label="Client work and results"]')).toBeInTheDocument()
+    expect(container.querySelector('section[aria-label="Sproutflow client work"]')).toBeInTheDocument()
   })
 })

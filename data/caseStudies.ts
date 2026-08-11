@@ -115,12 +115,12 @@ export const caseStudies: CaseStudy[] = [
     clientName: 'NOLA Pool Solutions',
     headline: '30% customer acquisition growth, starting from no website at all',
     summary:
-      'NOLA Pool Solutions is a pool maintenance and renovation company serving the New Orleans metro area. The business ran entirely on word of mouth with no website. We built a lead capture site that establishes credibility, pre-qualifies prospects, and books work before a phone call happens. The site went live in three weeks. Customer acquisition grew 30%, the company ranks first in local search for its services, and the calendar now fills further in advance than ever.',
+      'NOLA Pool Solutions is a pool maintenance and renovation company serving the New Orleans metro area. The business ran entirely on word of mouth with no website. We built a lead capture site that establishes credibility, helps prospects choose the right service, and collects the details needed for a quote. The site went live in three weeks, and customer acquisition grew 30%.',
     heroImage: 'work/client-logos/nps-project.png',
     heroStats: [
       { value: '30%', label: 'Customer acquisition growth' },
-      { value: '#1', label: 'Local Google ranking' },
       { value: '3 weeks', label: 'From nothing to live' },
+      { value: 'One path', label: 'Service details flow into a quote request' },
     ],
     problem:
       'All business came through word of mouth and a bare Google Business profile. The owner spent hours on discovery calls with people who were never going to buy, while serious prospects had no way to vet the company before calling. Competitors with websites were winning work on credibility alone.',
@@ -133,8 +133,8 @@ export const caseStudies: CaseStudy[] = [
     ],
     results: [
       { value: '30%', label: 'Growth in customer acquisition' },
-      { value: '#1', label: 'Google ranking for local pool services' },
-      { value: 'Booked', label: 'Calendar filling further in advance than before' },
+      { value: '3 weeks', label: 'From no website to a live customer path' },
+      { value: 'Direct', label: 'Quote details now arrive through one intake flow' },
     ],
     testimonial: {
       quote:
@@ -152,7 +152,7 @@ export const caseStudies: CaseStudy[] = [
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Formspree', 'Resend', 'Vercel'],
     cardImage: 'work/client-logos/nps-project.png',
     cardBlurb:
-      'From zero web presence to a 30% lift in customer acquisition. A lead funnel that pre-qualifies prospects and ranks first in local search.',
+      'From no web presence to a 30% lift in customer acquisition. The new intake flow collects quote details before the first call.',
     cardStats: [
       { value: '30%', label: 'Acquisition growth' },
       { value: '3 wks', label: 'Delivery' },
@@ -168,7 +168,7 @@ export const caseStudies: CaseStudy[] = [
     headline: 'Consultation requests doubled for a luxury event studio',
     summary:
       'Nealy Event Decor creates luxury custom fabrications for high-end events in Dallas: bespoke arches, bars, and premium rentals. We designed and built a website with editorial gallery layouts and an inventory system the team updates themselves. The site launched in six weeks and now presents the brand at the level of the work. Consultation requests have doubled since launch.',
-    heroImage: 'nealy-case-study.png',
+    heroImage: 'work/client-logos/nealy-project.png',
     heroStats: [
       { value: '2x', label: 'Consultation requests since launch' },
       { value: '6 weeks', label: 'Design to launch' },
@@ -209,15 +209,15 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'djn-services',
     clientName: 'DJN Services LLC',
-    headline: '20 years of reliable work, finally winning bookings online',
+    headline: 'A two-week rebuild for a 20-year service business',
     summary:
-      'DJN Services LLC is a veteran-owned welding, hauling, and removal company in North Alabama with more than 20 years in business. Its template website buried that track record. We rebuilt the site around the company’s strongest assets: two decades of work, veteran ownership, and fast response. Delivered in two weeks, the new site captures quotes while the owner is in the field and is already driving more bookings.',
+      'DJN Services LLC is a veteran-owned welding, hauling, and removal company in North Alabama with more than 20 years in business. Its template website buried that track record. We rebuilt the site around two decades of work, veteran ownership, and fast response. The new site launched in two weeks and captures quote details while the owner is in the field.',
     heroImage: 'work/client-logos/djn-new-home-page.png',
     heroImageFit: 'contain',
     heroStats: [
       { value: '20 yrs', label: 'In business before going digital' },
       { value: '2 weeks', label: 'Delivery timeline' },
-      { value: 'More', label: 'Bookings through the new site' },
+      { value: 'Quote form', label: 'Captures leads while the owner is working' },
     ],
     problem:
       'DJN had two decades of reputation in its community and a website that looked two months old. The veteran-owned story was buried, services read as walls of text, and there was no way to capture a lead while the owner was on a job. The online presence did not match the size of the operation, and growth beyond referrals had stalled.',
@@ -228,9 +228,9 @@ export const caseStudies: CaseStudy[] = [
       'Instant email notifications so every inquiry gets a fast response',
     ],
     results: [
-      { value: 'More', label: 'Bookings through the new quote form' },
-      { value: 'Online', label: 'A presence that finally matches 20 years of reputation' },
-      { value: '2 wks', label: 'From outdated template to live, converting site' },
+      { value: '2 weeks', label: 'From outdated template to live website' },
+      { value: '20 years', label: 'Company history now visible before a prospect calls' },
+      { value: 'One form', label: 'Quote details arrive through a defined intake path' },
     ],
     liveUrl: 'https://djnservices.com/',
     beforeAfter: [
@@ -270,7 +270,7 @@ export const caseStudies: CaseStudy[] = [
     cardImage: 'work/client-logos/djn-new-home-page.png',
     cardImageFit: 'contain',
     cardBlurb:
-      '20 years of veteran-owned welding and hauling work, finally represented online. A complete before and after, from basic template to authoritative brand.',
+      'Twenty years of veteran-owned welding and hauling work, finally represented online. The rebuilt site launched in two weeks.',
     cardStats: [
       { value: '20 yrs', label: 'In business' },
       { value: '2 wks', label: 'Delivery' },

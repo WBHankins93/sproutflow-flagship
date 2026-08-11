@@ -1,73 +1,66 @@
-// app/inquiry/page.tsx - Project intake and contact page
-
-import { Container, Section } from '@/components/layout/StudioLayout';
+import { ArrowDown, FileSearch, MessageSquareText, ReceiptText } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
+import { Container } from '@/components/layout/StudioLayout';
 import { InquiryForm } from '@/components/inquiry/InquiryForm';
-import { getImageUrl } from '@/lib/blob-images';
 
 export const metadata = {
-  title: 'Start a Project',
+  title: 'Tell Me About Your Project',
   description:
-    'Start your project with Sproutflow Studio. Share your goals in 3 to 5 minutes and we respond within 24 hours with clear next steps and a path to a fixed quote.',
-  alternates: {
-    canonical: '/inquiry',
-  },
+    'Share what you need with Sproutflow Studio. Only your name and email are required, and you can include a comfortable budget privately.',
+  alternates: { canonical: '/inquiry' },
 };
+
+const nextSteps = [
+  { icon: FileSearch, title: 'I read the details', text: 'Ben reviews every inquiry himself.' },
+  { icon: MessageSquareText, title: 'We talk if useful', text: 'A short call helps clarify the right starting point.' },
+  { icon: ReceiptText, title: 'You get a fixed quote', text: 'Scope, timing, and cost are written down before work starts.' },
+];
 
 export default function InquiryPage() {
   return (
     <>
-      <header className="relative border-b border-nature-200 bg-gradient-to-br from-white via-primary-50/40 to-primary-100/20">
-        <div className="absolute inset-0 -z-10">
-          <div
-            className="h-full w-full bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url(${getImageUrl('project-tree.jpg')})`,
-            }}
-          />
-          <div className="absolute inset-0 bg-white/60" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(95,117,94,0.18),_transparent_55%)] opacity-40" />
-        </div>
-
-        <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-24 md:px-8 md:py-28">
-          <div className="inline-flex items-center gap-2 text-primary-700">
-            <span className="h-px w-12 bg-primary-500/60" />
-            <span className="text-sm font-semibold uppercase tracking-[0.24em]">
-              Start a project
-            </span>
-            <span className="h-px w-12 bg-primary-500/60" />
-          </div>
-          <div className="grid gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] md:items-end">
-            <div className="space-y-6">
-              <h1 className="text-4xl font-display font-bold text-gray-900 md:text-6xl">
-                Tell us what you want to improve
+      <header className="bg-background-primary py-14 md:py-20">
+        <Container>
+          <div className="grid gap-10 border-t border-primary-900 pt-6 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary-700">Start with what you know</p>
+              <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[0.95] text-primary-950 sm:text-6xl lg:text-7xl">
+                Tell me what needs to work better.
               </h1>
-              <p className="text-lg text-gray-600 md:text-xl">
-                Share the basics in about 3–5 minutes. Best guesses are fine—we&apos;ll help clarify the scope.
-              </p>
-              <p className="text-base text-gray-600">
-                We review every inquiry ourselves and reply within one business day.
+              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary sm:text-xl">
+                Name and email are the only required fields. Add a link, a rough idea, or a comfortable budget if it helps explain the situation.
               </p>
             </div>
-            <div className="rounded-3xl border border-primary-200/60 bg-white/70 p-6 shadow-lg backdrop-blur">
-              <p className="text-sm font-semibold uppercase tracking-widest text-primary-700">
-                What happens next
-              </p>
-              <ul className="mt-4 space-y-3 text-sm text-gray-600">
-                <li>• We review your goals and current setup</li>
-                <li>• You receive a recommended next step</li>
-                <li>• Any project begins with a fixed quote</li>
-              </ul>
-            </div>
+
+            <aside className="lg:col-span-4 lg:col-start-9">
+              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.16em] text-primary-700">What happens next</p>
+              <ol className="space-y-3">
+                {nextSteps.map((step, index) => {
+                  const Icon = step.icon;
+                  return (
+                    <li key={step.title} className="grid grid-cols-[2.75rem_1fr] gap-3 border-t border-primary-900/15 pt-3">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-md bg-primary-100 text-primary-800">
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                      </span>
+                      <div>
+                        <p className="font-semibold text-primary-900"><span className="mr-1 text-accent-700" aria-hidden="true">0{index + 1}.</span> {step.title}</p>
+                        <p className="mt-1 text-sm leading-relaxed text-text-secondary">{step.text}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
+            </aside>
           </div>
-        </div>
+          <ArrowDown className="mt-10 h-6 w-6 text-accent-700" aria-hidden="true" />
+        </Container>
       </header>
 
-      <Section padding="lg" background="white" className="pb-8 md:pb-12">
-        <Container size="narrow" className="px-4 sm:px-6 md:px-8">
+      <section className="bg-white pb-20 pt-8 md:pb-28 md:pt-12">
+        <Container size="narrow">
           <InquiryForm />
         </Container>
-      </Section>
+      </section>
 
       <Footer />
     </>

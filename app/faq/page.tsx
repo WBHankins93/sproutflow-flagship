@@ -1,63 +1,65 @@
-// app/faq/page.tsx - Frequently Asked Questions
-//
-// FAQPage JSON-LD is generated from the same `faqs` array that renders on the
-// page, so the schema always matches the visible content.
-
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Clock3, FolderOpen, HelpCircle, LayoutTemplate, LifeBuoy, MapPin, Plus, Workflow, Zap } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
+import { Container } from '@/components/layout/StudioLayout';
 
 export const metadata = {
-  title: 'FAQ: Website Costs, Timelines & Custom Systems',
+  title: 'Frequently Asked Questions',
   description:
-    'Most small business websites in New Orleans cost $850 to $7,500+. Answers on pricing, timelines, custom vs. template sites, business automation, CRMs, and what to have ready before you start.',
-  alternates: {
-    canonical: '/faq',
-  },
+    'Answers about Sproutflow Studio project scope, timelines, custom websites, business systems, ownership, maintenance, and working remotely.',
+  alternates: { canonical: '/faq' },
 };
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.com';
 
-const faqs: { question: string; answer: string }[] = [
+const faqs = [
   {
-    question: 'How much does a small business website cost in New Orleans?',
+    icon: HelpCircle,
+    question: 'How do you decide what a project should include?',
     answer:
-      'Most of our projects run between $850 and $7,500+. A template-based starter site sits at the low end, and a fully custom site with professional copywriting lands in the middle. What moves a project into the upper range is custom systems work: CRMs, internal admin tools, and automation built around your operations. Every project gets a fixed quote before work starts.',
+      'I start with the result you need and the way the work happens today. After reviewing both, I recommend a right-sized scope and send a fixed quote. You can share a comfortable budget in the inquiry form so I do not suggest work that is out of reach.',
   },
   {
+    icon: Clock3,
     question: 'How long does a custom website take to build?',
     answer:
-      'Most custom websites take 2 to 6 weeks from kickoff to launch. A starter site can be live in 1 to 2 weeks, while larger platform builds with custom systems run 8 to 12 weeks. The biggest variable is usually content decisions, and we guide those so the timeline holds.',
+      'A focused site can launch in a few weeks. Larger websites and projects with connected business systems take longer. Content decisions and feedback usually affect the schedule most, so the written scope names what I need from you and when.',
   },
   {
-    question: "What's the difference between a custom site and a Squarespace or Wix template?",
+    icon: LayoutTemplate,
+    question: 'When is a custom site better than a Squarespace or Wix template?',
     answer:
-      'A template is usually the fastest, lowest-cost way to publish a standard site. A custom build is a better fit when your positioning, customer journey, integrations, or growth plans do not fit a standard layout. We recommend the simpler option when it can do the job well.',
+      'A template works well when the message and customer path fit a standard layout. A custom build makes more sense when positioning, integrations, or the way customers buy from you needs a different structure. I will recommend the simpler option when it can do the job well.',
   },
   {
-    question: 'I already have a website. What else can you build for my business?',
+    icon: Workflow,
+    question: 'I already have a website. What else can you build?',
     answer:
-      'We build the systems behind your website: internal admin tools and dashboards, custom CRM and customer management systems, lightweight CMS setups so you can update your own content, and workflow automation for intake, follow-up, and scheduling. Your website gets clients in the door. These systems keep them and save you hours every week.',
+      'Sproutflow builds the work behind the site: intake and booking flows, customer records, internal dashboards, content tools, reporting, and follow-up systems. The useful starting point is often the task your team repeats or the handoff where details keep going missing.',
   },
   {
-    question: 'Can you automate parts of my business, like missed calls or customer follow-up?',
+    icon: Zap,
+    question: 'Can you automate missed calls or customer follow-up?',
     answer:
-      'Yes. We build automation for missed-call response, customer follow-up, intake, scheduling, and document processing. If your team handles something by hand on a repeating schedule, there is a good chance we can automate it. We scope automation work the same way as websites: clear plan, fixed quote.',
+      'Yes. I can connect forms, missed-call responses, scheduling, documents, and follow-up messages. First we map the current steps and decide where automation helps. Some decisions should stay with a person.',
   },
   {
+    icon: MapPin,
     question: 'Do you work with businesses outside New Orleans?',
     answer:
-      'Yes. We are based in New Orleans and serve the metro area and South Louisiana first, but we work remotely with businesses nationwide. Most projects run fully remote with scheduled video check-ins, so location is never a blocker.',
+      'Yes. Sproutflow is based in New Orleans and works with businesses nationwide. Calls, reviews, and approvals can all happen remotely.',
   },
   {
+    icon: FolderOpen,
     question: 'What do I need to have ready before we start?',
     answer:
-      'Just your goals. A clear idea of who your customers are helps, and a logo, photos, or existing copy are useful but not required. We guide content and structure as part of every project, so you are never stuck staring at a blank page.',
+      'Bring the business goal and anything customers see now. A website link, form, notes, logo, photographs, or old copy can help, but none of them are required for the first conversation. I help shape the content and structure during the project.',
   },
   {
+    icon: LifeBuoy,
     question: 'Do you handle hosting and maintenance after launch?',
     answer:
-      'Yes. Website care plans start at $200 per month and cover managed hosting, security updates, performance monitoring, and content changes. You own everything either way: your domain, your site, and your accounts.',
+      'Yes. Ongoing support can include hosting, updates, monitoring, content changes, and measured improvements. It stays optional, and you keep ownership of the domain, site, and connected accounts either way.',
   },
 ];
 
@@ -67,79 +69,62 @@ const faqSchema = {
   mainEntity: faqs.map((faq) => ({
     '@type': 'Question',
     name: faq.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: faq.answer,
-    },
+    acceptedAnswer: { '@type': 'Answer', text: faq.answer },
   })),
 };
 
 export default function FAQPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
-      <header className="relative border-b border-nature-200 bg-gradient-to-br from-white via-primary-50/40 to-primary-100/20">
-        <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-24 md:px-8 md:py-28">
-          <div className="inline-flex items-center gap-2 text-primary-700">
-            <span className="h-px w-12 bg-primary-500/60" />
-            <span className="text-sm font-semibold uppercase tracking-[0.24em]">
-              FAQ
-            </span>
-            <span className="h-px w-12 bg-primary-500/60" />
-          </div>
-
-          <div className="space-y-6">
-            <h1 className="text-4xl font-display font-bold text-gray-900 md:text-6xl">
-              Frequently asked questions
-            </h1>
-            <p className="text-lg text-gray-600 md:text-xl max-w-3xl">
-              Straight answers on pricing, timelines, ownership, and how we work. If your question is not here, send us a note.
+      <header className="bg-background-primary py-16 md:py-24">
+        <Container>
+          <div className="grid gap-8 border-t border-primary-900 pt-6 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary-700">Questions before a project</p>
+              <h1 className="font-display text-5xl font-semibold leading-[0.95] text-primary-950 sm:text-6xl lg:text-7xl">The practical details.</h1>
+            </div>
+            <p className="text-lg leading-relaxed text-text-secondary lg:col-span-4 lg:col-start-9">
+              Open the question that matches what you are deciding. If your situation is different, send it to me in plain language.
             </p>
           </div>
-        </div>
+        </Container>
       </header>
 
-      <section className="relative py-20 md:py-24">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-primary-50/40 via-white to-white" />
-
-        <div className="mx-auto max-w-4xl px-4 md:px-8">
-          <div className="space-y-6">
-            {faqs.map((faq) => (
-              <div
-                key={faq.question}
-                className="rounded-2xl border border-gray-200 bg-white p-7 md:p-8 shadow-sm"
-              >
-                <h2 className="text-xl md:text-2xl font-display font-bold text-gray-900 mb-3">
-                  {faq.question}
-                </h2>
-                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-              </div>
-            ))}
+      <section className="bg-white pb-20 md:pb-28">
+        <Container size="narrow">
+          <div className="border-b border-primary-900/20">
+            {faqs.map((faq) => {
+              const Icon = faq.icon;
+              return (
+                <details key={faq.question} className="group border-t border-primary-900/20">
+                  <summary className="grid min-h-20 cursor-pointer list-none grid-cols-[2.75rem_1fr_2.75rem] items-center gap-3 py-5 marker:content-none">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-md bg-primary-100 text-primary-800">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <h2 className="font-display text-xl font-semibold text-primary-900 sm:text-2xl">{faq.question}</h2>
+                    <span className="flex h-11 w-11 items-center justify-center rounded-md border border-primary-900/15 text-primary-800">
+                      <Plus className="h-5 w-5 transition-transform group-open:rotate-45 motion-reduce:transition-none" aria-hidden="true" />
+                    </span>
+                  </summary>
+                  <p className="pb-7 pl-[3.5rem] pr-4 leading-relaxed text-text-secondary sm:text-lg">{faq.answer}</p>
+                </details>
+              );
+            })}
           </div>
-        </div>
-      </section>
 
-      {/* CTA */}
-      <section className="pb-20">
-        <div className="mx-auto flex max-w-4xl flex-col items-center gap-6 rounded-3xl border border-primary-200 bg-primary-50/60 px-6 py-12 text-center md:px-12">
-          <h3 className="text-3xl font-display font-semibold text-gray-900 md:text-4xl">
-            Still have questions?
-          </h3>
-          <p className="text-base text-gray-600 md:text-lg">
-            Send the question with a little context. We&apos;ll point you in the right direction.
-          </p>
-          <Link
-            href="/inquiry"
-            className="inline-flex items-center gap-3 rounded-full bg-primary-600 px-8 py-3 text-sm font-semibold uppercase tracking-widest text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-primary-700"
-          >
-            Ask your question
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </div>
+          <div className="mt-14 grid gap-7 border-y border-primary-900/20 py-9 sm:grid-cols-[1fr_auto] sm:items-center">
+            <div>
+              <h2 className="font-display text-3xl font-semibold text-primary-900">Still deciding?</h2>
+              <p className="mt-3 text-text-secondary">Send the question with a little context. I will point you toward a useful next step.</p>
+            </div>
+            <Link href="/inquiry" className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-lg bg-primary-800 px-7 py-3.5 font-semibold text-white hover:bg-primary-700">
+              Ask your question
+              <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            </Link>
+          </div>
+        </Container>
       </section>
 
       <Footer />

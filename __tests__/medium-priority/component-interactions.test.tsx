@@ -14,6 +14,8 @@ import Header from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import ServicesSection from '@/components/sections/ServicesSection'
 import ContactSection from '@/components/sections/ContactSection'
+import HeroSection from '@/components/sections/HeroSection'
+import FAQPage from '@/app/faq/page'
 
 describe('Component Interactions - Header Mobile Menu', () => {
   it('should toggle mobile menu when button is clicked', async () => {
@@ -90,7 +92,35 @@ describe('Component Interactions - ServicesSection Paths', () => {
   it('should preserve Shopify among the website capabilities', () => {
     render(<ServicesSection />)
 
-    expect(screen.getByText('Shopify builds and rebuilds')).toBeInTheDocument()
+    expect(screen.getByText('Rebuilds and Shopify')).toBeInTheDocument()
+  })
+})
+
+describe('Component Interactions - Project Reel', () => {
+  it('should expose every featured client as a direct control', () => {
+    render(<HeroSection />)
+
+    expect(screen.getByRole('button', { name: 'Show Second Line Psychiatry' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Show NOLA Pool Solutions' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Show Nealy Event Decor' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Show DJN Services' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Show Big Butt Association' })).toBeInTheDocument()
+  })
+
+  it('should keep the founder portrait out of the hero', () => {
+    render(<HeroSection />)
+
+    expect(screen.queryByAltText(/Ben Hankins/i)).not.toBeInTheDocument()
+  })
+})
+
+describe('Component Interactions - FAQ', () => {
+  it('should not publish price markers in visible copy or schema', () => {
+    const { container } = render(<FAQPage />)
+
+    expect(container.textContent).not.toContain('$')
+    expect(container.innerHTML).not.toContain('$850')
+    expect(container.innerHTML).not.toContain('$200')
   })
 })
 
@@ -98,7 +128,7 @@ describe('Component Interactions - ContactSection', () => {
   it('should render contact options', () => {
     render(<ContactSection />)
 
-    expect(screen.getByText('Tell us what needs to work better.')).toBeInTheDocument()
+    expect(screen.getByText('Tell me what needs to work better.')).toBeInTheDocument()
   })
 
   it('should route the discovery CTA to the inquiry application, not the calendar', () => {
@@ -106,7 +136,7 @@ describe('Component Interactions - ContactSection', () => {
 
     // Qualification funnel: calendar time comes after the application is
     // submitted, so the contact section must never link to the calendar.
-    const cta = screen.getByText('Share your project').closest('a')
+    const cta = screen.getByText('Tell me about your project').closest('a')
     expect(cta).toHaveAttribute('href', '/inquiry')
     expect(cta).not.toHaveAttribute('target')
 

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
-import { ShieldCheck, Database, KeyRound, RotateCcw, LogOut, Award } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, Award, Database, KeyRound, LogOut, RotateCcw, ShieldCheck } from 'lucide-react';
 import { Footer } from '@/components/layout/Footer';
+import { Container } from '@/components/layout/StudioLayout';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.com';
 
@@ -8,9 +10,7 @@ export const metadata: Metadata = {
   title: 'How We Handle Your Data',
   description:
     'Plain-language answers about where Sproutflow Studio client data lives, who owns it, who can access it, backups, exports, and founder security experience.',
-  alternates: {
-    canonical: '/how-we-handle-your-data',
-  },
+  alternates: { canonical: '/how-we-handle-your-data' },
 };
 
 const sections = [
@@ -18,37 +18,37 @@ const sections = [
     title: 'Where your data lives',
     icon: Database,
     body:
-      'Client site and app data lives in US-region managed services such as Vercel and managed Postgres providers like Neon or Supabase. The exact setup depends on the project, and we document it before launch so you know what is running your business.',
+      'Client site and app data lives in US-region managed services such as Vercel and managed Postgres providers like Neon or Supabase. The exact setup depends on the project. I document it before launch so you know what is running your business.',
   },
   {
     title: 'You own it',
     icon: ShieldCheck,
     body:
-      'Your business data belongs to you. If you need to export content, leads, customer records, or project data, we make that easy and explain the format you will receive.',
+      'Your business data belongs to you. If you need to export content, leads, customer records, or project data, I make that possible and explain the format you will receive.',
   },
   {
     title: 'Who can access it',
     icon: KeyRound,
     body:
-      'Ben has full access when needed to build, support, and troubleshoot your project. Access is handled with per-client credentials. Sproutflow does not hand your client data to offshore contractors.',
+      'Ben has access when needed to build, support, and troubleshoot your project. Access uses per-client credentials. Sproutflow does not hand your client data to offshore contractors.',
   },
   {
     title: 'Backups',
     icon: RotateCcw,
     body:
-      'For managed hosting and databases, backups are handled by the platform provider when that service includes them. For projects where backups matter to operations, we can add a written backup plan with provider snapshots, export cadence, and restore expectations before launch.',
+      'Managed hosting and database providers handle backups when their service includes them. If backups matter to daily operations, the project can include a written plan for snapshots, exports, and recovery before launch.',
   },
   {
     title: 'If we part ways',
     icon: LogOut,
     body:
-      'You can leave with your data. We will help export the information you need, transfer ownership where the provider supports it, and remove Sproutflow access after the handoff is complete.',
+      'You can leave with your data. I help export the information you need, transfer ownership where the provider supports it, and remove Sproutflow access after the handoff is complete.',
   },
   {
     title: 'Founder security background',
     icon: Award,
     body:
-      'Our founder led SOC 2 Type II readiness from 34% to 100% as an SRE before starting Sproutflow. That is professional experience, not a Sproutflow certification. Sproutflow Studio is not claiming to be SOC 2 certified.',
+      'Before Sproutflow, Ben led SOC 2 Type II readiness from 34% to 100% as an SRE. That is professional experience, not a Sproutflow certification. Sproutflow Studio is not claiming to be SOC 2 certified.',
   },
 ];
 
@@ -60,24 +60,11 @@ function DataHandlingSchema() {
     name: 'How We Handle Your Data',
     url: `${siteUrl}/how-we-handle-your-data`,
     description: metadata.description,
-    isPartOf: {
-      '@id': `${siteUrl}#organization`,
-    },
-    about: [
-      'client data ownership',
-      'managed hosting',
-      'access controls',
-      'backups',
-      'data export',
-    ],
+    isPartOf: { '@id': `${siteUrl}#organization` },
+    about: ['client data ownership', 'managed hosting', 'access controls', 'backups', 'data export'],
   };
 
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
 }
 
 export default function HowWeHandleYourDataPage() {
@@ -85,57 +72,56 @@ export default function HowWeHandleYourDataPage() {
     <>
       <DataHandlingSchema />
 
-      <header className="border-b border-primary-100 bg-gradient-to-br from-white via-primary-50/60 to-accent-50/40">
-        <div className="mx-auto max-w-5xl px-4 py-16 md:px-8 md:py-28">
-          <div className="mb-5 inline-flex items-center gap-2 text-primary-700">
-            <span className="h-px w-10 bg-primary-500/70" />
-            <span className="text-sm font-semibold uppercase tracking-[0.24em]">Trust</span>
-          </div>
-          <h1 className="max-w-3xl break-words text-3xl font-display font-bold leading-tight text-gray-900 sm:text-4xl md:text-6xl">
-            How We Handle Your Data
-          </h1>
-          <p className="mt-5 max-w-3xl text-base leading-relaxed text-gray-600 sm:text-lg md:mt-6 md:text-xl">
-            Your website and business systems can hold real customer information. Here is the
-            plain-language version of how Sproutflow treats that responsibility.
-          </p>
-        </div>
-      </header>
-
-      <main className="bg-white">
-        <section className="mx-auto grid max-w-6xl gap-5 px-4 py-12 md:grid-cols-2 md:gap-6 md:px-8 md:py-20">
-          {sections.map((section) => {
-            const Icon = section.icon;
-
-            return (
-              <article
-                key={section.title}
-                className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm md:p-8"
-              >
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-full bg-primary-50 text-primary-700">
-                  <Icon className="h-6 w-6" />
-                </div>
-                <h2 className="mb-3 text-xl font-display font-bold leading-tight text-gray-900 md:text-2xl">
-                  {section.title}
-                </h2>
-                <p className="text-base leading-relaxed text-gray-600">{section.body}</p>
-              </article>
-            );
-          })}
-        </section>
-
-        <section className="mx-auto max-w-5xl px-4 pb-20 md:px-8">
-          <div className="rounded-2xl border border-primary-200 bg-primary-50 p-5 md:p-8">
-            <h2 className="mb-3 text-xl font-display font-bold leading-tight text-gray-900 md:text-2xl">
-              Questions are welcome before you sign anything.
-            </h2>
-            <p className="text-base leading-relaxed text-gray-700">
-              If your project touches sensitive customer information, we will talk through access,
-              exports, backups, and responsibilities during scope. The goal is simple: you should
-              understand what is being built and feel comfortable trusting it.
+      <header className="bg-background-primary py-16 md:py-24">
+        <Container>
+          <div className="grid gap-8 border-t border-primary-900 pt-6 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary-700">Data and ownership</p>
+              <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[0.95] text-primary-950 sm:text-6xl lg:text-7xl">Know where it lives. Keep control of it.</h1>
+            </div>
+            <p className="text-lg leading-relaxed text-text-secondary lg:col-span-4 lg:col-start-9">
+              Websites and business systems can hold real customer information. These are the plain-language rules I use when choosing tools and handing over a project.
             </p>
           </div>
-        </section>
-      </main>
+        </Container>
+      </header>
+
+      <section className="bg-white pb-20 md:pb-28">
+        <Container>
+          <div className="grid gap-px overflow-hidden border border-primary-900/20 bg-primary-900/20 md:grid-cols-2">
+            {sections.map((section, index) => {
+              const Icon = section.icon;
+              return (
+                <article key={section.title} className="bg-white p-6 md:min-h-72 md:p-8">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-md bg-primary-100 text-primary-800">
+                      <Icon className="h-6 w-6" aria-hidden="true" />
+                    </span>
+                    <span className="font-display text-lg font-semibold text-accent-700" aria-hidden="true">0{index + 1}</span>
+                  </div>
+                  <h2 className="mt-8 font-display text-2xl font-semibold text-primary-900">{section.title}</h2>
+                  <p className="mt-4 leading-relaxed text-text-secondary">{section.body}</p>
+                </article>
+              );
+            })}
+          </div>
+
+          <div className="mt-12 grid gap-7 border-y border-primary-900/20 py-9 lg:grid-cols-12 lg:items-center">
+            <div className="lg:col-span-7">
+              <h2 className="font-display text-3xl font-semibold text-primary-900">Ask before you sign anything.</h2>
+              <p className="mt-3 max-w-2xl leading-relaxed text-text-secondary">
+                If a project touches sensitive customer information, we will cover access, exports, backups, and responsibilities during scope.
+              </p>
+            </div>
+            <div className="lg:col-span-4 lg:col-start-9">
+              <Link href="/inquiry" className="group inline-flex min-h-12 items-center gap-3 rounded-lg bg-primary-800 px-7 py-3.5 font-semibold text-white hover:bg-primary-700">
+                Ask about your project
+                <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+              </Link>
+            </div>
+          </div>
+        </Container>
+      </section>
 
       <Footer />
     </>
