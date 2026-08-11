@@ -1,5 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/how-we-work',
+        destination: '/#process',
+        permanent: true,
+      },
+      {
+        source: '/case-studies',
+        destination: '/work',
+        permanent: true,
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {
@@ -12,4 +26,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-
