@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
               priority
             />
             <BodyText className="text-white/80 mb-6 max-w-md">
-              Custom websites and business systems for small companies that want clearer growth and less manual work. Founder-led in New Orleans.
+              Websites and business systems that make it easier for customers to choose you and easier for your team to follow through.
             </BodyText>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (
@@ -61,7 +61,7 @@ export const Footer: React.FC = () => {
               </li>
               <li>
                 <Link href="/work" className="hover:text-white transition-colors">
-                  Work &amp; Results
+                  Work
                 </Link>
               </li>
               <li>
@@ -109,7 +109,7 @@ export const Footer: React.FC = () => {
         
         <div className="border-t border-white/20 mt-12 pt-8 text-center text-white/60">
           <BodyText size="sm">
-            &copy; {currentYear} Sproutflow Studio. All rights reserved. Growing together since 2025.
+            &copy; {currentYear} Sproutflow Studio. New Orleans, Louisiana.
           </BodyText>
         </div>
       </Container>

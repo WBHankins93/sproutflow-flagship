@@ -116,9 +116,9 @@ export default function Header() {
                 e.preventDefault();
                 handleNavClick({ label: "Contact", href: "/inquiry", type: "route" });
               }}
-              className="ml-4 px-6 py-2.5 bg-primary-600 text-white rounded-full font-semibold hover:bg-primary-700 transition-colors"
+              className="ml-4 inline-flex min-h-11 items-center rounded-lg bg-primary-700 px-6 py-2.5 font-semibold text-white transition-colors hover:bg-primary-800"
             >
-              Start a project
+              Tell me about your project
             </a>
           </nav>
 
@@ -162,9 +162,9 @@ export default function Header() {
                 e.preventDefault();
                 handleNavClick({ label: "Contact", href: "/inquiry", type: "route" });
               }}
-              className="block w-full px-6 py-3 bg-primary-600 text-white text-center rounded-full font-semibold hover:bg-primary-700 transition-colors mt-4"
+              className="mt-4 block min-h-12 w-full rounded-lg bg-primary-700 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-primary-800"
             >
-              Start a project
+              Tell me about your project
             </a>
           </nav>
         </div>
