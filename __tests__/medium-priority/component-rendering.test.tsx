@@ -20,6 +20,7 @@ describe('Component Rendering - Header', () => {
   it('should render navigation links', () => {
     render(<Header />)
     expect(screen.getByText('How we work')).toBeInTheDocument()
+    expect(screen.getByText('Services')).toBeInTheDocument()
     expect(screen.getByText('Work')).toBeInTheDocument()
     expect(screen.getByText('Results')).toBeInTheDocument()
     expect(screen.getByText('About')).toBeInTheDocument()
@@ -40,7 +41,7 @@ describe('Component Rendering - Footer', () => {
 
   it('should render explore links', () => {
     render(<Footer />)
-    expect(screen.getByText('Services & Pricing')).toBeInTheDocument()
+    expect(screen.getByText('Services')).toBeInTheDocument()
     expect(screen.getByText('Portfolio')).toBeInTheDocument()
     expect(screen.getByText('Case Studies')).toBeInTheDocument()
     expect(screen.getByText('How We Work')).toBeInTheDocument()
@@ -66,13 +67,13 @@ describe('Component Rendering - HeroSection', () => {
   it('should render hero headline', () => {
     render(<HeroSection />)
     expect(
-      screen.getByText(/Websites that win the right clients/i)
+      screen.getByText(/Clear websites/i)
     ).toBeInTheDocument()
   })
 
   it('should render CTA button linking to the inquiry application', () => {
     render(<HeroSection />)
-    const cta = screen.getByText('Tell us about your project').closest('a')
+    const cta = screen.getByText('Tell us what you need').closest('a')
     expect(cta).toBeInTheDocument()
     expect(cta).toHaveAttribute('href', '/inquiry')
   })
@@ -80,7 +81,7 @@ describe('Component Rendering - HeroSection', () => {
   it('should render trust badges', () => {
     render(<HeroSection />)
     expect(screen.getByText('New Orleans based')).toBeInTheDocument()
-    expect(screen.getByText('Founder-led from start to launch')).toBeInTheDocument()
+    expect(screen.getByText('Founder-led from first call to launch')).toBeInTheDocument()
   })
 })
 

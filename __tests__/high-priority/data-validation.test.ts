@@ -6,7 +6,44 @@
  */
 
 import { serviceTiers } from '@/data/services'
+import { servicePaths } from '@/data/servicePaths'
 import { servicesContent } from '@/data/content'
+import { BUDGET_OPTIONS, PROJECT_TYPES } from '@/types/inquiry'
+
+describe('Data Validation - Public Service Paths', () => {
+  it('should expose exactly the three outcome-led service paths', () => {
+    expect(servicePaths.map(path => path.id)).toEqual([
+      'websites',
+      'business-systems',
+      'growth-support',
+    ])
+  })
+
+  it('should keep pricing out of the public service path model', () => {
+    servicePaths.forEach(path => {
+      expect(path).not.toHaveProperty('price')
+      expect(path).not.toHaveProperty('priceRange')
+      expect(path).not.toHaveProperty('timeline')
+    })
+  })
+
+  it('should align the inquiry selector with the service paths', () => {
+    expect(PROJECT_TYPES).toEqual([
+      'Websites that earn trust',
+      'Systems that remove friction',
+      'Ongoing growth and support',
+      'Not sure yet',
+    ])
+  })
+
+  it('should collect budget privately without package labels', () => {
+    expect(BUDGET_OPTIONS.length).toBe(6)
+    expect(BUDGET_OPTIONS).not.toContain('Starter')
+    expect(BUDGET_OPTIONS).not.toContain('Foundation')
+    expect(BUDGET_OPTIONS).not.toContain('Growth')
+    expect(BUDGET_OPTIONS).not.toContain('Market Leader')
+  })
+})
 
 describe('Data Validation - Service Pricing Consistency', () => {
   it('should have consistent pricing between services.ts and content.ts', () => {

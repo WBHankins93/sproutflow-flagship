@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import StructuredData from "@/components/StructuredData";
-import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google";
+import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -11,7 +11,7 @@ const bricolage = Bricolage_Grotesque({
   display: "swap",
 });
 
-const sourceSans = Source_Sans_3({
+const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -96,7 +96,7 @@ export default function RootLayout({
     // scroll position on route changes - fixes pages loading scrolled to the bottom
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
       <body
-        className={`${bricolage.variable} ${sourceSans.variable} antialiased font-body`}
+        className={`${bricolage.variable} ${dmSans.variable} antialiased font-body`}
       >
         <StructuredData />
         <Header />

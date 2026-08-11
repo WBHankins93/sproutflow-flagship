@@ -3,7 +3,7 @@
  *
  * Tests for interactive component behavior:
  * - Header mobile menu toggle
- * - ServicesSection tier cards
+ * - ServicesSection service paths
  * - Navigation link handling
  * - ContactSection qualification flow (application before calendar time)
  */
@@ -61,39 +61,38 @@ describe('Component Interactions - Header Mobile Menu', () => {
   })
 })
 
-describe('Component Interactions - ServicesSection Tier Cards', () => {
-  it('should render service tier cards', () => {
+describe('Component Interactions - ServicesSection Paths', () => {
+  it('should render the three service paths', () => {
     render(<ServicesSection />)
 
-    // Check for service tier names (use getAllByText since names appear multiple times)
-    expect(screen.getAllByText('Starter').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Foundation').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Growth').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Market Leader').length).toBeGreaterThan(0)
+    expect(screen.getByText('Websites that earn trust')).toBeInTheDocument()
+    expect(screen.getByText('Systems that remove friction')).toBeInTheDocument()
+    expect(screen.getByText('Keep improving after launch')).toBeInTheDocument()
   })
 
-  it('should have a CTA on each service card routing to the inquiry application', () => {
-    render(<ServicesSection />)
+  it('should have a CTA on each service path routing to the inquiry application', () => {
+    const { container } = render(<ServicesSection />)
 
-    const tierButtons = screen.getAllByText('Discuss this option')
-    expect(tierButtons.length).toBe(4)
-    tierButtons.forEach((button) => {
-      expect(button.closest('a')).toHaveAttribute('href', '/inquiry')
+    const pathLinks = container.querySelectorAll('article a[href="/inquiry"]')
+    expect(pathLinks.length).toBe(3)
+    pathLinks.forEach((link) => {
+      expect(link).toHaveAttribute('href', '/inquiry')
     })
   })
 
-  it('should display price ranges on service cards', () => {
-    render(<ServicesSection />)
+  it('should not expose package names or prices', () => {
+    const { container } = render(<ServicesSection />)
 
-    // Check for price ranges (use getAllByText since prices appear multiple times)
-    expect(screen.getAllByText(/\$2,000 - \$2,800/).length).toBeGreaterThan(0)
-    expect(screen.getAllByText(/\$7,500\+/).length).toBeGreaterThan(0)
+    expect(container.textContent).not.toContain('$')
+    expect(screen.queryByText('Starter')).not.toBeInTheDocument()
+    expect(screen.queryByText('Foundation')).not.toBeInTheDocument()
+    expect(screen.queryByText('Market Leader')).not.toBeInTheDocument()
   })
 
-  it('should show "Most Popular" badge on Foundation tier', () => {
+  it('should preserve Shopify among the website capabilities', () => {
     render(<ServicesSection />)
 
-    expect(screen.getByText('Most Popular')).toBeInTheDocument()
+    expect(screen.getByText('Shopify builds and rebuilds')).toBeInTheDocument()
   })
 })
 
@@ -101,7 +100,7 @@ describe('Component Interactions - ContactSection', () => {
   it('should render contact options', () => {
     render(<ContactSection />)
 
-    expect(screen.getByText('Tell us what you want to improve')).toBeInTheDocument()
+    expect(screen.getByText('Tell us what needs to work better.')).toBeInTheDocument()
   })
 
   it('should route the discovery CTA to the inquiry application, not the calendar', () => {
@@ -109,7 +108,7 @@ describe('Component Interactions - ContactSection', () => {
 
     // Qualification funnel: calendar time comes after the application is
     // submitted, so the contact section must never link to the calendar.
-    const cta = screen.getByText('Tell us about your project').closest('a')
+    const cta = screen.getByText('Share your project').closest('a')
     expect(cta).toHaveAttribute('href', '/inquiry')
     expect(cta).not.toHaveAttribute('target')
 
@@ -145,10 +144,10 @@ describe('Component Interactions - Navigation Links', () => {
 })
 
 describe('Component Interactions - Footer Navigation', () => {
-  it('should link Services & Pricing to the homepage services section', () => {
+  it('should link Services to the homepage services section', () => {
     render(<Footer />)
 
-    const servicesLink = screen.getByText('Services & Pricing').closest('a')
+    const servicesLink = screen.getByText('Services').closest('a')
     expect(servicesLink).toHaveAttribute('href', '/#services')
   })
 })

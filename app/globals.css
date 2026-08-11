@@ -23,9 +23,9 @@
     overflow-x: hidden;
   }
 
-  /* Body uses DM Sans */
+  /* Body uses DM Sans. */
   body {
-    @apply bg-white text-gray-800;
+    @apply bg-background-primary text-gray-800;
     font-family: var(--font-body), sans-serif;
     font-size: 1rem;
     line-height: 1.65;
@@ -83,6 +83,21 @@
    UTILITY CLASSES
    =================================== */
 @layer utilities {
+  @keyframes studioReveal {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .studio-reveal {
+    animation: studioReveal 650ms ease-out both;
+  }
+
   .reading-width {
     max-width: 68ch;
   }
@@ -165,6 +180,10 @@
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .studio-reveal {
+    animation: none !important;
   }
 }
 

@@ -40,7 +40,9 @@ jest.mock('framer-motion', () => ({
     p: ({ children, initial, animate, transition, viewport, whileInView, ...props }) => <p {...props}>{children}</p>,
     span: ({ children, initial, animate, transition, viewport, whileInView, ...props }) => <span {...props}>{children}</span>,
     section: ({ children, initial, animate, transition, viewport, whileInView, ...props }) => <section {...props}>{children}</section>,
+    article: ({ children, initial, animate, transition, viewport, whileInView, ...props }) => <article {...props}>{children}</article>,
   },
+  useReducedMotion: () => false,
   AnimatePresence: ({ children }) => children,
 }))
 
