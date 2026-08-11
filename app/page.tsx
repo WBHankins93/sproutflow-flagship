@@ -2,12 +2,10 @@
 
 import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
-import TrustBarSection from '@/components/sections/TrustBarSection';
+import WorktableSection from '@/components/sections/WorktableSection';
 import HomeTestimonialsSection from '@/components/sections/HomeTestimonialsSection';
-import ValuePropsSection from '@/components/sections/ValuePropsSection';
 import ProcessSection from '@/components/sections/ProcessSection';
 import ServicesSection from '@/components/sections/ServicesSection';
-import BusinessSystemsSection from '@/components/sections/BusinessSystemsSection';
 import AboutSection from '@/components/sections/AboutSection';
 import ContactSection from '@/components/sections/ContactSection';
 import { Footer } from '@/components/layout/Footer';
@@ -37,17 +35,15 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main>
+    <>
       <HeroSection />
-      <TrustBarSection />
+      <WorktableSection />
       <HomeTestimonialsSection />
-      <ValuePropsSection />
-      <ProcessSection />
-      <BusinessSystemsSection />
       <ServicesSection />
+      <ProcessSection />
       <AboutSection />
       <ContactSection />
       <Footer />
-    </main>
+    </>
   );
 }

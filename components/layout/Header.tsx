@@ -21,6 +21,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks: NavLink[] = [
+    { label: 'Services', href: '#services', type: 'anchor' },
     { label: 'How we work', href: '/how-we-work', type: 'route' },
     { label: 'Work', href: '/work', type: 'route' },
     { label: 'Results', href: '/case-studies', type: 'route' },

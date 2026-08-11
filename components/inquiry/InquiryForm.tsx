@@ -3,8 +3,8 @@
 import { useRef, useState } from 'react';
 import { ArrowRight, LockKeyhole } from 'lucide-react';
 import { BodyText, Button, Heading } from '@/components/layout/StudioLayout';
-import { serviceTiers } from '@/data/services';
 import {
+  BUDGET_OPTIONS,
   PROJECT_GOALS,
   PROJECT_TYPES,
   REFERRAL_SOURCES,
@@ -169,11 +169,6 @@ export function InquiryForm() {
     );
   }
 
-  const budgetOptions = [
-    ...serviceTiers.map((tier) => `${tier.priceRange} (${tier.name})`),
-    'Not sure yet',
-  ];
-
   return (
     <form onSubmit={handleSubmit} className="space-y-10 pb-6 pt-4 md:pt-6">
       <FormSection title="Your details" description="Only your name and email are required.">
@@ -263,7 +258,7 @@ export function InquiryForm() {
             <Label htmlFor="inquiry-budget">Comfortable investment range</Label>
             <select id="inquiry-budget" name="budgetRange" value={data.budgetRange} onChange={update('budgetRange')} className={inputBase}>
               <option value="">Select an option</option>
-              {budgetOptions.map((option) => <option key={option} value={option}>{option}</option>)}
+              {BUDGET_OPTIONS.map((option) => <option key={option} value={option}>{option}</option>)}
             </select>
           </div>
 

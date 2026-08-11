@@ -31,7 +31,6 @@ const professionalServiceSchema = {
   },
   telephone: '+1-504-326-1676',
   email: 'ben@sproutflow-studio.com',
-  priceRange: '$850 - $7,500+',
   sameAs: [
     'https://linkedin.com/company/sproutflow-studio',
   ],
@@ -80,6 +79,17 @@ const professionalServiceSchema = {
           name: 'Custom Website Design and Development',
           description:
             'Custom Next.js websites for small businesses: design, development, copywriting, local SEO, and conversion-focused lead capture. Projects range from starter sites to fully custom platforms.',
+          provider: { '@id': `${siteUrl}#organization` },
+          areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Ongoing Website Growth and Support',
+          description:
+            'Optional website maintenance, hosting, SEO growth, performance reviews, content support, photography coordination, and marketing integrations.',
           provider: { '@id': `${siteUrl}#organization` },
           areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
         },

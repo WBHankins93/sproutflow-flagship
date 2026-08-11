@@ -1,12 +1,18 @@
 // types/inquiry.ts - Inquiry form data shape for Formspree and future Admin integration
 
 export const PROJECT_TYPES = [
-  'New website',
-  'Website redesign',
-  'Improve an existing site',
-  'E-commerce website',
-  'Internal tools, CRM, or automation',
-  'Landing pages',
+  'Websites that earn trust',
+  'Systems that remove friction',
+  'Ongoing growth and support',
+  'Not sure yet',
+] as const;
+
+export const BUDGET_OPTIONS = [
+  'Under $1,500',
+  '$1,500 - $3,000',
+  '$3,000 - $6,000',
+  '$6,000 - $10,000',
+  '$10,000+',
   'Not sure yet',
 ] as const;
 
