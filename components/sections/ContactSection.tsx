@@ -50,11 +50,17 @@ export default function ContactSection() {
             <div className="mt-7 space-y-3">
               <a href="mailto:ben@sproutflow-studio.com" className="flex min-h-12 items-center gap-3 rounded-lg border border-primary-900/15 bg-white p-4 text-primary-900 hover:border-primary-600">
                 <Mail className="h-5 w-5 flex-none text-primary-600" aria-hidden="true" />
-                <span className="break-all text-sm font-semibold">ben@sproutflow-studio.com</span>
+                <span>
+                  <span className="block text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">Email</span>
+                  <span className="mt-0.5 block break-all text-sm font-semibold">ben@sproutflow-studio.com</span>
+                </span>
               </a>
               <a href="tel:+15043261676" className="flex min-h-12 items-center gap-3 rounded-lg border border-primary-900/15 bg-white p-4 text-primary-900 hover:border-primary-600">
                 <Phone className="h-5 w-5 flex-none text-primary-600" aria-hidden="true" />
-                <span className="text-sm font-semibold">(504) 326-1676</span>
+                <span>
+                  <span className="block text-xs font-semibold uppercase tracking-[0.12em] text-text-muted">Phone</span>
+                  <span className="mt-0.5 block text-sm font-semibold">(504) 326-1676</span>
+                </span>
               </a>
             </div>
           </aside>

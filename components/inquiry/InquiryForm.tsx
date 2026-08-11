@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { ArrowRight, LockKeyhole } from 'lucide-react';
+import { ArrowRight, ContactRound, LockKeyhole, Route } from 'lucide-react';
 import { BodyText, Button, Heading } from '@/components/layout/StudioLayout';
 import {
   BUDGET_OPTIONS,
@@ -35,16 +35,19 @@ const initialFormData: InquiryFormData = {
 function FormSection({
   title,
   description,
+  icon,
   children,
 }: {
   title: string;
   description?: string;
+  icon: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
-    <fieldset className="space-y-5 border-0 p-0">
-      <legend className="mb-1 font-display text-2xl font-semibold text-text-primary">
-        {title}
+    <fieldset className="space-y-5 border-t border-primary-900/20 p-0 pt-6">
+      <legend className="mb-1 flex items-center gap-3 pr-4 font-display text-2xl font-semibold text-text-primary">
+        <span className="flex h-10 w-10 items-center justify-center rounded-md bg-primary-100 text-primary-800">{icon}</span>
+        <span>{title}</span>
       </legend>
       {description && <p className="text-text-secondary">{description}</p>}
       {children}
@@ -150,10 +153,10 @@ export function InquiryForm() {
     return (
       <div className="mx-auto max-w-xl space-y-6 rounded-2xl border border-nature-200 bg-nature-50/50 p-6 text-center sm:p-8">
         <Heading level={2} className="text-primary-800">
-          Thanks—your project is in.
+          Thanks. Your project is in.
         </Heading>
         <BodyText size="lg" color="secondary">
-          We&apos;ll review the details and reply within one business day. If you are ready, you can choose a call time now.
+          I&apos;ll review the details and reply within one business day. If you are ready, you can choose a call time now.
         </BodyText>
         <div className="pt-3">
           <Button
@@ -171,7 +174,7 @@ export function InquiryForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-10 pb-6 pt-4 md:pt-6">
-      <FormSection title="Your details" description="Only your name and email are required.">
+      <FormSection title="Your details" description="Only your name and email are required." icon={<ContactRound className="h-5 w-5" aria-hidden="true" />}>
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <Label htmlFor="inquiry-name" required>Name</Label>
@@ -236,7 +239,7 @@ export function InquiryForm() {
         </div>
       </FormSection>
 
-      <FormSection title="The project" description="Best guesses are fine. We will clarify the details together.">
+      <FormSection title="The project" description="Best guesses are fine. We can clarify the details together." icon={<Route className="h-5 w-5" aria-hidden="true" />}>
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <Label htmlFor="inquiry-project-type">What do you need?</Label>
@@ -302,7 +305,7 @@ export function InquiryForm() {
         </Button>
         <p className="mt-4 flex items-start gap-2 text-sm text-text-muted">
           <LockKeyhole className="mt-0.5 h-4 w-4 flex-none" />
-          <span>We use these details only to respond to your inquiry. Read <a href="/how-we-handle-your-data" className="font-semibold text-primary-700 underline underline-offset-2">how we handle your data</a>.</span>
+          <span>I use these details only to respond to your inquiry. Read <a href="/how-we-handle-your-data" className="font-semibold text-primary-700 underline underline-offset-2">how Sproutflow handles your data</a>.</span>
         </p>
         {isSubmitting && <p className="mt-2 text-sm text-text-muted">Keep this page open while the form sends.</p>}
       </div>

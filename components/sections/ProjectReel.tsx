@@ -16,6 +16,8 @@ export default function ProjectReel() {
   const activeProject = projectProof[activeIndex];
 
   useEffect(() => {
+    if (typeof window.matchMedia !== 'function') return;
+
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
     const updatePreference = () => setReduceMotion(query.matches);
 

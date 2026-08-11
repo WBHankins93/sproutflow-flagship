@@ -90,7 +90,7 @@ describe('Component Interactions - ServicesSection Paths', () => {
   it('should preserve Shopify among the website capabilities', () => {
     render(<ServicesSection />)
 
-    expect(screen.getByText('Shopify builds and rebuilds')).toBeInTheDocument()
+    expect(screen.getByText('Rebuilds and Shopify')).toBeInTheDocument()
   })
 })
 
@@ -98,7 +98,7 @@ describe('Component Interactions - ContactSection', () => {
   it('should render contact options', () => {
     render(<ContactSection />)
 
-    expect(screen.getByText('Tell us what needs to work better.')).toBeInTheDocument()
+    expect(screen.getByText('Tell me what needs to work better.')).toBeInTheDocument()
   })
 
   it('should route the discovery CTA to the inquiry application, not the calendar', () => {
@@ -106,7 +106,7 @@ describe('Component Interactions - ContactSection', () => {
 
     // Qualification funnel: calendar time comes after the application is
     // submitted, so the contact section must never link to the calendar.
-    const cta = screen.getByText('Share your project').closest('a')
+    const cta = screen.getByText('Tell me about your project').closest('a')
     expect(cta).toHaveAttribute('href', '/inquiry')
     expect(cta).not.toHaveAttribute('target')
 
