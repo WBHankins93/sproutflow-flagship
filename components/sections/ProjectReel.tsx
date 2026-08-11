@@ -60,7 +60,7 @@ export default function ProjectReel() {
                   fill
                   priority={index === 0}
                   aria-hidden={index !== activeIndex}
-                  className={`object-cover object-top transition-opacity duration-500 motion-reduce:transition-none ${
+                  className={`object-contain object-top transition-opacity duration-500 motion-reduce:transition-none ${
                     index === activeIndex ? 'opacity-100' : 'opacity-0'
                   }`}
                   sizes="(max-width: 1024px) 94vw, 50vw"

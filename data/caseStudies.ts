@@ -168,7 +168,7 @@ export const caseStudies: CaseStudy[] = [
     headline: 'Consultation requests doubled for a luxury event studio',
     summary:
       'Nealy Event Decor creates luxury custom fabrications for high-end events in Dallas: bespoke arches, bars, and premium rentals. We designed and built a website with editorial gallery layouts and an inventory system the team updates themselves. The site launched in six weeks and now presents the brand at the level of the work. Consultation requests have doubled since launch.',
-    heroImage: 'nealy-case-study.png',
+    heroImage: 'work/client-logos/nealy-project.png',
     heroStats: [
       { value: '2x', label: 'Consultation requests since launch' },
       { value: '6 weeks', label: 'Design to launch' },

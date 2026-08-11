@@ -75,7 +75,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
                       alt={`${caseStudy.clientName} website homepage`}
                       fill
                       priority
-                      className={caseStudy.heroImageFit === 'contain' ? 'object-contain object-top' : 'object-cover object-top'}
+                      className="object-contain object-top"
                       sizes="(max-width: 1024px) 94vw, 58vw"
                     />
                   </div>

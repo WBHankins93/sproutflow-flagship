@@ -49,7 +49,7 @@ export default function ProjectThumbnail({
               alt={project.screenshotAlt}
               fill
               priority={priority}
-              className="object-cover object-top transition-transform duration-500 motion-reduce:transition-none group-hover:scale-[1.015]"
+              className="object-contain object-top transition-transform duration-500 motion-reduce:transition-none group-hover:scale-[1.015]"
               sizes="(max-width: 768px) 92vw, 50vw"
             />
           </div>

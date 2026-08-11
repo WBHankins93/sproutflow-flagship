@@ -14,6 +14,8 @@ import Header from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import ServicesSection from '@/components/sections/ServicesSection'
 import ContactSection from '@/components/sections/ContactSection'
+import HeroSection from '@/components/sections/HeroSection'
+import FAQPage from '@/app/faq/page'
 
 describe('Component Interactions - Header Mobile Menu', () => {
   it('should toggle mobile menu when button is clicked', async () => {
@@ -91,6 +93,34 @@ describe('Component Interactions - ServicesSection Paths', () => {
     render(<ServicesSection />)
 
     expect(screen.getByText('Rebuilds and Shopify')).toBeInTheDocument()
+  })
+})
+
+describe('Component Interactions - Project Reel', () => {
+  it('should expose every featured client as a direct control', () => {
+    render(<HeroSection />)
+
+    expect(screen.getByRole('button', { name: 'Show Second Line Psychiatry' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Show NOLA Pool Solutions' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Show Nealy Event Decor' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Show DJN Services' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Show Big Butt Association' })).toBeInTheDocument()
+  })
+
+  it('should keep the founder portrait out of the hero', () => {
+    render(<HeroSection />)
+
+    expect(screen.queryByAltText(/Ben Hankins/i)).not.toBeInTheDocument()
+  })
+})
+
+describe('Component Interactions - FAQ', () => {
+  it('should not publish price markers in visible copy or schema', () => {
+    const { container } = render(<FAQPage />)
+
+    expect(container.textContent).not.toContain('$')
+    expect(container.innerHTML).not.toContain('$850')
+    expect(container.innerHTML).not.toContain('$200')
   })
 })
 
