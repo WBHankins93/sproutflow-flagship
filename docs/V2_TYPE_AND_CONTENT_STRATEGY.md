@@ -51,14 +51,17 @@ None are on Google Fonts, and the repo loads everything through `next/font/googl
 
 That is a one-line change to PR 3. Everything else in the type spec stands.
 
-### If you want noticeably warmer
+### Figtree as a special-use fifth font: not recommended
 
-Two alternates worth a look before PR 3 locks. Both are single-variable swaps for Archivo:
+Considered and rejected. **Figtree and DM Sans occupy nearly the same slot** — both are warm humanist-geometric sans at similar widths and x-heights. Setting testimonials or metrics in Figtree next to DM Sans body copy does not read as a deliberate accent. It reads as two fonts that almost match, which registers as sloppiness rather than intent. Special-use fonts only work when the contrast is obvious.
 
-- **Figtree** — friendly geometric, rounder, more open. Warmest option. Risk: leans startup-friendly, slightly less authority.
-- **Instrument Sans** — sharper and more contemporary than Archivo, still neutral. Risk: closer to the fashionable end.
+The contrast you want in exactly those places is already in the spec: the handoff sets testimonial quotes and pull quotes in **accent serif italic**, now Newsreader. That carries the warmth, it is already loading, and it is unmistakably distinct from DM Sans.
 
-My recommendation stays Archivo. It is the one that will still look right in 2031.
+**If you want the whole site warmer,** the real move is swapping **DM Sans → Figtree for body entirely.** Four families instead of five, and a change that is actually perceptible. Figtree is rounder and more open than DM Sans, with a friendlier lowercase. Risk: it leans startup-friendly and gives up a little authority. That is a live option before PR 3 locks; it is not a reason to add a fifth family.
+
+**Instrument Sans** is the other credible Archivo alternate — sharper, more contemporary, still neutral. Risk: closer to the fashionable end, which is the thing we are avoiding.
+
+Recommendation stands: Archivo, DM Sans, Newsreader, Fira Code. It will still look right in 2031.
 
 ---
 
@@ -89,6 +92,17 @@ Implement as a `track` field on each post, surfaced as filter pills on `/resourc
 
 Track 2 is your moat. Almost nobody competing for "web design new orleans" can write credibly about CRM architecture. Weight your Notes toward `systems` and `ai` even though `websites` has more search volume — those two are where you are uncontested and where the larger retainer clients come from.
 
+### Publishing rhythm
+
+Weekly, batch-prepared. One evening a month drafting four Notes, then scheduled to publish one per week.
+
+Two things make or break this:
+
+- **Schedule them, do not bulk-publish.** Four posts appearing on the same day produces one freshness spike and three weeks of silence. Four posts a week apart produces four. The whole point of Notes is a steady dated signal, so spread the `date` field and let the build pick them up.
+- **Keep a running idea list.** The failure mode for batch writing is staring at a blank page on drafting night. Capture Note ideas as they come up during client work, since the best ones come from a real question a client actually asked you that week.
+
+The ten starter titles below are enough for two and a half months, which covers the ramp while the habit sets.
+
 ### The fourth track is a different problem
 
 **Architecture and the road to FDE belongs on your personal portfolio, not on Sproutflow.**
@@ -100,6 +114,8 @@ It still feeds Sproutflow indirectly: the "six years shipping enterprise softwar
 ### Cross-posting rule — do not skip this
 
 If the same article exists at two URLs on two domains with no canonical, Google treats it as duplicate content and splits or suppresses both. You lose on both domains.
+
+Personal portfolio is live at **https://www.benhankins.dev/**. Add it to the `Person` node's `sameAs` in PR 2 — linking both properties to one entity strengthens each of them for search and for LLM retrieval, which is free and most people never do it.
 
 **The rule:**
 - Every post has exactly one canonical home.
