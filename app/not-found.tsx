@@ -8,7 +8,7 @@ export default function NotFound() {
       <Container size="narrow">
         <div className="text-center">
           <div className="mb-8">
-            <div className="text-8xl font-display font-bold text-nature-200 mb-4">
+            <div className="text-8xl font-display font-bold text-primary-200 mb-4">
               404
             </div>
             <Heading level={2} className="mb-4">
@@ -38,7 +38,7 @@ export default function NotFound() {
             </Button>
           </div>
 
-          <div className="mt-12 pt-8 border-t border-nature-200">
+          <div className="mt-12 pt-8 border-t border-primary-200">
             <BodyText size="sm" color="muted" className="mb-4">
               Looking for something specific?
             </BodyText>

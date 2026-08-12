@@ -26,7 +26,7 @@ const processSteps = [
 
 export default function ProcessSection() {
   return (
-    <section id="process" aria-labelledby="process-heading" className="bg-background-secondary py-20 md:py-28">
+    <section id="process" aria-labelledby="process-heading" className="bg-cream-300 py-20 md:py-28">
       <Container>
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">

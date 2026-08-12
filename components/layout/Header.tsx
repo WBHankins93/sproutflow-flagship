@@ -62,9 +62,9 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 border-b border-nature-200">
+    <header className="sticky top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 border-b border-primary-200">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-[72px] md:h-[88px]">
           
           {/* Logo + Brand */}
           <Link 
@@ -80,7 +80,7 @@ export default function Header() {
               alt="Sproutflow Studio"
               width={550}  
               height={183}
-              className="h-12 md:h-14 w-auto"
+              className="h-10 md:h-12 w-auto"
               priority
             />
           </Link>
@@ -141,7 +141,7 @@ export default function Header() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-nature-200 bg-white shadow-lg">
+        <div className="lg:hidden border-t border-primary-200 bg-white shadow-lg">
           <nav className="px-4 py-4 space-y-3">
             {navLinks.map((link) => (
               <a
@@ -151,7 +151,7 @@ export default function Header() {
                   e.preventDefault();
                   handleNavClick(link);
                 }}
-                className="flex min-h-11 items-center rounded-lg px-4 py-2 text-base font-medium text-text-secondary hover:bg-nature-50 hover:text-primary-600 transition-colors"
+                className="flex min-h-11 items-center rounded-lg px-4 py-2 text-base font-medium text-text-secondary hover:bg-primary-50 hover:text-primary-600 transition-colors"
               >
                 {link.label}
               </a>

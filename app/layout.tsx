@@ -3,17 +3,40 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import StructuredData from "@/components/StructuredData";
-import { Bricolage_Grotesque, DM_Sans } from "next/font/google";
+import { Archivo, DM_Sans, Newsreader, Fira_Code } from "next/font/google";
 
-const bricolage = Bricolage_Grotesque({
+// Display: Archivo. An American grotesque in the GT America family, chosen
+// because it is sturdy and unfashionable. Replaced Bricolage Grotesque, whose
+// deliberate irregularities date the design.
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-heading",
+  weight: ["600", "700", "800"],
+  variable: "--font-display",
   display: "swap",
 });
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   variable: "--font-body",
+  display: "swap",
+});
+
+// Accent: Newsreader italic, for the one emphasized word in a headline and for
+// pull quotes. Replaced Cormorant Garamond, whose hairline contrast read
+// boutique against the rest of the system.
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["italic"],
+  variable: "--font-accent",
+  display: "swap",
+});
+
+const firaCode = Fira_Code({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -96,7 +119,7 @@ export default function RootLayout({
     // scroll position on route changes - fixes pages loading scrolled to the bottom
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
       <body
-        className={`${bricolage.variable} ${dmSans.variable} antialiased font-body`}
+        className={`${archivo.variable} ${dmSans.variable} ${newsreader.variable} ${firaCode.variable} antialiased font-body`}
       >
         <StructuredData />
         <Header />

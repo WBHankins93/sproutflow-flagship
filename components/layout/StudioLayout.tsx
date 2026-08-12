@@ -53,8 +53,8 @@ export const Section: React.FC<SectionProps> = ({
 
   const backgroundClasses = {
     white: 'bg-white',
-    nature: 'bg-nature-50',
-    secondary: 'bg-nature-50'
+    nature: 'bg-primary-50',
+    secondary: 'bg-primary-50'
   };
 
   return (
@@ -125,7 +125,7 @@ export const Card: React.FC<CardProps> = ({
 
   return (
     <div className={`
-      bg-white border border-nature-200 rounded-2xl
+      bg-white border border-primary-200 rounded-2xl
       ${paddingClasses[padding]}
       ${hoverClasses}
       ${className}

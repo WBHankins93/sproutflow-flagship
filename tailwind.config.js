@@ -15,37 +15,38 @@ export default {
       // ============================================
       fontFamily: {
         // These MUST match the CSS variables from layout.tsx
-        display: ['var(--font-heading)', 'var(--font-body)', 'sans-serif'],
-        body: ['var(--font-body)', 'sans-serif'],
-        mono: ['var(--font-mono)', 'monospace'],         // Fira Code for code
+        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-body)', 'system-ui', 'sans-serif'],
+        accent: ['var(--font-accent)', 'Georgia', 'serif'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
       
       // ============================================
       // TYPOGRAPHY SCALE
       // ============================================
       fontSize: {
-        // Hero & Display
-        'hero': ['clamp(2.5rem, 6vw, 5rem)', { 
-          lineHeight: '1.1', 
-          fontWeight: '700',
-          letterSpacing: '-0.02em'
-        }],
-        'section': ['clamp(2rem, 4vw, 3.5rem)', { 
-          lineHeight: '1.2', 
-          fontWeight: '600',
-          letterSpacing: '-0.01em'
-        }],
-        'subsection': ['clamp(1.5rem, 3vw, 2.25rem)', { 
-          lineHeight: '1.3', 
-          fontWeight: '600' 
-        }],
-        
-        // Body Text
-        'body-lg': ['1.125rem', { lineHeight: '1.7' }],
+        // v2 display scale
+        'display-xl': ['clamp(3rem, 5.6vw, 5.125rem)', { lineHeight: '0.94', letterSpacing: '-0.03em', fontWeight: '700' }],
+        'display-lg': ['clamp(2.25rem, 4.2vw, 4rem)', { lineHeight: '1.0', letterSpacing: '-0.025em', fontWeight: '700' }],
+        'display-md': ['clamp(1.75rem, 2.6vw, 2.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '600' }],
+        'h4': ['1.25rem', { lineHeight: '1.3', fontWeight: '600' }],
+
+        // Body
+        'body-lg': ['1.125rem', { lineHeight: '1.75' }],
         'body': ['1rem', { lineHeight: '1.7' }],
-        'body-sm': ['0.875rem', { lineHeight: '1.6' }],
+        'body-sm': ['0.875rem', { lineHeight: '1.65' }],
+
+        // Supporting
+        'eyebrow': ['0.6875rem', { lineHeight: '1.4', letterSpacing: '0.18em', fontWeight: '600' }],
+        'mono-meta': ['0.8125rem', { lineHeight: '1.4', letterSpacing: '0.08em' }],
+
+        // Legacy aliases. Kept so v1 markup renders until each section is
+        // rebuilt in PRs 4 through 10. Remove once no usages remain.
+        'hero': ['clamp(3rem, 5.6vw, 5.125rem)', { lineHeight: '0.94', letterSpacing: '-0.03em', fontWeight: '700' }],
+        'section': ['clamp(2.25rem, 4.2vw, 4rem)', { lineHeight: '1.0', letterSpacing: '-0.025em', fontWeight: '700' }],
+        'subsection': ['clamp(1.75rem, 2.6vw, 2.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '600' }],
       },
-      
+
       // ============================================
       // WOODS & WATERS COLOR PALETTE
       // ============================================
@@ -78,31 +79,30 @@ export default {
           900: '#604123',
         },
         
-        // Nature/Green Tones
-        nature: {
-          50: '#f3f6f5',
-          100: '#e3e9e7',
-          200: '#c9d5d2',
-          300: '#9DB7B5', // Ash Gray
-          400: '#7a9c99',
-          500: '#5e817f',
-          600: '#4c6866',
-          700: '#42533C', // Feldgrau
-          800: '#384540',
-          900: '#323c38',
+        // Ink. Dark canvases for alternating sections. Replaces the old
+        // nature scale, which read too blue against the warm palette.
+        ink: {
+          900: '#141914',
+          800: '#1B211B',
+          700: '#232A23',
         },
-        
+
+        // Cream. Light canvases.
+        cream: {
+          500: '#E9E2D8',
+          300: '#F5F1E9',
+        },
+
         // Text Colors
         text: {
           primary: '#626155',   // Ebony
-          secondary: '#57604F', // Warm gray-green (replaced Payne's Gray #445E69 - read too blue/turquoise)
-          muted: '#686d63',
+          secondary: '#57604F', // Warm gray-green
+          muted: '#7a7d72',
         },
         
         // Background Colors
         background: {
           primary: '#E9E2D8',   // Alabaster
-          secondary: '#EDDDC0', // Dutch White
           card: '#DDE3E2',      // Platinum
         },
       },

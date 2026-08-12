@@ -128,7 +128,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
       </section>
 
       {caseStudy.beforeAfter && caseStudy.beforeAfter.length > 0 && (
-        <section aria-labelledby="proof-heading" className="bg-background-secondary py-16 md:py-24">
+        <section aria-labelledby="proof-heading" className="bg-cream-300 py-16 md:py-24">
           <Container>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary-700">Visual proof</p>
             <h2 id="proof-heading" className="mt-3 font-display text-4xl font-semibold text-primary-900 sm:text-5xl">Before and after</h2>

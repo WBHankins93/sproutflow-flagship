@@ -73,7 +73,7 @@ function Label({
 }
 
 const inputBase =
-  'w-full min-h-12 rounded-xl border border-nature-200 bg-white px-4 py-3 font-body text-text-primary placeholder:text-text-muted focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600/20 transition-colors';
+  'w-full min-h-12 rounded-xl border border-primary-200 bg-white px-4 py-3 font-body text-text-primary placeholder:text-text-muted focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600/20 transition-colors';
 
 export function InquiryForm() {
   const [data, setData] = useState<InquiryFormData>(initialFormData);
@@ -151,7 +151,7 @@ export function InquiryForm() {
 
   if (submitted) {
     return (
-      <div className="mx-auto max-w-xl space-y-6 rounded-2xl border border-nature-200 bg-nature-50/50 p-6 text-center sm:p-8">
+      <div className="mx-auto max-w-xl space-y-6 rounded-2xl border border-primary-200 bg-primary-50/50 p-6 text-center sm:p-8">
         <Heading level={2} className="text-primary-800">
           Thanks. Your project is in.
         </Heading>
@@ -299,7 +299,7 @@ export function InquiryForm() {
         </div>
       </FormSection>
 
-      <div className="border-t border-nature-200 pt-7">
+      <div className="border-t border-primary-200 pt-7">
         <Button type="submit" variant="primary" size="lg" className="min-h-12 w-full sm:w-auto" disabled={isSubmitting}>
           {isSubmitting ? 'Sending…' : 'Send project details'}
         </Button>
