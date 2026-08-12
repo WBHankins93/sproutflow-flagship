@@ -98,7 +98,9 @@ Handoff Phase 5.1 and 5.2. Consolidate onto `projectProof.ts`; add `industry` an
 **Metrics: cleared.** Ben has confirmed the `result` strings in `projectProof.ts` ("50% more qualified inquiries," "2x consultation requests," "30% customer acquisition growth") are accurate and defensible. They may render. Handoff Phase 0 rule 4 is satisfied for these five; it still applies to any new metric added later.
 
 ### PR 7 — `/about`
-Handoff Phase 5.4. **Blocked on your four to six sentences and the photography.** Everything else can be built with placeholders, but do not merge with `"Your words go here"` in the tree.
+Handoff Phase 5.4. **Copy is approved and written — see `docs/V2_ABOUT_COPY.md`.** Ship the opening block exactly as written there; the clipped, declarative register is deliberate and was chosen over longer alternatives.
+
+Still blocked on **founder and studio photography** (4 to 6 frames). Everything else can be built now. Do not merge with `"Your words go here"` or `"Four to six frames replace these slots"` in the tree.
 
 ### PR 8 — `/faq` regroup + `/resources` hub
 Handoff Phase 5.5 and 5.6. Grouped FAQ accordion with answers under 60 words, `FAQPage` schema per group. Resources hub with Guides and Notes. Resources is the engine for the GEO cadence in the SEO spec §6 — it is how the site stays fresh for LLM retrieval without touching the base layer.

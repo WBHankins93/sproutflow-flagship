@@ -25,9 +25,27 @@ Maps to the v2 About mockup slots: opening block, "01, before Sproutflow," "02, 
 
 ---
 
-## Opening block — three drafts
+## Opening block — APPROVED
 
-### Draft A (recommended, ~6 sentences)
+Ben approved this on 2026-08-11. Ship as written. Do not rewrite, expand, or "improve" it.
+
+> I spent seven years building and running software inside large companies, including IBM. That work taught me how to scope honestly, ship on a date, and leave behind something the next person can maintain.
+>
+> Sproutflow is where that goes to work for owner run businesses. You will not meet me on the call and then get handed to someone else.
+>
+> I am self taught, which means I had to learn this in plain language. You get the same version.
+>
+> Outside of it I garden, keep too many tropical plants, and make hot sauce that never comes out the same twice.
+
+Four paragraphs, rendered as four separate `<p>` elements in the opening block beside the founder portrait. Register is short and declarative on purpose. Long connected sentences were tried and rejected.
+
+---
+
+## Earlier drafts, superseded
+
+Kept for reference only. **Do not ship these.**
+
+### Draft A (~6 sentences)
 
 > I grew up on the Mississippi coast and around New Orleans, finished a communications degree at Mississippi State, and then spent the next couple of years teaching myself to write software because I could not stop thinking about it. That turned into a bootcamp in Austin, and then seven years building enterprise software, most of it at IBM. The project I still bring up is a realtime map for emergency services that used early Watson tooling to alert people inside an affected area while responders were still on the way. Somewhere in all of that I figured out which part I actually liked, and it was never the glamorous part. It was taking a system everyone had given up on and making it work properly. Now I do that for businesses here, and when I am not doing it I am usually in the garden with more tropical plants than I have room for, growing peppers for a hot sauce I refuse to stop tinkering with.
 

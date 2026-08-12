@@ -82,7 +82,7 @@ PRs 1 and 2 are parallel-safe with each other. Everything after is strictly sequ
 | 4 | `feat/homepage-v2` | Rebuild homepage sections | Lighthouse desktop perf 90+, no letterboxed screenshots |
 | 5 | `feat/services-pages` | Services hub and per-path detail pages | each path: unique title, description, `Service` schema, 600+ words unique copy |
 | 6 | `feat/work-and-case-studies` | Work index with filters and case study template | single data source, `BreadcrumbList` on every case study |
-| 7 | `feat/about-page` | About page | **blocked on Ben's copy and photography** |
+| 7 | `feat/about-page` | About page | copy approved in `V2_ABOUT_COPY.md`; **blocked on photography** |
 | 8 | `feat/faq-and-resources` | FAQ regroup and resources hub | FAQ answers under 60 words, `Article` schema, RSS feed live |
 | 9 | `feat/inquiry-form-v2` | Three-step inquiry form | step state survives refresh, `?path=` preselect works |
 | 10 | `feat/mobile-pass` | Mobile and tablet pass | Lighthouse mobile perf 85+, a11y 100, all motion respects reduced-motion |
@@ -133,7 +133,6 @@ Cursor cannot resolve these. Flag and move on.
 
 | Item | Blocks |
 |---|---|
-| Ben's About copy (4 to 6 sentences) | **PR 7, hard** |
 | Founder and studio photography, 4 to 6 frames | PR 7 |
 | Five client site scroll recordings, 10 to 20s | PR 4, 5, 6 — placeholders may merge |
 | CRM / booking / dashboard capture | PR 5 business-systems panel |
