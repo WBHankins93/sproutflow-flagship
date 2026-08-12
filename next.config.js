@@ -12,6 +12,11 @@ const nextConfig = {
         destination: '/work',
         permanent: true,
       },
+      {
+        source: '/how-we-handle-your-data',
+        destination: '/data-and-ownership',
+        permanent: true,
+      },
     ];
   },
   images: {
