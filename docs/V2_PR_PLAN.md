@@ -28,7 +28,7 @@ The handoff was written against the Design system export, which is two months be
 
 I read the extracted copy from all nine mockups. It is genuinely in your voice — first person, short declaratives, concrete situations, no em dashes, no ban-list words. Ship it nearly as written. Six things:
 
-1. **"The Sproutflow difference"** is the one agency-trope headline in the set. "The [Brand] difference" is a stock phrase and it is the section a skeptical owner hits second. The body copy underneath it is excellent and does not need help. Change the headline to **"Most studios sell you a website."** and let the existing first paragraph continue from it. Keeps the gold italic treatment on "website."
+1. ~~"The Sproutflow difference" is an agency trope, replace it.~~ **Overruled by Ben — keep it as written.** Rationale accepted: a named difference is what makes a company distinct, and the section earns it with concrete copy rather than claims. Ship the headline with the gold italic on "difference."
 
 2. **"6+ years"** conflicts with the About page's "I spent six years." Pick one number and use it in both places plus the schema. If it is more than six, say the real number, since it is your strongest credibility signal against a solo-founder objection.
 
@@ -95,7 +95,7 @@ Includes relocating the `CustomerPathSection` copy in as "what usually breaks." 
 ### PR 6 — `/work` index + case study template
 Handoff Phase 5.1 and 5.2. Consolidate onto `projectProof.ts`; add `industry` and `filterTags`; delete `workProjects.ts`. Filter bar, project rows, the fixed ten-section case study order, `BreadcrumbList` schema.
 
-**Hold the line on metrics:** no invented outcome numbers. The existing `result` strings in `projectProof.ts` ("50% more qualified inquiries," "2x consultation requests," "30% customer acquisition growth") need your individual sign-off before they render, per handoff Phase 0 rule 4. If any are not defensible, cut them — an unverifiable number is worse than none, in search and with a prospect.
+**Metrics: cleared.** Ben has confirmed the `result` strings in `projectProof.ts` ("50% more qualified inquiries," "2x consultation requests," "30% customer acquisition growth") are accurate and defensible. They may render. Handoff Phase 0 rule 4 is satisfied for these five; it still applies to any new metric added later.
 
 ### PR 7 — `/about`
 Handoff Phase 5.4. **Blocked on your four to six sentences and the photography.** Everything else can be built with placeholders, but do not merge with `"Your words go here"` in the tree.
