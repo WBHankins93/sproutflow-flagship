@@ -43,7 +43,7 @@ describe('Component Rendering - Footer', () => {
     expect(screen.getByText('Services')).toBeInTheDocument()
     expect(screen.getByText('Work')).toBeInTheDocument()
     expect(screen.getByText('About')).toBeInTheDocument()
-    expect(screen.getByText('How We Handle Your Data')).toBeInTheDocument()
+    expect(screen.getByText('How I Handle Your Data')).toBeInTheDocument()
     expect(screen.getByText('FAQ')).toBeInTheDocument()
   })
 

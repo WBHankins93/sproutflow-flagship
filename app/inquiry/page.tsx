@@ -4,7 +4,7 @@ import { Container } from '@/components/layout/StudioLayout';
 import { InquiryForm } from '@/components/inquiry/InquiryForm';
 
 export const metadata = {
-  title: 'Tell Me About Your Project',
+  title: 'Start a Project',
   description:
     'Share what you need with Sproutflow Studio. Only your name and email are required, and you can include a comfortable budget privately.',
   alternates: { canonical: '/inquiry' },

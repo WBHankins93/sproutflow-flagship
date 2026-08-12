@@ -4,7 +4,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Container } from '@/components/layout/StudioLayout';
 
 export const metadata = {
-  title: 'Frequently Asked Questions',
+  title: 'Common Questions',
   description:
     'Answers about Sproutflow Studio project scope, timelines, custom websites, business systems, ownership, maintenance, and working remotely.',
   alternates: { canonical: '/faq' },

@@ -12,7 +12,7 @@ import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
   title: {
-    absolute: 'Custom Websites & Business Systems | Sproutflow Studio - New Orleans Web Design',
+    absolute: 'Web Design & Business Systems in New Orleans | Sproutflow Studio',
   },
   description:
     'Sproutflow Studio builds custom websites, CRMs, admin tools, and workflow automation for small businesses in New Orleans. Clear scope, fixed quotes, and founder-led delivery.',

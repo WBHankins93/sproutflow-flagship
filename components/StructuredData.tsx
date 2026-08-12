@@ -31,6 +31,14 @@ const professionalServiceSchema = {
   },
   telephone: '+1-504-326-1676',
   email: 'ben@sproutflow-studio.com',
+  // Schema.org expects a relative indicator here, never a dollar figure.
+  priceRange: '$$',
+  founder: { '@id': `${siteUrl}#ben` },
+  employee: { '@id': `${siteUrl}#ben` },
+  numberOfEmployees: {
+    '@type': 'QuantitativeValue',
+    value: 1,
+  },
   sameAs: [
     'https://linkedin.com/company/sproutflow-studio',
   ],
@@ -109,11 +117,78 @@ const professionalServiceSchema = {
   },
 };
 
+// Person node for Ben.
+//
+// Search and LLM retrieval systems resolve "who should I hire" queries to
+// people at least as often as to companies, and most solo studios omit this
+// entirely. The sameAs links tie the studio and the personal site into one
+// entity, which strengthens both.
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${siteUrl}#ben`,
+  name: 'Ben Hankins',
+  givenName: 'Ben',
+  familyName: 'Hankins',
+  jobTitle: 'Founder and Software Engineer',
+  description:
+    'Ben Hankins runs Sproutflow Studio in New Orleans, Louisiana. He spent seven years building and running software inside large companies, including IBM, and now builds custom websites and business systems for owner-run businesses.',
+  url: `${siteUrl}/about`,
+  image: `${siteUrl}/images/ben-photo.png`,
+  worksFor: { '@id': `${siteUrl}#organization` },
+  homeLocation: {
+    '@type': 'Place',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'New Orleans',
+      addressRegion: 'LA',
+      addressCountry: 'US',
+    },
+  },
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: 'Mississippi State University',
+  },
+  knowsAbout: [
+    'web design',
+    'web development',
+    'custom software development',
+    'CRM systems',
+    'business process automation',
+    'internal tools and dashboards',
+    'site reliability engineering',
+    'cloud architecture',
+  ],
+  sameAs: [
+    'https://www.benhankins.dev/',
+    'https://linkedin.com/company/sproutflow-studio',
+  ],
+};
+
+const webSiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}#website`,
+  url: siteUrl,
+  name: 'Sproutflow Studio',
+  description:
+    'Custom websites, CRMs, booking flows, and automation for small businesses in New Orleans, Louisiana.',
+  publisher: { '@id': `${siteUrl}#organization` },
+  inLanguage: 'en-US',
+};
+
+const schemas = [professionalServiceSchema, personSchema, webSiteSchema];
+
 export default function StructuredData() {
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
-    />
+    <>
+      {schemas.map((schema) => (
+        <script
+          key={schema['@id']}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+    </>
   );
 }

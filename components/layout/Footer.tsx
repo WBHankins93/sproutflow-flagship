@@ -70,8 +70,8 @@ export const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/how-we-handle-your-data" className="hover:text-white transition-colors">
-                  How We Handle Your Data
+                <Link href="/data-and-ownership" className="hover:text-white transition-colors">
+                  How I Handle Your Data
                 </Link>
               </li>
               <li>

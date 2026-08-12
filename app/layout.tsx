@@ -22,8 +22,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.c
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Sproutflow Studio | Web Design & Custom Business Software in New Orleans, LA",
-    template: "%s | Sproutflow Studio - New Orleans Web Design"
+    default: "Sproutflow Studio | Web Design & Business Systems in New Orleans",
+    template: "%s | Sproutflow Studio"
   },
   description: "Custom websites and the business systems behind them: web design, admin tools, CRMs, and automation for small businesses in New Orleans, LA.",
   keywords: [

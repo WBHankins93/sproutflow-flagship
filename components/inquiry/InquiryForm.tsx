@@ -305,7 +305,7 @@ export function InquiryForm() {
         </Button>
         <p className="mt-4 flex items-start gap-2 text-sm text-text-muted">
           <LockKeyhole className="mt-0.5 h-4 w-4 flex-none" />
-          <span>I use these details only to respond to your inquiry. Read <a href="/how-we-handle-your-data" className="font-semibold text-primary-700 underline underline-offset-2">how Sproutflow handles your data</a>.</span>
+          <span>I use these details only to respond to your inquiry. Read <a href="/data-and-ownership" className="font-semibold text-primary-700 underline underline-offset-2">how I handle your data</a>.</span>
         </p>
         {isSubmitting && <p className="mt-2 text-sm text-text-muted">Keep this page open while the form sends.</p>}
       </div>

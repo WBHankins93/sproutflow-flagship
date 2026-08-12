@@ -91,7 +91,7 @@ describe('Data Validation - Project Proof', () => {
 
   it('should point every project at an external live site', () => {
     projectProof.forEach(project => {
-      expect(project.liveUrl).toMatch(/^https?:\/\/.+/)
+      expect(/^https?:\/\/.+/.test(project.liveUrl)).toBe(true)
     })
   })
 

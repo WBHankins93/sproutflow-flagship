@@ -58,7 +58,7 @@ describe('Data Consistency - Testimonials', () => {
   it('should use https for any live url', () => {
     testimonials.forEach(entry => {
       if (entry.liveUrl) {
-        expect(entry.liveUrl).toMatch(/^https:\/\/.+/)
+        expect(/^https:\/\/.+/.test(entry.liveUrl)).toBe(true)
       }
     })
   })
