@@ -11,7 +11,7 @@ export const metadata = {
 };
 
 const nextSteps = [
-  { icon: FileSearch, title: 'I read the details', text: 'Ben reviews every inquiry himself.' },
+  { icon: FileSearch, title: 'I read the details', text: 'Every inquiry comes to me directly.' },
   { icon: MessageSquareText, title: 'We talk if useful', text: 'A short call helps clarify the right starting point.' },
   { icon: ReceiptText, title: 'You get a fixed quote', text: 'Scope, timing, and cost are written down before work starts.' },
 ];

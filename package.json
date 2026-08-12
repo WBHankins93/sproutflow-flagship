@@ -12,7 +12,8 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "upload-images": "tsx scripts/upload-images-to-blob.ts",
-    "get-blob-url": "tsx scripts/get-blob-store-url.ts"
+    "get-blob-url": "tsx scripts/get-blob-store-url.ts",
+    "check:copy": "node scripts/check-copy.mjs"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
