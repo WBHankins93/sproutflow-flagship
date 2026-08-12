@@ -102,7 +102,8 @@ Small things that are easy to miss and expensive to fix later.
 - `app/not-found.tsx`: the "Contact our team" CTA links to `href="#contact"`, which does not exist on a 404. Point it at `/inquiry`.
 - `app/inquiry/page.tsx`: `"Ben reviews every inquiry himself."` → `"Every inquiry comes to me directly."`
 
-**PR 2**
+**PR 2 — landed. One finding worth carrying forward.**
+- **Route redirects must be declared in `next.config.js`, not as a page-level `permanentRedirect` stub.** A stub page returns 200, not 308. The existing `/how-we-work` and `/case-studies` redirects work because they are in `next.config.js`; their stub pages under `app/` are unreachable dead code and can be deleted in any later PR.
 - Add `https://www.benhankins.dev/` to the `Person` node's `sameAs`. It links Ben's two web properties into one entity, which strengthens both for search and for LLM retrieval.
 - `priceRange` in schema is `"$$"`, never a dollar figure.
 - `areaServed` must include both New Orleans and `Country: US`. He is local but works nationwide.
