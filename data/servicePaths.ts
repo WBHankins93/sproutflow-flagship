@@ -4,6 +4,8 @@ export interface ServicePath {
   id: ServicePathId;
   eyebrow: string;
   title: string;
+  /** Substring of `title` set in the accent face on the detail page header. */
+  titleAccent: string;
   outcome: string;
   description: string;
   goodFit: string;
@@ -22,6 +24,7 @@ export const servicePaths: ServicePath[] = [
     id: 'websites',
     eyebrow: 'Websites',
     title: 'Websites that earn trust',
+    titleAccent: 'earn trust',
     outcome: 'Help the right customer understand your value and take the next step.',
     description:
       'I shape the message and customer path before building a fast, accessible site that is easy for you to own.',
@@ -55,6 +58,7 @@ export const servicePaths: ServicePath[] = [
     id: 'business-systems',
     eyebrow: 'Business systems',
     title: 'Systems that remove friction',
+    titleAccent: 'remove friction',
     outcome: 'Give your team a clearer way to move a customer from inquiry to completed work.',
     description:
       'I connect leads, customer information, scheduling, and follow-up so the team is not stitching the work together by hand.',
@@ -88,6 +92,7 @@ export const servicePaths: ServicePath[] = [
     id: 'growth-support',
     eyebrow: 'Growth and support',
     title: 'Ongoing growth and support',
+    titleAccent: 'growth and support',
     outcome: 'Protect the work you have already done and make the next improvement with evidence.',
     description:
       'Keep the site healthy, review what customers are doing, and add new work when the business is ready for it.',

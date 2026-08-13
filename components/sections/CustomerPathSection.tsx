@@ -57,7 +57,7 @@ export default function CustomerPathSection() {
                     <span className="flex h-11 w-11 items-center justify-center rounded-md bg-white/10 text-accent-300">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
-                    <h3 className="font-display text-xl font-semibold text-white">
+                    <h3 className="font-display text-h4 font-semibold text-white">
                       <span className="mr-2 text-sm text-white/45" aria-hidden="true">
                         0{index + 1}
                       </span>

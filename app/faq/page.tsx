@@ -95,6 +95,7 @@ export default function FAQPage() {
       <PageHeader
         eyebrow="Common questions"
         title="The practical details."
+        titleAccent="practical details"
         intro="Open the group that matches what you are deciding. If your situation is different, send it to me in plain language."
         count={`${String(groups.flatMap((group) => group.items).length).padStart(2, '0')} questions`}
       />

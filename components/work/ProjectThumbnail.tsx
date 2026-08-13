@@ -59,7 +59,7 @@ export default function ProjectThumbnail({
       {showDetails && (
         <div className="mt-4 flex items-start justify-between gap-5 border-t border-primary-900/20 pt-4">
           <div>
-            <h3 className="font-display text-xl font-semibold text-primary-900">{project.name}</h3>
+            <h3 className="font-display text-h4 text-primary-900">{project.name}</h3>
             <p className="mt-1 text-sm text-text-muted">{project.location}</p>
             <p className="mt-2 font-semibold" style={{ color: project.inkColor }}>
               {project.result}

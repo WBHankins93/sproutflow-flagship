@@ -9,7 +9,7 @@ export default function WorktableSection() {
     <SectionShell
       index="03"
       label="selected work"
-      variant="ink"
+      variant="ink" tone="raised"
       labelledBy="selected-work-heading"
       className="bg-ink-800"
     >

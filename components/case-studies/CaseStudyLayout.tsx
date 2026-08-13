@@ -80,7 +80,9 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
             className="object-cover object-top"
           />
         </div>
-        <p className="mt-4 font-mono text-mono-meta text-white/45">Scroll recording replaces this still when ready</p>
+        <p className="mt-4 font-mono text-mono-meta text-white/45">
+          {caseStudy.clientName} · <a href={caseStudy.liveUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-white">visit the live site</a>
+        </p>
       </SectionShell>
 
       <SectionShell index="02" label="the situation" variant="cream" labelledBy="case-problem-heading">
@@ -100,7 +102,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
       <SectionShell index="03" label="what I built" variant="ink" labelledBy="case-built-heading">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <h2 id="case-built-heading" className="font-display text-display-lg text-cream-300">
+            <h2 id="case-built-heading" className="font-display text-display-md text-cream-300">
               The working parts of the project.
             </h2>
             <ol className="mt-10 border-t border-white/20">
@@ -121,7 +123,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
       </SectionShell>
 
       <SectionShell index="04" label="how it works now" variant="cream" labelledBy="case-results-heading">
-        <h2 id="case-results-heading" className="max-w-4xl font-display text-display-lg text-primary-900">
+        <h2 id="case-results-heading" className="max-w-4xl font-display text-display-md text-primary-900">
           What changed after launch.
         </h2>
         <div className="mt-12 grid gap-px border border-primary-900/20 bg-primary-900/20 md:grid-cols-3">
@@ -137,7 +139,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
       <SectionShell index="05" label="timeline" variant="ink" className="bg-ink-800" labelledBy="case-timeline-heading">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <h2 id="case-timeline-heading" className="font-display text-display-lg text-cream-300">
+            <h2 id="case-timeline-heading" className="font-display text-display-md text-cream-300">
               From scope to launch.
             </h2>
             <p className="mt-5 font-mono text-mono-meta text-accent-300">{caseStudy.details.timeline}</p>
@@ -225,7 +227,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
         )}
         <div className="relative mx-auto max-w-[1186px] px-5 md:px-11">
           <p className="text-eyebrow uppercase text-accent-300">Next project</p>
-          <h2 className="mt-5 flex items-center justify-between gap-8 font-display text-display-lg text-cream-300">
+          <h2 className="mt-5 flex items-center justify-between gap-8 font-display text-display-md text-cream-300">
             {nextStudy.clientName}
             <ArrowRight className="h-9 w-9" aria-hidden="true" />
           </h2>

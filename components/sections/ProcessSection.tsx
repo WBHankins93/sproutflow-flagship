@@ -24,7 +24,7 @@ export default function ProcessSection() {
     >
       <div className="grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <h2 id="process-heading" className="font-display text-display-lg text-primary-900">
+          <h2 id="process-heading" className="font-display text-display-md text-primary-900">
             Four checkpoints. You see the work as it{' '}
             <span className="font-accent font-normal italic text-accent-700">takes shape.</span>
           </h2>
@@ -46,7 +46,7 @@ export default function ProcessSection() {
                   0{index + 1}
                 </span>
                 <div className="md:mt-6">
-                  <h3 className="font-display text-xl text-primary-900">{title}</h3>
+                  <h3 className="font-display text-h4 text-primary-900">{title}</h3>
                   <p className="mt-3 text-body-sm text-text-secondary">{body}</p>
                 </div>
               </li>

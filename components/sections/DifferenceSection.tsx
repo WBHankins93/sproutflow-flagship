@@ -47,7 +47,7 @@ export default function DifferenceSection() {
           {proof.map(({ icon: Icon, title, body }) => (
             <article key={title} className="bg-white p-6">
               <Icon className="h-5 w-5 text-accent-700" aria-hidden="true" />
-              <h3 className="mt-5 font-display text-xl text-primary-900">{title}</h3>
+              <h3 className="mt-5 font-display text-h4 text-primary-900">{title}</h3>
               <p className="mt-3 text-text-secondary">{body}</p>
             </article>
           ))}

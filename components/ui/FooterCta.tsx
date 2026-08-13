@@ -4,7 +4,7 @@ import Marquee from './Marquee';
 
 export default function FooterCta() {
   return (
-    <section className="grain relative overflow-hidden bg-ink-900 pb-20 pt-10 text-white md:pb-28">
+    <section className="grain rings relative overflow-hidden bg-ink-900 pb-20 pt-10 text-white md:pb-28">
       <Marquee
         variant="ghost"
         speed={58}

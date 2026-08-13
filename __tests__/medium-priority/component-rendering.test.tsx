@@ -93,7 +93,9 @@ describe('Component Rendering - Unified Work Page', () => {
   it('should present client work and results in one destination', () => {
     const { container } = render(<WorkPage />)
 
-    expect(screen.getByText('The work, and what changed after.')).toBeInTheDocument()
+    // The headline is split across elements: AccentPhrase wraps one phrase in
+    // the accent face, so an exact-string match no longer sees a single node.
+    expect(container.querySelector('h1')?.textContent).toBe('The work, and what changed after.')
     expect(screen.getByText('50% more qualified inquiries')).toBeInTheDocument()
     expect(screen.getByText('30% customer acquisition growth')).toBeInTheDocument()
     expect(container.querySelector('a[href="/case-studies/second-line-psychiatry"]')).toBeInTheDocument()

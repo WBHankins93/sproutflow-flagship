@@ -21,6 +21,7 @@ export default function ResourcesPage() {
       <PageHeader
         eyebrow="Guides and notes"
         title="Useful answers, written down."
+        titleAccent="written down"
         intro="Longer guides for decisions that deserve context. Short notes for patterns I keep seeing in the work."
         count={`${String(resources.length).padStart(2, '0')} drafts`}
       />

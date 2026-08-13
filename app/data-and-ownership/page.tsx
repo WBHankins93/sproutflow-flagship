@@ -55,6 +55,7 @@ export default function DataAndOwnershipPage() {
       <PageHeader
         eyebrow="Data and ownership"
         title="Know where it lives. Keep control of it."
+        titleAccent="Keep control of it"
         intro="Plain-language rules for the data, accounts, access, backups, and handoff behind a project."
       />
       <SectionShell index="01" label="the practical answers" variant="cream">

@@ -32,6 +32,15 @@ const RULES = [
     message: 'Design mockup scaffolding found. Replace with real content or a labeled placeholder component.',
   },
   {
+    // The literal markers above only catch strings someone already knew to ban.
+    // This catches the shape of "this asset is not real yet" copy, which is how
+    // "Client scroll recordings replace these stills when ready" shipped to the
+    // homepage and survived a passing guard run.
+    id: 'placeholder-prose',
+    test: /\b(replace these|replaces? this (?:still|image|placeholder)|when ready|real (?:captures?|photography|footage) (?:go|goes|drop)|coming soon|placeholder (?:copy|text|image)|final copy (?:to|goes))\b/i,
+    message: 'Reads like placeholder prose describing a missing asset. Use a MediaPanel placeholder prop instead of shipping the sentence.',
+  },
+  {
     id: 'arrow-entity',
     test: /&#8594;|&rarr;/,
     message: 'Raw HTML arrow entity found. Use the Lucide ArrowRight icon instead.',

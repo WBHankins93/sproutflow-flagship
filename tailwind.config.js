@@ -29,6 +29,10 @@ export default {
         'display-xl': ['clamp(2.5rem, 5.6vw, 5.125rem)', { lineHeight: '0.94', letterSpacing: '-0.03em', fontWeight: '700' }],
         'display-lg': ['clamp(2rem, 4.2vw, 4rem)', { lineHeight: '1.0', letterSpacing: '-0.025em', fontWeight: '700' }],
         'display-md': ['clamp(1.5rem, 2.6vw, 2.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '600' }],
+        // Supporting sections. Without this step everything below the page's
+        // two or three anchor headings collapses onto display-md and the page
+        // reads as one flat shout.
+        'display-sm': ['clamp(1.5rem, 2.1vw, 1.9375rem)', { lineHeight: '1.12', letterSpacing: '-0.015em', fontWeight: '600' }],
         'h4': ['1.25rem', { lineHeight: '1.3', fontWeight: '600' }],
 
         // Body

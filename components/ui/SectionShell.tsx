@@ -2,12 +2,23 @@ import type { ReactNode } from 'react';
 
 export type ShellVariant = 'ink' | 'cream';
 
+/**
+ * Tonal step within a variant.
+ *
+ * When two sections must sit adjacent on the same canvas, stepping one to
+ * `raised` creates a visible seam without inverting every text colour inside
+ * it. Cheaper and safer than flipping a whole section, and it keeps contrast
+ * ratios intact.
+ */
+export type ShellTone = 'base' | 'raised';
+
 interface SectionShellProps {
   /** Two-digit section index, e.g. "01". Rendered in the sticky margin label. */
   index?: string;
   /** Short label beside the index, e.g. "ways to work together". */
   label?: string;
   variant?: ShellVariant;
+  tone?: ShellTone;
   id?: string;
   /** Passed through to aria-labelledby on the section element. */
   labelledBy?: string;
@@ -17,9 +28,15 @@ interface SectionShellProps {
   children: ReactNode;
 }
 
-const VARIANTS: Record<ShellVariant, string> = {
-  ink: 'grain bg-ink-900 text-white',
-  cream: 'bg-cream-300 text-text-primary',
+const VARIANTS: Record<ShellVariant, Record<ShellTone, string>> = {
+  ink: {
+    base: 'grain rings bg-ink-900 text-white',
+    raised: 'grain rings rings-left bg-ink-800 text-white',
+  },
+  cream: {
+    base: 'bg-cream-300 text-text-primary',
+    raised: 'bg-cream-500 text-text-primary',
+  },
 };
 
 /**
@@ -29,10 +46,38 @@ const VARIANTS: Record<ShellVariant, string> = {
  * the sticky margin label stay consistent. The 190px margin label is desktop
  * only; below lg it collapses into an inline eyebrow above the content.
  */
+/**
+ * Dev-only rhythm check.
+ *
+ * Two consecutive shells sharing a variant merge into one long undifferentiated
+ * scroll, which is how /work became a single dark slab from header to footer.
+ * Warns in development only; never runs in production.
+ */
+function useRhythmWarning(surface: string, index?: string, label?: string) {
+  if (process.env.NODE_ENV === 'production' || typeof document === 'undefined') return;
+  if (typeof queueMicrotask !== 'function') return;
+  queueMicrotask(() => {
+    const shells = [...document.querySelectorAll('[data-shell-variant]')];
+    for (let i = 1; i < shells.length; i += 1) {
+      const prev = shells[i - 1].getAttribute('data-shell-variant');
+      const curr = shells[i].getAttribute('data-shell-variant');
+      if (prev === curr) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          `[SectionShell] Two consecutive "${curr}" sections (#${i} and #${i + 1}). ` +
+            'Adjacent same-canvas sections read as one section. Alternate ink and cream.'
+        );
+        break;
+      }
+    }
+  });
+}
+
 export default function SectionShell({
   index,
   label,
   variant = 'cream',
+  tone = 'base',
   id,
   labelledBy,
   ariaLabel,
@@ -40,13 +85,15 @@ export default function SectionShell({
   children,
 }: SectionShellProps) {
   const hasMarginLabel = Boolean(index || label);
+  useRhythmWarning(`${variant}-${tone}`, index, label);
 
   return (
     <section
       id={id}
       aria-labelledby={labelledBy}
       aria-label={ariaLabel}
-      className={`relative overflow-hidden ${VARIANTS[variant]} ${className}`}
+      data-shell-variant={`${variant}-${tone}`}
+      className={`relative overflow-hidden ${VARIANTS[variant][tone]} ${className}`}
     >
       <div className="relative mx-auto flex max-w-[1440px] gap-0 px-5 py-[clamp(3.5rem,12vw,5rem)] md:px-11 md:py-[clamp(4rem,7vw,7.25rem)] lg:gap-8">
         {hasMarginLabel && (

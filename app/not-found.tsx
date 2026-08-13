@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <section className="grain relative flex min-h-[calc(100svh-88px)] items-center bg-ink-900 text-white">
+    <section className="grain rings relative flex min-h-[calc(100svh-88px)] items-center bg-ink-900 text-white">
       <div className="relative mx-auto w-full max-w-[1186px] px-5 py-20 md:px-11">
         <p className="font-mono text-mono-meta text-accent-300">404 · page not found</p>
         <h1 className="mt-7 max-w-4xl font-display text-display-lg text-cream-300">

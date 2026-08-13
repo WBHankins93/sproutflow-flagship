@@ -42,6 +42,7 @@ export default function AboutPage() {
       <PageHeader
         eyebrow="About Ben"
         title="I stay close to the problem and the people living with it."
+        titleAccent="the people living with it"
         intro="One person from the first conversation through launch, documentation, and support."
       />
       <SectionShell index="01" label="the opening" variant="cream">
@@ -107,7 +108,7 @@ export default function AboutPage() {
 
       <SectionShell index="03" label="why Sproutflow" variant="cream" labelledBy="origin-heading">
         <div className="grid gap-10 lg:grid-cols-12">
-          <h2 id="origin-heading" className="font-display text-display-lg text-primary-900 lg:col-span-5">
+          <h2 id="origin-heading" className="font-display text-display-md text-primary-900 lg:col-span-5">
             Built for businesses that grew on reputation first.
           </h2>
           <div className="space-y-6 text-body-lg text-text-secondary lg:col-span-6 lg:col-start-7">
@@ -133,7 +134,7 @@ export default function AboutPage() {
         className="bg-ink-700"
         labelledBy="principles-heading"
       >
-        <h2 id="principles-heading" className="max-w-4xl font-display text-display-lg text-cream-300">
+        <h2 id="principles-heading" className="max-w-4xl font-display text-display-md text-cream-300">
           Five principles that stay visible in the work.
         </h2>
         <div className="mt-12 grid border-t border-white/20 md:grid-cols-2">
@@ -143,7 +144,7 @@ export default function AboutPage() {
               className={`border-b border-white/20 py-7 md:px-7 ${index % 2 === 0 ? 'md:border-r md:pl-0' : 'md:pr-0'}`}
             >
               <span className="font-mono text-mono-meta text-accent-300">0{index + 1}</span>
-              <h3 className="mt-5 font-display text-2xl text-cream-300">{title}</h3>
+              <h3 className="mt-5 font-display text-h4 text-cream-300">{title}</h3>
               <p className="mt-3 text-white/60">{body}</p>
             </article>
           ))}

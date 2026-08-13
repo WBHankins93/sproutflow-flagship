@@ -28,7 +28,7 @@ export default function DeviceFrame({
     return (
       <div
         style={{ width: width ?? 148 }}
-        className={`rounded-[1.75rem] border-[6px] border-ink-800 bg-ink-800 shadow-2xl ${className}`}
+        className={`rounded-[1.75rem] border-[6px] border-ink-700 bg-ink-700 shadow-[0_18px_50px_rgba(0,0,0,0.55)] ring-1 ring-white/15 ${className}`}
       >
         <div className="relative aspect-[9/19] overflow-hidden rounded-[1.25rem] bg-white">
           {children}
@@ -41,7 +41,7 @@ export default function DeviceFrame({
     return (
       <div
         style={{ width }}
-        className={`overflow-hidden rounded-xl border border-ink-800/25 bg-white shadow-xl ${className}`}
+        className={`overflow-hidden rounded-xl border border-ink-700 bg-white shadow-[0_18px_50px_rgba(0,0,0,0.45)] ring-1 ring-white/15 ${className}`}
       >
         <div className="flex items-center gap-1.5 border-b border-ink-800/10 bg-cream-300 px-3 py-2">
           <span className="h-2.5 w-2.5 rounded-full bg-ink-900/15" />
@@ -55,12 +55,13 @@ export default function DeviceFrame({
 
   return (
     <div style={{ width }} className={className}>
-      <div className="rounded-t-xl border-[10px] border-b-0 border-ink-800 bg-ink-800 shadow-2xl">
+      <div className="rounded-t-xl border-[10px] border-b-0 border-ink-700 bg-ink-700 shadow-[0_24px_70px_rgba(0,0,0,0.6)] ring-1 ring-white/15">
         <div className="relative h-[330px] overflow-hidden bg-white">{children}</div>
       </div>
-      {/* Base */}
-      <div className="h-3 rounded-b-xl bg-ink-700" />
-      <div className="mx-auto h-1 w-1/4 rounded-b-md bg-ink-800/60" />
+      {/* Base. Lighter than the bezel so the laptop reads as an object with a
+          lid and a body, not a flat rectangle. */}
+      <div className="h-3 rounded-b-xl bg-gradient-to-b from-[#2E362E] to-ink-700 ring-1 ring-white/10" />
+      <div className="mx-auto h-1 w-1/4 rounded-b-md bg-ink-900/70" />
     </div>
   );
 }

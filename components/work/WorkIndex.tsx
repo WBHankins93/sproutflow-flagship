@@ -18,7 +18,7 @@ export default function WorkIndex() {
 
   return (
     <>
-      <div className="sticky top-[72px] z-30 -mx-5 border-y border-white/15 bg-ink-900/95 px-5 py-4 backdrop-blur-md md:top-[88px] md:-mx-11 md:px-11">
+      <div className="sticky top-[72px] z-30 -mx-5 border-y border-primary-900/15 bg-cream-300/95 px-5 py-4 backdrop-blur-md md:top-[88px] md:-mx-11 md:px-11">
         <div className="mx-auto flex max-w-[1186px] items-center gap-4">
           <div className="mask-fade-x scrollbar-hide flex min-w-0 flex-1 gap-2 overflow-x-auto px-4 md:px-0">
             {filters.map((filter) => (
@@ -27,13 +27,13 @@ export default function WorkIndex() {
                 type="button"
                 onClick={() => setActive(filter)}
                 aria-pressed={active === filter}
-                className={`min-h-11 flex-none rounded-full border px-5 text-sm font-semibold ${active === filter ? 'border-accent-500 bg-accent-500 text-ink-900' : 'border-white/20 text-white/65 hover:border-white/50 hover:text-white'}`}
+                className={`min-h-11 flex-none rounded-full border px-5 text-sm font-semibold ${active === filter ? 'border-accent-700 bg-accent-700 text-white' : 'border-primary-900/20 text-text-secondary hover:border-primary-900/50 hover:text-primary-900'}`}
               >
                 {filter}
               </button>
             ))}
           </div>
-          <p className="hidden flex-none font-mono text-mono-meta text-white/45 sm:block">
+          <p className="hidden flex-none font-mono text-mono-meta text-text-muted sm:block">
             {String(projects.length).padStart(2, '0')} projects
           </p>
         </div>
@@ -42,15 +42,15 @@ export default function WorkIndex() {
       <div className="mt-8">
         {projects.length > 0 ? (
           projects.map((project, index) => (
-            <ProjectRow key={project.id} project={project} index={index} priority={index === 0} />
+            <ProjectRow key={project.id} project={project} index={index} priority={index === 0} variant="cream" />
           ))
         ) : (
-          <div className="border-y border-white/20 py-16 text-center">
-            <p className="font-display text-display-md text-cream-300">No listed project uses that filter yet.</p>
+          <div className="border-y border-primary-900/20 py-16 text-center">
+            <p className="font-display text-display-md text-primary-900">No listed project uses that filter yet.</p>
             <button
               type="button"
               onClick={() => setActive('All')}
-              className="mt-5 border-b border-accent-400 pb-1 font-semibold text-white"
+              className="mt-5 border-b border-accent-600 pb-1 font-semibold text-primary-900"
             >
               Show all work
             </button>

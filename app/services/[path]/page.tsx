@@ -64,7 +64,7 @@ export default async function ServicePathPage({ params }: Props) {
   return (
     <>
       <ServiceSchema service={service} />
-      <PageHeader eyebrow={service.eyebrow} title={service.title} intro={service.outcome}>
+      <PageHeader eyebrow={service.eyebrow} title={service.title} titleAccent={service.titleAccent} intro={service.outcome}>
         <Link
           href={`/inquiry?path=${service.id}`}
           className="group inline-flex min-h-12 items-center gap-3 rounded-full bg-accent-500 px-6 py-3 font-semibold text-ink-900"
@@ -90,7 +90,7 @@ export default async function ServicePathPage({ params }: Props) {
       </SectionShell>
 
       <SectionShell index="02" label="what is included" variant="ink" labelledBy="service-included-heading">
-        <h2 id="service-included-heading" className="max-w-4xl font-display text-display-lg text-cream-300">
+        <h2 id="service-included-heading" className="max-w-4xl font-display text-display-md text-cream-300">
           The working parts of this service path.
         </h2>
         <div className="mt-12 grid border-t border-white/20 md:grid-cols-2">
@@ -100,7 +100,7 @@ export default async function ServicePathPage({ params }: Props) {
               className={`border-b border-white/20 py-7 md:px-6 ${index % 2 === 0 ? 'md:border-r md:pl-0' : 'md:pr-0'}`}
             >
               <p className="font-mono text-mono-meta text-accent-300">0{index + 1}</p>
-              <h3 className="mt-4 font-display text-2xl text-cream-300">{capability}</h3>
+              <h3 className="mt-4 font-display text-h4 text-cream-300">{capability}</h3>
               <p className="mt-3 text-white/55">Clarifying scope copy is ready for your review.</p>
             </article>
           ))}
@@ -112,14 +112,14 @@ export default async function ServicePathPage({ params }: Props) {
       </SectionShell>
 
       <SectionShell index="04" label="how it runs" variant="ink" labelledBy="service-process-heading">
-        <h2 id="service-process-heading" className="font-display text-display-lg text-cream-300">
+        <h2 id="service-process-heading" className="font-display text-display-md text-cream-300">
           Four checkpoints, phrased for this work.
         </h2>
         <ol className="mt-12 grid gap-px bg-white/20 md:grid-cols-4">
           {service.checkpoints.map((checkpoint, index) => (
             <li key={checkpoint} className="bg-ink-900 p-6">
               <span className="font-mono text-mono-meta text-accent-300">0{index + 1}</span>
-              <h3 className="mt-6 font-display text-xl text-cream-300">{checkpoint}</h3>
+              <h3 className="mt-6 font-display text-h4 text-cream-300">{checkpoint}</h3>
             </li>
           ))}
         </ol>
@@ -133,7 +133,7 @@ export default async function ServicePathPage({ params }: Props) {
 
       <SectionShell index="06" label="questions for this path" variant="cream" labelledBy="service-faq-heading">
         <div className="grid gap-10 lg:grid-cols-12">
-          <h2 id="service-faq-heading" className="font-display text-display-lg text-primary-900 lg:col-span-4">
+          <h2 id="service-faq-heading" className="font-display text-display-md text-primary-900 lg:col-span-4">
             Questions to answer before this page is final.
           </h2>
           <div className="lg:col-span-7 lg:col-start-6">

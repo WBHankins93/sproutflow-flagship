@@ -15,7 +15,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="grain relative overflow-hidden bg-ink-900 text-white">
+    <section className="grain rings relative overflow-hidden bg-ink-900 text-white">
       <div className="relative mx-auto grid min-h-[calc(100svh-88px)] max-w-[1440px] items-center gap-14 px-5 py-16 md:px-11 md:py-20 lg:grid-cols-12">
         <div className="lg:col-span-6">
           <p className="flex items-center gap-3 text-eyebrow uppercase text-white/55">
@@ -52,7 +52,7 @@ export default function HeroSection() {
         </div>
 
         <div className="relative lg:col-span-6">
-          <div className="mx-auto max-w-[620px]">
+          <div className="relative mx-auto max-w-[620px] pb-16 pr-6 md:pb-0 md:pr-0">
             <DeviceFrame kind="laptop" className="w-full">
               <Image
                 src={getImageUrl(leadProject.screenshot)}
@@ -63,7 +63,7 @@ export default function HeroSection() {
                 className="object-cover object-top"
               />
             </DeviceFrame>
-            <DeviceFrame kind="phone" width={118} className="absolute -bottom-8 right-0 md:right-4">
+            <DeviceFrame kind="phone" width={118} className="absolute -bottom-2 -right-2 md:-bottom-10 md:-right-6">
               <Image
                 src={getImageUrl(listedProjectProof[1].screenshot)}
                 alt=""
@@ -73,9 +73,6 @@ export default function HeroSection() {
               />
             </DeviceFrame>
           </div>
-          <p className="mt-12 text-center font-mono text-mono-meta text-white/45">
-            Client scroll recordings replace these stills when ready
-          </p>
         </div>
       </div>
     </section>

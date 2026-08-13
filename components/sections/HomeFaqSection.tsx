@@ -21,10 +21,10 @@ const items = [
 
 export default function HomeFaqSection() {
   return (
-    <SectionShell index="07" label="common questions" variant="cream" labelledBy="home-faq-heading">
+    <SectionShell index="07" label="common questions" variant="cream" tone="raised" labelledBy="home-faq-heading">
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <h2 id="home-faq-heading" className="font-display text-display-lg text-primary-900">
+          <h2 id="home-faq-heading" className="font-display text-display-sm text-primary-900">
             The practical details.
           </h2>
           <Link

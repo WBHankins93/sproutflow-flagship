@@ -6,7 +6,7 @@ export default function ServicesSection() {
   return (
     <SectionShell id="services" index="02" label="ways to work together" variant="ink" labelledBy="services-heading">
       <div className="mb-12 grid gap-7 lg:grid-cols-12 lg:items-end">
-        <h2 id="services-heading" className="font-display text-display-lg text-cream-300 lg:col-span-8">
+        <h2 id="services-heading" className="font-display text-display-md text-cream-300 lg:col-span-8">
           Start with the part that is{' '}
           <span className="font-accent font-normal italic text-accent-300">slowing you down.</span>
         </h2>

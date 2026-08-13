@@ -24,6 +24,7 @@ export default function ServicesPage() {
       <PageHeader
         eyebrow="Services"
         title="Three ways to make the business easier to choose and easier to run."
+        titleAccent="easier to choose"
         intro="No packages or tiers. We start with the closest problem, then I write the scope after we talk."
         count="03 paths"
       />

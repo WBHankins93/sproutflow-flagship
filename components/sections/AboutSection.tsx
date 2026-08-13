@@ -32,7 +32,7 @@ export default function AboutSection() {
         </div>
         <div className="lg:col-span-6 lg:col-start-7">
           <p className="text-eyebrow uppercase text-accent-300">Hi, I’m Ben</p>
-          <h2 id="about-heading" className="mt-5 font-display text-display-lg text-cream-300">
+          <h2 id="about-heading" className="mt-5 font-display text-display-md text-cream-300">
             I stay close to the problem and the people{' '}
             <span className="font-accent font-normal italic text-accent-300">living with it.</span>
           </h2>
