@@ -1,10 +1,9 @@
 'use client';
 
-import { useRef, useState } from 'react';
-import { ArrowRight, ContactRound, LockKeyhole, Route } from 'lucide-react';
-import { BodyText, Button, Heading } from '@/components/layout/StudioLayout';
+import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
+import { ArrowLeft, ArrowRight, LockKeyhole } from 'lucide-react';
 import {
-  BUDGET_OPTIONS,
   PROJECT_GOALS,
   PROJECT_TYPES,
   REFERRAL_SOURCES,
@@ -12,9 +11,8 @@ import {
   type InquiryFormData,
 } from '@/types/inquiry';
 
-const DISCOVERY_CALL_URL = 'https://calendar.app.google/hMkRd7yqsovDwZuL7';
-
-const initialFormData: InquiryFormData = {
+const STORAGE_KEY = 'sproutflow-inquiry-draft';
+const initialData: InquiryFormData = {
   name: '',
   email: '',
   company: '',
@@ -31,284 +29,269 @@ const initialFormData: InquiryFormData = {
   projectDetails: '',
   referralSource: '',
 };
+const inputClass =
+  'min-h-12 w-full rounded-lg border border-primary-900/20 bg-white px-4 py-3 text-text-primary placeholder:text-text-muted focus:border-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-600/20';
 
-function FormSection({
-  title,
-  description,
-  icon,
-  children,
-}: {
-  title: string;
-  description?: string;
-  icon: React.ReactNode;
-  children: React.ReactNode;
-}) {
+function Field({ label, children, required }: { label: string; children: React.ReactNode; required?: boolean }) {
   return (
-    <fieldset className="space-y-5 border-t border-primary-900/20 p-0 pt-6">
-      <legend className="mb-1 flex items-center gap-3 pr-4 font-display text-2xl font-semibold text-text-primary">
-        <span className="flex h-10 w-10 items-center justify-center rounded-md bg-primary-100 text-primary-800">{icon}</span>
-        <span>{title}</span>
-      </legend>
-      {description && <p className="text-text-secondary">{description}</p>}
+    <label className="block">
+      <span className="mb-2 block text-sm font-semibold text-primary-900">
+        {label}
+        {required && <span className="ml-1 text-accent-700">*</span>}
+      </span>
       {children}
-    </fieldset>
-  );
-}
-
-function Label({
-  htmlFor,
-  required,
-  children,
-}: {
-  htmlFor: string;
-  required?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <label htmlFor={htmlFor} className="mb-1.5 block font-body font-medium text-text-primary">
-      {children}
-      {required && <span className="ml-0.5 text-primary-700" aria-hidden>*</span>}
     </label>
   );
 }
 
-const inputBase =
-  'w-full min-h-12 rounded-xl border border-primary-200 bg-white px-4 py-3 font-body text-text-primary placeholder:text-text-muted focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600/20 transition-colors';
-
-export function InquiryForm() {
-  const [data, setData] = useState<InquiryFormData>(initialFormData);
-  const [errors, setErrors] = useState<Partial<Record<keyof InquiryFormData, string>>>({});
+export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: string }) {
+  const [step, setStep] = useState(1);
+  const [data, setData] = useState<InquiryFormData>({ ...initialData, projectType: initialProjectType });
+  const [errors, setErrors] = useState<{ name?: string; email?: string; form?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const submitGuard = useRef(false);
-  const nameInputRef = useRef<HTMLInputElement>(null);
-  const emailInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const stored = sessionStorage.getItem(STORAGE_KEY);
+    if (!stored) return;
+    try {
+      const parsed = JSON.parse(stored) as { step?: number; data?: InquiryFormData };
+      if (parsed.data) setData({ ...parsed.data, projectType: initialProjectType || parsed.data.projectType });
+      if (parsed.step && parsed.step >= 1 && parsed.step <= 3) setStep(parsed.step);
+    } catch {
+      sessionStorage.removeItem(STORAGE_KEY);
+    }
+  }, [initialProjectType]);
+
+  useEffect(() => {
+    if (!submitted) sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ step, data }));
+  }, [data, step, submitted]);
 
   const update =
     (field: keyof InquiryFormData) =>
-    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      setData((previous) => ({ ...previous, [field]: event.target.value }));
-      if (errors[field]) setErrors((previous) => ({ ...previous, [field]: undefined }));
-    };
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+      setData((current) => ({ ...current, [field]: event.target.value }));
 
-  const validate = () => {
-    const next: Partial<Record<keyof InquiryFormData, string>> = {};
-
-    if (!data.name.trim()) next.name = 'Enter your name.';
-    if (!data.email.trim()) next.email = 'Enter your email.';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-      next.email = 'Enter a valid email address.';
-    }
-
-    setErrors(next);
-    if (next.name) nameInputRef.current?.focus();
-    else if (next.email) emailInputRef.current?.focus();
-    return Object.keys(next).length === 0;
-  };
-
-  const handleSubmit = async (event: React.FormEvent) => {
+  const submit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (submitGuard.current || isSubmitting || !validate()) return;
-
-    const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
-    if (!formId) {
-      setErrors({ projectDetails: 'The form is unavailable right now. Please email us directly.' });
+    if (step < 3) {
+      setStep((current) => current + 1);
       return;
     }
-
+    const nextErrors: typeof errors = {};
+    if (!data.name.trim()) nextErrors.name = 'Enter your name.';
+    if (!data.email.trim()) nextErrors.email = 'Enter your email.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) nextErrors.email = 'Enter a valid email address.';
+    if (Object.keys(nextErrors).length) {
+      setErrors(nextErrors);
+      return;
+    }
+    const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
+    if (!formId) {
+      setErrors({ form: 'The form is unavailable right now. Email me directly instead.' });
+      return;
+    }
+    if (submitGuard.current) return;
     submitGuard.current = true;
     setIsSubmitting(true);
-    setErrors({});
-
-    const payload = {
-      name: data.name,
-      email: data.email,
-      company: data.company,
-      current_website_url: data.currentWebsiteUrl,
-      project_type: data.projectType,
-      project_goal: data.projectGoal,
-      budget_range: data.budgetRange,
-      timeline: data.timeline,
-      project_details: data.projectDetails,
-      referral_source: data.referralSource,
-    };
-
     try {
       const response = await fetch(`https://formspree.io/f/${formId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(data),
       });
-
       if (!response.ok) throw new Error('Submission failed');
+      sessionStorage.removeItem(STORAGE_KEY);
       setSubmitted(true);
     } catch {
-      setErrors({ projectDetails: 'Something went wrong. Try again or email us directly.' });
       submitGuard.current = false;
       setIsSubmitting(false);
+      setErrors({ form: 'Something went wrong. Try again or email me directly.' });
     }
   };
 
-  if (submitted) {
+  if (submitted)
     return (
-      <div className="mx-auto max-w-xl space-y-6 rounded-2xl border border-primary-200 bg-primary-50/50 p-6 text-center sm:p-8">
-        <Heading level={2} className="text-primary-800">
-          Thanks. Your project is in.
-        </Heading>
-        <BodyText size="lg" color="secondary">
-          I&apos;ll review the details and reply within one business day. If you are ready, you can choose a call time now.
-        </BodyText>
-        <div className="pt-3">
-          <Button
-            href={DISCOVERY_CALL_URL}
-            variant="primary"
-            size="md"
-            icon={<ArrowRight className="h-5 w-5" />}
-          >
-            Choose a call time
-          </Button>
-        </div>
+      <div className="border-y border-primary-900/20 py-12">
+        <p className="text-eyebrow uppercase text-accent-700">Project received</p>
+        <h2 className="mt-4 font-display text-display-md text-primary-900">Thanks. Your project is in.</h2>
+        <p className="mt-4 max-w-xl text-text-secondary">
+          I will review the details and reply within one business day.
+        </p>
+        <Link
+          href="/resources/what-you-should-own-after-launch"
+          className="mt-7 inline-flex border-b border-primary-700 pb-1 font-semibold text-primary-800"
+        >
+          Read a useful guide while you wait
+        </Link>
       </div>
     );
-  }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-10 pb-6 pt-4 md:pt-6">
-      <FormSection title="Your details" description="Only your name and email are required." icon={<ContactRound className="h-5 w-5" aria-hidden="true" />}>
-        <div className="grid gap-5 sm:grid-cols-2">
-          <div>
-            <Label htmlFor="inquiry-name" required>Name</Label>
-            <input
-              ref={nameInputRef}
-              id="inquiry-name"
-              name="name"
-              value={data.name}
-              onChange={update('name')}
-              className={`${inputBase} ${errors.name ? 'border-primary-600 ring-2 ring-primary-600/20' : ''}`}
-              autoComplete="name"
-              required
-              aria-invalid={!!errors.name}
-              aria-describedby={errors.name ? 'inquiry-name-error' : undefined}
-            />
-            {errors.name && <p id="inquiry-name-error" className="mt-1.5 text-sm text-primary-700" role="alert">{errors.name}</p>}
+    <form onSubmit={submit}>
+      <div className="mb-10 grid grid-cols-3 gap-2" aria-label={`Step ${step} of 3`}>
+        {[1, 2, 3].map((item) => (
+          <div key={item}>
+            <span className={`block h-1 ${item <= step ? 'bg-accent-500' : 'bg-primary-900/15'}`} />
+            <span className={`mt-2 block font-mono text-xs ${item === step ? 'text-primary-900' : 'text-text-muted'}`}>
+              0{item}
+            </span>
           </div>
+        ))}
+      </div>
 
-          <div>
-            <Label htmlFor="inquiry-email" required>Email</Label>
+      {step === 1 && (
+        <fieldset className="space-y-6">
+          <legend className="font-display text-display-md text-primary-900">What is happening now?</legend>
+          <p className="text-text-secondary">A rough description is enough. Nothing in this step is required.</p>
+          <Field label="Which path feels closest?">
+            <select value={data.projectType} onChange={update('projectType')} className={inputClass}>
+              <option value="">Choose a path</option>
+              {PROJECT_TYPES.map((option) => (
+                <option key={option}>{option}</option>
+              ))}
+            </select>
+          </Field>
+          <Field label="Current website, if there is one">
             <input
-              ref={emailInputRef}
-              id="inquiry-email"
-              type="email"
-              name="email"
-              value={data.email}
-              onChange={update('email')}
-              className={`${inputBase} ${errors.email ? 'border-primary-600 ring-2 ring-primary-600/20' : ''}`}
-              autoComplete="email"
-              required
-              aria-invalid={!!errors.email}
-              aria-describedby={errors.email ? 'inquiry-email-error' : undefined}
-            />
-            {errors.email && <p id="inquiry-email-error" className="mt-1.5 text-sm text-primary-700" role="alert">{errors.email}</p>}
-          </div>
-
-          <div>
-            <Label htmlFor="inquiry-company">Business name</Label>
-            <input
-              id="inquiry-company"
-              name="company"
-              value={data.company}
-              onChange={update('company')}
-              className={inputBase}
-              autoComplete="organization"
-            />
-          </div>
-
-          <div>
-            <Label htmlFor="inquiry-current-website-url">Current website</Label>
-            <input
-              id="inquiry-current-website-url"
               type="url"
-              name="currentWebsiteUrl"
               value={data.currentWebsiteUrl}
               onChange={update('currentWebsiteUrl')}
-              className={inputBase}
               placeholder="https://"
-              inputMode="url"
+              className={inputClass}
             />
+          </Field>
+          <Field label="What keeps getting in the way?">
+            <textarea
+              value={data.projectDetails}
+              onChange={update('projectDetails')}
+              rows={6}
+              className={inputClass}
+              placeholder="The customer, operational problem, or repeated task you want to improve."
+            />
+          </Field>
+        </fieldset>
+      )}
+
+      {step === 2 && (
+        <fieldset className="space-y-6">
+          <legend className="font-display text-display-md text-primary-900">
+            What would useful progress look like?
+          </legend>
+          <p className="text-text-secondary">Best guesses are fine. We can clarify the details together.</p>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Field label="Primary goal">
+              <select value={data.projectGoal} onChange={update('projectGoal')} className={inputClass}>
+                <option value="">Select an option</option>
+                {PROJECT_GOALS.map((option) => (
+                  <option key={option}>{option}</option>
+                ))}
+              </select>
+            </Field>
+            <Field label="Ideal timing">
+              <select value={data.timeline} onChange={update('timeline')} className={inputClass}>
+                <option value="">Select an option</option>
+                {TIMELINE_OPTIONS.map((option) => (
+                  <option key={option}>{option}</option>
+                ))}
+              </select>
+            </Field>
           </div>
-        </div>
-      </FormSection>
+          <Field label="Comfortable budget, optional">
+            <input
+              value={data.budgetRange}
+              onChange={update('budgetRange')}
+              className={inputClass}
+              placeholder="A range is enough. This stays private."
+            />
+          </Field>
+        </fieldset>
+      )}
 
-      <FormSection title="The project" description="Best guesses are fine. We can clarify the details together." icon={<Route className="h-5 w-5" aria-hidden="true" />}>
-        <div className="grid gap-5 sm:grid-cols-2">
-          <div>
-            <Label htmlFor="inquiry-project-type">What do you need?</Label>
-            <select id="inquiry-project-type" name="projectType" value={data.projectType} onChange={update('projectType')} className={inputBase}>
-              <option value="">Select an option</option>
-              {PROJECT_TYPES.map((option) => <option key={option} value={option}>{option}</option>)}
-            </select>
+      {step === 3 && (
+        <fieldset className="space-y-6">
+          <legend className="font-display text-display-md text-primary-900">How can I reach you?</legend>
+          <p className="text-text-secondary">Name and email are the only required fields.</p>
+          <div className="grid gap-5 sm:grid-cols-2">
+            <Field label="Name" required>
+              <input
+                value={data.name}
+                onChange={update('name')}
+                className={inputClass}
+                autoComplete="name"
+                aria-invalid={!!errors.name}
+              />
+              {errors.name && <span className="mt-2 block text-sm text-primary-700">{errors.name}</span>}
+            </Field>
+            <Field label="Email" required>
+              <input
+                type="email"
+                value={data.email}
+                onChange={update('email')}
+                className={inputClass}
+                autoComplete="email"
+                aria-invalid={!!errors.email}
+              />
+              {errors.email && <span className="mt-2 block text-sm text-primary-700">{errors.email}</span>}
+            </Field>
+            <Field label="Business name">
+              <input
+                value={data.company}
+                onChange={update('company')}
+                className={inputClass}
+                autoComplete="organization"
+              />
+            </Field>
+            <Field label="How did you find Sproutflow?">
+              <select value={data.referralSource} onChange={update('referralSource')} className={inputClass}>
+                <option value="">Select an option</option>
+                {REFERRAL_SOURCES.map((option) => (
+                  <option key={option}>{option}</option>
+                ))}
+              </select>
+            </Field>
           </div>
+        </fieldset>
+      )}
 
-          <div>
-            <Label htmlFor="inquiry-project-goal">Primary goal</Label>
-            <select id="inquiry-project-goal" name="projectGoal" value={data.projectGoal} onChange={update('projectGoal')} className={inputBase}>
-              <option value="">Select an option</option>
-              {PROJECT_GOALS.map((option) => <option key={option} value={option}>{option}</option>)}
-            </select>
-          </div>
-
-          <div>
-            <Label htmlFor="inquiry-budget">Comfortable investment range</Label>
-            <select id="inquiry-budget" name="budgetRange" value={data.budgetRange} onChange={update('budgetRange')} className={inputBase}>
-              <option value="">Select an option</option>
-              {BUDGET_OPTIONS.map((option) => <option key={option} value={option}>{option}</option>)}
-            </select>
-          </div>
-
-          <div>
-            <Label htmlFor="inquiry-timeline">Ideal timing</Label>
-            <select id="inquiry-timeline" name="timeline" value={data.timeline} onChange={update('timeline')} className={inputBase}>
-              <option value="">Select an option</option>
-              {TIMELINE_OPTIONS.map((option) => <option key={option} value={option}>{option}</option>)}
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <Label htmlFor="inquiry-project-details">What would make this project a win?</Label>
-          <textarea
-            id="inquiry-project-details"
-            name="projectDetails"
-            value={data.projectDetails}
-            onChange={update('projectDetails')}
-            rows={5}
-            className={`${inputBase} min-h-[132px] resize-y ${errors.projectDetails ? 'border-primary-600 ring-2 ring-primary-600/20' : ''}`}
-            placeholder="A few sentences about the business, the problem, and the result you want."
-            aria-invalid={!!errors.projectDetails}
-            aria-describedby={errors.projectDetails ? 'inquiry-project-details-error' : undefined}
-          />
-          {errors.projectDetails && <p id="inquiry-project-details-error" className="mt-1.5 text-sm text-primary-700" role="alert">{errors.projectDetails}</p>}
-        </div>
-
-        <div>
-          <Label htmlFor="inquiry-referral">How did you hear about Sproutflow?</Label>
-          <select id="inquiry-referral" name="referralSource" value={data.referralSource} onChange={update('referralSource')} className={inputBase}>
-            <option value="">Select an option</option>
-            {REFERRAL_SOURCES.map((option) => <option key={option} value={option}>{option}</option>)}
-          </select>
-        </div>
-      </FormSection>
-
-      <div className="border-t border-primary-200 pt-7">
-        <Button type="submit" variant="primary" size="lg" className="min-h-12 w-full sm:w-auto" disabled={isSubmitting}>
-          {isSubmitting ? 'Sending…' : 'Send project details'}
-        </Button>
-        <p className="mt-4 flex items-start gap-2 text-sm text-text-muted">
-          <LockKeyhole className="mt-0.5 h-4 w-4 flex-none" />
-          <span>I use these details only to respond to your inquiry. Read <a href="/data-and-ownership" className="font-semibold text-primary-700 underline underline-offset-2">how I handle your data</a>.</span>
+      {errors.form && (
+        <p className="mt-6 border-l-2 border-primary-700 pl-4 text-primary-800" role="alert">
+          {errors.form}
         </p>
-        {isSubmitting && <p className="mt-2 text-sm text-text-muted">Keep this page open while the form sends.</p>}
+      )}
+      <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-primary-900/20 pt-6">
+        {step > 1 ? (
+          <button
+            type="button"
+            onClick={() => setStep((current) => current - 1)}
+            className="inline-flex min-h-11 items-center gap-2 font-semibold text-primary-800"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back
+          </button>
+        ) : (
+          <span />
+        )}
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="group inline-flex min-h-12 items-center gap-3 rounded-full bg-ink-900 px-7 py-3.5 font-semibold text-white hover:bg-primary-800 disabled:opacity-60"
+        >
+          {step < 3 ? 'Continue' : isSubmitting ? 'Sending…' : 'Send project details'}
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </button>
       </div>
+      <p className="mt-5 flex gap-2 text-sm text-text-muted">
+        <LockKeyhole className="mt-0.5 h-4 w-4 flex-none" />
+        <span>
+          I use these details only to respond to your inquiry. Read{' '}
+          <Link href="/data-and-ownership" className="font-semibold text-primary-800 underline underline-offset-2">
+            how I handle your data
+          </Link>
+          .
+        </span>
+      </p>
     </form>
   );
 }

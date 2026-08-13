@@ -7,15 +7,6 @@ export const PROJECT_TYPES = [
   'Not sure yet',
 ] as const;
 
-export const BUDGET_OPTIONS = [
-  'Under $1,500',
-  '$1,500 - $3,000',
-  '$3,000 - $6,000',
-  '$6,000 - $10,000',
-  '$10,000+',
-  'Not sure yet',
-] as const;
-
 export const PROJECT_GOALS = [
   'Generate more leads',
   'Launch a new business',
@@ -27,13 +18,7 @@ export const PROJECT_GOALS = [
 
 export const HAS_WEBSITE_OPTIONS = ['Yes', 'No', 'Under development'] as const;
 
-export const WEBSITE_PLATFORMS = [
-  'WordPress',
-  'Wix / Squarespace',
-  'Webflow',
-  'Custom',
-  'Not sure',
-] as const;
+export const WEBSITE_PLATFORMS = ['WordPress', 'Wix / Squarespace', 'Webflow', 'Custom', 'Not sure'] as const;
 
 export const PROJECT_SCOPE_OPTIONS = [
   'Small informational website',
@@ -43,12 +28,7 @@ export const PROJECT_SCOPE_OPTIONS = [
   'Not sure yet',
 ] as const;
 
-export const TIMELINE_OPTIONS = [
-  'As soon as possible',
-  '1-2 months',
-  '3-6 months',
-  'Just exploring options',
-] as const;
+export const TIMELINE_OPTIONS = ['As soon as possible', '1-2 months', '3-6 months', 'Just exploring options'] as const;
 
 export const DECISION_MAKER_OPTIONS = [
   'Yes, I make the final decision',

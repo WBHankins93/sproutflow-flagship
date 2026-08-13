@@ -1,67 +1,67 @@
-import { ArrowDown, FileSearch, MessageSquareText, ReceiptText } from 'lucide-react';
-import { Footer } from '@/components/layout/Footer';
-import { Container } from '@/components/layout/StudioLayout';
+import type { Metadata } from 'next';
+import { FileSearch, MessageSquareText, ReceiptText } from 'lucide-react';
 import { InquiryForm } from '@/components/inquiry/InquiryForm';
+import { Footer } from '@/components/layout/Footer';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Start a Project',
   description:
-    'Share what you need with Sproutflow Studio. Only your name and email are required, and you can include a comfortable budget privately.',
+    'Tell me what needs to work better. Name and email are the only required fields. Reply within one business day.',
   alternates: { canonical: '/inquiry' },
 };
 
-const nextSteps = [
-  { icon: FileSearch, title: 'I read the details', text: 'Every inquiry comes to me directly.' },
-  { icon: MessageSquareText, title: 'We talk if useful', text: 'A short call helps clarify the right starting point.' },
-  { icon: ReceiptText, title: 'You get a fixed quote', text: 'Scope, timing, and cost are written down before work starts.' },
+const pathMap: Record<string, string> = {
+  websites: 'Websites that earn trust',
+  'business-systems': 'Systems that remove friction',
+  'growth-support': 'Ongoing growth and support',
+};
+const steps = [
+  { icon: FileSearch, title: 'I read the details', body: 'Every inquiry comes to me directly.' },
+  { icon: MessageSquareText, title: 'We talk if useful', body: 'A short call helps clarify the right starting point.' },
+  {
+    icon: ReceiptText,
+    title: 'You get a fixed quote',
+    body: 'Scope, timing, and cost are written down before work starts.',
+  },
 ];
 
-export default function InquiryPage() {
+type Props = { searchParams: Promise<{ path?: string }> };
+
+export default async function InquiryPage({ searchParams }: Props) {
+  const { path } = await searchParams;
   return (
     <>
-      <header className="bg-background-primary py-14 md:py-20">
-        <Container>
-          <div className="grid gap-10 border-t border-primary-900 pt-6 lg:grid-cols-12 lg:items-end">
-            <div className="lg:col-span-7">
-              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary-700">Start with what you know</p>
-              <h1 className="max-w-4xl font-display text-5xl font-semibold leading-[0.95] text-primary-950 sm:text-6xl lg:text-7xl">
-                Tell me what needs to work better.
-              </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-text-secondary sm:text-xl">
-                Name and email are the only required fields. Add a link, a rough idea, or a comfortable budget if it helps explain the situation.
-              </p>
-            </div>
-
-            <aside className="lg:col-span-4 lg:col-start-9">
-              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.16em] text-primary-700">What happens next</p>
-              <ol className="space-y-3">
-                {nextSteps.map((step, index) => {
-                  const Icon = step.icon;
-                  return (
-                    <li key={step.title} className="grid grid-cols-[2.75rem_1fr] gap-3 border-t border-primary-900/15 pt-3">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-md bg-primary-100 text-primary-800">
-                        <Icon className="h-5 w-5" aria-hidden="true" />
-                      </span>
-                      <div>
-                        <p className="font-semibold text-primary-900"><span className="mr-1 text-accent-700" aria-hidden="true">0{index + 1}.</span> {step.title}</p>
-                        <p className="mt-1 text-sm leading-relaxed text-text-secondary">{step.text}</p>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ol>
-            </aside>
+      <section className="bg-cream-300 py-14 md:py-20">
+        <div className="mx-auto grid max-w-[1186px] gap-12 px-5 md:px-11 lg:grid-cols-12">
+          <aside className="lg:col-span-4">
+            <p className="text-eyebrow uppercase text-accent-700">Start with what you know</p>
+            <h1 className="mt-5 font-display text-display-lg text-primary-900">Tell me what needs to work better.</h1>
+            <p className="mt-5 text-body-lg text-text-secondary">
+              You can stop after the first checkpoint. A polished brief is not required.
+            </p>
+            <ol className="mt-10 border-t border-primary-900/20">
+              {steps.map(({ icon: Icon, title, body }, index) => (
+                <li key={title} className="grid grid-cols-[44px_1fr] gap-4 border-b border-primary-900/20 py-5">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary-900/20">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <div>
+                    <p className="font-semibold text-primary-900">
+                      <span className="mr-2 font-mono text-xs text-accent-700">0{index + 1}</span>
+                      {title}
+                    </p>
+                    <p className="mt-1 text-sm text-text-secondary">{body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <p className="mt-6 text-sm text-text-muted">I reply within one business day.</p>
+          </aside>
+          <div className="border-t border-primary-900/20 pt-8 lg:col-span-7 lg:col-start-6">
+            <InquiryForm initialProjectType={path ? pathMap[path] || '' : ''} />
           </div>
-          <ArrowDown className="mt-10 h-6 w-6 text-accent-700" aria-hidden="true" />
-        </Container>
-      </header>
-
-      <section className="bg-white pb-20 pt-8 md:pb-28 md:pt-12">
-        <Container size="narrow">
-          <InquiryForm />
-        </Container>
+        </div>
       </section>
-
       <Footer />
     </>
   );
