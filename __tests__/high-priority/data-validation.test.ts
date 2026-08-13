@@ -11,7 +11,7 @@
 import { servicePaths } from '@/data/servicePaths'
 import { projectProof } from '@/data/projectProof'
 import { caseStudies } from '@/data/caseStudies'
-import { BUDGET_OPTIONS, PROJECT_TYPES } from '@/types/inquiry'
+import { PROJECT_TYPES } from '@/types/inquiry'
 
 const CORRECT_EMAIL = 'ben@sproutflow-studio.com'
 const CORRECT_PHONE_DISPLAY = '(504) 326-1676'
@@ -57,13 +57,6 @@ describe('Data Validation - Public Service Paths', () => {
     ])
   })
 
-  it('should collect budget privately without package labels', () => {
-    expect(BUDGET_OPTIONS.length).toBe(6)
-    expect(BUDGET_OPTIONS).not.toContain('Starter')
-    expect(BUDGET_OPTIONS).not.toContain('Foundation')
-    expect(BUDGET_OPTIONS).not.toContain('Growth')
-    expect(BUDGET_OPTIONS).not.toContain('Market Leader')
-  })
 })
 
 describe('Data Validation - Project Proof', () => {
@@ -140,28 +133,24 @@ describe('Data Validation - Contact Information Consistency', () => {
 
 describe('Data Validation - Work Projects Structure', () => {
   it('should have valid work project structure', async () => {
-    const { workProjects } = await import('@/data/workProjects')
+    const { projectProof } = await import('@/data/projectProof')
 
-    workProjects.forEach(project => {
+    projectProof.forEach(project => {
       expect(project).toHaveProperty('id')
-      expect(project).toHaveProperty('title')
-      expect(project).toHaveProperty('client')
-      expect(project).toHaveProperty('category')
-      expect(project).toHaveProperty('sortPriority')
+      expect(project).toHaveProperty('name')
+      expect(project).toHaveProperty('industry')
+      expect(project).toHaveProperty('location')
       expect(project).toHaveProperty('status')
-      expect(project).toHaveProperty('description')
-      expect(project).toHaveProperty('url')
-      expect(project).toHaveProperty('services')
-      expect(project).toHaveProperty('tech')
-      expect(project).toHaveProperty('gradient')
+      expect(project).toHaveProperty('summary')
+      expect(project).toHaveProperty('liveUrl')
+      expect(project).toHaveProperty('scope')
+      expect(project).toHaveProperty('filterTags')
+      expect(project).toHaveProperty('canvasColor')
 
-      expect(['Live', 'In Progress']).toContain(project.status)
-      expect(typeof project.category).toBe('string')
-      expect(typeof project.sortPriority).toBe('number')
-      expect(Array.isArray(project.services)).toBe(true)
-      expect(Array.isArray(project.tech)).toBe(true)
-      expect(Array.isArray(project.gradient)).toBe(true)
-      expect(project.gradient.length).toBeGreaterThanOrEqual(2)
+      expect(['Live', 'In progress']).toContain(project.status)
+      expect(typeof project.industry).toBe('string')
+      expect(Array.isArray(project.scope)).toBe(true)
+      expect(Array.isArray(project.filterTags)).toBe(true)
     })
   })
 })

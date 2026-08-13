@@ -133,7 +133,7 @@ Laptop and phone frames go in `components/ui/DeviceFrame.tsx`, props `kind: 'lap
 
 ### 3.2 Client marquee
 
-Cream strip, 26px vertical padding. Each item is two lines: client name in `display-md` at 21px, and the industry beneath in accent serif italic 13px at `#6c7264`. Gold 5px dot between items. Data from `data/workProjects.ts`; add an `industry` field to each project.
+Cream strip, 26px vertical padding. Each item is two lines: client name in `display-md` at 21px, and the industry beneath in accent serif italic 13px at `#6c7264`. Gold 5px dot between items. Data comes from the consolidated `data/projectProof.ts` source.
 
 ### 3.3 The Sproutflow difference (`components/sections/DifferenceSection.tsx`, new)
 
@@ -211,7 +211,7 @@ Order: page header, filter bar, project list, closing CTA.
 - **Filter bar.** Sticky under the header at `top: 88px`, ink background with a hairline bottom border. Pills: All, Websites, Shopify, Systems, Ongoing care. Active pill is gold filled with ink text. Filtering is client side, animates with a layout transition, never a full page reload. Show the result count in mono to the right of the pills.
 - **Project list.** Large rows, not cards. Each row: mono index, eyebrow with industry and location, `display-md` title, one paragraph, scope pills, status chip (Live or In progress), and a 320px tall screenshot that alternates side per row. Whole row is the link. Hover lifts the row 4px and shifts the screenshot 8px.
 - **Empty state.** If a filter returns nothing, show a line of copy plus a reset link. Never a blank column.
-- Source `data/workProjects.ts`. Add fields: `industry`, `filterTags: string[]`.
+- Source `data/projectProof.ts`, including `industry` and `filterTags: string[]`.
 - Closing block: "Not sure which of these is closest to your situation?" plus the primary CTA.
 
 ### 5.2 `/case-studies/[slug]` — Case study detail

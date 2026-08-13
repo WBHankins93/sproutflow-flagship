@@ -84,32 +84,27 @@ describe('Data Consistency - Project Proof and Case Studies', () => {
 
 describe('Data Consistency - Type Safety', () => {
   it('should have valid status values for work projects', async () => {
-    const { workProjects } = await import('@/data/workProjects')
-    const validStatuses = ['Live', 'In Progress']
+    const { projectProof } = await import('@/data/projectProof')
+    const validStatuses = ['Live', 'In progress']
 
-    workProjects.forEach(project => {
+    projectProof.forEach(project => {
       expect(validStatuses).toContain(project.status)
     })
   })
 
   it('should have valid URL format for work projects', async () => {
-    const { workProjects } = await import('@/data/workProjects')
+    const { projectProof } = await import('@/data/projectProof')
 
-    workProjects.forEach(project => {
-      expect(/^https?:\/\/.+/.test(project.url)).toBe(true)
+    projectProof.forEach(project => {
+      expect(/^https?:\/\/.+/.test(project.liveUrl)).toBe(true)
     })
   })
 
-  it('should have gradient arrays with at least 2 colors', async () => {
-    const { workProjects } = await import('@/data/workProjects')
+  it('should have valid project canvas colors', async () => {
+    const { projectProof } = await import('@/data/projectProof')
 
-    workProjects.forEach(project => {
-      expect(Array.isArray(project.gradient)).toBe(true)
-      expect(project.gradient.length).toBeGreaterThanOrEqual(2)
-      project.gradient.forEach(color => {
-        expect(typeof color).toBe('string')
-        expect(/^#[0-9A-Fa-f]{6}$/.test(color) || /^[a-zA-Z]+$/.test(color)).toBe(true)
-      })
+    projectProof.forEach(project => {
+      expect(/^#[0-9A-Fa-f]{6}$/.test(project.canvasColor)).toBe(true)
     })
   })
 })

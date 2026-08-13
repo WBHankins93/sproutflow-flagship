@@ -12,7 +12,6 @@ import { servicePaths } from '@/data/servicePaths'
 import { projectProof } from '@/data/projectProof'
 import { caseStudies } from '@/data/caseStudies'
 import { testimonials } from '@/data/testimonials'
-import { workProjects } from '@/data/workProjects'
 
 /** Strings that mean a mockup placeholder leaked into shipped data. */
 const SCAFFOLDING = [
@@ -114,6 +113,15 @@ describe('Data Structure Validation - Project Proof', () => {
   it('should carry at least one project so derived counts never render zero', () => {
     expect(projectProof.length).toBeGreaterThan(0)
   })
+
+  it('should have usable listing metadata', () => {
+    projectProof.forEach(project => {
+      expect(project.summary.length).toBeGreaterThan(20)
+      expect(project.scope.length).toBeGreaterThan(0)
+      expect(project.filterTags.length).toBeGreaterThan(0)
+      expect(['Live', 'In progress']).toContain(project.status)
+    })
+  })
 })
 
 describe('Data Structure Validation - Case Studies', () => {
@@ -127,53 +135,5 @@ describe('Data Structure Validation - Case Studies', () => {
       expect(typeof study.metaTitle).toBe('string')
       expect(study.metaTitle.length).toBeGreaterThan(0)
     })
-  })
-})
-
-describe('Data Structure Validation - Work Projects', () => {
-  it('should have unique project IDs', () => {
-    const ids = workProjects.map(project => project.id)
-    expect(new Set(ids).size).toBe(ids.length)
-  })
-
-  it('should have all projects with non-empty descriptions', () => {
-    workProjects.forEach(project => {
-      expect(typeof project.description).toBe('string')
-      expect(project.description.length).toBeGreaterThan(20)
-    })
-  })
-
-  it('should have all projects with at least one service and tech item', () => {
-    workProjects.forEach(project => {
-      expect(project.services.length).toBeGreaterThan(0)
-      expect(project.tech.length).toBeGreaterThan(0)
-    })
-  })
-
-  it('should have valid gradient color formats', () => {
-    workProjects.forEach(project => {
-      project.gradient.forEach(color => {
-        const isHex = /^#[0-9A-Fa-f]{6}$/.test(color)
-        const isRgb = /^rgb\(|^rgba\(/.test(color)
-        const isNamed = /^[a-zA-Z]+$/.test(color)
-        expect(isHex || isRgb || isNamed).toBe(true)
-      })
-    })
-  })
-
-  it('should use relative paths for logos and background images', () => {
-    workProjects.forEach(project => {
-      if (project.logo) {
-        expect(project.logo.startsWith('http')).toBe(false)
-      }
-      if (project.backgroundImage) {
-        expect(project.backgroundImage.startsWith('http')).toBe(false)
-      }
-    })
-  })
-
-  it('should have at least one live project', () => {
-    const live = workProjects.filter(project => project.status === 'Live')
-    expect(live.length).toBeGreaterThan(0)
   })
 })
