@@ -187,6 +187,75 @@
   }
 }
 
+/* Service path micro-worlds. One working visual language, three mechanisms. */
+.service-world {
+  position: relative;
+  min-height: 390px;
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 1rem;
+  background:
+    radial-gradient(circle at 70% 18%, rgb(95 117 94 / 0.5), transparent 40%),
+    #1b211b;
+}
+
+.service-world::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background-image: url('/textures/grain.svg');
+  pointer-events: none;
+}
+
+.site-browser {
+  position: absolute;
+  inset: 18% 14% 17% 12%;
+  border: 1px solid rgb(233 226 216 / 0.42);
+  border-radius: 0.75rem;
+  background: #f5f1e9;
+  box-shadow: 0 28px 60px rgb(0 0 0 / 0.24);
+}
+
+.site-browser-bar { display: block; height: 11%; border-bottom: 1px solid rgb(20 25 20 / 0.15); }
+.site-heading, .site-copy, .site-button { position: absolute; left: 12%; display: block; border-radius: 999px; }
+.site-heading { top: 30%; width: 52%; height: 9%; background: #333d33; }
+.site-copy { top: 46%; width: 68%; height: 4%; background: rgb(51 61 51 / 0.3); box-shadow: 0 16px 0 rgb(51 61 51 / 0.18); }
+.site-button { bottom: 18%; width: 30%; height: 11%; background: #c49a45; }
+.site-phone { position: absolute; right: 7%; bottom: 9%; width: 22%; height: 48%; border: 6px solid #141914; border-radius: 1.5rem; background: #fff; box-shadow: 0 18px 32px rgb(0 0 0 / 0.3); }
+.site-phone span { display: block; margin: 48% auto 0; width: 58%; height: 5px; border-radius: 99px; background: #5f755e; box-shadow: 0 14px 0 rgb(95 117 94 / 0.35), 0 28px 0 #c49a45; }
+.site-seed { position: absolute; left: 7%; bottom: 9%; width: 14px; height: 19px; transform: rotate(26deg); border-radius: 70% 30% 70% 30%; background: #c49a45; }
+
+.service-hub, .service-node { position: absolute; z-index: 1; display: flex; align-items: center; justify-content: center; border-radius: 999px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.05em; }
+.service-hub { left: calc(50% - 40px); top: calc(50% - 40px); width: 80px; height: 80px; background: #c49a45; color: #141914; }
+.service-node { min-width: 78px; height: 42px; padding: 0 12px; border: 1px solid rgb(233 226 216 / 0.35); background: #232a23; color: rgb(245 241 233 / 0.78); }
+.service-node-1 { left: 9%; top: 15%; }
+.service-node-2 { right: 8%; top: 17%; }
+.service-node-3 { left: 8%; bottom: 14%; }
+.service-node-4 { right: 7%; bottom: 13%; }
+.service-route { position: absolute; inset: 22% 18%; border: 1px dashed rgb(196 154 69 / 0.65); border-radius: 45%; transform: rotate(-8deg); }
+
+.service-world-growth svg { position: absolute; inset: 18% 8% 24%; width: 84%; height: 58%; overflow: visible; }
+.service-world-growth path { fill: none; stroke: #c49a45; stroke-width: 4; stroke-linecap: round; }
+.service-world-growth circle { fill: #f5f1e9; stroke: #c49a45; stroke-width: 3; }
+.growth-bars { position: absolute; inset: auto 10% 18%; display: flex; height: 36%; align-items: end; gap: 8%; }
+.growth-bars i { display: block; width: 30px; border: 1px solid rgb(245 241 233 / 0.2); background: rgb(245 241 233 / 0.06); }
+.growth-bars i:nth-child(1) { height: 28%; }.growth-bars i:nth-child(2) { height: 48%; }.growth-bars i:nth-child(3) { height: 68%; }.growth-bars i:nth-child(4) { height: 94%; }
+.growth-note { position: absolute; left: 10%; bottom: 8%; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; color: rgb(245 241 233 / 0.55); }
+
+@media (max-width: 1023px) {
+  .service-world { min-height: 260px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .service-world-website .site-seed { animation: float 3.6s ease-in-out infinite; }
+  .service-world-system .service-route { animation: service-route-pulse 4.5s ease-in-out infinite; }
+  .service-world-growth circle { animation: service-point-pulse 3.8s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+}
+
+@keyframes service-route-pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@keyframes service-point-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+
 /* ===================================
    COMPONENT STYLES
    =================================== */

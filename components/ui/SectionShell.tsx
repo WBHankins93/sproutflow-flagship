@@ -11,6 +11,8 @@ interface SectionShellProps {
   id?: string;
   /** Passed through to aria-labelledby on the section element. */
   labelledBy?: string;
+  /** Direct accessible name when the section does not have its own heading. */
+  ariaLabel?: string;
   className?: string;
   children: ReactNode;
 }
@@ -33,6 +35,7 @@ export default function SectionShell({
   variant = 'cream',
   id,
   labelledBy,
+  ariaLabel,
   className = '',
   children,
 }: SectionShellProps) {
@@ -42,6 +45,7 @@ export default function SectionShell({
     <section
       id={id}
       aria-labelledby={labelledBy}
+      aria-label={ariaLabel}
       className={`relative overflow-hidden ${VARIANTS[variant]} ${className}`}
     >
       <div className="relative mx-auto flex max-w-[1440px] gap-0 px-5 py-[clamp(3.5rem,12vw,5rem)] md:px-11 md:py-[clamp(4rem,7vw,7.25rem)] lg:gap-8">
@@ -77,11 +81,7 @@ export default function SectionShell({
                 variant === 'ink' ? 'text-white/55' : 'text-text-muted'
               }`}
             >
-              {index && (
-                <span className={variant === 'ink' ? 'text-accent-300' : 'text-accent-700'}>
-                  {index}
-                </span>
-              )}
+              {index && <span className={variant === 'ink' ? 'text-accent-300' : 'text-accent-700'}>{index}</span>}
               {label}
             </p>
           </>

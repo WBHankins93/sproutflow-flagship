@@ -2,12 +2,15 @@
 
 import type { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
-import CustomerPathSection from '@/components/sections/CustomerPathSection';
+import ClientMarqueeSection from '@/components/sections/ClientMarqueeSection';
+import DifferenceSection from '@/components/sections/DifferenceSection';
 import WorktableSection from '@/components/sections/WorktableSection';
 import ProcessSection from '@/components/sections/ProcessSection';
 import ServicesSection from '@/components/sections/ServicesSection';
 import AboutSection from '@/components/sections/AboutSection';
 import ContactSection from '@/components/sections/ContactSection';
+import TestimonialsSection from '@/components/sections/TestimonialsSection';
+import HomeFaqSection from '@/components/sections/HomeFaqSection';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
@@ -37,11 +40,14 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <CustomerPathSection />
+      <ClientMarqueeSection />
+      <DifferenceSection />
       <ServicesSection />
       <WorktableSection />
       <ProcessSection />
       <AboutSection />
+      <TestimonialsSection />
+      <HomeFaqSection />
       <ContactSection />
       <Footer />
     </>

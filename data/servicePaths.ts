@@ -9,6 +9,12 @@ export interface ServicePath {
   goodFit: string;
   capabilities: string[];
   ctaLabel: string;
+  metaTitle: string;
+  metaDescription: string;
+  mediaPlaceholder: string;
+  relatedCaseStudy: string;
+  checkpoints: string[];
+  faq: { question: string; answer?: string }[];
 }
 
 export const servicePaths: ServicePath[] = [
@@ -28,6 +34,22 @@ export const servicePaths: ServicePath[] = [
       'Rebuilds and Shopify',
     ],
     ctaLabel: 'Ask about a website',
+    metaTitle: 'Web Design in New Orleans',
+    metaDescription:
+      'Custom website design and development for New Orleans small businesses. New builds, rebuilds, and Shopify. You own the domain, code, and accounts.',
+    mediaPlaceholder: 'Client website loop goes here',
+    relatedCaseStudy: 'second-line-psychiatry',
+    checkpoints: [
+      'Message and customer path',
+      'Visual direction and written scope',
+      'Working pages and review rounds',
+      'Launch, documentation, and ownership',
+    ],
+    faq: [
+      { question: 'What kind of website is the right fit here?' },
+      { question: 'Can you rebuild an existing site or Shopify store?' },
+      { question: 'What will I be able to update myself?' },
+    ],
   },
   {
     id: 'business-systems',
@@ -45,6 +67,22 @@ export const servicePaths: ServicePath[] = [
       'Automation, integrations, and reporting',
     ],
     ctaLabel: 'Ask about a business system',
+    metaTitle: 'CRM & Business Automation',
+    metaDescription:
+      'Custom CRMs, booking and intake flows, dashboards, and automation for small businesses. Stop losing leads in the handoff between tools.',
+    mediaPlaceholder: 'CRM, booking, or dashboard capture goes here',
+    relatedCaseStudy: 'nola-pool-solutions',
+    checkpoints: [
+      'Map the work as it happens now',
+      'Choose the smallest useful system',
+      'Test the workflow with real scenarios',
+      'Handoff, training, and support plan',
+    ],
+    faq: [
+      { question: 'Do I need to replace the tools I already use?' },
+      { question: 'What information belongs in a custom CRM?' },
+      { question: 'How do access, backups, and ownership work?' },
+    ],
   },
   {
     id: 'growth-support',
@@ -62,5 +100,25 @@ export const servicePaths: ServicePath[] = [
       'Photography and email coordination',
     ],
     ctaLabel: 'Ask about ongoing support',
+    metaTitle: 'Website Maintenance & SEO',
+    metaDescription:
+      'Ongoing hosting, maintenance, search and performance reviews for small business websites. Measured improvements without giving up ownership.',
+    mediaPlaceholder: 'Analytics and improvement capture goes here',
+    relatedCaseStudy: 'nealy-events',
+    checkpoints: [
+      'Review site health and current goals',
+      'Choose one measurable improvement',
+      'Ship and verify the change',
+      'Record what happened and choose what is next',
+    ],
+    faq: [
+      { question: 'Can you support a site you did not build?' },
+      { question: 'What is included in ongoing maintenance?' },
+      { question: 'How do we decide what to improve next?' },
+    ],
   },
 ];
+
+export function getServicePath(id: string): ServicePath | undefined {
+  return servicePaths.find((path) => path.id === id);
+}

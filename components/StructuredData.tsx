@@ -39,9 +39,7 @@ const professionalServiceSchema = {
     '@type': 'QuantitativeValue',
     value: 1,
   },
-  sameAs: [
-    'https://linkedin.com/company/sproutflow-studio',
-  ],
+  sameAs: ['https://linkedin.com/company/sproutflow-studio'],
   areaServed: [
     {
       '@type': 'City',
@@ -86,7 +84,8 @@ const professionalServiceSchema = {
           '@type': 'Service',
           name: 'Custom Website Design and Development',
           description:
-            'Custom Next.js websites for small businesses: design, development, copywriting, local SEO, and conversion-focused lead capture. Projects range from starter sites to fully custom platforms.',
+            'Custom websites for small businesses: positioning, design, development, copy, SEO foundations, rebuilds, and Shopify.',
+          url: `${siteUrl}/services/websites`,
           provider: { '@id': `${siteUrl}#organization` },
           areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
         },
@@ -98,6 +97,7 @@ const professionalServiceSchema = {
           name: 'Ongoing Website Growth and Support',
           description:
             'Optional website maintenance, hosting, SEO growth, performance reviews, content support, photography coordination, and marketing integrations.',
+          url: `${siteUrl}/services/growth-support`,
           provider: { '@id': `${siteUrl}#organization` },
           areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
         },
@@ -109,6 +109,7 @@ const professionalServiceSchema = {
           name: 'Custom Business Software and Automation',
           description:
             'Custom business systems behind the website: internal admin tools and dashboards, custom CRM and customer management systems, lightweight CMS builds, and workflow automation for intake, follow-up, scheduling, and document processing.',
+          url: `${siteUrl}/services/business-systems`,
           provider: { '@id': `${siteUrl}#organization` },
           areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
         },
@@ -159,10 +160,7 @@ const personSchema = {
     'site reliability engineering',
     'cloud architecture',
   ],
-  sameAs: [
-    'https://www.benhankins.dev/',
-    'https://linkedin.com/company/sproutflow-studio',
-  ],
+  sameAs: ['https://www.benhankins.dev/', 'https://linkedin.com/company/sproutflow-studio'],
 };
 
 const webSiteSchema = {
@@ -171,8 +169,7 @@ const webSiteSchema = {
   '@id': `${siteUrl}#website`,
   url: siteUrl,
   name: 'Sproutflow Studio',
-  description:
-    'Custom websites, CRMs, booking flows, and automation for small businesses in New Orleans, Louisiana.',
+  description: 'Custom websites, CRMs, booking flows, and automation for small businesses in New Orleans, Louisiana.',
   publisher: { '@id': `${siteUrl}#organization` },
   inLanguage: 'en-US',
 };
