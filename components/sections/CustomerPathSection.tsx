@@ -1,5 +1,4 @@
 import { ArrowDown, BellRing, ClipboardList, MousePointerClick, Send, UserRoundCheck } from 'lucide-react';
-import { Container } from '../layout/StudioLayout';
 
 const frictionPoints = [
   {
@@ -28,15 +27,21 @@ const betterPath = [
 export default function CustomerPathSection() {
   return (
     <section aria-labelledby="customer-path-heading" className="bg-primary-950 py-20 text-white md:py-28">
-      <Container>
+      <div className="mx-auto max-w-[1440px] px-5 md:px-11">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent-300">Where leads get stuck</p>
-            <h2 id="customer-path-heading" className="font-display text-4xl font-semibold leading-[0.98] text-white sm:text-5xl">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-accent-300">
+              Where leads get stuck
+            </p>
+            <h2
+              id="customer-path-heading"
+              className="font-display text-4xl font-semibold leading-[0.98] text-white sm:text-5xl"
+            >
               A good business can still be hard to buy from.
             </h2>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-white/70">
-              Usually there is no single broken tool. The trouble lives in the handoffs between the website, the form, and the person who needs to reply.
+              Usually there is no single broken tool. The trouble lives in the handoffs between the website, the form,
+              and the person who needs to reply.
             </p>
           </div>
 
@@ -45,12 +50,17 @@ export default function CustomerPathSection() {
               {frictionPoints.map((point, index) => {
                 const Icon = point.icon;
                 return (
-                  <li key={point.title} className="grid grid-cols-[3rem_1fr] gap-4 border border-white/15 p-5 sm:grid-cols-[3rem_13rem_1fr] sm:items-center">
+                  <li
+                    key={point.title}
+                    className="grid grid-cols-[3rem_1fr] gap-4 border border-white/15 p-5 sm:grid-cols-[3rem_13rem_1fr] sm:items-center"
+                  >
                     <span className="flex h-11 w-11 items-center justify-center rounded-md bg-white/10 text-accent-300">
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
                     <h3 className="font-display text-xl font-semibold text-white">
-                      <span className="mr-2 text-sm text-white/45" aria-hidden="true">0{index + 1}</span>
+                      <span className="mr-2 text-sm text-white/45" aria-hidden="true">
+                        0{index + 1}
+                      </span>
                       {point.title}
                     </h3>
                     <p className="col-start-2 leading-relaxed text-white/65 sm:col-start-3">{point.text}</p>
@@ -80,7 +90,7 @@ export default function CustomerPathSection() {
             </div>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }
