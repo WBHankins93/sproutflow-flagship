@@ -11,6 +11,10 @@ export const metadata = {
   alternates: {
     canonical: '/case-studies/big-butt-association',
   },
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default function BigButtAssociationCaseStudy() {
