@@ -33,7 +33,7 @@ export default function FaqAccordion({ items, variant = 'cream' }: { items: FaqI
             </button>
             {open && (
               <div className={`max-w-3xl pb-6 pr-14 leading-relaxed ${dark ? 'text-white/65' : 'text-text-secondary'}`}>
-                {item.answer || <p className="italic">Answer copy is ready for your review.</p>}
+                {item.answer}
               </div>
             )}
           </div>

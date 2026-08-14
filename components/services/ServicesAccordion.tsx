@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { servicePaths } from '@/data/servicePaths';
 import ArrowDisc from '@/components/ui/ArrowDisc';
 import Pill from '@/components/ui/Pill';
-import ServicePathVisual from './ServicePathVisual';
+import ServiceMedia from './ServiceMedia';
 
 export default function ServicesAccordion() {
   const [openId, setOpenId] = useState(servicePaths[0].id);
@@ -34,7 +34,7 @@ export default function ServicesAccordion() {
               </button>
               <div id={panelId} hidden={!open} className="pb-9 pl-0 md:pl-12">
                 <div className="mb-6 lg:hidden">
-                  <ServicePathVisual path={path.id} />
+                  <ServiceMedia path={path.id} height={300} />
                 </div>
                 <p className="max-w-2xl text-body-lg text-white/[0.72]">{path.outcome}</p>
                 <p className="mt-4 max-w-2xl text-white/60">{path.goodFit}</p>
@@ -58,7 +58,7 @@ export default function ServicesAccordion() {
       </div>
       <div className="hidden lg:col-span-5 lg:block">
         <div className="sticky top-32">
-          <ServicePathVisual path={openId} />
+          <ServiceMedia path={openId} height={430} />
         </div>
       </div>
     </div>

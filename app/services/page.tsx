@@ -6,7 +6,7 @@ import SectionShell from '@/components/ui/SectionShell';
 import Pill from '@/components/ui/Pill';
 import Marquee from '@/components/ui/Marquee';
 import FooterCta from '@/components/ui/FooterCta';
-import ServicePathVisual from '@/components/services/ServicePathVisual';
+import ServiceMedia from '@/components/services/ServiceMedia';
 import CustomerPathSection from '@/components/sections/CustomerPathSection';
 import { Footer } from '@/components/layout/Footer';
 import { servicePaths } from '@/data/servicePaths';
@@ -60,7 +60,7 @@ export default function ServicesPage() {
                 </Link>
               </div>
               <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : 'lg:col-start-8'} lg:col-span-5`}>
-                <ServicePathVisual path={path.id} />
+                <ServiceMedia path={path.id} height={430} />
               </div>
             </div>
           </SectionShell>

@@ -37,7 +37,7 @@ const RULES = [
     // "Client scroll recordings replace these stills when ready" shipped to the
     // homepage and survived a passing guard run.
     id: 'placeholder-prose',
-    test: /\b(replace these|replaces? this (?:still|image|placeholder)|when ready|real (?:captures?|photography|footage) (?:go|goes|drop)|coming soon|placeholder (?:copy|text|image)|final copy (?:to|goes))\b/i,
+    test: /\b(replace these|replaces? this (?:still|image|placeholder)|when ready|real (?:captures?|photography|footage) (?:go|goes|drop)|coming soon|placeholder (?:copy|text|image)|final copy (?:to|goes)|will be added after|page skeleton|content review|is ready for your review|to be written|pending review)\b/i,
     message: 'Reads like placeholder prose describing a missing asset. Use a MediaPanel placeholder prop instead of shipping the sentence.',
   },
   {

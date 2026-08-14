@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { ArrowRight } from 'lucide-react';
 import PageHeader from '@/components/ui/PageHeader';
 import SectionShell from '@/components/ui/SectionShell';
-import MediaPanel from '@/components/ui/MediaPanel';
+import ServiceMedia from '@/components/services/ServiceMedia';
 import ProjectRow from '@/components/ui/ProjectRow';
 import FaqAccordion from '@/components/ui/FaqAccordion';
 import FooterCta from '@/components/ui/FooterCta';
@@ -80,11 +80,14 @@ export default async function ServicePathPage({ params }: Props) {
             A useful fit when this is the part holding things back.
           </h2>
           <div className="lg:col-span-6 lg:col-start-7">
-            <p className="border-l-2 border-accent-500 pl-5 text-body-lg text-text-secondary">{service.goodFit}</p>
-            <div className="mt-8 border border-dashed border-primary-900/25 bg-white p-6 text-text-muted">
-              <p className="text-eyebrow uppercase text-accent-700">Content review</p>
-              <p className="mt-3">Two additional fit statements will be added after you review this page skeleton.</p>
-            </div>
+            <ul className="grid gap-px border-y border-primary-900/15 bg-primary-900/15">
+              {service.fitStatements.map((statement, index) => (
+                <li key={statement} className="grid grid-cols-[2.5rem_1fr] items-baseline gap-3 bg-cream-300 py-5">
+                  <span className="font-mono text-mono-meta text-accent-700">0{index + 1}</span>
+                  <span className="text-body-lg text-text-secondary">{statement}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </SectionShell>
@@ -101,14 +104,13 @@ export default async function ServicePathPage({ params }: Props) {
             >
               <p className="font-mono text-mono-meta text-accent-300">0{index + 1}</p>
               <h3 className="mt-4 font-display text-h4 text-cream-300">{capability}</h3>
-              <p className="mt-3 text-white/55">Clarifying scope copy is ready for your review.</p>
             </article>
           ))}
         </div>
       </SectionShell>
 
-      <SectionShell index="03" label="working media" variant="cream">
-        <MediaPanel placeholder={service.mediaPlaceholder} height={560} />
+      <SectionShell index="03" label="what it looks like" variant="cream">
+        <ServiceMedia path={service.id} height={520} />
       </SectionShell>
 
       <SectionShell index="04" label="how it runs" variant="ink" labelledBy="service-process-heading">
@@ -134,7 +136,7 @@ export default async function ServicePathPage({ params }: Props) {
       <SectionShell index="06" label="questions for this path" variant="cream" labelledBy="service-faq-heading">
         <div className="grid gap-10 lg:grid-cols-12">
           <h2 id="service-faq-heading" className="font-display text-display-md text-primary-900 lg:col-span-4">
-            Questions to answer before this page is final.
+            Questions owners ask about this path.
           </h2>
           <div className="lg:col-span-7 lg:col-start-6">
             <FaqAccordion items={service.faq} />

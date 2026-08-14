@@ -128,6 +128,32 @@ Small things that are easy to miss and expensive to fix later.
 
 ---
 
+## 3b. Local setup and two gotchas that cost real time
+
+**Images 404 without an env var.** They live in Vercel Blob and were removed from
+the repo in `323be5b`. Create `.env.local` with:
+
+```
+NEXT_PUBLIC_BLOB_STORE_URL=https://kektfntppap5yky4.public.blob.vercel-storage.com
+```
+
+Without it every image is a broken icon and the site looks half-built. It is in
+`.env.example` now. `.env.local` is gitignored, so each machine needs its own.
+
+**Editing `tailwind.config.js` requires a dev-server restart.** Next does not
+pick up config changes through HMR. The symptom is not an error: the page
+renders with *no CSS at all*, fonts fall back to Times, and every background
+goes transparent, so it looks like the app is broken rather than the stylesheet
+being stale. `npm run build` will pass the whole time. Kill the dev server,
+`rm -rf .next`, restart.
+
+**Verify design changes with computed styles, not screenshots.** Reading
+`getComputedStyle` for font family, font size, and background colour catches
+things a screenshot cannot explain, and it is how both problems above were
+diagnosed.
+
+---
+
 ## 4. Owner blockers
 
 Cursor cannot resolve these. Flag and move on.
