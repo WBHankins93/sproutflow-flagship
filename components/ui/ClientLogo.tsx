@@ -41,17 +41,22 @@ export default function ClientLogo({
   const scale = project.logoScale ?? 1;
   const height = Math.round(box * scale);
 
+  // Width follows the artwork's real aspect. A fixed box left square marks
+  // sitting in ~90px of dead space, which pushed adjacent content away and
+  // read as a broken layout.
+  const width = Math.round(height * project.logoAspect);
+
   const mark = (
-    <span className="relative block" style={{ height, width: height * 4 }}>
-      <Image
-        src={getImageUrl(project.logo)}
-        alt={`${project.name} logo`}
-        fill
-        sizes={`${height * 4}px`}
-        // contain, never cover: a cropped logo is a broken logo.
-        className="object-contain object-left"
-      />
-    </span>
+    <Image
+      src={getImageUrl(project.logo)}
+      alt={`${project.name} logo`}
+      width={width}
+      height={height}
+      sizes={`${width}px`}
+      // contain, never cover: a cropped logo is a broken logo.
+      className="block h-auto w-auto object-contain"
+      style={{ height, width }}
+    />
   );
 
   if (!chip) {

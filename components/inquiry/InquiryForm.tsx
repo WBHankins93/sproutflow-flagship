@@ -53,19 +53,32 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
   const submitGuard = useRef(false);
 
   useEffect(() => {
-    const stored = sessionStorage.getItem(STORAGE_KEY);
-    if (!stored) return;
+    // Storage access itself can throw, not just the parse: Safari private mode
+    // and hardened privacy settings reject sessionStorage outright. An
+    // unguarded read here takes down the whole inquiry form, which is the only
+    // conversion path on the site.
     try {
+      const stored = sessionStorage.getItem(STORAGE_KEY);
+      if (!stored) return;
       const parsed = JSON.parse(stored) as { step?: number; data?: InquiryFormData };
       if (parsed.data) setData({ ...parsed.data, projectType: initialProjectType || parsed.data.projectType });
       if (parsed.step && parsed.step >= 1 && parsed.step <= 3) setStep(parsed.step);
     } catch {
-      sessionStorage.removeItem(STORAGE_KEY);
+      try {
+        sessionStorage.removeItem(STORAGE_KEY);
+      } catch {
+        /* storage unavailable; drafts simply do not persist */
+      }
     }
   }, [initialProjectType]);
 
   useEffect(() => {
-    if (!submitted) sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ step, data }));
+    if (submitted) return;
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ step, data }));
+    } catch {
+      /* quota exceeded or storage disabled; the form still works without a draft */
+    }
   }, [data, step, submitted]);
 
   const update =
@@ -102,7 +115,11 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
         body: JSON.stringify(data),
       });
       if (!response.ok) throw new Error('Submission failed');
-      sessionStorage.removeItem(STORAGE_KEY);
+      try {
+        sessionStorage.removeItem(STORAGE_KEY);
+      } catch {
+        /* storage unavailable; nothing to clear */
+      }
       setSubmitted(true);
     } catch {
       submitGuard.current = false;

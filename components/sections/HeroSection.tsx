@@ -8,6 +8,9 @@ import { getImageUrl } from '@/lib/blob-images';
 
 export default function HeroSection() {
   const leadProject = listedProjectProof[0];
+  // The phone is a second, optional device. With only one listed project there
+  // is nothing to put in it, and indexing blind would fail the build.
+  const secondProject = listedProjectProof[1];
   const stats = [
     { value: String(listedProjectProof.length), label: 'live client builds' },
     { value: '1:1', label: 'with the founder' },
@@ -63,15 +66,17 @@ export default function HeroSection() {
                 className="object-cover object-top"
               />
             </DeviceFrame>
-            <DeviceFrame kind="phone" width={118} className="absolute -bottom-2 -right-2 md:-bottom-10 md:-right-6">
-              <Image
-                src={getImageUrl(listedProjectProof[1].screenshot)}
-                alt=""
-                fill
-                sizes="118px"
-                className="object-cover object-top"
-              />
-            </DeviceFrame>
+            {secondProject && (
+              <DeviceFrame kind="phone" width={118} className="absolute -bottom-2 -right-2 md:-bottom-10 md:-right-6">
+                <Image
+                  src={getImageUrl(secondProject.screenshot)}
+                  alt=""
+                  fill
+                  sizes="118px"
+                  className="object-cover object-top"
+                />
+              </DeviceFrame>
+            )}
           </div>
         </div>
       </div>
