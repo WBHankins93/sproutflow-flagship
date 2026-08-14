@@ -42,7 +42,7 @@
 
   /* Bricolage gives the brand a distinct voice without reducing body readability. */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading), var(--font-body), sans-serif;
+    font-family: var(--font-display), var(--font-body), sans-serif;
     font-weight: 650;
     letter-spacing: -0.025em;
     line-height: 1.1;
@@ -187,6 +187,17 @@
   }
 }
 
+/* Service path micro-worlds. One working visual language, three mechanisms. */
+
+@media (max-width: 1023px) {
+}
+
+@media (prefers-reduced-motion: no-preference) {
+}
+
+@keyframes service-route-pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+@keyframes service-point-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+
 /* ===================================
    COMPONENT STYLES
    =================================== */
@@ -216,5 +227,78 @@
 
   .card-nature {
     @apply bg-gradient-to-br from-primary-50 to-white rounded-2xl p-6 border border-primary-100 shadow-nature;
+  }
+}
+
+/* ============================================
+   V2 UTILITIES
+   ============================================ */
+
+/* Film grain overlay for ink sections. The parent must be positioned.
+   Cheap, and it carries most of the v2 visual identity. */
+.grain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.15;
+  background-image: url('/textures/grain.svg');
+}
+
+/* Tree-ring motif for ink sections. Sproutflow's namesake, carried as texture
+   rather than illustration: a sprout becomes a tree, and the rings are the
+   growth record. Sits above the grain, well below the content. Decorative only,
+   so it is never announced to assistive tech. */
+.rings::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: url('/textures/growth-rings.svg');
+  background-repeat: no-repeat;
+  background-position: right -170px top -140px;
+  background-size: 720px 720px;
+}
+
+/* Second placement so long pages do not show the same motif in the same spot
+   on every dark section. */
+.rings-left::after {
+  background-position: left -230px bottom -190px;
+  background-size: 640px 640px;
+}
+
+@media (max-width: 767px) {
+  .rings::after {
+    background-position: right -260px top -200px;
+    background-size: 520px 520px;
+    opacity: 0.04;
+  }
+}
+
+/* Fades the leading and trailing edges of a horizontal marquee so items
+   enter and leave without a hard cut. */
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+/* Marquee track. Children are duplicated once in the component, so
+   translating -50% loops seamlessly. */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x var(--marquee-duration, 40s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    transform: none;
   }
 }

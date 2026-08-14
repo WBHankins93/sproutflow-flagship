@@ -109,3 +109,5 @@ public/images/**/*.JPG
 public/images/**/*.JPEG
 public/images/**/*.PNG
 public/images/**/*.WEBP
+# Locally optimized assets staged for blob upload
+optimized-assets/

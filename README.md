@@ -76,7 +76,7 @@ Note: `npm run lint` depends on the local Next/ESLint setup. Prefer `npm run typ
 - Testimonials must come from `data/testimonials.ts` and should only be added with permission to publish.
 - Case-study metrics must be real, attributed, and traceable to client-approved source material.
 - Security/trust copy must stay factual. Sproutflow is not claiming SOC 2 certification; founder security background should be described as professional experience only.
-- Portfolio visibility and ordering are controlled through `data/workProjects.ts` and listing filters.
+- Portfolio visibility, ordering, and filters are controlled through `data/projectProof.ts`.
 - Sitewide business contact details also appear in structured data and tests, so update all references together.
 
 ## Verification Checklist

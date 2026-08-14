@@ -1,69 +1,59 @@
-import { FileCheck2, MessageSquareText, Rocket, Wrench } from 'lucide-react';
-import { Container } from '../layout/StudioLayout';
+import SectionShell from '@/components/ui/SectionShell';
 
-const processSteps = [
-  {
-    icon: MessageSquareText,
-    stage: 'Figure out the right job',
-    description: 'We talk through the customer, the bottleneck, and what a useful result would change.',
-  },
-  {
-    icon: FileCheck2,
-    stage: 'Agree before building',
-    description: 'You see the message, direction, scope, and fixed quote before the project moves forward.',
-  },
-  {
-    icon: Wrench,
-    stage: 'Review working pieces',
-    description: 'I build in clear rounds. You review the actual experience instead of guessing from a long document.',
-  },
-  {
-    icon: Rocket,
-    stage: 'Launch with ownership',
-    description: 'I test the work, document what matters, and make sure the accounts and finished product belong to you.',
-  },
+const steps = [
+  ['Figure out the right job', 'We talk through the customer, the bottleneck, and what a useful result would change.'],
+  ['Agree before building', 'You see the message, direction, scope, and fixed quote before the project moves forward.'],
+  [
+    'Review working pieces',
+    'I build in clear rounds. You review the actual experience instead of guessing from a long document.',
+  ],
+  [
+    'Launch with ownership',
+    'I test the work, document what matters, and make sure the accounts and finished product belong to you.',
+  ],
 ];
 
 export default function ProcessSection() {
   return (
-    <section id="process" aria-labelledby="process-heading" className="bg-background-secondary py-20 md:py-28">
-      <Container>
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-primary-700">From first call to launch</p>
-            <h2 id="process-heading" className="font-display text-4xl font-semibold leading-[0.98] text-primary-900 sm:text-5xl">
-              Four checkpoints. You see the work as it takes shape.
-            </h2>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-text-secondary">
-              The process is small on purpose. Each checkpoint answers a decision before the next one begins.
-            </p>
-            <div className="mt-8 border-l-2 border-accent-500 pl-4">
-              <p className="font-semibold text-primary-900">Before you commit</p>
-              <p className="mt-2 text-sm leading-relaxed text-text-secondary">
-                You receive a written scope, a fixed quote, and direct access to Ben. If the recommended project does not fit, you can stop there.
-              </p>
-            </div>
-          </div>
-
-          <ol className="grid gap-px overflow-hidden border border-primary-900/20 bg-primary-900/20 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
-            {processSteps.map((step, index) => {
-              const Icon = step.icon;
-              return (
-                <li key={step.stage} className="bg-white p-6 sm:min-h-64 sm:p-7">
-                  <div className="flex items-center justify-between">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-md bg-primary-100 text-primary-800">
-                      <Icon className="h-5 w-5" aria-hidden="true" />
-                    </span>
-                    <span className="font-display text-lg font-semibold text-accent-700" aria-hidden="true">0{index + 1}</span>
-                  </div>
-                  <h3 className="mt-8 font-display text-2xl font-semibold text-primary-900">{step.stage}</h3>
-                  <p className="mt-3 leading-relaxed text-text-secondary">{step.description}</p>
-                </li>
-              );
-            })}
-          </ol>
+    <SectionShell
+      id="process"
+      index="04"
+      label="from first call to launch"
+      variant="cream"
+      labelledBy="process-heading"
+    >
+      <div className="grid gap-12 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <h2 id="process-heading" className="font-display text-display-md text-primary-900">
+            Four checkpoints. You see the work as it{' '}
+            <span className="font-accent font-normal italic text-accent-700">takes shape.</span>
+          </h2>
+          <p className="mt-6 max-w-xl text-body-lg text-text-secondary">
+            The process is small on purpose. Each checkpoint answers a decision before the next one begins.
+          </p>
         </div>
-      </Container>
-    </section>
+        <ol className="relative lg:col-span-7">
+          <span
+            className="absolute bottom-8 left-8 top-8 w-px border-l border-dashed border-primary-900/30 md:bottom-auto md:left-8 md:right-8 md:top-8 md:h-px md:w-auto md:border-l-0 md:border-t"
+            aria-hidden="true"
+          />
+          <div className="grid gap-7 md:grid-cols-4">
+            {steps.map(([title, body], index) => (
+              <li key={title} className="relative grid grid-cols-[64px_1fr] gap-4 md:block">
+                <span
+                  className={`relative z-10 flex h-16 w-16 items-center justify-center rounded-full border font-mono text-mono-meta ${index === 1 ? 'border-accent-500 bg-accent-500 text-ink-900' : 'border-primary-900/25 bg-cream-300 text-primary-900'}`}
+                >
+                  0{index + 1}
+                </span>
+                <div className="md:mt-6">
+                  <h3 className="font-display text-h4 text-primary-900">{title}</h3>
+                  <p className="mt-3 text-body-sm text-text-secondary">{body}</p>
+                </div>
+              </li>
+            ))}
+          </div>
+        </ol>
+      </div>
+    </SectionShell>
   );
 }

@@ -1,173 +1,106 @@
-// components/layout/Header.tsx - FIXED VERSION
 'use client';
 
 import { useState } from 'react';
-import type { MouseEvent as ReactMouseEvent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
 
-type NavLink = {
-  label: string;
-  href: string;
-  type: 'route' | 'anchor';
-};
+const links = [
+  { label: 'Services', href: '/services' },
+  { label: 'Work', href: '/work' },
+  { label: 'About', href: '/about' },
+  { label: 'Resources', href: '/resources' },
+];
 
 export default function Header() {
-  const router = useRouter();
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const navLinks: NavLink[] = [
-    { label: 'Services', href: '#services', type: 'anchor' },
-    { label: 'Work', href: '/work', type: 'route' },
-    { label: 'About', href: '#about', type: 'anchor' },
-  ];
-
-  const closeMobileMenu = () => setMobileMenuOpen(false);
-
-  const handleHomeLink = (event: ReactMouseEvent<HTMLAnchorElement>) => {
-    closeMobileMenu();
-    if (pathname === '/') {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const handleNavClick = (link: NavLink) => {
-    closeMobileMenu();
-
-    if (link.type === 'route') {
-      if (pathname !== link.href) {
-        router.push(link.href);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-      return;
-    }
-
-    if (pathname !== '/') {
-      const target = link.href.startsWith('#') ? `/${link.href}` : link.href;
-      router.push(target);
-      return;
-    }
-
-    const element = document.querySelector(link.href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      window.history.replaceState(null, '', link.href);
-    }
-  };
+  const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50 border-b border-nature-200">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="flex items-center justify-between h-16">
-          
-          {/* Logo + Brand */}
-          <Link 
-            href="/" 
-            className="flex items-center hover:opacity-90 transition-opacity"
-            onClick={(e) => {
-              handleHomeLink(e);
-            }}
-          >
-            {/* Main Logo */}
-            <Image 
-              src={getImageUrl('logo/main-logo-Photoroom.png')} 
-              alt="Sproutflow Studio"
-              width={550}  
-              height={183}
-              className="h-12 md:h-14 w-auto"
-              priority
-            />
-          </Link>
+    <header className="sticky top-0 z-50 border-b border-ink-900/10 bg-cream-300/95 backdrop-blur-md">
+      <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-5 md:h-[88px] md:px-11">
+        <Link href="/" aria-label="Sproutflow Studio home" onClick={() => setOpen(false)}>
+          <Image
+            src={getImageUrl('logo/main-logo-Photoroom.png')}
+            alt="Sproutflow Studio"
+            width={550}
+            height={183}
+            className="h-10 w-auto md:h-12"
+            priority
+          />
+        </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
-            {navLinks.map((link) => {
-              const isActive = link.type === 'route' && (
-                pathname === link.href ||
-                (link.href === '/work' && pathname.startsWith('/case-studies/'))
-              );
-              return (
-              <a
+        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary navigation">
+          {links.map((link) => {
+            const active =
+              pathname === link.href ||
+              pathname.startsWith(`${link.href}/`) ||
+              (link.href === '/work' && pathname.startsWith('/case-studies/'));
+            return (
+              <Link
                 key={link.href}
                 href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link);
-                }}
-                className={`text-base font-medium transition-colors ${
-                  isActive
-                    ? 'text-primary-600'
-                    : 'text-text-secondary hover:text-primary-600'
-                }`}
+                className={`text-sm font-semibold ${active ? 'text-primary-800' : 'text-text-secondary hover:text-primary-800'}`}
               >
                 {link.label}
-              </a>
+              </Link>
             );
-            })}
-            <a 
-              href="/inquiry"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick({ label: "Contact", href: "/inquiry", type: "route" });
-              }}
-              className="ml-4 inline-flex min-h-11 items-center rounded-lg bg-primary-700 px-6 py-2.5 font-semibold text-white transition-colors hover:bg-primary-800"
-            >
-              Tell me about your project
-            </a>
-          </nav>
-
-          {/* Mobile Menu Button */}
-          <button 
-            className="flex min-h-11 min-w-11 items-center justify-center rounded-lg hover:bg-gray-100 transition-colors lg:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={mobileMenuOpen}
+          })}
+          <Link
+            href="/inquiry"
+            className="inline-flex min-h-11 items-center rounded-full bg-ink-900 px-6 py-2.5 text-sm font-semibold text-white hover:bg-primary-800"
           >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-gray-700" />
-            ) : (
-              <Menu className="w-6 h-6 text-gray-700" />
-            )}
-          </button>
+            Start a project
+          </Link>
+        </nav>
 
+        <div className="flex items-center gap-2 lg:hidden">
+          <Link
+            href="/inquiry"
+            className="inline-flex min-h-11 items-center rounded-full bg-accent-500 px-4 text-sm font-semibold text-ink-900"
+          >
+            Start
+          </Link>
+          <button
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-ink-900/20"
+            aria-label="Toggle menu"
+            title={open ? 'Close menu' : 'Open menu'}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-nature-200 bg-white shadow-lg">
-          <nav className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => (
-              <a
+      {open && (
+        <nav
+          id="mobile-navigation"
+          className="grain fixed inset-x-0 top-[72px] min-h-[calc(100svh-72px)] bg-ink-900 px-5 py-10 text-white lg:hidden"
+          aria-label="Mobile navigation"
+        >
+          <div className="relative grid gap-1">
+            {links.map((link, index) => (
+              <Link
                 key={link.href}
                 href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(link);
-                }}
-                className="flex min-h-11 items-center rounded-lg px-4 py-2 text-base font-medium text-text-secondary hover:bg-nature-50 hover:text-primary-600 transition-colors"
+                onClick={() => setOpen(false)}
+                className="flex min-h-16 items-center justify-between border-b border-white/15 font-display text-display-md text-cream-300"
               >
                 {link.label}
-              </a>
+                <span className="font-mono text-mono-meta text-accent-300">0{index + 1}</span>
+              </Link>
             ))}
-            <a 
-              href="/inquiry"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick({ label: "Contact", href: "/inquiry", type: "route" });
-              }}
-              className="mt-4 block min-h-12 w-full rounded-lg bg-primary-700 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-primary-800"
-            >
-              Tell me about your project
-            </a>
-          </nav>
-        </div>
+            <div className="mt-10 space-y-3 text-white/60">
+              <a href="mailto:ben@sproutflow-studio.com">ben@sproutflow-studio.com</a>
+              <p>(504) 326-1676 · New Orleans, LA</p>
+            </div>
+          </div>
+        </nav>
       )}
     </header>
   );

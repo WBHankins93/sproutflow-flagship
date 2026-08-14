@@ -16,6 +16,7 @@ import ServicesSection from '@/components/sections/ServicesSection'
 import ContactSection from '@/components/sections/ContactSection'
 import HeroSection from '@/components/sections/HeroSection'
 import FAQPage from '@/app/faq/page'
+import { InquiryForm } from '@/components/inquiry/InquiryForm'
 
 describe('Component Interactions - Header Mobile Menu', () => {
   it('should toggle mobile menu when button is clicked', async () => {
@@ -70,14 +71,16 @@ describe('Component Interactions - ServicesSection Paths', () => {
     expect(screen.getByText('Ongoing growth and support')).toBeInTheDocument()
   })
 
-  it('should have a CTA on each service path routing to the inquiry application', () => {
+  it('should have a CTA on each service path routing to its detail page', () => {
     const { container } = render(<ServicesSection />)
 
-    const pathLinks = container.querySelectorAll('article a[href="/inquiry"]')
+    const pathLinks = container.querySelectorAll('article a[href^="/services/"]')
     expect(pathLinks.length).toBe(3)
-    pathLinks.forEach((link) => {
-      expect(link).toHaveAttribute('href', '/inquiry')
-    })
+    expect(Array.from(pathLinks).map((link) => link.getAttribute('href'))).toEqual([
+      '/services/websites',
+      '/services/business-systems',
+      '/services/growth-support',
+    ])
   })
 
   it('should not expose package names or prices', () => {
@@ -96,15 +99,12 @@ describe('Component Interactions - ServicesSection Paths', () => {
   })
 })
 
-describe('Component Interactions - Project Reel', () => {
-  it('should expose every featured client as a direct control', () => {
-    render(<HeroSection />)
+describe('Component Interactions - Hero proof', () => {
+  it('should show client work without exposing hidden projects', () => {
+    const { container } = render(<HeroSection />)
 
-    expect(screen.getByRole('button', { name: 'Show Second Line Psychiatry' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Show NOLA Pool Solutions' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Show Nealy Event Decor' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Show DJN Services' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Show Big Butt Association' })).toBeInTheDocument()
+    expect(screen.getByAltText('Second Line Psychiatry homepage shown inside a laptop frame')).toBeInTheDocument()
+    expect(container.textContent).not.toContain('Big Butt Association')
   })
 
   it('should keep the founder portrait out of the hero', () => {
@@ -128,7 +128,7 @@ describe('Component Interactions - ContactSection', () => {
   it('should render contact options', () => {
     render(<ContactSection />)
 
-    expect(screen.getByText('Tell me what needs to work better.')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Tell me what needs to work better/i })).toBeInTheDocument()
   })
 
   it('should route the discovery CTA to the inquiry application, not the calendar', () => {
@@ -152,12 +152,21 @@ describe('Component Interactions - ContactSection', () => {
   })
 })
 
+describe('Component Interactions - InquiryForm', () => {
+  it('should offer one explicit undecided path without duplicating it as the prompt', () => {
+    render(<InquiryForm />)
+
+    expect(screen.getByRole('option', { name: 'Choose a path' })).toBeInTheDocument()
+    expect(screen.getAllByRole('option', { name: 'Not sure yet' }).length).toBe(1)
+  })
+})
+
 describe('Component Interactions - Navigation Links', () => {
   it('should have correct anchor links in header', () => {
     render(<Header />)
 
     const aboutLink = screen.getByText('About').closest('a')
-    expect(aboutLink).toHaveAttribute('href', '#about')
+    expect(aboutLink).toHaveAttribute('href', '/about')
   })
 
   it('should have correct route links in header', () => {
@@ -171,10 +180,10 @@ describe('Component Interactions - Navigation Links', () => {
 })
 
 describe('Component Interactions - Footer Navigation', () => {
-  it('should link Services to the homepage services section', () => {
+  it('should link Services to the services hub', () => {
     render(<Footer />)
 
     const servicesLink = screen.getByText('Services').closest('a')
-    expect(servicesLink).toHaveAttribute('href', '/#services')
+    expect(servicesLink).toHaveAttribute('href', '/services')
   })
 })

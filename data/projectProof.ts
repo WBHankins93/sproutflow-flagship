@@ -6,10 +6,22 @@ export interface ProjectProof {
   screenshot: string;
   screenshotAlt: string;
   logo: string;
+  /**
+   * Optical size correction, multiplied against the logo box height.
+   * Square badges read far heavier than wide wordmarks at equal height, so
+   * they are scaled down. Tuned by eye, not by aspect ratio maths.
+   */
+  logoScale?: number;
   href: string;
   liveUrl: string;
   canvasColor: string;
   inkColor: string;
+  industry: string;
+  filterTags: string[];
+  status: 'Live' | 'In progress';
+  scope: string[];
+  summary: string;
+  listed?: boolean;
 }
 
 export const projectProof: ProjectProof[] = [
@@ -25,6 +37,12 @@ export const projectProof: ProjectProof[] = [
     liveUrl: 'https://www.secondlinepsychiatry.com/',
     canvasColor: '#DCE9F2',
     inkColor: '#16324A',
+    industry: 'Professional practice',
+    filterTags: ['Websites', 'Systems', 'Ongoing care'],
+    status: 'Live',
+    scope: ['Web design', 'Booking flow', 'Accessibility'],
+    summary:
+      'A trauma-informed website and booking path that helps families understand the practice before the first call.',
   },
   {
     id: 'nola-pool-solutions',
@@ -34,10 +52,16 @@ export const projectProof: ProjectProof[] = [
     screenshot: 'work/client-logos/nps-project.png',
     screenshotAlt: 'NOLA Pool Solutions homepage shown inside a laptop frame',
     logo: 'work/client-logos/logo.png',
+    logoScale: 0.72,
     href: '/case-studies/nola-pool-solutions',
     liveUrl: 'https://nolapoolsolutions.com/',
     canvasColor: '#DDEDF1',
     inkColor: '#0B3954',
+    industry: 'Service business',
+    filterTags: ['Websites', 'Systems', 'Ongoing care'],
+    status: 'Live',
+    scope: ['Web design', 'Lead capture', 'Local SEO'],
+    summary: 'A service site and intake flow built to collect useful quote details before the owner calls back.',
   },
   {
     id: 'nealy-events',
@@ -47,10 +71,16 @@ export const projectProof: ProjectProof[] = [
     screenshot: 'work/client-logos/nealy-project.png',
     screenshotAlt: 'Nealy Event Decor homepage shown inside a laptop frame',
     logo: 'work/client-logos/NealyLogo.png',
+    logoScale: 0.78,
     href: '/case-studies/nealy-events',
     liveUrl: 'https://nealyevents.com/',
     canvasColor: '#EEE6F2',
     inkColor: '#3F2B5B',
+    industry: 'Creative service',
+    filterTags: ['Websites', 'Systems'],
+    status: 'Live',
+    scope: ['Web design', 'CMS', 'Conversion strategy'],
+    summary: 'An editorial showcase and self-managed inventory system for a luxury event fabrication studio.',
   },
   {
     id: 'djn-services',
@@ -60,10 +90,17 @@ export const projectProof: ProjectProof[] = [
     screenshot: 'work/client-logos/djn-new-home-page.png',
     screenshotAlt: 'DJN Services homepage shown inside a laptop frame',
     logo: 'work/client-logos/djn-logo.webp',
+    logoScale: 0.9,
     href: '/case-studies/djn-services',
     liveUrl: 'https://djnservices.com/',
     canvasColor: '#E7E0D7',
     inkColor: '#2C2119',
+    industry: 'Service business',
+    filterTags: ['Websites', 'Systems'],
+    status: 'Live',
+    scope: ['Web design', 'Positioning', 'Lead capture'],
+    summary:
+      'A fast rebuild that makes twenty years of field experience visible and captures quote details while the owner works.',
   },
   {
     id: 'big-butt-association',
@@ -73,9 +110,18 @@ export const projectProof: ProjectProof[] = [
     screenshot: 'work/client-logos/bba-homepage.png',
     screenshotAlt: 'Big Butt Association Shopify homepage shown inside a browser frame',
     logo: 'work/client-logos/bekky-no-background.png',
+    logoScale: 0.74,
     href: '/case-studies/big-butt-association',
     liveUrl: 'https://bigbuttassociation.com/',
     canvasColor: '#F4D8E9',
     inkColor: '#5E2147',
+    industry: 'Independent brand',
+    filterTags: ['Shopify'],
+    status: 'Live',
+    scope: ['Shopify', 'E-commerce design', 'Brand system'],
+    summary: 'A custom Shopify storefront built around the energy and visual language of the brand.',
+    listed: false,
   },
 ];
+
+export const listedProjectProof = projectProof.filter((project) => project.listed !== false);

@@ -185,7 +185,11 @@ describe('SEO Metadata - Sitemap', () => {
 
     expect(urls).not.toContain('https://sproutflow-studio.com/how-we-work')
     expect(urls).not.toContain('https://sproutflow-studio.com/case-studies')
+    expect(urls).not.toContain('https://sproutflow-studio.com/case-studies/big-butt-association')
     expect(urls).toContain('https://sproutflow-studio.com/work')
+    expect(urls).toContain('https://sproutflow-studio.com/services/websites')
+    expect(urls).toContain('https://sproutflow-studio.com/services/business-systems')
+    expect(urls).toContain('https://sproutflow-studio.com/services/growth-support')
   })
 
   it('should have home page in sitemap with highest priority', async () => {

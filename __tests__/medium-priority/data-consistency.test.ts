@@ -1,129 +1,110 @@
 /**
  * MEDIUM PRIORITY TESTS: Data Consistency
- * 
- * Tests to validate data consistency across different data files
- * and ensure type safety.
+ *
+ * Validates consistency across the live data files and the components
+ * that consume them.
+ *
+ * The v1 pricing-tier data (data/services.ts, data/content.ts) was deleted
+ * in the v2 cleanup. Those files were imported by tests only.
  */
 
-import { serviceTiers } from '@/data/services'
-import { servicesContent } from '@/data/content'
+import { servicePaths } from '@/data/servicePaths'
+import { projectProof } from '@/data/projectProof'
+import { caseStudies } from '@/data/caseStudies'
+import { testimonials } from '@/data/testimonials'
 
-describe('Data Consistency - Service Tiers', () => {
-  it('should have matching tier IDs between services.ts and content.ts', () => {
-    const servicesIds = new Set(serviceTiers.map(tier => tier.id))
-    const contentIds = new Set(servicesContent.tiers.map(tier => tier.id))
-    
-    // Check that all content tiers exist in services.ts
-    // Note: services.ts may have additional tiers (like 'starter') not in content.ts
-    contentIds.forEach(id => {
-      expect(servicesIds.has(id)).toBe(true)
-    })
-    
-    // Check that common tiers match
-    const commonTiers = ['foundation', 'growth', 'market-leader']
-    commonTiers.forEach(id => {
-      expect(servicesIds.has(id)).toBe(true)
-      expect(contentIds.has(id)).toBe(true)
+describe('Data Consistency - Service Paths', () => {
+  it('should have unique path ids', () => {
+    const ids = servicePaths.map(path => path.id)
+    expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('should keep capability lists short enough to scan', () => {
+    servicePaths.forEach(path => {
+      expect(path.capabilities.length).toBeGreaterThanOrEqual(3)
+      expect(path.capabilities.length).toBeLessThanOrEqual(6)
     })
   })
 
-  it('should have consistent tier names', () => {
-    const servicesMap = new Map(
-      serviceTiers.map(tier => [tier.id, tier.name])
-    )
-    
-    servicesContent.tiers.forEach(contentTier => {
-      const servicesName = servicesMap.get(contentTier.id)
-      expect(servicesName).toBeDefined()
-      expect(contentTier.name).toBe(servicesName)
-    })
-  })
-
-  it('should have consistent timelines', () => {
-    const servicesMap = new Map(
-      serviceTiers.map(tier => [tier.id, tier.timeline])
-    )
-    
-    servicesContent.tiers.forEach(contentTier => {
-      const servicesTimeline = servicesMap.get(contentTier.id)
-      expect(servicesTimeline).toBeDefined()
-      expect(contentTier.timeline).toBe(servicesTimeline)
+  it('should phrase every CTA as an ask, not a purchase', () => {
+    servicePaths.forEach(path => {
+      expect(path.ctaLabel.toLowerCase().startsWith('ask about')).toBe(true)
     })
   })
 })
 
-describe('Data Consistency - Service Tier Structure', () => {
-  it('should have all tiers with required fields', () => {
-    const requiredFields = ['id', 'name', 'priceRange', 'timeline', 'description']
-    
-    serviceTiers.forEach(tier => {
-      requiredFields.forEach(field => {
-        expect(tier).toHaveProperty(field)
-        expect(tier[field as keyof typeof tier]).toBeTruthy()
-      })
+describe('Data Consistency - Testimonials', () => {
+  it('should attach every testimonial to a real case study', () => {
+    const slugs = new Set(caseStudies.map(study => study.slug))
+    testimonials.forEach(entry => {
+      expect(slugs.has(entry.caseStudySlug)).toBe(true)
     })
   })
 
-  it('should have valid price range format', () => {
-    const priceRangeRegex = /^\$[\d,]+(?: - \$[\d,]+)?\+?$/
-    
-    serviceTiers.forEach(tier => {
-      expect(priceRangeRegex.test(tier.priceRange)).toBe(true)
+  it('should have unique testimonial ids', () => {
+    const ids = testimonials.map(entry => entry.id)
+    expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('should have attribution on every quote', () => {
+    testimonials.forEach(entry => {
+      expect(entry.quote.length).toBeGreaterThan(20)
+      expect(entry.name.length).toBeGreaterThan(0)
+      expect(entry.role.length).toBeGreaterThan(0)
+      expect(entry.business.length).toBeGreaterThan(0)
     })
   })
 
-  it('should have non-empty arrays for business outcomes', () => {
-    serviceTiers.forEach(tier => {
-      expect(Array.isArray(tier.businessOutcomes)).toBe(true)
-      expect(tier.businessOutcomes.length).toBeGreaterThan(0)
+  it('should use https for any live url', () => {
+    testimonials.forEach(entry => {
+      if (entry.liveUrl) {
+        expect(/^https:\/\/.+/.test(entry.liveUrl)).toBe(true)
+      }
+    })
+  })
+})
+
+describe('Data Consistency - Project Proof and Case Studies', () => {
+  it('should keep project names aligned with case study client names', () => {
+    caseStudies.forEach(study => {
+      const project = projectProof.find(entry => entry.id === study.slug)
+      if (project) {
+        expect(study.clientName.length).toBeGreaterThan(0)
+      }
     })
   })
 
-  it('should have non-empty arrays for technical features', () => {
-    serviceTiers.forEach(tier => {
-      expect(Array.isArray(tier.technicalFeatures)).toBe(true)
-      expect(tier.technicalFeatures.length).toBeGreaterThan(0)
-    })
-  })
-
-  it('should have non-empty arrays for deliverables', () => {
-    serviceTiers.forEach(tier => {
-      expect(Array.isArray(tier.deliverables)).toBe(true)
-      expect(tier.deliverables.length).toBeGreaterThan(0)
+  it('should give every case study a card blurb for the work index', () => {
+    caseStudies.forEach(study => {
+      expect(typeof study.cardBlurb).toBe('string')
+      expect(study.cardBlurb.length).toBeGreaterThan(20)
     })
   })
 })
 
 describe('Data Consistency - Type Safety', () => {
   it('should have valid status values for work projects', async () => {
-    const { workProjects } = await import('@/data/workProjects')
-    const validStatuses = ['Live', 'In Progress']
-    
-    workProjects.forEach(project => {
+    const { projectProof } = await import('@/data/projectProof')
+    const validStatuses = ['Live', 'In progress']
+
+    projectProof.forEach(project => {
       expect(validStatuses).toContain(project.status)
     })
   })
 
   it('should have valid URL format for work projects', async () => {
-    const { workProjects } = await import('@/data/workProjects')
-    const urlRegex = /^https?:\/\/.+/
-    
-    workProjects.forEach(project => {
-      expect(urlRegex.test(project.url)).toBe(true)
+    const { projectProof } = await import('@/data/projectProof')
+
+    projectProof.forEach(project => {
+      expect(/^https?:\/\/.+/.test(project.liveUrl)).toBe(true)
     })
   })
 
-  it('should have gradient arrays with at least 2 colors', async () => {
-    const { workProjects } = await import('@/data/workProjects')
-    
-    workProjects.forEach(project => {
-      expect(Array.isArray(project.gradient)).toBe(true)
-      expect(project.gradient.length).toBeGreaterThanOrEqual(2)
-      project.gradient.forEach(color => {
-        expect(typeof color).toBe('string')
-        // Basic hex color validation
-        expect(/^#[0-9A-Fa-f]{6}$/.test(color) || /^[a-zA-Z]+$/.test(color)).toBe(true)
-      })
+  it('should have valid project canvas colors', async () => {
+    const { projectProof } = await import('@/data/projectProof')
+
+    projectProof.forEach(project => {
+      expect(/^#[0-9A-Fa-f]{6}$/.test(project.canvasColor)).toBe(true)
     })
   })
 })

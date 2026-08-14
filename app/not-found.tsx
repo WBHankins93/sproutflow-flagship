@@ -1,61 +1,32 @@
-// app/not-found.tsx - Professional 404 Page
-
-import Link from 'next/link'
-import { Container, Heading, BodyText, Button } from '../components/layout/StudioLayout'
-import { ArrowLeft, Home } from 'lucide-react'
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex items-center justify-center section-padding">
-      <Container size="narrow">
-        <div className="text-center">
-          {/* Professional 404 Design */}
-          <div className="mb-8">
-            <div className="text-8xl font-display font-bold text-nature-200 mb-4">
-              404
-            </div>
-            <Heading level={2} className="mb-4">
-              Page not found
-            </Heading>
-            <BodyText size="lg" color="secondary" className="mb-8 max-w-md mx-auto">
-              The page you&apos;re looking for doesn&apos;t exist or may have been moved.
-            </BodyText>
-          </div>
-          
-          {/* Professional Navigation Options */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="primary"
-              href="/"
-              icon={<Home className="w-4 h-4" />}
-            >
-              Return Home
-            </Button>
-            
-            <Button
-              variant="secondary"
-              href="#"
-              onClick={() => window.history.back()}
-              icon={<ArrowLeft className="w-4 h-4" />}
-            >
-              Go Back
-            </Button>
-          </div>
-          
-          {/* Professional Contact Option */}
-          <div className="mt-12 pt-8 border-t border-nature-200">
-            <BodyText size="sm" color="muted" className="mb-4">
-              Need assistance finding something specific?
-            </BodyText>
-            <Link 
-              href="#contact"
-              className="text-primary-600 hover:text-primary-700 font-medium transition-colors"
-            >
-              Contact our team
-            </Link>
-          </div>
+    <section className="grain rings relative flex min-h-[calc(100svh-88px)] items-center bg-ink-900 text-white">
+      <div className="relative mx-auto w-full max-w-[1186px] px-5 py-20 md:px-11">
+        <p className="font-mono text-mono-meta text-accent-300">404 · page not found</p>
+        <h1 className="mt-7 max-w-4xl font-display text-display-lg text-cream-300">
+          That page does not exist anymore.
+        </h1>
+        <p className="mt-6 max-w-xl text-body-lg text-white/[0.68]">
+          The useful part may have moved. Start with the work, the services, or tell me what you were looking for.
+        </p>
+        <div className="mt-9 flex flex-wrap gap-5">
+          <Link href="/work" className="border-b border-accent-400 pb-1 font-semibold">
+            Work
+          </Link>
+          <Link href="/services" className="border-b border-accent-400 pb-1 font-semibold">
+            Services
+          </Link>
+          <Link
+            href="/inquiry"
+            className="group inline-flex items-center gap-2 rounded-full bg-accent-500 px-6 py-3 font-semibold text-ink-900"
+          >
+            Tell me what you need <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </div>
-      </Container>
-    </div>
-  )
+      </div>
+    </section>
+  );
 }

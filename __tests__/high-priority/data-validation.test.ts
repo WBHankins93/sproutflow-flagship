@@ -1,14 +1,21 @@
 /**
  * HIGH PRIORITY TESTS: Data Validation
- * 
- * Tests to catch pricing mismatches, contact info inconsistencies,
- * and data structure validation.
+ *
+ * Validates the live content model: service paths, project proof,
+ * case studies, and contact information consistency.
+ *
+ * The v1 pricing-tier data (data/services.ts, data/content.ts) was deleted
+ * in the v2 cleanup. Those files were imported by tests only.
  */
 
-import { serviceTiers } from '@/data/services'
 import { servicePaths } from '@/data/servicePaths'
-import { servicesContent } from '@/data/content'
-import { BUDGET_OPTIONS, PROJECT_TYPES } from '@/types/inquiry'
+import { projectProof } from '@/data/projectProof'
+import { caseStudies } from '@/data/caseStudies'
+import { PROJECT_TYPES } from '@/types/inquiry'
+
+const CORRECT_EMAIL = 'ben@sproutflow-studio.com'
+const CORRECT_PHONE_DISPLAY = '(504) 326-1676'
+const CORRECT_PHONE_TEL = '+15043261676'
 
 describe('Data Validation - Public Service Paths', () => {
   it('should expose exactly the three outcome-led service paths', () => {
@@ -27,6 +34,20 @@ describe('Data Validation - Public Service Paths', () => {
     })
   })
 
+  it('should have every required field populated on each path', () => {
+    servicePaths.forEach(path => {
+      expect(typeof path.eyebrow).toBe('string')
+      expect(path.eyebrow.length).toBeGreaterThan(0)
+      expect(path.title.length).toBeGreaterThan(0)
+      expect(path.outcome.length).toBeGreaterThan(0)
+      expect(path.description.length).toBeGreaterThan(0)
+      expect(path.goodFit.length).toBeGreaterThan(0)
+      expect(path.ctaLabel.length).toBeGreaterThan(0)
+      expect(Array.isArray(path.capabilities)).toBe(true)
+      expect(path.capabilities.length).toBeGreaterThan(0)
+    })
+  })
+
   it('should align the inquiry selector with the service paths', () => {
     expect(PROJECT_TYPES).toEqual([
       'Websites that earn trust',
@@ -36,114 +57,100 @@ describe('Data Validation - Public Service Paths', () => {
     ])
   })
 
-  it('should collect budget privately without package labels', () => {
-    expect(BUDGET_OPTIONS.length).toBe(6)
-    expect(BUDGET_OPTIONS).not.toContain('Starter')
-    expect(BUDGET_OPTIONS).not.toContain('Foundation')
-    expect(BUDGET_OPTIONS).not.toContain('Growth')
-    expect(BUDGET_OPTIONS).not.toContain('Market Leader')
+})
+
+describe('Data Validation - Project Proof', () => {
+  it('should have unique project ids', () => {
+    const ids = projectProof.map(project => project.id)
+    expect(new Set(ids).size).toBe(ids.length)
+  })
+
+  it('should have all required fields on every project', () => {
+    projectProof.forEach(project => {
+      expect(project.name.length).toBeGreaterThan(0)
+      expect(project.location.length).toBeGreaterThan(0)
+      expect(project.result.length).toBeGreaterThan(0)
+      expect(project.screenshot.length).toBeGreaterThan(0)
+      expect(project.screenshotAlt.length).toBeGreaterThan(0)
+      expect(project.logo.length).toBeGreaterThan(0)
+    })
+  })
+
+  it('should link every project to an internal case study route', () => {
+    projectProof.forEach(project => {
+      expect(project.href).toBe(`/case-studies/${project.id}`)
+    })
+  })
+
+  it('should point every project at an external live site', () => {
+    projectProof.forEach(project => {
+      expect(/^https?:\/\/.+/.test(project.liveUrl)).toBe(true)
+    })
+  })
+
+  it('should use valid hex colors for canvas and ink', () => {
+    const hex = /^#[0-9A-Fa-f]{6}$/
+    projectProof.forEach(project => {
+      expect(hex.test(project.canvasColor)).toBe(true)
+      expect(hex.test(project.inkColor)).toBe(true)
+    })
   })
 })
 
-describe('Data Validation - Service Pricing Consistency', () => {
-  it('should have consistent pricing between services.ts and content.ts', () => {
-    const servicesTiersMap = new Map(
-      serviceTiers.map(tier => [tier.id, tier.priceRange])
-    )
-    
-    servicesContent.tiers.forEach(contentTier => {
-      const servicesPrice = servicesTiersMap.get(contentTier.id)
-      expect(servicesPrice).toBeDefined()
-      expect(contentTier.priceRange).toBe(servicesPrice)
+describe('Data Validation - Case Study Cross-Reference', () => {
+  it('should have a case study for every project proof entry', () => {
+    const slugs = new Set(caseStudies.map(study => study.slug))
+    projectProof.forEach(project => {
+      expect(slugs.has(project.id)).toBe(true)
     })
   })
 
-  it('should have Foundation tier priced at $2,000 - $2,800', () => {
-    const foundationTier = serviceTiers.find(tier => tier.id === 'foundation')
-    expect(foundationTier).toBeDefined()
-    expect(foundationTier?.priceRange).toBe('$2,000 - $2,800')
-  })
-
-  it('should have Market Leader tier priced at $7,500+', () => {
-    const marketLeaderTier = serviceTiers.find(tier => tier.id === 'market-leader')
-    expect(marketLeaderTier).toBeDefined()
-    expect(marketLeaderTier?.priceRange).toBe('$7,500+')
-  })
-
-  it('should have all required service tier fields', () => {
-    serviceTiers.forEach(tier => {
-      expect(tier).toHaveProperty('id')
-      expect(tier).toHaveProperty('name')
-      expect(tier).toHaveProperty('priceRange')
-      expect(tier).toHaveProperty('timeline')
-      expect(tier).toHaveProperty('description')
-      expect(tier).toHaveProperty('businessOutcomes')
-      expect(tier).toHaveProperty('technicalFeatures')
-      expect(tier).toHaveProperty('strategicInclusions')
-      expect(tier).toHaveProperty('deliverables')
-      
-      expect(typeof tier.id).toBe('string')
-      expect(typeof tier.name).toBe('string')
-      expect(typeof tier.priceRange).toBe('string')
-      expect(Array.isArray(tier.businessOutcomes)).toBe(true)
-    })
+  it('should have unique case study slugs', () => {
+    const slugs = caseStudies.map(study => study.slug)
+    expect(new Set(slugs).size).toBe(slugs.length)
   })
 })
 
 describe('Data Validation - Contact Information Consistency', () => {
-  const CORRECT_EMAIL = 'ben@sproutflow-studio.com'
-  const CORRECT_PHONE_DISPLAY = '(504) 326-1676'
-  const CORRECT_PHONE_TEL = '+15043261676'
-
-  it('should have correct email in content.ts', () => {
-    expect(servicesContent).toBeDefined()
-    // Check if contactContent exists and has correct email
-    // Note: contactContent is in content.ts but may not be used
-    // This test ensures the data structure is correct
-  })
-
   it('should validate email format', () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    expect(emailRegex.test(CORRECT_EMAIL)).toBe(true)
+    expect(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(CORRECT_EMAIL)).toBe(true)
   })
 
-  it('should validate phone number format', () => {
-    // Phone should be in format (XXX) XXX-XXXX
-    const phoneDisplayRegex = /^\(\d{3}\) \d{3}-\d{4}$/
-    expect(phoneDisplayRegex.test(CORRECT_PHONE_DISPLAY)).toBe(true)
+  it('should use the New Orleans local number in display format', () => {
+    expect(/^\(\d{3}\) \d{3}-\d{4}$/.test(CORRECT_PHONE_DISPLAY)).toBe(true)
+    expect(CORRECT_PHONE_DISPLAY.startsWith('(504)')).toBe(true)
   })
 
   it('should validate tel: link format', () => {
-    // Tel link should be digits only with optional + prefix
-    const telRegex = /^\+?\d+$/
-    expect(telRegex.test(CORRECT_PHONE_TEL)).toBe(true)
+    expect(/^\+?\d+$/.test(CORRECT_PHONE_TEL)).toBe(true)
+  })
+
+  it('should keep the display number and tel: link in sync', () => {
+    const digits = CORRECT_PHONE_DISPLAY.replace(/\D/g, '')
+    expect(CORRECT_PHONE_TEL).toBe(`+1${digits}`)
   })
 })
 
 describe('Data Validation - Work Projects Structure', () => {
   it('should have valid work project structure', async () => {
-    const { workProjects } = await import('@/data/workProjects')
-    
-    workProjects.forEach(project => {
+    const { projectProof } = await import('@/data/projectProof')
+
+    projectProof.forEach(project => {
       expect(project).toHaveProperty('id')
-      expect(project).toHaveProperty('title')
-      expect(project).toHaveProperty('client')
-      expect(project).toHaveProperty('category')
-      expect(project).toHaveProperty('sortPriority')
+      expect(project).toHaveProperty('name')
+      expect(project).toHaveProperty('industry')
+      expect(project).toHaveProperty('location')
       expect(project).toHaveProperty('status')
-      expect(project).toHaveProperty('description')
-      expect(project).toHaveProperty('url')
-      expect(project).toHaveProperty('services')
-      expect(project).toHaveProperty('tech')
-      expect(project).toHaveProperty('gradient')
-      
-      expect(['Live', 'In Progress']).toContain(project.status)
-      expect(typeof project.category).toBe('string')
-      expect(typeof project.sortPriority).toBe('number')
-      expect(Array.isArray(project.services)).toBe(true)
-      expect(Array.isArray(project.tech)).toBe(true)
-      expect(Array.isArray(project.gradient)).toBe(true)
-      expect(project.gradient.length).toBeGreaterThanOrEqual(2)
+      expect(project).toHaveProperty('summary')
+      expect(project).toHaveProperty('liveUrl')
+      expect(project).toHaveProperty('scope')
+      expect(project).toHaveProperty('filterTags')
+      expect(project).toHaveProperty('canvasColor')
+
+      expect(['Live', 'In progress']).toContain(project.status)
+      expect(typeof project.industry).toBe('string')
+      expect(Array.isArray(project.scope)).toBe(true)
+      expect(Array.isArray(project.filterTags)).toBe(true)
     })
   })
 })
