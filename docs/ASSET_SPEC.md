@@ -165,29 +165,38 @@ Logos at 400px longest edge, q90, alpha preserved. Brand logos at 800px.
 
 ### Uploading them
 
-Blob writes need `BLOB_READ_WRITE_TOKEN` in `.env.local`, which the agent that
-produced these files did not have. From the repo root, with the token set:
+Blob writes need `BLOB_READ_WRITE_TOKEN` in `.env.local`. Get it from the Vercel
+dashboard under Storage, your blob store, the tokens tab. Then:
 
 ```bash
-npx tsx scripts/replace-blob-image.ts images/work/client-logos/nps-project.webp
+npx tsx scripts/upload-optimized-assets.ts --dry-run
+npx tsx scripts/upload-optimized-assets.ts --apply-paths
+npm run check:assets
 ```
 
-The script deletes the old blob and uploads at the same path, so URLs stay
-stable. Note the extension changes from `.png` to `.webp`, so update the paths
-in `data/projectProof.ts` and `data/caseStudies.ts` in the same commit, then
-re-run `npm run check:assets`.
+The script uploads everything staged, reads the data files to find what each
+asset is *currently* referenced as rather than assuming an extension, and
+rewrites those references. Old blobs are left in place, so a bad upload rolls
+back by reverting the data files alone. Delete the originals once the new
+assets are confirmed live.
 
 ---
 
-## One logo needs a real re-export
+## The Second Line logo, recovered
 
-`second-line.png` is RGBA, but **every pixel in its alpha channel is fully
-opaque**. The transparency is nominal: the background is baked into the image.
-It will render as a solid rectangle on cream and on ink, where every other mark
-floats.
+`second-line.png` was RGBA with **every pixel fully opaque**: the white
+background was baked in, so it would have rendered as a solid rectangle
+wherever every other mark floats.
 
-Ask the client for the SVG or a genuinely transparent PNG. This is not
-something compression can fix.
+The background was uniform white across 87 percent of the image, so it was
+recoverable. The staged version un-mattes from white, deriving alpha from pixel
+luminance and normalising so the darkest ink returns to fully opaque. Result:
+87 percent transparent, 10 percent anti-aliased edge, real alpha channel, 12 KB.
+
+**This is a recovery, not a substitute for the original.** Un-matting cannot
+invent detail the flattening destroyed, and a wordmark this thin is mostly
+anti-aliased edge. Still worth asking the client for the SVG. Until then the
+staged file is a genuine improvement over a white box.
 
 ---
 
