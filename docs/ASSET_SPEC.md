@@ -140,6 +140,57 @@ big-butt-association-logo.svg
 
 ---
 
+## Optimisation already done
+
+Every asset has been re-exported locally to WebP and staged in
+`optimized-assets/` (gitignored). Measured results:
+
+| Asset | Before | After | Saving |
+|---|---|---|---|
+| `nps-project` | 4032 KB | 126 KB | 97% |
+| `nealy-project` | 3980 KB | 131 KB | 97% |
+| `bba-homepage` | 3137 KB | 72 KB | 98% |
+| `djn-new-home-page` | 2837 KB | 44 KB | 99% |
+| `second-line-project` | 1230 KB | 49 KB | 96% |
+| `bekky-no-background` | 542 KB | 24 KB | 96% |
+| `sproutflow-white-logo` | 298 KB | 28 KB | 91% |
+| `djn-logo` | 281 KB | 11 KB | 96% |
+| `logo` (NOLA) | 194 KB | 9 KB | 96% |
+| `main-logo-Photoroom` | 168 KB | 42 KB | 75% |
+| `NealyLogo` | 166 KB | 60 KB | 64% |
+| `second-line` | 30 KB | 7 KB | 77% |
+
+**16.9 MB to 608 KB, a 97% reduction.** Screenshots at 1600px wide, q82.
+Logos at 400px longest edge, q90, alpha preserved. Brand logos at 800px.
+
+### Uploading them
+
+Blob writes need `BLOB_READ_WRITE_TOKEN` in `.env.local`, which the agent that
+produced these files did not have. From the repo root, with the token set:
+
+```bash
+npx tsx scripts/replace-blob-image.ts images/work/client-logos/nps-project.webp
+```
+
+The script deletes the old blob and uploads at the same path, so URLs stay
+stable. Note the extension changes from `.png` to `.webp`, so update the paths
+in `data/projectProof.ts` and `data/caseStudies.ts` in the same commit, then
+re-run `npm run check:assets`.
+
+---
+
+## One logo needs a real re-export
+
+`second-line.png` is RGBA, but **every pixel in its alpha channel is fully
+opaque**. The transparency is nominal: the background is baked into the image.
+It will render as a solid rectangle on cream and on ink, where every other mark
+floats.
+
+Ask the client for the SVG or a genuinely transparent PNG. This is not
+something compression can fix.
+
+---
+
 ## Re-export worth doing now
 
 Not blocking, but each is quick and each pays for itself:
