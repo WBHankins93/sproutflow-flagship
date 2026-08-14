@@ -4,6 +4,7 @@ import { ArrowUpRight } from 'lucide-react';
 import type { ProjectProof } from '@/data/projectProof';
 import { getImageUrl } from '@/lib/blob-images';
 import Pill from './Pill';
+import ClientLogo from './ClientLogo';
 import type { ShellVariant } from './SectionShell';
 
 interface ProjectRowProps {
@@ -49,7 +50,10 @@ export default function ProjectRow({ project, index = 0, priority = false, varia
       >
         <div className={`${reverse ? 'lg:col-start-8' : 'lg:col-start-1'} lg:col-span-5`}>
           <div className="flex items-center justify-between gap-4">
-            <p className={`font-mono text-mono-meta ${tone.meta}`}>{String(index + 1).padStart(2, '0')}</p>
+            <span className="flex items-center gap-4">
+              <p className={`font-mono text-mono-meta ${tone.meta}`}>{String(index + 1).padStart(2, '0')}</p>
+              <ClientLogo project={project} variant={variant} size="sm" />
+            </span>
             <span className={`rounded-full border px-3 py-1 text-body-sm ${tone.status}`}>
               {project.status}
             </span>
