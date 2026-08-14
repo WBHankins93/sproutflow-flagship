@@ -1,12 +1,66 @@
-# Client Logo Assets — Export Spec
+# Asset Spec and Budgets
 
-The code now normalises whatever it is given. This spec is how to stop needing
-that normalisation, and it is the thing to hand a client when you ask for their
-mark.
+Every image the site serves, what it may weigh, and how to export it.
+
+Enforced by `npm run check:assets`, which fetches each referenced asset,
+measures it, and reports anything over budget. Add `-- --ci` to fail a build on
+violations.
+
+**Current state: 12 assets, 16.9 MB, all 12 over budget.** Documentation alone
+did not prevent that, which is why the check exists.
 
 ---
 
-## The problem, measured
+## Budgets
+
+| Class | Max weight | Max longest edge | Renders at |
+|---|---|---|---|
+| `client-logo` | 40 KB | 400 px | 28 to 56 px tall |
+| `brand-logo` | 80 KB | 800 px | up to 220 px wide |
+| `screenshot` | 400 KB | 2000 px | up to 1000 px wide |
+| `photography` | 500 KB | 2400 px | up to 1200 px wide |
+
+The ceiling is roughly 2x the largest render size. Past that is a file nobody
+resized.
+
+Next/Image resizes on serve, so a visitor does not download the 4 MB original.
+The cost lands instead on blob storage, on Vercel image optimisation, and on
+the first request for each new size, which is uncached and slow.
+
+---
+
+## Screenshots are the expensive problem
+
+| File | Dimensions | Weight |
+|---|---|---|
+| `nps-project.png` | 2182 × 1194 | **4033 KB** |
+| `nealy-project.png` | 2194 × 1190 | **3981 KB** |
+| `bba-homepage.png` | 2562 × 1764 | 3137 KB |
+| `djn-new-home-page.png` | 3312 × 1716 | 2838 KB |
+| `second-line-project.png` | 2198 × 1178 | 1231 KB |
+
+About 15 MB, and `second-line-project.png` is the homepage hero. All are PNG,
+which is the wrong format for a photographic page capture.
+
+**Fix: re-export as WebP at 1600px wide, quality 82.** Expect roughly 150 to
+250 KB each, a 90 percent reduction with no visible difference at render size.
+PNG is only right for a mark with flat colour and hard edges.
+
+---
+
+## Brand logos
+
+| File | Dimensions | Weight |
+|---|---|---|
+| `logo/sproutflow-white-logo.png` | 1592 × 656 | 298 KB |
+| `logo/main-logo-Photoroom.png` | 1024 × 422 | 169 KB |
+
+Both are your own mark, so an SVG almost certainly exists. Using it removes
+these from the budget entirely and makes the header sharp at any size.
+
+---
+
+## Client logos, measured
 
 Current assets in `images/work/client-logos/`, as served:
 
@@ -100,6 +154,19 @@ Not blocking, but each is quick and each pays for itself:
 
 After re-exporting, revisit `logoScale` in `data/projectProof.ts`. Trimmed
 sources need less correction, and several values may go to 1.
+
+---
+
+## Running the check
+
+```bash
+npm run check:assets
+```
+
+Requires `NEXT_PUBLIC_BLOB_STORE_URL`. Without it the check skips rather than
+failing, so it never blocks a fresh clone.
+
+Run it after adding any asset, and before asking whether the site feels slow.
 
 ---
 
