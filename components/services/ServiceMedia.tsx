@@ -29,8 +29,11 @@ export default function ServiceMedia({ path, height = 470, className = '' }: Ser
 /* ---------------------------------------------------------------- websites */
 
 function WebsitesMedia({ height, className }: { height: number; className: string }) {
-  const lead = listedProjectProof[0];
-  const second = listedProjectProof[1];
+  const [lead, second] = listedProjectProof;
+
+  // Nothing listed means nothing honest to show, so fall back to the schematic
+  // rather than rendering an empty frame or failing the build.
+  if (!lead) return <SystemsMedia height={height} className={className} />;
 
   return (
     <div
@@ -48,19 +51,17 @@ function WebsitesMedia({ height, className }: { height: number; className: strin
             className="object-cover object-top"
           />
         </DeviceFrame>
-        <DeviceFrame
-          kind="phone"
-          width={104}
-          className="absolute -bottom-6 -right-4 hidden sm:block"
-        >
-          <Image
-            src={getImageUrl(second.screenshot)}
-            alt=""
-            fill
-            sizes="104px"
-            className="object-cover object-top"
-          />
-        </DeviceFrame>
+        {second && (
+          <DeviceFrame kind="phone" width={104} className="absolute -bottom-6 -right-4 hidden sm:block">
+            <Image
+              src={getImageUrl(second.screenshot)}
+              alt=""
+              fill
+              sizes="104px"
+              className="object-cover object-top"
+            />
+          </DeviceFrame>
+        )}
       </div>
     </div>
   );

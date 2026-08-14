@@ -6,6 +6,8 @@ export interface ProjectProof {
   screenshot: string;
   screenshotAlt: string;
   logo: string;
+  /** Intrinsic aspect ratio (width / height) of the logo artwork. */
+  logoAspect: number;
   /**
    * Optical size correction, multiplied against the logo box height.
    * Square badges read far heavier than wide wordmarks at equal height, so
@@ -33,6 +35,7 @@ export const projectProof: ProjectProof[] = [
     screenshot: 'work/client-logos/second-line-project.png',
     screenshotAlt: 'Second Line Psychiatry homepage shown inside a laptop frame',
     logo: 'work/client-logos/second-line.png',
+    logoAspect: 3.92,
     href: '/case-studies/second-line-psychiatry',
     liveUrl: 'https://www.secondlinepsychiatry.com/',
     canvasColor: '#DCE9F2',
@@ -52,7 +55,8 @@ export const projectProof: ProjectProof[] = [
     screenshot: 'work/client-logos/nps-project.png',
     screenshotAlt: 'NOLA Pool Solutions homepage shown inside a laptop frame',
     logo: 'work/client-logos/logo.png',
-    logoScale: 0.72,
+    logoAspect: 1.0,
+    logoScale: 0.86,
     href: '/case-studies/nola-pool-solutions',
     liveUrl: 'https://nolapoolsolutions.com/',
     canvasColor: '#DDEDF1',
@@ -71,7 +75,8 @@ export const projectProof: ProjectProof[] = [
     screenshot: 'work/client-logos/nealy-project.png',
     screenshotAlt: 'Nealy Event Decor homepage shown inside a laptop frame',
     logo: 'work/client-logos/NealyLogo.png',
-    logoScale: 0.78,
+    logoAspect: 1.0,
+    logoScale: 0.88,
     href: '/case-studies/nealy-events',
     liveUrl: 'https://nealyevents.com/',
     canvasColor: '#EEE6F2',
@@ -90,7 +95,8 @@ export const projectProof: ProjectProof[] = [
     screenshot: 'work/client-logos/djn-new-home-page.png',
     screenshotAlt: 'DJN Services homepage shown inside a laptop frame',
     logo: 'work/client-logos/djn-logo.webp',
-    logoScale: 0.9,
+    logoAspect: 1.78,
+    logoScale: 0.95,
     href: '/case-studies/djn-services',
     liveUrl: 'https://djnservices.com/',
     canvasColor: '#E7E0D7',
@@ -110,7 +116,8 @@ export const projectProof: ProjectProof[] = [
     screenshot: 'work/client-logos/bba-homepage.png',
     screenshotAlt: 'Big Butt Association Shopify homepage shown inside a browser frame',
     logo: 'work/client-logos/bekky-no-background.png',
-    logoScale: 0.74,
+    logoAspect: 1.0,
+    logoScale: 0.86,
     href: '/case-studies/big-butt-association',
     liveUrl: 'https://bigbuttassociation.com/',
     canvasColor: '#F4D8E9',
