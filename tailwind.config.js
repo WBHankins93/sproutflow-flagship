@@ -67,6 +67,7 @@ export default {
           700: '#3e4a3d',
           800: '#333d33',
           900: '#2b322b',
+          950: '#1B211B', // Darkest green. Matches ink.800 for full-bleed dark sections.
         },
         
         // Accent Colors (Satin Sheen Gold)
@@ -78,7 +79,7 @@ export default {
           400: '#efa548',
           500: '#C49A45', // Accent gold
           600: '#a67d2d',
-          700: '#885f27',
+          700: '#7D5723', // Darkened for 4.5:1 as body text on the cream canvas
           800: '#714d26',
           900: '#604123',
         },

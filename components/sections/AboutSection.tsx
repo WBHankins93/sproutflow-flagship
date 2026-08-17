@@ -26,7 +26,7 @@ export default function AboutSection() {
               className="object-cover"
             />
           </div>
-          <p className="mt-3 font-mono text-mono-meta text-white/45">
+          <p className="mt-3 font-mono text-mono-meta text-white/55">
             Founder and studio photography strip expands here
           </p>
         </div>

@@ -66,7 +66,7 @@ export default function MediaPanel({
 
   const frame =
     variant === 'ink'
-      ? 'border-white/15 bg-white/[0.04] text-white/45'
+      ? 'border-white/15 bg-white/[0.04] text-white/55'
       : 'border-primary-900/15 bg-white text-text-muted';
 
   return (
