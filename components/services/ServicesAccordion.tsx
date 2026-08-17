@@ -27,7 +27,7 @@ export default function ServicesAccordion() {
               >
                 <span className="font-mono text-mono-meta text-accent-300">0{index + 1}</span>
                 <span>
-                  <span className="block text-eyebrow uppercase text-white/45">{path.eyebrow}</span>
+                  <span className="block text-eyebrow uppercase text-white/55">{path.eyebrow}</span>
                   <span className="mt-1 block font-display text-display-md text-cream-300">{path.title}</span>
                 </span>
                 <ArrowDisc open={open} variant="ink" />

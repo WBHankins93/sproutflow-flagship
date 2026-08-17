@@ -30,7 +30,7 @@ export const Footer = () => (
           </p>
         </div>
         <div className="md:col-span-3 md:col-start-7">
-          <p className="text-eyebrow uppercase text-white/40">Explore</p>
+          <p className="text-eyebrow uppercase text-white/55">Explore</p>
           <ul className="mt-5 space-y-3 text-white/70">
             {explore.map(([label, href]) => (
               <li key={href}>
@@ -42,7 +42,7 @@ export const Footer = () => (
           </ul>
         </div>
         <div className="md:col-span-3">
-          <p className="text-eyebrow uppercase text-white/40">Direct contact</p>
+          <p className="text-eyebrow uppercase text-white/55">Direct contact</p>
           <div className="mt-5 space-y-3 text-white/70">
             <a className="block hover:text-white" href="mailto:ben@sproutflow-studio.com">
               ben@sproutflow-studio.com
@@ -62,7 +62,7 @@ export const Footer = () => (
           </div>
         </div>
       </div>
-      <p className="mt-12 border-t border-white/15 pt-6 font-mono text-xs text-white/35">
+      <p className="mt-12 border-t border-white/15 pt-6 font-mono text-xs text-white/55">
         © {new Date().getFullYear()} Sproutflow Studio · New Orleans, Louisiana
       </p>
     </div>

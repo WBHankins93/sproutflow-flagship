@@ -80,7 +80,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
             className="object-cover object-top"
           />
         </div>
-        <p className="mt-4 font-mono text-mono-meta text-white/45">
+        <p className="mt-4 font-mono text-mono-meta text-white/55">
           {caseStudy.clientName} · <a href={caseStudy.liveUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-white">visit the live site</a>
         </p>
       </SectionShell>
@@ -171,19 +171,19 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
           <div className="lg:col-span-7 lg:col-start-6">
             <dl className="grid gap-5 text-white/[0.68] sm:grid-cols-2">
               <div>
-                <dt className="text-eyebrow uppercase text-white/40">Timeline</dt>
+                <dt className="text-eyebrow uppercase text-white/55">Timeline</dt>
                 <dd className="mt-2">{caseStudy.details.timeline}</dd>
               </div>
               <div>
-                <dt className="text-eyebrow uppercase text-white/40">Services</dt>
+                <dt className="text-eyebrow uppercase text-white/55">Services</dt>
                 <dd className="mt-2">{caseStudy.details.services}</dd>
               </div>
               <div>
-                <dt className="text-eyebrow uppercase text-white/40">Location</dt>
+                <dt className="text-eyebrow uppercase text-white/55">Location</dt>
                 <dd className="mt-2">{caseStudy.details.location}</dd>
               </div>
               <div>
-                <dt className="text-eyebrow uppercase text-white/40">Industry</dt>
+                <dt className="text-eyebrow uppercase text-white/55">Industry</dt>
                 <dd className="mt-2">{caseStudy.details.industry}</dd>
               </div>
             </dl>

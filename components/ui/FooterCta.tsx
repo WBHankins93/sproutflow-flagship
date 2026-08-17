@@ -36,7 +36,7 @@ export default function FooterCta() {
             >
               <Mail className="h-5 w-5 text-accent-300" aria-hidden="true" />
               <span>
-                <span className="block text-xs uppercase tracking-[0.16em] text-white/40">Email</span>
+                <span className="block text-xs uppercase tracking-[0.16em] text-white/55">Email</span>
                 ben@sproutflow-studio.com
               </span>
             </a>
@@ -46,7 +46,7 @@ export default function FooterCta() {
             >
               <Phone className="h-5 w-5 text-accent-300" aria-hidden="true" />
               <span>
-                <span className="block text-xs uppercase tracking-[0.16em] text-white/40">Phone</span>(504) 326-1676
+                <span className="block text-xs uppercase tracking-[0.16em] text-white/55">Phone</span>(504) 326-1676
               </span>
             </a>
           </div>

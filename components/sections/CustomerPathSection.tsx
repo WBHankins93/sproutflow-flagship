@@ -58,7 +58,7 @@ export default function CustomerPathSection() {
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
                     <h3 className="font-display text-h4 font-semibold text-white">
-                      <span className="mr-2 text-sm text-white/45" aria-hidden="true">
+                      <span className="mr-2 text-sm text-white/55" aria-hidden="true">
                         0{index + 1}
                       </span>
                       {point.title}

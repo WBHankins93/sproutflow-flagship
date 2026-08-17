@@ -84,7 +84,7 @@ function SystemsMedia({ height, className }: { height: number; className: string
     >
       <div className="grain rings rings-left absolute inset-0" aria-hidden="true" />
       <div className="relative flex h-full flex-col justify-center">
-        <p className="text-eyebrow uppercase text-white/45">One connected line</p>
+        <p className="text-eyebrow uppercase text-white/55">One connected line</p>
 
         <ol className="mt-8 space-y-3">
           {FLOW.map((step, index) => (
@@ -108,7 +108,7 @@ function SystemsMedia({ height, className }: { height: number; className: string
           ))}
         </ol>
 
-        <p className="mt-7 border-t border-white/15 pt-5 text-body-sm text-white/45">
+        <p className="mt-7 border-t border-white/15 pt-5 text-body-sm text-white/55">
           No step waits on someone remembering it.
         </p>
       </div>
@@ -128,7 +128,7 @@ function GrowthMedia({ height, className }: { height: number; className: string 
     >
       <div className="grain absolute inset-0" aria-hidden="true" />
       <div className="relative flex h-full flex-col justify-center">
-        <p className="text-eyebrow uppercase text-white/45">Growth you can see</p>
+        <p className="text-eyebrow uppercase text-white/55">Growth you can see</p>
 
         {/* Growth rings, drawn as the record of successive improvements. The
             same motif as the site texture, used here to carry meaning. */}
@@ -150,7 +150,7 @@ function GrowthMedia({ height, className }: { height: number; className: string 
             <circle cx="150" cy="150" r="9" fill="#C49A45" fillOpacity="0.9" />
           </svg>
 
-          <p className="absolute inset-x-0 bottom-1 text-center font-mono text-mono-meta text-white/40">
+          <p className="absolute inset-x-0 bottom-1 text-center font-mono text-mono-meta text-white/55">
             each ring, one round of work
           </p>
         </div>
