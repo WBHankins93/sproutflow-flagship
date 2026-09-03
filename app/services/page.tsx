@@ -27,7 +27,15 @@ export default function ServicesPage() {
         titleAccent="easier to choose"
         intro="No packages or tiers. We start with the closest problem, then I write the scope after we talk."
         count="03 paths"
-      />
+      >
+        <Link
+          href="/data-and-ownership"
+          className="inline-flex items-center gap-2 border-b border-accent-400 pb-1 text-sm font-semibold text-white/75 hover:text-white"
+        >
+          How I handle your data and ownership
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
+      </PageHeader>
       {servicePaths.map((path, index) => (
         <div key={path.id}>
           <SectionShell index={`0${index + 1}`} label={path.eyebrow} variant={index % 2 === 0 ? 'cream' : 'ink'}>

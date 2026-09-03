@@ -19,7 +19,7 @@ export default function TestimonialsSection() {
             <figcaption className="mt-8 border-t border-primary-900/15 pt-5">
               <p className="font-semibold text-primary-900">{testimonial.name}</p>
               <p className="mt-1 text-body-sm text-text-secondary">
-                {testimonial.role}, {testimonial.business}
+                {testimonial.name === testimonial.role ? testimonial.business : `${testimonial.role}, ${testimonial.business}`}
               </p>
             </figcaption>
           </figure>

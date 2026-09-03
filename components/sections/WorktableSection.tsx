@@ -31,7 +31,7 @@ export default function WorktableSection() {
         </div>
       </div>
       <div className="mt-12">
-        {listedProjectProof.slice(0, 3).map((project, index) => (
+        {listedProjectProof.slice(0, 4).map((project, index) => (
           <ProjectRow key={project.id} project={project} index={index} priority={index === 0} />
         ))}
       </div>

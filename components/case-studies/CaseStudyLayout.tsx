@@ -4,11 +4,10 @@ import { ArrowLeft, ArrowRight, ExternalLink, Quote } from 'lucide-react';
 import type { CaseStudy } from '@/data/caseStudies';
 import { caseStudies } from '@/data/caseStudies';
 import { listedProjectProof, projectProof } from '@/data/projectProof';
-import { getTestimonialForCaseStudy } from '@/data/testimonials';
+import { getTestimonialForCaseStudy, getTestimonialByline } from '@/data/testimonials';
 import { getImageUrl } from '@/lib/blob-images';
 import PageHeader from '@/components/ui/PageHeader';
 import SectionShell from '@/components/ui/SectionShell';
-import MediaPanel from '@/components/ui/MediaPanel';
 import Pill from '@/components/ui/Pill';
 import FooterCta from '@/components/ui/FooterCta';
 import { Footer } from '@/components/layout/Footer';
@@ -100,8 +99,8 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
       </SectionShell>
 
       <SectionShell index="03" label="what I built" variant="ink" labelledBy="case-built-heading">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-6">
+        <div className={caseStudy.builtImage ? 'grid gap-12 lg:grid-cols-12' : 'max-w-3xl'}>
+          <div className={caseStudy.builtImage ? 'lg:col-span-6' : ''}>
             <h2 id="case-built-heading" className="font-display text-display-md text-cream-300">
               The working parts of the project.
             </h2>
@@ -114,11 +113,21 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
               ))}
             </ol>
           </div>
-          <div className="lg:col-span-5 lg:col-start-8">
-            <div className="sticky top-32">
-              <MediaPanel placeholder="Project detail capture goes here" variant="ink" />
+          {caseStudy.builtImage && (
+            <div className="lg:col-span-5 lg:col-start-8">
+              <div className="sticky top-32">
+                <div className="relative overflow-hidden rounded-xl border border-white/15" style={{ height: 470 }}>
+                  <Image
+                    src={getImageUrl(caseStudy.builtImage)}
+                    alt={caseStudy.builtImageAlt || `${caseStudy.clientName} website detail`}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover object-top"
+                  />
+                </div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </SectionShell>
 
@@ -155,15 +164,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
         </div>
       </SectionShell>
 
-      <SectionShell index="06" label="mobile screens" variant="cream">
-        <div className="grid gap-5 sm:grid-cols-3">
-          {[1, 2, 3].map((item) => (
-            <MediaPanel key={item} placeholder={`Mobile screen ${item}`} height={460} />
-          ))}
-        </div>
-      </SectionShell>
-
-      <SectionShell index="07" label="project notes" variant="ink">
+      <SectionShell index="06" label="project notes" variant="ink">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <h2 className="font-display text-display-md text-cream-300">The practical details.</h2>
@@ -199,15 +200,13 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
       </SectionShell>
 
       {testimonial && (
-        <SectionShell index="08" label="testimonial" variant="cream">
+        <SectionShell index="07" label="testimonial" variant="cream">
           <figure className="mx-auto max-w-4xl">
             <Quote className="h-8 w-8 text-accent-700" aria-hidden="true" />
             <blockquote className="mt-7 font-accent text-3xl italic leading-relaxed text-primary-900">
               “{testimonial.quote}”
             </blockquote>
-            <figcaption className="mt-7 text-text-secondary">
-              {testimonial.name} · {testimonial.role}, {testimonial.business}
-            </figcaption>
+            <figcaption className="mt-7 text-text-secondary">{getTestimonialByline(testimonial)}</figcaption>
           </figure>
         </SectionShell>
       )}

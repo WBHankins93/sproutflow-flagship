@@ -6,7 +6,6 @@ import StatRail from '@/components/ui/StatRail';
 import MediaPanel from '@/components/ui/MediaPanel';
 import FooterCta from '@/components/ui/FooterCta';
 import { Footer } from '@/components/layout/Footer';
-import { listedProjectProof } from '@/data/projectProof';
 import { getImageUrl } from '@/lib/blob-images';
 
 export const metadata: Metadata = {
@@ -98,7 +97,7 @@ export default function AboutPage() {
               className="pt-5"
               stats={[
                 { value: '7 years', label: 'enterprise software' },
-                { value: String(listedProjectProof.length), label: 'live client builds' },
+                { value: '100%', label: 'projects shipped live' },
                 { value: '1 person', label: 'start to finish' },
               ]}
             />

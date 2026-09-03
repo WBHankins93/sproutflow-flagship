@@ -141,13 +141,13 @@ function GrowthMedia({ height, className }: { height: number; className: string 
                 cy="150"
                 r={r}
                 fill="none"
-                stroke={i < 3 ? '#C49A45' : '#5F755E'}
+                stroke={i < 3 ? '#D9A441' : '#223528'}
                 strokeOpacity={i < 3 ? 0.85 - i * 0.18 : 0.55}
                 strokeWidth={i === 0 ? 1.6 : 1}
                 strokeDasharray={i === 0 ? '4 6' : undefined}
               />
             ))}
-            <circle cx="150" cy="150" r="9" fill="#C49A45" fillOpacity="0.9" />
+            <circle cx="150" cy="150" r="9" fill="#D9A441" fillOpacity="0.9" />
           </svg>
 
           <p className="absolute inset-x-0 bottom-1 text-center font-mono text-mono-meta text-white/55">

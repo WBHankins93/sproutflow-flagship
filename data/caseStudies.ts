@@ -33,12 +33,9 @@ export interface CaseStudy {
   /** What was built. Brief, outcomes emphasized. */
   built: string[];
   results: CaseStudyStat[];
-  /** Omit until a real, approved client quote exists - the section simply won't render. */
-  testimonial?: {
-    quote: string;
-    name: string;
-    role: string;
-  };
+  /** Detail shot for the "what I built" panel. Omit until a real capture exists - the panel simply does not render. */
+  builtImage?: string;
+  builtImageAlt?: string;
   liveUrl: string;
   beforeAfter?: BeforeAfterPair[];
   details: {
@@ -85,12 +82,6 @@ export const caseStudies: CaseStudy[] = [
       { value: 'Better fit', label: 'Inquiries arrive pre-qualified and informed' },
       { value: 'Live', label: 'Serving families across the New Orleans area' },
     ],
-    testimonial: {
-      quote:
-        'We didn’t have a current website and were working through client referrals only, but thanks to Sproutflow Studio we have seen a tremendous growth of incoming clients. The booking platform connected to our Google business account really helped our team.',
-      name: 'Dr. Lauryn Richard, PMHNP',
-      role: 'Second Line Psychiatry',
-    },
     liveUrl: 'https://www.secondlinepsychiatry.com/',
     details: {
       timeline: '4 weeks',
@@ -136,12 +127,6 @@ export const caseStudies: CaseStudy[] = [
       { value: '3 weeks', label: 'From no website to a live customer path' },
       { value: 'Direct', label: 'Quote details now arrive through one intake flow' },
     ],
-    testimonial: {
-      quote:
-        'Incredible professionalism. Handled the project quickly and kept constant communication throughout. Really pleased with the maintenance and upkeep service after the project was completed. It’s nice to know that I can focus on my business without worrying about this anymore.',
-      name: 'Owner',
-      role: 'NOLA Pool Solutions',
-    },
     liveUrl: 'https://nolapoolsolutions.com/',
     details: {
       timeline: '3 weeks',
@@ -232,6 +217,8 @@ export const caseStudies: CaseStudy[] = [
       { value: '20 years', label: 'Company history now visible before a prospect calls' },
       { value: 'One form', label: 'Quote details arrive through a defined intake path' },
     ],
+    builtImage: 'case-studies/djn-services-after.png',
+    builtImageAlt: 'DJN Services new services page, with mobile welding, trash removal, and handyman services packaged into clear categories',
     liveUrl: 'https://djnservices.com/',
     beforeAfter: [
       {

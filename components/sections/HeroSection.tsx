@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import DeviceFrame from '@/components/ui/DeviceFrame';
+import ImageWithSkeleton from '@/components/ui/ImageWithSkeleton';
 import StatRail from '@/components/ui/StatRail';
 import { listedProjectProof } from '@/data/projectProof';
 import { getImageUrl } from '@/lib/blob-images';
@@ -12,7 +13,7 @@ export default function HeroSection() {
   // is nothing to put in it, and indexing blind would fail the build.
   const secondProject = listedProjectProof[1];
   const stats = [
-    { value: String(listedProjectProof.length), label: 'live client builds' },
+    { value: '100%', label: 'projects shipped live' },
     { value: '1:1', label: 'with the founder' },
     { value: 'Fixed', label: 'quote before work' },
   ];
@@ -57,7 +58,7 @@ export default function HeroSection() {
         <div className="relative lg:col-span-6">
           <div className="relative mx-auto max-w-[620px] pb-16 pr-6 md:pb-0 md:pr-0">
             <DeviceFrame kind="laptop" className="w-full">
-              <Image
+              <ImageWithSkeleton
                 src={getImageUrl(leadProject.screenshot)}
                 alt={leadProject.screenshotAlt}
                 fill

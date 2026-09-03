@@ -1,7 +1,6 @@
 import { Check, FileText, KeyRound } from 'lucide-react';
 import SectionShell from '@/components/ui/SectionShell';
 import StatRail from '@/components/ui/StatRail';
-import { listedProjectProof } from '@/data/projectProof';
 
 const proof = [
   {
@@ -37,7 +36,7 @@ export default function DifferenceSection() {
           <StatRail
             className="mt-10"
             stats={[
-              { value: String(listedProjectProof.length), label: 'live builds' },
+              { value: '100%', label: 'written scope before work' },
               { value: '4', label: 'clear checkpoints' },
               { value: '1', label: 'owner of the work' },
             ]}

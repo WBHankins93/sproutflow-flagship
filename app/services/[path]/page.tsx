@@ -60,6 +60,7 @@ export default async function ServicePathPage({ params }: Props) {
   const service = getServicePath(pathId);
   if (!service) notFound();
   const relatedProject = projectProof.find((project) => project.id === service.relatedCaseStudy);
+  const otherPaths = servicePaths.filter((path) => path.id !== service.id);
 
   return (
     <>
@@ -143,6 +144,31 @@ export default async function ServicePathPage({ params }: Props) {
           </div>
         </div>
       </SectionShell>
+
+      <div className="border-t border-primary-900/10 bg-cream-300 py-10">
+        <div className="mx-auto max-w-[1440px] px-5 md:px-11">
+          <p className="text-eyebrow uppercase text-text-muted">Might be a closer fit</p>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            {otherPaths.map((path) => (
+              <Link
+                key={path.id}
+                href={`/services/${path.id}`}
+                className="group flex items-center justify-between gap-4 border border-primary-900/15 bg-white p-5 hover:border-primary-700"
+              >
+                <span>
+                  <span className="block text-body-sm text-text-muted">{path.eyebrow}</span>
+                  <span className="mt-1 block font-display text-h4 text-primary-900">{path.title}</span>
+                </span>
+                <ArrowRight
+                  className="h-5 w-5 flex-none text-primary-700 transition-transform group-hover:translate-x-1"
+                  aria-hidden="true"
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <FooterCta />
       <Footer />
     </>

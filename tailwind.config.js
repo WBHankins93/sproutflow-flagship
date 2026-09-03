@@ -53,49 +53,61 @@ export default {
 
       // ============================================
       // WOODS & WATERS COLOR PALETTE
+      //
+      // Sourced directly from the "Woods & Waters" Figma palette (Sept 2026):
+      // Canopy — Pine Shadow #223528, Fern #3F6B45, Sprout #8FBF5C
+      // Undergrowth — Moss #7A7F3E, Bark #6B4A32, Soil #3E2E22
+      // Deep & Bloom — Char #241F17, Goldenrod #D9A441
+      // Ground — Birch Paper #F4EFE3, Lichen #E4E3D2, Edge #D3D0BC
+      //
+      // primary/ink/accent/cream below are tint ramps built from those exact
+      // anchors (900/500 for primary/accent, 900/700 for ink, 300/500 for
+      // cream match the named swatch precisely). Earlier version of this
+      // file used placeholder greens/golds that never matched the Figma
+      // spec - replaced in full here.
       // ============================================
       colors: {
-        // Primary Brand Colors (Reseda Green)
+        // Primary Brand Colors (Pine Shadow)
         primary: {
-          50: '#f3f6f3',
-          100: '#e3e9e3',
-          200: '#c7d4c7',
-          300: '#a3b9a3',
-          400: '#7e9b7e',
-          500: '#5F755E', // Main brand color
-          600: '#4d5e4c',
-          700: '#3e4a3d',
-          800: '#333d33',
-          900: '#2b322b',
-          950: '#1B211B', // Darkest green. Matches ink.800 for full-bleed dark sections.
-        },
-        
-        // Accent Colors (Satin Sheen Gold)
-        accent: {
-          50: '#fef9ed',
-          100: '#fcf0d4',
-          200: '#f8dda8',
-          300: '#f4c571',
-          400: '#efa548',
-          500: '#C49A45', // Accent gold
-          600: '#a67d2d',
-          700: '#7D5723', // Darkened for 4.5:1 as body text on the cream canvas
-          800: '#714d26',
-          900: '#604123',
-        },
-        
-        // Ink. Dark canvases for alternating sections. Replaces the old
-        // nature scale, which read too blue against the warm palette.
-        ink: {
-          900: '#141914',
-          800: '#1B211B',
-          700: '#232A23',
+          50: '#F3F7F4',
+          100: '#E3EDE6',
+          200: '#C7DBCD',
+          300: '#A2C3AC',
+          400: '#73A583',
+          500: '#548262',
+          600: '#42674D',
+          700: '#34513D',
+          800: '#283E2F',
+          900: '#223528', // Pine Shadow - main brand color
+          950: '#18251C',
         },
 
-        // Cream. Light canvases.
+        // Accent Colors (Goldenrod)
+        accent: {
+          50: '#FCF7EE',
+          100: '#F7EBD4',
+          200: '#EED6AA',
+          300: '#E7C688',
+          400: '#DFB25E',
+          500: '#D9A441', // Goldenrod - accent gold
+          600: '#BF8A26',
+          700: '#8C651C', // Darkened for 4.5:1 as body text on the cream canvas
+          800: '#735317',
+          900: '#5E4313',
+        },
+
+        // Ink. Dark canvases for alternating sections. Pine Shadow through
+        // Fern, the Canopy family from the Woods & Waters palette.
+        ink: {
+          900: '#223528', // Pine Shadow
+          800: '#315037',
+          700: '#3F6B45', // Fern
+        },
+
+        // Cream. Light canvases. Birch Paper and Lichen, the Ground family.
         cream: {
-          500: '#E9E2D8',
-          300: '#F5F1E9',
+          500: '#E4E3D2', // Lichen
+          300: '#F4EFE3', // Birch Paper
         },
 
         // Text Colors
@@ -104,11 +116,11 @@ export default {
           secondary: '#57604F', // Warm gray-green
           muted: '#5f665c',
         },
-        
+
         // Background Colors
         background: {
-          primary: '#E9E2D8',   // Alabaster
-          card: '#DDE3E2',      // Platinum
+          primary: '#E4E3D2',   // Lichen
+          card: '#D3D0BC',      // Edge
         },
       },
       
