@@ -9,7 +9,7 @@ export default function AboutSection() {
   return (
     <SectionShell
       id="about"
-      index="05"
+      index="06"
       label="about Ben"
       variant="ink"
       labelledBy="about-heading"

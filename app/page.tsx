@@ -7,6 +7,7 @@ import DifferenceSection from '@/components/sections/DifferenceSection';
 import WorktableSection from '@/components/sections/WorktableSection';
 import ProcessSection from '@/components/sections/ProcessSection';
 import ServicesSection from '@/components/sections/ServicesSection';
+import TiersSection from '@/components/sections/TiersSection';
 import AboutSection from '@/components/sections/AboutSection';
 import ContactSection from '@/components/sections/ContactSection';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
@@ -43,6 +44,7 @@ export default function Home() {
       <ClientMarqueeSection />
       <DifferenceSection />
       <ServicesSection />
+      <TiersSection />
       <WorktableSection />
       <ProcessSection />
       <AboutSection />

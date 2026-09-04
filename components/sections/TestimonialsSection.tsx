@@ -4,7 +4,7 @@ import { testimonials } from '@/data/testimonials';
 
 export default function TestimonialsSection() {
   return (
-    <SectionShell index="06" label="testimonials" variant="cream" labelledBy="testimonials-heading">
+    <SectionShell index="07" label="testimonials" variant="cream" labelledBy="testimonials-heading">
       <h2 id="testimonials-heading" className="max-w-4xl font-display text-display-sm text-primary-900">
         What clients say after the work is{' '}
         <span className="font-accent font-normal italic text-accent-700">in use.</span>
