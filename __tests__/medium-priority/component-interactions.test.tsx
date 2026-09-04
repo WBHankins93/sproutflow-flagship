@@ -64,11 +64,15 @@ describe('Component Interactions - Header Mobile Menu', () => {
 
 describe('Component Interactions - ServicesSection Paths', () => {
   it('should render the three service paths', () => {
-    render(<ServicesSection />)
+    const { container } = render(<ServicesSection />)
 
-    expect(screen.getByText('Websites that earn trust')).toBeInTheDocument()
-    expect(screen.getByText('Systems that remove friction')).toBeInTheDocument()
-    expect(screen.getByText('Ongoing growth and support')).toBeInTheDocument()
+    // Titles run through AccentPhrase, which splits part of the text into its
+    // own span, so match on an element's full textContent rather than a
+    // single text node.
+    const headings = Array.from(container.querySelectorAll('h3')).map((el) => el.textContent)
+    expect(headings).toContain('Websites that earn trust')
+    expect(headings).toContain('Systems that remove friction')
+    expect(headings).toContain('Ongoing growth and support')
   })
 
   it('should have a CTA on each service path routing to its detail page', () => {

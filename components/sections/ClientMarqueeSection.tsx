@@ -9,7 +9,10 @@ export default function ClientMarqueeSection() {
       speed={46}
       ariaLabel="Selected Sproutflow clients"
       items={listedProjectProof.map((project) => (
-        <span key={project.id} className="flex min-w-64 items-center gap-4">
+        <span
+          key={project.id}
+          className="flex min-w-64 items-center gap-4 rounded-xl border border-primary-900/15 bg-white px-5 py-4"
+        >
           <ClientLogo project={project} variant="cream" size="md" />
           <span className="block border-l border-primary-900/15 pl-4">
             <span className="block font-display text-lg font-semibold text-primary-900">{project.name}</span>

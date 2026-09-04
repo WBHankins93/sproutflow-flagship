@@ -77,11 +77,11 @@ export default async function ServicePathPage({ params }: Props) {
 
       <SectionShell index="01" label="who this is for" variant="cream" labelledBy="service-fit-heading">
         <div className="grid gap-10 lg:grid-cols-12">
-          <h2 id="service-fit-heading" className="font-display text-display-lg text-primary-900 lg:col-span-5">
-            A useful fit when this is the part holding things back.
-          </h2>
-          <div className="lg:col-span-6 lg:col-start-7">
-            <ul className="grid gap-px border-y border-primary-900/15 bg-primary-900/15">
+          <div className="lg:col-span-5">
+            <h2 id="service-fit-heading" className="font-display text-display-lg text-primary-900">
+              A useful fit when this is the part holding things back.
+            </h2>
+            <ul className="mt-8 grid gap-px border-y border-primary-900/15 bg-primary-900/15">
               {service.fitStatements.map((statement, index) => (
                 <li key={statement} className="grid grid-cols-[2.5rem_1fr] items-baseline gap-3 bg-cream-300 py-5">
                   <span className="font-mono text-mono-meta text-accent-700">0{index + 1}</span>
@@ -90,51 +90,44 @@ export default async function ServicePathPage({ params }: Props) {
               ))}
             </ul>
           </div>
+          <div className="lg:col-span-6 lg:col-start-7">
+            <p className="text-eyebrow uppercase text-text-muted">What is included</p>
+            <div className="mt-5 grid border-t border-primary-900/15">
+              {service.capabilities.map((capability) => (
+                <p key={capability} className="border-b border-primary-900/15 py-4 text-body-lg text-primary-900">
+                  {capability}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
       </SectionShell>
 
-      <SectionShell index="02" label="what is included" variant="ink" labelledBy="service-included-heading">
-        <h2 id="service-included-heading" className="max-w-4xl font-display text-display-md text-cream-300">
-          The working parts of this service path.
-        </h2>
-        <div className="mt-12 grid border-t border-white/20 md:grid-cols-2">
-          {service.capabilities.map((capability, index) => (
-            <article
-              key={capability}
-              className={`border-b border-white/20 py-7 md:px-6 ${index % 2 === 0 ? 'md:border-r md:pl-0' : 'md:pr-0'}`}
-            >
-              <p className="font-mono text-mono-meta text-accent-300">0{index + 1}</p>
-              <h3 className="mt-4 font-display text-h4 text-cream-300">{capability}</h3>
-            </article>
-          ))}
-        </div>
+      <SectionShell index="02" label="what it looks like" variant="ink">
+        <ServiceMedia path={service.id} height={480} />
       </SectionShell>
 
-      <SectionShell index="03" label="what it looks like" variant="cream">
-        <ServiceMedia path={service.id} height={520} />
-      </SectionShell>
-
-      <SectionShell index="04" label="how it runs" variant="ink" labelledBy="service-process-heading">
-        <h2 id="service-process-heading" className="font-display text-display-md text-cream-300">
+      <SectionShell index="03" label="how it runs" variant="cream" labelledBy="service-process-heading">
+        <h2 id="service-process-heading" className="font-display text-display-md text-primary-900">
           Four checkpoints, phrased for this work.
         </h2>
-        <ol className="mt-12 grid gap-px bg-white/20 md:grid-cols-4">
+        <ol className="mt-10 grid gap-px border border-primary-900/15 bg-primary-900/15 sm:grid-cols-2 lg:grid-cols-4">
           {service.checkpoints.map((checkpoint, index) => (
-            <li key={checkpoint} className="bg-ink-900 p-6">
-              <span className="font-mono text-mono-meta text-accent-300">0{index + 1}</span>
-              <h3 className="mt-6 font-display text-h4 text-cream-300">{checkpoint}</h3>
+            <li key={checkpoint} className="bg-cream-300 p-5">
+              <span className="font-mono text-mono-meta text-accent-700">0{index + 1}</span>
+              <h3 className="mt-3 font-display text-body-lg font-semibold text-primary-900">{checkpoint}</h3>
             </li>
           ))}
         </ol>
       </SectionShell>
 
       {relatedProject && (
-        <SectionShell index="05" label="related work" variant="ink" className="bg-ink-800">
+        <SectionShell index="04" label="related work" variant="ink" className="bg-ink-800">
           <ProjectRow project={relatedProject} />
         </SectionShell>
       )}
 
-      <SectionShell index="06" label="questions for this path" variant="cream" labelledBy="service-faq-heading">
+      <SectionShell index="05" label="questions for this path" variant="cream" labelledBy="service-faq-heading">
         <div className="grid gap-10 lg:grid-cols-12">
           <h2 id="service-faq-heading" className="font-display text-display-md text-primary-900 lg:col-span-4">
             Questions owners ask about this path.

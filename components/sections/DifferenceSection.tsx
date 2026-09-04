@@ -5,8 +5,8 @@ import StatRail from '@/components/ui/StatRail';
 const proof = [
   {
     icon: Check,
-    title: 'One person throughout',
-    body: 'The person on the first call is the person shaping, building, and testing the work.',
+    title: 'Straight to who is doing the work',
+    body: 'Questions go to whoever is shaping, building, and testing the project, not into a queue.',
   },
   {
     icon: FileText,

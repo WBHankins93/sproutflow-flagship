@@ -3,7 +3,6 @@ import Image from 'next/image';
 import PageHeader from '@/components/ui/PageHeader';
 import SectionShell from '@/components/ui/SectionShell';
 import StatRail from '@/components/ui/StatRail';
-import MediaPanel from '@/components/ui/MediaPanel';
 import FooterCta from '@/components/ui/FooterCta';
 import { Footer } from '@/components/layout/Footer';
 import { getImageUrl } from '@/lib/blob-images';
@@ -88,9 +87,9 @@ export default function AboutPage() {
             </p>
             <p>
               Small businesses almost never get any of that, and it is not a money problem. It is that most studios skip
-              it. I did not want to run an agency and I did not want to hire my way into one. I wanted to take those
-              habits and shrink them down to something a person running their own shop can actually afford, which is why
-              it is one person start to finish and why you own everything when we are done.
+              it. Sproutflow exists to bring that same rigor to a business that could never afford enterprise-scale
+              overhead: a written scope you can hold me to, a fixed quote before anything gets built, and a handoff
+              where you actually own what you paid for.
             </p>
             <StatRail
               variant="ink"
@@ -143,21 +142,13 @@ export default function AboutPage() {
               className={`border-b border-white/20 py-7 md:px-7 ${index % 2 === 0 ? 'md:border-r md:pl-0' : 'md:pr-0'}`}
             >
               <span className="font-mono text-mono-meta text-accent-300">0{index + 1}</span>
-              <h3 className="mt-5 font-display text-h4 text-cream-300">{title}</h3>
-              <p className="mt-3 text-white/60">{body}</p>
+              <h3 className="mt-5 font-display text-display-sm text-cream-300">{title}</h3>
+              <p className="mt-3 font-body text-body-sm text-white/55">{body}</p>
             </article>
           ))}
         </div>
       </SectionShell>
 
-      <SectionShell index="05" label="the studio" variant="cream">
-        <div className="grid gap-5 md:grid-cols-12">
-          <MediaPanel placeholder="Studio photograph 01" height={360} className="md:col-span-7" />
-          <MediaPanel placeholder="Studio photograph 02" height={360} className="md:col-span-5" />
-          <MediaPanel placeholder="Garden or New Orleans photograph" height={300} className="md:col-span-5" />
-          <MediaPanel placeholder="Working detail photograph" height={300} className="md:col-span-7" />
-        </div>
-      </SectionShell>
       <FooterCta />
       <Footer />
     </>
