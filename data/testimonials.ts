@@ -56,7 +56,7 @@ export const testimonials: TestimonialEntry[] = [
     business: 'DJN Services LLC',
     metric: '35% increase in total bookings',
     logoSrc: 'work/client-logos/djn-logo.webp',
-    liveUrl: 'https://djnservices.com/',
+    liveUrl: 'https://djnservicesllc.com/',
   },
 ];
 

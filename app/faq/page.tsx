@@ -94,8 +94,8 @@ export default function FAQPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <PageHeader
         eyebrow="Common questions"
-        title="The practical details."
-        titleAccent="practical details"
+        title="Frequently asked questions."
+        titleAccent="asked questions"
         intro="Open the group that matches what you are deciding. If your situation is different, send it to me in plain language."
         count={`${String(groups.flatMap((group) => group.items).length).padStart(2, '0')} questions`}
       />

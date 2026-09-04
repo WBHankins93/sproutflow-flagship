@@ -91,7 +91,7 @@ export default function ProjectRow({ project, index = 0, priority = false, varia
               fill
               priority={priority}
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover object-top transition-transform duration-500 group-hover:translate-x-2 motion-reduce:transition-none"
+              className="object-cover object-top"
             />
           </div>
         </div>

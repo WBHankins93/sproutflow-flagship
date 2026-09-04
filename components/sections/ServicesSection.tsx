@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import SectionShell from '@/components/ui/SectionShell';
-import ServicesAccordion from '@/components/services/ServicesAccordion';
+import ServicesGrid from '@/components/services/ServicesGrid';
 
 export default function ServicesSection() {
   return (
@@ -19,7 +19,7 @@ export default function ServicesSection() {
           </Link>
         </div>
       </div>
-      <ServicesAccordion />
+      <ServicesGrid />
     </SectionShell>
   );
 }
