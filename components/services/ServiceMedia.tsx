@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import DeviceFrame from '@/components/ui/DeviceFrame';
+import ImageCarousel from '@/components/ui/ImageCarousel';
 import type { ServicePathId } from '@/data/servicePaths';
 import { listedProjectProof } from '@/data/projectProof';
-import { getImageUrl } from '@/lib/blob-images';
+import { demos } from '@/data/demos';
 
 interface ServiceMediaProps {
   path: ServicePathId;
@@ -14,11 +14,11 @@ interface ServiceMediaProps {
 /**
  * Visual for each service path.
  *
- * Websites shows a real client site, because real proof exists for that path.
- * The other two are deliberately schematic: a diagram of how the work is
- * shaped, not a mock product screenshot. Inventing a plausible-looking CRM
- * with invented records would read as a real product Sproutflow ships, and
- * the studio does not have one. A diagram makes the same point honestly.
+ * Websites and business systems both rotate through real screenshots -
+ * client sites for the former, Sproutflow's own ClipBoard and Growth Desk
+ * products for the latter (neither is a client engagement, see data/demos.ts).
+ * Growth and support stays a schematic diagram since the work there isn't
+ * tied to one product's screen.
  */
 export default function ServiceMedia({ path, height = 470, className = '' }: ServiceMediaProps) {
   if (path === 'websites') return <WebsitesMedia height={height} className={className} />;
@@ -31,9 +31,11 @@ export default function ServiceMedia({ path, height = 470, className = '' }: Ser
 function WebsitesMedia({ height, className }: { height: number; className: string }) {
   const [lead, second] = listedProjectProof;
 
-  // Nothing listed means nothing honest to show, so fall back to the schematic
-  // rather than rendering an empty frame or failing the build.
+  // Nothing listed means nothing honest to show, so fall back to the systems
+  // panel rather than rendering an empty frame or failing the build.
   if (!lead) return <SystemsMedia height={height} className={className} />;
+
+  const slides = listedProjectProof.map((project) => ({ src: project.screenshot, alt: project.screenshotAlt }));
 
   return (
     <div
@@ -43,23 +45,11 @@ function WebsitesMedia({ height, className }: { height: number; className: strin
       <div className="grain rings absolute inset-0" aria-hidden="true" />
       <div className="relative w-full max-w-[520px]">
         <DeviceFrame kind="browser" className="w-full">
-          <Image
-            src={getImageUrl(lead.screenshot)}
-            alt={lead.screenshotAlt}
-            fill
-            sizes="(max-width: 1024px) 90vw, 520px"
-            className="object-cover object-top"
-          />
+          <ImageCarousel slides={slides} sizes="(max-width: 1024px) 90vw, 520px" />
         </DeviceFrame>
         {second && (
           <DeviceFrame kind="phone" width={104} className="absolute -bottom-6 -right-4 hidden sm:block">
-            <Image
-              src={getImageUrl(second.screenshot)}
-              alt=""
-              fill
-              sizes="104px"
-              className="object-cover object-top"
-            />
+            <ImageCarousel slides={[{ src: second.screenshot, alt: '' }]} sizes="104px" />
           </DeviceFrame>
         )}
       </div>
@@ -69,49 +59,22 @@ function WebsitesMedia({ height, className }: { height: number; className: strin
 
 /* -------------------------------------------------------- business systems */
 
-const FLOW = [
-  { label: 'Inquiry', note: 'form, call, or referral' },
-  { label: 'Record', note: 'one customer, one place' },
-  { label: 'Schedule', note: 'booked without back and forth' },
-  { label: 'Follow up', note: 'automatic, not remembered' },
-];
-
 function SystemsMedia({ height, className }: { height: number; className: string }) {
+  const slides = demos.flatMap((demo) => demo.screenshots.map((shot) => ({ src: shot.src, alt: shot.alt })));
+  const names = demos.map((demo) => demo.name).join(' · ');
+
   return (
     <div
-      className={`relative overflow-hidden rounded-xl bg-ink-800 p-7 md:p-10 ${className}`}
+      className={`relative flex flex-col overflow-hidden rounded-xl bg-ink-800 ${className}`}
       style={{ minHeight: height }}
     >
       <div className="grain rings rings-left absolute inset-0" aria-hidden="true" />
-      <div className="relative flex h-full flex-col justify-center">
-        <p className="text-eyebrow uppercase text-white/55">One connected line</p>
-
-        <ol className="mt-8 space-y-3">
-          {FLOW.map((step, index) => (
-            <li key={step.label} className="relative">
-              {index < FLOW.length - 1 && (
-                <span
-                  className="absolute left-[19px] top-11 h-[calc(100%-0.75rem)] w-px bg-gradient-to-b from-accent-500/70 to-accent-500/10"
-                  aria-hidden="true"
-                />
-              )}
-              <div className="flex items-start gap-4 rounded-lg border border-white/12 bg-white/[0.04] p-4">
-                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full border border-accent-500/50 bg-ink-900 font-mono text-mono-meta text-accent-300">
-                  {index + 1}
-                </span>
-                <span className="min-w-0">
-                  <span className="block font-display text-h4 text-cream-300">{step.label}</span>
-                  <span className="mt-1 block text-body-sm text-white/50">{step.note}</span>
-                </span>
-              </div>
-            </li>
-          ))}
-        </ol>
-
-        <p className="mt-7 border-t border-white/15 pt-5 text-body-sm text-white/55">
-          No step waits on someone remembering it.
-        </p>
+      <div className="relative flex-1 overflow-hidden">
+        <ImageCarousel slides={slides} sizes="(max-width: 1024px) 90vw, 520px" />
       </div>
+      <p className="relative border-t border-white/12 bg-ink-900/80 px-5 py-3 text-eyebrow uppercase text-white/55">
+        {names} — Sproutflow&apos;s own systems
+      </p>
     </div>
   );
 }

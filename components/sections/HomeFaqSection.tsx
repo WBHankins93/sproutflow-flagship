@@ -25,7 +25,7 @@ export default function HomeFaqSection() {
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <h2 id="home-faq-heading" className="font-display text-display-sm text-primary-900">
-            The practical details.
+            Frequently asked questions.
           </h2>
           <Link
             href="/faq"

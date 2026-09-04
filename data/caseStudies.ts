@@ -219,7 +219,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     builtImage: 'case-studies/djn-services-after.png',
     builtImageAlt: 'DJN Services new services page, with mobile welding, trash removal, and handyman services packaged into clear categories',
-    liveUrl: 'https://djnservices.com/',
+    liveUrl: 'https://djnservicesllc.com/',
     beforeAfter: [
       {
         beforeSrc: 'case-studies/djn-before-home.png',

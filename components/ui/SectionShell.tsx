@@ -30,8 +30,13 @@ interface SectionShellProps {
 
 const VARIANTS: Record<ShellVariant, Record<ShellTone, string>> = {
   ink: {
-    base: 'grain rings bg-ink-900 text-white',
-    raised: 'grain rings rings-left bg-ink-800 text-white',
+    // Deliberately no "rings" here. The tree-ring motif is reserved for the
+    // hero, page headers, and footer CTA (each applies it directly in its
+    // own className) - a long page like a case study alternates through
+    // several ink sections, and the motif repeating on every one of them
+    // reads as clutter rather than a signature.
+    base: 'grain bg-ink-900 text-white',
+    raised: 'grain bg-ink-800 text-white',
   },
   cream: {
     base: 'bg-cream-300 text-text-primary',

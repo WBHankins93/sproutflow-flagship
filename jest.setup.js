@@ -46,6 +46,22 @@ jest.mock('framer-motion', () => ({
   AnimatePresence: ({ children }) => children,
 }))
 
+// jsdom does not implement matchMedia. Components that check
+// prefers-reduced-motion (MediaPanel, ImageCarousel) need this to render
+// without throwing; default to "no preference" (matches: false).
+window.matchMedia = window.matchMedia || function matchMedia(query) {
+  return {
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  }
+}
+
 // Suppress React warnings about non-boolean attributes in tests
 const originalError = console.error
 beforeAll(() => {

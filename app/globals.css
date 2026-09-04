@@ -269,14 +269,17 @@
 /* Tree-ring motif for ink sections. Sproutflow's namesake, carried as texture
    rather than illustration: a sprout becomes a tree, and the rings are the
    growth record. Sits above the grain, well below the content. Decorative only,
-   so it is never announced to assistive tech. */
+   so it is never announced to assistive tech. tree-ring-1.png and
+   tree-ring-3.png are Ben's own tree-ring artwork, alpha-matted from their
+   original black-on-white scans (white line art visible via alpha, rest
+   transparent) so they sit on dark canvases the same way the old SVG did. */
 .rings::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.055;
-  background-image: url('/textures/growth-rings.svg');
+  opacity: 0.06;
+  background-image: url('/textures/tree-ring-1.png');
   background-repeat: no-repeat;
   background-position: right -170px top -140px;
   background-size: 720px 720px;
@@ -285,6 +288,7 @@
 /* Second placement so long pages do not show the same motif in the same spot
    on every dark section. */
 .rings-left::after {
+  background-image: url('/textures/tree-ring-3.png');
   background-position: left -230px bottom -190px;
   background-size: 640px 640px;
 }
@@ -293,7 +297,7 @@
   .rings::after {
     background-position: right -260px top -200px;
     background-size: 520px 520px;
-    opacity: 0.04;
+    opacity: 0.05;
   }
 }
 

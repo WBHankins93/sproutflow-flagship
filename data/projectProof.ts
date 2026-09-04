@@ -98,7 +98,7 @@ export const projectProof: ProjectProof[] = [
     logoAspect: 1.78,
     logoScale: 0.95,
     href: '/case-studies/djn-services',
-    liveUrl: 'https://djnservices.com/',
+    liveUrl: 'https://djnservicesllc.com/',
     canvasColor: '#E7E0D7',
     inkColor: '#2C2119',
     industry: 'Service business',
