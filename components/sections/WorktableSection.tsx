@@ -7,7 +7,7 @@ import { listedProjectProof } from '@/data/projectProof';
 export default function WorktableSection() {
   return (
     <SectionShell
-      index="03"
+      index="04"
       label="selected work"
       variant="ink" tone="raised"
       labelledBy="selected-work-heading"

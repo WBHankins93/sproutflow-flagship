@@ -14,7 +14,7 @@ import { servicePaths } from '@/data/servicePaths';
 export const metadata: Metadata = {
   title: 'Services',
   description:
-    'Three ways to work together: websites, business systems, ongoing growth and support. No packages or tiers. Scope written after we talk.',
+    'Three ways to work together: websites, business systems, ongoing growth and support. Scope written after we talk, sized to where your business is today.',
   alternates: { canonical: '/services' },
 };
 
@@ -25,7 +25,7 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="Three ways to make the business easier to choose and easier to run."
         titleAccent="easier to choose"
-        intro="No packages or tiers. We start with the closest problem, then I write the scope after we talk."
+        intro="Most projects land somewhere on a simple scale. We start with the closest problem, then I write the exact scope after we talk."
         count="03 paths"
       >
         <Link

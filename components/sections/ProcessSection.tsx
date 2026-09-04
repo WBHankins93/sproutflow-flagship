@@ -17,7 +17,7 @@ export default function ProcessSection() {
   return (
     <SectionShell
       id="process"
-      index="04"
+      index="05"
       label="from first call to launch"
       variant="cream"
       labelledBy="process-heading"

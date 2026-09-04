@@ -15,6 +15,12 @@ const pathMap: Record<string, string> = {
   'business-systems': 'Systems that remove friction',
   'growth-support': 'Ongoing growth and support',
 };
+const tierMap: Record<string, string> = {
+  sprout: 'Sprout',
+  leaf: 'Leaf',
+  bloom: 'Bloom',
+  canopy: 'Canopy',
+};
 const steps = [
   { icon: FileSearch, title: 'I read the details', body: 'Every inquiry comes to me directly.' },
   { icon: MessageSquareText, title: 'We talk if useful', body: 'A short call helps clarify the right starting point.' },
@@ -25,10 +31,11 @@ const steps = [
   },
 ];
 
-type Props = { searchParams: Promise<{ path?: string }> };
+type Props = { searchParams: Promise<{ path?: string; tier?: string }> };
 
 export default async function InquiryPage({ searchParams }: Props) {
-  const { path } = await searchParams;
+  const { path, tier } = await searchParams;
+  const initialProjectType = (path && pathMap[path]) || (tier && tierMap[tier]) || '';
   return (
     <>
       <section className="bg-cream-300 py-14 md:py-20">
@@ -58,7 +65,7 @@ export default async function InquiryPage({ searchParams }: Props) {
             <p className="mt-6 text-sm text-text-muted">I reply within one business day.</p>
           </aside>
           <div className="border-t border-primary-900/20 pt-8 lg:col-span-7 lg:col-start-6">
-            <InquiryForm initialProjectType={path ? pathMap[path] || '' : ''} />
+            <InquiryForm initialProjectType={initialProjectType} />
           </div>
         </div>
       </section>

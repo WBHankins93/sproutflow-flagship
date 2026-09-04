@@ -29,7 +29,7 @@ export default function ServiceMedia({ path, height = 470, className = '' }: Ser
 /* ---------------------------------------------------------------- websites */
 
 function WebsitesMedia({ height, className }: { height: number; className: string }) {
-  const [lead, second] = listedProjectProof;
+  const [lead] = listedProjectProof;
 
   // Nothing listed means nothing honest to show, so fall back to the systems
   // panel rather than rendering an empty frame or failing the build.
@@ -39,7 +39,7 @@ function WebsitesMedia({ height, className }: { height: number; className: strin
 
   return (
     <div
-      className={`relative flex items-center justify-center overflow-hidden rounded-xl bg-ink-800 px-6 py-10 ${className}`}
+      className={`relative flex items-center justify-center overflow-hidden rounded-xl bg-ink-800 px-6 py-8 ${className}`}
       style={{ minHeight: height }}
     >
       <div className="grain rings absolute inset-0" aria-hidden="true" />
@@ -47,11 +47,6 @@ function WebsitesMedia({ height, className }: { height: number; className: strin
         <DeviceFrame kind="browser" className="w-full">
           <ImageCarousel slides={slides} sizes="(max-width: 1024px) 90vw, 520px" />
         </DeviceFrame>
-        {second && (
-          <DeviceFrame kind="phone" width={104} className="absolute -bottom-6 -right-4 hidden sm:block">
-            <ImageCarousel slides={[{ src: second.screenshot, alt: '' }]} sizes="104px" />
-          </DeviceFrame>
-        )}
       </div>
     </div>
   );
@@ -60,21 +55,27 @@ function WebsitesMedia({ height, className }: { height: number; className: strin
 /* -------------------------------------------------------- business systems */
 
 function SystemsMedia({ height, className }: { height: number; className: string }) {
+  const compact = height <= 260;
   const slides = demos.flatMap((demo) => demo.screenshots.map((shot) => ({ src: shot.src, alt: shot.alt })));
-  const names = demos.map((demo) => demo.name).join(' · ');
+  const captionHeight = compact ? 56 : 88;
 
   return (
-    <div
-      className={`relative flex flex-col overflow-hidden rounded-xl bg-ink-800 ${className}`}
-      style={{ minHeight: height }}
-    >
+    <div className={`relative flex flex-col overflow-hidden rounded-xl bg-ink-800 ${className}`} style={{ height }}>
       <div className="grain rings rings-left absolute inset-0" aria-hidden="true" />
       <div className="relative flex-1 overflow-hidden">
         <ImageCarousel slides={slides} sizes="(max-width: 1024px) 90vw, 520px" />
       </div>
-      <p className="relative border-t border-white/12 bg-ink-900/80 px-5 py-3 text-eyebrow uppercase text-white/55">
-        {names} — Sproutflow&apos;s own systems
-      </p>
+      <div
+        className="relative flex flex-col justify-center gap-1 border-t border-white/12 bg-ink-900/85 px-5"
+        style={{ height: captionHeight }}
+      >
+        {demos.map((demo) => (
+          <p key={demo.id} className="truncate text-body-sm text-white/70">
+            <span className="font-semibold text-cream-300">{demo.name}</span>
+            {!compact && <span className="text-white/50"> — {demo.tagline}</span>}
+          </p>
+        ))}
+      </div>
     </div>
   );
 }
@@ -84,18 +85,23 @@ function SystemsMedia({ height, className }: { height: number; className: string
 const LOOP = ['Measure', 'Decide', 'Improve'];
 
 function GrowthMedia({ height, className }: { height: number; className: string }) {
+  // The ring diagram and its caption need real room to read; below this the
+  // rings alone are dropped rather than rendered squeezed and clipped.
+  const compact = height <= 260;
+  const ringSize = compact ? 120 : 300;
+
   return (
     <div
-      className={`relative overflow-hidden rounded-xl bg-ink-800 p-7 md:p-10 ${className}`}
-      style={{ minHeight: height }}
+      className={`relative overflow-hidden rounded-xl bg-ink-800 ${compact ? 'p-5' : 'p-7 md:p-10'} ${className}`}
+      style={{ height }}
     >
       <div className="grain absolute inset-0" aria-hidden="true" />
-      <div className="relative flex h-full flex-col justify-center">
-        <p className="text-eyebrow uppercase text-white/55">Growth you can see</p>
+      <div className="relative flex h-full flex-col items-center justify-center gap-4">
+        {!compact && <p className="self-start text-eyebrow uppercase text-white/55">Growth you can see</p>}
 
         {/* Growth rings, drawn as the record of successive improvements. The
             same motif as the site texture, used here to carry meaning. */}
-        <div className="relative mx-auto mt-8 aspect-square w-full max-w-[300px]">
+        <div className="relative aspect-square" style={{ width: ringSize }}>
           <svg viewBox="0 0 300 300" className="h-full w-full" role="img" aria-label="Concentric growth rings, each one a completed round of improvement">
             {[138, 116, 94, 72, 50, 28].map((r, i) => (
               <circle
@@ -113,16 +119,22 @@ function GrowthMedia({ height, className }: { height: number; className: string 
             <circle cx="150" cy="150" r="9" fill="#D9A441" fillOpacity="0.9" />
           </svg>
 
-          <p className="absolute inset-x-0 bottom-1 text-center font-mono text-mono-meta text-white/55">
-            each ring, one round of work
-          </p>
+          {!compact && (
+            <p className="absolute inset-x-0 bottom-1 text-center font-mono text-mono-meta text-white/55">
+              each ring, one round of work
+            </p>
+          )}
         </div>
 
-        <ol className="mt-8 grid grid-cols-3 gap-px overflow-hidden rounded-lg border border-white/12 bg-white/12">
+        <ol className="grid w-full grid-cols-3 gap-px overflow-hidden rounded-lg border border-white/12 bg-white/12">
           {LOOP.map((stage, index) => (
-            <li key={stage} className="bg-ink-900 px-4 py-5 text-center">
-              <span className="block font-mono text-mono-meta text-accent-300">0{index + 1}</span>
-              <span className="mt-2 block font-display text-h4 text-cream-300">{stage}</span>
+            <li key={stage} className={`bg-ink-900 text-center ${compact ? 'px-1.5 py-2.5' : 'px-4 py-5'}`}>
+              {!compact && <span className="block font-mono text-mono-meta text-accent-300">0{index + 1}</span>}
+              <span
+                className={`block font-display text-cream-300 ${compact ? 'mt-0 text-body-sm' : 'mt-2 text-h4'}`}
+              >
+                {stage}
+              </span>
             </li>
           ))}
         </ol>

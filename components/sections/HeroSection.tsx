@@ -7,9 +7,6 @@ import { listedProjectProof } from '@/data/projectProof';
 import { demos } from '@/data/demos';
 
 export default function HeroSection() {
-  // The phone is a second, optional device. With only one listed project there
-  // is nothing to put in it, and indexing blind would fail the build.
-  const secondProject = listedProjectProof[1];
   const showcaseSlides = [
     ...listedProjectProof.map((project) => ({ src: project.screenshot, alt: project.screenshotAlt })),
     ...demos.map((demo) => ({ src: demo.screenshots[0].src, alt: `${demo.name} — ${demo.tagline}` })),
@@ -63,11 +60,6 @@ export default function HeroSection() {
               <div className="media-shimmer absolute inset-0 bg-ink-700/40" aria-hidden="true" />
               <ImageCarousel slides={showcaseSlides} priority />
             </DeviceFrame>
-            {secondProject && (
-              <DeviceFrame kind="phone" width={118} className="absolute -bottom-2 -right-2 md:-bottom-10 md:-right-6">
-                <ImageCarousel slides={[{ src: secondProject.screenshot, alt: '' }]} sizes="118px" />
-              </DeviceFrame>
-            )}
           </div>
         </div>
       </div>
