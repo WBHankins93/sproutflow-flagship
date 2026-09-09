@@ -19,7 +19,7 @@ export default function HeroSection() {
 
   return (
     <section className="grain rings relative overflow-hidden bg-ink-900 text-white">
-      <div className="relative mx-auto grid min-h-[calc(100svh-88px)] max-w-[1440px] items-center gap-14 px-5 py-16 md:px-11 md:py-20 lg:grid-cols-12">
+      <div className="relative mx-auto grid max-w-[1440px] items-center gap-14 px-5 py-16 md:px-11 md:py-20 lg:min-h-[calc(100svh-88px)] lg:grid-cols-12">
         <div className="lg:col-span-6">
           <p className="flex items-center gap-3 text-eyebrow uppercase text-white/55">
             <span className="h-px w-8 bg-accent-400" aria-hidden="true" />

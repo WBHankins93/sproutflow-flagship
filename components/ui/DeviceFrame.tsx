@@ -56,7 +56,7 @@ export default function DeviceFrame({
   return (
     <div style={{ width }} className={className}>
       <div className="rounded-t-xl border-[10px] border-b-0 border-ink-700 bg-ink-700 shadow-[0_24px_70px_rgba(0,0,0,0.6)] ring-1 ring-white/15">
-        <div className="relative h-[330px] overflow-hidden bg-white">{children}</div>
+        <div className="relative aspect-[16/10] overflow-hidden bg-white">{children}</div>
       </div>
       {/* Base. Lighter than the bezel so the laptop reads as an object with a
           lid and a body, not a flat rectangle. */}

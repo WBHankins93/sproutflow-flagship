@@ -40,7 +40,7 @@ export default function ServicesPage() {
         <div key={path.id}>
           <SectionShell index={`0${index + 1}`} label={path.eyebrow} variant={index % 2 === 0 ? 'cream' : 'ink'}>
             <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
-              <div className={`lg:col-span-6 ${index % 2 === 1 ? 'lg:col-start-7' : ''}`}>
+              <div className={`min-w-0 lg:col-span-6 ${index % 2 === 1 ? 'lg:col-start-7' : ''}`}>
                 <p className={`text-eyebrow uppercase ${index % 2 === 0 ? 'text-accent-700' : 'text-accent-300'}`}>
                   {path.outcome}
                 </p>
@@ -67,7 +67,7 @@ export default function ServicesPage() {
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
                 </Link>
               </div>
-              <div className={`${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : 'lg:col-start-8'} lg:col-span-5`}>
+              <div className={`min-w-0 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : 'lg:col-start-8'} lg:col-span-5`}>
                 <ServiceMedia path={path.id} height={430} />
               </div>
             </div>
