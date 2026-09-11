@@ -74,11 +74,11 @@ export const servicePaths: ServicePath[] = [
   {
     id: 'business-systems',
     eyebrow: 'Business systems',
-    title: 'Systems that remove friction',
-    titleAccent: 'remove friction',
-    outcome: 'Give your team a clearer way to move a customer from inquiry to completed work.',
+    title: 'Lead capture and follow-up',
+    titleAccent: 'capture and follow-up',
+    outcome: 'Turn scattered inquiries into a clear path from first contact to booked work.',
     description:
-      'I connect leads, customer information, scheduling, and follow-up so the team is not stitching the work together by hand.',
+      'I capture the lead, organize the handoff, and connect follow-up so the team is not stitching the work together by hand.',
     goodFit:
       'Leads slip through, repeat admin work is slowing the team down, or your current tools do not match how the business actually operates.',
     fitStatements: [
@@ -87,12 +87,12 @@ export const servicePaths: ServicePath[] = [
       'Your tools do not match how the business actually operates.',
     ],
     capabilities: [
-      'CRM and customer records',
-      'Intake and booking flows',
-      'Dashboards and admin tools',
-      'Automation, integrations, and reporting',
+      'Capture: forms, calls, email, referrals, and job details',
+      'Coordinate: clean, qualify, assign, and track every lead',
+      'Follow through: acknowledgments, reminders, estimates, and booking',
+      'Measure: lead sources, response time, conversion, and lost opportunities',
     ],
-    ctaLabel: 'Ask about a business system',
+    ctaLabel: 'Ask about a lead system',
     metaTitle: 'CRM & Business Automation',
     metaDescription:
       'Custom CRMs, booking and intake flows, dashboards, and automation for small businesses. Stop losing leads in the handoff between tools.',

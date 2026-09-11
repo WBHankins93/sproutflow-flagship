@@ -51,7 +51,7 @@ describe('Data Validation - Public Service Paths', () => {
   it('should align the inquiry selector with the service paths', () => {
     expect(PROJECT_TYPES).toEqual([
       'Websites that earn trust',
-      'Systems that remove friction',
+      'Lead capture and follow-up',
       'Ongoing growth and support',
       'Not sure yet',
     ])

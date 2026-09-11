@@ -72,7 +72,7 @@ function SystemsMedia({ height, className }: { height: number; className: string
         {demos.map((demo) => (
           <p key={demo.id} className="truncate text-body-sm text-white/70">
             <span className="font-semibold text-cream-300">{demo.name}</span>
-            {!compact && <span className="text-white/50"> — {demo.tagline}</span>}
+            {!compact && <span className="text-white/50">: {demo.tagline}</span>}
           </p>
         ))}
       </div>

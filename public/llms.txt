@@ -16,7 +16,7 @@ Ben Hankins spent seven years building and running software inside large compani
 ## Services
 
 - [Websites](https://sproutflow-studio.com/#services): New builds, rebuilds, and Shopify storefronts. Messaging and customer path, responsive design and development, copy, CMS, and SEO foundations.
-- [Business systems](https://sproutflow-studio.com/#services): Custom CRMs and customer records, intake and booking flows, internal dashboards and admin tools, automation, integrations, and reporting.
+- [Lead capture and follow-up](https://sproutflow-studio.com/services/business-systems): Capture inquiries, organize the handoff, automate follow-up, and measure what turns into booked work without replacing useful existing tools.
 - [Growth and support](https://sproutflow-studio.com/#services): Maintenance and hosting, search and performance reviews, new pages and content, ongoing measured improvements.
 
 ## Key pages

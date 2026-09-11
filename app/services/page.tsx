@@ -25,7 +25,7 @@ export default function ServicesPage() {
         eyebrow="Services"
         title="Three ways to make the business easier to choose and easier to run."
         titleAccent="easier to choose"
-        intro="Most projects land somewhere on a simple scale. We start with the closest problem, then I write the exact scope after we talk."
+        intro="Start with the closest problem. I map the handoff, recommend the smallest useful system, and write the exact scope before work begins."
         count="03 paths"
       >
         <Link

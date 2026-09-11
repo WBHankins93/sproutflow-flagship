@@ -9,7 +9,7 @@ import { demos } from '@/data/demos';
 export default function HeroSection() {
   const showcaseSlides = [
     ...listedProjectProof.map((project) => ({ src: project.screenshot, alt: project.screenshotAlt })),
-    ...demos.map((demo) => ({ src: demo.screenshots[0].src, alt: `${demo.name} — ${demo.tagline}` })),
+    ...demos.map((demo) => ({ src: demo.screenshots[0].src, alt: `${demo.name}: ${demo.tagline}` })),
   ];
   const stats = [
     { value: '100%', label: 'projects shipped live' },
