@@ -12,14 +12,13 @@ export const metadata: Metadata = {
 
 const pathMap: Record<string, string> = {
   websites: 'Websites that earn trust',
-  'business-systems': 'Systems that remove friction',
+  'business-systems': 'Lead capture and follow-up',
   'growth-support': 'Ongoing growth and support',
 };
 const tierMap: Record<string, string> = {
-  sprout: 'Sprout',
-  leaf: 'Leaf',
-  bloom: 'Bloom',
-  canopy: 'Canopy',
+  'lead-flow-audit': 'Lead capture and follow-up',
+  'lead-capture-system': 'Lead capture and follow-up',
+  'system-care': 'Ongoing growth and support',
 };
 const steps = [
   { icon: FileSearch, title: 'I read the details', body: 'Every inquiry comes to me directly.' },

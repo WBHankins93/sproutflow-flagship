@@ -35,7 +35,7 @@ const sections = [
   ],
   [
     'Why I take this seriously',
-    'Before Sproutflow, I led SOC 2 Type II readiness from 34% to 100% as an SRE. That is my professional experience, not a Sproutflow certification. Sproutflow Studio is not claiming to be SOC 2 certified.',
+    'Before Sproutflow, I led SOC 2 Type II readiness from a 34% Vanta baseline to a passed audit as an SRE. That is my professional experience, not a Sproutflow certification. Sproutflow Studio is not claiming to be SOC 2 certified.',
   ],
 ];
 

@@ -71,7 +71,7 @@ describe('Component Interactions - ServicesSection Paths', () => {
     // single text node.
     const headings = Array.from(container.querySelectorAll('h3')).map((el) => el.textContent)
     expect(headings).toContain('Websites that earn trust')
-    expect(headings).toContain('Systems that remove friction')
+    expect(headings).toContain('Lead capture and follow-up')
     expect(headings).toContain('Ongoing growth and support')
   })
 

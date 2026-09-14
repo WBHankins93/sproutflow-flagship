@@ -2,7 +2,7 @@
 
 export const PROJECT_TYPES = [
   'Websites that earn trust',
-  'Systems that remove friction',
+  'Lead capture and follow-up',
   'Ongoing growth and support',
   'Not sure yet',
 ] as const;
