@@ -30,6 +30,13 @@ jest.mock('next/image', () => ({
   },
 }))
 
+// Mock Vercel Analytics. Its "browser" export is ESM-only, which Jest's jsdom
+// environment cannot parse, and it has nothing to do in tests anyway.
+// app/layout.tsx renders it, and several suites import the layout.
+jest.mock('@vercel/analytics/next', () => ({
+  Analytics: () => null,
+}))
+
 // Mock framer-motion
 jest.mock('framer-motion', () => ({
   motion: {

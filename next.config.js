@@ -17,6 +17,12 @@ const nextConfig = {
         destination: '/data-and-ownership',
         permanent: true,
       },
+      // Until Cal.com is configured, /book has nothing to show. app/book/page.tsx
+      // also redirects, but a statically prerendered redirect() is served as a
+      // 200 with a meta refresh; this makes it a real temporary redirect.
+      ...(process.env.NEXT_PUBLIC_CAL_LINK?.trim()
+        ? []
+        : [{ source: '/book', destination: '/inquiry', permanent: false }]),
     ];
   },
   images: {

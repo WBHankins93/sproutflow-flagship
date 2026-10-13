@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { ArrowRight, Mail, Phone } from 'lucide-react';
 import Marquee from './Marquee';
+import { BookCallLink } from './BookCallLink';
+import { BOOKING_CTA_LABEL, INQUIRY_PATH } from '@/lib/constants';
 
 export default function FooterCta() {
   return (
@@ -18,16 +20,25 @@ export default function FooterCta() {
             <h2 className="mt-5 max-w-5xl font-display text-display-lg text-cream-300">
               Tell me what needs to work better. I will help name the next step.
             </h2>
-            <Link
-              href="/inquiry"
-              className="group mt-8 inline-flex min-h-12 items-center gap-3 rounded-full bg-accent-500 px-7 py-3.5 font-semibold text-ink-900 hover:bg-accent-400"
-            >
-              Tell me about your project
-              <ArrowRight
-                className="h-5 w-5 transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
-                aria-hidden="true"
-              />
-            </Link>
+            <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
+              <BookCallLink
+                data-cta="footer"
+                className="group inline-flex min-h-12 items-center gap-3 rounded-full bg-accent-500 px-7 py-3.5 font-semibold text-ink-900 hover:bg-accent-400"
+              >
+                {BOOKING_CTA_LABEL}
+                <ArrowRight
+                  className="h-5 w-5 transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+                  aria-hidden="true"
+                />
+              </BookCallLink>
+              <Link
+                href={INQUIRY_PATH}
+                data-cta="footer-inquiry"
+                className="font-semibold text-white/75 underline underline-offset-4 hover:text-white"
+              >
+                Or send the details in writing
+              </Link>
+            </div>
           </div>
           <div className="grid content-end gap-4 lg:col-span-4">
             <a

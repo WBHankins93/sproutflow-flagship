@@ -5,7 +5,7 @@
  * - Header mobile menu toggle
  * - ServicesSection service paths
  * - Navigation link handling
- * - ContactSection qualification flow (application before calendar time)
+ * - ContactSection CTAs (booking primary, written inquiry secondary)
  */
 
 import { render, screen, fireEvent } from '@testing-library/react'
@@ -17,6 +17,7 @@ import ContactSection from '@/components/sections/ContactSection'
 import HeroSection from '@/components/sections/HeroSection'
 import FAQPage from '@/app/faq/page'
 import { InquiryForm } from '@/components/inquiry/InquiryForm'
+import { BOOKING_CTA_LABEL, getBookingHref } from '@/lib/constants'
 
 describe('Component Interactions - Header Mobile Menu', () => {
   it('should toggle mobile menu when button is clicked', async () => {
@@ -135,14 +136,19 @@ describe('Component Interactions - ContactSection', () => {
     expect(screen.getByRole('heading', { name: /Tell me what needs to work better/i })).toBeInTheDocument()
   })
 
-  it('should route the discovery CTA to the inquiry application, not the calendar', () => {
+  it('should route the primary CTA to booking and the secondary to the written inquiry', () => {
     render(<ContactSection />)
 
-    // Qualification funnel: calendar time comes after the application is
-    // submitted, so the contact section must never link to the calendar.
-    const cta = screen.getByText('Tell me about your project').closest('a')
-    expect(cta).toHaveAttribute('href', '/inquiry')
+    // Owner-approved (13 Oct 2026): booking a 15-minute call is the primary
+    // CTA (/book, or /inquiry until Cal.com is configured) and the written
+    // inquiry stays available as the secondary option. The old Google
+    // Calendar link must never come back.
+    const cta = screen.getByText(BOOKING_CTA_LABEL).closest('a')
+    expect(cta).toHaveAttribute('href', getBookingHref())
     expect(cta).not.toHaveAttribute('target')
+
+    const secondary = screen.getByRole('link', { name: 'Or send the details in writing' })
+    expect(secondary).toHaveAttribute('href', '/inquiry')
 
     const calendarLinks = document.querySelectorAll('a[href*="calendar.app.google"]')
     expect(calendarLinks.length).toBe(0)

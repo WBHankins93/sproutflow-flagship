@@ -1,22 +1,37 @@
 # Qualification & Partnership Playbook
 
 Internal reference. Not rendered on the site. The site implements Layer 1
-(the /inquiry application) and the copy framing for Layers 2-3; everything
-else here is operating discipline.
+(the /book Cal.com booking form, with /inquiry as the written alternative)
+and the copy framing for Layers 2-3; everything else here is operating
+discipline.
 
 ## The three-layer qualification filter
 
-### Layer 1 - Pre-call application (implemented: /inquiry)
-A short form before anyone gets calendar time: what the business does, the
-project goal, budget bracket, timeline, and whether they are the
+### Layer 1 - Pre-call qualification (implemented: /book, with /inquiry)
+A short set of questions before anyone gets calendar time: what the business
+does, the current site, budget bracket, timeline, and whether they are the
 decision-maker. People who won't answer a budget bracket question won't pay
-invoices either. The calendar link only appears after the form is submitted.
+invoices either.
+
+> **Changed 13 Oct 2026 (owner-approved):** primary CTAs now go to /book, an
+> embedded Cal.com scheduler for a 15-minute fit call. /inquiry stays as the
+> written alternative and is linked as the secondary option next to every
+> primary booking CTA. The Layer 1 qualifying questions (business, current
+> site, budget bracket, timeline, decision-maker) move onto the Cal.com
+> booking form, so the call is still gated by them. The older rule that
+> every CTA routes to /inquiry first no longer applies; do not reintroduce
+> it.
 
 Site enforcement:
-- All "Book a Discovery Call" / "Start your project" CTAs route to /inquiry.
-- The form asks budget (tier-mapped brackets + "Not sure yet"), timeline,
-  and decision-maker.
-- The Google Calendar link renders only on the post-submit confirmation.
+- Primary CTAs ("Book a 15-minute call" / "Book a call") use `BookCallLink`,
+  which points at /book when `NEXT_PUBLIC_CAL_LINK` is set and falls back to
+  /inquiry when it is not (/book also redirects to /inquiry in that case).
+- Secondary links ("Or send the details in writing" and similar) go to
+  /inquiry.
+- The Cal.com event's booking questions carry the Layer 1 qualifiers. The
+  /inquiry form still asks budget (tier-mapped brackets + "Not sure yet"),
+  timeline, and decision-maker for people who prefer writing.
+- No Google Calendar (calendar.app.google) links anywhere on the site.
 
 ### Layer 2 - The discovery call is diagnosis, not pitch
 Structure the call around their business outcome:

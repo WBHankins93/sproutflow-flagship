@@ -10,6 +10,8 @@ import {
   TIMELINE_OPTIONS,
   type InquiryFormData,
 } from '@/types/inquiry';
+import { BookCallLink } from '@/components/ui/BookCallLink';
+import { isBookingConfigured } from '@/lib/constants';
 
 const STORAGE_KEY = 'sproutflow-inquiry-draft';
 const initialData: InquiryFormData = {
@@ -136,6 +138,17 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
         <p className="mt-4 max-w-xl text-text-secondary">
           I will review the details and reply within one business day.
         </p>
+        {isBookingConfigured() && (
+          <p className="mt-4 max-w-xl text-text-secondary">
+            Want to move faster?{' '}
+            <BookCallLink
+              data-cta="inquiry-success"
+              className="font-semibold text-primary-800 underline underline-offset-2"
+            >
+              Book a 15-minute call now
+            </BookCallLink>
+          </p>
+        )}
         <Link
           href="/resources/what-you-should-own-after-launch"
           className="mt-7 inline-flex border-b border-primary-700 pb-1 font-semibold text-primary-800"

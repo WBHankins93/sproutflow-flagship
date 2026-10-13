@@ -3,7 +3,10 @@ import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import DeviceFrame from '@/components/ui/DeviceFrame';
 import ImageCarousel from '@/components/ui/ImageCarousel';
 import StatRail from '@/components/ui/StatRail';
+import { BookCallLink } from '@/components/ui/BookCallLink';
+import { BOOKING_CTA_LABEL } from '@/lib/constants';
 import { listedProjectProof } from '@/data/projectProof';
+import { heroStats } from '@/data/heroStats';
 import { demos } from '@/data/demos';
 
 export default function HeroSection() {
@@ -11,11 +14,8 @@ export default function HeroSection() {
     ...listedProjectProof.map((project) => ({ src: project.screenshot, alt: project.screenshotAlt })),
     ...demos.map((demo) => ({ src: demo.screenshots[0].src, alt: `${demo.name}: ${demo.tagline}` })),
   ];
-  const stats = [
-    { value: '100%', label: 'projects shipped live' },
-    { value: '1:1', label: 'with the founder' },
-    { value: 'Fixed', label: 'quote before work' },
-  ];
+  // Real client results, read from published project and testimonial data.
+  const stats = heroStats.map(({ value, label, note }) => ({ value, label, note }));
 
   return (
     <section className="grain rings relative overflow-hidden bg-ink-900 text-white">
@@ -34,16 +34,16 @@ export default function HeroSection() {
             take the next step.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/inquiry"
+            <BookCallLink
+              data-cta="hero"
               className="group inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-accent-500 px-7 py-3.5 font-semibold text-ink-900 hover:bg-accent-400"
             >
-              Tell me about your project
+              {BOOKING_CTA_LABEL}
               <ArrowRight
                 className="h-5 w-5 transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
                 aria-hidden="true"
               />
-            </Link>
+            </BookCallLink>
             <Link
               href="/work"
               className="inline-flex min-h-12 items-center justify-center gap-2 px-5 py-3 font-semibold text-white/75 hover:text-white"

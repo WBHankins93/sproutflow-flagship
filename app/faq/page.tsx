@@ -4,6 +4,8 @@ import PageHeader from '@/components/ui/PageHeader';
 import SectionShell from '@/components/ui/SectionShell';
 import FaqAccordion, { type FaqItem } from '@/components/ui/FaqAccordion';
 import FooterCta from '@/components/ui/FooterCta';
+import { BookCallLink } from '@/components/ui/BookCallLink';
+import { INQUIRY_PATH } from '@/lib/constants';
 import { Footer } from '@/components/layout/Footer';
 
 export const metadata: Metadata = {
@@ -127,9 +129,19 @@ export default function FAQPage() {
           Email Ben directly
         </a>
         <span className="mx-3 text-text-muted">or</span>
-        <Link href="/inquiry" className="font-semibold text-primary-800">
-          start an inquiry
-        </Link>
+        <BookCallLink data-cta="faq" className="font-semibold text-primary-800">
+          book a 15-minute call
+        </BookCallLink>
+        <p className="mt-4 text-sm text-text-muted">
+          Prefer writing it down?{' '}
+          <Link
+            href={INQUIRY_PATH}
+            data-cta="faq-inquiry"
+            className="font-semibold text-primary-800 underline underline-offset-2"
+          >
+            Send the details
+          </Link>
+        </p>
       </div>
       <FooterCta />
       <Footer />

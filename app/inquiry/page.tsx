@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { FileSearch, MessageSquareText, ReceiptText } from 'lucide-react';
 import { InquiryForm } from '@/components/inquiry/InquiryForm';
 import { Footer } from '@/components/layout/Footer';
+import { BookCallLink } from '@/components/ui/BookCallLink';
+import { BOOKING_CTA_LABEL, isBookingConfigured } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Start a Project',
@@ -16,6 +18,7 @@ const pathMap: Record<string, string> = {
   'growth-support': 'Ongoing growth and support',
 };
 const tierMap: Record<string, string> = {
+  'website-rescue': 'Websites that earn trust',
   'lead-flow-audit': 'Lead capture and follow-up',
   'lead-capture-system': 'Lead capture and follow-up',
   'system-care': 'Ongoing growth and support',
@@ -62,6 +65,17 @@ export default async function InquiryPage({ searchParams }: Props) {
               ))}
             </ol>
             <p className="mt-6 text-sm text-text-muted">I reply within one business day.</p>
+            {isBookingConfigured() && (
+              <p className="mt-4 text-sm text-text-secondary" data-testid="inquiry-booking-line">
+                Rather talk it through?{' '}
+                <BookCallLink
+                  data-cta="inquiry-aside"
+                  className="font-semibold text-primary-800 underline underline-offset-2"
+                >
+                  {BOOKING_CTA_LABEL}
+                </BookCallLink>
+              </p>
+            )}
           </aside>
           <div className="border-t border-primary-900/20 pt-8 lg:col-span-7 lg:col-start-6">
             <InquiryForm initialProjectType={initialProjectType} />
