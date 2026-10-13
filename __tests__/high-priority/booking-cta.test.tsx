@@ -3,7 +3,7 @@
  *
  * "Book a 15-minute call" is the primary call to action across the site and
  * the written inquiry form stays visible as the secondary option. Booking
- * CTAs point at /book only when NEXT_PUBLIC_CAL_LINK is set; otherwise they
+ * CTAs point at /book unless NEXT_PUBLIC_CAL_LINK is "off"; in that case they
  * fall back to /inquiry, and lines that would link the inquiry page to itself
  * stay hidden.
  */
@@ -68,8 +68,8 @@ async function submitInquiryForm() {
 
 const states = [
   {
-    label: 'booking not configured',
-    calLink: undefined,
+    label: 'booking turned off',
+    calLink: 'off',
     bookingHref: '/inquiry',
     configured: false,
   },

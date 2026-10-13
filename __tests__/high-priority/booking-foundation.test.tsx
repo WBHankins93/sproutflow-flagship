@@ -1,7 +1,7 @@
 /**
  * HIGH PRIORITY TESTS: Booking foundation
  *
- * Booking must degrade safely. Until NEXT_PUBLIC_CAL_LINK is set, booking
+ * Booking must degrade safely. When NEXT_PUBLIC_CAL_LINK is "off", booking
  * CTAs point at /inquiry, /book redirects to /inquiry, and the sitemap
  * leaves /book out.
  */
@@ -9,6 +9,7 @@
 import { render, screen } from '@testing-library/react'
 import {
   BOOKING_CTA_LABEL,
+  DEFAULT_CAL_LINK,
   getBookingHref,
   getCalLink,
   getCalPublicUrl,
@@ -48,7 +49,7 @@ function setCalLink(value: string | undefined) {
 }
 
 beforeEach(() => {
-  setCalLink(undefined)
+  setCalLink('off')
   mockRedirect.mockClear()
 })
 
@@ -57,10 +58,24 @@ afterEach(() => {
 })
 
 describe('getCalLink', () => {
-  it('returns null when unset', () => {
+  it('uses the default Sproutflow link when unset', () => {
+    setCalLink(undefined)
+    expect(getCalLink()).toBe(DEFAULT_CAL_LINK)
+    expect(DEFAULT_CAL_LINK).toBe('ben-hankins-sproutflow-studio/15min')
+    expect(isBookingConfigured()).toBe(true)
+    expect(getBookingHref()).toBe('/book')
+    expect(getCalPublicUrl()).toBe('https://cal.com/ben-hankins-sproutflow-studio/15min')
+  })
+
+  it('returns null when turned off', () => {
     expect(getCalLink()).toBeNull()
     expect(isBookingConfigured()).toBe(false)
     expect(getCalPublicUrl()).toBeNull()
+  })
+
+  it('treats OFF in any case as turned off', () => {
+    setCalLink(' OFF ')
+    expect(getCalLink()).toBeNull()
   })
 
   it('returns a plain link path as is', () => {
@@ -87,7 +102,7 @@ describe('getCalLink', () => {
 })
 
 describe('getBookingHref', () => {
-  it('points at /inquiry when unset', () => {
+  it('points at /inquiry when turned off', () => {
     expect(getBookingHref()).toBe('/inquiry')
   })
 
@@ -104,7 +119,7 @@ describe('BookCallLink', () => {
     expect(BOOKING_CTA_LABEL).toBe('Book a 15-minute call')
   })
 
-  it('links to /inquiry when booking is not configured', () => {
+  it('links to /inquiry when booking is turned off', () => {
     render(<BookCallLink />)
     expect(screen.getByRole('link')).toHaveAttribute('href', '/inquiry')
   })

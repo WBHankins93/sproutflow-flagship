@@ -5,7 +5,7 @@
  * consistent across the tiers band and structured data. Hero stats must be
  * real client results read from published data, never typed into the
  * component. Every pricing and hero CTA must follow the booking fallback:
- * /inquiry until NEXT_PUBLIC_CAL_LINK is set, /book after.
+ * /inquiry when NEXT_PUBLIC_CAL_LINK is "off", /book otherwise.
  */
 
 import { render, screen } from '@testing-library/react'
@@ -34,7 +34,7 @@ afterEach(() => {
 })
 
 const BOOKING_CASES: Array<[string, string | undefined, string]> = [
-  ['booking not configured', undefined, '/inquiry'],
+  ['booking turned off', 'off', '/inquiry'],
   ['booking configured', 'sproutflow/15min', '/book'],
 ]
 
@@ -61,7 +61,7 @@ describe('Offers - Website Rescue data', () => {
 
 describe('Offers - TiersSection', () => {
   it('renders the Website Rescue band with its price and includes', () => {
-    setCalLink(undefined)
+    setCalLink('off')
     render(<TiersSection />)
 
     const band = screen.getByRole('region', {

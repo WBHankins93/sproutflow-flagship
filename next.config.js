@@ -1,3 +1,10 @@
+/** Mirrors getCalLink() in lib/constants.ts: unset means the default link. */
+function isBookingOff(value) {
+  if (value === undefined) return false;
+  const trimmed = value.trim().toLowerCase();
+  return trimmed === '' || trimmed === 'off';
+}
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async redirects() {
@@ -17,12 +24,14 @@ const nextConfig = {
         destination: '/data-and-ownership',
         permanent: true,
       },
-      // Until Cal.com is configured, /book has nothing to show. app/book/page.tsx
-      // also redirects, but a statically prerendered redirect() is served as a
-      // 200 with a meta refresh; this makes it a real temporary redirect.
-      ...(process.env.NEXT_PUBLIC_CAL_LINK?.trim()
-        ? []
-        : [{ source: '/book', destination: '/inquiry', permanent: false }]),
+      // When booking is turned off (NEXT_PUBLIC_CAL_LINK set to `off` or blank;
+      // unset uses the default link in lib/constants.ts), /book has nothing to
+      // show. app/book/page.tsx also redirects, but a statically prerendered
+      // redirect() is served as a 200 with a meta refresh; this makes it a
+      // real temporary redirect.
+      ...(isBookingOff(process.env.NEXT_PUBLIC_CAL_LINK)
+        ? [{ source: '/book', destination: '/inquiry', permanent: false }]
+        : []),
     ];
   },
   images: {

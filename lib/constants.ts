@@ -1,8 +1,9 @@
 /**
  * Shared site constants and booking helpers.
  *
- * Booking degrades safely: until NEXT_PUBLIC_CAL_LINK is set, every booking
- * CTA points at the inquiry form and /book redirects there.
+ * Booking degrades safely: when booking is turned off (NEXT_PUBLIC_CAL_LINK
+ * set to `off`), every booking CTA points at the inquiry form and /book
+ * redirects there.
  */
 
 /** Route that hosts the embedded Cal.com scheduler. */
@@ -20,15 +21,23 @@ export const BOOKING_CTA_SHORT = 'Book a call';
 const CAL_ORIGIN = 'https://cal.com';
 
 /**
+ * Sproutflow's public 15-minute Cal.com event. It is a public URL, like the
+ * phone number, so it lives in code. NEXT_PUBLIC_CAL_LINK overrides it;
+ * setting that variable to `off` (or blank) turns booking off.
+ */
+export const DEFAULT_CAL_LINK = 'ben-hankins-sproutflow-studio/15min';
+
+/**
  * Returns the Cal.com link path (for example `sproutflow/15min`) or null when
- * booking is not configured. Accepts a pasted full URL and normalizes it.
+ * booking is turned off. Accepts a pasted full URL and normalizes it.
  *
  * The env var is read on every call (direct property access so Next inlines
  * it at build time) so tests can change it between cases.
  */
 export function getCalLink(): string | null {
-  const raw = process.env.NEXT_PUBLIC_CAL_LINK;
-  if (!raw) return null;
+  const env = process.env.NEXT_PUBLIC_CAL_LINK;
+  const raw = env === undefined ? DEFAULT_CAL_LINK : env;
+  if (raw.trim().toLowerCase() === 'off') return null;
   const link = raw
     .trim()
     .replace(/^https?:\/\/(www\.)?cal\.com\//i, '')

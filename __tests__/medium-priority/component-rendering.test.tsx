@@ -71,15 +71,12 @@ describe('Component Rendering - HeroSection', () => {
     expect(screen.getByRole('heading', { name: /Make it easier for customers to choose you/i })).toBeInTheDocument()
   })
 
-  it('should render the booking CTA, falling back to the inquiry form when Cal.com is unset', () => {
+  it('should render the booking CTA, using the booking href', () => {
     render(<HeroSection />)
     expect(BOOKING_CTA_LABEL).toBe('Book a 15-minute call')
     const cta = screen.getByText('Book a 15-minute call').closest('a')
     expect(cta).toBeInTheDocument()
     expect(cta).toHaveAttribute('href', getBookingHref())
-    if (!process.env.NEXT_PUBLIC_CAL_LINK) {
-      expect(cta).toHaveAttribute('href', '/inquiry')
-    }
   })
 
   it('should render trust badges', () => {
