@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { BookCallLink } from '@/components/ui/BookCallLink';
+import { BOOKING_CTA_LABEL } from '@/lib/constants';
 
 export default function NotFound() {
   return (
@@ -10,7 +12,7 @@ export default function NotFound() {
           That page does not exist anymore.
         </h1>
         <p className="mt-6 max-w-xl text-body-lg text-white/[0.68]">
-          The useful part may have moved. Start with the work, the services, or tell me what you were looking for.
+          The useful part may have moved. Start with the work, the services, or book a short call and tell me what you were looking for.
         </p>
         <div className="mt-9 flex flex-wrap gap-5">
           <Link href="/work" className="border-b border-accent-400 pb-1 font-semibold">
@@ -19,12 +21,12 @@ export default function NotFound() {
           <Link href="/services" className="border-b border-accent-400 pb-1 font-semibold">
             Services
           </Link>
-          <Link
-            href="/inquiry"
+          <BookCallLink
+            data-cta="not-found"
             className="group inline-flex items-center gap-2 rounded-full bg-accent-500 px-6 py-3 font-semibold text-ink-900"
           >
-            Tell me what you need <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
+            {BOOKING_CTA_LABEL} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </BookCallLink>
         </div>
       </div>
     </section>

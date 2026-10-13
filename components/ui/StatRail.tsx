@@ -3,6 +3,8 @@ import type { ShellVariant } from './SectionShell';
 export interface Stat {
   value: string;
   label: string;
+  /** Optional attribution line under the label, e.g. the client a result belongs to. */
+  note?: string;
 }
 
 interface StatRailProps {
@@ -21,6 +23,7 @@ export default function StatRail({ stats, variant = 'cream', className = '' }: S
   const divider = variant === 'ink' ? 'border-white/20' : 'border-primary-900/20';
   const value = variant === 'ink' ? 'text-accent-300' : 'text-accent-700';
   const label = variant === 'ink' ? 'text-white/65' : 'text-text-secondary';
+  const note = variant === 'ink' ? 'text-white/45' : 'text-text-muted';
 
   return (
     <dl className={`grid grid-cols-3 ${className}`}>
@@ -33,6 +36,7 @@ export default function StatRail({ stats, variant = 'cream', className = '' }: S
           <dd>
             <span className={`block font-display text-display-md ${value}`}>{stat.value}</span>
             <span className={`mt-1 block text-body-sm ${label}`}>{stat.label}</span>
+            {stat.note && <span className={`mt-1 block text-xs ${note}`}>{stat.note}</span>}
           </dd>
         </div>
       ))}

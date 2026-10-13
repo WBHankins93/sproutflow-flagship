@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/layout/Header';
 import StructuredData from '@/components/StructuredData';
+import { Analytics } from '@vercel/analytics/next';
 import { Archivo, DM_Sans, Newsreader, Fira_Code } from 'next/font/google';
 
 // Display: Archivo. An American grotesque in the GT America family, chosen
@@ -125,6 +126,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <StructuredData />
         <Header />
         <main>{children}</main>
+        <Analytics />
       </body>
     </html>
   );

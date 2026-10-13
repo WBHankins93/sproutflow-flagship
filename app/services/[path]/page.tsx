@@ -8,6 +8,8 @@ import ServiceMedia from '@/components/services/ServiceMedia';
 import ProjectRow from '@/components/ui/ProjectRow';
 import FaqAccordion from '@/components/ui/FaqAccordion';
 import FooterCta from '@/components/ui/FooterCta';
+import { BookCallLink } from '@/components/ui/BookCallLink';
+import { BOOKING_CTA_LABEL, INQUIRY_PATH } from '@/lib/constants';
 import { Footer } from '@/components/layout/Footer';
 import { getServicePath, servicePaths } from '@/data/servicePaths';
 import { projectProof } from '@/data/projectProof';
@@ -66,13 +68,23 @@ export default async function ServicePathPage({ params }: Props) {
     <>
       <ServiceSchema service={service} />
       <PageHeader eyebrow={service.eyebrow} title={service.title} titleAccent={service.titleAccent} intro={service.outcome}>
-        <Link
-          href={`/inquiry?path=${service.id}`}
-          className="group inline-flex min-h-12 items-center gap-3 rounded-full bg-accent-500 px-6 py-3 font-semibold text-ink-900"
-        >
-          Ask about this path{' '}
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-        </Link>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+          <BookCallLink
+            data-cta={`service-${service.id}`}
+            inquiryQuery={`path=${service.id}`}
+            className="group inline-flex min-h-12 items-center gap-3 rounded-full bg-accent-500 px-6 py-3 font-semibold text-ink-900"
+          >
+            {BOOKING_CTA_LABEL}{' '}
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+          </BookCallLink>
+          <Link
+            href={`${INQUIRY_PATH}?path=${service.id}`}
+            data-cta={`service-${service.id}-inquiry`}
+            className="font-semibold text-white/75 underline underline-offset-4 hover:text-white"
+          >
+            {service.ctaLabel}
+          </Link>
+        </div>
       </PageHeader>
 
       <SectionShell index="01" label="who this is for" variant="cream" labelledBy="service-fit-heading">

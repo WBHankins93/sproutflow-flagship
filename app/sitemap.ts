@@ -3,6 +3,7 @@ import { caseStudies } from '@/data/caseStudies';
 import { listedProjectProof } from '@/data/projectProof';
 import { servicePaths } from '@/data/servicePaths';
 import { resources } from '@/data/resources';
+import { BOOKING_PATH, isBookingConfigured } from '@/lib/constants';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.com';
 
@@ -67,6 +68,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    // Only list /book once Cal.com is configured; until then it redirects.
+    ...(isBookingConfigured()
+      ? [
+          {
+            url: `${siteUrl}${BOOKING_PATH}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.8,
+          },
+        ]
+      : []),
     {
       url: `${siteUrl}/faq`,
       lastModified: new Date(),

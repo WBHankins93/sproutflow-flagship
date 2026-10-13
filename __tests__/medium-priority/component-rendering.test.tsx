@@ -10,6 +10,7 @@ import Header from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import HeroSection from '@/components/sections/HeroSection'
 import WorkPage from '@/app/work/page'
+import { BOOKING_CTA_LABEL, BOOKING_CTA_SHORT, getBookingHref } from '@/lib/constants'
 
 describe('Component Rendering - Header', () => {
   it('should render header with logo', () => {
@@ -27,7 +28,10 @@ describe('Component Rendering - Header', () => {
 
   it('should render contact CTA button', () => {
     render(<Header />)
-    expect(screen.getByText('Start a project')).toBeInTheDocument()
+    expect(BOOKING_CTA_SHORT).toBe('Book a call')
+    const cta = screen.getByText('Book a call').closest('a')
+    expect(cta).toBeInTheDocument()
+    expect(cta).toHaveAttribute('href', getBookingHref())
   })
 })
 
@@ -67,11 +71,12 @@ describe('Component Rendering - HeroSection', () => {
     expect(screen.getByRole('heading', { name: /Make it easier for customers to choose you/i })).toBeInTheDocument()
   })
 
-  it('should render CTA button linking to the inquiry application', () => {
+  it('should render the booking CTA, using the booking href', () => {
     render(<HeroSection />)
-    const cta = screen.getByText('Tell me about your project').closest('a')
+    expect(BOOKING_CTA_LABEL).toBe('Book a 15-minute call')
+    const cta = screen.getByText('Book a 15-minute call').closest('a')
     expect(cta).toBeInTheDocument()
-    expect(cta).toHaveAttribute('href', '/inquiry')
+    expect(cta).toHaveAttribute('href', getBookingHref())
   })
 
   it('should render trust badges', () => {

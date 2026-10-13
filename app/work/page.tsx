@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import PageHeader from '@/components/ui/PageHeader';
 import SectionShell from '@/components/ui/SectionShell';
 import FooterCta from '@/components/ui/FooterCta';
+import { BookCallLink } from '@/components/ui/BookCallLink';
+import { BOOKING_CTA_LABEL } from '@/lib/constants';
 import WorkIndex from '@/components/work/WorkIndex';
 import { Footer } from '@/components/layout/Footer';
 import { listedProjectProof } from '@/data/projectProof';
@@ -33,13 +34,13 @@ export default function WorkPage() {
             <h2 className="mt-4 font-display text-display-md text-primary-900">Show me what customers see now.</h2>
           </div>
           <div className="lg:col-span-4">
-            <Link
-              href="/inquiry"
+            <BookCallLink
+              data-cta="work"
               className="group inline-flex min-h-12 items-center gap-3 rounded-full bg-primary-800 px-6 py-3 font-semibold text-white hover:bg-primary-700"
             >
-              Tell me about your project{' '}
+              {BOOKING_CTA_LABEL}{' '}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-            </Link>
+            </BookCallLink>
           </div>
         </div>
       </SectionShell>

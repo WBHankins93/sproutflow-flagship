@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
+import { BookCallLink } from '@/components/ui/BookCallLink';
+import { BOOKING_CTA_LABEL, BOOKING_CTA_SHORT } from '@/lib/constants';
 
 const links = [
   { label: 'Services', href: '/services' },
@@ -47,21 +49,22 @@ export default function Header() {
               </Link>
             );
           })}
-          <Link
-            href="/inquiry"
+          <BookCallLink
+            data-cta="header"
             className="inline-flex min-h-11 items-center rounded-full bg-ink-900 px-6 py-2.5 text-sm font-semibold text-white hover:bg-primary-800"
           >
-            Start a project
-          </Link>
+            {BOOKING_CTA_SHORT}
+          </BookCallLink>
         </nav>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <Link
-            href="/inquiry"
+          <BookCallLink
+            data-cta="header-mobile"
+            aria-label={BOOKING_CTA_LABEL}
             className="inline-flex min-h-11 items-center rounded-full bg-accent-500 px-4 text-sm font-semibold text-ink-900"
           >
-            Start
-          </Link>
+            Book
+          </BookCallLink>
           <button
             type="button"
             onClick={() => setOpen((value) => !value)}

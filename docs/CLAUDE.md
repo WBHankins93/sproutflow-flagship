@@ -35,7 +35,8 @@ Pages under `app/`:
 - `/how-we-work` redirects to the concise homepage process
 - `/case-studies` redirects to `/work`
 - `/case-studies/[project]` - individual project stories kept for deeper proof and SEO
-- `/inquiry` (`app/inquiry/page.tsx`) - primary contact + project intake page
+- `/inquiry` (`app/inquiry/page.tsx`) - written project intake form (secondary to booking)
+- `/book` (`app/book/page.tsx`) - embedded Cal.com 15-minute call scheduler; uses the Cal.com link in `lib/constants.ts` (`DEFAULT_CAL_LINK`); redirects to `/inquiry` when `NEXT_PUBLIC_CAL_LINK=off`
 
 Global route metadata/sitemap:
 - `app/layout.tsx`
@@ -58,7 +59,7 @@ Global route metadata/sitemap:
 
 ### Important implementation details
 - `app/layout.tsx` already renders `<Header />` and wraps route content with `<main>`. Route pages should generally return a fragment and include `<Footer />` themselves.
-- `Header` CTA "Start a project" routes to `/inquiry` on desktop and mobile.
+- `Header` CTA "Book a call" (mobile pill: "Book") uses `BookCallLink`, which routes to `/book`, or to `/inquiry` when booking is turned off.
 - Inquiry form submits directly to Formspree from the client and shows an in-page success state.
 - `components/layout/StudioLayout.tsx` `Button` supports `type` and `disabled` (used by form submit state).
 
@@ -117,6 +118,7 @@ Runtime/public:
 - `NEXT_PUBLIC_SITE_URL` (optional; defaults to `https://sproutflow-studio.com`)
 - `NEXT_PUBLIC_BLOB_STORE_URL` (required for Blob-backed image URLs in deployed envs)
 - `NEXT_PUBLIC_FORMSPREE_FORM_ID` (required for `/inquiry` submission)
+- `NEXT_PUBLIC_CAL_LINK` (optional override of `DEFAULT_CAL_LINK`, e.g. `sproutflow/15min`; inlined at build time; `off` = booking CTAs fall back to `/inquiry`)
 
 Server/script-only:
 - `BLOB_READ_WRITE_TOKEN` (required by Blob scripts)

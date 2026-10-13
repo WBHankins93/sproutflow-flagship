@@ -4,6 +4,8 @@
 // FAQPage schema lives on /faq (where the content is visible).
 // BreadcrumbList schema lives in components/case-studies/CaseStudyLayout.tsx.
 
+import { websiteRescue } from '@/data/offers';
+
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.com';
 
 const professionalServiceSchema = {
@@ -110,6 +112,22 @@ const professionalServiceSchema = {
           description:
             'Custom business systems behind the website: internal admin tools and dashboards, custom CRM and customer management systems, lightweight CMS builds, and workflow automation for intake, follow-up, scheduling, and document processing.',
           url: `${siteUrl}/services/business-systems`,
+          provider: { '@id': `${siteUrl}#organization` },
+          areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
+        },
+      },
+      {
+        '@type': 'Offer',
+        // The only catalog entry with a single fixed price, so it carries one.
+        // The service categories above are scoped and quoted per project.
+        price: '1500',
+        priceCurrency: 'USD',
+        itemOffered: {
+          '@type': 'Service',
+          name: websiteRescue.name,
+          description:
+            'A fixed-price five-page website for contractors and home-service businesses with a dead, missing, or broken website. Built on the domain the client already owns, with a quote form that reaches phone and email and a Google Business Profile cleanup. Live 10 business days after content arrives.',
+          url: `${siteUrl}/#${websiteRescue.id}`,
           provider: { '@id': `${siteUrl}#organization` },
           areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
         },
