@@ -71,7 +71,7 @@ Global route metadata/sitemap:
   - Typed options/data shape: `types/inquiry.ts`
 - Submission:
   - Formspree endpoint pattern: `https://formspree.io/f/{FORM_ID}`
-  - Uses `NEXT_PUBLIC_FORMSPREE_FORM_ID`
+  - Posts to Formspree via `getFormspreeFormId()` (`lib/constants.ts`); `NEXT_PUBLIC_FORMSPREE_FORM_ID` overrides the default
   - Required validation: name + email
   - Prevents duplicate submits with in-memory submit guard and disabled button state
 
@@ -117,7 +117,7 @@ Critical gotcha:
 Runtime/public:
 - `NEXT_PUBLIC_SITE_URL` (optional; defaults to `https://sproutflow-studio.com`)
 - `NEXT_PUBLIC_BLOB_STORE_URL` (required for Blob-backed image URLs in deployed envs)
-- `NEXT_PUBLIC_FORMSPREE_FORM_ID` (required for `/inquiry` submission)
+- `NEXT_PUBLIC_FORMSPREE_FORM_ID` (optional override of `DEFAULT_FORMSPREE_FORM_ID` in `lib/constants.ts`, which `/inquiry` posts to)
 - `NEXT_PUBLIC_CAL_LINK` (optional override of `DEFAULT_CAL_LINK`, e.g. `sproutflow/15min`; inlined at build time; `off` = booking CTAs fall back to `/inquiry`)
 
 Server/script-only:
