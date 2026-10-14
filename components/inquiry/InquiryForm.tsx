@@ -11,7 +11,7 @@ import {
   type InquiryFormData,
 } from '@/types/inquiry';
 import { BookCallLink } from '@/components/ui/BookCallLink';
-import { isBookingConfigured } from '@/lib/constants';
+import { getFormspreeFormId, isBookingConfigured } from '@/lib/constants';
 
 const STORAGE_KEY = 'sproutflow-inquiry-draft';
 const initialData: InquiryFormData = {
@@ -102,7 +102,7 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
       setErrors(nextErrors);
       return;
     }
-    const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID;
+    const formId = getFormspreeFormId();
     if (!formId) {
       setErrors({ form: 'The form is unavailable right now. Email me directly instead.' });
       return;

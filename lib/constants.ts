@@ -61,3 +61,17 @@ export function getCalPublicUrl(): string | null {
   const link = getCalLink();
   return link ? `${CAL_ORIGIN}/${link}` : null;
 }
+
+/**
+ * Formspree form that receives /inquiry submissions. It is public by design
+ * (every visitor's browser posts to formspree.io/f/<id>), so it lives in code
+ * and the form works without a Vercel variable. NEXT_PUBLIC_FORMSPREE_FORM_ID
+ * overrides it; a blank value falls back to this default.
+ */
+export const DEFAULT_FORMSPREE_FORM_ID = 'mbdzzbpn';
+
+/** The Formspree form ID the inquiry form should post to. */
+export function getFormspreeFormId(): string {
+  const env = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID?.trim();
+  return env ? env : DEFAULT_FORMSPREE_FORM_ID;
+}
