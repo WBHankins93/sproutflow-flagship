@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -18,6 +18,18 @@ const links = [
 export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setOpen(false);
+      toggleRef.current?.focus();
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [open]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink-900/10 bg-cream-300/95 backdrop-blur-md">
@@ -66,6 +78,7 @@ export default function Header() {
             Book
           </BookCallLink>
           <button
+            ref={toggleRef}
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
@@ -97,9 +110,20 @@ export default function Header() {
                 <span className="font-mono text-mono-meta text-accent-300">0{index + 1}</span>
               </Link>
             ))}
-            <div className="mt-10 space-y-3 text-white/60">
-              <a href="mailto:ben@sproutflow-studio.com">ben@sproutflow-studio.com</a>
-              <p>(504) 326-1676 · New Orleans, LA</p>
+            <div className="mt-10 space-y-1 text-white/60">
+              <a
+                className="flex min-h-11 w-fit items-center hover:text-white"
+                href="mailto:ben@sproutflow-studio.com"
+              >
+                ben@sproutflow-studio.com
+              </a>
+              <p className="flex flex-wrap items-center gap-x-2">
+                <a className="inline-flex min-h-11 items-center hover:text-white" href="tel:+15043261676">
+                  (504) 326-1676
+                </a>
+                <span aria-hidden="true">·</span>
+                <span>New Orleans, LA</span>
+              </p>
             </div>
           </div>
         </nav>

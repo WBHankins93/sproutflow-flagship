@@ -149,7 +149,7 @@ for (const { label, calLink, bookingHref, configured } of states) {
       // The existing guide link stays either way.
       expect(
         screen.getByRole('link', {
-          name: 'Read a useful guide while you wait',
+          name: 'See recent client work while you wait',
         }),
       ).toBeInTheDocument()
     })

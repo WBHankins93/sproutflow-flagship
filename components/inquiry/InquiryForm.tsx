@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, LockKeyhole } from 'lucide-react';
+import { AlertCircle, ArrowLeft, ArrowRight, LockKeyhole } from 'lucide-react';
 import {
   PROJECT_GOALS,
   PROJECT_TYPES,
@@ -31,8 +31,52 @@ const initialData: InquiryFormData = {
   projectDetails: '',
   referralSource: '',
 };
-const inputClass =
-  'min-h-12 w-full rounded-lg border border-primary-900/20 bg-white px-4 py-3 text-text-primary placeholder:text-text-muted focus:border-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-600/20';
+const inputBaseClass =
+  'min-h-12 w-full rounded-lg border bg-white px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2';
+const inputClass = `${inputBaseClass} border-primary-900/20 focus:border-primary-700 focus:ring-primary-600/20`;
+// red-700 (#B91C1C) is 5.64:1 on the Birch Paper canvas (#F4EFE3) and 6.47:1
+// on the white input fill, so the message text clears 4.5:1 and the border
+// clears the 3:1 non-text minimum. The thicker ring keeps the invalid state
+// visible without relying on hue alone.
+const invalidInputClass = `${inputBaseClass} border-red-700 ring-1 ring-red-700 focus:border-red-700 focus:ring-red-700/30`;
+
+type ContactField = 'name' | 'email';
+
+// Same rules the submit handler has always used. Pulled out so a field that is
+// already showing an error can re-check itself while the visitor fixes it.
+function validateContactField(field: ContactField, value: string): string | undefined {
+  if (field === 'name') return value.trim() ? undefined : 'Enter your name.';
+  if (!value.trim()) return 'Enter your email.';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Enter a valid email address.';
+  return undefined;
+}
+
+function prefersReducedMotion() {
+  try {
+    return typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  } catch {
+    return false;
+  }
+}
+
+// jsdom and some older browsers lack scrollIntoView; never let a missing
+// scroll helper break the form.
+function scrollToElement(element: HTMLElement | null, block: ScrollLogicalPosition) {
+  if (!element || typeof element.scrollIntoView !== 'function') return;
+  element.scrollIntoView({ block, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+}
+
+function FieldError({ id, message }: { id: string; message: string }) {
+  return (
+    <p id={id} className="mt-2 flex items-start gap-1.5 text-sm font-medium text-red-700">
+      <AlertCircle className="mt-0.5 h-4 w-4 flex-none" aria-hidden="true" />
+      <span>
+        <span className="sr-only">Error: </span>
+        {message}
+      </span>
+    </p>
+  );
+}
 
 function Field({ label, children, required }: { label: string; children: React.ReactNode; required?: boolean }) {
   return (
@@ -53,6 +97,17 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const submitGuard = useRef(false);
+  const formRef = useRef<HTMLFormElement>(null);
+  const legendRef = useRef<HTMLLegendElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  // Only steps the visitor moves through (Continue/Back) should move focus and
+  // scroll. The first render and a restored draft must leave the page alone.
+  const stepChangedByUser = useRef(false);
+  const focusFirstError = useRef(false);
+  const idPrefix = useId();
+  const nameErrorId = `${idPrefix}-name-error`;
+  const emailErrorId = `${idPrefix}-email-error`;
 
   useEffect(() => {
     // Storage access itself can throw, not just the parse: Safari private mode
@@ -83,22 +138,53 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
     }
   }, [data, step, submitted]);
 
+  useEffect(() => {
+    if (!stepChangedByUser.current) return;
+    stepChangedByUser.current = false;
+    scrollToElement(formRef.current, 'start');
+    legendRef.current?.focus({ preventScroll: true });
+  }, [step]);
+
+  useEffect(() => {
+    if (!focusFirstError.current) return;
+    focusFirstError.current = false;
+    const target = errors.name ? nameRef.current : errors.email ? emailRef.current : null;
+    if (!target) return;
+    target.focus({ preventScroll: true });
+    scrollToElement(target, 'center');
+  }, [errors]);
+
+  const goToStep = (next: number) => {
+    stepChangedByUser.current = true;
+    setStep(next);
+  };
+
   const update =
     (field: keyof InquiryFormData) =>
-    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-      setData((current) => ({ ...current, [field]: event.target.value }));
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      const { value } = event.target;
+      setData((current) => ({ ...current, [field]: value }));
+      if (field === 'name' || field === 'email') {
+        setErrors((current) => {
+          if (!current[field]) return current;
+          return { ...current, [field]: validateContactField(field, value) };
+        });
+      }
+    };
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (step < 3) {
-      setStep((current) => current + 1);
+      goToStep(step + 1);
       return;
     }
     const nextErrors: typeof errors = {};
-    if (!data.name.trim()) nextErrors.name = 'Enter your name.';
-    if (!data.email.trim()) nextErrors.email = 'Enter your email.';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) nextErrors.email = 'Enter a valid email address.';
+    const nameError = validateContactField('name', data.name);
+    const emailError = validateContactField('email', data.email);
+    if (nameError) nextErrors.name = nameError;
+    if (emailError) nextErrors.email = emailError;
     if (Object.keys(nextErrors).length) {
+      focusFirstError.current = true;
       setErrors(nextErrors);
       return;
     }
@@ -150,16 +236,16 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
           </p>
         )}
         <Link
-          href="/resources/what-you-should-own-after-launch"
+          href="/work"
           className="mt-7 inline-flex border-b border-primary-700 pb-1 font-semibold text-primary-800"
         >
-          Read a useful guide while you wait
+          See recent client work while you wait
         </Link>
       </div>
     );
 
   return (
-    <form onSubmit={submit}>
+    <form ref={formRef} onSubmit={submit} className="scroll-mt-24 md:scroll-mt-28">
       <div className="mb-10 grid grid-cols-3 gap-2" aria-label={`Step ${step} of 3`}>
         {[1, 2, 3].map((item) => (
           <div key={item}>
@@ -173,7 +259,7 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
 
       {step === 1 && (
         <fieldset className="space-y-6">
-          <legend className="font-display text-display-md text-primary-900">What is happening now?</legend>
+          <legend ref={legendRef} tabIndex={-1} className="font-display text-display-md text-primary-900 focus:outline-none">What is happening now?</legend>
           <p className="text-text-secondary">A rough description is enough. Nothing in this step is required.</p>
           <Field label="Which path feels closest?">
             <select value={data.projectType} onChange={update('projectType')} className={inputClass}>
@@ -206,7 +292,7 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
 
       {step === 2 && (
         <fieldset className="space-y-6">
-          <legend className="font-display text-display-md text-primary-900">
+          <legend ref={legendRef} tabIndex={-1} className="font-display text-display-md text-primary-900 focus:outline-none">
             What would useful progress look like?
           </legend>
           <p className="text-text-secondary">Best guesses are fine. We can clarify the details together.</p>
@@ -241,30 +327,40 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
 
       {step === 3 && (
         <fieldset className="space-y-6">
-          <legend className="font-display text-display-md text-primary-900">How can I reach you?</legend>
+          <legend ref={legendRef} tabIndex={-1} className="font-display text-display-md text-primary-900 focus:outline-none">How can I reach you?</legend>
           <p className="text-text-secondary">Name and email are the only required fields.</p>
           <div className="grid gap-5 sm:grid-cols-2">
-            <Field label="Name" required>
-              <input
-                value={data.name}
-                onChange={update('name')}
-                className={inputClass}
-                autoComplete="name"
-                aria-invalid={!!errors.name}
-              />
-              {errors.name && <span className="mt-2 block text-sm text-primary-700">{errors.name}</span>}
-            </Field>
-            <Field label="Email" required>
-              <input
-                type="email"
-                value={data.email}
-                onChange={update('email')}
-                className={inputClass}
-                autoComplete="email"
-                aria-invalid={!!errors.email}
-              />
-              {errors.email && <span className="mt-2 block text-sm text-primary-700">{errors.email}</span>}
-            </Field>
+            <div>
+              <Field label="Name" required>
+                <input
+                  ref={nameRef}
+                  value={data.name}
+                  onChange={update('name')}
+                  className={errors.name ? invalidInputClass : inputClass}
+                  autoComplete="name"
+                  aria-required="true"
+                  aria-invalid={errors.name ? true : undefined}
+                  aria-describedby={errors.name ? nameErrorId : undefined}
+                />
+              </Field>
+              {errors.name && <FieldError id={nameErrorId} message={errors.name} />}
+            </div>
+            <div>
+              <Field label="Email" required>
+                <input
+                  ref={emailRef}
+                  type="email"
+                  value={data.email}
+                  onChange={update('email')}
+                  className={errors.email ? invalidInputClass : inputClass}
+                  autoComplete="email"
+                  aria-required="true"
+                  aria-invalid={errors.email ? true : undefined}
+                  aria-describedby={errors.email ? emailErrorId : undefined}
+                />
+              </Field>
+              {errors.email && <FieldError id={emailErrorId} message={errors.email} />}
+            </div>
             <Field label="Business name">
               <input
                 value={data.company}
@@ -286,15 +382,19 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
       )}
 
       {errors.form && (
-        <p className="mt-6 border-l-2 border-primary-700 pl-4 text-primary-800" role="alert">
-          {errors.form}
+        <p className="mt-6 flex items-start gap-2 border-l-2 border-red-700 pl-4 font-medium text-red-700" role="alert">
+          <AlertCircle className="mt-1 h-4 w-4 flex-none" aria-hidden="true" />
+          <span>
+            <span className="sr-only">Error: </span>
+            {errors.form}
+          </span>
         </p>
       )}
       <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-primary-900/20 pt-6">
         {step > 1 ? (
           <button
             type="button"
-            onClick={() => setStep((current) => current - 1)}
+            onClick={() => goToStep(step - 1)}
             className="inline-flex min-h-11 items-center gap-2 font-semibold text-primary-800"
           >
             <ArrowLeft className="h-4 w-4" />
