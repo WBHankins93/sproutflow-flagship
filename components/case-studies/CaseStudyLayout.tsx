@@ -10,6 +10,7 @@ import PageHeader from '@/components/ui/PageHeader';
 import SectionShell from '@/components/ui/SectionShell';
 import Pill from '@/components/ui/Pill';
 import FooterCta from '@/components/ui/FooterCta';
+import BeforeAfterGallery from '@/components/case-studies/BeforeAfterGallery';
 import { Footer } from '@/components/layout/Footer';
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.com';
@@ -97,6 +98,10 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
           </div>
         </div>
       </SectionShell>
+
+      {caseStudy.beforeAfter?.length ? (
+        <BeforeAfterGallery pairs={caseStudy.beforeAfter} clientName={caseStudy.clientName} />
+      ) : null}
 
       <SectionShell index="03" label="what I built" variant="ink" labelledBy="case-built-heading">
         <div className={caseStudy.builtImage ? 'grid gap-12 lg:grid-cols-12' : 'max-w-3xl'}>
