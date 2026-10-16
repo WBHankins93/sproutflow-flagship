@@ -1,7 +1,18 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { BookCallLink } from '@/components/ui/BookCallLink';
 import { BOOKING_CTA_LABEL } from '@/lib/constants';
+
+export const metadata: Metadata = {
+  title: 'Page not found',
+  // Next already emits <meta name="robots" content="noindex"> with the 404
+  // status. Clearing robots here stops the root layout's "index, follow" from
+  // rendering beside it, and clearing canonical stops the 404 claiming the
+  // homepage as its canonical.
+  robots: null,
+  alternates: { canonical: null },
+};
 
 export default function NotFound() {
   return (

@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import StructuredData from '@/components/StructuredData';
 import { Analytics } from '@vercel/analytics/next';
+import { SITE_URL } from '@/lib/site';
 import { Archivo, DM_Sans, Newsreader, Fira_Code } from 'next/font/google';
 
 // Display: Archivo. An American grotesque in the GT America family, chosen
@@ -41,10 +42,8 @@ const firaCode = Fira_Code({
   display: 'swap',
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.com';
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'Sproutflow Studio | Web Design & Business Systems in New Orleans',
     template: '%s | Sproutflow Studio',
@@ -74,26 +73,20 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: siteUrl,
+    url: SITE_URL,
     siteName: 'Sproutflow Studio',
     title: 'Sproutflow Studio | Web Design & Business Systems in New Orleans',
     description:
       'Custom websites and the business systems behind them. Web design, admin tools, CRMs, and automation for small businesses in New Orleans, LA.',
-    images: [
-      {
-        url: `${siteUrl}/images/logo/main-logo-Photoroom.png`,
-        width: 1200,
-        height: 630,
-        alt: 'Sproutflow Studio - Professional Web Design',
-      },
-    ],
+    // No images here on purpose: app/opengraph-image.tsx and
+    // app/twitter-image.tsx generate the 1200x630 social card, and Next only
+    // attaches them when this object leaves `images` unset.
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Sproutflow Studio | Web Design & Business Systems in New Orleans',
     description:
       'Custom websites and the business systems behind them. Web design, admin tools, CRMs, and automation for small businesses in New Orleans, LA.',
-    images: [`${siteUrl}/images/logo/main-logo-Photoroom.png`],
   },
   robots: {
     index: true,
@@ -111,7 +104,7 @@ export const metadata: Metadata = {
     // google: "your-google-verification-code",
   },
   alternates: {
-    canonical: siteUrl,
+    canonical: SITE_URL,
   },
 };
 

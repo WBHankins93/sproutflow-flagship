@@ -5,8 +5,9 @@
 // BreadcrumbList schema lives in components/case-studies/CaseStudyLayout.tsx.
 
 import { websiteRescue } from '@/data/offers';
+import { FOUNDER_PHOTO_URL, ORGANIZATION_LOGO_URL, SITE_URL } from '@/lib/site';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.com';
+const siteUrl = SITE_URL;
 
 const professionalServiceSchema = {
   '@context': 'https://schema.org',
@@ -15,8 +16,10 @@ const professionalServiceSchema = {
   name: 'Sproutflow Studio',
   alternateName: 'Sproutflow',
   url: siteUrl,
-  logo: `${siteUrl}/images/logo/main-logo-Photoroom.png`,
-  image: `${siteUrl}/images/logo/main-logo-Photoroom.png`,
+  // Images live on Vercel Blob; public/images is gitignored, so the site host
+  // 404s for them.
+  logo: ORGANIZATION_LOGO_URL,
+  image: ORGANIZATION_LOGO_URL,
   description:
     'Sproutflow Studio builds custom websites and custom business software for small businesses. Web design and development, internal admin tools, CRM systems, CMS builds, and workflow automation. Based in New Orleans, LA.',
   slogan: 'Websites that win clients. Systems that make growth easier.',
@@ -153,7 +156,7 @@ const personSchema = {
   description:
     'Ben Hankins runs Sproutflow Studio in New Orleans, Louisiana. He spent seven years building and running software inside large companies, including IBM, and now builds custom websites and business systems for owner-run businesses.',
   url: `${siteUrl}/about`,
-  image: `${siteUrl}/images/ben-photo.png`,
+  image: FOUNDER_PHOTO_URL,
   worksFor: { '@id': `${siteUrl}#organization` },
   homeLocation: {
     '@type': 'Place',

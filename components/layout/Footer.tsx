@@ -2,15 +2,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Linkedin } from 'lucide-react';
 import { getImageUrl } from '@/lib/blob-images';
+import { hasPublishedResources } from '@/data/resources';
 
-const explore = [
-  ['Services', '/services'],
-  ['Work', '/work'],
-  ['About', '/about'],
-  ['Resources', '/resources'],
-  ['Common questions', '/faq'],
-  ['How I handle your data', '/data-and-ownership'],
-];
+function getExploreLinks(): Array<[label: string, href: string]> {
+  return [
+    ['Services', '/services'],
+    ['Work', '/work'],
+    ['About', '/about'],
+    // /resources 404s until a resource is published, so only link it then.
+    ...(hasPublishedResources() ? [['Resources', '/resources'] as [string, string]] : []),
+    ['Common questions', '/faq'],
+    ['How I handle your data', '/data-and-ownership'],
+  ];
+}
 
 export const Footer = () => (
   <footer className="border-t border-white/15 bg-ink-900 py-12 text-white">
@@ -32,7 +36,7 @@ export const Footer = () => (
         <div className="md:col-span-3 md:col-start-7">
           <p className="text-eyebrow uppercase text-white/55">Explore</p>
           <ul className="mt-5 space-y-3 text-white/70">
-            {explore.map(([label, href]) => (
+            {getExploreLinks().map(([label, href]) => (
               <li key={href}>
                 <Link href={href} className="hover:text-white">
                   {label}

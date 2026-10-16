@@ -183,13 +183,13 @@ describe('SEO Metadata - Sitemap', () => {
     const sitemapData = sitemap.default()
     const urls = sitemapData.map((entry: any) => entry.url)
 
-    expect(urls).not.toContain('https://sproutflow-studio.com/how-we-work')
-    expect(urls).not.toContain('https://sproutflow-studio.com/case-studies')
-    expect(urls).not.toContain('https://sproutflow-studio.com/case-studies/big-butt-association')
-    expect(urls).toContain('https://sproutflow-studio.com/work')
-    expect(urls).toContain('https://sproutflow-studio.com/services/websites')
-    expect(urls).toContain('https://sproutflow-studio.com/services/business-systems')
-    expect(urls).toContain('https://sproutflow-studio.com/services/growth-support')
+    expect(urls).not.toContain('https://www.sproutflow-studio.com/how-we-work')
+    expect(urls).not.toContain('https://www.sproutflow-studio.com/case-studies')
+    expect(urls).not.toContain('https://www.sproutflow-studio.com/case-studies/big-butt-association')
+    expect(urls).toContain('https://www.sproutflow-studio.com/work')
+    expect(urls).toContain('https://www.sproutflow-studio.com/services/websites')
+    expect(urls).toContain('https://www.sproutflow-studio.com/services/business-systems')
+    expect(urls).toContain('https://www.sproutflow-studio.com/services/growth-support')
   })
 
   it('should have home page in sitemap with highest priority', async () => {
@@ -200,7 +200,7 @@ describe('SEO Metadata - Sitemap', () => {
     const homePage = sitemapData.find((entry: any) => {
       const url = entry.url
       // Home page is either the base URL or has priority 1
-      return entry.priority === 1 || url === 'https://sproutflow-studio.com' || url.endsWith('sproutflow-studio.com')
+      return entry.priority === 1 || url === 'https://www.sproutflow-studio.com' || url.endsWith('sproutflow-studio.com')
     })
     expect(homePage).toBeDefined()
     expect(homePage?.priority).toBe(1)
