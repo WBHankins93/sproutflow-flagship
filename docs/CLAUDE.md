@@ -115,7 +115,7 @@ Critical gotcha:
 ## Environment Variables
 
 Runtime/public:
-- `NEXT_PUBLIC_SITE_URL` (optional; defaults to `https://sproutflow-studio.com`)
+- `NEXT_PUBLIC_SITE_URL` (optional; defaults to `https://www.sproutflow-studio.com` via `lib/site.ts`, the single source for absolute site URLs)
 - `NEXT_PUBLIC_BLOB_STORE_URL` (required for Blob-backed image URLs in deployed envs)
 - `NEXT_PUBLIC_FORMSPREE_FORM_ID` (optional override of `DEFAULT_FORMSPREE_FORM_ID` in `lib/constants.ts`, which `/inquiry` posts to)
 - `NEXT_PUBLIC_CAL_LINK` (optional override of `DEFAULT_CAL_LINK`, e.g. `sproutflow/15min`; inlined at build time; `off` = booking CTAs fall back to `/inquiry`)

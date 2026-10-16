@@ -11,6 +11,10 @@ export interface ResourceEntry {
   date?: string;
   sections: string[];
   featured?: boolean;
+  /**
+   * Drafts stay in this file but are not routable: no page, no sitemap entry,
+   * no footer link. Flip to false (or remove) once the article copy is final.
+   */
   draft?: boolean;
 }
 
@@ -51,4 +55,23 @@ export const resources: ResourceEntry[] = [
 
 export function getResource(slug: string) {
   return resources.find((resource) => resource.slug === slug);
+}
+
+export function isPublished(resource: ResourceEntry) {
+  return !resource.draft;
+}
+
+/** Resources a visitor or crawler may reach. Drives routes, sitemap, and nav. */
+export function getPublishedResources() {
+  return resources.filter(isPublished);
+}
+
+/** A resource only when it exists and is published; drafts read as missing. */
+export function getPublishedResource(slug: string) {
+  const resource = getResource(slug);
+  return resource && isPublished(resource) ? resource : undefined;
+}
+
+export function hasPublishedResources() {
+  return getPublishedResources().length > 0;
 }

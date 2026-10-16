@@ -2,10 +2,11 @@ import { MetadataRoute } from 'next';
 import { caseStudies } from '@/data/caseStudies';
 import { listedProjectProof } from '@/data/projectProof';
 import { servicePaths } from '@/data/servicePaths';
-import { resources } from '@/data/resources';
+import { getPublishedResources } from '@/data/resources';
 import { BOOKING_PATH, isBookingConfigured } from '@/lib/constants';
+import { SITE_URL } from '@/lib/site';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.com';
+const siteUrl = SITE_URL;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const caseStudyEntries: MetadataRoute.Sitemap = caseStudies
@@ -22,14 +23,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly',
     priority: 0.8,
   }));
-  const resourceEntries: MetadataRoute.Sitemap = resources
-    .filter((resource) => !resource.draft)
-    .map((resource) => ({
-      url: `${siteUrl}/resources/${resource.slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    }));
+  // Drafts 404, so only published resources (and their index, once one
+  // exists) belong here.
+  const publishedResources = getPublishedResources();
+  const resourceEntries: MetadataRoute.Sitemap = publishedResources.map((resource) => ({
+    url: `${siteUrl}/resources/${resource.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.6,
+  }));
+  const resourceIndexEntries: MetadataRoute.Sitemap =
+    publishedResources.length > 0
+      ? [
+          {
+            url: `${siteUrl}/resources`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.7,
+          },
+        ]
+      : [];
 
   return [
     {
@@ -56,12 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
-    {
-      url: `${siteUrl}/resources`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
+    ...resourceIndexEntries,
     {
       url: `${siteUrl}/inquiry`,
       lastModified: new Date(),

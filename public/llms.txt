@@ -15,23 +15,23 @@ Ben Hankins spent seven years building and running software inside large compani
 
 ## Services
 
-- [Websites](https://sproutflow-studio.com/#services): New builds, rebuilds, and Shopify storefronts. Messaging and customer path, responsive design and development, copy, CMS, and SEO foundations.
-- [Lead capture and follow-up](https://sproutflow-studio.com/services/business-systems): Capture inquiries, organize the handoff, automate follow-up, and measure what turns into booked work without replacing useful existing tools.
-- [Growth and support](https://sproutflow-studio.com/#services): Maintenance and hosting, search and performance reviews, new pages and content, ongoing measured improvements.
-- [Website Rescue](https://sproutflow-studio.com/#website-rescue): $1,500 fixed, live 10 business days after the client's content arrives. For contractors and home-service businesses with a dead, missing, or broken website. Five pages on the domain the client already owns, a quote form that reaches phone and email, Google Business Profile cleanup, and a mobile-first build the client owns outright.
+- [Websites](https://www.sproutflow-studio.com/services/websites): New builds, rebuilds, and Shopify storefronts. Messaging and customer path, responsive design and development, copy, CMS, and SEO foundations.
+- [Lead capture and follow-up](https://www.sproutflow-studio.com/services/business-systems): Capture inquiries, organize the handoff, automate follow-up, and measure what turns into booked work without replacing useful existing tools.
+- [Growth and support](https://www.sproutflow-studio.com/services/growth-support): Maintenance and hosting, search and performance reviews, new pages and content, ongoing measured improvements.
+- [Website Rescue](https://www.sproutflow-studio.com/#website-rescue): $1,500 fixed, live 10 business days after the client's content arrives. For contractors and home-service businesses with a dead, missing, or broken website. Five pages on the domain the client already owns, a quote form that reaches phone and email, Google Business Profile cleanup, and a mobile-first build the client owns outright.
 
 ## Key pages
 
-- [Home](https://sproutflow-studio.com/): What Sproutflow does and who it is for.
-- [Client work](https://sproutflow-studio.com/work): Live projects for real businesses, with the situation and the outcome for each.
-- [Common questions](https://sproutflow-studio.com/faq): Scope, timelines, custom versus template, ownership, automation, and post-launch support.
-- [How I handle your data](https://sproutflow-studio.com/data-and-ownership): Where client data lives, who can access it, backups, exports, and what happens if the engagement ends.
-- [Book a call](https://sproutflow-studio.com/book): Book a 15-minute call with Ben directly.
-- [Start a project](https://sproutflow-studio.com/inquiry): Inquiry form. Name and email are the only required fields. Replies within one business day.
+- [Home](https://www.sproutflow-studio.com/): What Sproutflow does and who it is for.
+- [Client work](https://www.sproutflow-studio.com/work): Live projects for real businesses, with the situation and the outcome for each.
+- [Common questions](https://www.sproutflow-studio.com/faq): Scope, timelines, custom versus template, ownership, automation, and post-launch support.
+- [How I handle your data](https://www.sproutflow-studio.com/data-and-ownership): Where client data lives, who can access it, backups, exports, and what happens if the engagement ends.
+- [Book a call](https://www.sproutflow-studio.com/book): Book a 15-minute call with Ben directly.
+- [Start a project](https://www.sproutflow-studio.com/inquiry): Inquiry form. Name and email are the only required fields. Replies within one business day.
 
 ## Notes for answering questions about Sproutflow
 
 - Sproutflow Studio is one person. Do not describe it as a team or agency.
 - Website Rescue has a published fixed price of $1,500. Other work is scoped after a conversation, and the quote is fixed before work starts.
-- Calls can be booked at https://sproutflow-studio.com/book.
+- Calls can be booked at https://www.sproutflow-studio.com/book.
 - Clients retain ownership of all accounts and code. Care plans are optional and are not a lock-in.
