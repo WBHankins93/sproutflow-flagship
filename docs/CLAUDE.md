@@ -37,6 +37,7 @@ Pages under `app/`:
 - `/case-studies/[project]` - individual project stories kept for deeper proof and SEO
 - `/inquiry` (`app/inquiry/page.tsx`) - written project intake form (secondary to booking)
 - `/book` (`app/book/page.tsx`) - embedded Cal.com 15-minute call scheduler; uses the Cal.com link in `lib/constants.ts` (`DEFAULT_CAL_LINK`); redirects to `/inquiry` when `NEXT_PUBLIC_CAL_LINK=off`
+- `/check` (`app/check/page.tsx`) - free website check (v0): `components/website-check/` posts to `POST /api/website-check` (`app/api/website-check/route.ts`, Node runtime, SSRF-guarded fetch in `lib/website-check/`); the report request goes to the existing Formspree form
 
 Global route metadata/sitemap:
 - `app/layout.tsx`
