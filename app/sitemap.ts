@@ -88,6 +88,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ]
       : []),
     {
+      url: `${siteUrl}/check`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${siteUrl}/faq`,
       lastModified: new Date(),
       changeFrequency: 'monthly',

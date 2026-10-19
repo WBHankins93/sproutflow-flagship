@@ -1,0 +1,46 @@
+/**
+ * Shared types for the free website check (v0).
+ *
+ * Pure type module: safe to import from client components.
+ */
+
+export type CheckId = 'loads' | 'https' | 'mobile' | 'call' | 'form' | 'speed';
+
+/** `unknown` displays as a grey "not checked" line. */
+export type CheckStatus = 'pass' | 'warn' | 'fail' | 'unknown';
+
+export type OfferId = 'website-rescue' | 'lead-capture-system' | 'lead-flow-audit';
+
+export interface CheckResult {
+  id: CheckId;
+  label: string;
+  status: CheckStatus;
+  /** What was found, first person, no promises. */
+  line: string;
+  /** Which offer covers it. Only set on warn or fail. */
+  fix?: string;
+  data?: Record<string, string | number | boolean>;
+}
+
+/**
+ * - `checked`: the homepage loaded (any HTML or non-HTML 2xx, or an error status).
+ * - `not-loaded`: DNS, timeout, refused or TLS on both schemes, too many redirects.
+ * - `not-checked`: the site turned the checker away (403 challenge and similar), or a fetch failed in a way I cannot judge safely.
+ */
+export type CheckOutcome = 'checked' | 'not-loaded' | 'not-checked';
+
+export interface WebsiteCheckResult {
+  checkedAt: string;
+  /** What the visitor typed, trimmed. */
+  inputUrl: string;
+  /** Host shown to the visitor, without a leading www. */
+  host: string;
+  finalUrl: string | null;
+  outcome: CheckOutcome;
+  /** One recommended next step, or null when nothing could be checked. */
+  offer: OfferId | null;
+  checks: CheckResult[];
+}
+
+/** Error codes the API returns, mapped to COPY.md section 6 lines. */
+export type WebsiteCheckErrorCode = 'empty' | 'invalid' | 'blocked' | 'rate_limited' | 'server';
