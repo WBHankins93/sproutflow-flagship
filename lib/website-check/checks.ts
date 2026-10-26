@@ -615,12 +615,12 @@ function checkSpeed(page: PageAnalysis, fetched: FetchSuccess): CheckResult {
     return result('speed', 'fail', `Your homepage took ${seconds(fetched.totalMs)} seconds to download from my server.`, data);
   }
   if (htmlKb <= 250 && scripts <= 15 && fetched.ttfbMs <= 1500) {
-    return result('speed', 'pass', `Your homepage looks light: ${htmlKb} KB of page code and ${scripts} scripts.`, data);
+    return result('speed', 'pass', `Your homepage looks light: ${htmlKb} KB of page code and ${scripts} ${scripts === 1 ? 'script' : 'scripts'}.`, data);
   }
   return result(
     'speed',
     'warn',
-    `Your homepage looks heavy for a phone: ${htmlKb} KB of page code and ${scripts} scripts, ${thirdParty} of them from other companies.`,
+    `Your homepage looks heavy for a phone: ${htmlKb} KB of page code and ${scripts} ${scripts === 1 ? 'script' : 'scripts'}, ${thirdParty} of them from other companies.`,
     data,
   );
 }
