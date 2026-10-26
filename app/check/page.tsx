@@ -7,7 +7,7 @@ import { prefillFromQuery } from '@/components/website-check/prefill';
 export const metadata: Metadata = {
   title: 'Free website check',
   description:
-    'Enter your website address. I check six things a customer runs into first, and show you the results right here. No sign-up.',
+    'Enter your website address. I check eight things: what a customer runs into first, plus your domain renewal and email setup. You see the results right here. No sign-up.',
   alternates: { canonical: '/check' },
 };
 
@@ -27,8 +27,8 @@ export default async function CheckPage({ searchParams }: Props) {
             Is your website doing its job? Check it in 10 seconds.
           </Heading>
           <p className="mt-5 max-w-[60ch] text-body-lg text-[#4A574D]">
-            Enter your website address. I check six things a customer runs into first, and show you the results right
-            here. No sign-up.
+            Enter your website address. I check eight things: what a customer runs into first, plus your domain renewal and email setup.
+            You see the results right here. No sign-up.
           </p>
         </div>
         <div className="mt-10 md:mt-12">

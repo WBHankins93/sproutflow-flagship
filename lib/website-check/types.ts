@@ -1,10 +1,12 @@
 /**
- * Shared types for the free website check (v0).
+ * Shared types for the free website check (v1: six page checks plus the
+ * domain and email operations checks).
  *
  * Pure type module: safe to import from client components.
  */
 
-export type CheckId = 'loads' | 'https' | 'mobile' | 'call' | 'form' | 'speed';
+/** Six page checks, then two operations checks from public data (domain registry, DNS). */
+export type CheckId = 'loads' | 'https' | 'mobile' | 'call' | 'form' | 'speed' | 'domain' | 'email';
 
 /** `unknown` displays as a grey "not checked" line. */
 export type CheckStatus = 'pass' | 'warn' | 'fail' | 'unknown';
@@ -19,6 +21,8 @@ export interface CheckResult {
   line: string;
   /** Which offer covers it. Only set on warn or fail. */
   fix?: string;
+  /** A short aside that is not a result, for example what could not be checked (DKIM). */
+  note?: string;
   data?: Record<string, string | number | boolean>;
 }
 

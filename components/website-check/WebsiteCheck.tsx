@@ -31,7 +31,7 @@ function isOffline(): boolean {
 }
 
 /**
- * The free website check: enter a URL, watch it check, read six results, and
+ * The free website check: enter a URL, watch it check, read eight results, and
  * optionally ask for the full report. Flow and copy follow
  * funnel/check-flow.html and funnel/COPY.md.
  *
@@ -76,7 +76,7 @@ export function WebsiteCheck({ initialUrl = '' }: { initialUrl?: string } = {}) 
 
   useEffect(() => {
     if (phase !== 'checking') return;
-    setStatus(`Checking ${host}. Step ${step + 1} of 6: ${STEP_NAMES[CHECK_ORDER[step]]}.`);
+    setStatus(`Checking ${host}. Step ${step + 1} of ${CHECK_ORDER.length}: ${STEP_NAMES[CHECK_ORDER[step]]}.`);
   }, [phase, step, host]);
 
   const backToForm = useCallback((message: string, asFieldError: boolean) => {

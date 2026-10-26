@@ -131,6 +131,7 @@ export const CheckResults = forwardRef<HTMLHeadingElement, Props>(function Check
                 <p className="font-semibold text-primary-900">{check.label}</p>
                 <p className="mt-1 text-primary-900 [overflow-wrap:anywhere]">{check.line}</p>
                 {check.fix && <p className={`mt-1 text-sm ${softTextClass}`}>{check.fix}</p>}
+                {check.note && <p className={`mt-1 text-sm ${softTextClass}`}>{check.note}</p>}
               </div>
             </li>
           ))}
