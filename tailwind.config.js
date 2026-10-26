@@ -14,26 +14,42 @@ export default {
       // FONTS
       // ============================================
       fontFamily: {
-        // These MUST match the CSS variables from layout.tsx
-        display: ['var(--font-display)', 'system-ui', 'sans-serif'],
+        // Design system v3: five roles. Each must match a CSS variable set by
+        // lib/fonts.ts (applied on <body> in app/layout.tsx).
+        // Archivo 800/900. The hero headline only.
+        hero: ['var(--font-hero)', 'system-ui', 'sans-serif'],
+        // Instrument Serif 400 + italic. Every other heading. Single weight.
+        display: ['var(--font-display)', 'Georgia', 'serif'],
+        // DM Sans 400/500/600.
         body: ['var(--font-body)', 'system-ui', 'sans-serif'],
+        // Caveat 700. Redline marks and Ben's notes only, never below 18px.
+        annotation: ['var(--font-annotation)', 'cursive'],
+        // Fira Code 400/500. Prices, labels, numerals, eyebrows.
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+        // Legacy alias. --font-accent points at Instrument Serif (globals.css),
+        // so old `font-accent italic` markup keeps rendering.
         accent: ['var(--font-accent)', 'Georgia', 'serif'],
-        mono: ['var(--font-mono)', 'monospace'],
       },
       
       // ============================================
       // TYPOGRAPHY SCALE
       // ============================================
       fontSize: {
-        // v2 display scale
-        'display-xl': ['clamp(2.5rem, 5.6vw, 5.125rem)', { lineHeight: '0.94', letterSpacing: '-0.03em', fontWeight: '700' }],
-        'display-lg': ['clamp(2rem, 4.2vw, 4rem)', { lineHeight: '1.0', letterSpacing: '-0.025em', fontWeight: '700' }],
-        'display-md': ['clamp(1.5rem, 2.6vw, 2.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '600' }],
+        // v3 hero: Archivo (font-hero) only. The one heavy headline per page.
+        'hero': ['clamp(2.75rem, 6vw, 5.75rem)', { lineHeight: '0.95', letterSpacing: '-0.035em', fontWeight: '900' }],
+
+        // Display scale. Since v3 these render in Instrument Serif, which has
+        // a single weight: every display token is fontWeight 400. Anything
+        // heavier makes the browser synthesize a faux bold.
+        'display-xl': ['clamp(2.5rem, 5.6vw, 5.125rem)', { lineHeight: '1.0', letterSpacing: '-0.01em', fontWeight: '400' }],
+        'display-lg': ['clamp(2rem, 4.2vw, 4rem)', { lineHeight: '1.04', letterSpacing: '-0.01em', fontWeight: '400' }],
+        'display-md': ['clamp(1.5rem, 2.6vw, 2.5rem)', { lineHeight: '1.1', letterSpacing: '-0.005em', fontWeight: '400' }],
         // Supporting sections. Without this step everything below the page's
         // two or three anchor headings collapses onto display-md and the page
         // reads as one flat shout.
-        'display-sm': ['clamp(1.5rem, 2.1vw, 1.9375rem)', { lineHeight: '1.12', letterSpacing: '-0.015em', fontWeight: '600' }],
-        'h4': ['1.25rem', { lineHeight: '1.3', fontWeight: '600' }],
+        'display-sm': ['clamp(1.5rem, 2.1vw, 1.9375rem)', { lineHeight: '1.12', letterSpacing: '-0.005em', fontWeight: '400' }],
+        // Legacy card-title token. Renders in the display serif, so 400.
+        'h4': ['1.25rem', { lineHeight: '1.3', fontWeight: '400' }],
 
         // Body
         'body-lg': ['1.125rem', { lineHeight: '1.75' }],
@@ -44,11 +60,18 @@ export default {
         'eyebrow': ['0.6875rem', { lineHeight: '1.4', letterSpacing: '0.18em', fontWeight: '600' }],
         'mono-meta': ['0.8125rem', { lineHeight: '1.4', letterSpacing: '0.08em' }],
 
-        // Legacy aliases. Kept so v1 markup renders until each section is
-        // rebuilt in PRs 4 through 10. Remove once no usages remain.
-        'hero': ['clamp(3rem, 5.6vw, 5.125rem)', { lineHeight: '0.94', letterSpacing: '-0.03em', fontWeight: '700' }],
-        'section': ['clamp(2.25rem, 4.2vw, 4rem)', { lineHeight: '1.0', letterSpacing: '-0.025em', fontWeight: '700' }],
-        'subsection': ['clamp(1.75rem, 2.6vw, 2.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em', fontWeight: '600' }],
+        // v3 annotation: Caveat (font-annotation). Floor of 18px, because
+        // Caveat closes up below that.
+        'annotation': ['clamp(1.125rem, 0.95rem + 0.75vw, 1.5rem)', { lineHeight: '1.1', letterSpacing: '0.005em', fontWeight: '700' }],
+        // v3 utility sizes for Fira Code (font-mono).
+        'label': ['clamp(0.75rem, 0.72rem + 0.1vw, 0.8125rem)', { lineHeight: '1.3', letterSpacing: '0.08em', fontWeight: '500' }],
+        'price': ['clamp(1.75rem, 1.6rem + 0.6vw, 2.125rem)', { lineHeight: '1', letterSpacing: '-0.02em', fontWeight: '500' }],
+        'numeral': ['clamp(2.75rem, 2.4rem + 1.5vw, 3.75rem)', { lineHeight: '1', letterSpacing: '-0.03em', fontWeight: '500' }],
+
+        // Legacy display aliases (v1 markup). Same serif rule: weight 400.
+        // 'hero' above replaced the v2 alias of the same name.
+        'section': ['clamp(2.25rem, 4.2vw, 4rem)', { lineHeight: '1.04', letterSpacing: '-0.01em', fontWeight: '400' }],
+        'subsection': ['clamp(1.75rem, 2.6vw, 2.5rem)', { lineHeight: '1.1', letterSpacing: '-0.005em', fontWeight: '400' }],
       },
 
       // ============================================
@@ -67,6 +90,15 @@ export default {
       // spec - replaced in full here.
       // ============================================
       colors: {
+        // Redline (v3). The one added markup color: red-pen marks, pins and
+        // the focus ring on light canvases. Never on Pine (1.99:1).
+        // DEFAULT on Birch #F4EFE3 5.73:1, on white 6.57:1, on Paper 6.20:1.
+        redline: {
+          DEFAULT: '#B42318',
+          ink: '#9A1C13',
+          soft: '#FBE9E7',
+        },
+
         // Primary Brand Colors (Pine Shadow)
         primary: {
           50: '#F3F7F4',

@@ -5,42 +5,8 @@ import Header from '@/components/layout/Header';
 import StructuredData from '@/components/StructuredData';
 import { Analytics } from '@vercel/analytics/next';
 import { SITE_URL } from '@/lib/site';
-import { Archivo, DM_Sans, Newsreader, Fira_Code } from 'next/font/google';
-
-// Display: Archivo. An American grotesque in the GT America family, chosen
-// because it is sturdy and unfashionable. Replaced Bricolage Grotesque, whose
-// deliberate irregularities date the design.
-const archivo = Archivo({
-  subsets: ['latin'],
-  weight: ['600', '700', '800'],
-  variable: '--font-display',
-  display: 'swap',
-});
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-body',
-  display: 'swap',
-});
-
-// Accent: Newsreader italic, for the one emphasized word in a headline and for
-// pull quotes. Replaced Cormorant Garamond, whose hairline contrast read
-// boutique against the rest of the system.
-const newsreader = Newsreader({
-  subsets: ['latin'],
-  weight: ['400'],
-  style: ['italic'],
-  variable: '--font-accent',
-  display: 'swap',
-});
-
-const firaCode = Fira_Code({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-mono',
-  display: 'swap',
-});
+// Fonts: the five v3 type roles live in lib/fonts.ts (see docs/design-system-v3.md).
+import { fontVariables } from '@/lib/fonts';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -114,7 +80,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     // scroll position on route changes - fixes pages loading scrolled to the bottom
     <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
       <body
-        className={`${archivo.variable} ${dmSans.variable} ${newsreader.variable} ${firaCode.variable} antialiased font-body`}
+        className={`${fontVariables} antialiased font-body`}
       >
         <StructuredData />
         <Header />
