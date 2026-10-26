@@ -1,68 +1,57 @@
 import Link from 'next/link';
-import { ArrowRight, Mail, Phone } from 'lucide-react';
-import Marquee from './Marquee';
+import { ArrowRight } from 'lucide-react';
 import { BookCallLink } from './BookCallLink';
 import { BOOKING_CTA_LABEL, INQUIRY_PATH } from '@/lib/constants';
+import { BUTTON_LINK_VARIANTS } from '@/components/v3/ButtonLink';
+import { Eyebrow, Heading, Section } from '@/components/v3';
 
+// The v3 ButtonLink onDark look (Goldenrod fill, Pine text, 5.81:1) on the booking link,
+// which has to stay a BookCallLink so it falls back to /inquiry when booking is off.
+const bookButton = `group inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border-2 px-6 py-2 font-semibold leading-tight transition-colors duration-150 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] ${BUTTON_LINK_VARIANTS.onDark}`;
+
+const contactLink =
+  'grid min-h-14 content-center gap-1 border-t border-cream-300/20 pt-4 text-cream-300 hover:text-white focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-accent-300';
+
+const contactLabel = 'font-mono text-label uppercase text-[#C9CFC4] [font-variant-ligatures:none]';
+
+/** The closing call to action on inner pages: book a call, write it out, or call. */
 export default function FooterCta() {
   return (
-    <section className="grain rings relative overflow-hidden bg-ink-900 pb-20 pt-10 text-white md:pb-28">
-      <Marquee
-        variant="ghost"
-        speed={58}
-        ariaLabel="Start with what needs to work better"
-        items={['START WITH WHAT NEEDS TO WORK BETTER', 'A CLEAR NEXT STEP']}
-      />
-      <div className="relative mx-auto mt-14 max-w-[1440px] px-5 md:px-11">
-        <div className="grid gap-10 border-t border-white/20 pt-8 lg:grid-cols-12">
-          <div className="lg:col-span-8">
-            <p className="text-eyebrow uppercase text-accent-300">Start a useful conversation</p>
-            <h2 className="mt-5 max-w-5xl font-display text-display-lg text-cream-300">
-              Tell me what needs to work better. I will help name the next step.
-            </h2>
-            <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
-              <BookCallLink
-                data-cta="footer"
-                className="group inline-flex min-h-12 items-center gap-3 rounded-full bg-accent-500 px-7 py-3.5 font-semibold text-ink-900 hover:bg-accent-400"
-              >
-                {BOOKING_CTA_LABEL}
-                <ArrowRight
-                  className="h-5 w-5 transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
-                  aria-hidden="true"
-                />
-              </BookCallLink>
-              <Link
-                href={INQUIRY_PATH}
-                data-cta="footer-inquiry"
-                className="font-semibold text-white/75 underline underline-offset-4 hover:text-white"
-              >
-                Or send the details in writing
-              </Link>
-            </div>
-          </div>
-          <div className="grid content-end gap-4 lg:col-span-4">
-            <a
-              href="mailto:ben@sproutflow-studio.com"
-              className="grid min-h-14 grid-cols-[auto_1fr] items-center gap-x-3 border-t border-white/20 pt-4 text-white/75 hover:text-white"
+    <Section tone="pine" rhythm="loose" labelledBy="footer-cta-h" className="border-b border-cream-300/15">
+      <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+        <div className="lg:col-span-8">
+          <Eyebrow onDark>Start a useful conversation</Eyebrow>
+          <Heading id="footer-cta-h" italic="better" className="mt-5 max-w-[22ch] text-cream-300">
+            Tell me what needs to work better. I will help name the next step.
+          </Heading>
+          <div className="mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
+            <BookCallLink data-cta="footer" className={bookButton}>
+              {BOOKING_CTA_LABEL}
+              <ArrowRight
+                className="h-5 w-5 transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+                aria-hidden="true"
+              />
+            </BookCallLink>
+            <Link
+              href={INQUIRY_PATH}
+              data-cta="footer-inquiry"
+              className="inline-flex min-h-11 items-center rounded-sm font-semibold text-cream-300 underline decoration-accent-300 underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-accent-300"
             >
-              <Mail className="h-5 w-5 text-accent-300" aria-hidden="true" />
-              <span>
-                <span className="block text-xs uppercase tracking-[0.16em] text-white/55">Email</span>
-                ben@sproutflow-studio.com
-              </span>
-            </a>
-            <a
-              href="tel:+15043261676"
-              className="grid min-h-14 grid-cols-[auto_1fr] items-center gap-x-3 border-t border-white/20 pt-4 text-white/75 hover:text-white"
-            >
-              <Phone className="h-5 w-5 text-accent-300" aria-hidden="true" />
-              <span>
-                <span className="block text-xs uppercase tracking-[0.16em] text-white/55">Phone</span>(504) 326-1676
-              </span>
-            </a>
+              Or send the details in writing
+            </Link>
           </div>
         </div>
+        <div className="grid content-end gap-4 lg:col-span-4">
+          <a href="tel:+15043261676" className={contactLink}>
+            <span className={contactLabel}>Phone</span>
+            <span className="font-mono text-price tabular-nums [font-variant-ligatures:none]">(504) 326-1676</span>
+          </a>
+          <a href="mailto:ben@sproutflow-studio.com" className={contactLink}>
+            <span className={contactLabel}>Email</span>
+            <span className="[overflow-wrap:anywhere]">ben@sproutflow-studio.com</span>
+          </a>
+        </div>
       </div>
-    </section>
+    </Section>
   );
 }
