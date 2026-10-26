@@ -29,6 +29,8 @@ export const CHECK_LABELS: Record<CheckId, string> = {
   call: 'Tap to call',
   form: 'Quote form',
   speed: 'It is light',
+  domain: 'Domain renewal',
+  email: 'Email records',
 };
 
 /** Step names announced while checking (check-flow.html screen 2). */
@@ -39,9 +41,11 @@ export const STEP_NAMES: Record<CheckId, string> = {
   call: 'Looking for tap-to-call',
   form: 'Looking for a quote form',
   speed: 'Estimating page weight',
+  domain: 'Checking when your domain renews',
+  email: 'Checking your email records',
 };
 
-export const CHECK_ORDER: CheckId[] = ['loads', 'https', 'mobile', 'call', 'form', 'speed'];
+export const CHECK_ORDER: CheckId[] = ['loads', 'https', 'mobile', 'call', 'form', 'speed', 'domain', 'email'];
 
 /** The checker identifies itself honestly on every request. */
 export const USER_AGENT = 'SproutflowSiteCheck/1.0 (+https://www.sproutflow-studio.com/check)';

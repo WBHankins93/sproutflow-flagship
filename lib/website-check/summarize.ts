@@ -1,14 +1,15 @@
 /**
- * Turns six check results into what the visitor and Ben read: the one
- * recommended offer (funnel/CHECKS.md section 4), the "which offer covers
- * this" notes, counts, and the plain-text summary sent with a report request.
+ * Turns the check results (six page checks, then domain and email) into what
+ * the visitor and Ben read: the one recommended offer (funnel/CHECKS.md
+ * section 4), the "which offer covers this" notes, counts, and the
+ * plain-text summary sent with a report request.
  *
  * Pure and client-safe: no Node imports.
  */
 
 import { websiteRescue } from '@/data/offers';
 import { tiers } from '@/data/tiers';
-import type { CheckResult, CheckStatus, OfferId, WebsiteCheckResult } from './types';
+import type { CheckId, CheckResult, CheckStatus, OfferId, WebsiteCheckResult } from './types';
 
 export interface StatusCounts {
   fail: number;
@@ -27,15 +28,22 @@ function statusOf(checks: CheckResult[], id: CheckResult['id']): CheckStatus | u
   return checks.find((check) => check.id === id)?.status;
 }
 
+/** The operations checks read public data about the domain, not the page. */
+const OPS_CHECKS = new Set<CheckId>(['domain', 'email']);
+
 /**
  * First matching rule wins:
  * 1. C1, C2 or C3 fails, C1 is a parked page, or C6 fails: Website Rescue.
  * 2. C1 to C3 all pass and C5 warns: Lead Capture & Follow-Up System.
  * 3. Anything else: Lead Flow Audit.
- * Nothing could be checked: no offer (the page offers a call instead).
+ * No page check could run: no offer (the page offers a call instead), even
+ * when the domain and email checks have results.
+ * The domain and email checks do not change the offer; their notes point to
+ * Site Care.
  */
 export function recommendOffer(checks: CheckResult[]): OfferId | null {
-  if (checks.length === 0 || checks.every((check) => check.status === 'unknown')) return null;
+  const pageChecks = checks.filter((check) => !OPS_CHECKS.has(check.id));
+  if (pageChecks.length === 0 || pageChecks.every((check) => check.status === 'unknown')) return null;
   const loads = checks.find((check) => check.id === 'loads');
   const coreFail = (['loads', 'https', 'mobile'] as const).some((id) => statusOf(checks, id) === 'fail');
   if (coreFail || loads?.data?.parked === true || statusOf(checks, 'speed') === 'fail') return 'website-rescue';
@@ -60,6 +68,9 @@ export function fixLine(check: CheckResult, offer: OfferId | null): string | und
         : 'The Lead Capture & Follow-Up System covers this.';
     case 'speed':
       return check.status === 'fail' ? 'Website Rescue fixes this.' : 'The Lead Flow Audit looks at this.';
+    case 'domain':
+    case 'email':
+      return 'Site Care covers this.';
     default:
       return undefined;
   }
@@ -140,5 +151,7 @@ export function formatSummaryText(result: WebsiteCheckResult): string {
     '',
     ...sortBySeverity(result.checks).map((check) => `${STATUS_TEXT[check.status]} | ${check.label}: ${check.line}`),
   ];
+  const notes = result.checks.filter((check) => check.note).map((check) => `Note | ${check.label}: ${check.note}`);
+  if (notes.length > 0) lines.push('', ...notes);
   return lines.join('\n');
 }

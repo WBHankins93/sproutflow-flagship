@@ -1,8 +1,9 @@
 /**
  * POST /api/website-check  { "url": "yourbusiness.com" }
  *
- * Runs the free website check (lib/website-check) and returns the six
- * results. v0 stores nothing and sends nothing: the visitor's browser posts a
+ * Runs the free website check (lib/website-check) and returns eight
+ * results: six page checks, then domain renewal (RDAP) and email records
+ * (DNS). It stores nothing and sends nothing: the visitor's browser posts a
  * report request to Formspree itself.
  *
  * Responses:
@@ -21,7 +22,8 @@ import { normalizeInput } from '@/lib/website-check/url-guard';
 // node:dns needs the Node runtime; never run this on the edge.
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-// The check itself is capped at 8 s; leave headroom for a cold start.
+// The check itself, domain and email included, is capped at 8 s; leave
+// headroom for a cold start.
 export const maxDuration = 20;
 
 const MAX_REQUEST_BYTES = 4096;

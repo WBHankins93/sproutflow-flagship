@@ -1,6 +1,7 @@
 /**
- * The six checks from funnel/CHECKS.md section 3, as pure functions over the
- * fetch results. No network, no Node imports: tests feed saved HTML fixtures.
+ * The six page checks from funnel/CHECKS.md section 3, as pure functions over
+ * the fetch results. (The domain and email checks live in rdap.ts and
+ * email-dns.ts; they look at public registry and DNS data, not the page.) No network, no Node imports: tests feed saved HTML fixtures.
  *
  * Where a rule cannot be judged reliably from a server-side fetch it is warn
  * only (C4 tap-to-call, C5 quote form), and a page built in the browser by
@@ -9,6 +10,7 @@
  */
 
 import type { FetchError, FetchSuccess, SafeFetchResult } from './fetcher';
+import { registrableDomain } from './domain-name';
 import { CHECK_LABELS } from './messages';
 import type { CheckId, CheckOutcome, CheckResult, CheckStatus } from './types';
 
@@ -279,30 +281,8 @@ export function analyzeHtml(rawHtml: string): PageAnalysis {
 /* Helpers used by the checks                                          */
 /* ------------------------------------------------------------------ */
 
-const TWO_PART_SUFFIXES = new Set([
-  'co.uk',
-  'org.uk',
-  'ac.uk',
-  'gov.uk',
-  'com.au',
-  'net.au',
-  'org.au',
-  'co.nz',
-  'com.br',
-  'co.jp',
-  'com.mx',
-  'co.za',
-  'com.sg',
-  'co.in',
-]);
-
-/** Approximate registrable domain: last two labels, or three under a known two-part suffix. */
-export function registrableDomain(hostname: string): string {
-  const labels = hostname.toLowerCase().replace(/\.$/, '').split('.');
-  if (labels.length <= 2) return labels.join('.');
-  const lastTwo = labels.slice(-2).join('.');
-  return TWO_PART_SUFFIXES.has(lastTwo) ? labels.slice(-3).join('.') : lastTwo;
-}
+// Shared with the domain and email checks (domain-name.ts).
+export { registrableDomain };
 
 function digitsOf(value: string): string {
   return value.replace(/\D/g, '');
