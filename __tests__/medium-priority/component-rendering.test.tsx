@@ -21,9 +21,12 @@ describe('Component Rendering - Header', () => {
 
   it('should render navigation links', () => {
     render(<Header />)
-    expect(screen.getByText('Services')).toBeInTheDocument()
+    expect(screen.getByText('Websites')).toBeInTheDocument()
+    expect(screen.getByText('Systems')).toBeInTheDocument()
+    expect(screen.getByText('Care')).toBeInTheDocument()
     expect(screen.getByText('Work')).toBeInTheDocument()
     expect(screen.getByText('About')).toBeInTheDocument()
+    expect(screen.getByText('Free check')).toBeInTheDocument()
   })
 
   it('should render contact CTA button', () => {
@@ -53,7 +56,7 @@ describe('Component Rendering - Footer', () => {
 
   it('should render contact information', () => {
     render(<Footer />)
-    expect(screen.getByText(/New Orleans, Louisiana/)).toBeInTheDocument()
+    expect(screen.getByText('Based in New Orleans. Working with businesses anywhere.')).toBeInTheDocument()
     expect(screen.getByText('ben@sproutflow-studio.com')).toBeInTheDocument()
     expect(screen.getByText('(504) 326-1676')).toBeInTheDocument()
   })
