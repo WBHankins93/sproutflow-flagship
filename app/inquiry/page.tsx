@@ -4,6 +4,7 @@ import { InquiryForm } from '@/components/inquiry/InquiryForm';
 import { Footer } from '@/components/layout/Footer';
 import { BookCallLink } from '@/components/ui/BookCallLink';
 import { BOOKING_CTA_LABEL, isBookingConfigured } from '@/lib/constants';
+import { Eyebrow, Heading, MarginNote, Section } from '@/components/v3';
 
 export const metadata: Metadata = {
   title: 'Start a Project',
@@ -40,48 +41,58 @@ export default async function InquiryPage({ searchParams }: Props) {
   const initialProjectType = (path && pathMap[path]) || (tier && tierMap[tier]) || '';
   return (
     <>
-      <section className="bg-cream-300 py-14 md:py-20">
-        <div className="mx-auto grid max-w-[1186px] gap-12 px-5 md:px-11 lg:grid-cols-12">
+      <Section tone="birch" labelledBy="inquiry-h">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           <aside className="lg:col-span-4">
-            <p className="text-eyebrow uppercase text-accent-700">Start with what you know</p>
-            <h1 className="mt-5 font-display text-display-lg text-primary-900">Tell me what needs to work better.</h1>
-            <p className="mt-5 text-body-lg text-text-secondary">
+            <Eyebrow>Start with what you know</Eyebrow>
+            <Heading as="h1" size="lg" id="inquiry-h" italic="better" className="mt-5">
+              Tell me what needs to work better.
+            </Heading>
+            <p className="mt-5 max-w-[60ch] text-body-lg text-[#4A574D]">
               You can stop after the first checkpoint. A polished brief is not required.
             </p>
             <ol className="mt-10 border-t border-primary-900/20">
               {steps.map(({ icon: Icon, title, body }, index) => (
                 <li key={title} className="grid grid-cols-[44px_1fr] gap-4 border-b border-primary-900/20 py-5">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary-900/20">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary-900/20 text-primary-900">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <div>
                     <p className="font-semibold text-primary-900">
-                      <span className="mr-2 font-mono text-xs text-accent-700">0{index + 1}</span>
+                      <span
+                        className="mr-2 font-mono text-label tabular-nums text-redline [font-variant-ligatures:none]"
+                        aria-hidden="true"
+                      >
+                        0{index + 1}
+                      </span>
                       {title}
                     </p>
-                    <p className="mt-1 text-sm text-text-secondary">{body}</p>
+                    <p className="mt-1 text-sm text-[#4A574D]">{body}</p>
                   </div>
                 </li>
               ))}
             </ol>
-            <p className="mt-6 text-sm text-text-muted">I reply within one business day.</p>
+            <MarginNote arrow="none" className="mt-6">
+              I read every one myself
+            </MarginNote>
+            <p className="mt-4 text-sm text-[#4A574D]">I reply within one business day.</p>
             {isBookingConfigured() && (
-              <p className="mt-4 text-sm text-text-secondary" data-testid="inquiry-booking-line">
+              <p className="mt-4 text-sm text-[#4A574D]" data-testid="inquiry-booking-line">
                 Rather talk it through?{' '}
                 <BookCallLink
                   data-cta="inquiry-aside"
-                  className="font-semibold text-primary-800 underline underline-offset-2"
+                  className="rounded-sm font-semibold text-primary-900 underline underline-offset-2 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-redline"
                 >
                   {BOOKING_CTA_LABEL}
                 </BookCallLink>
               </p>
             )}
           </aside>
-          <div className="border-t border-primary-900/20 pt-8 lg:col-span-7 lg:col-start-6">
+          <div className="min-w-0 border-t border-primary-900/20 pt-8 lg:col-span-7 lg:col-start-6">
             <InquiryForm initialProjectType={initialProjectType} />
           </div>
         </div>
-      </section>
+      </Section>
       <Footer />
     </>
   );

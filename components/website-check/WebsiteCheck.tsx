@@ -6,8 +6,9 @@ import { CHECK_ORDER, ERROR_MESSAGES, OFFLINE_MESSAGE, STEP_NAMES } from '@/lib/
 import { countStatuses, doneAnnouncement } from '@/lib/website-check/summarize';
 import type { WebsiteCheckErrorCode, WebsiteCheckResult } from '@/lib/website-check/types';
 import { normalizeInput } from '@/lib/website-check/url-guard';
+import { Heading } from '@/components/v3';
 import { CheckResults } from './CheckResults';
-import { cardClass, inputClass, invalidInputClass, primaryButtonClass } from './styles';
+import { cardClass, inputClass, invalidInputClass, labelClass, primaryButtonClass, softTextClass } from './styles';
 
 type Phase = 'idle' | 'checking' | 'results';
 
@@ -30,13 +31,16 @@ function isOffline(): boolean {
 }
 
 /**
- * The free website check: enter a URL, watch it check, read six results, and
+ * The free website check: enter a URL, watch it check, read eight results, and
  * optionally ask for the full report. Flow and copy follow
  * funnel/check-flow.html and funnel/COPY.md.
+ *
+ * `initialUrl` prefills the field (from /check?url=). The check never runs on
+ * its own; the visitor presses "Check my site".
  */
-export function WebsiteCheck() {
+export function WebsiteCheck({ initialUrl = '' }: { initialUrl?: string } = {}) {
   const [phase, setPhase] = useState<Phase>('idle');
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState(initialUrl);
   const [fieldError, setFieldError] = useState<string | null>(null);
   const [alert, setAlert] = useState<string | null>(null);
   const [host, setHost] = useState('');
@@ -72,7 +76,7 @@ export function WebsiteCheck() {
 
   useEffect(() => {
     if (phase !== 'checking') return;
-    setStatus(`Checking ${host}. Step ${step + 1} of 6: ${STEP_NAMES[CHECK_ORDER[step]]}.`);
+    setStatus(`Checking ${host}. Step ${step + 1} of ${CHECK_ORDER.length}: ${STEP_NAMES[CHECK_ORDER[step]]}.`);
   }, [phase, step, host]);
 
   const backToForm = useCallback((message: string, asFieldError: boolean) => {
@@ -192,7 +196,7 @@ export function WebsiteCheck() {
                 </p>
               )}
               {alert && (
-                <p className="mt-4 border-l-4 border-accent-600 bg-accent-50 px-3 py-2.5 text-[15px] text-primary-900" role="alert">
+                <p className="mt-4 border-l-4 border-redline bg-redline-soft px-3 py-2.5 text-[15px] text-primary-900" role="alert">
                   {alert}
                 </p>
               )}
@@ -200,7 +204,7 @@ export function WebsiteCheck() {
                 Free. Nothing is stored unless you ask me to email the report.
               </p>
               <noscript>
-                <p className="mt-4 border-l-4 border-accent-600 bg-accent-50 px-3 py-2.5 text-[15px] text-primary-900">
+                <p className="mt-4 border-l-4 border-redline bg-redline-soft px-3 py-2.5 text-[15px] text-primary-900">
                   The checker needs JavaScript. You can also email me your address at ben@sproutflow-studio.com and I
                   will run it for you.
                 </p>
@@ -209,21 +213,23 @@ export function WebsiteCheck() {
           </div>
 
           <div className="min-w-0">
-            <h2 className="font-display text-h4 text-primary-900">What I check</h2>
+            <Heading as="h2" size="sm" className="text-primary-900">
+              What I check
+            </Heading>
             <ol className="mt-4 border-t border-primary-900/15">
               {WHAT_I_CHECK.map(([title, body], index) => (
                 <li key={title} className="grid grid-cols-[32px_minmax(0,1fr)] gap-x-3 border-b border-primary-900/15 py-3.5">
-                  <span className="font-mono text-xs leading-6 text-accent-700" aria-hidden="true">
+                  <span className="font-mono text-label leading-6 tabular-nums text-redline [font-variant-ligatures:none]" aria-hidden="true">
                     0{index + 1}
                   </span>
                   <div>
                     <p className="font-semibold text-primary-900">{title}</p>
-                    <p className="text-[15px] text-text-secondary">{body}</p>
+                    <p className={`text-[15px] ${softTextClass}`}>{body}</p>
                   </div>
                 </li>
               ))}
             </ol>
-            <p className="mt-4 text-sm text-text-secondary">
+            <p className={`mt-4 text-sm ${softTextClass}`}>
               No website at all? That is what <strong className="text-primary-900">Website Rescue</strong> is for.
             </p>
           </div>
@@ -232,10 +238,10 @@ export function WebsiteCheck() {
 
       {phase === 'checking' && (
         <div className={`${cardClass} mx-auto max-w-2xl`} aria-busy="true">
-          <p className="text-eyebrow uppercase text-accent-700">Checking</p>
-          <h2 className="mt-3 font-display text-display-sm text-primary-900 [overflow-wrap:anywhere]">
-            Checking <span className="font-mono text-[0.85em]">{host}</span>
-          </h2>
+          <p className={labelClass}>Checking</p>
+          <Heading as="h2" size="sm" className="mt-3 text-primary-900 [overflow-wrap:anywhere]">
+            Checking <span className="font-mono text-[0.8em]">{host}</span>
+          </Heading>
           <div className="mt-5 h-2 overflow-hidden rounded-full bg-cream-500" aria-hidden="true">
             <div
               className="h-full rounded-full bg-primary-700 motion-safe:transition-[width] motion-safe:duration-500"
@@ -256,7 +262,7 @@ export function WebsiteCheck() {
                     {state === 'waiting' && <Circle className="h-3 w-3 text-primary-900/30" />}
                   </span>
                   <span className={state === 'waiting' ? 'text-text-muted' : 'text-primary-900'}>{STEP_NAMES[checkId]}</span>
-                  <span className="whitespace-nowrap font-mono text-xs text-text-muted">
+                  <span className="whitespace-nowrap font-mono text-label uppercase text-text-muted [font-variant-ligatures:none]">
                     {state === 'done' ? 'Done' : state === 'running' ? 'Checking' : 'Waiting'}
                   </span>
                 </li>

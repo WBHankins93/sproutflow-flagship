@@ -374,3 +374,51 @@ describe('summary for the report request', () => {
     expect(checks.find((check) => check.id === 'form')?.fix).toBe('Website Rescue includes a quote form.')
   })
 })
+
+describe('v1: domain and email results in the summary and the offer', () => {
+  const domain = {
+    id: 'domain' as const,
+    label: 'Domain renewal',
+    status: 'warn' as const,
+    line: 'Your domain renews by Nov 4, 2026, in 9 days. If auto-renew is off, your site and email stop.',
+  }
+  const email = {
+    id: 'email' as const,
+    label: 'Email records',
+    status: 'fail' as const,
+    line: 'Your domain has no mail server (MX) record and no SPF record, so it cannot reliably send or receive email.',
+    note: 'I did not check DKIM, the third email record, because it can only be looked up with a name your email provider picks.',
+  }
+
+  it('points both to Site Care and leaves the page-based offer alone', () => {
+    const run = evaluateChecks({ host: 'example.com', https: page(fixture('good-site.html')), httpProbe: PROBE_FORWARDS })
+    const { offer, checks } = withRecommendation([...run.checks, domain, email])
+    expect(offer).toBe('lead-flow-audit')
+    expect(checks.find((check) => check.id === 'domain')?.fix).toBe('Site Care covers this.')
+    expect(checks.find((check) => check.id === 'email')?.fix).toBe('Site Care covers this.')
+  })
+
+  it('offers nothing when no page check could run, even with domain and email results', () => {
+    const run = evaluateChecks({ host: 'example.com', https: page(fixture('challenge-403.html'), { status: 403 }) })
+    expect(recommendOffer([...run.checks, domain, email])).toBe(null)
+  })
+
+  it('includes the new results and the DKIM note in the report summary', () => {
+    const run = evaluateChecks({ host: 'example.com', https: page(fixture('good-site.html')), httpProbe: PROBE_FORWARDS })
+    const { offer, checks } = withRecommendation([...run.checks, domain, email])
+    const result: WebsiteCheckResult = {
+      checkedAt: '2026-10-26T12:00:00.000Z',
+      inputUrl: 'example.com',
+      host: 'example.com',
+      finalUrl: 'https://www.example.com/',
+      outcome: 'checked',
+      offer,
+      checks,
+    }
+    const lines = formatSummaryText(result).split('\n')
+    expect(lines).toContain('Totals: 1 fail, 1 warn, 6 pass, 0 not checked')
+    expect(lines).toContain(`FAIL | Email records: ${email.line}`)
+    expect(lines).toContain(`WARN | Domain renewal: ${domain.line}`)
+    expect(lines[lines.length - 1]).toBe(`Note | Email records: ${email.note}`)
+  })
+})
