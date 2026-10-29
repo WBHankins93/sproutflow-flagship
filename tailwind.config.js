@@ -99,6 +99,17 @@ export default {
           soft: '#FBE9E7',
         },
 
+        // Sunlit forest (v3, 29 Oct). Section canvases; text pairs noted.
+        // Red pen only on the light ones: clearing 6.1:1, leaf 5.2:1, sunlight 5.8:1.
+        forest: {
+          clearing: '#F2F1D8', // hero
+          leaf: '#CFE3B4', // spring leaf, care section and highlights
+          fern: '#3F6B45', // trust strip and book; cream text 5.3:1, never red
+          sungold: '#F2D58A', // prices and numerals on pine (9:1)
+          sunlight: '#F6E8C3', // Ben section
+          white: '#FBFCF8', // proof and work
+        },
+
         // Primary Brand Colors (Pine Shadow)
         primary: {
           50: '#F3F7F4',

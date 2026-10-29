@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import Container, { type ContainerSize } from './Container';
 
-export type SectionTone = 'birch' | 'paper' | 'lichen' | 'pine';
+export type SectionTone = 'birch' | 'paper' | 'lichen' | 'pine' | 'clearing' | 'leaf' | 'fern' | 'sunlight' | 'white';
 export type SectionRhythm = 'tight' | 'default' | 'loose' | 'none';
 
 /** Canvas + default text colour per tone. Every pair is at least 10:1. */
@@ -9,7 +9,12 @@ export const SECTION_TONES: Record<SectionTone, string> = {
   birch: 'bg-cream-300 text-primary-900', // Birch Paper #F4EFE3, the default canvas
   paper: 'bg-[#FBF8F1] text-primary-900', // Paper, a lighter step for cards and the check
   lichen: 'bg-cream-500 text-primary-900', // Lichen #E4E3D2, a seam between light sections
-  pine: 'bg-primary-900 text-cream-300', // Pine Shadow #223528, the one dark canvas
+  pine: 'bg-primary-900 text-cream-300', // Pine Shadow #223528, the deep dark canvas
+  clearing: 'bg-forest-clearing text-primary-900', // Sunlit forest hero
+  leaf: 'bg-forest-leaf text-primary-900', // Spring leaf
+  fern: 'bg-forest-fern text-cream-300', // Fern, the lighter dark canvas (5.3:1); no red pen
+  sunlight: 'bg-forest-sunlight text-primary-900', // warm light behind Ben
+  white: 'bg-forest-white text-primary-900', // near-white for proof and work
 };
 
 /** Vertical padding, from the --v3-rhythm-* tokens in app/globals.css. */
