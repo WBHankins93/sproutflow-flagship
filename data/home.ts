@@ -19,7 +19,7 @@ export const homeHero = {
   sub: 'I’m Ben. I find where your website loses customers, fix it at a fixed price, and keep it working after launch.',
   primaryCta: 'Book a 15-minute call',
   secondaryCta: { label: 'Check your website free', href: '/check' },
-  note: 'hi, I’m Ben. You’ll talk to me, not a sales team.',
+  note: 'hi, I’m Ben. You’ll talk to me.',
   photoAlt: 'Ben Hankins, founder of Sproutflow Studio',
 };
 
