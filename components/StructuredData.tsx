@@ -3,11 +3,56 @@
 // Organization + ProfessionalService schema rendered in the root layout.
 // FAQPage schema lives on /faq (where the content is visible).
 // BreadcrumbList schema lives in components/case-studies/CaseStudyLayout.tsx.
+//
+// The OfferCatalog is built from data/catalog.ts, one Offer per catalog entry.
+// Prices appear only where the catalog has them: a fixed one-time price as
+// `price`, "from" prices as `minPrice`, monthly prices as a
+// UnitPriceSpecification. An offer quoted after a call has no price at all.
 
-import { websiteRescue } from '@/data/offers';
+import { catalog, getCategory, type CatalogOffer, type CatalogPrice } from '@/data/catalog';
 import { FOUNDER_PHOTO_URL, ORGANIZATION_LOGO_URL, SITE_URL } from '@/lib/site';
 
 const siteUrl = SITE_URL;
+
+function priceSpecification(price: CatalogPrice) {
+  const amount = price.basis === 'from' ? { minPrice: price.amount } : { price: price.amount };
+  return {
+    '@type': price.per === 'month' ? 'UnitPriceSpecification' : 'PriceSpecification',
+    ...amount,
+    priceCurrency: 'USD',
+    ...(price.per === 'month' ? { unitCode: 'MON', unitText: 'month' } : {}),
+    ...(price.appliesTo ? { description: `For ${price.appliesTo}` } : {}),
+  };
+}
+
+/** One schema.org Offer for a catalog entry. Exported for tests. */
+export function catalogOfferSchema(offer: CatalogOffer) {
+  const [only] = offer.prices;
+  const isSingleFixed = offer.prices.length === 1 && only.basis === 'fixed' && !only.per;
+  const pricing =
+    offer.prices.length === 0
+      ? {}
+      : isSingleFixed
+        ? { price: String(only.amount), priceCurrency: 'USD' }
+        : {
+            priceCurrency: 'USD',
+            priceSpecification:
+              offer.prices.length === 1 ? priceSpecification(only) : offer.prices.map(priceSpecification),
+          };
+
+  return {
+    '@type': 'Offer',
+    ...pricing,
+    itemOffered: {
+      '@type': 'Service',
+      name: offer.name,
+      description: offer.summary,
+      category: getCategory(offer.category).name,
+      url: `${siteUrl}/#${offer.id}`,
+      provider: { '@id': `${siteUrl}#organization` },
+    },
+  };
+}
 
 const professionalServiceSchema = {
   '@context': 'https://schema.org',
@@ -21,8 +66,8 @@ const professionalServiceSchema = {
   logo: ORGANIZATION_LOGO_URL,
   image: ORGANIZATION_LOGO_URL,
   description:
-    'Sproutflow Studio builds custom websites and custom business software for small businesses. Web design and development, internal admin tools, CRM systems, CMS builds, and workflow automation. Based in New Orleans, LA.',
-  slogan: 'Websites that win clients. Systems that make growth easier.',
+    'Sproutflow Studio is a one-person studio that builds websites, lead and business systems, and ongoing care for small businesses anywhere. Based in New Orleans, Louisiana.',
+  slogan: 'Find the leaks. Fix the site. Book the work.',
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'New Orleans',
@@ -45,22 +90,12 @@ const professionalServiceSchema = {
     value: 1,
   },
   sameAs: ['https://linkedin.com/company/sproutflow-studio'],
+  // Serve anyone, anywhere (DIRECTION.md §8): the home city stays for local
+  // search, without a neighborhood list.
   areaServed: [
     {
       '@type': 'City',
       name: 'New Orleans',
-    },
-    {
-      '@type': 'City',
-      name: 'Metairie',
-    },
-    {
-      '@type': 'Place',
-      name: 'New Orleans metro area',
-    },
-    {
-      '@type': 'Place',
-      name: 'South Louisiana',
     },
     {
       '@type': 'Country',
@@ -81,61 +116,8 @@ const professionalServiceSchema = {
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Web Design and Business Software Services',
-    itemListElement: [
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Custom Website Design and Development',
-          description:
-            'Custom websites for small businesses: positioning, design, development, copy, SEO foundations, rebuilds, and Shopify.',
-          url: `${siteUrl}/services/websites`,
-          provider: { '@id': `${siteUrl}#organization` },
-          areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Ongoing Website Growth and Support',
-          description:
-            'Optional website maintenance, hosting, SEO growth, performance reviews, content support, photography coordination, and marketing integrations.',
-          url: `${siteUrl}/services/growth-support`,
-          provider: { '@id': `${siteUrl}#organization` },
-          areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
-        },
-      },
-      {
-        '@type': 'Offer',
-        itemOffered: {
-          '@type': 'Service',
-          name: 'Custom Business Software and Automation',
-          description:
-            'Custom business systems behind the website: internal admin tools and dashboards, custom CRM and customer management systems, lightweight CMS builds, and workflow automation for intake, follow-up, scheduling, and document processing.',
-          url: `${siteUrl}/services/business-systems`,
-          provider: { '@id': `${siteUrl}#organization` },
-          areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
-        },
-      },
-      {
-        '@type': 'Offer',
-        // The only catalog entry with a single fixed price, so it carries one.
-        // The service categories above are scoped and quoted per project.
-        price: '1500',
-        priceCurrency: 'USD',
-        itemOffered: {
-          '@type': 'Service',
-          name: websiteRescue.name,
-          description:
-            'A fixed-price five-page website for contractors and home-service businesses with a dead, missing, or broken website. Built on the domain the client already owns, with a quote form that reaches phone and email and a Google Business Profile cleanup. Live 10 business days after content arrives.',
-          url: `${siteUrl}/#${websiteRescue.id}`,
-          provider: { '@id': `${siteUrl}#organization` },
-          areaServed: 'New Orleans metro area, South Louisiana, and remote nationwide',
-        },
-      },
-    ],
+    name: 'Websites, Lead & Business Systems, and Care',
+    itemListElement: catalog.map(catalogOfferSchema),
   },
 };
 
@@ -154,7 +136,7 @@ const personSchema = {
   familyName: 'Hankins',
   jobTitle: 'Founder and Software Engineer',
   description:
-    'Ben Hankins runs Sproutflow Studio in New Orleans, Louisiana. He spent seven years building and running software inside large companies, including IBM, and now builds custom websites and business systems for owner-run businesses.',
+    'Ben Hankins runs Sproutflow Studio in New Orleans, Louisiana. He spent seven years building and running software inside large companies, including IBM, and now builds websites, lead systems and ongoing care for small businesses anywhere.',
   url: `${siteUrl}/about`,
   image: FOUNDER_PHOTO_URL,
   worksFor: { '@id': `${siteUrl}#organization` },
@@ -190,7 +172,7 @@ const webSiteSchema = {
   '@id': `${siteUrl}#website`,
   url: siteUrl,
   name: 'Sproutflow Studio',
-  description: 'Custom websites, CRMs, booking flows, and automation for small businesses in New Orleans, Louisiana.',
+  description: 'Websites, lead and business systems, and ongoing care for small businesses anywhere, from a one-person studio in New Orleans.',
   publisher: { '@id': `${siteUrl}#organization` },
   inLanguage: 'en-US',
 };
