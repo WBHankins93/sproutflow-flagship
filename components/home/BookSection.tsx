@@ -6,8 +6,8 @@ import { homeBookingHref } from './booking';
 /** 10. Book: the call, a phone number, and three short answers. The one Pine section. */
 export default function BookSection() {
   return (
-    <Section tone="pine" rhythm="tight" id="book" labelledBy="home-book-h">
-      <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
+    <Section tone="pine" rhythm="none" className="py-8 md:py-[var(--v3-rhythm-tight)]" id="book" labelledBy="home-book-h">
+      <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
         <div className="min-w-0 lg:col-span-6">
           <Eyebrow index="07" onDark>
             {homeBook.eyebrow}
@@ -15,8 +15,8 @@ export default function BookSection() {
           <Heading as="h2" id="home-book-h" className="mt-4">
             {homeBook.heading} <RedlineUnderline tone="goldenrod">{homeBook.underline}</RedlineUnderline>
           </Heading>
-          <p className="mt-4 max-w-[48ch] font-body text-body-lg text-[#C9CFC4]">{homeBook.body}</p>
-          <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
+          <p className="mt-3 max-w-[48ch] font-body text-body text-[#C9CFC4] md:mt-4 md:text-body-lg">{homeBook.body}</p>
+          <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
             <ButtonLink href={homeBookingHref()} variant="onDark" data-cta="book">
               {homeBook.cta}
             </ButtonLink>
@@ -38,8 +38,8 @@ export default function BookSection() {
           </h3>
           <dl className="mt-4">
             {homeBook.faqs.map((faq) => (
-              <div key={faq.id} className="border-t border-cream-300/20 py-4">
-                <dt className="font-body text-body-lg font-semibold text-cream-300">{faq.question}</dt>
+              <div key={faq.id} className="border-t border-cream-300/20 py-3 md:py-4">
+                <dt className="font-body text-body font-semibold text-cream-300 md:text-body-lg">{faq.question}</dt>
                 <dd className="mt-1 font-body text-body text-[#C9CFC4]">{faq.answer}</dd>
               </div>
             ))}

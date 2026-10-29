@@ -11,6 +11,7 @@ import {
   catalogCategories,
   formatOfferPrice,
   formatPrice,
+  getIncludedItems,
   getOffer,
   getOffersByCategory,
 } from '@/data/catalog'
@@ -121,11 +122,37 @@ describe('Catalog - decided prices', () => {
   })
 })
 
+describe('Catalog - phone line and included list', () => {
+  it('gives every offer one short line and something to list', () => {
+    catalog.forEach((offer) => {
+      expect(offer.line.length).toBeGreaterThan(0)
+      expect(offer.line.length).toBeLessThanOrEqual(48)
+      expect(getIncludedItems(offer).length).toBeGreaterThan(0)
+    })
+  })
+
+  it('builds per-plan prices and price notes into the list from catalog data', () => {
+    expect(getIncludedItems(getOffer('site-care')!)).toEqual([
+      '$99/mo for Rescue and Business sites',
+      '$150/mo for larger sites',
+    ])
+    const top = getIncludedItems(getOffer('catalog-custom-build')!)
+    expect(top[top.length - 1]).toBe('Most land between $6,000 and $12,000, payable in three parts.')
+  })
+})
+
 describe('Catalog - copy rules', () => {
   it('has no em dashes and no team voice', () => {
     const copy = [
       ...catalogCategories.flatMap((category) => [category.name, category.blurb]),
-      ...catalog.flatMap((offer) => [offer.name, offer.summary, offer.priceLabel ?? '', offer.priceNote ?? '']),
+      ...catalog.flatMap((offer) => [
+        offer.name,
+        offer.summary,
+        offer.line,
+        ...offer.includes,
+        offer.priceLabel ?? '',
+        offer.priceNote ?? '',
+      ]),
     ]
     copy.forEach((text) => {
       expect(text).not.toContain('—')

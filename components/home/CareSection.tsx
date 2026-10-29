@@ -10,14 +10,14 @@ export default function CareSection() {
   const lowest = prices.length ? prices.reduce((min, price) => (price.amount < min.amount ? price : min)) : undefined;
 
   return (
-    <Section tone="lichen" rhythm="tight" id="care" labelledBy="home-care-h">
-      <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+    <Section tone="lichen" rhythm="none" className="py-8 md:py-[var(--v3-rhythm-tight)]" id="care" labelledBy="home-care-h">
+      <div className="grid gap-6 lg:grid-cols-12 lg:gap-12">
         <div className="min-w-0 lg:col-span-5">
           <Eyebrow index="03">{homeCare.eyebrow}</Eyebrow>
           <Heading as="h2" id="home-care-h" italic={homeCare.italic} className="mt-4">
             {homeCare.heading}
           </Heading>
-          <p className="mt-4 max-w-[52ch] font-body text-body-lg text-primary-900">{homeCare.intro}</p>
+          <p className="mt-3 max-w-[52ch] font-body text-body text-primary-900 md:mt-4 md:text-body-lg">{homeCare.intro}</p>
           {lowest && (
             <p className="mt-4 max-w-[52ch] font-body text-body text-[#4A574D]">
               {homeCare.pitch}{' '}
@@ -37,7 +37,7 @@ export default function CareSection() {
           </ButtonLink>
         </div>
 
-        <ul className="grid min-w-0 content-start gap-5 sm:grid-cols-2 lg:col-span-7 lg:mt-12">
+        <ul className="grid min-w-0 content-start gap-3 sm:grid-cols-2 sm:gap-5 lg:col-span-7 lg:mt-12">
           {homeCare.examples.map((example) => (
             <li key={example.label} className="rounded-xl border-t-4 border-redline bg-[#FBF8F1] p-5 sm:p-6">
               <p className="font-mono text-label uppercase text-redline [font-variant-ligatures:none]">{example.label}</p>

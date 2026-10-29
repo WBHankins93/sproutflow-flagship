@@ -16,15 +16,15 @@ export default function WorkSection() {
   const cards = homeWork.cardIds.flatMap((id) => projectProof.filter((project) => project.id === id));
 
   return (
-    <Section tone="paper" rhythm="tight" id="work" labelledBy="home-work-h">
-      <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
+    <Section tone="paper" rhythm="none" id="work" labelledBy="home-work-h" className="py-8 md:py-[var(--v3-rhythm-tight)]">
+      <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-12">
         <div className="min-w-0 lg:col-span-6 lg:col-start-7 lg:row-start-1">
           <Eyebrow index="04">{homeWork.eyebrow}</Eyebrow>
           <Heading as="h2" id="home-work-h" className="mt-4">
             {homeWork.heading}
           </Heading>
           {featured && (
-            <div className="mt-6">
+            <div className="mt-4 md:mt-6">
               <p className="font-body text-body font-semibold text-primary-900">
                 {featured.project.name}{' '}
                 <span className="font-normal text-[#4A574D]">· {featured.project.location}</span>
@@ -60,27 +60,34 @@ export default function WorkSection() {
               after={{ src: getImageUrl(pair.afterSrc), alt: pair.afterAlt }}
               label={homeWork.sliderLabel}
               hint={homeWork.sliderHint}
+              hintClassName="sr-only md:not-sr-only"
             />
           )}
         </div>
 
       </div>
 
-      <ul className="mt-10 grid gap-x-8 gap-y-6 md:grid-cols-3">
+      {/* Each card's name links to its case study. The summary shows from 768px. */}
+      <ul className="mt-6 grid gap-x-8 gap-y-3 md:mt-10 md:grid-cols-3 md:gap-y-6">
         {cards.map((project) => (
-          <li key={project.id} className="flex min-w-0 flex-col border-t-2 border-primary-900 pt-4">
-            <h3 className="font-body text-body-lg font-semibold leading-snug text-primary-900">{project.name}</h3>
+          <li key={project.id} className="min-w-0 border-t-2 border-primary-900 pt-1">
+            <h3>
+              <Link
+                href={project.href}
+                data-cta={`work-${project.id}`}
+                className="flex min-h-[44px] items-center justify-between gap-3 font-body text-body-lg font-semibold leading-snug text-primary-900 underline decoration-redline decoration-2 underline-offset-[6px] hover:decoration-primary-900 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-redline"
+              >
+                <span>
+                  {project.name}
+                  <span className="sr-only">: {homeWork.caseStudyLink.toLowerCase()}</span>
+                </span>
+                <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+              </Link>
+            </h3>
             <p className="font-body text-body-sm text-[#4A574D]">
               {project.industry} · {project.location}
             </p>
-            <p className="mt-2 font-body text-body-sm text-primary-900">{project.summary}</p>
-            <div className="mt-auto pt-2">
-              <Link href={project.href} className={TEXT_LINK_CLASS} data-cta={`work-${project.id}`}>
-                {homeWork.caseStudyLink}
-                <span className="sr-only">: {project.name}</span>
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-            </div>
+            <p className="mt-2 hidden font-body text-body-sm text-primary-900 md:block">{project.summary}</p>
           </li>
         ))}
       </ul>

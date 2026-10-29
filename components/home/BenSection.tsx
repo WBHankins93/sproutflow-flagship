@@ -19,26 +19,26 @@ export default function BenSection() {
   const quote = getBenTestimonial();
 
   return (
-    <Section tone="lichen" rhythm="tight" id="about" labelledBy="home-ben-h">
+    <Section tone="lichen" rhythm="none" className="py-8 md:py-[var(--v3-rhythm-tight)]" id="about" labelledBy="home-ben-h">
       <Eyebrow index="06">{homeBen.eyebrow}</Eyebrow>
       <Heading as="h2" id="home-ben-h" className="mt-4">
         {homeBen.heading}
       </Heading>
 
-      <div className="mt-8 grid gap-8 md:grid-cols-12 lg:gap-12">
-        <div className="relative aspect-[4/5] w-40 overflow-hidden rounded-2xl border border-primary-900/10 bg-cream-300 md:col-span-4 md:w-full lg:col-span-3">
+      <div className="mt-5 grid gap-5 md:mt-8 md:grid-cols-12 md:gap-8 lg:gap-12">
+        <div className="relative aspect-square w-20 overflow-hidden rounded-2xl md:aspect-[4/5] border border-primary-900/10 bg-cream-300 md:col-span-4 md:w-full lg:col-span-3">
           <Image
             src={getImageUrl('ben-photo.png')}
             alt={homeBen.photoAlt}
             fill
-            sizes="(min-width: 1024px) 280px, (min-width: 768px) 30vw, 160px"
+            sizes="(min-width: 1024px) 280px, (min-width: 768px) 30vw, 80px"
             className="object-cover object-top"
           />
         </div>
 
         <div className="min-w-0 md:col-span-8 lg:col-span-5">
           {homeBen.paragraphs.map((paragraph) => (
-            <p key={paragraph.slice(0, 24)} className="mb-4 max-w-[60ch] font-body text-body-lg text-primary-900">
+            <p key={paragraph.slice(0, 24)} className="mb-3 max-w-[60ch] font-body text-body text-primary-900 md:mb-4 md:text-body-lg">
               {paragraph}
             </p>
           ))}

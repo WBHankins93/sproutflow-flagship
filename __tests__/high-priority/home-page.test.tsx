@@ -23,7 +23,7 @@ import ProofStrip from '@/components/home/ProofStrip'
 import TrustStrip from '@/components/home/TrustStrip'
 import WorkSection from '@/components/home/WorkSection'
 import { homeBookingHref } from '@/components/home/booking'
-import { catalog, catalogCategories, formatAmount } from '@/data/catalog'
+import { catalog, catalogCategories, formatAmount, getIncludedItems } from '@/data/catalog'
 import { HOME_SECTION_IDS, getHomeProof, homeBen, homeHero, homeOwn, homeTrust } from '@/data/home'
 import { projectProof } from '@/data/projectProof'
 import { testimonials } from '@/data/testimonials'
@@ -78,10 +78,28 @@ describe('Homepage - structure', () => {
     expect(screen.getByTestId('hero-machine')).toBeInTheDocument()
   })
 
-  it('underlines "Find the leaks" in the hero', () => {
+  it('underlines "Find the leaks." with its period, so the period never wraps alone', () => {
     const { container } = render(<HomeHero />)
+    const h1 = container.querySelector('h1')!
+    expect(squash(h1.textContent)).toBe('Find the leaks. Fix the site. Book the work.')
     const underline = container.querySelector('h1 .redline-underline')
-    expect(squash(underline?.textContent)).toBe('Find the leaks')
+    expect(squash(underline?.textContent)).toBe('Find the leaks.')
+    const words = Array.from(container.querySelectorAll('h1 .redline-underline-word')).map((el) => squash(el.textContent))
+    expect(words).toContain('leaks.')
+  })
+
+  it('orders the phone hero as headline, CTAs, machine, then Ben and the subcopy', () => {
+    const { container } = render(<HomeHero />)
+    const orderOf = (el: Element | null) => {
+      const match = (el?.getAttribute('class') ?? '').match(/(?:^|\s)order-(\d)/)
+      return match ? Number(match[1]) : NaN
+    }
+    const headline = container.querySelector('h1')!.parentElement
+    const ctas = container.querySelector('a[data-cta="hero"]')!.parentElement
+    const machine = screen.getByTestId('hero-machine').parentElement
+    const ben = screen.getByAltText('Ben Hankins, founder of Sproutflow Studio').closest('.order-4')
+    const sub = screen.getByText(homeHero.sub)
+    expect([orderOf(headline), orderOf(ctas), orderOf(machine), orderOf(ben), orderOf(sub)]).toEqual([1, 2, 3, 4, 5])
   })
 
   it('names no neighborhoods anywhere on the homepage, including its structured data', () => {
@@ -252,6 +270,21 @@ describe('Homepage - offer menu', () => {
         })
     })
     expect(container.querySelectorAll('article').length).toBe(catalog.length)
+  })
+
+  it('lists what is included, behind a toggle on phones', () => {
+    const { container } = render(<OfferMenu />)
+    catalog.forEach((offer) => {
+      const article = container.querySelector(`article#${offer.id}`)!
+      expect(article).toHaveTextContent(offer.line)
+      const details = article.querySelector('details')
+      expect(details).not.toBeNull()
+      expect(details!.querySelector('summary')).toHaveTextContent('What’s included')
+      getIncludedItems(offer).forEach((item) => expect(details).toHaveTextContent(item))
+    })
+    const siteCare = container.querySelector('article#site-care')!
+    expect(siteCare).toHaveTextContent('$99/mo for Rescue and Business sites')
+    expect(siteCare).toHaveTextContent('$150/mo for larger sites')
   })
 
   it('marks pending prices for QA', () => {

@@ -12,10 +12,10 @@ import { getTestimonialForCaseStudy } from './testimonials';
 
 export const homeHero = {
   eyebrow: 'Sproutflow Studio · Websites, lead systems and care',
-  /** The whole headline, for metadata and tests. The component underlines "Find the leaks". */
+  /** The whole headline, for metadata and tests. The component underlines "Find the leaks.", period included, so it never wraps alone. */
   headline: 'Find the leaks. Fix the site. Book the work.',
   sentences: ['Find the leaks.', 'Fix the site.', 'Book the work.'] as const,
-  underline: 'Find the leaks',
+  underline: 'Find the leaks.',
   sub: 'I’m Ben. I find where your website loses customers, fix it at a fixed price, and keep it working after launch.',
   primaryCta: 'Book a 15-minute call',
   secondaryCta: { label: 'Check your website free', href: '/check' },
@@ -86,7 +86,7 @@ export function getHomeProof(specs: readonly ProofSpec[] = homeProof.items): Hom
 export const homeCheck = {
   eyebrow: 'Free website check',
   heading: 'Is your website doing its job?',
-  sub: 'Enter your address. I check what a customer runs into first and show you the results on the next page. No sign-up.',
+  sub: 'I check what a customer runs into first and show you the results. No sign-up.',
   inputLabel: 'Your website address',
   placeholder: 'yourbusiness.com',
   button: 'Check my site',
@@ -111,9 +111,10 @@ export const homeCheck = {
 
 export const homeOffers = {
   eyebrow: 'Prices',
-  heading: 'One menu. Prices up front.',
+  heading: 'Prices up front.',
   sub: 'Every project starts with a 15-minute call and a written, fixed quote. Not sure which fits? That is what the call is for.',
   cta: 'Book a call',
+  included: 'What’s included',
 };
 
 export const homeCare = {

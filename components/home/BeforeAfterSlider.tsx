@@ -10,6 +10,8 @@ export interface BeforeAfterSliderProps {
   label: string;
   /** Visible hint under the frame. */
   hint: string;
+  /** Extra classes for the hint, e.g. to keep it for screen readers only on phones. */
+  hintClassName?: string;
   sizes?: string;
   className?: string;
 }
@@ -25,6 +27,7 @@ export default function BeforeAfterSlider({
   after,
   label,
   hint,
+  hintClassName = '',
   sizes = '(min-width: 1024px) 600px, 100vw',
   className = '',
 }: BeforeAfterSliderProps) {
@@ -81,7 +84,7 @@ export default function BeforeAfterSlider({
           After
         </span>
       </div>
-      <p id={hintId} className="mt-2 font-body text-body-sm text-[#4A574D]">
+      <p id={hintId} className={['mt-2 font-body text-body-sm text-[#4A574D]', hintClassName].filter(Boolean).join(' ')}>
         {hint}
       </p>
     </div>
