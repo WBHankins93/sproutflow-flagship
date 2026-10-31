@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer';
 import { BookCallLink } from '@/components/ui/BookCallLink';
 import { customQuote, formatShortPrice, getOffer, toOfferKey, type OfferKey } from '@/data/catalog';
 import { BOOKING_CTA_LABEL, isBookingConfigured } from '@/lib/constants';
+import { toProjectType } from '@/types/inquiry';
 import { Eyebrow, Heading, MarginNote, Section } from '@/components/v3';
 
 export const metadata: Metadata = {
@@ -14,18 +15,6 @@ export const metadata: Metadata = {
   alternates: { canonical: '/inquiry' },
 };
 
-const pathMap: Record<string, string> = {
-  websites: 'Websites that earn trust',
-  'business-systems': 'Lead capture and follow-up',
-  'growth-support': 'Ongoing growth and support',
-};
-/** Project type prefilled for each offer. A custom quote leaves the choice to the visitor. */
-const offerProjectType: Record<OfferKey, string> = {
-  starter: 'Websites that earn trust',
-  audit: 'Lead capture and follow-up',
-  care: 'Ongoing growth and support',
-  custom: '',
-};
 const steps = [
   { icon: FileSearch, title: 'I read the details', body: 'Every inquiry comes to me directly.' },
   { icon: MessageSquareText, title: 'We talk if useful', body: 'A short call helps clarify the right starting point.' },
@@ -60,7 +49,8 @@ export default async function InquiryPage({ searchParams }: Props) {
   const { path, offer, tier } = await searchParams;
   const offerKey = toOfferKey(offer) ?? toOfferKey(tier);
   const context = offerKey ? offerContext(offerKey) : null;
-  const initialProjectType = (path && pathMap[path]) || (offerKey && offerProjectType[offerKey]) || '';
+  // Project type prefill (types/inquiry.ts): the service path first, then the offer. A custom quote is prefilled too.
+  const initialProjectType = toProjectType(path) || (offerKey ? toProjectType(offerKey) : '');
   return (
     <>
       <Section tone="birch" labelledBy="inquiry-h">

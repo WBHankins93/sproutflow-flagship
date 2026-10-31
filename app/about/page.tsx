@@ -1,153 +1,141 @@
+// app/about/page.tsx - Ben's story on v3, in his own voice.
+//
+// Tones: clearing header (photo and the one margin note), white story, leaf
+// principles, sunlight "why", then the Fern FooterCta and the Pine footer.
+
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import PageHeader from '@/components/ui/PageHeader';
-import SectionShell from '@/components/ui/SectionShell';
-import StatRail from '@/components/ui/StatRail';
 import FooterCta from '@/components/ui/FooterCta';
 import { Footer } from '@/components/layout/Footer';
+import { ButtonLink, Eyebrow, Heading, MarginNote, Section } from '@/components/v3';
+import PageIntro from '@/components/services/PageIntro';
+import { NUMERAL_CLASS, SOFT_TEXT, bookingHref } from '@/components/services/styles';
+import { BOOKING_CTA_LABEL } from '@/lib/constants';
+import { homeBen, homeHero, homeTrust } from '@/data/home';
 import { getImageUrl } from '@/lib/blob-images';
 
 export const metadata: Metadata = {
   title: 'About Ben Hankins',
   description:
-    'Seven years building software inside large companies, including IBM. Now bringing that delivery discipline to owner-run businesses in New Orleans.',
+    'Ben Hankins spent 7 years keeping software running at large companies, including IBM. Now he builds websites, lead systems and care for small businesses. Based in New Orleans, working with businesses anywhere.',
   alternates: { canonical: '/about' },
 };
 
-const principles = [
-  [
-    'One person start to finish',
-    'The person who scopes the work is the person who designs, builds, tests, and explains it.',
-  ],
-  [
-    'Written scope before building',
-    'The important decisions, limits, timing, and fixed quote are visible before production begins.',
-  ],
-  ['You own the accounts', 'Domains, data, analytics, and connected tools stay under your control.'],
-  [
-    'Smallest useful fix first',
-    'The work begins with the part that can make a real difference, not the largest possible project.',
-  ],
-  [
-    'No agency language',
-    'I explain the tradeoffs in plain terms so you can make the decision without learning my vocabulary.',
-  ],
+const PRINCIPLES: [title: string, body: string][] = [
+  ['One person, start to finish', 'The person who takes your call is the person who designs, builds, tests and looks after the work.'],
+  ['A fixed price in writing', 'You see the scope, the timing and the price before I start.'],
+  ['You own everything', 'Your domain, code, data and accounts stay in your name.'],
+  ['The smallest useful fix first', 'I start with the part that makes a real difference, not the biggest possible project.'],
+  ['Plain English', 'I explain the tradeoffs in plain terms, so you can decide without learning my vocabulary.'],
 ];
 
 export default function AboutPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="About Ben"
-        title="I stay close to the problem and the people living with it."
-        titleAccent="the people living with it"
-        intro="One person from the first conversation through launch, documentation, and support."
-      />
-      <SectionShell index="01" label="the opening" variant="cream">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-          <div className="space-y-5 text-body-lg text-text-secondary lg:col-span-6">
-            <p>
-              I spent seven years building and running software inside large companies, including IBM. That work taught
-              me how to scope honestly, ship on a date, and leave behind something the next person can maintain.
-            </p>
-            <p>
-              Sproutflow is where that goes to work for owner run businesses. You will not meet me on the call and then
-              get handed to someone else.
-            </p>
-            <p>I am self taught, which means I had to learn this in plain language. You get the same version.</p>
-            <p>
-              Outside of it I garden, keep too many tropical plants, and make hot sauce that never comes out the same
-              twice.
-            </p>
+      <PageIntro
+        id="about-h"
+        eyebrow="About"
+        title="I’m Ben. I build it, and I keep it working."
+        italic="keep"
+        intro={<p>{homeBen.paragraphs[0]}</p>}
+        aside={
+          <figure className="flex items-end gap-4 lg:flex-col lg:items-start">
+            <div className="relative aspect-[4/5] w-36 flex-none overflow-hidden rounded-2xl border border-primary-900/10 bg-forest-leaf sm:w-48 lg:w-full lg:max-w-[360px]">
+              <Image
+                src={getImageUrl('ben-photo.png')}
+                alt={homeBen.photoAlt}
+                fill
+                priority
+                sizes="(min-width: 1024px) 360px, 192px"
+                className="object-cover object-top"
+              />
+            </div>
+            <MarginNote arrow="left" className="pb-2 lg:pb-0" decorative>
+              {homeHero.note}
+            </MarginNote>
+          </figure>
+        }
+      >
+        <p className="border-l-2 border-ink-700 pl-4 font-body text-body font-semibold text-primary-900">
+          {homeBen.credentials}
+        </p>
+        <p className={`mt-3 font-body text-body ${SOFT_TEXT}`}>{homeTrust.location}</p>
+        <ButtonLink href={bookingHref()} data-cta="about" className="mt-6">
+          {BOOKING_CTA_LABEL}
+        </ButtonLink>
+      </PageIntro>
+
+      <Section tone="white" labelledBy="about-before-h">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
+          <div className="min-w-0 lg:col-span-5">
+            <Eyebrow index="01">Before Sproutflow</Eyebrow>
+            <Heading as="h2" id="about-before-h" className="mt-4">
+              The habits that make the work hold up.
+            </Heading>
           </div>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-xl lg:col-span-5 lg:col-start-8">
-            <Image
-              src={getImageUrl('ben-photo.png')}
-              alt="Ben Hankins, founder of Sproutflow Studio"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 40vw"
-              className="object-cover"
-            />
+          <div className="min-w-0 space-y-5 font-body text-body-lg text-primary-900 lg:col-span-7">
+            <p>
+              I spent seven years keeping software running at large companies, including IBM. That work taught me to scope
+              honestly, ship on a date, and leave behind something the next person can maintain.
+            </p>
+            <p>
+              Big companies are strict about the parts nobody brags about. You write the scope down. You agree what done
+              means before anyone builds. You test it, and you document the handover so the thing survives the person who
+              made it.
+            </p>
+            <p>
+              Small businesses almost never get any of that. I bring the same habits to every project: a fixed price in
+              writing before I start, testing on real phones, and a handoff where you own what you paid for.
+            </p>
+            <p className={SOFT_TEXT}>I am self-taught, so I had to learn all of this in plain language. You get the same version.</p>
           </div>
         </div>
-      </SectionShell>
+      </Section>
 
-      <SectionShell index="02" label="before Sproutflow" variant="ink" labelledBy="before-sproutflow-heading">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <h2 id="before-sproutflow-heading" className="font-display text-display-lg text-cream-300 lg:col-span-5">
-            The habits that make the work hold up.
-          </h2>
-          <div className="space-y-6 text-body-lg text-white/[0.68] lg:col-span-6 lg:col-start-7">
-            <p>
-              Enterprise work is strict about the parts nobody brags about. You write the scope down. You agree what
-              done means before anyone builds. You test it, and you document the handover so the thing survives the
-              person who made it. That is not talent, it is habit, and it is the reason enterprise software keeps
-              running long after the original team has moved on.
-            </p>
-            <p>
-              Small businesses almost never get any of that, and it is not a money problem. It is that most studios skip
-              it. Sproutflow exists to bring that same rigor to a business that could never afford enterprise-scale
-              overhead: a written scope you can hold me to, a fixed quote before anything gets built, and a handoff
-              where you actually own what you paid for.
-            </p>
-            <StatRail
-              variant="ink"
-              className="pt-5"
-              stats={[
-                { value: '7 years', label: 'enterprise software' },
-                { value: '100%', label: 'projects shipped live' },
-                { value: '1 person', label: 'start to finish' },
-              ]}
-            />
+      <Section tone="leaf" labelledBy="about-principles-h">
+        <Eyebrow index="02">How I work</Eyebrow>
+        <Heading as="h2" size="md" id="about-principles-h" className="mt-4">
+          Five rules I keep on every project.
+        </Heading>
+        <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {PRINCIPLES.map(([title, body], i) => (
+            <li key={title} className="rounded-xl bg-forest-white p-5">
+              <span aria-hidden="true" className={`font-mono text-label text-redline ${NUMERAL_CLASS}`}>
+                0{i + 1}
+              </span>
+              <h3 className="mt-3 font-body text-body-lg font-semibold leading-snug text-primary-900">{title}</h3>
+              <p className={`mt-2 font-body text-body-sm ${SOFT_TEXT}`}>{body}</p>
+            </li>
+          ))}
+        </ol>
+      </Section>
+
+      <Section tone="sunlight" labelledBy="about-why-h">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
+          <div className="min-w-0 lg:col-span-5">
+            <Eyebrow index="03">Why Sproutflow</Eyebrow>
+            <Heading as="h2" size="md" id="about-why-h" className="mt-4">
+              Built for businesses that grew on reputation first.
+            </Heading>
           </div>
-        </div>
-      </SectionShell>
-
-      <SectionShell index="03" label="why Sproutflow" variant="cream" labelledBy="origin-heading">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <h2 id="origin-heading" className="font-display text-display-md text-primary-900 lg:col-span-5">
-            Built for businesses that grew on reputation first.
-          </h2>
-          <div className="space-y-6 text-body-lg text-text-secondary lg:col-span-6 lg:col-start-7">
+          <div className="min-w-0 space-y-5 font-body text-body-lg text-primary-900 lg:col-span-7">
             <p>
-              New Orleans runs on people who work for themselves. Contractors, practices, firms, offices, trades, shops.
-              It is a city built on doing your own thing, and word of mouth here is strong enough that plenty of them
-              never needed a website to stay busy. Some of the best ones I found had a backlog they could not clear and
-              no website at all.
+              Plenty of good businesses run on word of mouth: trades, practices, creative studios, small shops. Some of the
+              best I have met had more work than they could clear and no website at all, or one that quietly stopped
+              working years ago.
             </p>
             <p>
               That is the part that got me. Not that these businesses were failing, but that they were succeeding on
-              reputation alone, with nothing built to catch what comes next. Sproutflow is me working on that, one
-              business at a time.
+              reputation alone, with nothing built to catch what comes next. Sproutflow is me working on that, one business
+              at a time.
+            </p>
+            <p className={SOFT_TEXT}>
+              Outside of work I garden, keep too many tropical plants, and make hot sauce that never comes out the same
+              twice.
             </p>
           </div>
         </div>
-      </SectionShell>
-
-      <SectionShell
-        index="04"
-        label="how I actually work"
-        variant="ink"
-        className="bg-ink-700"
-        labelledBy="principles-heading"
-      >
-        <h2 id="principles-heading" className="max-w-4xl font-display text-display-md text-cream-300">
-          Five principles that stay visible in the work.
-        </h2>
-        <div className="mt-12 grid border-t border-white/20 md:grid-cols-2">
-          {principles.map(([title, body], index) => (
-            <article
-              key={title}
-              className={`border-b border-white/20 py-7 md:px-7 ${index % 2 === 0 ? 'md:border-r md:pl-0' : 'md:pr-0'}`}
-            >
-              <span className="font-mono text-mono-meta text-accent-300">0{index + 1}</span>
-              <h3 className="mt-5 font-display text-display-sm text-cream-300">{title}</h3>
-              <p className="mt-3 font-body text-body-sm text-white/55">{body}</p>
-            </article>
-          ))}
-        </div>
-      </SectionShell>
+      </Section>
 
       <FooterCta />
       <Footer />

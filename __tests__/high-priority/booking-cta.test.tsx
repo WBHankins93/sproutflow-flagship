@@ -183,10 +183,10 @@ describe('Inquiry page offer mapping', () => {
   }
 
   const NEW: Array<[string, string, string]> = [
-    ['starter', 'Websites that earn trust', 'Starter landing page, $500.'],
-    ['audit', 'Lead capture and follow-up', 'Lead Flow Audit, $500.'],
-    ['care', 'Ongoing growth and support', 'Site Care, $99/mo or $150/mo.'],
-    ['custom', '', 'Bring me the problem.'],
+    ['starter', 'Starter landing page', 'Starter landing page, $500.'],
+    ['audit', 'Lead Flow Audit', 'Lead Flow Audit, $500.'],
+    ['care', 'Site Care', 'Site Care, $99/mo or $150/mo.'],
+    ['custom', 'A custom project', 'Bring me the problem.'],
   ]
 
   NEW.forEach(([offer, projectType, line]) => {
@@ -213,15 +213,15 @@ describe('Inquiry page offer mapping', () => {
     })
   })
 
-  it('preselects the website path for the old website-rescue tier', async () => {
+  it('preselects the starter landing page for the old website-rescue tier', async () => {
     const { select } = await renderInquiry({ tier: 'website-rescue' })
-    expect(select.value).toBe('Websites that earn trust')
+    expect(select.value).toBe('Starter landing page')
   })
 
   it('prefers offer= over tier=, and path= for the project type', async () => {
     const { select, context } = await renderInquiry({ offer: 'care', tier: 'website-rescue', path: 'business-systems' })
     expect(context).toHaveAttribute('data-offer', 'care')
-    expect(select.value).toBe('Lead capture and follow-up')
+    expect(select.value).toBe('Lead Flow Audit')
   })
 
   it('shows no offer line without an offer', async () => {
