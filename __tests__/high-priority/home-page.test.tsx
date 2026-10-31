@@ -23,7 +23,7 @@ import ProofStrip from '@/components/home/ProofStrip'
 import TrustStrip from '@/components/home/TrustStrip'
 import WorkSection from '@/components/home/WorkSection'
 import { homeBookingHref } from '@/components/home/booking'
-import { catalog, catalogCategories, formatAmount, getIncludedItems } from '@/data/catalog'
+import { customQuote, fixedOffers, formatAmount, getIncludedItems } from '@/data/catalog'
 import { HOME_SECTION_IDS, getHomeProof, homeBen, homeHero, homeOwn, homeTrust } from '@/data/home'
 import { projectProof } from '@/data/projectProof'
 import { testimonials } from '@/data/testimonials'
@@ -152,14 +152,17 @@ describe('Homepage - booking CTAs', () => {
       expect(container.querySelector('a[data-cta="hero"]')).toHaveTextContent('Book a 15-minute call')
       expect(container.querySelector('a[data-cta="book"]')).toHaveAttribute('href', base)
 
-      catalog.forEach((offer) => {
-        const category = catalogCategories.find((entry) => entry.id === offer.category)!
-        const expected = base === '/inquiry' ? `/inquiry?path=${category.servicePath}` : '/book'
+      fixedOffers.forEach((offer) => {
+        const expected = base === '/inquiry' ? `/inquiry?offer=${offer.key}` : '/book'
         const cta = container.querySelector(`a[data-cta="offer-${offer.id}"]`)
         expect(cta).not.toBeNull()
         expect(cta).toHaveAttribute('href', expected)
         expect(squash(cta!.textContent)).toBe(`Book a call about ${offer.name}`)
       })
+      const custom = container.querySelector('a[data-cta="offer-custom-quote"]')
+      expect(custom).toHaveAttribute('href', base === '/inquiry' ? '/inquiry?offer=custom' : '/book')
+      expect(custom).toHaveTextContent('Book a 15-minute call')
+      expect(container.querySelector('a[data-cta="offer-custom-describe"]')).toHaveAttribute('href', '/inquiry?offer=custom')
 
       const care = container.querySelector('a[data-cta="care"]')
       expect(care).toHaveAttribute('href', base === '/inquiry' ? '/inquiry?path=growth-support' : '/book')
@@ -251,30 +254,39 @@ describe('Homepage - website check teaser', () => {
 })
 
 describe('Homepage - offer menu', () => {
-  it('renders every catalog offer under its category with its price from data', () => {
+  it('sits on Pine with the three fixed offers in order, then the custom quote', () => {
     const { container } = render(<OfferMenu />)
-    catalogCategories.forEach((category) => {
-      const group: HTMLElement = screen.getByRole('region', { name: category.name })
-      catalog
-        .filter((offer) => offer.category === category.id)
-        .forEach((offer) => {
-          const article = group.querySelector(`article#${offer.id}`) as HTMLElement
-          expect(article).not.toBeNull()
-          const labelledBy = article.getAttribute('aria-labelledby')!
-          expect(squash(container.querySelector(`#${labelledBy}`)?.textContent)).toBe(offer.name)
-          if (offer.prices.length === 0) {
-            expect(article).toHaveTextContent(offer.priceLabel!)
-          }
-          offer.prices.forEach((price) => expect(article).toHaveTextContent(formatAmount(price)))
-          if (offer.priceNote) expect(article).toHaveTextContent(offer.priceNote)
-        })
+    const section = container.querySelector('section#offers')!
+    expect(section).toHaveAttribute('data-tone', 'pine')
+    const articles = Array.from(section.querySelectorAll('article')).map((article) => article.id)
+    expect(articles).toEqual(['starter-landing-page', 'lead-flow-audit', 'site-care', 'custom-quote'])
+  })
+
+  it('renders every fixed offer with its price from data, in Sun gold mono', () => {
+    const { container } = render(<OfferMenu />)
+    const group: HTMLElement = screen.getByRole('region', { name: 'Fixed-price offers' })
+    fixedOffers.forEach((offer) => {
+      const article = group.querySelector(`article#${offer.id}`) as HTMLElement
+      expect(article).not.toBeNull()
+      const labelledBy = article.getAttribute('aria-labelledby')!
+      expect(squash(container.querySelector(`#${labelledBy}`)?.textContent)).toBe(offer.name)
+      offer.prices.forEach((price) => expect(article).toHaveTextContent(formatAmount(price)))
+      if (offer.priceNote) expect(article).toHaveTextContent(offer.priceNote)
+      const prices = Array.from(article.querySelectorAll('.text-price'))
+      expect(prices.length).toBe(offer.prices.length)
+      prices.forEach((price) => {
+        expect(price).toHaveClass('font-mono')
+        expect(price).toHaveClass('text-forest-sungold')
+      })
     })
-    expect(container.querySelectorAll('article').length).toBe(catalog.length)
+    expect(squash(container.querySelector('#starter-landing-page .text-price')?.textContent)).toBe('$500')
+    expect(squash(container.querySelector('#lead-flow-audit .text-price')?.textContent)).toBe('$500')
+    expect(Array.from(container.querySelectorAll('#site-care .text-price')).map((el) => el.textContent)).toEqual(['$99', '$150'])
   })
 
   it('lists what is included, behind a toggle on phones', () => {
     const { container } = render(<OfferMenu />)
-    catalog.forEach((offer) => {
+    fixedOffers.forEach((offer) => {
       const article = container.querySelector(`article#${offer.id}`)!
       expect(article).toHaveTextContent(offer.line)
       const details = article.querySelector('details')
@@ -283,14 +295,25 @@ describe('Homepage - offer menu', () => {
       getIncludedItems(offer).forEach((item) => expect(details).toHaveTextContent(item))
     })
     const siteCare = container.querySelector('article#site-care')!
-    expect(siteCare).toHaveTextContent('$99/mo for Rescue and Business sites')
+    expect(siteCare).toHaveTextContent('$99/mo for starter and small sites')
     expect(siteCare).toHaveTextContent('$150/mo for larger sites')
   })
 
-  it('marks pending prices for QA', () => {
+  it('shows the custom quote: the heading, the verbatim range line and three steps', () => {
     const { container } = render(<OfferMenu />)
-    const pending = Array.from(container.querySelectorAll('article[data-pending]')).map((el) => el.id)
-    expect(pending).toEqual(catalog.filter((offer) => offer.pending).map((offer) => offer.id))
+    const block = container.querySelector('article#custom-quote') as HTMLElement
+    expect(screen.getByRole('heading', { name: 'Bring me the problem.' })).toBeInTheDocument()
+    expect(block.querySelector('[data-range-line]')?.textContent).toBe(customQuote.range)
+    expect(customQuote.range).toBe('Most projects land between $1,500 and $6,000, paid in parts.')
+    const steps = screen.getByRole('list', { name: 'How it works' })
+    expect(steps.querySelectorAll('li').length).toBe(3)
+    customQuote.examples.forEach((example) => expect(block).toHaveTextContent(example))
+    expect(block.querySelector('.text-price')).toBeNull()
+  })
+
+  it('never uses the red pen on Pine', () => {
+    const { container } = render(<OfferMenu />)
+    expect(/redline/.test(container.innerHTML)).toBe(false)
   })
 
   it('never hard-codes a price in a homepage component', () => {

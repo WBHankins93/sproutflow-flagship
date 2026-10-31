@@ -5,13 +5,20 @@
  * Pure type module: safe to import from client components.
  */
 
+import type { OfferKey } from '@/data/catalog';
+
 /** Six page checks, then two operations checks from public data (domain registry, DNS). */
 export type CheckId = 'loads' | 'https' | 'mobile' | 'call' | 'form' | 'speed' | 'domain' | 'email';
 
 /** `unknown` displays as a grey "not checked" line. */
 export type CheckStatus = 'pass' | 'warn' | 'fail' | 'unknown';
 
-export type OfferId = 'website-rescue' | 'lead-capture-system' | 'lead-flow-audit';
+/**
+ * The recommended next step: one of the catalog offer keys (data/catalog.ts).
+ * Old ids map through LEGACY_OFFER_KEYS: website-rescue is now `starter`,
+ * lead-capture-system is `custom`, lead-flow-audit is `audit`.
+ */
+export type OfferId = OfferKey;
 
 export interface CheckResult {
   id: CheckId;

@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { AlertCircle, ArrowRight, Check, Circle, LoaderCircle } from 'lucide-react';
+import { getOffer } from '@/data/catalog';
 import { CHECK_ORDER, ERROR_MESSAGES, OFFLINE_MESSAGE, STEP_NAMES } from '@/lib/website-check/messages';
 import { countStatuses, doneAnnouncement } from '@/lib/website-check/summarize';
 import type { WebsiteCheckErrorCode, WebsiteCheckResult } from '@/lib/website-check/types';
@@ -9,6 +10,9 @@ import { normalizeInput } from '@/lib/website-check/url-guard';
 import { Heading } from '@/components/v3';
 import { CheckResults } from './CheckResults';
 import { cardClass, inputClass, invalidInputClass, labelClass, primaryButtonClass, softTextClass } from './styles';
+
+/** "starter landing page", from data/catalog.ts, for the no-website line. */
+const STARTER_NAME = (getOffer('starter')?.name ?? 'Starter landing page').toLowerCase();
 
 type Phase = 'idle' | 'checking' | 'results';
 
@@ -230,7 +234,7 @@ export function WebsiteCheck({ initialUrl = '' }: { initialUrl?: string } = {}) 
               ))}
             </ol>
             <p className={`mt-4 text-sm ${softTextClass}`}>
-              No website at all? That is what <strong className="text-primary-900">Website Rescue</strong> is for.
+              No website at all? That is what my <strong className="text-primary-900">{STARTER_NAME}</strong> is for.
             </p>
           </div>
         </div>

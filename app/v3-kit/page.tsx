@@ -217,8 +217,8 @@ export default function V3KitPage() {
         </div>
         <div className="mt-10 grid gap-6 sm:grid-cols-3">
           <div>
-            <p className="font-mono text-label uppercase text-[#4A574D]">Website Rescue</p>
-            <p className="mt-2 font-mono text-price tabular-nums text-primary-900">$1,500</p>
+            <p className="font-mono text-label uppercase text-[#4A574D]">Starter landing page</p>
+            <p className="mt-2 font-mono text-price tabular-nums text-primary-900">$500</p>
           </div>
           <div>
             <p className="font-mono text-label uppercase text-[#4A574D]">DJN Services</p>

@@ -7,8 +7,7 @@
  * Pure and client-safe: no Node imports.
  */
 
-import { websiteRescue } from '@/data/offers';
-import { tiers } from '@/data/tiers';
+import { customQuote, formatShortPrice, getIncludedItems, getOffer, toOfferKey } from '@/data/catalog';
 import type { CheckId, CheckResult, CheckStatus, OfferId, WebsiteCheckResult } from './types';
 
 export interface StatusCounts {
@@ -28,49 +27,65 @@ function statusOf(checks: CheckResult[], id: CheckResult['id']): CheckStatus | u
   return checks.find((check) => check.id === id)?.status;
 }
 
+const isIssue = (check: CheckResult) => check.status === 'warn' || check.status === 'fail';
+
 /** The operations checks read public data about the domain, not the page. */
 const OPS_CHECKS = new Set<CheckId>(['domain', 'email']);
 
 /**
- * First matching rule wins:
- * 1. C1, C2 or C3 fails, C1 is a parked page, or C6 fails: Website Rescue.
- * 2. C1 to C3 all pass and C5 warns: Lead Capture & Follow-Up System.
- * 3. Anything else: Lead Flow Audit.
+ * First matching rule wins (offer keys from data/catalog.ts):
+ * 1. C1, C2 or C3 fails, C1 is a parked page, or C6 fails: a dead, missing or
+ *    broken site, so the Starter landing page (old id website-rescue).
+ * 2. C1 to C3 all pass and C5 warns: a custom quote, "Bring me the problem"
+ *    (old id lead-capture-system).
+ * 3. Any other page check warns or fails (the lead path: call, form, speed):
+ *    the Lead Flow Audit.
+ * 4. Every page check passes but the domain or email check warns or fails:
+ *    Site Care.
+ * 5. Everything passes: the Lead Flow Audit, the next place to look.
  * No page check could run: no offer (the page offers a call instead), even
  * when the domain and email checks have results.
- * The domain and email checks do not change the offer; their notes point to
- * Site Care.
  */
 export function recommendOffer(checks: CheckResult[]): OfferId | null {
   const pageChecks = checks.filter((check) => !OPS_CHECKS.has(check.id));
   if (pageChecks.length === 0 || pageChecks.every((check) => check.status === 'unknown')) return null;
   const loads = checks.find((check) => check.id === 'loads');
   const coreFail = (['loads', 'https', 'mobile'] as const).some((id) => statusOf(checks, id) === 'fail');
-  if (coreFail || loads?.data?.parked === true || statusOf(checks, 'speed') === 'fail') return 'website-rescue';
+  if (coreFail || loads?.data?.parked === true || statusOf(checks, 'speed') === 'fail') return 'starter';
   const corePass = (['loads', 'https', 'mobile'] as const).every((id) => statusOf(checks, id) === 'pass');
-  if (corePass && statusOf(checks, 'form') === 'warn') return 'lead-capture-system';
-  return 'lead-flow-audit';
+  if (corePass && statusOf(checks, 'form') === 'warn') return 'custom';
+  if (pageChecks.some(isIssue)) return 'audit';
+  if (checks.some((check) => OPS_CHECKS.has(check.id) && isIssue(check))) return 'care';
+  return 'audit';
 }
+
+/** Fix lines, one per offer, so every note names an offer that is on the site. */
+export const FIX_LINES = {
+  starter: 'A starter landing page fixes this.',
+  starterForm: 'A starter landing page includes a quote form.',
+  audit: 'The Lead Flow Audit looks at this.',
+  custom: 'A custom quote covers this. Bring me the problem.',
+  care: 'Site Care covers this.',
+} as const;
 
 /** The "which offer covers this" note under a warn or fail line. */
 export function fixLine(check: CheckResult, offer: OfferId | null): string | undefined {
-  if (check.status !== 'warn' && check.status !== 'fail') return undefined;
+  if (!isIssue(check)) return undefined;
   switch (check.id) {
     case 'loads':
     case 'https':
     case 'mobile':
-      return 'Website Rescue fixes this.';
+      return FIX_LINES.starter;
     case 'call':
-      return 'The Lead Flow Audit looks at this.';
+      return FIX_LINES.audit;
     case 'form':
-      return offer === 'website-rescue'
-        ? 'Website Rescue includes a quote form.'
-        : 'The Lead Capture & Follow-Up System covers this.';
+      if (offer === 'starter') return FIX_LINES.starterForm;
+      return offer === 'custom' ? FIX_LINES.custom : FIX_LINES.audit;
     case 'speed':
-      return check.status === 'fail' ? 'Website Rescue fixes this.' : 'The Lead Flow Audit looks at this.';
+      return check.status === 'fail' ? FIX_LINES.starter : FIX_LINES.audit;
     case 'domain':
     case 'email':
-      return 'Site Care covers this.';
+      return FIX_LINES.care;
     default:
       return undefined;
   }
@@ -91,25 +106,37 @@ export function withRecommendation(checks: CheckResult[]): { offer: OfferId | nu
 export interface OfferDetails {
   id: OfferId;
   name: string;
-  price: string;
+  /** "$500", "$99/mo or $150/mo"; null for the custom quote, which has no price. */
+  price: string | null;
+  /** The price note, or the range line for the custom quote. */
   priceNote: string;
   includes: string[];
 }
 
-/** Name, price and includes for an offer, from the site's own data files. */
-export function offerDetails(id: OfferId): OfferDetails {
-  if (id === 'website-rescue') {
+/**
+ * Name, price and includes for an offer, all from data/catalog.ts. An old id
+ * from before the 29 Oct restructure ("website-rescue") maps to its new key.
+ */
+export function offerDetails(offerId: OfferId): OfferDetails {
+  const id: OfferId = toOfferKey(offerId) ?? 'custom';
+  if (id === 'custom') {
     return {
       id,
-      name: websiteRescue.name,
-      price: websiteRescue.price,
-      priceNote: websiteRescue.priceNote,
-      includes: websiteRescue.includes,
+      name: customQuote.name,
+      price: null,
+      priceNote: customQuote.range,
+      includes: customQuote.steps.map((step) => `${step.title}. ${step.body}`),
     };
   }
-  const tier = tiers.find((item) => item.id === id);
-  if (!tier) throw new Error(`Unknown offer ${id}`);
-  return { id, name: tier.name, price: tier.price, priceNote: tier.priceNote, includes: tier.includes };
+  const offer = getOffer(id);
+  if (!offer) throw new Error(`Unknown offer ${id}`);
+  return {
+    id,
+    name: offer.name,
+    price: formatShortPrice(offer),
+    priceNote: offer.priceNote ?? '',
+    includes: getIncludedItems(offer).filter((item) => item !== offer.priceNote),
+  };
 }
 
 const SEVERITY: Record<CheckStatus, number> = { fail: 0, warn: 1, unknown: 2, pass: 3 };
@@ -147,7 +174,7 @@ export function formatSummaryText(result: WebsiteCheckResult): string {
     `Final URL: ${result.finalUrl ?? 'did not load'}`,
     `Checked: ${result.checkedAt}`,
     `Totals: ${counts.fail} fail, ${counts.warn} warn, ${counts.pass} pass, ${counts.unknown} not checked`,
-    `Recommendation: ${offer ? `${offer.name} (${offer.price})` : 'none, the site could not be checked'}`,
+    `Recommendation: ${offer ? `${offer.name} (${offer.price ?? 'quoted after a call'})` : 'none, the site could not be checked'}`,
     '',
     ...sortBySeverity(result.checks).map((check) => `${STATUS_TEXT[check.status]} | ${check.label}: ${check.line}`),
   ];

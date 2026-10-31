@@ -19,8 +19,8 @@ export const primaryButtonClass =
 export const secondaryButtonClass =
   'inline-flex min-h-12 items-center justify-center gap-2 rounded-full border-2 border-primary-900 bg-transparent px-6 py-3 font-semibold leading-tight text-primary-900 transition-colors duration-150 hover:bg-primary-900/[0.06] focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-redline disabled:opacity-60';
 
-/** Paper card on the Birch canvas. */
-export const cardClass = 'rounded-2xl border border-primary-900/15 bg-[#FBF8F1] p-5 md:p-7';
+/** Form and results card on Sunlit forest white (#FBFCF8). */
+export const cardClass = 'rounded-2xl border border-primary-900/15 bg-forest-white p-5 md:p-7';
 
 /** The recommended offer: same card, heavier Pine border. */
 export const offerCardClass = 'rounded-2xl border-2 border-primary-900 bg-[#FBF8F1] p-5 md:p-7';

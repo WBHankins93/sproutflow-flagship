@@ -3,6 +3,7 @@
 import { forwardRef } from 'react';
 import { ArrowRight, Check, RotateCcw } from 'lucide-react';
 import { BookCallLink } from '@/components/ui/BookCallLink';
+import { customQuote } from '@/data/catalog';
 import { BOOKING_CTA_LABEL } from '@/lib/constants';
 import { countStatuses, offerDetails, sortBySeverity } from '@/lib/website-check/summarize';
 import type { OfferId, WebsiteCheckResult } from '@/lib/website-check/types';
@@ -40,24 +41,34 @@ function OfferCard({ offer, allPass }: { offer: OfferId | null; allPass: boolean
   }
 
   const details = offerDetails(offer);
-  const audit = offer === 'lead-capture-system' ? offerDetails('lead-flow-audit') : null;
-  const intro =
-    offer === 'website-rescue'
-      ? 'This is the fixed-price way I fix what I found.'
-      : offer === 'lead-capture-system'
-        ? 'Your site covers the first basics. The next step is giving every inquiry a clear way to reach you.'
-        : 'The next place to look is what happens after someone reaches out.';
+  const isCustom = details.id === 'custom';
+  const audit = isCustom ? offerDetails('audit') : null;
+  const intro: Record<OfferId, string> = {
+    starter: 'This is the fixed-price way I fix what I found.',
+    custom: 'Your site covers the first basics. The next step is giving every inquiry a clear way to reach you.',
+    care: 'Your pages cover the basics. What I found is in the domain and email behind them, and that is what Site Care watches.',
+    audit: 'The next place to look is what happens after someone reaches out.',
+  };
 
   return (
     <div className={offerCardClass}>
       <p className={labelClass}>{allPass ? 'Your site covers the basics' : 'My recommendation'}</p>
-      <h3 className="mt-3 font-display text-display-sm font-normal text-primary-900">{details.name}</h3>
-      <p className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-        <span className="font-mono text-price tabular-nums text-primary-900 [font-variant-ligatures:none]">{details.price}</span>
-        <span className={`text-sm ${softTextClass}`}>{details.priceNote}</span>
-      </p>
-      <p className="mt-3 text-primary-900">{intro}</p>
-      <ul className="mt-4 space-y-2">
+      <h3 className="mt-3 font-display text-display-sm font-normal text-primary-900">
+        {isCustom ? customQuote.heading : details.name}
+      </h3>
+      {details.price ? (
+        <p className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+          <span className="font-mono text-price tabular-nums text-primary-900 [font-variant-ligatures:none]">{details.price}</span>
+          {details.priceNote && <span className={`text-sm ${softTextClass}`}>{details.priceNote}</span>}
+        </p>
+      ) : (
+        <p className={`mt-3 ${softTextClass}`} data-range-line>
+          {details.priceNote}
+        </p>
+      )}
+      <p className="mt-3 text-primary-900">{intro[details.id]}</p>
+      {isCustom && <p className={`${labelClass} mt-4`}>How it works</p>}
+      <ul className={isCustom ? 'mt-2 space-y-2' : 'mt-4 space-y-2'}>
         {details.includes.map((item) => (
           <li key={item} className={`grid grid-cols-[18px_minmax(0,1fr)] gap-2 text-[15px] ${softTextClass}`}>
             <Check className="mt-1 h-[18px] w-[18px] text-ink-700" aria-hidden="true" />
@@ -67,11 +78,11 @@ function OfferCard({ offer, allPass }: { offer: OfferId | null; allPass: boolean
       </ul>
       {audit && (
         <p className={`mt-4 text-sm ${softTextClass}`}>
-          Want a smaller first step? The {audit.name} is {audit.price}, {audit.priceNote}.
+          Want a smaller first step? The {audit.name} is {audit.price}. {audit.priceNote}
         </p>
       )}
       <div className="mt-5 border-t border-primary-900/15 pt-5">
-        <BookCallLink data-cta="website-check-offer" inquiryQuery={`tier=${offer}`} className={`w-full ${primaryButtonClass}`}>
+        <BookCallLink data-cta="website-check-offer" inquiryQuery={`offer=${details.id}`} className={`w-full ${primaryButtonClass}`}>
           {BOOKING_CTA_LABEL}
           <ArrowRight className="h-4 w-4 motion-safe:transition-transform motion-safe:group-hover:translate-x-1" aria-hidden="true" />
         </BookCallLink>

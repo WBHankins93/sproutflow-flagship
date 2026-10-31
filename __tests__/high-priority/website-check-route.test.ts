@@ -27,7 +27,7 @@ const RESULT: WebsiteCheckResult = {
   host: 'example.com',
   finalUrl: 'https://www.example.com/',
   outcome: 'checked',
-  offer: 'lead-flow-audit',
+  offer: 'audit',
   checks: [
     { id: 'loads', label: 'It loads', status: 'pass', line: 'Your homepage loaded in 0.6 seconds from my server.' },
     { id: 'https', label: 'It is secure', status: 'pass', line: 'Your site uses a secure https connection, and the plain http address forwards to it.' },

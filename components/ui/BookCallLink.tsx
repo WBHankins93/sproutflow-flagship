@@ -11,7 +11,7 @@ type BookCallLinkProps = {
   'aria-label'?: string;
   /**
    * Query string (without `?`) added only when the link falls back to
-   * /inquiry, so the form keeps its path prefill, e.g. `tier=lead-flow-audit`.
+   * /inquiry, so the form keeps its path prefill, e.g. `offer=audit`.
    */
   inquiryQuery?: string;
 };

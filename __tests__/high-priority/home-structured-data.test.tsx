@@ -1,16 +1,15 @@
 /**
  * HIGH PRIORITY: structured data and llms.txt follow data/catalog.ts.
  *
- * The OfferCatalog has one Offer per catalog entry. Prices appear only where
- * the catalog has a fixed or "from" value, and the top website tier carries
- * no price at all.
+ * The OfferCatalog has one Offer per fixed-price offer, with its exact price,
+ * then the custom quote with no price at all.
  */
 
 import fs from 'fs'
 import path from 'path'
 import { render } from '@testing-library/react'
 import StructuredData from '@/components/StructuredData'
-import { catalog, catalogCategories, getCategory } from '@/data/catalog'
+import { catalogCategories, customQuote, fixedOffers, getCategory } from '@/data/catalog'
 
 const WWW = 'https://www.sproutflow-studio.com'
 
@@ -33,11 +32,16 @@ describe('Structured data - offer catalog matches data/catalog.ts', () => {
   const organization = readOrganization()
   const offers: Array<Record<string, any>> = organization.hasOfferCatalog.itemListElement
 
-  it('lists exactly the catalog offers, in order', () => {
+  it('lists the three fixed offers, then the custom quote, in order', () => {
     expect(organization.hasOfferCatalog['@type']).toBe('OfferCatalog')
-    expect(offers.map((offer) => offer.itemOffered.name)).toEqual(catalog.map((offer) => offer.name))
-    offers.forEach((offer, index) => {
-      const source = catalog[index]
+    expect(offers.map((offer) => offer.itemOffered.name)).toEqual([
+      'Starter landing page',
+      'Lead Flow Audit',
+      'Site Care',
+      'Custom quote',
+    ])
+    fixedOffers.forEach((source, index) => {
+      const offer = offers[index]
       expect(offer['@type']).toBe('Offer')
       expect(offer.itemOffered['@type']).toBe('Service')
       expect(offer.itemOffered.description).toBe(source.summary)
@@ -46,49 +50,43 @@ describe('Structured data - offer catalog matches data/catalog.ts', () => {
     })
   })
 
-  it('carries each catalog price exactly, and nothing more', () => {
-    offers.forEach((offer, index) => {
-      const source = catalog[index]
-      if (source.prices.length === 0) return
-      const single = source.prices.length === 1 && source.prices[0].basis === 'fixed' && !source.prices[0].per
-      if (single) {
-        expect(offer.price).toBe(String(source.prices[0].amount))
-        expect(offer.priceCurrency).toBe('USD')
-        expect(offer.priceSpecification).toBeUndefined()
-        return
-      }
-      expect(offer.price).toBeUndefined()
-      const specs = specsOf(offer)
-      expect(specs.length).toBe(source.prices.length)
-      specs.forEach((spec, i) => {
-        const price = source.prices[i]
-        expect(spec.priceCurrency).toBe('USD')
-        if (price.basis === 'from') {
-          expect(spec.minPrice).toBe(price.amount)
-          expect(spec.price).toBeUndefined()
-        } else {
-          expect(spec.price).toBe(price.amount)
-        }
-        if (price.per === 'month') {
-          expect(spec['@type']).toBe('UnitPriceSpecification')
-          expect(spec.unitCode).toBe('MON')
-        }
-      })
+  it('prices the Starter landing page and the Lead Flow Audit at a fixed 500 USD', () => {
+    ;[offers[0], offers[1]].forEach((offer) => {
+      expect(offer.price).toBe('500')
+      expect(offer.priceCurrency).toBe('USD')
+      expect(offer.priceSpecification).toBeUndefined()
     })
   })
 
-  it('gives the top website tier no price at all', () => {
-    const top = offers.find((offer) => offer.itemOffered.name === 'Catalog & Custom Build')!
-    expect(top).toBeDefined()
-    expect(top.price).toBeUndefined()
-    expect(top.priceSpecification).toBeUndefined()
-    expect(top.priceCurrency).toBeUndefined()
-    expect(/6,?000|12,?000/.test(JSON.stringify(top))).toBe(false)
+  it('prices Site Care as two monthly prices, 99 and 150 USD', () => {
+    const care = offers[2]
+    expect(care.price).toBeUndefined()
+    const specs = specsOf(care)
+    expect(specs.map((spec) => spec.price)).toEqual([99, 150])
+    specs.forEach((spec) => {
+      expect(spec['@type']).toBe('UnitPriceSpecification')
+      expect(spec.unitCode).toBe('MON')
+      expect(spec.priceCurrency).toBe('USD')
+      expect(spec.minPrice).toBeUndefined()
+    })
   })
 
-  it('keeps Website Rescue at a fixed 1500 USD', () => {
-    const rescue = offers.find((offer) => offer.itemOffered.name === 'Website Rescue')!
-    expect(rescue.price).toBe('1500')
+  it('gives the custom quote no price at all', () => {
+    const custom = offers[3]
+    expect(custom['@type']).toBe('Offer')
+    expect(custom.itemOffered.url).toBe(`${WWW}/#${customQuote.id}`)
+    expect(custom.itemOffered.description).toBe(customQuote.summary)
+    expect(custom.price).toBeUndefined()
+    expect(custom.priceSpecification).toBeUndefined()
+    expect(custom.priceCurrency).toBeUndefined()
+    expect(/\$|1,?500|6,?000/.test(JSON.stringify(custom))).toBe(false)
+  })
+
+  it('has no removed offers', () => {
+    const json = JSON.stringify(organization)
+    ;['Website Rescue', 'Business Website', 'Growth Website', 'Catalog & Custom Build', 'Lead Capture', 'Custom Business Software'].forEach(
+      (name) => expect(json.includes(name)).toBe(false),
+    )
   })
 
   it('serves anyone: no neighborhood list in areaServed', () => {
@@ -100,23 +98,32 @@ describe('Structured data - offer catalog matches data/catalog.ts', () => {
 describe('llms.txt - follows the catalog', () => {
   const llms = fs.readFileSync(path.join(process.cwd(), 'public', 'llms.txt'), 'utf8')
 
-  it('has a section per category', () => {
-    catalogCategories.forEach((category) => expect(llms).toContain(`## ${category.name}`))
+  it('has a fixed-price section and a custom-quote section', () => {
+    expect(llms).toContain('## Fixed-price offers')
+    expect(llms).toContain('## Custom quote: "Bring me the problem."')
   })
 
-  it('lists every offer with its homepage anchor', () => {
-    catalog.forEach((offer) => {
+  it('lists every offer with its homepage anchor and exact price', () => {
+    ;[...fixedOffers, customQuote].forEach((offer) => {
       expect(llms).toContain(`[${offer.name}](${WWW}/#${offer.id})`)
     })
+    const line = (name: string) => llms.split('\n').find((entry) => entry.includes(`[${name}]`))!
+    expect(line('Starter landing page')).toContain('$500 fixed')
+    expect(line('Lead Flow Audit')).toContain('$500 fixed, credited toward any build')
+    expect(line('Site Care')).toContain('$99 a month for starter and small sites, $150 a month for larger sites')
+    expect(/\$/.test(line('Custom quote'))).toBe(false)
   })
 
-  it('prices the top website tier only as quoted after a call', () => {
-    const line = llms.split('\n').find((entry) => entry.includes('[Catalog & Custom Build]'))!
-    expect(line).toContain('quoted after a call')
-    expect(/\$/.test(line)).toBe(false)
+  it('carries the range line verbatim, once', () => {
+    expect(llms.split(customQuote.range).length).toBe(2)
   })
 
-  it('has no em dashes', () => {
+  it('still links the three service pages', () => {
+    catalogCategories.forEach((category) => expect(llms).toContain(`/services/${category.servicePath}`))
+  })
+
+  it('has no em dashes and no removed offers', () => {
     expect(llms).not.toContain('—')
+    ;['Website Rescue', 'Lead Capture', 'from $'].forEach((term) => expect(llms.includes(term)).toBe(false))
   })
 })

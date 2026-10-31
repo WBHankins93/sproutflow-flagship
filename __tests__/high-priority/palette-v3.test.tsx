@@ -82,11 +82,7 @@ describe('Sunlit forest: homepage tone map', () => {
     expect(actual).toEqual(TONE_MAP.filter(([id]) => id !== 'offers'))
   })
 
-  // The `offers` worker owns OfferMenu.tsx and sets it to Pine in a parallel
-  // branch. Until that lands this test fails, so it is marked `failing`. Once
-  // both branches are merged it passes, Jest reports it, and it must be
-  // switched to a plain `it`. (jest.d.ts does not declare `failing`.)
-  ;(it as unknown as { failing: typeof it }).failing('the offer menu is Pine (set by the offers worker)', () => {
+  it('the offer menu is Pine', () => {
     const { container } = render(<OfferMenu />)
     expect(container.querySelector('section#offers')).toHaveAttribute('data-tone', 'pine')
   })

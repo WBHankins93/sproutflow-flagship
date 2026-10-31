@@ -180,7 +180,7 @@ describe('Check results typography', () => {
     host: 'example.com',
     finalUrl: 'https://example.com/',
     outcome: 'checked',
-    offer: 'website-rescue',
+    offer: 'starter',
     checks: [{ id: 'loads', label: 'It loads', status: 'fail', line: 'It did not load.' }],
   }
 

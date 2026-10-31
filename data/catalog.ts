@@ -1,12 +1,20 @@
-// data/catalog.ts - The v3 offer menu: Websites, Lead & Business Systems, Care.
+// data/catalog.ts - The v3 offer menu: three fixed-price offers and one
+// custom-quote path (DIRECTION.md §8, 29 Oct 2026).
 //
-// The only place prices live. The homepage menu, the care section, structured
-// data (components/StructuredData.tsx) and public/llms.txt all read from or
-// mirror this file, so change prices here first and then update llms.txt.
+// The only place prices live. The homepage menu, the care section, the
+// website check, the inquiry page, structured data (components/StructuredData.tsx)
+// and public/llms.txt all read from or mirror this file, so change prices here
+// first and then update llms.txt.
 //
-// Website prices are PENDING Ben's confirmation (DIRECTION.md §8, 19 Oct 2026)
-// and are flagged `pending: true`. The top website tier is quoted after a call
-// and carries no price at all.
+// Fixed price (book and start): Starter landing page, Lead Flow Audit, Site
+// Care. Everything else is a custom quote: "Bring me the problem.", one range
+// line and a call. The custom quote has no price of its own.
+
+/** The four ways in, in menu order. Also the `/inquiry?offer=` values. */
+export type OfferKey = 'starter' | 'audit' | 'care' | 'custom';
+export type FixedOfferKey = Exclude<OfferKey, 'custom'>;
+
+export const OFFER_KEYS: readonly OfferKey[] = ['starter', 'audit', 'care', 'custom'];
 
 export type CatalogCategoryId = 'websites' | 'systems' | 'care';
 
@@ -22,10 +30,8 @@ export interface CatalogCategory {
 }
 
 export interface CatalogPrice {
-  /** Whole US dollars. */
+  /** Whole US dollars. Every published price is fixed. */
   amount: number;
-  /** 'fixed' is the exact price; 'from' is a starting price. */
-  basis: 'fixed' | 'from';
   /** Billing period for recurring prices. Omit for a one-time price. */
   per?: 'month';
   /** Who this price applies to, when an offer has more than one price. */
@@ -33,7 +39,8 @@ export interface CatalogPrice {
 }
 
 export interface CatalogOffer {
-  /** Also the homepage anchor (`/#website-rescue`). */
+  key: FixedOfferKey;
+  /** Homepage anchor (`/#starter-landing-page`). Never a homepage section id. */
   id: string;
   category: CatalogCategoryId;
   name: string;
@@ -41,16 +48,36 @@ export interface CatalogOffer {
   summary: string;
   /** One short line shown on every screen size, under the name and price. */
   line: string;
-  /** Short facts for the "What's included" list (price notes and per-plan prices are added after). */
+  /** Short facts for the "What's included" list (per-plan prices and the price note are added after). */
   includes: string[];
-  /** Empty when the offer is quoted after a call. */
   prices: CatalogPrice[];
-  /** Shown instead of a price when `prices` is empty. */
-  priceLabel?: string;
-  /** One line under the price, e.g. "Credited toward a build." */
+  /** One line under the price, e.g. "Credited toward any build." */
   priceNote?: string;
-  /** True while Ben has not confirmed the price. */
-  pending: boolean;
+}
+
+export interface CustomQuoteStep {
+  title: string;
+  body: string;
+}
+
+export interface CustomQuote {
+  key: 'custom';
+  /** Homepage anchor (`/#custom-quote`). */
+  id: string;
+  /** Short name, used in structured data, llms.txt and the check summary. */
+  name: string;
+  heading: string;
+  /** What it covers and how it is priced, in plain sentences (structured data, llms.txt). */
+  summary: string;
+  /** One short paragraph under the heading. */
+  intro: string;
+  /** What a custom quote covers. No prices. */
+  examples: string[];
+  /** The one range line, verbatim. The only place these two figures appear. */
+  range: string;
+  steps: CustomQuoteStep[];
+  primaryCta: string;
+  secondaryCta: { label: string; href: string };
 }
 
 export const catalogCategories: CatalogCategory[] = [
@@ -74,130 +101,108 @@ export const catalogCategories: CatalogCategory[] = [
   },
 ];
 
-export const catalog: CatalogOffer[] = [
-  // Websites. Prices pending Ben.
+/** The three fixed-price offers, in menu order. */
+export const fixedOffers: CatalogOffer[] = [
   {
-    id: 'website-rescue',
+    key: 'starter',
+    id: 'starter-landing-page',
     category: 'websites',
-    name: 'Website Rescue',
-    summary: 'For a dead, missing or broken site. Up to 5 pages on the domain you already own.',
-    line: 'For a dead, missing or broken site.',
-    includes: ['Up to 5 pages on the domain you own'],
-    prices: [{ amount: 1500, basis: 'fixed' }],
-    priceNote: 'Live 10 business days after your content arrives.',
-    pending: true,
+    name: 'Starter landing page',
+    summary:
+      'One page on your own domain with up to 6 sections (what you do, services, photos, reviews, about, contact), tap-to-call and a quote form that reaches your phone and email. Built from my starter templates and live within 5 business days after your content arrives.',
+    line: 'One page that gets you found and called.',
+    includes: [
+      'One page on your domain, up to 6 sections',
+      'Tap-to-call and a quote form to your phone and email',
+      'Mobile-ready, basic search setup, Google Business Profile link',
+      'One round of changes',
+    ],
+    prices: [{ amount: 500 }],
+    priceNote: 'Live within 5 business days after content arrives.',
   },
   {
-    id: 'business-website',
-    category: 'websites',
-    name: 'Business Website',
-    summary: '5 to 8 pages that explain what you do and make the next step obvious.',
-    line: 'The right size for most businesses.',
-    includes: ['5 to 8 pages', 'Fixed quote after a 15-minute call'],
-    prices: [{ amount: 3000, basis: 'from' }],
-    pending: true,
-  },
-  {
-    id: 'growth-website',
-    category: 'websites',
-    name: 'Growth Website',
-    summary: 'Up to 15 pages, with online booking and galleries.',
-    line: 'Room to grow, with booking and galleries.',
-    includes: ['Up to 15 pages', 'Online booking and galleries'],
-    prices: [{ amount: 5000, basis: 'from' }],
-    pending: true,
-  },
-  {
-    id: 'catalog-custom-build',
-    category: 'websites',
-    name: 'Catalog & Custom Build',
-    summary: '30-page catalogs, online stores, portals and custom features.',
-    line: 'Catalogs, stores, portals and custom features.',
-    includes: ['30-page catalogs and online stores', 'Portals and custom features'],
-    prices: [],
-    priceLabel: 'Quoted after a call',
-    priceNote: 'Most land between $6,000 and $12,000, payable in three parts.',
-    pending: true,
-  },
-
-  // Lead & Business Systems.
-  {
+    key: 'audit',
     id: 'lead-flow-audit',
     category: 'systems',
     name: 'Lead Flow Audit',
     summary: 'I find where good inquiries get lost, then hand you a plan and a fixed build quote.',
     line: 'Find where good inquiries get lost.',
-    includes: ['A plan and a fixed build quote'],
-    prices: [{ amount: 500, basis: 'fixed' }],
-    priceNote: 'Credited toward a build.',
-    pending: false,
+    includes: [
+      'The path from first inquiry to booked work, mapped',
+      'The tools and handoffs you use now, reviewed',
+      'A prioritized plan and a fixed build quote',
+    ],
+    prices: [{ amount: 500 }],
+    priceNote: 'Credited toward any build.',
   },
   {
-    id: 'lead-capture-follow-up',
-    category: 'systems',
-    name: 'Lead Capture & Follow-Up',
-    summary: 'Every inquiry captured, answered and followed up, from the channels you already use.',
-    line: 'Every inquiry answered and followed up.',
-    includes: ['Works with the channels you already use'],
-    prices: [{ amount: 3500, basis: 'from' }],
-    priceNote: 'Fixed scope and 30 days of launch support.',
-    pending: false,
-  },
-  {
-    id: 'custom-business-software',
-    category: 'systems',
-    name: 'Custom Business Software',
-    summary: 'Admin tools, customer records and dashboards built around how your business runs.',
-    line: 'Tools built around how your business runs.',
-    includes: ['Admin tools and dashboards', 'Customer records'],
-    prices: [{ amount: 10000, basis: 'from' }],
-    pending: false,
-  },
-
-  // Care.
-  {
+    key: 'care',
     id: 'site-care',
     category: 'care',
     name: 'Site Care',
     summary: 'Updates, checks and fixes for a live website, so it keeps working.',
     line: 'Updates, checks and fixes for a live site.',
-    includes: [],
+    includes: ['I watch your forms, domain and email', 'Updates, and fixes when something breaks'],
     prices: [
-      { amount: 99, basis: 'fixed', per: 'month', appliesTo: 'Rescue and Business sites' },
-      { amount: 150, basis: 'fixed', per: 'month', appliesTo: 'larger sites' },
+      { amount: 99, per: 'month', appliesTo: 'starter and small sites' },
+      { amount: 150, per: 'month', appliesTo: 'larger sites' },
     ],
-    pending: false,
-  },
-  {
-    id: 'system-care',
-    category: 'care',
-    name: 'System Care',
-    summary: 'I watch the integrations, fix what breaks and review how leads are flowing.',
-    line: 'I keep your lead system working.',
-    includes: ['Integrations watched, breaks fixed', 'Lead flow reviewed'],
-    prices: [{ amount: 450, basis: 'from', per: 'month' }],
-    pending: false,
   },
 ];
 
+/** Everything else: one range line, three steps and a call. No price of its own. */
+export const customQuote: CustomQuote = {
+  key: 'custom',
+  id: 'custom-quote',
+  name: 'Custom quote',
+  heading: 'Bring me the problem.',
+  summary:
+    'Everything without a fixed price: multi-page sites, booking, catalogs and online stores, galleries, lead capture and follow-up systems, custom business software and System Care. Quoted after a 15-minute call, with written options at fixed prices within 2 business days, paid in parts.',
+  intro: 'Everything else is built around your business. Tell me what is getting in the way and I’ll lay out options.',
+  examples: [
+    'Multi-page sites',
+    'Booking',
+    'Catalogs and online stores',
+    'Galleries',
+    'Lead capture and follow-up systems',
+    'Custom business software',
+    'System Care',
+  ],
+  range: 'Most projects land between $1,500 and $6,000, paid in parts.',
+  steps: [
+    { title: '15-minute call', body: 'You tell me the problem. I ask a few questions.' },
+    { title: 'Written options', body: 'Fixed prices for each, within 2 business days.' },
+    { title: 'Pick one', body: 'You pay in parts, not all up front.' },
+  ],
+  primaryCta: 'Book a 15-minute call',
+  secondaryCta: { label: 'Describe your problem', href: '/inquiry?offer=custom' },
+};
+
+/** Backward-compatible name for the fixed offers (the only offers with prices). */
+export const catalog = fixedOffers;
+
 const USD = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 
-/** "$1,500", "$99/mo". The "from" is rendered separately so it can sit in body type. */
+/** "$500", "$99/mo". */
 export function formatAmount(price: CatalogPrice): string {
   return `${USD.format(price.amount)}${price.per === 'month' ? '/mo' : ''}`;
 }
 
-/** Plain-text price for one price: "$1,500", "from $3,000", "$99/mo". */
+/** Plain-text price for one price. Same as formatAmount now that every price is fixed. */
 export function formatPrice(price: CatalogPrice): string {
-  return `${price.basis === 'from' ? 'from ' : ''}${formatAmount(price)}`;
+  return formatAmount(price);
 }
 
-/** Plain-text price line for an offer: every price, or its quoted label. */
+/** Plain-text price line for an offer: "$500", or "$99/mo (starter and small sites) or $150/mo (larger sites)". */
 export function formatOfferPrice(offer: CatalogOffer): string {
-  if (offer.prices.length === 0) return offer.priceLabel ?? 'Quoted after a call';
   return offer.prices
     .map((price) => (price.appliesTo ? `${formatPrice(price)} (${price.appliesTo})` : formatPrice(price)))
     .join(' or ');
+}
+
+/** Short price for tight spots: "$500", "$99/mo or $150/mo". */
+export function formatShortPrice(offer: CatalogOffer): string {
+  return offer.prices.map(formatPrice).join(' or ');
 }
 
 export function getCategory(id: CatalogCategoryId): CatalogCategory {
@@ -207,12 +212,12 @@ export function getCategory(id: CatalogCategoryId): CatalogCategory {
 }
 
 export function getOffersByCategory(id: CatalogCategoryId): CatalogOffer[] {
-  return catalog.filter((offer) => offer.category === id);
+  return fixedOffers.filter((offer) => offer.category === id);
 }
 
 /**
  * The "What's included" list for an offer: its includes, then one line per
- * price when it has several ("$99/mo for Rescue and Business sites"), then its
+ * price when it has several ("$99/mo for starter and small sites"), then its
  * price note. Built from the catalog, so prices still live only here.
  */
 export function getIncludedItems(offer: CatalogOffer): string[] {
@@ -223,6 +228,41 @@ export function getIncludedItems(offer: CatalogOffer): string[] {
   return [...offer.includes, ...perPrice, ...(offer.priceNote ? [offer.priceNote] : [])];
 }
 
-export function getOffer(id: string): CatalogOffer | undefined {
-  return catalog.find((offer) => offer.id === id);
+/** A fixed offer by its key ("starter") or its anchor id ("starter-landing-page"). */
+export function getOffer(idOrKey: string): CatalogOffer | undefined {
+  return fixedOffers.find((offer) => offer.id === idOrKey || offer.key === idOrKey);
+}
+
+/**
+ * Offer ids from before the 29 Oct restructure, mapped to the new keys, so old
+ * links (`/inquiry?tier=website-rescue`) and old check results keep working.
+ */
+export const LEGACY_OFFER_KEYS: Readonly<Record<string, OfferKey>> = {
+  'website-rescue': 'starter',
+  'business-website': 'custom',
+  'growth-website': 'custom',
+  'catalog-custom-build': 'custom',
+  'lead-flow-audit': 'audit',
+  'lead-capture-system': 'custom',
+  'lead-capture-follow-up': 'custom',
+  'custom-business-software': 'custom',
+  'site-care': 'care',
+  'system-care': 'custom',
+};
+
+/**
+ * Reads an `offer=` or old `tier=` value: a new key, a homepage anchor id or
+ * an old offer id. Anything else that is not empty is a custom quote, so an
+ * unknown link still lands somewhere useful. Undefined when nothing was given.
+ */
+export function toOfferKey(value: string | string[] | undefined | null): OfferKey | undefined {
+  const raw = Array.isArray(value) ? value[0] : value;
+  if (typeof raw !== 'string') return undefined;
+  const id = raw.trim().toLowerCase();
+  if (!id) return undefined;
+  if ((OFFER_KEYS as readonly string[]).includes(id)) return id as OfferKey;
+  if (id === customQuote.id) return 'custom';
+  const fixed = fixedOffers.find((offer) => offer.id === id);
+  if (fixed) return fixed.key;
+  return LEGACY_OFFER_KEYS[id] ?? 'custom';
 }

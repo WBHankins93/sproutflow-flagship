@@ -130,7 +130,7 @@ export const caseStudies: CaseStudy[] = [
     liveUrl: 'https://nolapoolsolutions.com/',
     details: {
       timeline: '3 weeks',
-      services: 'Web Design, Lead Capture System, Service Packaging, SEO Foundation',
+      services: 'Web Design, Quote Intake Flow, Service Packaging, SEO Foundation',
       industry: 'Pool Maintenance & Renovation',
       location: 'New Orleans metro',
     },
@@ -248,7 +248,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     details: {
       timeline: '2 weeks',
-      services: 'Web Design, Brand Positioning, Lead Capture System',
+      services: 'Web Design, Brand Positioning, Quote Intake Flow',
       industry: 'Welding, Hauling & Removal',
       location: 'North Alabama',
       notable: '100% Veteran-Owned',
