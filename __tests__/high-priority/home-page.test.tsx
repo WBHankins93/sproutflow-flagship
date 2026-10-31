@@ -353,7 +353,9 @@ describe('Homepage - work, own site, Ben and book', () => {
 
   it('marks up Ben’s own homepage with the three honest marks', () => {
     const { container } = render(<OwnSiteSection />)
-    expect(container.querySelector('img[src="/redesign/sproutflow-v1-home.jpg"]')).not.toBeNull()
+    expect(homeOwn.image.src).toBe('/proof/sproutflow-v1-home.jpg')
+    expect(fs.existsSync(path.join(process.cwd(), 'public', homeOwn.image.src))).toBe(true)
+    expect(container.querySelector(`img[src="${homeOwn.image.src}"]`)).not.toBeNull()
     const list = screen.getByRole('list', { name: homeOwn.listLabel })
     expect(list.querySelectorAll('li').length).toBe(3)
     expect(list).toHaveTextContent('no phone number up top')

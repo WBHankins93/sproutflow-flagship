@@ -63,7 +63,7 @@ export interface HomeProofItem {
   rest: string;
 }
 
-/** Leading figure of a result string: "35% increase..." gives "35%", "2x consultation..." gives "2x". */
+/** Leading figure of a result string: "35% increase..." gives "35%". */
 export function leadingFigure(text: string): string | null {
   const match = text.trim().match(/^(\d+(?:\.\d+)?(?:%|x))(?=\s)/i);
   return match ? match[1] : null;
@@ -168,7 +168,7 @@ export const homeOwn = {
   body: 'This was my homepage in August 2026. Before I mark up yours, here is what I got wrong on mine.',
   note: 'my August homepage, marked up',
   image: {
-    src: '/redesign/sproutflow-v1-home.jpg',
+    src: '/proof/sproutflow-v1-home.jpg',
     width: 1600,
     height: 1424,
     alt: 'Sproutflow Studio’s August 2026 homepage: a large headline, Make it easier for customers to choose you, a button that says Tell me about your project, and a project carousel on the right.',

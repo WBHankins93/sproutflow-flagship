@@ -29,7 +29,7 @@ function WorkCard({ project, priority }: { project: ProjectProof; priority: bool
   return (
     <article className="group relative flex h-full flex-col">
       <div
-        className="relative aspect-[16/10] overflow-hidden rounded-xl border border-primary-900/15 transition-transform duration-300 group-hover:-translate-y-1 motion-reduce:transition-none"
+        className="relative aspect-[16/9] overflow-hidden rounded-xl border border-primary-900/15 bg-forest-white transition-transform duration-300 group-hover:-translate-y-1 motion-reduce:transition-none"
         style={{ backgroundColor: project.canvasColor }}
       >
         <Image
@@ -38,7 +38,7 @@ function WorkCard({ project, priority }: { project: ProjectProof; priority: bool
           fill
           priority={priority}
           sizes="(min-width: 768px) 50vw, 100vw"
-          className="object-cover object-top"
+          className="object-contain object-top"
         />
       </div>
       <p className="mt-5 font-mono text-label uppercase text-[#4A574D] [font-variant-ligatures:none]">

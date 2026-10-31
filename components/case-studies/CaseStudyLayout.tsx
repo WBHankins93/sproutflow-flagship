@@ -85,7 +85,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
           </div>
           <div className="min-w-0 lg:col-span-5">
             <div
-              className="relative aspect-[16/10] overflow-hidden rounded-xl border border-primary-900/15"
+              className="relative aspect-[16/9] overflow-hidden rounded-xl border border-primary-900/15 bg-forest-white"
               style={{ backgroundColor: project?.canvasColor }}
             >
               <Image
@@ -94,7 +94,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
                 fill
                 priority
                 sizes="(min-width: 1024px) 40vw, 100vw"
-                className={caseStudy.heroImageFit === 'contain' ? 'object-contain object-center' : 'object-cover object-top'}
+                className="object-contain object-top"
               />
             </div>
           </div>

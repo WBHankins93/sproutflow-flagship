@@ -3,22 +3,37 @@
  *
  * Tests for interactive component behavior:
  * - Header mobile menu toggle
- * - ServicesSection service paths
+ * - Services hub: the three service paths (v2 ServicesSection retired)
  * - Navigation link handling
- * - ContactSection CTAs (booking primary, written inquiry secondary)
+ * - FooterCta CTAs (booking primary, written inquiry secondary)
  */
 
 import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Header from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import ServicesSection from '@/components/sections/ServicesSection'
-import ContactSection from '@/components/sections/ContactSection'
-import HeroSection from '@/components/sections/HeroSection'
+import ServicesPage from '@/app/services/page'
+import ServicePathPage from '@/app/services/[path]/page'
+import FooterCta from '@/components/ui/FooterCta'
+import Home from '@/app/page'
 import FAQPage from '@/app/faq/page'
 import { InquiryForm } from '@/components/inquiry/InquiryForm'
 import { BOOKING_CTA_LABEL, getBookingHref } from '@/lib/constants'
-import { customQuote, fixedOffers, formatAmount } from '@/data/catalog'
+import { catalogCategories, customQuote, fixedOffers, formatAmount } from '@/data/catalog'
+import { listedProjectProof, projectProof } from '@/data/projectProof'
+
+// The Lead Machine is owned by the `hero` worker; the homepage only depends on its export.
+jest.mock('@/components/home/hero-machine', () => {
+  const Stub = () => <div data-testid="hero-machine" />
+  return { __esModule: true, HeroMachine: Stub, default: Stub }
+})
+
+/** The "What I build" category list on /services, where the three service paths now live. */
+function renderServiceCategories() {
+  const utils = render(<ServicesPage />)
+  const section = utils.container.querySelector('section[aria-labelledby="services-categories-h"]') as HTMLElement
+  return { ...utils, section }
+}
 
 describe('Component Interactions - Header Mobile Menu', () => {
   it('should toggle mobile menu when button is clicked', async () => {
@@ -64,23 +79,19 @@ describe('Component Interactions - Header Mobile Menu', () => {
   })
 })
 
-describe('Component Interactions - ServicesSection Paths', () => {
+describe('Component Interactions - Service paths (services hub)', () => {
   it('should render the three service paths', () => {
-    const { container } = render(<ServicesSection />)
+    const { section } = renderServiceCategories()
 
-    // Titles run through AccentPhrase, which splits part of the text into its
-    // own span, so match on an element's full textContent rather than a
-    // single text node.
-    const headings = Array.from(container.querySelectorAll('h3')).map((el) => el.textContent)
-    expect(headings).toContain('Websites that earn trust')
-    expect(headings).toContain('Lead capture and follow-up')
-    expect(headings).toContain('Care that keeps your site working')
+    const headings = Array.from(section.querySelectorAll('h3')).map((el) => el.textContent)
+    expect(headings).toEqual(catalogCategories.map((category) => category.name))
+    expect(headings).toEqual(['Websites', 'Lead & Business Systems', 'Care'])
   })
 
   it('should have a CTA on each service path routing to its detail page', () => {
-    const { container } = render(<ServicesSection />)
+    const { section } = renderServiceCategories()
 
-    const pathLinks = container.querySelectorAll('article a[href^="/services/"]')
+    const pathLinks = section.querySelectorAll('article a[href^="/services/"]')
     expect(pathLinks.length).toBe(3)
     expect(Array.from(pathLinks).map((link) => link.getAttribute('href'))).toEqual([
       '/services/websites',
@@ -89,34 +100,36 @@ describe('Component Interactions - ServicesSection Paths', () => {
     ])
   })
 
-  it('should not expose package names or prices', () => {
-    const { container } = render(<ServicesSection />)
+  it('should not expose package names or prices in the path overview', () => {
+    // Prices are public since the 29 Oct offers, but they live in the offer
+    // block below; the three paths themselves stay price-free.
+    const { section } = renderServiceCategories()
 
-    expect(container.textContent).not.toContain('$')
-    expect(screen.queryByText('Starter')).not.toBeInTheDocument()
-    expect(screen.queryByText('Foundation')).not.toBeInTheDocument()
-    expect(screen.queryByText('Market Leader')).not.toBeInTheDocument()
+    expect(section.textContent).not.toContain('$')
+    expect(section.textContent).not.toContain('Starter')
+    expect(section.textContent).not.toContain('Foundation')
+    expect(section.textContent).not.toContain('Market Leader')
   })
 
-  it('should preserve Shopify among the website capabilities', () => {
-    render(<ServicesSection />)
+  it('should preserve Shopify among the website capabilities', async () => {
+    render(await ServicePathPage({ params: Promise.resolve({ path: 'websites' }) }))
 
     expect(screen.getByText('Rebuilds and Shopify')).toBeInTheDocument()
   })
 })
 
-describe('Component Interactions - Hero proof', () => {
+describe('Component Interactions - Homepage proof', () => {
   it('should show client work without exposing hidden projects', () => {
-    const { container } = render(<HeroSection />)
+    const { container } = render(<Home />)
 
-    expect(screen.getByAltText('Second Line Psychiatry homepage shown inside a laptop frame')).toBeInTheDocument()
-    expect(container.textContent).not.toContain('Big Butt Association')
-  })
-
-  it('should keep the founder portrait out of the hero', () => {
-    render(<HeroSection />)
-
-    expect(screen.queryByAltText(/Ben Hankins/i)).not.toBeInTheDocument()
+    const hidden = projectProof.filter((project) => !listedProjectProof.includes(project))
+    expect(hidden.map((project) => project.name)).toContain('Big Butt Association')
+    expect(container.textContent).toContain('Second Line Psychiatry')
+    expect(container.querySelector('a[href="/case-studies/second-line-psychiatry"]')).toBeInTheDocument()
+    hidden.forEach((project) => {
+      expect(container.textContent).not.toContain(project.name)
+      expect(container.querySelector(`a[href="${project.href}"]`)).toBeNull()
+    })
   })
 })
 
@@ -138,15 +151,16 @@ describe('Component Interactions - FAQ', () => {
   })
 })
 
-describe('Component Interactions - ContactSection', () => {
+// The v2 ContactSection rendered FooterCta, the closing block on every inner page.
+describe('Component Interactions - FooterCta', () => {
   it('should render contact options', () => {
-    render(<ContactSection />)
+    render(<FooterCta />)
 
     expect(screen.getByRole('heading', { name: /Tell me what needs to work better/i })).toBeInTheDocument()
   })
 
   it('should route the primary CTA to booking and the secondary to the written inquiry', () => {
-    render(<ContactSection />)
+    render(<FooterCta />)
 
     // Owner-approved (13 Oct 2026): booking a 15-minute call is the primary
     // CTA (/book, or /inquiry until Cal.com is configured) and the written
@@ -164,7 +178,7 @@ describe('Component Interactions - ContactSection', () => {
   })
 
   it('should display alternative contact methods', () => {
-    render(<ContactSection />)
+    render(<FooterCta />)
 
     expect(screen.getByText('Email')).toBeInTheDocument()
     expect(screen.getByText('Phone')).toBeInTheDocument()
