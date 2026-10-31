@@ -102,7 +102,7 @@ export function ReportRequest({ result }: { result: WebsiteCheckResult }) {
         <p className="mt-4 text-primary-900">Want to go through it together?</p>
         <BookCallLink
           data-cta="website-check-sent"
-          inquiryQuery={result.offer ? `tier=${result.offer}` : undefined}
+          inquiryQuery={result.offer ? `offer=${result.offer}` : undefined}
           className={`mt-3 ${primaryButtonClass}`}
         >
           {BOOKING_CTA_LABEL}

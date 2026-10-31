@@ -112,9 +112,15 @@ export const homeCheck = {
 export const homeOffers = {
   eyebrow: 'Prices',
   heading: 'Prices up front.',
-  sub: 'Every project starts with a 15-minute call and a written, fixed quote. Not sure which fits? That is what the call is for.',
+  sub: 'Three fixed prices you can book and start. Anything bigger starts with a 15-minute call and written options.',
+  /** Accessible name for the three fixed-price cards. */
+  fixedLabel: 'Fixed-price offers',
   cta: 'Book a call',
   included: 'What’s included',
+  /** Label over the custom quote's three steps. */
+  howItWorks: 'How it works',
+  /** Label over what a custom quote covers. */
+  examplesLabel: 'For example',
 };
 
 export const homeCare = {
@@ -239,7 +245,7 @@ export const homeBook = {
       id: 'fixed-price',
       question: 'Is the price really fixed?',
       answer:
-        'Yes. After the call I send a written quote with the scope, the price and the timeline, and I don’t start until you’ve agreed to it.',
+        'Yes. The three fixed offers cost what the menu says. For anything else I send written options with the scope, the price and the timeline, and I don’t start until you’ve agreed to one.',
     },
     {
       id: 'ownership',
@@ -251,7 +257,7 @@ export const homeBook = {
       id: 'speed',
       question: 'How fast can it be live?',
       answer:
-        'Website Rescue is live 10 business days after your content arrives. Larger sites and lead systems take longer, and the written quote says exactly when.',
+        'A starter landing page is live within 5 business days after your content arrives. Larger sites and lead systems take longer, and the written quote says exactly when.',
     },
   ],
 };

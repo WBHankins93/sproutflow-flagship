@@ -4,41 +4,36 @@
 // FAQPage schema lives on /faq (where the content is visible).
 // BreadcrumbList schema lives in components/case-studies/CaseStudyLayout.tsx.
 //
-// The OfferCatalog is built from data/catalog.ts, one Offer per catalog entry.
-// Prices appear only where the catalog has them: a fixed one-time price as
-// `price`, "from" prices as `minPrice`, monthly prices as a
-// UnitPriceSpecification. An offer quoted after a call has no price at all.
+// The OfferCatalog is built from data/catalog.ts: one Offer per fixed-price
+// offer, then the custom quote. A one-time price is `price`; Site Care's two
+// monthly prices are UnitPriceSpecifications. The custom quote has no price at
+// all, and its range line stays out of the schema.
 
-import { catalog, getCategory, type CatalogOffer, type CatalogPrice } from '@/data/catalog';
+import { customQuote, fixedOffers, getCategory, type CatalogOffer, type CatalogPrice } from '@/data/catalog';
 import { FOUNDER_PHOTO_URL, ORGANIZATION_LOGO_URL, SITE_URL } from '@/lib/site';
 
 const siteUrl = SITE_URL;
 
 function priceSpecification(price: CatalogPrice) {
-  const amount = price.basis === 'from' ? { minPrice: price.amount } : { price: price.amount };
   return {
     '@type': price.per === 'month' ? 'UnitPriceSpecification' : 'PriceSpecification',
-    ...amount,
+    price: price.amount,
     priceCurrency: 'USD',
     ...(price.per === 'month' ? { unitCode: 'MON', unitText: 'month' } : {}),
     ...(price.appliesTo ? { description: `For ${price.appliesTo}` } : {}),
   };
 }
 
-/** One schema.org Offer for a catalog entry. Exported for tests. */
+/** One schema.org Offer for a fixed-price catalog entry. Exported for tests. */
 export function catalogOfferSchema(offer: CatalogOffer) {
   const [only] = offer.prices;
-  const isSingleFixed = offer.prices.length === 1 && only.basis === 'fixed' && !only.per;
-  const pricing =
-    offer.prices.length === 0
-      ? {}
-      : isSingleFixed
-        ? { price: String(only.amount), priceCurrency: 'USD' }
-        : {
-            priceCurrency: 'USD',
-            priceSpecification:
-              offer.prices.length === 1 ? priceSpecification(only) : offer.prices.map(priceSpecification),
-          };
+  const isSingleOneTime = offer.prices.length === 1 && !only.per;
+  const pricing = isSingleOneTime
+    ? { price: String(only.amount), priceCurrency: 'USD' }
+    : {
+        priceCurrency: 'USD',
+        priceSpecification: offer.prices.length === 1 ? priceSpecification(only) : offer.prices.map(priceSpecification),
+      };
 
   return {
     '@type': 'Offer',
@@ -49,6 +44,20 @@ export function catalogOfferSchema(offer: CatalogOffer) {
       description: offer.summary,
       category: getCategory(offer.category).name,
       url: `${siteUrl}/#${offer.id}`,
+      provider: { '@id': `${siteUrl}#organization` },
+    },
+  };
+}
+
+/** The custom quote: an Offer with no price. Exported for tests. */
+export function customQuoteSchema() {
+  return {
+    '@type': 'Offer',
+    itemOffered: {
+      '@type': 'Service',
+      name: customQuote.name,
+      description: customQuote.summary,
+      url: `${siteUrl}/#${customQuote.id}`,
       provider: { '@id': `${siteUrl}#organization` },
     },
   };
@@ -116,8 +125,8 @@ const professionalServiceSchema = {
   ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Websites, Lead & Business Systems, and Care',
-    itemListElement: catalog.map(catalogOfferSchema),
+    name: 'Fixed-price offers and custom quotes',
+    itemListElement: [...fixedOffers.map(catalogOfferSchema), customQuoteSchema()],
   },
 };
 

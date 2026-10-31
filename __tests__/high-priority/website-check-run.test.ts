@@ -90,14 +90,14 @@ describe('runWebsiteCheck', () => {
     if (outcome.kind !== 'result') return
     expect(outcome.result.checks.map((check) => check.id)).toEqual(['loads', 'https', 'mobile', 'call', 'form', 'speed', 'domain', 'email'])
     expect(outcome.result.checks.map((check) => check.status)).toEqual(['pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass', 'pass'])
-    expect(outcome.result.offer).toBe('lead-flow-audit')
+    expect(outcome.result.offer).toBe('audit')
     expect(outcome.result.host).toBe('example.com')
     // Two requests to the site; the registry lookups go through their own fetch.
     expect(web.requested.sort()).toEqual(['http://example.com/', 'https://example.com/'])
     expect(ops.rdap.requested).toEqual([BOOTSTRAP_URL, RDAP_COM])
   })
 
-  it('adds the domain and email results, pointing to Site Care, without changing the offer', async () => {
+  it('adds the domain and email results, pointing to Site Care, and recommends Site Care on a healthy page', async () => {
     const web = fakeWeb({
       'https://www.example.com/': htmlResponse(fixture('good-site.html')),
       'http://www.example.com/': redirectTo('https://www.example.com/'),
@@ -117,7 +117,7 @@ describe('runWebsiteCheck', () => {
     expect(domain?.fix).toBe('Site Care covers this.')
     expect(email?.status).toBe('warn')
     expect(email?.fix).toBe('Site Care covers this.')
-    expect(outcome.result.offer).toBe('lead-flow-audit')
+    expect(outcome.result.offer).toBe('care')
   })
 
   it('still reports the domain when the site does not load (a lapsed domain)', async () => {
@@ -146,7 +146,7 @@ describe('runWebsiteCheck', () => {
     expect(byId.loads).toBe('fail')
     expect(byId.domain).toBe('fail')
     expect(byId.email).toBe('fail')
-    expect(outcome.result.offer).toBe('website-rescue')
+    expect(outcome.result.offer).toBe('starter')
   })
 
   it('reports "could not check" for the domain when the registry is down', async () => {
@@ -171,7 +171,7 @@ describe('runWebsiteCheck', () => {
     const byId = Object.fromEntries(outcome.result.checks.map((check) => [check.id, check.status]))
     expect(byId.loads).toBe('pass')
     expect(byId.https).toBe('fail')
-    expect(outcome.result.offer).toBe('website-rescue')
+    expect(outcome.result.offer).toBe('starter')
   })
 
   it('makes one extra request for a contact page and finds its form', async () => {

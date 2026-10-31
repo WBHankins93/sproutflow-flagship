@@ -94,7 +94,14 @@ function Field({ label, children, required }: { label: string; children: React.R
   );
 }
 
-export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: string }) {
+export function InquiryForm({
+  initialProjectType = '',
+  offer,
+}: {
+  initialProjectType?: string;
+  /** The offer the visitor came from ("Starter landing page ($500)", "Custom quote"), sent with the inquiry. */
+  offer?: string;
+}) {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<InquiryFormData>({ ...initialData, projectType: initialProjectType });
   const [errors, setErrors] = useState<{ name?: string; email?: string; form?: string }>({});
@@ -204,7 +211,7 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
       const response = await fetch(`https://formspree.io/f/${formId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(offer ? { ...data, offer } : data),
       });
       if (!response.ok) throw new Error('Submission failed');
       try {

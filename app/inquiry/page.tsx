@@ -3,6 +3,7 @@ import { FileSearch, MessageSquareText, ReceiptText } from 'lucide-react';
 import { InquiryForm } from '@/components/inquiry/InquiryForm';
 import { Footer } from '@/components/layout/Footer';
 import { BookCallLink } from '@/components/ui/BookCallLink';
+import { customQuote, formatShortPrice, getOffer, toOfferKey, type OfferKey } from '@/data/catalog';
 import { BOOKING_CTA_LABEL, isBookingConfigured } from '@/lib/constants';
 import { Eyebrow, Heading, MarginNote, Section } from '@/components/v3';
 
@@ -18,11 +19,12 @@ const pathMap: Record<string, string> = {
   'business-systems': 'Lead capture and follow-up',
   'growth-support': 'Ongoing growth and support',
 };
-const tierMap: Record<string, string> = {
-  'website-rescue': 'Websites that earn trust',
-  'lead-flow-audit': 'Lead capture and follow-up',
-  'lead-capture-system': 'Lead capture and follow-up',
-  'system-care': 'Ongoing growth and support',
+/** Project type prefilled for each offer. A custom quote leaves the choice to the visitor. */
+const offerProjectType: Record<OfferKey, string> = {
+  starter: 'Websites that earn trust',
+  audit: 'Lead capture and follow-up',
+  care: 'Ongoing growth and support',
+  custom: '',
 };
 const steps = [
   { icon: FileSearch, title: 'I read the details', body: 'Every inquiry comes to me directly.' },
@@ -34,11 +36,31 @@ const steps = [
   },
 ];
 
-type Props = { searchParams: Promise<{ path?: string; tier?: string }> };
+/** What the visitor asked about, from data/catalog.ts: the name and price, or the custom quote. */
+function offerContext(key: OfferKey): { line: string; submitted: string } {
+  if (key === 'custom') {
+    return {
+      line: `${customQuote.heading} Describe it below in your own words, and I’ll come back with options.`,
+      submitted: customQuote.name,
+    };
+  }
+  const offer = getOffer(key)!;
+  const price = formatShortPrice(offer);
+  return { line: `${offer.name}, ${price}. ${offer.priceNote ?? offer.line}`, submitted: `${offer.name} (${price})` };
+}
 
+type Props = { searchParams: Promise<{ path?: string; offer?: string | string[]; tier?: string | string[] }> };
+
+/**
+ * `offer=starter|audit|care|custom` names the offer. Old `tier=` links still
+ * work: website-rescue is the starter page, lead-capture-system and anything
+ * unknown are a custom quote (data/catalog.ts LEGACY_OFFER_KEYS).
+ */
 export default async function InquiryPage({ searchParams }: Props) {
-  const { path, tier } = await searchParams;
-  const initialProjectType = (path && pathMap[path]) || (tier && tierMap[tier]) || '';
+  const { path, offer, tier } = await searchParams;
+  const offerKey = toOfferKey(offer) ?? toOfferKey(tier);
+  const context = offerKey ? offerContext(offerKey) : null;
+  const initialProjectType = (path && pathMap[path]) || (offerKey && offerProjectType[offerKey]) || '';
   return (
     <>
       <Section tone="birch" labelledBy="inquiry-h">
@@ -89,7 +111,19 @@ export default async function InquiryPage({ searchParams }: Props) {
             )}
           </aside>
           <div className="min-w-0 border-t border-primary-900/20 pt-8 lg:col-span-7 lg:col-start-6">
-            <InquiryForm initialProjectType={initialProjectType} />
+            {context && (
+              <p
+                className="mb-8 border-l-4 border-forest-fern pl-4 font-body text-body text-primary-900"
+                data-testid="inquiry-offer"
+                data-offer={offerKey}
+              >
+                <span className="block font-mono text-label uppercase text-[#4A574D] [font-variant-ligatures:none]">
+                  You asked about
+                </span>
+                <span className="mt-1 block">{context.line}</span>
+              </p>
+            )}
+            <InquiryForm initialProjectType={initialProjectType} offer={context?.submitted} />
           </div>
         </div>
       </Section>
