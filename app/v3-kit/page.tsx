@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { RedlineFrame, RedlineUnderline, type RedlineMarkSpec } from '@/components/redline';
 import { ButtonLink, Container, Eyebrow, Heading, MarginNote, Section } from '@/components/v3';
+import type { SectionTone } from '@/components/v3/Section';
 
 // Temporary QA page for design system v3 (Wave 1). Renders every primitive
 // and the Redline kit so the lead can check 375 x 812 and 1440 x 900.
@@ -106,6 +107,61 @@ const OWN_MARKS: RedlineMarkSpec[] = [
     tone: 'fern',
   },
 ];
+
+/** Every Section tone, in the order of the homepage tone map, with its role and allowed colours. */
+const TONES: { tone: SectionTone; name: string; hex: string; role: string; dark?: 'fern' | 'pine' }[] = [
+  { tone: 'clearing', name: 'Clearing', hex: '#F2F1D8', role: 'Hero, /book and /check heroes. Red pen allowed.' },
+  { tone: 'fern', name: 'Fern', hex: '#3F6B45', role: 'Trust strip, book, FooterCta. Birch text only. No red.', dark: 'fern' },
+  { tone: 'white', name: 'White', hex: '#FBFCF8', role: 'Proof, check teaser, work, header. Red pen allowed.' },
+  { tone: 'paper', name: 'Paper', hex: '#FBF8F1', role: 'A warm light step, cards. Red pen allowed.' },
+  { tone: 'pine', name: 'Pine', hex: '#223528', role: 'Offer menu, footer, 404. Sun gold prices. No red.', dark: 'pine' },
+  { tone: 'leaf', name: 'Spring leaf', hex: '#CFE3B4', role: 'Websites break quietly. Red pen allowed; no Fern notes.' },
+  { tone: 'birch', name: 'Birch', hex: '#F4EFE3', role: 'Only behind I start with my own. Red pen allowed.' },
+  { tone: 'sunlight', name: 'Sunlight', hex: '#F6E8C3', role: 'Ben. Red pen allowed.' },
+  { tone: 'lichen', name: 'Lichen', hex: '#E4E3D2', role: 'Legacy seam between light sections.' },
+];
+
+function ToneSample({ tone, name, hex, role, dark }: (typeof TONES)[number]) {
+  const id = `tone-${tone}-h`;
+  return (
+    <Section tone={tone} rhythm="tight" labelledBy={id}>
+      <div className="flex flex-wrap items-end justify-between gap-6">
+        <div className="min-w-0">
+          <Eyebrow onDark={dark === 'pine'} onFern={dark === 'fern'}>
+            {`${name} ${hex}`}
+          </Eyebrow>
+          <Heading as="h3" size="md" id={id} className="mt-3">
+            {dark ? (
+              <>
+                Book the <RedlineUnderline tone={dark === 'fern' ? 'sungold' : 'goldenrod'}>work.</RedlineUnderline>
+              </>
+            ) : (
+              <>
+                Find the <RedlineUnderline>leaks.</RedlineUnderline>
+              </>
+            )}
+          </Heading>
+          <p className={`mt-2 max-w-[56ch] font-body text-body ${dark ? '' : 'text-[#4A574D]'}`}>{role}</p>
+          {dark === 'pine' && (
+            <p className="mt-2 font-mono text-price tabular-nums text-forest-sungold [font-variant-ligatures:none]">$500</p>
+          )}
+        </div>
+        <div className="flex flex-wrap items-center gap-3">
+          {dark === 'fern' && <ButtonLink href="/book" variant="onFern">Book a call</ButtonLink>}
+          {dark === 'pine' && <ButtonLink href="/book" variant="onDark">Book a call</ButtonLink>}
+          {!dark && (
+            <>
+              <ButtonLink href="/book">Book a call</ButtonLink>
+              <ButtonLink href="/check" variant="secondary">
+                Check your site
+              </ButtonLink>
+            </>
+          )}
+        </div>
+      </div>
+    </Section>
+  );
+}
 
 function Swatch({ name, hex, className }: { name: string; hex: string; className: string }) {
   return (
@@ -261,14 +317,44 @@ export default function V3KitPage() {
         </div>
       </Section>
 
+      {/* Fern: on-fern variants. Goldenrod fails on Fern (2.75:1), so Sun gold. */}
+      <Section tone="fern" labelledBy="fern-h">
+        <Eyebrow index="05" onFern>
+          Trust and book
+        </Eyebrow>
+        <Heading as="h2" size="lg" id="fern-h" className="mt-4">
+          Fifteen minutes. <RedlineUnderline tone="sungold">One clear next step.</RedlineUnderline>
+        </Heading>
+        <div className="mt-8 flex flex-wrap items-center gap-6">
+          <ButtonLink href="/book" variant="onFern">
+            Book a 15-minute call
+          </ButtonLink>
+          <MarginNote tone="onFern" arrow="left">
+            I answer the phone myself
+          </MarginNote>
+        </div>
+      </Section>
+
+      {/* Sunlit forest: every tone */}
+      {TONES.map((sample) => (
+        <ToneSample key={sample.tone} {...sample} />
+      ))}
+
       {/* Tokens */}
       <Section tone="birch" labelledBy="tokens-h" rhythm="tight">
         <Container size="narrow" className="!px-0">
-          <Eyebrow index="05">Tokens</Eyebrow>
+          <Eyebrow index="06">Tokens</Eyebrow>
           <Heading as="h2" size="md" id="tokens-h" className="mt-4">
             Canvases and the red pen
           </Heading>
           <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
+            <Swatch name="Clearing" hex="#F2F1D8" className="bg-forest-clearing" />
+            <Swatch name="Spring leaf" hex="#CFE3B4" className="bg-forest-leaf" />
+            <Swatch name="Fern" hex="#3F6B45" className="bg-forest-fern" />
+            <Swatch name="Sun gold" hex="#F2D58A" className="bg-forest-sungold" />
+            <Swatch name="Sunlight" hex="#F6E8C3" className="bg-forest-sunlight" />
+            <Swatch name="White" hex="#FBFCF8" className="bg-forest-white" />
+            <Swatch name="Goldenrod" hex="#D9A441" className="bg-accent-500" />
             <Swatch name="Birch" hex="#F4EFE3" className="bg-cream-300" />
             <Swatch name="Paper" hex="#FBF8F1" className="bg-[#FBF8F1]" />
             <Swatch name="Lichen" hex="#E4E3D2" className="bg-cream-500" />

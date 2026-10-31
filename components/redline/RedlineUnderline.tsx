@@ -5,8 +5,11 @@ import RedlineShape from './RedlineShape';
 export interface RedlineUnderlineProps {
   /** The headline words to underline. Plain text; keep it to a short phrase. */
   children: string;
-  /** 'redline' on light canvases; 'goldenrod' on Pine, where red fails contrast. */
-  tone?: 'redline' | 'goldenrod';
+  /**
+   * 'redline' on light canvases; 'goldenrod' on Pine (5.81:1); 'sungold' on
+   * Fern (4.31:1), where Goldenrod is only 2.75:1. Never red on Fern or Pine.
+   */
+  tone?: 'redline' | 'goldenrod' | 'sungold';
   /** Draw on when scrolled into view. Default true. */
   drawOn?: boolean;
   className?: string;

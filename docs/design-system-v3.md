@@ -63,7 +63,7 @@ Legacy tokens kept so v2 markup still renders: `text-h4` (20px, now 400), `text-
 | Redline ink | `redline-ink` | #9A1C13 | Red text on `redline-soft` |
 | Redline soft | `redline-soft` | #FBE9E7 | Tint behind an inline problem callout |
 | Pine Shadow | `primary-900` | #223528 | Text on light canvases, primary button, the dark canvas |
-| Birch Paper | `cream-300` | #F4EFE3 | Default canvas; text on Pine |
+| Birch Paper | `cream-300` | #F4EFE3 | `Section` default canvas (inner pages until Wave 3); text on Pine and Fern. On the homepage only behind "I start with my own". |
 | Paper | `bg-[#FBF8F1]` (`--v3-paper`) | #FBF8F1 | Lighter canvas step; note chips |
 | Lichen | `cream-500` | #E4E3D2 | Seam between light sections |
 | Fern | `ink-700` | #3F6B45 | Ben's notes; "the fix" marks |
@@ -72,7 +72,7 @@ Legacy tokens kept so v2 markup still renders: `text-h4` (20px, now 400), `text-
 | Ink soft | `text-[#4A574D]` (`--v3-ink-soft`) | #4A574D | Secondary text on light canvases |
 | On-dark soft | `text-[#C9CFC4]` | #C9CFC4 | Secondary text on Pine |
 
-Existing tokens are unchanged.
+Existing tokens are unchanged. The Sunlit forest canvases are in the Palette section below.
 
 ### Contrast (WCAG, all at least 4.5:1)
 
@@ -93,7 +93,12 @@ Existing tokens are unchanged.
 | Ink soft on Birch / Lichen / Paper | 6.63 / 5.87 / 7.17 |
 | On-dark soft on Pine | 8.21 |
 | Gold light on Pine | 7.98 |
+| Birch / forest white on Fern | 5.38 / 5.99 |
+| Pine on Sun gold (onFern button) | 9.12 |
+| Sun gold on Pine (prices) | 9.12 |
+| Redline on Clearing / Leaf / Sunlight / forest white | 5.74 / 4.79 / 5.40 / 6.38 |
 | **Redline on Pine** | **1.99: never do this.** Use `goldenrod` underlines on Pine. |
+| **Anything red, soft grey or gold light on Fern** | **Never.** Birch only; `sungold` underlines. |
 
 ### Layout
 
@@ -102,6 +107,61 @@ Existing tokens are unchanged.
 - Vertical rhythm (CSS variables in `app/globals.css`, via `Section`): `--v3-rhythm-tight` clamp(2.5rem, 5vw, 4rem), `--v3-rhythm` clamp(3.5rem, 7vw, 6rem), `--v3-rhythm-loose` clamp(4.5rem, 9vw, 8rem).
 - Page height targets: 6,000px or less at 1440 wide, 12 phone screens or fewer at 375.
 - Light theme only. No dark mode.
+
+---
+
+## Palette: Sunlit forest
+
+Decided 29 Oct 2026 (DIRECTION.md section 8): "more lively but of the trees", an even balance of green and warm light. Birch is no longer the default look; it appears once on the homepage.
+
+### Tokens
+
+Tailwind `forest.*` plus the existing Pine, Birch, Paper, Lichen and Goldenrod. Every canvas is a `Section` tone.
+
+| Token | Tailwind | Hex | Role | Text allowed | Red pen |
+|---|---|---|---|---|---|
+| Clearing | `forest-clearing` (tone `clearing`) | #F2F1D8 | Homepage hero, /book and /check heroes; the Lead Machine sits on it | Pine 11.41, ink soft 6.64, Fern 5.40, Redline 5.74 | Yes |
+| Spring leaf | `forest-leaf` (tone `leaf`) | #CFE3B4 | "Websites break quietly"; small fills behind photos | Pine 9.52, ink soft 5.54, Redline 4.79. **Not Fern text (4.50)** | Yes |
+| Fern | `forest-fern` (tone `fern`) | #3F6B45 | Trust strip, homepage book, FooterCta | Birch 5.38, forest white 5.99. Nothing softer: #C9CFC4 3.88, gold light 3.77 and Sun gold 4.31 fail as text | **Never** |
+| Pine | `primary-900` (tone `pine`) | #223528 | Offer menu, footer, 404, mobile menu | Birch 11.38, #C9CFC4 8.21, gold light 7.98, Sun gold 9.12 | **Never** |
+| Sun gold | `forest-sungold` | #F2D58A | Prices and numerals on Pine; the onFern button fill; underlines on Fern | As text: on Pine only (9.12). On Fern only for UI and large marks (4.31) | n/a |
+| Sunlight | `forest-sunlight` (tone `sunlight`) | #F6E8C3 | Ben section; onFern button hover | Pine 10.73, ink soft 6.25, Fern 5.07, Redline 5.40 | Yes |
+| White | `forest-white` (tone `white`) | #FBFCF8 | Proof, check teaser, work, the header, cards on Leaf, the machine's cards and calendar | Pine 12.68, ink soft 7.38, Fern 5.99, Redline 6.38 | Yes |
+| Birch | `cream-300` (tone `birch`) | #F4EFE3 | Only behind "I start with my own" on the homepage; still the `Section` default for inner pages until Wave 3 | Pine 11.38, ink soft 6.63, Fern 5.38, Redline 5.73 | Yes |
+| Paper | `bg-[#FBF8F1]` (tone `paper`) | #FBF8F1 | A warm light step: note chips, check cards | Pine 12.31, ink soft 7.17, Redline 6.20 | Yes |
+| Goldenrod | `accent-500` | #D9A441 | Accent only: onDark button fill on Pine, booked checks, small marks. **Never a section background**, never on Fern (2.75) | Pine on Goldenrod 5.81 | n/a |
+
+Rules:
+
+1. **Red pen only on light canvases** (Clearing, Leaf, White, Birch, Sunlight, Paper). On Fern and Pine there is no `RedlineMark`, `RedlineFrame`, red `RedlineUnderline`, red `MarginNote`, `text-redline`, `decoration-redline` or red focus ring. Use `RedlineUnderline tone="goldenrod"` on Pine and `tone="sungold"` on Fern.
+2. **On Fern every text colour is Birch** (or forest white). Small mono labels and numerals on Fern are Birch too, never sage, grey or gold. `Eyebrow onFern`, `MarginNote tone="onFern"`, `ButtonLink variant="onFern"`.
+3. **Prices and numerals on Pine use Sun gold** (`text-forest-sungold`, 9.12:1). On Fern they use Birch.
+4. **Buttons:** `primary` and `secondary` on every light canvas (Pine edge 9.52:1 or more), `onDark` (Goldenrod) on Pine, `onFern` (Sun gold fill, Pine label 9.12:1, edge 4.31:1, Birch focus ring) on Fern.
+5. **No two neighbouring sections share a tone.** Where a layout forces two (the white proof strip and white check teaser), separate them with a 1px `border-forest-fern/10` rule.
+6. **Header** is forest white at 95% with a `border-forest-fern/15` hairline. **Footer** is Pine. **FooterCta** is Fern so it reads as its own band above the footer.
+
+### Homepage tone map
+
+| # | Section | Component | Tone |
+|---|---|---|---|
+| | Header | `components/layout/Header.tsx` | forest white, Fern/15 hairline |
+| 1 | Hero | `HomeHero` | `clearing` |
+| 2 | Trust strip | `TrustStrip` | `fern` |
+| 3 | Proof | `ProofStrip` | `white` |
+| 4 | Check teaser | `CheckTeaser` | `white`, 1px Fern/10 rule on top (Paper read as tan) |
+| 5 | Offer menu | `OfferMenu` | `pine` |
+| 6 | Websites break quietly | `CareSection` | `leaf` (example cards on forest white) |
+| 7 | Work | `WorkSection` | `white` |
+| 8 | I start with my own | `OwnSiteSection` | `birch`, the only tan section |
+| 9 | Ben | `BenSection` | `sunlight` |
+| 10 | Book | `BookSection` | `fern` |
+| | Footer | `Footer` | Pine |
+
+`__tests__/high-priority/palette-v3.test.tsx` enforces this order, the no-red-on-dark rule and the header.
+
+### The Lead Machine
+
+Sits on Clearing. Belts and the machine body are Fern tints mixed into forest white (`--hm-tint-1` to `--hm-tint-4`: #E8EEE6, #D5DFD4, #C3D0C2, #A6BBA7), the platform is Fern at 10% over Clearing (#E0E4C9), cards and the calendar are forest white with Pine outlines, booked checks stay Goldenrod and the marker and its notes stay red. Geometry and timing are unchanged.
 
 ---
 
@@ -126,7 +186,7 @@ All server components unless noted. Import from the barrels: `@/components/v3` a
 
 | Prop | Type | Default | |
 |---|---|---|---|
-| `tone` | `'birch' \| 'paper' \| 'lichen' \| 'pine'` | `'birch'` | Canvas and default text colour |
+| `tone` | `'clearing' \| 'leaf' \| 'fern' \| 'sunlight' \| 'white' \| 'birch' \| 'paper' \| 'lichen' \| 'pine'` | `'birch'` | Canvas and default text colour. See Palette: Sunlit forest. |
 | `rhythm` | `'tight' \| 'default' \| 'loose' \| 'none'` | `'default'` | Vertical padding token |
 | `id` | `string` | | Anchor target (has `scroll-mt-20`) |
 | `labelledBy` | `string` | | Sets `aria-labelledby`; pass the heading's id |
@@ -142,7 +202,7 @@ All server components unless noted. Import from the barrels: `@/components/v3` a
 </Section>
 ```
 
-Use Pine for at most one or two sections per page (the Book section). Two neighbouring sections should not share a tone.
+Use Pine and Fern for at most one or two sections each per page. Two neighbouring sections should not share a tone.
 
 ### Eyebrow
 
@@ -151,6 +211,7 @@ Use Pine for at most one or two sections per page (the Book section). Two neighb
 | `children` | `ReactNode` | required | The label. Sentence text; it renders in capitals. |
 | `index` | `string` | | Section number, e.g. `"03"`. Red on light, gold on Pine. |
 | `onDark` | `boolean` | `false` | Set inside Pine sections |
+| `onFern` | `boolean` | `false` | Set inside Fern sections: label and index in Birch |
 | `as` | `'p' \| 'span' \| 'div'` | `'p'` | |
 | `className` | `string` | | |
 
@@ -185,13 +246,13 @@ Wraps `next/link`. At least 48px tall, DM Sans 600, 3px focus ring with a 3px of
 | Prop | Type | Default | |
 |---|---|---|---|
 | `href` | `LinkProps['href']` | required | Internal path, `tel:` or `mailto:` |
-| `variant` | `'primary' \| 'secondary' \| 'onDark'` | `'primary'` | primary: Pine fill. secondary: Pine outline (light canvases only). onDark: Goldenrod fill (Pine sections). |
+| `variant` | `'primary' \| 'secondary' \| 'onDark' \| 'onFern'` | `'primary'` | primary: Pine fill. secondary: Pine outline (light canvases only). onDark: Goldenrod fill (Pine sections). onFern: Sun gold fill (Fern sections). |
 | `prefetch` | `LinkProps['prefetch']` | | |
 | `className` | `string` | | |
 | `children` | `ReactNode` | required | |
 | ...rest | anchor attributes | | `aria-label`, `target`, `rel`, `onClick` and so on |
 
-Focus ring: Redline on light canvases, Gold light on Pine.
+Focus ring: Redline on light canvases, Gold light on Pine, Birch on Fern.
 
 ```tsx
 <ButtonLink href="/book">Book a 15-minute call</ButtonLink>
@@ -207,7 +268,7 @@ Ben's handwritten note in Caveat with a small hand-drawn arrow.
 |---|---|---|---|
 | `children` | `string` | required | 8 words or fewer (warns in development) |
 | `arrow` | `'up' \| 'down' \| 'left' \| 'right' \| 'none'` | `'down'` | Direction the arrow points. Left and up sit before the text; right and down after. |
-| `tone` | `'fern' \| 'redline' \| 'onDark'` | `'fern'` | Fern for Ben's notes; redline for a red-pen aside; onDark on Pine |
+| `tone` | `'fern' \| 'redline' \| 'onDark' \| 'onFern'` | `'fern'` | Fern for Ben's notes (not on Leaf); redline for a red-pen aside (light canvases); onDark on Pine; onFern (Birch) on Fern |
 | `decorative` | `boolean` | `false` | `aria-hidden` when the note only repeats nearby text ("that's me" beside a captioned photo) |
 | `as` | `'p' \| 'span'` | `'p'` | |
 | `className` | `string` | | |
@@ -278,7 +339,7 @@ Hand-drawn underline under headline words. Each word is an inline-block with its
 | Prop | Type | Default | |
 |---|---|---|---|
 | `children` | `string` | required | Plain text, 1 to 4 words |
-| `tone` | `'redline' \| 'goldenrod'` | `'redline'` | goldenrod on Pine |
+| `tone` | `'redline' \| 'goldenrod' \| 'sungold'` | `'redline'` | goldenrod on Pine, sungold on Fern |
 | `drawOn` | `boolean` | `true` | |
 | `className` | `string` | | |
 
@@ -313,8 +374,9 @@ Hand-drawn underline under headline words. Each word is an inline-block with its
 | `35%` in `font-mono text-numeral`, label in `text-label` | Result figures in body text at the same size as the sentence |
 | Caveat for "no phone number up top" on a Redline mark | Caveat for a paragraph, a heading, a button or a price |
 | Notes of 8 words or fewer, 18px or more | Long sentences in a note; put them in `detail` |
-| Redline on Birch, Paper, Lichen and white | Redline text or marks on Pine (1.99:1) |
-| Goldenrod as the onDark button fill | Goldenrod as a section background |
+| Redline on Clearing, Leaf, White, Birch, Sunlight, Paper and Lichen | Redline text, marks or focus rings on Fern or Pine |
+| Birch text and `onFern` variants on Fern | #C9CFC4, gold light or Goldenrod on Fern |
+| Goldenrod as the onDark button fill on Pine | Goldenrod as a section background, or on Fern |
 | `pins="always"` for small or crowded screenshots | Overlapping note chips at desktop width |
 | Real client work and client-reported results, labelled | Invented marks on a client's site without permission (DJN markup is not approved for the hero) |
 | No em dashes in copy | Em dashes anywhere visible |

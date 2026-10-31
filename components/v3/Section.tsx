@@ -4,7 +4,12 @@ import Container, { type ContainerSize } from './Container';
 export type SectionTone = 'birch' | 'paper' | 'lichen' | 'pine' | 'clearing' | 'leaf' | 'fern' | 'sunlight' | 'white';
 export type SectionRhythm = 'tight' | 'default' | 'loose' | 'none';
 
-/** Canvas + default text colour per tone. Every pair is at least 10:1. */
+/**
+ * Canvas + default text colour per tone (WCAG). The lowest pair is Fern with
+ * Birch text at 5.38:1; every light tone carries Pine text at 9.5:1 or more
+ * (Leaf 9.52, Sunlight 10.73, Clearing 11.41, Birch 11.38, White 12.68).
+ * Red pen only on the light tones, never on Fern or Pine.
+ */
 export const SECTION_TONES: Record<SectionTone, string> = {
   birch: 'bg-cream-300 text-primary-900', // Birch Paper #F4EFE3, the default canvas
   paper: 'bg-[#FBF8F1] text-primary-900', // Paper, a lighter step for cards and the check
@@ -12,7 +17,7 @@ export const SECTION_TONES: Record<SectionTone, string> = {
   pine: 'bg-primary-900 text-cream-300', // Pine Shadow #223528, the deep dark canvas
   clearing: 'bg-forest-clearing text-primary-900', // Sunlit forest hero
   leaf: 'bg-forest-leaf text-primary-900', // Spring leaf
-  fern: 'bg-forest-fern text-cream-300', // Fern, the lighter dark canvas (5.3:1); no red pen
+  fern: 'bg-forest-fern text-cream-300', // Fern, the lighter dark canvas (5.38:1); no red pen
   sunlight: 'bg-forest-sunlight text-primary-900', // warm light behind Ben
   white: 'bg-forest-white text-primary-900', // near-white for proof and work
 };

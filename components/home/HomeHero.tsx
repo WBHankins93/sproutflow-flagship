@@ -13,7 +13,7 @@ import { homeBookingHref } from './booking';
 function HeroBen() {
   return (
     <div className="order-4 flex min-w-0 items-center gap-4 lg:mt-7">
-      <div className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-full border border-primary-900/10 bg-cream-500">
+      <div className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-full border border-primary-900/10 bg-forest-leaf">
         <Image
           src={getImageUrl('ben-photo.png')}
           alt={homeHero.photoAlt}
@@ -51,7 +51,7 @@ export default function HomeHero() {
 
   return (
     <Section
-      tone="birch"
+      tone="clearing"
       rhythm="none"
       id="top"
       labelledBy="home-hero-h"
