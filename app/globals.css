@@ -69,9 +69,32 @@
     @apply transition-colors duration-300;
   }
 
+  /*
+   * Global focus ring (WCAG 1.4.11, 3:1 against the canvas). The colour is a
+   * custom property so the nearest dark canvas wins when sections nest.
+   * Pine #223528 on every light canvas: 9.52:1 (Leaf) to 12.68:1 (White).
+   * Goldenrod #D9A441 on Pine: 5.81:1. Birch #F4EFE3 on Fern: 5.38:1
+   * (Goldenrod is only 2.75:1 on Fern). Component focus utilities still win.
+   * Scoped to section[data-tone] because MarginNote also uses data-tone.
+   */
+  :root,
+  section[data-tone]:not([data-tone='pine']):not([data-tone='fern']) {
+    --focus-ring: #223528;
+  }
+
+  section[data-tone='pine'],
+  :is(section, footer, nav, div, aside, header).bg-primary-900 {
+    --focus-ring: #D9A441;
+  }
+
+  section[data-tone='fern'],
+  :is(section, footer, nav, div, aside, header).bg-forest-fern {
+    --focus-ring: #F4EFE3;
+  }
+
   :focus-visible {
-    outline: 3px solid #D9A441;
-    outline-offset: 3px;
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
   }
 
   ::selection {

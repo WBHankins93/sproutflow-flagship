@@ -6,6 +6,9 @@
  */
 
 import { getImageUrl, getBlobImageUrl } from '@/lib/blob-images'
+import optimizedImages from '@/lib/optimized-images.json'
+import { existsSync } from 'fs'
+import { join } from 'path'
 
 describe('Image URL Generation', () => {
   const originalEnv = { ...process.env }
@@ -24,6 +27,19 @@ describe('Image URL Generation', () => {
       delete (process.env as any)[key]
     })
     Object.assign(process.env, originalEnv)
+  })
+
+  it('serves every explicit optimized derivative locally even with a blob origin', () => {
+    ;(process.env as any).NODE_ENV = 'production'
+    process.env.NEXT_PUBLIC_BLOB_STORE_URL = 'https://blob.vercel-storage.com'
+    for (const [source, optimized] of Object.entries(optimizedImages)) {
+      expect(getBlobImageUrl(source)).toBe(optimized)
+      expect(getBlobImageUrl(`/${source}`)).toBe(optimized)
+      expect(getImageUrl(source)).toBe(optimized)
+      expect(getImageUrl(`/${source}`)).toBe(optimized)
+      expect(getImageUrl(source.replace(/^images\//, ''))).toBe(optimized)
+      expect(existsSync(join(process.cwd(), 'public', optimized))).toBe(true)
+    }
   })
 
   describe('getImageUrl', () => {
