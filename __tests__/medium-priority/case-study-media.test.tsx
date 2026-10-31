@@ -4,14 +4,13 @@
  * The DJN before/after pairs existed in data but never rendered, and the
  * laptop and browser frames cropped the sides of wide site captures (the
  * Second Line Psychiatry logo read "ond Line Psychiatry"). These tests pin
- * both fixes.
+ * both fixes. The v2 DeviceFrame/ImageCarousel are gone; the case study
+ * screenshot now renders in CaseStudyLayout's hero box.
  */
 
 import { render, screen } from '@testing-library/react'
 import BeforeAfterGallery from '@/components/case-studies/BeforeAfterGallery'
 import CaseStudyLayout from '@/components/case-studies/CaseStudyLayout'
-import DeviceFrame, { SCREEN_ASPECT_CLASS, SCREEN_MEDIA_CLASSES } from '@/components/ui/DeviceFrame'
-import ImageCarousel from '@/components/ui/ImageCarousel'
 import { caseStudies, type BeforeAfterPair } from '@/data/caseStudies'
 import { getImageUrl } from '@/lib/blob-images'
 
@@ -125,41 +124,19 @@ describe('CaseStudyLayout before/after section', () => {
   })
 })
 
-describe('DeviceFrame screen fit', () => {
-  const slides = [
-    {
-      src: 'work/client-logos/second-line-project.png',
-      alt: 'Second Line Psychiatry homepage',
-    },
-  ]
+describe('CaseStudyLayout hero screenshot fit', () => {
+  const heroImg = (container: HTMLElement, clientName: string) =>
+    container.querySelector(`img[alt="${clientName} website"]`) as HTMLImageElement
 
-  ;(['laptop', 'browser'] as const).forEach((kind) => {
-    it(`${kind} screen matches the capture aspect and anchors top`, () => {
-      const { container } = render(
-        <DeviceFrame kind={kind}>
-          <ImageCarousel slides={slides} />
-        </DeviceFrame>
-      )
-      const screenEl = container.querySelector(`[data-device-screen="${kind}"]`)!
-      expect(screenEl).toBeInTheDocument()
-      expect(screenEl).toHaveClass(SCREEN_ASPECT_CLASS)
-      expect(screenEl).toHaveClass(...SCREEN_MEDIA_CLASSES.split(' '))
-      expect(screenEl).not.toHaveClass('aspect-[16/10]')
-      expect(SCREEN_ASPECT_CLASS).toBe('aspect-[15/8]')
-      expect(SCREEN_MEDIA_CLASSES).toBe('[&_img]:object-cover [&_img]:object-top')
-
-      const img = screenEl.querySelector('img')!
-      expect(img.getAttribute('src')).toBe(getImageUrl(slides[0].src))
-      expect(img).toHaveClass('object-top')
+  it('never crops any case study hero capture', () => {
+    caseStudies.forEach((study) => {
+      const { container, unmount } = render(<CaseStudyLayout caseStudy={study} />)
+      const img = heroImg(container, study.clientName)
+      expect(img.getAttribute('src')).toBe(getImageUrl(study.heroImage))
+      expect(img).toHaveClass('object-contain', 'object-top')
+      expect(img).not.toHaveClass('object-cover')
+      expect(img.parentElement).toHaveClass('aspect-[16/9]', 'overflow-hidden')
+      unmount()
     })
-  })
-
-  it('leaves the phone frame portrait', () => {
-    const { container } = render(
-      <DeviceFrame kind="phone">
-        <span>Phone</span>
-      </DeviceFrame>
-    )
-    expect(container.querySelector('.aspect-\\[9\\/19\\]')).toBeInTheDocument()
   })
 })

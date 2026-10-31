@@ -1,10 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import PageHeader from '@/components/ui/PageHeader';
-import SectionShell from '@/components/ui/SectionShell';
-import FooterCta from '@/components/ui/FooterCta';
-import ResourceIndex from '@/components/resources/ResourceIndex';
-import { Footer } from '@/components/layout/Footer';
+import { ResourceArticle, ResourceIndexView } from '@/components/resources/ResourceViews';
 import { getPublishedResource, getPublishedResources, type ResourceEntry } from '@/data/resources';
 
 /**
@@ -61,61 +57,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ResourcesRoute({ params }: Props) {
   const route = await resolveRoute(params);
-  return (
-    <>
-      {route.kind === 'index' ? <ResourceIndexView published={route.published} /> : <ResourceView resource={route.resource} />}
-      <FooterCta />
-      <Footer />
-    </>
-  );
-}
-
-function ResourceIndexView({ published }: { published: ResourceEntry[] }) {
-  const featured = published.find((resource) => resource.featured);
-  return (
-    <>
-      <PageHeader
-        eyebrow="Guides and notes"
-        title="Useful answers, written down."
-        titleAccent="written down"
-        intro="Longer guides for decisions that deserve context. Short notes for patterns I keep seeing in the work."
-        count={`${String(published.length).padStart(2, '0')} ${published.length === 1 ? 'entry' : 'entries'}`}
-      />
-      {featured && (
-        <SectionShell index="01" label="featured guide" variant="ink">
-          <div className="max-w-3xl">
-            <p className="text-eyebrow uppercase text-accent-300">Featured {featured.type}</p>
-            <h2 className="mt-5 font-display text-display-lg text-cream-300">{featured.title}</h2>
-            <p className="mt-5 text-body-lg text-white/[0.68]">{featured.summary}</p>
-          </div>
-        </SectionShell>
-      )}
-      <SectionShell index="02" label="the library" variant="cream">
-        <ResourceIndex resources={published} />
-      </SectionShell>
-    </>
-  );
-}
-
-function ResourceView({ resource }: { resource: ResourceEntry }) {
-  return (
-    <>
-      <PageHeader
-        eyebrow={`${resource.type} · ${resource.track}`}
-        title={resource.title}
-        intro={resource.summary}
-        count={resource.readTime}
-      />
-      <SectionShell index="01" label={resource.type} variant="cream">
-        <div className="mx-auto max-w-[680px] space-y-14">
-          {resource.sections.map((section, index) => (
-            <section key={section}>
-              <p className="font-mono text-mono-meta text-accent-700">{String(index + 1).padStart(2, '0')}</p>
-              <h2 className="mt-4 font-display text-display-md text-primary-900">{section}</h2>
-            </section>
-          ))}
-        </div>
-      </SectionShell>
-    </>
+  return route.kind === 'index' ? (
+    <ResourceIndexView published={route.published} />
+  ) : (
+    <ResourceArticle resource={route.resource} />
   );
 }

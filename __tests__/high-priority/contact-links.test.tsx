@@ -7,7 +7,16 @@
 
 import { render, screen } from '@testing-library/react'
 import { Footer } from '@/components/layout/Footer'
-import ContactSection from '@/components/sections/ContactSection'
+import BookSection from '@/components/home/BookSection'
+import FooterCta from '@/components/ui/FooterCta'
+import Home from '@/app/page'
+import { homeBook } from '@/data/home'
+
+// The Lead Machine is owned by the `hero` worker; these tests only need the page around it.
+jest.mock('@/components/home/hero-machine', () => {
+  const Stub = () => <div data-testid="hero-machine" />
+  return { __esModule: true, HeroMachine: Stub, default: Stub }
+})
 
 describe('Contact Links - Footer', () => {
   it('should have correct email mailto link', () => {
@@ -33,27 +42,60 @@ describe('Contact Links - Footer', () => {
   })
 })
 
-describe('Contact Links - ContactSection', () => {
+// The v2 ContactSection was a wrapper around FooterCta, the closing contact
+// block every inner page still renders, so its assertions run on FooterCta.
+describe('Contact Links - FooterCta (inner pages)', () => {
   it('should have correct email mailto link', () => {
-    render(<ContactSection />)
+    render(<FooterCta />)
     const emailLink = screen.getByText('ben@sproutflow-studio.com').closest('a')
     expect(emailLink).toHaveAttribute('href', 'mailto:ben@sproutflow-studio.com')
   })
 
   it('should have correct phone tel link', () => {
-    render(<ContactSection />)
+    render(<FooterCta />)
     const phoneLink = screen.getByText('(504) 326-1676').closest('a')
     expect(phoneLink).toHaveAttribute('href', 'tel:+15043261676')
   })
 
   it('should display correct email address', () => {
-    render(<ContactSection />)
+    render(<FooterCta />)
     expect(screen.getByText('ben@sproutflow-studio.com')).toBeInTheDocument()
   })
 
   it('should display correct phone number', () => {
-    render(<ContactSection />)
+    render(<FooterCta />)
     expect(screen.getByText('(504) 326-1676')).toBeInTheDocument()
+  })
+})
+
+// On the homepage the closing contact block is BookSection (the phone) above
+// the Footer (email and phone).
+describe('Contact Links - homepage BookSection and Footer', () => {
+  it('should have correct phone tel link in BookSection', () => {
+    render(<BookSection />)
+    expect(homeBook.phoneDisplay).toBe('(504) 326-1676')
+    const phoneLink = screen.getByText('(504) 326-1676').closest('a')
+    expect(phoneLink).toHaveAttribute('href', 'tel:+15043261676')
+  })
+
+  it('should give the homepage a working mailto and tel link in every contact block', () => {
+    const { container } = render(<Home />)
+    const book = container.querySelector('section#book')!
+    expect(book.querySelector('a[href="tel:+15043261676"]')).toHaveTextContent('(504) 326-1676')
+
+    const footer = container.querySelector('footer')!
+    expect(footer.querySelector('a[href="mailto:ben@sproutflow-studio.com"]')).toHaveTextContent(
+      'ben@sproutflow-studio.com',
+    )
+    expect(footer.querySelector('a[href="tel:+15043261676"]')).toHaveTextContent('(504) 326-1676')
+
+    // Every contact link on the page uses the one correct address and number.
+    container.querySelectorAll('a[href^="mailto:"]').forEach((link) =>
+      expect(link).toHaveAttribute('href', 'mailto:ben@sproutflow-studio.com'),
+    )
+    container.querySelectorAll('a[href^="tel:"]').forEach((link) =>
+      expect(link).toHaveAttribute('href', 'tel:+15043261676'),
+    )
   })
 })
 

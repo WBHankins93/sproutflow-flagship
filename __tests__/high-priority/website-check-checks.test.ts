@@ -10,7 +10,7 @@ import fs from 'fs'
 import path from 'path'
 import { analyzeHtml, evaluateChecks, findContactLink, needsContactPage, type CheckInputs } from '@/lib/website-check/checks'
 import type { FetchError, FetchSuccess } from '@/lib/website-check/fetcher'
-import { countStatuses, formatSummaryText, recommendOffer, withRecommendation } from '@/lib/website-check/summarize'
+import { FIX_LINES, countStatuses, fixLine, formatSummaryText, offerDetails, recommendOffer, withRecommendation } from '@/lib/website-check/summarize'
 import type { CheckId, CheckStatus, WebsiteCheckResult } from '@/lib/website-check/types'
 
 const FIXTURES = path.join(process.cwd(), '__tests__/fixtures/website-check')
@@ -72,7 +72,7 @@ describe('fixture: a good site', () => {
   })
 
   it('recommends the Lead Flow Audit when everything passes', () => {
-    expect(recommendOffer(evaluateChecks(inputs).checks)).toBe('lead-flow-audit')
+    expect(recommendOffer(evaluateChecks(inputs).checks)).toBe('audit')
   })
 })
 
@@ -92,8 +92,8 @@ describe('fixture: no viewport, number not linked, heavy', () => {
     expect(lineOf(inputs, 'https')).toBe('Your site works on https, but the plain http address does not forward to it.')
   })
 
-  it('recommends Website Rescue', () => {
-    expect(recommendOffer(evaluateChecks(inputs).checks)).toBe('website-rescue')
+  it('recommends the Starter landing page (was Website Rescue)', () => {
+    expect(recommendOffer(evaluateChecks(inputs).checks)).toBe('starter')
   })
 })
 
@@ -109,8 +109,8 @@ describe('fixture: only a mailto link', () => {
     expect(lineOf(inputs, 'call')).toBe('I could not find a tap-to-call phone number on your homepage.')
   })
 
-  it('recommends the Lead Capture & Follow-Up System', () => {
-    expect(recommendOffer(evaluateChecks(inputs).checks)).toBe('lead-capture-system')
+  it('recommends a custom quote (was the Lead Capture & Follow-Up System)', () => {
+    expect(recommendOffer(evaluateChecks(inputs).checks)).toBe('custom')
   })
 })
 
@@ -176,7 +176,7 @@ describe('C1 page loads', () => {
       'I could not find a website at lapsed.example. The domain may have lapsed or not be connected to a site.',
     )
     expect(evaluateChecks(inputs).outcome).toBe('not-loaded')
-    expect(recommendOffer(evaluateChecks(inputs).checks)).toBe('website-rescue')
+    expect(recommendOffer(evaluateChecks(inputs).checks)).toBe('starter')
   })
 
   it('fails on a timeout', () => {
@@ -204,7 +204,7 @@ describe('C1 page loads', () => {
     const parked = '<html><head><title>example.com is for sale</title></head><body><p>This domain is for sale.</p></body></html>'
     const inputs: CheckInputs = { host: 'example.com', https: page(parked), httpProbe: PROBE_FORWARDS }
     expect(statuses(inputs).loads).toBe('warn')
-    expect(recommendOffer(evaluateChecks(inputs).checks)).toBe('website-rescue')
+    expect(recommendOffer(evaluateChecks(inputs).checks)).toBe('starter')
   })
 
   it('does not call a long contractor homepage parked for saying "under construction"', () => {
@@ -310,7 +310,7 @@ describe('C3 to C6 details', () => {
       httpProbe: PROBE_FORWARDS,
     }
     expect(statuses(inputs).speed).toBe('fail')
-    expect(recommendOffer(evaluateChecks(inputs).checks)).toBe('website-rescue')
+    expect(recommendOffer(evaluateChecks(inputs).checks)).toBe('starter')
   })
 
   it('never fails the call or form checks', () => {
@@ -366,11 +366,116 @@ describe('summary for the report request', () => {
     const text = formatSummaryText(result)
     const lines = text.split('\n')
     expect(lines[0]).toBe('Website check: example.com')
-    expect(lines).toContain('Recommendation: Website Rescue ($1,500)')
+    expect(lines).toContain('Recommendation: Starter landing page ($500)')
     expect(lines).toContain('Totals: 1 fail, 4 warn, 1 pass, 0 not checked')
     expect(lines[7].startsWith('FAIL | It fits a phone: ')).toBe(true)
     expect(countStatuses(checks).warn).toBe(4)
-    expect(checks.find((check) => check.id === 'mobile')?.fix).toBe('Website Rescue fixes this.')
-    expect(checks.find((check) => check.id === 'form')?.fix).toBe('Website Rescue includes a quote form.')
+    expect(checks.find((check) => check.id === 'mobile')?.fix).toBe('A starter landing page fixes this.')
+    expect(checks.find((check) => check.id === 'form')?.fix).toBe('A starter landing page includes a quote form.')
+  })
+})
+
+describe('v1: domain and email results in the summary and the offer', () => {
+  const domain = {
+    id: 'domain' as const,
+    label: 'Domain renewal',
+    status: 'warn' as const,
+    line: 'Your domain renews by Nov 4, 2026, in 9 days. If auto-renew is off, your site and email stop.',
+  }
+  const email = {
+    id: 'email' as const,
+    label: 'Email records',
+    status: 'fail' as const,
+    line: 'Your domain has no mail server (MX) record and no SPF record, so it cannot reliably send or receive email.',
+    note: 'I did not check DKIM, the third email record, because it can only be looked up with a name your email provider picks.',
+  }
+
+  it('points both to Site Care, and recommends Site Care when every page check passes', () => {
+    const run = evaluateChecks({ host: 'example.com', https: page(fixture('good-site.html')), httpProbe: PROBE_FORWARDS })
+    const { offer, checks } = withRecommendation([...run.checks, domain, email])
+    expect(offer).toBe('care')
+    expect(checks.find((check) => check.id === 'domain')?.fix).toBe('Site Care covers this.')
+    expect(checks.find((check) => check.id === 'email')?.fix).toBe('Site Care covers this.')
+  })
+
+  it('offers nothing when no page check could run, even with domain and email results', () => {
+    const run = evaluateChecks({ host: 'example.com', https: page(fixture('challenge-403.html'), { status: 403 }) })
+    expect(recommendOffer([...run.checks, domain, email])).toBe(null)
+  })
+
+  it('includes the new results and the DKIM note in the report summary', () => {
+    const run = evaluateChecks({ host: 'example.com', https: page(fixture('good-site.html')), httpProbe: PROBE_FORWARDS })
+    const { offer, checks } = withRecommendation([...run.checks, domain, email])
+    const result: WebsiteCheckResult = {
+      checkedAt: '2026-10-26T12:00:00.000Z',
+      inputUrl: 'example.com',
+      host: 'example.com',
+      finalUrl: 'https://www.example.com/',
+      outcome: 'checked',
+      offer,
+      checks,
+    }
+    const lines = formatSummaryText(result).split('\n')
+    expect(lines).toContain('Totals: 1 fail, 1 warn, 6 pass, 0 not checked')
+    expect(lines).toContain(`FAIL | Email records: ${email.line}`)
+    expect(lines).toContain(`WARN | Domain renewal: ${domain.line}`)
+    expect(lines[lines.length - 1]).toBe(`Note | Email records: ${email.note}`)
+  })
+})
+
+describe('29 Oct offer restructure: every recommendation names a current offer', () => {
+  const check = (id: CheckId, status: CheckStatus) => ({ id, label: id, status, line: `${id} ${status}` })
+  const allPass = (['loads', 'https', 'mobile', 'call', 'form', 'speed', 'domain', 'email'] as CheckId[]).map((id) => check(id, 'pass'))
+  const withStatus = (changes: Partial<Record<CheckId, CheckStatus>>) =>
+    allPass.map((entry) => (changes[entry.id] ? check(entry.id, changes[entry.id]!) : entry))
+
+  it('maps each problem to the new offer set', () => {
+    expect(recommendOffer(withStatus({ loads: 'fail' }))).toBe('starter')
+    expect(recommendOffer(withStatus({ speed: 'fail' }))).toBe('starter')
+    expect(recommendOffer(withStatus({ form: 'warn' }))).toBe('custom')
+    expect(recommendOffer(withStatus({ call: 'warn' }))).toBe('audit')
+    expect(recommendOffer(withStatus({ speed: 'warn' }))).toBe('audit')
+    expect(recommendOffer(withStatus({ domain: 'warn' }))).toBe('care')
+    expect(recommendOffer(withStatus({ email: 'fail' }))).toBe('care')
+    expect(recommendOffer(withStatus({ call: 'warn', domain: 'fail' }))).toBe('audit')
+    expect(recommendOffer(allPass)).toBe('audit')
+  })
+
+  it('writes every fix line with a current offer name', () => {
+    expect(fixLine(check('mobile', 'fail'), 'starter')).toBe('A starter landing page fixes this.')
+    expect(fixLine(check('form', 'warn'), 'starter')).toBe('A starter landing page includes a quote form.')
+    expect(fixLine(check('form', 'warn'), 'custom')).toBe('A custom quote covers this. Bring me the problem.')
+    expect(fixLine(check('form', 'fail'), 'audit')).toBe('The Lead Flow Audit looks at this.')
+    expect(fixLine(check('call', 'warn'), 'audit')).toBe('The Lead Flow Audit looks at this.')
+    expect(fixLine(check('domain', 'warn'), 'care')).toBe('Site Care covers this.')
+    Object.values(FIX_LINES).forEach((line) => expect(/Website Rescue|Lead Capture/.test(line)).toBe(false))
+  })
+
+  it('reads offer details from the catalog, including old ids', () => {
+    expect(offerDetails('starter').name).toBe('Starter landing page')
+    expect(offerDetails('starter').price).toBe('$500')
+    expect(offerDetails('audit').price).toBe('$500')
+    expect(offerDetails('audit').priceNote).toBe('Credited toward any build.')
+    expect(offerDetails('care').price).toBe('$99/mo or $150/mo')
+    const custom = offerDetails('custom')
+    expect(custom.price).toBe(null)
+    expect(custom.priceNote).toBe('Most projects land between $1,500 and $6,000, paid in parts.')
+    expect(custom.includes.length).toBe(3)
+    // An old id from before the restructure still resolves.
+    expect(offerDetails('website-rescue' as never).name).toBe('Starter landing page')
+    expect(offerDetails('lead-capture-system' as never).name).toBe('Custom quote')
+  })
+
+  it('names the custom quote in the report summary without a price', () => {
+    const result: WebsiteCheckResult = {
+      checkedAt: '2026-10-29T12:00:00.000Z',
+      inputUrl: 'example.com',
+      host: 'example.com',
+      finalUrl: 'https://example.com/',
+      outcome: 'checked',
+      offer: 'custom',
+      checks: withStatus({ form: 'warn' }),
+    }
+    expect(formatSummaryText(result).split('\n')).toContain('Recommendation: Custom quote (quoted after a call)')
   })
 })

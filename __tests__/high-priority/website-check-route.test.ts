@@ -27,7 +27,7 @@ const RESULT: WebsiteCheckResult = {
   host: 'example.com',
   finalUrl: 'https://www.example.com/',
   outcome: 'checked',
-  offer: 'lead-flow-audit',
+  offer: 'audit',
   checks: [
     { id: 'loads', label: 'It loads', status: 'pass', line: 'Your homepage loaded in 0.6 seconds from my server.' },
     { id: 'https', label: 'It is secure', status: 'pass', line: 'Your site uses a secure https connection, and the plain http address forwards to it.' },
@@ -35,6 +35,21 @@ const RESULT: WebsiteCheckResult = {
     { id: 'call', label: 'Tap to call', status: 'pass', line: 'Your phone number is a tap-to-call link.' },
     { id: 'form', label: 'Quote form', status: 'pass', line: 'I found a contact or quote form on your homepage.' },
     { id: 'speed', label: 'It is light', status: 'pass', line: 'Your homepage looks light: 2 KB of page code and 2 scripts.' },
+    {
+      id: 'domain',
+      label: 'Domain renewal',
+      status: 'pass',
+      line: 'Your domain, example.com, is registered until Aug 13, 2028. No renewal is due in the next 60 days.',
+      data: { domain: 'example.com', expires: '2028-08-13', days_left: 656 },
+    },
+    {
+      id: 'email',
+      label: 'Email records',
+      status: 'pass',
+      line: 'Your domain has SPF and a DMARC policy set to reject, the records inboxes look for before trusting your email.',
+      note: 'I did not check DKIM, the third email record, because it can only be looked up with a name your email provider picks.',
+      data: { domain: 'example.com', spf: true, dmarc: 'reject', mx: true },
+    },
   ],
 }
 
@@ -61,14 +76,24 @@ describe('POST /api/website-check', () => {
     expect(runtime).toBe('nodejs')
   })
 
-  it('returns the six results on success', async () => {
+  it('returns the eight results (six page checks, domain and email) on success', async () => {
     const response = await post({ url: 'example.com' })
     expect(response.status).toBe(200)
     expect(response.headers.get('cache-control')).toBe('no-store')
     const body = await response.json()
     expect(body.result.host).toBe('example.com')
-    expect(body.result.checks.length).toBe(6)
-    expect(body.result.checks.map((check: { id: string }) => check.id)).toEqual(['loads', 'https', 'mobile', 'call', 'form', 'speed'])
+    expect(body.result.checks.length).toBe(8)
+    expect(body.result.checks.map((check: { id: string }) => check.id)).toEqual([
+      'loads',
+      'https',
+      'mobile',
+      'call',
+      'form',
+      'speed',
+      'domain',
+      'email',
+    ])
+    expect(body.result.checks[7].note).toBe(RESULT.checks[7].note)
     expect(runMock).toHaveBeenCalledTimes(1)
     expect(runMock.mock.calls[0][0].url.href).toBe('https://example.com/')
   })

@@ -1,0 +1,14 @@
+{
+  "description": "Trimmed copy of https://data.iana.org/rdap/dns.json (Oct 2026) for tests. Note us, co and io are absent upstream too.",
+  "publication": "2026-10-22T23:00:04Z",
+  "version": "1.0",
+  "services": [
+    [["com"], ["https://rdap.verisign.com/com/v1/"]],
+    [["net"], ["https://rdap.verisign.com/net/v1/"]],
+    [["org"], ["https://rdap.publicinterestregistry.org/rdap/"]],
+    [["app", "dev"], ["https://pubapi.registry.google/rdap/"]],
+    [["info", "ai"], ["https://rdap.identitydigital.services/rdap/"]],
+    [["uk"], ["https://rdap.nominet.uk/uk/"]],
+    [["gov"], ["https://rdap.nic.gov/rdap/"]]
+  ]
+}

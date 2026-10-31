@@ -8,15 +8,18 @@
 import { render } from '@testing-library/react'
 import Header from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import HeroSection from '@/components/sections/HeroSection'
+import HomeHero from '@/components/home/HomeHero'
 
 describe('Performance - Image Optimization', () => {
   it('should have priority prop on hero images', () => {
-    const { container } = render(<HeroSection />)
+    const { container } = render(<HomeHero />)
     // Note: Next.js Image component with priority prop
     // This is a basic check - actual priority behavior is handled by Next.js
     const images = container.querySelectorAll('img')
     expect(images.length).toBeGreaterThan(0)
+    // Ben's photo is the hero image above the fold (priority in HomeHero).
+    const photo = container.querySelector('img[alt="Ben Hankins, founder of Sproutflow Studio"]')!
+    expect(photo).toBeInTheDocument()
   })
 
   it('should have priority prop on header logo', () => {
