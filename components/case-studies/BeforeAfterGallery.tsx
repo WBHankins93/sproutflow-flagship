@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import type { BeforeAfterPair } from '@/data/caseStudies';
 import { getImageUrl } from '@/lib/blob-images';
-import SectionShell from '@/components/ui/SectionShell';
+import { Eyebrow, Heading, Section } from '@/components/v3';
 
 interface BeforeAfterGalleryProps {
   pairs: BeforeAfterPair[];
@@ -11,23 +11,25 @@ interface BeforeAfterGalleryProps {
 type Side = 'Before' | 'After';
 
 /**
- * Old site next to the rebuild, one row per page.
+ * Old site next to the rebuild, one row per page, on Pine.
  *
  * Captures range from about 1.5:1 to 1.95:1, so each slot is a fixed 16:10
- * box with the screenshot contained (never cropped) on an ink mat. The fixed
+ * box with the screenshot contained (never cropped) on a dark mat. The fixed
  * box reserves space before the image loads, and the before and after in a
  * row always line up at the same height. Pairs missing either image are
- * skipped rather than rendered half empty.
+ * skipped rather than rendered half empty. Pine, so no red: "After" is Sun
+ * gold (9.12:1), "Before" and captions are #C9CFC4 (8.21:1).
  */
 export default function BeforeAfterGallery({ pairs, clientName }: BeforeAfterGalleryProps) {
   const complete = pairs.filter((pair) => pair.beforeSrc && pair.afterSrc);
   if (!complete.length) return null;
 
   return (
-    <SectionShell label="before and after" variant="ink" tone="raised" labelledBy="case-before-after-heading">
-      <h2 id="case-before-after-heading" className="font-display text-display-md text-cream-300">
+    <Section tone="pine" labelledBy="case-before-after-heading">
+      <Eyebrow onDark>The old site and the new one</Eyebrow>
+      <Heading id="case-before-after-heading" size="md" className="mt-4">
         Before and after.
-      </h2>
+      </Heading>
       <ol className="mt-10 grid gap-12 md:gap-16">
         {complete.map((pair, index) => (
           <li key={`${pair.beforeSrc}-${pair.afterSrc}`} className="grid gap-6 md:grid-cols-2 md:gap-8">
@@ -46,7 +48,7 @@ export default function BeforeAfterGallery({ pairs, clientName }: BeforeAfterGal
           </li>
         ))}
       </ol>
-    </SectionShell>
+    </Section>
   );
 }
 
@@ -57,16 +59,16 @@ function BeforeAfterFigure({ side, src, alt, caption }: { side: Side; src: strin
     <figure data-side={side.toLowerCase()}>
       <p
         aria-hidden="true"
-        className={`mb-3 flex items-center gap-3 text-eyebrow uppercase ${
-          after ? 'text-accent-300' : 'text-white/55'
+        className={`mb-3 flex items-center gap-3 font-mono text-label uppercase [font-variant-ligatures:none] ${
+          after ? 'text-forest-sungold' : 'text-[#C9CFC4]'
         }`}
       >
-        <span className={`h-px w-6 ${after ? 'bg-accent-400' : 'bg-white/30'}`} />
+        <span className={`h-px w-6 ${after ? 'bg-forest-sungold' : 'bg-[#C9CFC4]/60'}`} />
         {side}
       </p>
       <div
-        className={`relative aspect-[16/10] overflow-hidden rounded-xl border bg-ink-900 ${
-          after ? 'border-accent-400/40' : 'border-white/15'
+        className={`relative aspect-[16/10] overflow-hidden rounded-xl border bg-black/25 ${
+          after ? 'border-forest-sungold/50' : 'border-cream-300/20'
         }`}
       >
         <Image
@@ -77,8 +79,11 @@ function BeforeAfterFigure({ side, src, alt, caption }: { side: Side; src: strin
           className="object-contain object-center"
         />
       </div>
-      <figcaption className="mt-3 text-body-sm text-white/[0.68]">
-        <span className="sr-only">{side}{caption ? ': ' : ''}</span>
+      <figcaption className="mt-3 font-body text-body-sm text-[#C9CFC4]">
+        <span className="sr-only">
+          {side}
+          {caption ? ': ' : ''}
+        </span>
         {caption}
       </figcaption>
     </figure>

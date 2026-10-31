@@ -1,8 +1,13 @@
+import type { ProofSource } from './caseStudies';
+
 export interface ProjectProof {
   id: string;
   name: string;
   location: string;
+  /** The one result shown for this project (homepage proof strip, /work). */
   result: string;
+  /** Where `result` comes from; rendered as its label. */
+  resultSource: ProofSource;
   screenshot: string;
   screenshotAlt: string;
   logo: string;
@@ -31,7 +36,9 @@ export const projectProof: ProjectProof[] = [
     id: 'second-line-psychiatry',
     name: 'Second Line Psychiatry',
     location: 'New Orleans, Louisiana',
+    // Ben to confirm source (client-reported) before final launch
     result: '50% more qualified inquiries',
+    resultSource: 'client-reported',
     screenshot: 'work/client-logos/second-line-project.png',
     screenshotAlt: 'Second Line Psychiatry homepage shown inside a laptop frame',
     logo: 'work/client-logos/second-line.png',
@@ -51,7 +58,9 @@ export const projectProof: ProjectProof[] = [
     id: 'nola-pool-solutions',
     name: 'NOLA Pool Solutions',
     location: 'New Orleans metro',
+    // Ben to confirm source (client-reported) before final launch
     result: '30% customer acquisition growth',
+    resultSource: 'client-reported',
     screenshot: 'work/client-logos/nps-project.png',
     screenshotAlt: 'NOLA Pool Solutions homepage shown inside a laptop frame',
     logo: 'work/client-logos/logo.png',
@@ -71,7 +80,10 @@ export const projectProof: ProjectProof[] = [
     id: 'nealy-events',
     name: 'Nealy Event Decor',
     location: 'Dallas, Texas',
-    result: '2x consultation requests',
+    // From the owner's testimonial ("already fully booked for next month"). The former
+    // consultation-request multiplier was Ben's estimate, not client-reported, and is gone.
+    result: 'Fully booked for next month',
+    resultSource: 'client-reported',
     screenshot: 'work/client-logos/nealy-project.png',
     screenshotAlt: 'Nealy Event Decor homepage shown inside a laptop frame',
     logo: 'work/client-logos/NealyLogo.png',
@@ -92,6 +104,7 @@ export const projectProof: ProjectProof[] = [
     name: 'DJN Services',
     location: 'North Alabama',
     result: 'Website launched in 2 weeks',
+    resultSource: 'delivered',
     screenshot: 'work/client-logos/djn-new-home-page.png',
     screenshotAlt: 'DJN Services homepage shown inside a laptop frame',
     logo: 'work/client-logos/djn-logo.webp',
@@ -113,6 +126,7 @@ export const projectProof: ProjectProof[] = [
     name: 'Big Butt Association',
     location: 'Online apparel brand',
     result: 'Custom Shopify storefront',
+    resultSource: 'delivered',
     screenshot: 'work/client-logos/bba-homepage.png',
     screenshotAlt: 'Big Butt Association Shopify homepage shown inside a browser frame',
     logo: 'work/client-logos/bekky-no-background.png',
