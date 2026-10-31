@@ -257,7 +257,10 @@ describe('Site-wide - removed offers and old prices are gone', () => {
 
   it('scans the live code, including rendered components/sections files', () => {
     expect(scanned.length).toBeGreaterThan(50)
-    expect(scanned.some((file) => file.endsWith(path.join('components', 'sections', 'CustomerPathSection.tsx')))).toBe(true)
+    // No live route imports components/sections since Wave 3 (pages-a); the
+    // rebuilt service pages are scanned instead.
+    expect(scanned.some((file) => file.endsWith(path.join('app', 'services', 'page.tsx')))).toBe(true)
+    expect(scanned.some((file) => file.endsWith(path.join('components', 'services', 'OfferBlock.tsx')))).toBe(true)
   })
 
   it('finds the range line only where it belongs', () => {

@@ -18,6 +18,7 @@ import HeroSection from '@/components/sections/HeroSection'
 import FAQPage from '@/app/faq/page'
 import { InquiryForm } from '@/components/inquiry/InquiryForm'
 import { BOOKING_CTA_LABEL, getBookingHref } from '@/lib/constants'
+import { customQuote, fixedOffers, formatAmount } from '@/data/catalog'
 
 describe('Component Interactions - Header Mobile Menu', () => {
   it('should toggle mobile menu when button is clicked', async () => {
@@ -73,7 +74,7 @@ describe('Component Interactions - ServicesSection Paths', () => {
     const headings = Array.from(container.querySelectorAll('h3')).map((el) => el.textContent)
     expect(headings).toContain('Websites that earn trust')
     expect(headings).toContain('Lead capture and follow-up')
-    expect(headings).toContain('Ongoing growth and support')
+    expect(headings).toContain('Care that keeps your site working')
   })
 
   it('should have a CTA on each service path routing to its detail page', () => {
@@ -120,10 +121,18 @@ describe('Component Interactions - Hero proof', () => {
 })
 
 describe('Component Interactions - FAQ', () => {
-  it('should not publish price markers in visible copy or schema', () => {
+  it('should publish only catalog prices in visible copy and schema', () => {
     const { container } = render(<FAQPage />)
 
-    expect(container.textContent).not.toContain('$')
+    // Prices are public since the 29 Oct offers; every figure must be a
+    // catalog price or one of the two figures in the verbatim range line.
+    const allowed = new Set([
+      ...fixedOffers.flatMap((offer) => offer.prices.map((price) => formatAmount(price).replace(/\/mo$/, ''))),
+      ...(customQuote.range.match(/\$\d{1,3}(?:,\d{3})*/g) ?? []),
+    ])
+    const figures = container.innerHTML.match(/\$\d{1,3}(?:,\d{3})*/g) ?? []
+    expect(figures.length).toBeGreaterThan(0)
+    expect(figures.filter((figure) => !allowed.has(figure))).toEqual([])
     expect(container.innerHTML).not.toContain('$850')
     expect(container.innerHTML).not.toContain('$200')
   })
