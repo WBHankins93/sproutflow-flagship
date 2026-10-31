@@ -271,7 +271,7 @@ describe('Site-wide - removed offers and old prices are gone', () => {
   // Files outside the offers worker's ownership that still show an old offer.
   // Each is listed as a Request in the Wave 2.5 handback; remove the entry once
   // the file is fixed. Nothing else may be added here.
-  const PENDING_REQUESTS = ['app/v3-kit/page.tsx']
+  const PENDING_REQUESTS: string[] = []
 
   it('has no removed offer name or old price outside the range line', () => {
     const hits: string[] = []
