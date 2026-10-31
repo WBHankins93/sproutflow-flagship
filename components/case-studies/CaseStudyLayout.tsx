@@ -1,38 +1,45 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight, ExternalLink, Quote } from 'lucide-react';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
 import type { CaseStudy } from '@/data/caseStudies';
 import { caseStudies } from '@/data/caseStudies';
 import { listedProjectProof, projectProof } from '@/data/projectProof';
-import { getTestimonialForCaseStudy, getTestimonialByline } from '@/data/testimonials';
+import { getTestimonialForCaseStudy } from '@/data/testimonials';
 import { getImageUrl } from '@/lib/blob-images';
-import PageHeader from '@/components/ui/PageHeader';
-import SectionShell from '@/components/ui/SectionShell';
-import Pill from '@/components/ui/Pill';
-import FooterCta from '@/components/ui/FooterCta';
-import BeforeAfterGallery from '@/components/case-studies/BeforeAfterGallery';
+import { SITE_URL } from '@/lib/site';
+import { Eyebrow, Heading, Section } from '@/components/v3';
 import { Footer } from '@/components/layout/Footer';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.com';
+import Testimonial from '@/components/Testimonial';
+import BeforeAfterGallery from './BeforeAfterGallery';
+import ProjectCta from './ProjectCta';
+import { PROOF_LEGEND, ProofLabel, StatValue, TEXT_LINK_CLASS } from './proof';
 
 function BreadcrumbSchema({ caseStudy }: { caseStudy: CaseStudy }) {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
-      { '@type': 'ListItem', position: 2, name: 'Work', item: `${siteUrl}/work` },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+      { '@type': 'ListItem', position: 2, name: 'Work', item: `${SITE_URL}/work` },
       {
         '@type': 'ListItem',
         position: 3,
         name: caseStudy.clientName,
-        item: `${siteUrl}/case-studies/${caseStudy.slug}`,
+        item: `${SITE_URL}/case-studies/${caseStudy.slug}`,
       },
     ],
   };
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />;
 }
 
+/**
+ * One case study on v3 and Sunlit forest. Tones, top to bottom:
+ * clearing (header) · white (the challenge) · leaf (what I built) ·
+ * pine (before and after, only when there are pairs) · white (results) ·
+ * sunlight (testimonial, only when there is one) · fern (call to action) ·
+ * Pine footer. No two neighbours share a tone, birch is not used, and red
+ * appears only on the light tones.
+ */
 export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy }) {
   const testimonial = getTestimonialForCaseStudy(caseStudy.slug);
   const project = projectProof.find((item) => item.id === caseStudy.slug);
@@ -40,204 +47,179 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
   const currentIndex = listedCaseStudies.findIndex((item) => item.slug === caseStudy.slug);
   const nextStudy =
     currentIndex === -1 ? listedCaseStudies[0] : listedCaseStudies[(currentIndex + 1) % listedCaseStudies.length];
-  const nextProject = projectProof.find((item) => item.id === nextStudy.slug);
+  const hasGallery = Boolean(caseStudy.beforeAfter?.some((pair) => pair.beforeSrc && pair.afterSrc));
+  // Four results sit 2 by 2: a 60px mono "20 years" does not fit a quarter of the container.
+  const resultColumns = caseStudy.results.length === 3 ? 'lg:grid-cols-3' : '';
 
   return (
     <>
       <BreadcrumbSchema caseStudy={caseStudy} />
-      <PageHeader
-        eyebrow={`${caseStudy.details.industry} · ${caseStudy.details.location}`}
-        title={caseStudy.clientName}
-        intro={caseStudy.headline}
-      >
-        <div className="flex flex-wrap gap-4">
-          <Link href="/work" className="inline-flex min-h-11 items-center gap-2 text-white/65 hover:text-white">
-            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            All work
-          </Link>
-          <a
-            href={caseStudy.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-2 border-b border-accent-400 font-semibold text-white"
-          >
-            Visit live site <ExternalLink className="h-4 w-4" aria-hidden="true" />
-          </a>
-        </div>
-      </PageHeader>
 
-      <SectionShell index="01" label="project media" variant="ink" className="bg-ink-800">
-        <div
-          className="relative aspect-[16/9] overflow-hidden rounded-xl border border-white/15"
-          style={{ backgroundColor: project?.canvasColor }}
+      <Section tone="clearing" labelledBy="case-h">
+        <Link
+          href="/work"
+          className="inline-flex min-h-[44px] items-center gap-2 font-body text-body-sm font-semibold text-primary-900 hover:underline hover:decoration-redline hover:underline-offset-4 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-redline"
         >
-          <Image
-            src={getImageUrl(caseStudy.heroImage)}
-            alt={`${caseStudy.clientName} website`}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-top"
-          />
-        </div>
-        <p className="mt-4 font-mono text-mono-meta text-white/55">
-          {caseStudy.clientName} · <a href={caseStudy.liveUrl} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-white">visit the live site</a>
-        </p>
-      </SectionShell>
-
-      <SectionShell index="02" label="the situation" variant="cream" labelledBy="case-problem-heading">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <h2 id="case-problem-heading" className="font-display text-display-lg text-primary-900 lg:col-span-4">
-            What needed to change.
-          </h2>
-          <div className="lg:col-span-7 lg:col-start-6">
-            <p className="text-body-lg text-text-secondary">{caseStudy.problem}</p>
-            <p className="mt-8 border-l-[3px] border-accent-500 pl-6 font-accent text-2xl italic leading-relaxed text-primary-900">
-              {caseStudy.summary}
-            </p>
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+          All work
+        </Link>
+        <div className="mt-4 grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-12">
+          <div className="min-w-0 lg:col-span-7">
+            <Eyebrow>{`Case study · ${caseStudy.details.industry}`}</Eyebrow>
+            <p className="mt-4 font-body text-body-lg font-semibold">{caseStudy.clientName}</p>
+            <Heading as="h1" size="lg" id="case-h" className="mt-2">
+              {caseStudy.headline}
+            </Heading>
+            {caseStudy.headlineSource && <ProofLabel source={caseStudy.headlineSource} className="mt-4 block" />}
+            <p className="mt-6 max-w-[60ch] font-body text-body-lg text-[#4A574D]">{caseStudy.summary}</p>
+            <a
+              href={caseStudy.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${TEXT_LINK_CLASS} mt-6`}
+            >
+              Visit the live site
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          </div>
+          <div className="min-w-0 lg:col-span-5">
+            <div
+              className="relative aspect-[16/10] overflow-hidden rounded-xl border border-primary-900/15"
+              style={{ backgroundColor: project?.canvasColor }}
+            >
+              <Image
+                src={getImageUrl(caseStudy.heroImage)}
+                alt={`${caseStudy.clientName} website`}
+                fill
+                priority
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className={caseStudy.heroImageFit === 'contain' ? 'object-contain object-center' : 'object-cover object-top'}
+              />
+            </div>
           </div>
         </div>
-      </SectionShell>
+      </Section>
 
-      {caseStudy.beforeAfter?.length ? (
-        <BeforeAfterGallery pairs={caseStudy.beforeAfter} clientName={caseStudy.clientName} />
-      ) : null}
+      <Section tone="white" labelledBy="case-challenge-h">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="min-w-0 lg:col-span-7">
+            <Eyebrow>The challenge</Eyebrow>
+            <Heading id="case-challenge-h" size="md" className="mt-4">
+              What needed to change.
+            </Heading>
+            <p className="mt-6 max-w-[60ch] font-body text-body-lg">{caseStudy.problem}</p>
+          </div>
+          <aside aria-label="Project facts" className="min-w-0 lg:col-span-4 lg:col-start-9">
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-primary-900/15 pt-5">
+              {[
+                ['Timeline', caseStudy.details.timeline],
+                ['Location', caseStudy.details.location],
+                ['Industry', caseStudy.details.industry],
+                ['Services', caseStudy.details.services],
+                ...(caseStudy.details.notable ? [['Note', caseStudy.details.notable]] : []),
+              ].map(([term, value]) => (
+                <div key={term} className="min-w-0">
+                  <dt className="font-mono text-label uppercase text-[#4A574D] [font-variant-ligatures:none]">{term}</dt>
+                  <dd className="mt-1 font-body text-body-sm">{value}</dd>
+                </div>
+              ))}
+            </dl>
+            <ul aria-label="Built with" className="mt-6 flex flex-wrap gap-2">
+              {caseStudy.stack.map((item) => (
+                <li
+                  key={item}
+                  className="rounded-full border border-primary-900/20 px-3 py-1 font-mono text-label text-[#4A574D] [font-variant-ligatures:none]"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </div>
+      </Section>
 
-      <SectionShell index="03" label="what I built" variant="ink" labelledBy="case-built-heading">
-        <div className={caseStudy.builtImage ? 'grid gap-12 lg:grid-cols-12' : 'max-w-3xl'}>
-          <div className={caseStudy.builtImage ? 'lg:col-span-6' : ''}>
-            <h2 id="case-built-heading" className="font-display text-display-md text-cream-300">
-              The working parts of the project.
-            </h2>
-            <ol className="mt-10 border-t border-white/20">
+      <Section tone="leaf" labelledBy="case-built-h">
+        <div className={caseStudy.builtImage ? 'grid gap-10 lg:grid-cols-12 lg:gap-12' : ''}>
+          <div className={caseStudy.builtImage ? 'min-w-0 lg:col-span-6' : 'max-w-3xl'}>
+            <Eyebrow>What I built</Eyebrow>
+            <Heading id="case-built-h" size="md" className="mt-4">
+              The working parts.
+            </Heading>
+            <ol className="mt-8 border-t border-primary-900/20">
               {caseStudy.built.map((item, index) => (
-                <li key={item} className="grid grid-cols-[44px_1fr] gap-4 border-b border-white/20 py-5">
-                  <span className="font-mono text-mono-meta text-accent-300">0{index + 1}</span>
-                  <p className="text-white/[0.68]">{item}</p>
+                <li key={item} className="grid grid-cols-[40px_1fr] gap-3 border-b border-primary-900/20 py-4">
+                  <span
+                    aria-hidden="true"
+                    className="font-mono text-label leading-7 tabular-nums text-redline [font-variant-ligatures:none]"
+                  >
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <p className="font-body text-body">{item}</p>
                 </li>
               ))}
             </ol>
           </div>
           {caseStudy.builtImage && (
-            <div className="lg:col-span-5 lg:col-start-8">
-              <div className="sticky top-32">
-                <div className="relative overflow-hidden rounded-xl border border-white/15" style={{ height: 470 }}>
-                  <Image
-                    src={getImageUrl(caseStudy.builtImage)}
-                    alt={caseStudy.builtImageAlt || `${caseStudy.clientName} website detail`}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover object-top"
-                  />
-                </div>
+            <div className="min-w-0 lg:col-span-5 lg:col-start-8">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-primary-900/15 bg-forest-white">
+                <Image
+                  src={getImageUrl(caseStudy.builtImage)}
+                  alt={caseStudy.builtImageAlt || `${caseStudy.clientName} website detail`}
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="object-cover object-top"
+                />
               </div>
             </div>
           )}
         </div>
-      </SectionShell>
+      </Section>
 
-      <SectionShell index="04" label="how it works now" variant="cream" labelledBy="case-results-heading">
-        <h2 id="case-results-heading" className="max-w-4xl font-display text-display-md text-primary-900">
+      {hasGallery && <BeforeAfterGallery pairs={caseStudy.beforeAfter!} clientName={caseStudy.clientName} />}
+
+      <Section tone="white" labelledBy="case-results-h">
+        <Eyebrow>Results</Eyebrow>
+        <Heading id="case-results-h" size="md" className="mt-4">
           What changed after launch.
-        </h2>
-        <div className="mt-12 grid gap-px border border-primary-900/20 bg-primary-900/20 md:grid-cols-3">
+        </Heading>
+        <ul aria-label="Results" className={`mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 ${resultColumns}`}>
           {caseStudy.results.map((result) => (
-            <article key={`${result.value}-${result.label}`} className="bg-white p-7">
-              <p className="font-display text-display-md text-accent-700">{result.value}</p>
-              <p className="mt-4 text-text-secondary">{result.label}</p>
-            </article>
+            <li
+              key={`${result.value}-${result.label}`}
+              data-result
+              className="flex min-w-0 flex-col border-t-2 border-primary-900 pt-4"
+            >
+              <StatValue value={result.value} />
+              <p className="mt-2 font-body text-body">{result.label}</p>
+              <ProofLabel source={result.source} className="mt-3" />
+            </li>
           ))}
-        </div>
-      </SectionShell>
-
-      <SectionShell index="05" label="timeline" variant="ink" className="bg-ink-800" labelledBy="case-timeline-heading">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <h2 id="case-timeline-heading" className="font-display text-display-md text-cream-300">
-              From scope to launch.
-            </h2>
-            <p className="mt-5 font-mono text-mono-meta text-accent-300">{caseStudy.details.timeline}</p>
-          </div>
-          <div className="grid gap-px bg-white/20 sm:grid-cols-2 lg:col-span-7 lg:col-start-6">
-            {['Direction agreed', 'Working build', 'Review and refine', 'Launch and handoff'].map((step, index) => (
-              <div key={step} className="bg-ink-800 p-6">
-                <span className="font-mono text-mono-meta text-accent-300">0{index + 1}</span>
-                <p className="mt-5 font-display text-xl text-cream-300">{step}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </SectionShell>
-
-      <SectionShell index="06" label="project notes" variant="ink">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <h2 className="font-display text-display-md text-cream-300">The practical details.</h2>
-          </div>
-          <div className="lg:col-span-7 lg:col-start-6">
-            <dl className="grid gap-5 text-white/[0.68] sm:grid-cols-2">
-              <div>
-                <dt className="text-eyebrow uppercase text-white/55">Timeline</dt>
-                <dd className="mt-2">{caseStudy.details.timeline}</dd>
-              </div>
-              <div>
-                <dt className="text-eyebrow uppercase text-white/55">Services</dt>
-                <dd className="mt-2">{caseStudy.details.services}</dd>
-              </div>
-              <div>
-                <dt className="text-eyebrow uppercase text-white/55">Location</dt>
-                <dd className="mt-2">{caseStudy.details.location}</dd>
-              </div>
-              <div>
-                <dt className="text-eyebrow uppercase text-white/55">Industry</dt>
-                <dd className="mt-2">{caseStudy.details.industry}</dd>
-              </div>
-            </dl>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {caseStudy.stack.map((item) => (
-                <Pill key={item} variant="ink">
-                  {item}
-                </Pill>
-              ))}
-            </div>
-          </div>
-        </div>
-      </SectionShell>
+        </ul>
+        <p className="mt-8 max-w-[60ch] font-body text-body-sm text-[#4A574D]">{PROOF_LEGEND}</p>
+      </Section>
 
       {testimonial && (
-        <SectionShell index="07" label="testimonial" variant="cream">
-          <figure className="mx-auto max-w-4xl">
-            <Quote className="h-8 w-8 text-accent-700" aria-hidden="true" />
-            <blockquote className="mt-7 font-accent text-3xl italic leading-relaxed text-primary-900">
-              “{testimonial.quote}”
-            </blockquote>
-            <figcaption className="mt-7 text-text-secondary">{getTestimonialByline(testimonial)}</figcaption>
-          </figure>
-        </SectionShell>
+        <Section tone="sunlight" labelledBy="case-quote-h" container="narrow">
+          <Eyebrow>In their words</Eyebrow>
+          <h2 id="case-quote-h" className="sr-only">
+            What {caseStudy.clientName} said
+          </h2>
+          <Testimonial testimonial={testimonial} className="mt-6" />
+        </Section>
       )}
 
-      <Link
-        href={`/case-studies/${nextStudy.slug}`}
-        className="group relative block overflow-hidden bg-ink-900 py-20 text-white md:py-28"
-      >
-        {nextProject && (
-          <Image
-            src={getImageUrl(nextProject.screenshot)}
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover object-top opacity-20 transition-transform duration-500 group-hover:scale-[1.02] motion-reduce:transition-none"
-          />
-        )}
-        <div className="relative mx-auto max-w-[1186px] px-5 md:px-11">
-          <p className="text-eyebrow uppercase text-accent-300">Next project</p>
-          <h2 className="mt-5 flex items-center justify-between gap-8 font-display text-display-md text-cream-300">
-            {nextStudy.clientName}
-            <ArrowRight className="h-9 w-9" aria-hidden="true" />
-          </h2>
-        </div>
-      </Link>
-      <FooterCta />
+      <ProjectCta
+        id="case-cta-h"
+        cta="case-study"
+        heading="Have a problem like this one?"
+        body="Book a 15-minute call with me. Tell me what is getting in the way, and I will tell you straight what I would do about it."
+        next={
+          nextStudy && nextStudy.slug !== caseStudy.slug
+            ? { href: `/case-studies/${nextStudy.slug}`, name: nextStudy.clientName }
+            : undefined
+        }
+      />
       <Footer />
     </>
   );

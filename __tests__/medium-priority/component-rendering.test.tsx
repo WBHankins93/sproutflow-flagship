@@ -104,8 +104,10 @@ describe('Component Rendering - Unified Work Page', () => {
     // The headline is split across elements: AccentPhrase wraps one phrase in
     // the accent face, so an exact-string match no longer sees a single node.
     expect(container.querySelector('h1')?.textContent).toBe('The work, and what changed after.')
-    expect(screen.getByText('50% more qualified inquiries')).toBeInTheDocument()
-    expect(screen.getByText('30% customer acquisition growth')).toBeInTheDocument()
+    // The figure renders in mono and the rest in body, so match the squashed text.
+    const text = (container.textContent ?? '').replace(/\s+/g, ' ')
+    expect(text).toContain('50% more qualified inquiries')
+    expect(text).toContain('30% customer acquisition growth')
     expect(container.querySelector('a[href="/case-studies/second-line-psychiatry"]')).toBeInTheDocument()
     expect(container.querySelector('section[aria-label="Sproutflow client work"]')).toBeInTheDocument()
     expect(container.textContent).not.toContain('Big Butt Association')
