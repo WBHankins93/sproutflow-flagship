@@ -183,7 +183,7 @@ describe('SEO Metadata - Sitemap', () => {
     const sitemapData = sitemap.default()
     const urls = sitemapData.map((entry: any) => entry.url)
 
-    expect(urls).not.toContain('https://www.sproutflow-studio.com/how-we-work')
+    expect(urls).toContain('https://www.sproutflow-studio.com/how-we-work')
     expect(urls).not.toContain('https://www.sproutflow-studio.com/case-studies')
     expect(urls).not.toContain('https://www.sproutflow-studio.com/case-studies/big-butt-association')
     expect(urls).toContain('https://www.sproutflow-studio.com/work')
@@ -250,9 +250,8 @@ describe('SEO Metadata - Legacy Redirects', () => {
     const howWeWorkRedirect = redirects.find((redirect: any) => redirect.source === '/how-we-work')
     const caseStudiesRedirect = redirects.find((redirect: any) => redirect.source === '/case-studies')
 
-    expect(howWeWorkRedirect).toBeDefined()
-    expect(howWeWorkRedirect.destination).toBe('/#process')
-    expect(howWeWorkRedirect.permanent).toBe(true)
+    // /how-we-work is a real page in v3, so it is no longer redirected.
+    expect(howWeWorkRedirect).toBeUndefined()
     expect(caseStudiesRedirect).toBeDefined()
     expect(caseStudiesRedirect.destination).toBe('/work')
     expect(caseStudiesRedirect.permanent).toBe(true)
