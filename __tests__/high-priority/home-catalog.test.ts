@@ -226,7 +226,8 @@ describe('Catalog - copy rules', () => {
  * Site-wide guard (29 Oct restructure): no removed offer or old price in the
  * code that ships. The verbatim range line is the only place "$1,500" and
  * "$6,000" may appear, so it is removed from each file before the scan.
- * components/sections is scanned only for files a live route still imports.
+ * The v2 components/sections directory was deleted in the w3 cleanup, so
+ * every file under app, components, data, lib and public is live and scanned.
  */
 describe('Site-wide - removed offers and old prices are gone', () => {
   const ROOT = process.cwd()
@@ -244,23 +245,21 @@ describe('Site-wide - removed offers and old prices are gone', () => {
 
   const liveFiles = ['app', 'components', 'data', 'lib', 'public'].flatMap((dir) => walk(path.join(ROOT, dir)))
   const sources = new Map(liveFiles.map((file) => [file, fs.readFileSync(file, 'utf8')]))
-  const importedSections = new Set(
-    Array.from(sources.values()).flatMap((source) =>
-      Array.from(source.matchAll(/components\/sections\/(\w+)/g)).map((match) => match[1]),
-    ),
-  )
-  const scanned = liveFiles.filter((file) => {
-    const rel = path.relative(ROOT, file).split(path.sep).join('/')
-    if (!rel.startsWith('components/sections/')) return true
-    return importedSections.has(path.basename(rel).replace(/\.\w+$/, ''))
-  })
+  const scanned = liveFiles
+  const rel = (file: string) => path.relative(ROOT, file).split(path.sep).join('/')
 
-  it('scans the live code, including rendered components/sections files', () => {
+  it('scans the live code, and no v2 section directory is left to skip', () => {
     expect(scanned.length).toBeGreaterThan(50)
-    // No live route imports components/sections since Wave 3 (pages-a); the
-    // rebuilt service pages are scanned instead.
-    expect(scanned.some((file) => file.endsWith(path.join('app', 'services', 'page.tsx')))).toBe(true)
-    expect(scanned.some((file) => file.endsWith(path.join('components', 'services', 'OfferBlock.tsx')))).toBe(true)
+    expect(fs.existsSync(path.join(ROOT, 'components', 'sections'))).toBe(false)
+    expect(scanned.filter((file) => /components\/sections\//.test(sources.get(file)!)).map(rel)).toEqual([])
+    // The rebuilt homepage and service pages are where the offers render.
+    ;[
+      'app/page.tsx',
+      'app/services/page.tsx',
+      'components/home/OfferMenu.tsx',
+      'components/services/OfferBlock.tsx',
+      'data/catalog.ts',
+    ].forEach((file) => expect(scanned.map(rel)).toContain(file))
   })
 
   it('finds the range line only where it belongs', () => {

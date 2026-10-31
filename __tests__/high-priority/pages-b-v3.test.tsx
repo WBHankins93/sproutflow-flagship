@@ -32,8 +32,7 @@ import Testimonial from '@/components/Testimonial'
 import { caseStudies, hasFigure, type CaseStudyStat } from '@/data/caseStudies'
 import { projectProof, listedProjectProof } from '@/data/projectProof'
 import { testimonials, getTestimonialByline } from '@/data/testimonials'
-import { heroStats } from '@/data/heroStats'
-import { getHomeProof } from '@/data/home'
+import { getHomeProof, homeProof } from '@/data/home'
 import { resources } from '@/data/resources'
 import { getImageUrl } from '@/lib/blob-images'
 
@@ -69,8 +68,8 @@ const STUDY_PAGES: Array<[slug: string, Page: () => ReactElement]> = [
 ]
 
 describe('pages-b - proof data', () => {
-  it('has no 2x, doubled or #1 claim in case study, project, testimonial or hero stat data', () => {
-    const strings = collectStrings([caseStudies, projectProof, testimonials, heroStats, getHomeProof()])
+  it('has no 2x, doubled or #1 claim in case study, project, testimonial or homepage proof data', () => {
+    const strings = collectStrings([caseStudies, projectProof, testimonials, homeProof, getHomeProof()])
     expect(strings.length).toBeGreaterThan(100)
     expect(strings.filter((text) => BANNED_CLAIM.test(text))).toEqual([])
   })

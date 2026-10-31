@@ -6,7 +6,7 @@ Sources: `redesign-proposals/DIRECTION.md` section 8 (the 19 Oct 2026 type and t
 
 The idea in one line: the site marks up what costs a business calls with a red pen, then shows the fix, with Ben front and center. The type reads like an edited proof: a tall serif under a red pen.
 
-QA page: `/v3-kit` (noindex, not in the sitemap) renders every component below. Remove it when Wave 2 pages ship.
+The `/v3-kit` QA page was removed before launch; the homepage and inner pages are the live reference.
 
 ---
 
@@ -390,4 +390,4 @@ Hand-drawn underline under headline words. Each word is an inline-block with its
 - `text-h4` (20px) is below the 24px display floor. Several v2 cards and `/check` headings use it with `font-display` (`WebsiteCheck.tsx`, `ReportRequest.tsx`, `TiersSection.tsx`). Use `Heading size="sm"` or body 600 instead when rebuilding.
 - `components/ui/SectionShell.tsx` and the other v2 components are untouched. New pages use `components/v3`.
 - The hero animation is a later wave. Leave a slot; do not depend on DJN's screenshot for the hero.
-- `public/redesign/` holds the two QA images for `/v3-kit`. Production images still go through `getImageUrl()` and Blob.
+- `public/proof/sproutflow-v1-home.jpg` is the August 2026 homepage used by "I start with my own". Other production images go through `getImageUrl()` (optimized derivatives first, then Blob).
