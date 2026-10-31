@@ -8,6 +8,10 @@ import { SITE_URL } from '@/lib/site';
 
 const siteUrl = SITE_URL;
 
+/**
+ * Every public, indexable route. Scaffolding (/v3-kit, /kitchen-sink), the
+ * retired /case-studies index and noindex pages (the hidden case study) stay out.
+ */
 export default function sitemap(): MetadataRoute.Sitemap {
   const caseStudyEntries: MetadataRoute.Sitemap = caseStudies
     .filter((caseStudy) => listedProjectProof.some((project) => project.id === caseStudy.slug))
@@ -98,6 +102,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
+    },
+    {
+      url: `${siteUrl}/how-we-work`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
       url: `${siteUrl}/data-and-ownership`,

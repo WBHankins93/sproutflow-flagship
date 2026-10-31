@@ -2,20 +2,20 @@
 /**
  * Asset budget check.
  *
- * Every image the site references is fetched, measured, and checked against the
+ * The current work/logo inventory is read locally or fetched and checked against the
  * budget for its class. Documentation alone did not stop a 542 KB logo being
  * served into a 40px slot, so this is the enforcement.
  *
  *   npm run check:assets           report only
  *   npm run check:assets -- --ci   exit non-zero on any error
  *
- * Requires NEXT_PUBLIC_BLOB_STORE_URL (see .env.example). Without it the script
- * skips rather than failing, so it never blocks someone who has not set up
- * local env yet.
+ * Manifest entries use tracked local files, matching the image URL helper.
+ * Unmapped entries use the configured blob store or local /images fallback.
  */
 
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { collectPaths, classOf } from './asset-inventory.mjs';
 
 const ROOT = process.cwd();
 const CI = process.argv.includes('--ci');
@@ -29,65 +29,6 @@ function blobBase() {
     if (m) return m[1].trim();
   }
   return null;
-}
-
-/**
- * Budgets per asset class.
- *
- * `maxEdge` is the longest side. Rendered sizes are small, so 2x the largest
- * render is the ceiling; anything past that is a file nobody resized.
- */
-const CLASSES = [
-  {
-    id: 'client-logo',
-    match: (p) => /client-logos\//.test(p) && !/-project|-homepage|home-page/.test(p),
-    maxBytes: 40 * 1024,
-    maxEdge: 400,
-    note: 'renders 28 to 56px tall',
-  },
-  {
-    id: 'screenshot',
-    match: (p) => /client-logos\/.*(-project|-homepage|home-page)/.test(p),
-    maxBytes: 400 * 1024,
-    maxEdge: 2000,
-    note: 'renders up to 1000px wide',
-  },
-  {
-    id: 'brand-logo',
-    match: (p) => /^logo\//.test(p),
-    maxBytes: 80 * 1024,
-    maxEdge: 800,
-    note: 'renders up to 220px wide',
-  },
-  {
-    id: 'photography',
-    match: () => true,
-    maxBytes: 500 * 1024,
-    maxEdge: 2400,
-    note: 'renders up to 1200px wide',
-  },
-];
-
-const classOf = (p) => CLASSES.find((c) => c.match(p));
-
-/** Collect every asset path referenced from the data layer. */
-function collectPaths() {
-  const paths = new Set();
-  const files = ['data/projectProof.ts', 'data/caseStudies.ts', 'data/testimonials.ts'];
-  for (const f of files) {
-    const p = join(ROOT, f);
-    if (!existsSync(p)) continue;
-    const src = readFileSync(p, 'utf8');
-    for (const m of src.matchAll(/'((?:images\/)?(?:work|logo)\/[^']+\.(?:png|jpe?g|webp|avif|svg))'/g)) {
-      paths.add(m[1].replace(/^images\//, ''));
-    }
-  }
-  // Brand assets referenced directly in components.
-  for (const m of readFileSync(join(ROOT, 'components/layout/Footer.tsx'), 'utf8')
-    .matchAll(/getImageUrl\('([^']+)'\)/g)) paths.add(m[1]);
-  for (const m of readFileSync(join(ROOT, 'components/layout/Header.tsx'), 'utf8')
-    .matchAll(/getImageUrl\('([^']+)'\)/g)) paths.add(m[1]);
-  return [...paths].sort();
 }
 
 /** Dimensions from the file header. Enough for PNG, JPEG, WebP, GIF. */
@@ -128,24 +69,28 @@ function dimensions(buf) {
 const kb = (n) => `${Math.round(n / 1024)}KB`;
 
 const base = blobBase();
-if (!base) {
-  console.log('check:assets skipped. NEXT_PUBLIC_BLOB_STORE_URL is not set (see .env.example).');
-  process.exit(0);
-}
+const manifest = JSON.parse(readFileSync(join(ROOT, 'lib/optimized-images.json'), 'utf8'));
 
 const paths = collectPaths();
 const rows = [];
 
 for (const path of paths) {
-  const url = `${base.replace(/\/$/, '')}/images/${path}`;
+  const optimized = manifest[`images/${path}`];
+  const localPath = optimized || (!base ? `/images/${path}` : null);
   let bytes = 0;
   let dim = null;
   let status = 0;
   try {
-    const res = await fetch(url);
-    status = res.status;
-    if (res.ok) {
-      const buf = Buffer.from(await res.arrayBuffer());
+    let buf;
+    if (localPath) {
+      buf = readFileSync(join(ROOT, 'public', localPath));
+      status = 200;
+    } else {
+      const res = await fetch(`${base.replace(/\/$/, '')}/images/${path}`, { signal: AbortSignal.timeout(15000) });
+      status = res.status;
+      if (res.ok) buf = Buffer.from(await res.arrayBuffer());
+    }
+    if (buf) {
       bytes = buf.length;
       dim = dimensions(buf);
     }
@@ -156,8 +101,9 @@ for (const path of paths) {
   const cls = classOf(path);
   const edge = dim && dim.w ? Math.max(dim.w, dim.h) : null;
   const problems = [];
-  if (status !== 200) problems.push(`HTTP ${status || 'failed'}`);
+  if (status !== 200) problems.push(localPath ? `Missing/unreadable local file: ${localPath}` : `HTTP ${status || 'failed'}`);
   else {
+    if (!dim?.w || !dim?.h) problems.push('Cannot verify image dimensions');
     if (bytes > cls.maxBytes) problems.push(`${kb(bytes)} over ${kb(cls.maxBytes)} budget`);
     if (edge && edge > cls.maxEdge) problems.push(`${edge}px longest edge over ${cls.maxEdge}px`);
   }
@@ -167,7 +113,7 @@ for (const path of paths) {
 const pad = (s, n) => String(s).padEnd(n);
 const widest = Math.max(...rows.map((r) => r.path.length), 10);
 
-console.log('\nAsset budget report\n');
+console.log('\nAsset budget report (work/logo inventory; not every site image)\n');
 for (const r of rows) {
   const size = r.dim && r.dim.w ? `${r.dim.w}x${r.dim.h}` : r.dim?.type || '?';
   const flag = r.problems.length ? 'FAIL' : ' ok ';

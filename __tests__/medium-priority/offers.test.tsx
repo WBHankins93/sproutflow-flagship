@@ -56,11 +56,12 @@ describe('Offers - HeroSection', () => {
   it('renders the three client result stats and none of the old filler', () => {
     const { container } = render(<HeroSection />)
     const values = Array.from(container.querySelectorAll('dl dd > span:first-child')).map((el) => el.textContent)
-    expect(values).toEqual(['35%', '50%', '2x'])
+    expect(values).toEqual(['35%', '50%'])
 
     expect(screen.getByText('DJN Services')).toBeInTheDocument()
     expect(screen.getAllByText('Second Line Psychiatry').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Nealy Event Decor').length).toBeGreaterThan(0)
+    // Nealy's stat is gone with the 2x estimate.
+    expect(container.textContent).not.toContain('2x')
 
     expect(container.textContent).not.toContain('projects shipped live')
     expect(container.textContent).not.toContain('with the founder')
@@ -71,7 +72,7 @@ describe('Offers - HeroSection', () => {
 
 describe('Offers - Hero stats trace back to published data', () => {
   it('reads each figure from the matching source string', () => {
-    expect(heroStats.map((stat) => stat.value)).toEqual(['35%', '50%', '2x'])
+    expect(heroStats.map((stat) => stat.value)).toEqual(['35%', '50%'])
     heroStats.forEach((stat) => {
       expect(stat.source.startsWith(stat.value)).toBe(true)
     })
@@ -89,13 +90,12 @@ describe('Offers - Hero stats trace back to published data', () => {
     const slp = projectProof.find((entry) => entry.id === 'second-line-psychiatry')
     const nealy = projectProof.find((entry) => entry.id === 'nealy-events')
     expect(slp?.result).toBe('50% more qualified inquiries')
-    expect(nealy?.result).toBe('2x consultation requests')
+    expect(nealy?.result).toBe('Fully booked for next month')
     expect(heroStats[1].value).toBe('50%')
     expect(heroStats[1].note).toBe('Second Line Psychiatry')
     expect(heroStats[1].source).toBe(slp?.result)
-    expect(heroStats[2].value).toBe('2x')
-    expect(heroStats[2].note).toBe('Nealy Event Decor')
-    expect(heroStats[2].source).toBe(nealy?.result)
+    // Nealy's result has no leading figure now (the 2x estimate is gone), so its stat is dropped.
+    expect(heroStats[2]).toBeUndefined()
   })
 
   it('only reads a leading figure, never invents one', () => {

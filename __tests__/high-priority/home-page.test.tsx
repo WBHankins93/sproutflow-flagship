@@ -224,7 +224,7 @@ describe('Homepage - proof', () => {
     expect(results).toEqual([
       '50% more qualified inquiries',
       '30% customer acquisition growth',
-      '2x consultation requests',
+      'Fully booked for next month',
       '35% increase in total bookings',
     ])
     const djn = testimonials.find((entry) => entry.id === 'djn-services')

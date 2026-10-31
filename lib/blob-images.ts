@@ -1,14 +1,18 @@
-// lib/blob-images.ts - Utility for Vercel Blob Storage image URLs
+// Explicit optimized derivatives ship with the site; other assets keep their blob/local fallback.
+import optimizedImages from './optimized-images.json';
 
 /**
  * Get the blob URL for an image
- * In development, falls back to local /images path
- * In production, uses Vercel Blob Storage
+ * Known optimized assets resolve locally in every environment.
+ * Unmapped assets use Vercel Blob Storage when configured, otherwise local paths.
  */
 export function getBlobImageUrl(imagePath: string): string {
   // Remove leading slash if present
   const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
   
+  const optimized = (optimizedImages as Record<string, string>)[cleanPath];
+  if (optimized) return optimized;
+
   // Check if we have the blob store URL set
   const blobStoreUrl = process.env.NEXT_PUBLIC_BLOB_STORE_URL;
   
@@ -33,7 +37,8 @@ export function getBlobImageUrl(imagePath: string): string {
  */
 export function getImageUrl(path: string): string {
   // Ensure path starts with images/
-  const imagePath = path.startsWith('images/') ? path : `images/${path}`;
+  const cleanPath = path.replace(/^\//, '');
+  const imagePath = cleanPath.startsWith('images/') ? cleanPath : `images/${cleanPath}`;
   return getBlobImageUrl(imagePath);
 }
 
