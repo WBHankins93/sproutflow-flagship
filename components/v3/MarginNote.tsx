@@ -1,11 +1,16 @@
 export type MarginNoteArrow = 'up' | 'down' | 'left' | 'right' | 'none';
-export type MarginNoteTone = 'fern' | 'redline' | 'onDark';
+export type MarginNoteTone = 'fern' | 'redline' | 'onDark' | 'onFern';
 
-/** Text colour per tone. Fern 5.38:1 on Birch, redline 5.73:1, gold 7.98:1 on Pine. */
+/**
+ * Text colour per tone. fern: 5.40:1 on Clearing, 5.38:1 on Birch, 5.07:1 on
+ * Sunlight (not on Leaf: 4.50:1). redline: 4.79:1 or more on every light
+ * canvas. onDark: gold light on Pine (7.98:1). onFern: Birch on Fern (5.38:1).
+ */
 export const MARGIN_NOTE_TONES: Record<MarginNoteTone, string> = {
   fern: 'text-ink-700',
   redline: 'text-redline',
   onDark: 'text-accent-300',
+  onFern: 'text-cream-300',
 };
 
 // The mockup arrow points up and to the right. Degrees to turn it so it points each way.
@@ -16,7 +21,7 @@ export interface MarginNoteProps {
   children: string;
   /** Which way the hand-drawn arrow points. Default 'down'. */
   arrow?: MarginNoteArrow;
-  /** Fern for Ben's notes (default), redline for a red-pen aside, onDark on Pine. */
+  /** Fern for Ben's notes (default), redline for a red-pen aside, onDark on Pine, onFern on Fern. */
   tone?: MarginNoteTone;
   /** Hide from assistive tech when the note only repeats nearby text (e.g. "that's me"). */
   decorative?: boolean;

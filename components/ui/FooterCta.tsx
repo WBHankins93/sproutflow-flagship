@@ -5,22 +5,26 @@ import { BOOKING_CTA_LABEL, INQUIRY_PATH } from '@/lib/constants';
 import { BUTTON_LINK_VARIANTS } from '@/components/v3/ButtonLink';
 import { Eyebrow, Heading, Section } from '@/components/v3';
 
-// The v3 ButtonLink onDark look (Goldenrod fill, Pine text, 5.81:1) on the booking link,
-// which has to stay a BookCallLink so it falls back to /inquiry when booking is off.
-const bookButton = `group inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border-2 px-6 py-2 font-semibold leading-tight transition-colors duration-150 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] ${BUTTON_LINK_VARIANTS.onDark}`;
+// The v3 ButtonLink onFern look (Sun gold fill, Pine text, 9.12:1; 4.31:1 edge on Fern) on the
+// booking link, which has to stay a BookCallLink so it falls back to /inquiry when booking is off.
+const bookButton = `group inline-flex min-h-[48px] items-center justify-center gap-2 rounded-full border-2 px-6 py-2 font-semibold leading-tight transition-colors duration-150 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] ${BUTTON_LINK_VARIANTS.onFern}`;
 
+// On Fern every text colour is Birch (5.38:1) or white (5.99:1): the soft greys fail there.
 const contactLink =
-  'grid min-h-14 content-center gap-1 border-t border-cream-300/20 pt-4 text-cream-300 hover:text-white focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-accent-300';
+  'grid min-h-14 content-center gap-1 border-t border-cream-300/20 pt-4 text-cream-300 hover:text-white focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-cream-300';
 
-const contactLabel = 'font-mono text-label uppercase text-[#C9CFC4] [font-variant-ligatures:none]';
+const contactLabel = 'font-mono text-label uppercase text-cream-300 [font-variant-ligatures:none]';
 
-/** The closing call to action on inner pages: book a call, write it out, or call. */
+/**
+ * The closing call to action on inner pages: book a call, write it out, or call.
+ * Fern, so it reads as its own band above the Pine footer.
+ */
 export default function FooterCta() {
   return (
-    <Section tone="pine" rhythm="loose" labelledBy="footer-cta-h" className="border-b border-cream-300/15">
+    <Section tone="fern" rhythm="loose" labelledBy="footer-cta-h">
       <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-8">
-          <Eyebrow onDark>Start a useful conversation</Eyebrow>
+          <Eyebrow onFern>Start a useful conversation</Eyebrow>
           <Heading id="footer-cta-h" italic="better" className="mt-5 max-w-[22ch] text-cream-300">
             Tell me what needs to work better. I will help name the next step.
           </Heading>
@@ -35,7 +39,7 @@ export default function FooterCta() {
             <Link
               href={INQUIRY_PATH}
               data-cta="footer-inquiry"
-              className="inline-flex min-h-11 items-center rounded-sm font-semibold text-cream-300 underline decoration-accent-300 underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-accent-300"
+              className="inline-flex min-h-11 items-center rounded-sm font-semibold text-cream-300 underline decoration-forest-sungold underline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-cream-300"
             >
               Or send the details in writing
             </Link>

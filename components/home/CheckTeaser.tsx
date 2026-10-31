@@ -9,12 +9,21 @@ export const CHECK_ACTION = '/check';
  * 4. Website check teaser. A plain GET form, so it works without JavaScript:
  * submitting navigates to /check?url=<value>. The list follows the checker's
  * own labels and order.
+ *
+ * White like the proof strip above it (Paper would be the one warm step
+ * between them), so a 1px Fern/10 rule separates the two.
  */
 export default function CheckTeaser() {
   const checks = CHECK_ORDER.map((id) => ({ id, label: CHECK_LABELS[id], detail: homeCheck.details[id] }));
 
   return (
-    <Section tone="paper" rhythm="none" id="check" labelledBy="home-check-h" className="py-8 md:py-[var(--v3-rhythm-tight)]">
+    <Section
+      tone="white"
+      rhythm="none"
+      id="check"
+      labelledBy="home-check-h"
+      className="border-t border-forest-fern/10 py-8 md:py-[var(--v3-rhythm-tight)]"
+    >
       <div className="grid gap-6 md:gap-10 lg:grid-cols-12 lg:gap-12">
         <div className="min-w-0 lg:col-span-6">
           <Eyebrow index="01">{homeCheck.eyebrow}</Eyebrow>

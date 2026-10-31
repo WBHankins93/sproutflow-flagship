@@ -20,7 +20,7 @@ export default async function CheckPage({ searchParams }: Props) {
 
   return (
     <>
-      <Section tone="birch" labelledBy="check-h">
+      <Section tone="clearing" labelledBy="check-h">
         <div className="max-w-4xl">
           <Eyebrow>Free website check</Eyebrow>
           <Heading as="h1" id="check-h" italic="job" className="mt-5">

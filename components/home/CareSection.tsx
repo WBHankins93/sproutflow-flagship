@@ -10,7 +10,7 @@ export default function CareSection() {
   const lowest = prices.length ? prices.reduce((min, price) => (price.amount < min.amount ? price : min)) : undefined;
 
   return (
-    <Section tone="lichen" rhythm="none" className="py-8 md:py-[var(--v3-rhythm-tight)]" id="care" labelledBy="home-care-h">
+    <Section tone="leaf" rhythm="none" className="py-8 md:py-[var(--v3-rhythm-tight)]" id="care" labelledBy="home-care-h">
       <div className="grid gap-6 lg:grid-cols-12 lg:gap-12">
         <div className="min-w-0 lg:col-span-5">
           <Eyebrow index="03">{homeCare.eyebrow}</Eyebrow>
@@ -39,7 +39,7 @@ export default function CareSection() {
 
         <ul className="grid min-w-0 content-start gap-3 sm:grid-cols-2 sm:gap-5 lg:col-span-7 lg:mt-12">
           {homeCare.examples.map((example) => (
-            <li key={example.label} className="rounded-xl border-t-4 border-redline bg-[#FBF8F1] p-5 sm:p-6">
+            <li key={example.label} className="rounded-xl border-t-4 border-redline bg-forest-white p-5 sm:p-6">
               <p className="font-mono text-label uppercase text-redline [font-variant-ligatures:none]">{example.label}</p>
               <h3 className="mt-3 font-body text-body-lg font-semibold leading-snug text-primary-900">{example.title}</h3>
               <p className="mt-2 font-body text-body-sm text-[#4A574D]">{example.body}</p>

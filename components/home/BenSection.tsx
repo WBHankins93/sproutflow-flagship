@@ -19,14 +19,14 @@ export default function BenSection() {
   const quote = getBenTestimonial();
 
   return (
-    <Section tone="lichen" rhythm="none" className="py-8 md:py-[var(--v3-rhythm-tight)]" id="about" labelledBy="home-ben-h">
+    <Section tone="sunlight" rhythm="none" className="py-8 md:py-[var(--v3-rhythm-tight)]" id="about" labelledBy="home-ben-h">
       <Eyebrow index="06">{homeBen.eyebrow}</Eyebrow>
       <Heading as="h2" id="home-ben-h" className="mt-4">
         {homeBen.heading}
       </Heading>
 
       <div className="mt-5 grid gap-5 md:mt-8 md:grid-cols-12 md:gap-8 lg:gap-12">
-        <div className="relative aspect-square w-20 overflow-hidden rounded-2xl md:aspect-[4/5] border border-primary-900/10 bg-cream-300 md:col-span-4 md:w-full lg:col-span-3">
+        <div className="relative aspect-square w-20 overflow-hidden rounded-2xl md:aspect-[4/5] border border-primary-900/10 bg-forest-leaf md:col-span-4 md:w-full lg:col-span-3">
           <Image
             src={getImageUrl('ben-photo.png')}
             alt={homeBen.photoAlt}
