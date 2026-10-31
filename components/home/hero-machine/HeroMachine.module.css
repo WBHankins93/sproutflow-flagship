@@ -2,6 +2,11 @@
  * The Lead Machine (components/home/hero-machine). Colours come from the
  * Tailwind theme, fonts from the v3 role variables (lib/fonts.ts).
  *
+ * Sunlit forest (29 Oct): the scene sits on the Clearing hero canvas. Belts
+ * and the machine body are Fern tints (--hm-tint-*, Fern mixed into the
+ * forest white), cards and the calendar are forest white, booked checks stay
+ * Goldenrod and the marker stays red (it sits on the light scene).
+ *
  * The root is a size container. Below 600px of its own width the stage
  * switches to the phone crop: the SVG is enlarged and offset inside a clipped
  * stage (numbers set inline from config.ts as --hm-* variables) and the
@@ -14,8 +19,13 @@
   --hm-gold: theme('colors.accent.500');
   --hm-gold-text: theme('colors.accent.700');
   --hm-red: theme('colors.redline.DEFAULT');
-  --hm-lichen: theme('colors.cream.500');
-  --hm-paper: var(--v3-paper, #fbf8f1);
+  --hm-leaf: theme('colors.forest.leaf');
+  --hm-paper: theme('colors.forest.white');
+  /* Fern over forest white at 10%, 20%, 30% and 45%. */
+  --hm-tint-1: #e8eee6;
+  --hm-tint-2: #d5dfd4;
+  --hm-tint-3: #c3d0c2;
+  --hm-tint-4: #a6bba7;
   --hm-ink-soft: var(--v3-ink-soft, #4a574d);
   --hm-line: rgb(34 53 40 / 0.14);
   container: hero-machine / inline-size;
@@ -128,7 +138,7 @@
 }
 
 .pause:hover {
-  background: var(--hm-lichen);
+  background: var(--hm-leaf);
 }
 
 .pause:focus-visible {
@@ -164,20 +174,21 @@
 }
 
 .platform {
-  fill: #e9e6d7;
+  /* Fern at 10% over Clearing. */
+  fill: #e0e4c9;
   stroke: rgb(34 53 40 / 0.16);
   stroke-width: 1.2;
 }
 
 .beltTop {
-  fill: var(--hm-lichen);
+  fill: var(--hm-tint-2);
   stroke: var(--hm-pine);
   stroke-width: 1.4;
   stroke-linejoin: round;
 }
 
 .beltSide {
-  fill: #c9c5ae;
+  fill: var(--hm-tint-4);
   stroke: var(--hm-pine);
   stroke-width: 1.4;
   stroke-linejoin: round;
@@ -208,15 +219,15 @@
 }
 
 .mTop {
-  fill: var(--hm-paper);
+  fill: var(--hm-tint-1);
 }
 
 .mLeft {
-  fill: #ede7d6;
+  fill: var(--hm-tint-2);
 }
 
 .mRight {
-  fill: #dcd4be;
+  fill: var(--hm-tint-3);
 }
 
 .lid {
@@ -291,7 +302,7 @@
 }
 
 .lampOff {
-  fill: var(--hm-lichen);
+  fill: var(--hm-tint-2);
 }
 
 .lampOn {
@@ -299,11 +310,11 @@
 }
 
 .pot {
-  fill: var(--hm-paper);
+  fill: var(--hm-tint-1);
 }
 
 .potRim {
-  fill: #e2dccb;
+  fill: var(--hm-tint-2);
   stroke: var(--hm-pine);
   stroke-width: 1.2;
 }

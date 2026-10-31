@@ -592,6 +592,7 @@ h1, h2, h3, h4, h5, h6,
 
 .redline-underline--redline { color: inherit; --redline-color: #B42318; }
 .redline-underline--goldenrod { color: inherit; --redline-color: #D9A441; }
+.redline-underline--sungold { color: inherit; --redline-color: #F2D58A; }
 
 .redline-underline-word > .redline-shape {
   color: var(--redline-color, #B42318);

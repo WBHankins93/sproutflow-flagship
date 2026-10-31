@@ -10,7 +10,7 @@ export default function ProofStrip() {
   const items = getHomeProof();
 
   return (
-    <Section tone="birch" rhythm="none" className="py-8 md:py-[var(--v3-rhythm-tight)]" id="results" labelledBy="home-proof-h">
+    <Section tone="white" rhythm="none" className="py-8 md:py-[var(--v3-rhythm-tight)]" id="results" labelledBy="home-proof-h">
       <div className="grid gap-6 lg:grid-cols-12 lg:gap-12">
       <Heading as="h2" size="sm" id="home-proof-h" className="max-w-[36ch] lg:col-span-3">
         {homeProof.heading}

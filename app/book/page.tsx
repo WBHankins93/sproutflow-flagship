@@ -27,7 +27,7 @@ export default function BookPage() {
 
   return (
     <>
-      <Section tone="birch" labelledBy="book-h">
+      <Section tone="clearing" labelledBy="book-h">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           <aside className="lg:col-span-4">
             <Eyebrow>15 minutes with Ben</Eyebrow>

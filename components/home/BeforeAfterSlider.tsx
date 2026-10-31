@@ -73,13 +73,13 @@ export default function BeforeAfterSlider({
 
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute left-3 top-3 rounded-full bg-[#FBF8F1] px-3 py-1 font-mono text-label uppercase text-primary-900 [font-variant-ligatures:none]"
+          className="pointer-events-none absolute left-3 top-3 rounded-full bg-forest-white px-3 py-1 font-mono text-label uppercase text-primary-900 [font-variant-ligatures:none]"
         >
           Before
         </span>
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute right-3 top-3 rounded-full bg-[#FBF8F1] px-3 py-1 font-mono text-label uppercase text-primary-900 [font-variant-ligatures:none]"
+          className="pointer-events-none absolute right-3 top-3 rounded-full bg-forest-white px-3 py-1 font-mono text-label uppercase text-primary-900 [font-variant-ligatures:none]"
         >
           After
         </span>

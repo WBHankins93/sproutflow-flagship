@@ -100,12 +100,12 @@ export default {
         },
 
         // Sunlit forest (v3, 29 Oct). Section canvases; text pairs noted.
-        // Red pen only on the light ones: clearing 6.1:1, leaf 5.2:1, sunlight 5.8:1.
+        // Red pen only on the light ones: clearing 5.74:1, leaf 4.79:1, sunlight 5.40:1, white 6.38:1.
         forest: {
           clearing: '#F2F1D8', // hero
           leaf: '#CFE3B4', // spring leaf, care section and highlights
-          fern: '#3F6B45', // trust strip and book; cream text 5.3:1, never red
-          sungold: '#F2D58A', // prices and numerals on pine (9:1)
+          fern: '#3F6B45', // trust strip and book; cream text 5.38:1, never red
+          sungold: '#F2D58A', // prices and numerals on pine (9.12:1); on fern only large or UI (4.31:1)
           sunlight: '#F6E8C3', // Ben section
           white: '#FBFCF8', // proof and work
         },

@@ -16,7 +16,7 @@ export default function WorkSection() {
   const cards = homeWork.cardIds.flatMap((id) => projectProof.filter((project) => project.id === id));
 
   return (
-    <Section tone="paper" rhythm="none" id="work" labelledBy="home-work-h" className="py-8 md:py-[var(--v3-rhythm-tight)]">
+    <Section tone="white" rhythm="none" id="work" labelledBy="home-work-h" className="py-8 md:py-[var(--v3-rhythm-tight)]">
       <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-12">
         <div className="min-w-0 lg:col-span-6 lg:col-start-7 lg:row-start-1">
           <Eyebrow index="04">{homeWork.eyebrow}</Eyebrow>

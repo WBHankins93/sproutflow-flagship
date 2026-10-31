@@ -23,7 +23,7 @@ function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`) || (href === '/work' && pathname.startsWith('/case-studies/'));
 }
 
-// Redline focus ring on the Birch canvas (5.73:1); gold light on the Pine menu (7.98:1).
+// Redline focus ring on the white header (6.38:1); gold light on the Pine menu (7.98:1).
 const focusLight =
   'focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-redline';
 const focusDark =
@@ -49,7 +49,7 @@ export default function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-primary-900/10 bg-cream-300/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-forest-fern/15 bg-forest-white/95 backdrop-blur-md">
       <div className="mx-auto flex h-[72px] w-full max-w-container-wide items-center justify-between gap-6 px-4 sm:px-8 md:h-[80px] lg:px-12">
         <Link
           href="/"
