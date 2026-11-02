@@ -78,6 +78,7 @@ Global route metadata/sitemap:
 
 ## Styling + Design System
 
+- Design system v3 (binding for the redesign): `docs/design-system-v3.md` covers the five font roles in `lib/fonts.ts`, the tokens, `components/v3` and the Redline kit in `components/redline`
 - Tailwind config: `tailwind.config.js`
 - Global styles: `app/globals.css`
 - Fonts: Bricolage Grotesk (display), DM Sans (body) loaded in `app/layout.tsx`

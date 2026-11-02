@@ -5,6 +5,11 @@ export interface TestimonialEntry {
   name: string;
   role: string;
   business: string;
+  /**
+   * A client-reported result shown next to this client's work. Always rendered
+   * with a client-reported label. DJN's is verbatim in its quote; Second Line's
+   * and NOLA Pool's are not in the quote text (see the comments on each).
+   */
   metric?: string;
   logoSrc?: string;
   liveUrl?: string;
@@ -54,6 +59,7 @@ export const testimonials: TestimonialEntry[] = [
     name: 'Owner',
     role: 'Owner',
     business: 'DJN Services LLC',
+    // Verbatim in the quote above.
     metric: '35% increase in total bookings',
     logoSrc: 'work/client-logos/djn-logo.webp',
     liveUrl: 'https://djnservicesllc.com/',

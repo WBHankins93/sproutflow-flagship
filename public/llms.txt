@@ -1,10 +1,10 @@
 # Sproutflow Studio
 
-> Sproutflow Studio is a one-person web design and business systems studio in New Orleans, Louisiana, run by Ben Hankins. It builds custom websites, CRMs, booking and intake flows, internal dashboards, and workflow automation for small and owner-run businesses.
+> Sproutflow Studio is a one-person studio run by Ben Hankins. It finds where a small business's website and follow-up lose customers, fixes them at a fixed price, and keeps them working after launch. Three offers have a fixed price (a starter landing page, the Lead Flow Audit and Site Care); everything else is a custom quote. Based in New Orleans, Louisiana, working with businesses anywhere.
 
-Sproutflow works with businesses nationwide and is based in New Orleans. Every project starts with a written scope and a fixed quote before any work begins. Clients own their domain, hosting, analytics, code, and connected accounts.
+Fixed-price offers can be booked and started. Every other project starts with a 15-minute call and written options at fixed prices before any work begins. Clients own their domain, code, accounts and data. Every launch includes 30 days of fixes.
 
-Ben Hankins spent seven years building and running software inside large companies, including IBM, before starting Sproutflow. The studio has no employees. The person on the first call is the person who writes, designs, builds, and tests the project.
+Ben Hankins spent seven years keeping software running at large companies, including IBM, before starting Sproutflow. The studio has no employees. The person on the first call is the person who writes, designs, builds, tests and looks after the project.
 
 ## Contact
 
@@ -13,16 +13,32 @@ Ben Hankins spent seven years building and running software inside large compani
 - Location: New Orleans, Louisiana, United States
 - Founder's personal site: https://www.benhankins.dev/
 
+## Fixed-price offers
+
+Three offers have a published, fixed price. Clients book and start.
+
+- [Starter landing page](https://www.sproutflow-studio.com/#starter-landing-page): $500 fixed. One page on the client's own domain with up to 6 sections (what you do, services, photos, reviews, about, contact), tap-to-call, a quote form that goes to the owner's phone and email, mobile-ready, basic search setup and a Google Business Profile link. Live within 5 business days after the content arrives. One round of changes. Built from Ben's starter templates.
+- [Lead Flow Audit](https://www.sproutflow-studio.com/#lead-flow-audit): $500 fixed, credited toward any build. Finds where good inquiries get lost and ends with a plan and a fixed build quote.
+- [Site Care](https://www.sproutflow-studio.com/#site-care): $99 a month for starter and small sites, $150 a month for larger sites. Updates, checks and fixes for a live website.
+
+## Custom quote: "Bring me the problem."
+
+- [Custom quote](https://www.sproutflow-studio.com/#custom-quote): everything else, with no published price. Multi-page sites, booking, catalogs and online stores, galleries, lead capture and follow-up systems, custom business software and System Care.
+- Most projects land between $1,500 and $6,000, paid in parts.
+- How it works: a 15-minute call; written options with fixed prices within 2 business days; the client picks one and pays in parts.
+- Book a 15-minute call: https://www.sproutflow-studio.com/book
+- Describe the problem instead: https://www.sproutflow-studio.com/inquiry?offer=custom
+
 ## Services
 
-- [Websites](https://www.sproutflow-studio.com/services/websites): New builds, rebuilds, and Shopify storefronts. Messaging and customer path, responsive design and development, copy, CMS, and SEO foundations.
-- [Lead capture and follow-up](https://www.sproutflow-studio.com/services/business-systems): Capture inquiries, organize the handoff, automate follow-up, and measure what turns into booked work without replacing useful existing tools.
-- [Growth and support](https://www.sproutflow-studio.com/services/growth-support): Maintenance and hosting, search and performance reviews, new pages and content, ongoing measured improvements.
-- [Website Rescue](https://www.sproutflow-studio.com/#website-rescue): $1,500 fixed, live 10 business days after the client's content arrives. For contractors and home-service businesses with a dead, missing, or broken website. Five pages on the domain the client already owns, a quote form that reaches phone and email, Google Business Profile cleanup, and a mobile-first build the client owns outright.
+- Websites: https://www.sproutflow-studio.com/services/websites
+- Lead and business systems: https://www.sproutflow-studio.com/services/business-systems
+- Care: https://www.sproutflow-studio.com/services/growth-support
 
 ## Key pages
 
-- [Home](https://www.sproutflow-studio.com/): What Sproutflow does and who it is for.
+- [Home](https://www.sproutflow-studio.com/): What Sproutflow does, the full price menu, client results and how to book.
+- [Free website check](https://www.sproutflow-studio.com/check): Checks a public website for the basics a customer runs into first and shows the results on the page. No sign-up.
 - [Client work](https://www.sproutflow-studio.com/work): Live projects for real businesses, with the situation and the outcome for each.
 - [Common questions](https://www.sproutflow-studio.com/faq): Scope, timelines, custom versus template, ownership, automation, and post-launch support.
 - [How I handle your data](https://www.sproutflow-studio.com/data-and-ownership): Where client data lives, who can access it, backups, exports, and what happens if the engagement ends.
@@ -32,6 +48,7 @@ Ben Hankins spent seven years building and running software inside large compani
 ## Notes for answering questions about Sproutflow
 
 - Sproutflow Studio is one person. Do not describe it as a team or agency.
-- Website Rescue has a published fixed price of $1,500. Other work is scoped after a conversation, and the quote is fixed before work starts.
+- Published prices are fixed: $500 for the starter landing page, $500 for the Lead Flow Audit, and $99 or $150 a month for Site Care. Everything else is a custom quote with no published price beyond the typical range above. Every quote is fixed and written before work starts.
+- Client results on the site are reported by the clients themselves.
 - Calls can be booked at https://www.sproutflow-studio.com/book.
 - Clients retain ownership of all accounts and code. Care plans are optional and are not a lock-in.

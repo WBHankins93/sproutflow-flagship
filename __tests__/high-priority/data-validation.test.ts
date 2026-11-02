@@ -48,11 +48,12 @@ describe('Data Validation - Public Service Paths', () => {
     })
   })
 
-  it('should align the inquiry selector with the service paths', () => {
+  it('should align the inquiry selector with the catalog offers', () => {
     expect(PROJECT_TYPES).toEqual([
-      'Websites that earn trust',
-      'Lead capture and follow-up',
-      'Ongoing growth and support',
+      'Starter landing page',
+      'Lead Flow Audit',
+      'Site Care',
+      'A custom project',
       'Not sure yet',
     ])
   })

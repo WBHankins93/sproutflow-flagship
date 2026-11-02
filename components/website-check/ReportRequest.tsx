@@ -7,7 +7,7 @@ import { BOOKING_CTA_LABEL, getFormspreeFormId } from '@/lib/constants';
 import { REPORT_MESSAGES } from '@/lib/website-check/messages';
 import { formatSummaryText } from '@/lib/website-check/summarize';
 import type { WebsiteCheckResult } from '@/lib/website-check/types';
-import { cardClass, inputClass, invalidInputClass, primaryButtonClass } from './styles';
+import { cardClass, inputClass, invalidInputClass, primaryButtonClass, secondaryButtonClass, softTextClass } from './styles';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
@@ -85,24 +85,24 @@ export function ReportRequest({ result }: { result: WebsiteCheckResult }) {
   if (sentTo) {
     return (
       <div className={cardClass}>
-        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-primary-50 text-primary-800">
+        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-ink-700 text-white">
           <CircleCheck className="h-6 w-6" aria-hidden="true" />
         </span>
         <h3
           ref={sentHeadingRef}
           tabIndex={-1}
-          className="mt-4 font-display text-display-sm text-primary-900 focus:outline-none"
+          className="mt-4 font-display text-display-sm font-normal text-primary-900 focus:outline-none"
         >
           Your report is on its way.
         </h3>
-        <p className="mt-3 text-text-secondary [overflow-wrap:anywhere]">
+        <p className={`mt-3 [overflow-wrap:anywhere] ${softTextClass}`}>
           I will send the full marked-up report to {sentTo} within one business day. It comes from
           me, Ben, so keep an eye out for a personal email.
         </p>
         <p className="mt-4 text-primary-900">Want to go through it together?</p>
         <BookCallLink
           data-cta="website-check-sent"
-          inquiryQuery={result.offer ? `tier=${result.offer}` : undefined}
+          inquiryQuery={result.offer ? `offer=${result.offer}` : undefined}
           className={`mt-3 ${primaryButtonClass}`}
         >
           {BOOKING_CTA_LABEL}
@@ -113,7 +113,9 @@ export function ReportRequest({ result }: { result: WebsiteCheckResult }) {
 
   return (
     <div className={cardClass}>
-      <h3 className="font-display text-h4 text-primary-900">Prefer to read first? Get the full report by email.</h3>
+      <h3 className="font-body text-lg font-semibold leading-snug tracking-normal text-primary-900">
+        Prefer to read first? Get the full report by email.
+      </h3>
       <form onSubmit={submit} noValidate className="mt-5 space-y-4">
         <div>
           <label htmlFor={emailId} className="mb-2 block text-sm font-semibold text-primary-900">
@@ -174,11 +176,11 @@ export function ReportRequest({ result }: { result: WebsiteCheckResult }) {
         <button
           type="submit"
           disabled={sending}
-          className="inline-flex min-h-12 w-full items-center justify-center rounded-full border-2 border-primary-900 px-6 py-3 font-semibold text-primary-900 hover:bg-primary-900 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-700 disabled:opacity-60"
+          className={`w-full ${secondaryButtonClass}`}
         >
           {sending ? 'Sending…' : 'Email me the report'}
         </button>
-        <p id={promiseId} className="text-sm text-text-secondary">
+        <p id={promiseId} className={`text-sm ${softTextClass}`}>
           I will send the full marked-up report within one business day.
         </p>
         <p id={privacyId} className="flex gap-2 text-sm text-text-muted">

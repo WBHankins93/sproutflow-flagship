@@ -8,6 +8,7 @@ import {
   PROJECT_TYPES,
   REFERRAL_SOURCES,
   TIMELINE_OPTIONS,
+  toProjectType,
   type InquiryFormData,
 } from '@/types/inquiry';
 import { BookCallLink } from '@/components/ui/BookCallLink';
@@ -33,12 +34,16 @@ const initialData: InquiryFormData = {
 };
 const inputBaseClass =
   'min-h-12 w-full rounded-lg border bg-white px-4 py-3 text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2';
-const inputClass = `${inputBaseClass} border-primary-900/20 focus:border-primary-700 focus:ring-primary-600/20`;
+const inputClass = `${inputBaseClass} border-primary-900/30 focus:border-primary-900 focus:ring-redline/40`;
 // red-700 (#B91C1C) is 5.64:1 on the Birch Paper canvas (#F4EFE3) and 6.47:1
 // on the white input fill, so the message text clears 4.5:1 and the border
 // clears the 3:1 non-text minimum. The thicker ring keeps the invalid state
 // visible without relying on hue alone.
 const invalidInputClass = `${inputBaseClass} border-red-700 ring-1 ring-red-700 focus:border-red-700 focus:ring-red-700/30`;
+
+// v3 focus ring: 3px Redline on the light canvas (5.73:1 on Birch).
+const focusRing =
+  'focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-redline';
 
 type ContactField = 'name' | 'email';
 
@@ -83,14 +88,21 @@ function Field({ label, children, required }: { label: string; children: React.R
     <label className="block">
       <span className="mb-2 block text-sm font-semibold text-primary-900">
         {label}
-        {required && <span className="ml-1 text-accent-700">*</span>}
+        {required && <span className="ml-1 text-redline">*</span>}
       </span>
       {children}
     </label>
   );
 }
 
-export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: string }) {
+export function InquiryForm({
+  initialProjectType = '',
+  offer,
+}: {
+  initialProjectType?: string;
+  /** The offer the visitor came from ("Starter landing page ($500)", "Custom quote"), sent with the inquiry. */
+  offer?: string;
+}) {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<InquiryFormData>({ ...initialData, projectType: initialProjectType });
   const [errors, setErrors] = useState<{ name?: string; email?: string; form?: string }>({});
@@ -118,7 +130,7 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
       const stored = sessionStorage.getItem(STORAGE_KEY);
       if (!stored) return;
       const parsed = JSON.parse(stored) as { step?: number; data?: InquiryFormData };
-      if (parsed.data) setData({ ...parsed.data, projectType: initialProjectType || parsed.data.projectType });
+      if (parsed.data) setData({ ...parsed.data, projectType: initialProjectType || toProjectType(parsed.data.projectType) });
       if (parsed.step && parsed.step >= 1 && parsed.step <= 3) setStep(parsed.step);
     } catch {
       try {
@@ -200,7 +212,7 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
       const response = await fetch(`https://formspree.io/f/${formId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        body: JSON.stringify(offer ? { ...data, offer } : data),
       });
       if (!response.ok) throw new Error('Submission failed');
       try {
@@ -219,17 +231,17 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
   if (submitted)
     return (
       <div className="border-y border-primary-900/20 py-12">
-        <p className="text-eyebrow uppercase text-accent-700">Project received</p>
-        <h2 className="mt-4 font-display text-display-md text-primary-900">Thanks. Your project is in.</h2>
-        <p className="mt-4 max-w-xl text-text-secondary">
+        <p className="font-mono text-label uppercase text-[#4A574D] [font-variant-ligatures:none]">Project received</p>
+        <h2 className="mt-4 font-display text-display-md font-normal text-primary-900">Thanks. Your project is in.</h2>
+        <p className="mt-4 max-w-xl text-[#4A574D]">
           I will review the details and reply within one business day.
         </p>
         {isBookingConfigured() && (
-          <p className="mt-4 max-w-xl text-text-secondary">
+          <p className="mt-4 max-w-xl text-[#4A574D]">
             Want to move faster?{' '}
             <BookCallLink
               data-cta="inquiry-success"
-              className="font-semibold text-primary-800 underline underline-offset-2"
+              className={`font-semibold text-primary-900 underline underline-offset-2 ${focusRing}`}
             >
               Book a 15-minute call now
             </BookCallLink>
@@ -237,7 +249,7 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
         )}
         <Link
           href="/work"
-          className="mt-7 inline-flex border-b border-primary-700 pb-1 font-semibold text-primary-800"
+          className={`mt-7 inline-flex min-h-11 items-center font-semibold text-primary-900 underline decoration-redline decoration-2 underline-offset-[6px] ${focusRing}`}
         >
           See recent client work while you wait
         </Link>
@@ -249,8 +261,10 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
       <div className="mb-10 grid grid-cols-3 gap-2" aria-label={`Step ${step} of 3`}>
         {[1, 2, 3].map((item) => (
           <div key={item}>
-            <span className={`block h-1 ${item <= step ? 'bg-accent-500' : 'bg-primary-900/15'}`} />
-            <span className={`mt-2 block font-mono text-xs ${item === step ? 'text-primary-900' : 'text-text-muted'}`}>
+            <span className={`block h-1 ${item <= step ? 'bg-primary-900' : 'bg-primary-900/15'}`} />
+            <span
+              className={`mt-2 block font-mono text-label tabular-nums [font-variant-ligatures:none] ${item === step ? 'text-redline' : 'text-text-muted'}`}
+            >
               0{item}
             </span>
           </div>
@@ -259,8 +273,8 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
 
       {step === 1 && (
         <fieldset className="space-y-6">
-          <legend ref={legendRef} tabIndex={-1} className="font-display text-display-md text-primary-900 focus:outline-none">What is happening now?</legend>
-          <p className="text-text-secondary">A rough description is enough. Nothing in this step is required.</p>
+          <legend ref={legendRef} tabIndex={-1} className="font-display text-display-md font-normal text-primary-900 focus:outline-none">What is happening now?</legend>
+          <p className="text-[#4A574D]">A rough description is enough. Nothing in this step is required.</p>
           <Field label="Which path feels closest?">
             <select value={data.projectType} onChange={update('projectType')} className={inputClass}>
               <option value="">Choose a path</option>
@@ -292,10 +306,10 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
 
       {step === 2 && (
         <fieldset className="space-y-6">
-          <legend ref={legendRef} tabIndex={-1} className="font-display text-display-md text-primary-900 focus:outline-none">
+          <legend ref={legendRef} tabIndex={-1} className="font-display text-display-md font-normal text-primary-900 focus:outline-none">
             What would useful progress look like?
           </legend>
-          <p className="text-text-secondary">Best guesses are fine. We can clarify the details together.</p>
+          <p className="text-[#4A574D]">Best guesses are fine. We can clarify the details together.</p>
           <div className="grid gap-5 sm:grid-cols-2">
             <Field label="Primary goal">
               <select value={data.projectGoal} onChange={update('projectGoal')} className={inputClass}>
@@ -327,8 +341,8 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
 
       {step === 3 && (
         <fieldset className="space-y-6">
-          <legend ref={legendRef} tabIndex={-1} className="font-display text-display-md text-primary-900 focus:outline-none">How can I reach you?</legend>
-          <p className="text-text-secondary">Name and email are the only required fields.</p>
+          <legend ref={legendRef} tabIndex={-1} className="font-display text-display-md font-normal text-primary-900 focus:outline-none">How can I reach you?</legend>
+          <p className="text-[#4A574D]">Name and email are the only required fields.</p>
           <div className="grid gap-5 sm:grid-cols-2">
             <div>
               <Field label="Name" required>
@@ -395,9 +409,9 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
           <button
             type="button"
             onClick={() => goToStep(step - 1)}
-            className="inline-flex min-h-11 items-center gap-2 font-semibold text-primary-800"
+            className={`inline-flex min-h-11 items-center gap-2 rounded-sm font-semibold text-primary-900 ${focusRing}`}
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Back
           </button>
         ) : (
@@ -406,17 +420,17 @@ export function InquiryForm({ initialProjectType = '' }: { initialProjectType?: 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="group inline-flex min-h-12 items-center gap-3 rounded-full bg-ink-900 px-7 py-3.5 font-semibold text-white hover:bg-primary-800 disabled:opacity-60"
+          className={`group inline-flex min-h-12 items-center gap-3 rounded-full border-2 border-primary-900 bg-primary-900 px-7 py-3 font-semibold leading-tight text-cream-300 transition-colors duration-150 hover:border-primary-800 hover:bg-primary-800 disabled:opacity-60 ${focusRing}`}
         >
           {step < 3 ? 'Continue' : isSubmitting ? 'Sending…' : 'Send project details'}
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 motion-reduce:transition-none" aria-hidden="true" />
         </button>
       </div>
       <p className="mt-5 flex gap-2 text-sm text-text-muted">
-        <LockKeyhole className="mt-0.5 h-4 w-4 flex-none" />
+        <LockKeyhole className="mt-0.5 h-4 w-4 flex-none" aria-hidden="true" />
         <span>
           I use these details only to respond to your inquiry. Read{' '}
-          <Link href="/data-and-ownership" className="font-semibold text-primary-800 underline underline-offset-2">
+          <Link href="/data-and-ownership" className={`font-semibold text-primary-900 underline underline-offset-2 ${focusRing}`}>
             how I handle your data
           </Link>
           .

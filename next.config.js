@@ -8,12 +8,8 @@ function isBookingOff(value) {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async redirects() {
+    // /how-we-work is a real page in v3, so it is not redirected.
     return [
-      {
-        source: '/how-we-work',
-        destination: '/#process',
-        permanent: true,
-      },
       {
         source: '/case-studies',
         destination: '/work',

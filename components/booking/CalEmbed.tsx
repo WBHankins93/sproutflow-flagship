@@ -9,7 +9,8 @@ type CalEmbedProps = {
 };
 
 const NAMESPACE = 'book-call';
-const BRAND_COLOR = '#5F755E';
+// Sunlit forest Pine. The embed is light-only and sets no secondary colour.
+const BRAND_COLOR = '#223528';
 
 /**
  * Inline Cal.com scheduler in month view with the light theme. A plain link to

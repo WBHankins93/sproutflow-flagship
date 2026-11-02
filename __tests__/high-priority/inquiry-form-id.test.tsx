@@ -34,12 +34,12 @@ afterEach(() => {
   }
 })
 
-async function submit() {
+async function submit(offer?: string) {
   const user = userEvent.setup()
   const fetchMock = jest.fn().mockResolvedValue({ ok: true })
   global.fetch = fetchMock as unknown as typeof fetch
 
-  render(<InquiryForm />)
+  render(<InquiryForm offer={offer} />)
   await user.click(screen.getByRole('button', { name: /continue/i }))
   await user.click(screen.getByRole('button', { name: /continue/i }))
   await user.type(screen.getByLabelText(/^name/i), 'Test Owner')
@@ -86,5 +86,17 @@ describe('InquiryForm submission', () => {
     setFormId('override1')
     const fetchMock = await submit()
     expect(fetchMock.mock.calls[0][0]).toBe('https://formspree.io/f/override1')
+  })
+})
+
+describe('InquiryForm offer context', () => {
+  it('sends the offer the visitor came from', async () => {
+    const fetchMock = await submit('Starter landing page ($500)')
+    expect(JSON.parse(fetchMock.mock.calls[0][1].body).offer).toBe('Starter landing page ($500)')
+  })
+
+  it('sends no offer field without one', async () => {
+    const fetchMock = await submit()
+    expect('offer' in JSON.parse(fetchMock.mock.calls[0][1].body)).toBe(false)
   })
 })

@@ -1,13 +1,37 @@
 # Asset Spec and Budgets
 
-Every image the site serves, what it may weigh, and how to export it.
+Budgets for the current work/logo image inventory and guidance for other images.
 
 Enforced by `npm run check:assets`, which fetches each referenced asset,
 measures it, and reports anything over budget. Add `-- --ci` to fail a build on
 violations.
 
-**Current state: 12 assets, 16.9 MB, all 12 over budget.** Documentation alone
-did not prevent that, which is why the check exists.
+**Original-source baseline: 12 assets, 16.9 MB, all 12 over budget.**
+The October 2026 fix serves tracked local WebP derivatives for this inventory:
+12 assets, 17,307,795 bytes of originals down to 637,040 bytes (96.3% smaller),
+none over budget. Historical staging/upload notes below describe the earlier
+approach; no blob upload is required for the local derivative implementation.
+
+### Optimized derivatives
+
+- `public/optimized-images/**` holds the WebP copies; `lib/optimized-images.json`
+  maps each source path (`images/...`) to its local URL.
+- `getImageUrl()` / `getBlobImageUrl()` in `lib/blob-images.ts` return the
+  mapped local URL in every environment, even when `NEXT_PUBLIC_BLOB_STORE_URL`
+  is set. Unmapped paths keep the blob origin, or `/images/...` without one.
+- Regenerate with `node scripts/generate-optimized-assets.mjs`. It needs Sharp
+  (from the Next dependency tree) and the originals in the gitignored
+  `public/images/`. Normal builds need only the tracked derivatives and manifest.
+- Exports keep aspect ratio and alpha, never enlarge, crop or recolour.
+  Screenshots: quality 82, 1600 px longest edge. Logos start at quality 90 and
+  step down only as needed to meet the budget; the Nealy badge uses 240 px.
+- `scripts/asset-inventory.mjs` holds the inventory and budgets shared by the
+  generator and `check:assets`. The inventory is the work/logo references in
+  `data/projectProof.ts`, `data/caseStudies.ts`, `data/testimonials.ts` and the
+  header/footer marks. Not covered yet: `ben-photo.png`, the DJN before/after
+  screenshots under `case-studies/`, and `demos/*`.
+- Rollback: drop the manifest lookup in `lib/blob-images.ts`. Originals and
+  remote blobs are untouched.
 
 ---
 
@@ -223,8 +247,11 @@ sources need less correction, and several values may go to 1.
 npm run check:assets
 ```
 
-Requires `NEXT_PUBLIC_BLOB_STORE_URL`. Without it the check skips rather than
-failing, so it never blocks a fresh clone.
+Checks manifest-mapped local derivatives first. Unmapped inventory entries use
+`NEXT_PUBLIC_BLOB_STORE_URL` when configured, otherwise local `/images` files.
+Missing files and unreadable dimensions fail the CI check. The inventory covers
+work/logo references in three data files plus header/footer marks; it is not
+a complete inventory of all photography, demo images, or case-study screenshots.
 
 Run it after adding any asset, and before asking whether the site feels slow.
 

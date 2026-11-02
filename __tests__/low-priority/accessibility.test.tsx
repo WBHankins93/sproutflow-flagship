@@ -8,7 +8,7 @@
 import { render } from '@testing-library/react'
 import Header from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import HeroSection from '@/components/sections/HeroSection'
+import HomeHero from '@/components/home/HomeHero'
 
 describe('Accessibility - Semantic HTML', () => {
   it('should have header element in Header component', () => {
@@ -23,10 +23,14 @@ describe('Accessibility - Semantic HTML', () => {
     expect(footer).toBeInTheDocument()
   })
 
-  it('should have section elements in HeroSection', () => {
-    const { container } = render(<HeroSection />)
+  it('should have section elements in HomeHero', () => {
+    const { container } = render(<HomeHero />)
     const sections = container.querySelectorAll('section')
     expect(sections.length).toBeGreaterThan(0)
+    // The hero section is named by its h1.
+    const hero = container.querySelector('section#top')!
+    expect(hero).toHaveAttribute('aria-labelledby', 'home-hero-h')
+    expect(container.querySelector('h1#home-hero-h')).toBeInTheDocument()
   })
 })
 

@@ -173,15 +173,59 @@ for (const { label, calLink, bookingHref, configured } of states) {
   })
 }
 
-describe('Inquiry page tier mapping', () => {
-  it('preselects the website path for the website-rescue tier', async () => {
-    const page = await InquiryPage({
-      searchParams: Promise.resolve({ tier: 'website-rescue' }),
+describe('Inquiry page offer mapping', () => {
+  async function renderInquiry(params: { offer?: string; tier?: string; path?: string }) {
+    const page = await InquiryPage({ searchParams: Promise.resolve(params) })
+    const view = render(page)
+    const select = screen.getByRole('combobox', { name: /which path feels closest/i }) as HTMLSelectElement
+    const context = view.container.querySelector('[data-testid="inquiry-offer"]')
+    return { select, context, unmount: view.unmount }
+  }
+
+  const NEW: Array<[string, string, string]> = [
+    ['starter', 'Starter landing page', 'Starter landing page, $500.'],
+    ['audit', 'Lead Flow Audit', 'Lead Flow Audit, $500.'],
+    ['care', 'Site Care', 'Site Care, $99/mo or $150/mo.'],
+    ['custom', 'A custom project', 'Bring me the problem.'],
+  ]
+
+  NEW.forEach(([offer, projectType, line]) => {
+    it(`accepts offer=${offer}`, async () => {
+      const { select, context } = await renderInquiry({ offer })
+      expect(select.value).toBe(projectType)
+      expect(context).toHaveAttribute('data-offer', offer)
+      expect(context).toHaveTextContent(line)
     })
-    render(page)
-    const select = screen.getByRole('combobox', {
-      name: /which path feels closest/i,
-    }) as HTMLSelectElement
-    expect(select.value).toBe('Websites that earn trust')
+  })
+
+  const OLD: Array<[string, string]> = [
+    ['website-rescue', 'starter'],
+    ['lead-capture-system', 'custom'],
+    ['lead-flow-audit', 'audit'],
+    ['system-care', 'custom'],
+    ['something-unknown', 'custom'],
+  ]
+
+  OLD.forEach(([tier, offer]) => {
+    it(`maps the old tier=${tier} link to ${offer}`, async () => {
+      const { context } = await renderInquiry({ tier })
+      expect(context).toHaveAttribute('data-offer', offer)
+    })
+  })
+
+  it('preselects the starter landing page for the old website-rescue tier', async () => {
+    const { select } = await renderInquiry({ tier: 'website-rescue' })
+    expect(select.value).toBe('Starter landing page')
+  })
+
+  it('prefers offer= over tier=, and path= for the project type', async () => {
+    const { select, context } = await renderInquiry({ offer: 'care', tier: 'website-rescue', path: 'business-systems' })
+    expect(context).toHaveAttribute('data-offer', 'care')
+    expect(select.value).toBe('Lead Flow Audit')
+  })
+
+  it('shows no offer line without an offer', async () => {
+    const { context } = await renderInquiry({})
+    expect(context).toBeNull()
   })
 })

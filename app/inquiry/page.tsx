@@ -3,7 +3,10 @@ import { FileSearch, MessageSquareText, ReceiptText } from 'lucide-react';
 import { InquiryForm } from '@/components/inquiry/InquiryForm';
 import { Footer } from '@/components/layout/Footer';
 import { BookCallLink } from '@/components/ui/BookCallLink';
+import { customQuote, formatShortPrice, getOffer, toOfferKey, type OfferKey } from '@/data/catalog';
 import { BOOKING_CTA_LABEL, isBookingConfigured } from '@/lib/constants';
+import { toProjectType } from '@/types/inquiry';
+import { Eyebrow, Heading, MarginNote, Section } from '@/components/v3';
 
 export const metadata: Metadata = {
   title: 'Start a Project',
@@ -12,17 +15,6 @@ export const metadata: Metadata = {
   alternates: { canonical: '/inquiry' },
 };
 
-const pathMap: Record<string, string> = {
-  websites: 'Websites that earn trust',
-  'business-systems': 'Lead capture and follow-up',
-  'growth-support': 'Ongoing growth and support',
-};
-const tierMap: Record<string, string> = {
-  'website-rescue': 'Websites that earn trust',
-  'lead-flow-audit': 'Lead capture and follow-up',
-  'lead-capture-system': 'Lead capture and follow-up',
-  'system-care': 'Ongoing growth and support',
-};
 const steps = [
   { icon: FileSearch, title: 'I read the details', body: 'Every inquiry comes to me directly.' },
   { icon: MessageSquareText, title: 'We talk if useful', body: 'A short call helps clarify the right starting point.' },
@@ -33,55 +25,98 @@ const steps = [
   },
 ];
 
-type Props = { searchParams: Promise<{ path?: string; tier?: string }> };
+/** What the visitor asked about, from data/catalog.ts: the name and price, or the custom quote. */
+function offerContext(key: OfferKey): { line: string; submitted: string } {
+  if (key === 'custom') {
+    return {
+      line: `${customQuote.heading} Describe it below in your own words, and I’ll come back with options.`,
+      submitted: customQuote.name,
+    };
+  }
+  const offer = getOffer(key)!;
+  const price = formatShortPrice(offer);
+  return { line: `${offer.name}, ${price}. ${offer.priceNote ?? offer.line}`, submitted: `${offer.name} (${price})` };
+}
 
+type Props = { searchParams: Promise<{ path?: string; offer?: string | string[]; tier?: string | string[] }> };
+
+/**
+ * `offer=starter|audit|care|custom` names the offer. Old `tier=` links still
+ * work: website-rescue is the starter page, lead-capture-system and anything
+ * unknown are a custom quote (data/catalog.ts LEGACY_OFFER_KEYS).
+ */
 export default async function InquiryPage({ searchParams }: Props) {
-  const { path, tier } = await searchParams;
-  const initialProjectType = (path && pathMap[path]) || (tier && tierMap[tier]) || '';
+  const { path, offer, tier } = await searchParams;
+  const offerKey = toOfferKey(offer) ?? toOfferKey(tier);
+  const context = offerKey ? offerContext(offerKey) : null;
+  // Project type prefill (types/inquiry.ts): the service path first, then the offer. A custom quote is prefilled too.
+  const initialProjectType = toProjectType(path) || (offerKey ? toProjectType(offerKey) : '');
   return (
     <>
-      <section className="bg-cream-300 py-14 md:py-20">
-        <div className="mx-auto grid max-w-[1186px] gap-12 px-5 md:px-11 lg:grid-cols-12">
+      <Section tone="birch" labelledBy="inquiry-h">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           <aside className="lg:col-span-4">
-            <p className="text-eyebrow uppercase text-accent-700">Start with what you know</p>
-            <h1 className="mt-5 font-display text-display-lg text-primary-900">Tell me what needs to work better.</h1>
-            <p className="mt-5 text-body-lg text-text-secondary">
+            <Eyebrow>Start with what you know</Eyebrow>
+            <Heading as="h1" size="lg" id="inquiry-h" italic="better" className="mt-5">
+              Tell me what needs to work better.
+            </Heading>
+            <p className="mt-5 max-w-[60ch] text-body-lg text-[#4A574D]">
               You can stop after the first checkpoint. A polished brief is not required.
             </p>
             <ol className="mt-10 border-t border-primary-900/20">
               {steps.map(({ icon: Icon, title, body }, index) => (
                 <li key={title} className="grid grid-cols-[44px_1fr] gap-4 border-b border-primary-900/20 py-5">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary-900/20">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary-900/20 text-primary-900">
                     <Icon className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <div>
                     <p className="font-semibold text-primary-900">
-                      <span className="mr-2 font-mono text-xs text-accent-700">0{index + 1}</span>
+                      <span
+                        className="mr-2 font-mono text-label tabular-nums text-redline [font-variant-ligatures:none]"
+                        aria-hidden="true"
+                      >
+                        0{index + 1}
+                      </span>
                       {title}
                     </p>
-                    <p className="mt-1 text-sm text-text-secondary">{body}</p>
+                    <p className="mt-1 text-sm text-[#4A574D]">{body}</p>
                   </div>
                 </li>
               ))}
             </ol>
-            <p className="mt-6 text-sm text-text-muted">I reply within one business day.</p>
+            <MarginNote arrow="none" className="mt-6">
+              I read every one myself
+            </MarginNote>
+            <p className="mt-4 text-sm text-[#4A574D]">I reply within one business day.</p>
             {isBookingConfigured() && (
-              <p className="mt-4 text-sm text-text-secondary" data-testid="inquiry-booking-line">
+              <p className="mt-4 text-sm text-[#4A574D]" data-testid="inquiry-booking-line">
                 Rather talk it through?{' '}
                 <BookCallLink
                   data-cta="inquiry-aside"
-                  className="font-semibold text-primary-800 underline underline-offset-2"
+                  className="rounded-sm font-semibold text-primary-900 underline underline-offset-2 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-redline"
                 >
                   {BOOKING_CTA_LABEL}
                 </BookCallLink>
               </p>
             )}
           </aside>
-          <div className="border-t border-primary-900/20 pt-8 lg:col-span-7 lg:col-start-6">
-            <InquiryForm initialProjectType={initialProjectType} />
+          <div className="min-w-0 border-t border-primary-900/20 pt-8 lg:col-span-7 lg:col-start-6">
+            {context && (
+              <p
+                className="mb-8 border-l-4 border-forest-fern pl-4 font-body text-body text-primary-900"
+                data-testid="inquiry-offer"
+                data-offer={offerKey}
+              >
+                <span className="block font-mono text-label uppercase text-[#4A574D] [font-variant-ligatures:none]">
+                  You asked about
+                </span>
+                <span className="mt-1 block">{context.line}</span>
+              </p>
+            )}
+            <InquiryForm initialProjectType={initialProjectType} offer={context?.submitted} />
           </div>
         </div>
-      </section>
+      </Section>
       <Footer />
     </>
   );

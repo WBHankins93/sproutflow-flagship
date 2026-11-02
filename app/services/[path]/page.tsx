@@ -1,18 +1,26 @@
+// app/services/[path]/page.tsx - The three "what I build" category pages on v3
+// (Websites, Lead & Business Systems, Care). Each ends with its matching offers
+// from data/catalog.ts; no price is typed here.
+//
+// Tones: clearing header, white fit, leaf process, white related work, pine
+// offers, sunlight questions, then the Fern FooterCta and the Pine footer.
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowRight } from 'lucide-react';
-import PageHeader from '@/components/ui/PageHeader';
-import SectionShell from '@/components/ui/SectionShell';
-import ServiceMedia from '@/components/services/ServiceMedia';
-import ProjectRow from '@/components/ui/ProjectRow';
-import FaqAccordion from '@/components/ui/FaqAccordion';
 import FooterCta from '@/components/ui/FooterCta';
-import { BookCallLink } from '@/components/ui/BookCallLink';
-import { BOOKING_CTA_LABEL, INQUIRY_PATH } from '@/lib/constants';
 import { Footer } from '@/components/layout/Footer';
-import { getServicePath, servicePaths } from '@/data/servicePaths';
-import { projectProof } from '@/data/projectProof';
+import { ButtonLink, Eyebrow, Heading, Section } from '@/components/v3';
+import OfferBlock from '@/components/services/OfferBlock';
+import PageIntro from '@/components/services/PageIntro';
+import QuestionList from '@/components/services/QuestionList';
+import RelatedWork from '@/components/services/RelatedWork';
+import { NUMERAL_CLASS, SOFT_TEXT, TEXT_LINK_CLASS, bookingHref } from '@/components/services/styles';
+import { BOOKING_CTA_LABEL, INQUIRY_PATH } from '@/lib/constants';
+import { getCategory, getOffersByCategory } from '@/data/catalog';
+import { listedProjectProof } from '@/data/projectProof';
+import { getServicePath, servicePaths, type ServicePath } from '@/data/servicePaths';
 
 type Props = { params: Promise<{ path: string }> };
 
@@ -31,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function ServiceSchema({ service }: { service: NonNullable<ReturnType<typeof getServicePath>> }) {
+function ServiceSchema({ service }: { service: ServicePath }) {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://sproutflow-studio.com';
   const schema = {
     '@context': 'https://schema.org',
@@ -61,118 +69,147 @@ export default async function ServicePathPage({ params }: Props) {
   const { path: pathId } = await params;
   const service = getServicePath(pathId);
   if (!service) notFound();
-  const relatedProject = projectProof.find((project) => project.id === service.relatedCaseStudy);
+  const category = getCategory(service.category);
+  const offers = getOffersByCategory(service.category);
   const otherPaths = servicePaths.filter((path) => path.id !== service.id);
+  const hasRelated = listedProjectProof.some((project) => project.id === service.relatedCaseStudy);
+  const index = (n: number) => String(n).padStart(2, '0');
+  const offersIndex = hasRelated ? 4 : 3;
 
   return (
     <>
       <ServiceSchema service={service} />
-      <PageHeader eyebrow={service.eyebrow} title={service.title} titleAccent={service.titleAccent} intro={service.outcome}>
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
-          <BookCallLink
-            data-cta={`service-${service.id}`}
-            inquiryQuery={`path=${service.id}`}
-            className="group inline-flex min-h-12 items-center gap-3 rounded-full bg-accent-500 px-6 py-3 font-semibold text-ink-900"
-          >
-            {BOOKING_CTA_LABEL}{' '}
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-          </BookCallLink>
+      <PageIntro
+        id="service-h"
+        eyebrow={category.name}
+        title={service.title}
+        italic={service.titleAccent}
+        intro={
+          <>
+            <p>{service.outcome}</p>
+            <p className="mt-3">{service.description}</p>
+          </>
+        }
+      >
+        <div className="flex flex-col items-start gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
+          <ButtonLink href={bookingHref(`path=${service.id}`)} data-cta={`service-${service.id}`}>
+            {BOOKING_CTA_LABEL}
+          </ButtonLink>
           <Link
             href={`${INQUIRY_PATH}?path=${service.id}`}
             data-cta={`service-${service.id}-inquiry`}
-            className="font-semibold text-white/75 underline underline-offset-4 hover:text-white"
+            className={TEXT_LINK_CLASS}
           >
             {service.ctaLabel}
           </Link>
         </div>
-      </PageHeader>
+      </PageIntro>
 
-      <SectionShell index="01" label="who this is for" variant="cream" labelledBy="service-fit-heading">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-5">
-            <h2 id="service-fit-heading" className="font-display text-display-lg text-primary-900">
-              A useful fit when this is the part holding things back.
-            </h2>
-            <ul className="mt-8 grid gap-px border-y border-primary-900/15 bg-primary-900/15">
-              {service.fitStatements.map((statement, index) => (
-                <li key={statement} className="grid grid-cols-[2.5rem_1fr] items-baseline gap-3 bg-cream-300 py-5">
-                  <span className="font-mono text-mono-meta text-accent-700">0{index + 1}</span>
-                  <span className="text-body-lg text-text-secondary">{statement}</span>
+      <Section tone="white" labelledBy="service-fit-h">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="min-w-0 lg:col-span-5">
+            <Eyebrow index={index(1)}>Who this is for</Eyebrow>
+            <Heading as="h2" size="md" id="service-fit-h" className="mt-4">
+              A good fit when this is the part holding things back.
+            </Heading>
+            <ul className="mt-6 border-t border-primary-900/15">
+              {service.fitStatements.map((statement, i) => (
+                <li key={statement} className="grid grid-cols-[2.5rem_1fr] items-baseline gap-3 border-b border-primary-900/15 py-4">
+                  <span aria-hidden="true" className={`font-mono text-label text-redline ${NUMERAL_CLASS}`}>
+                    {index(i + 1)}
+                  </span>
+                  <span className="font-body text-body-lg text-primary-900">{statement}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div className="lg:col-span-6 lg:col-start-7">
-            <p className="text-eyebrow uppercase text-text-muted">What is included</p>
-            <div className="mt-5 grid border-t border-primary-900/15">
+          <div className="min-w-0 lg:col-span-6 lg:col-start-7">
+            <h3 className={`font-mono text-label uppercase ${SOFT_TEXT} [font-variant-ligatures:none]`}>What I build</h3>
+            <ul className="mt-4 border-t border-primary-900/15">
               {service.capabilities.map((capability) => (
-                <p key={capability} className="border-b border-primary-900/15 py-4 text-body-lg text-primary-900">
+                <li key={capability} className="border-b border-primary-900/15 py-4 font-body text-body-lg text-primary-900">
                   {capability}
-                </p>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
-      </SectionShell>
+      </Section>
 
-      <SectionShell index="02" label="what it looks like" variant="ink">
-        <ServiceMedia path={service.id} height={480} />
-      </SectionShell>
-
-      <SectionShell index="03" label="how it runs" variant="cream" labelledBy="service-process-heading">
-        <h2 id="service-process-heading" className="font-display text-display-md text-primary-900">
-          Four checkpoints, phrased for this work.
-        </h2>
-        <ol className="mt-10 grid gap-px border border-primary-900/15 bg-primary-900/15 sm:grid-cols-2 lg:grid-cols-4">
-          {service.checkpoints.map((checkpoint, index) => (
-            <li key={checkpoint} className="bg-cream-300 p-5">
-              <span className="font-mono text-mono-meta text-accent-700">0{index + 1}</span>
-              <h3 className="mt-3 font-display text-body-lg font-semibold text-primary-900">{checkpoint}</h3>
+      <Section tone="leaf" labelledBy="service-process-h">
+        <Eyebrow index={index(2)}>How it runs</Eyebrow>
+        <Heading as="h2" size="md" id="service-process-h" className="mt-4">
+          Four checkpoints, start to finish.
+        </Heading>
+        <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {service.checkpoints.map((checkpoint, i) => (
+            <li key={checkpoint} className="rounded-xl bg-forest-white p-5">
+              <span aria-hidden="true" className={`font-mono text-label text-redline ${NUMERAL_CLASS}`}>
+                {index(i + 1)}
+              </span>
+              <p className="mt-3 font-body text-body-lg font-semibold leading-snug text-primary-900">{checkpoint}</p>
             </li>
           ))}
         </ol>
-      </SectionShell>
+      </Section>
 
-      {relatedProject && (
-        <SectionShell index="04" label="related work" variant="ink" className="bg-ink-800">
-          <ProjectRow project={relatedProject} />
-        </SectionShell>
-      )}
+      <RelatedWork projectId={service.relatedCaseStudy} index={index(3)} />
 
-      <SectionShell index="05" label="questions for this path" variant="cream" labelledBy="service-faq-heading">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <h2 id="service-faq-heading" className="font-display text-display-md text-primary-900 lg:col-span-4">
-            Questions owners ask about this path.
-          </h2>
-          <div className="lg:col-span-7 lg:col-start-6">
-            <FaqAccordion items={service.faq} />
+      <OfferBlock
+        id="service-offers"
+        index={index(offersIndex)}
+        eyebrow="Ways to start"
+        heading={service.offersHeading}
+        sub={service.offersSub}
+        offers={offers}
+        showCustomQuote={service.customQuote}
+        ctaPrefix={`service-${service.id}`}
+      />
+
+      <Section tone="sunlight" labelledBy="service-faq-h">
+        <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
+          <div className="min-w-0 lg:col-span-4">
+            <Eyebrow index={index(offersIndex + 1)}>Questions</Eyebrow>
+            <Heading as="h2" size="md" id="service-faq-h" className="mt-4">
+              What owners ask about {category.name.toLowerCase()}.
+            </Heading>
+            <Link href="/faq" className={`${TEXT_LINK_CLASS} mt-4`} data-cta={`service-${service.id}-faq`}>
+              All common questions
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="min-w-0 lg:col-span-8">
+            <QuestionList items={service.faq} />
           </div>
         </div>
-      </SectionShell>
 
-      <div className="border-t border-primary-900/10 bg-cream-300 py-10">
-        <div className="mx-auto max-w-[1440px] px-5 md:px-11">
-          <p className="text-eyebrow uppercase text-text-muted">Might be a closer fit</p>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+        <nav aria-labelledby="service-other-h" className="mt-12 border-t border-primary-900/15 pt-6">
+          <p id="service-other-h" className={`font-mono text-label uppercase ${SOFT_TEXT} [font-variant-ligatures:none]`}>
+            Might be a closer fit
+          </p>
+          <ul className="mt-4 grid gap-3 sm:grid-cols-2">
             {otherPaths.map((path) => (
-              <Link
-                key={path.id}
-                href={`/services/${path.id}`}
-                className="group flex items-center justify-between gap-4 border border-primary-900/15 bg-white p-5 hover:border-primary-700"
-              >
-                <span>
-                  <span className="block text-body-sm text-text-muted">{path.eyebrow}</span>
-                  <span className="mt-1 block font-display text-h4 text-primary-900">{path.title}</span>
-                </span>
-                <ArrowRight
-                  className="h-5 w-5 flex-none text-primary-700 transition-transform group-hover:translate-x-1"
-                  aria-hidden="true"
-                />
-              </Link>
+              <li key={path.id}>
+                <Link
+                  href={`/services/${path.id}`}
+                  className="group flex min-h-[64px] items-center justify-between gap-4 rounded-xl border border-primary-900/15 bg-forest-white p-4 transition-colors hover:border-primary-900 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-redline"
+                >
+                  <span className="min-w-0">
+                    <span className={`block font-mono text-label uppercase ${SOFT_TEXT} [font-variant-ligatures:none]`}>
+                      {getCategory(path.category).name}
+                    </span>
+                    <span className="mt-1 block font-body text-body-lg font-semibold text-primary-900">{path.title}</span>
+                  </span>
+                  <ArrowRight
+                    className="h-5 w-5 flex-none text-primary-900 transition-transform group-hover:translate-x-1 motion-reduce:transition-none"
+                    aria-hidden="true"
+                  />
+                </Link>
+              </li>
             ))}
-          </div>
-        </div>
-      </div>
+          </ul>
+        </nav>
+      </Section>
 
       <FooterCta />
       <Footer />

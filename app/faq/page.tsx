@@ -1,148 +1,86 @@
+// app/faq/page.tsx - Common questions on v3, answered for the current offers.
+// Every price and time comes from data/catalog.ts. The FAQPage structured data
+// is built from the same `FAQ_GROUPS` the page renders, so the two cannot
+// drift. (The homepage has no FAQPage; components/StructuredData.tsx leaves it here.)
+//
+// Tones: clearing header, then white and leaf in turn for each group, a
+// sunlight "still have a question", then the Fern FooterCta and the footer.
+
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import PageHeader from '@/components/ui/PageHeader';
-import SectionShell from '@/components/ui/SectionShell';
-import FaqAccordion, { type FaqItem } from '@/components/ui/FaqAccordion';
 import FooterCta from '@/components/ui/FooterCta';
-import { BookCallLink } from '@/components/ui/BookCallLink';
-import { INQUIRY_PATH } from '@/lib/constants';
 import { Footer } from '@/components/layout/Footer';
+import { Eyebrow, Heading, Section } from '@/components/v3';
+import PageIntro from '@/components/services/PageIntro';
+import QuestionList from '@/components/services/QuestionList';
+import { buildFaqGroups, faqSchema } from '@/components/services/faq';
+import { SOFT_TEXT, TEXT_LINK_CLASS, bookingHref } from '@/components/services/styles';
+import { BOOKING_CTA_LABEL, INQUIRY_PATH } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Common Questions',
   description:
-    'Answers on scope, timelines, pricing, ownership, and what happens after launch. Written for owners deciding whether to hire.',
+    'Straight answers on prices, timing, ownership and what happens after launch: the starter landing page, the Lead Flow Audit, Site Care and custom quotes.',
   alternates: { canonical: '/faq' },
 };
 
-const groups: { label: string; items: FaqItem[] }[] = [
-  {
-    label: 'Pricing and budget',
-    items: [
-      {
-        question: 'How do you decide what a project should include?',
-        answer:
-          'I start with the result you need and the way the work happens today. After reviewing both, I recommend a right-sized scope and send a fixed quote.',
-      },
-    ],
-  },
-  {
-    label: 'Process and timeline',
-    items: [
-      {
-        question: 'How long does a custom website take to build?',
-        answer:
-          'A focused site can launch in a few weeks. Larger websites and connected business systems take longer. The written scope names what I need from you and when.',
-      },
-      {
-        question: 'What do I need to have ready before we start?',
-        answer:
-          'Bring the business goal and anything customers see now. A website link, form, notes, logo, photographs, or old copy can help, but none are required for the first conversation.',
-      },
-    ],
-  },
-  {
-    label: 'Ownership and handover',
-    items: [
-      {
-        question: 'Who owns the finished work?',
-        answer:
-          'You own the domain, accounts, data, and finished work. I document the handoff and remove access when support ends.',
-      },
-    ],
-  },
-  {
-    label: 'Working together',
-    items: [
-      {
-        question: 'Do you work with businesses outside New Orleans?',
-        answer:
-          'Yes. Sproutflow is based in New Orleans and works with businesses nationwide. Calls, reviews, and approvals can all happen remotely.',
-      },
-      {
-        question: 'I already have a website. What else can you build?',
-        answer:
-          'Sproutflow builds the work behind the site: intake and booking flows, customer records, dashboards, content tools, reporting, and follow-up systems.',
-      },
-    ],
-  },
-  {
-    label: 'After launch',
-    items: [
-      {
-        question: 'Do you handle hosting and maintenance after launch?',
-        answer:
-          'Yes. Ongoing support can include hosting, updates, monitoring, content changes, and measured improvements. It stays optional, and you keep ownership either way.',
-      },
-    ],
-  },
-];
-
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: groups
-    .flatMap((group) => group.items)
-    .map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: { '@type': 'Answer', text: faq.answer },
-    })),
-};
-
 export default function FAQPage() {
+  const groups = buildFaqGroups();
+  const count = groups.reduce((total, group) => total + group.items.length, 0);
+
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
-      <PageHeader
-        eyebrow="Common questions"
-        title="Frequently asked questions."
-        titleAccent="asked questions"
-        intro="Open the group that matches what you are deciding. If your situation is different, send it to me in plain language."
-        count={`${String(groups.flatMap((group) => group.items).length).padStart(2, '0')} questions`}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(groups)) }} />
+      <PageIntro
+        id="faq-h"
+        eyebrow={`Common questions · ${count}`}
+        title="Straight answers, before you book."
+        italic="Straight"
+        intro="Open the group that matches what you are deciding. If your situation is different, tell me in plain language."
       />
-      {groups.map((group, index) => (
-        <SectionShell
-          key={group.label}
-          index={`0${index + 1}`}
-          label={group.label}
-          variant={index % 2 === 0 ? 'cream' : 'ink'}
+
+      {groups.map((group, i) => (
+        <Section
+          key={group.id}
+          id={group.id}
+          tone={i % 2 === 0 ? 'white' : 'leaf'}
+          rhythm="tight"
+          labelledBy={`${group.id}-h`}
         >
-          <div className="grid gap-10 lg:grid-cols-12">
-            <h2
-              className={`font-display text-display-md lg:col-span-4 ${index % 2 === 0 ? 'text-primary-900' : 'text-cream-300'}`}
-            >
-              {group.label}
-            </h2>
-            <div className="lg:col-span-7 lg:col-start-6">
-              <FaqAccordion items={group.items} variant={index % 2 === 0 ? 'cream' : 'ink'} />
+          <div className="grid gap-6 lg:grid-cols-12 lg:gap-12">
+            <div className="min-w-0 lg:col-span-4">
+              <Eyebrow index={String(i + 1).padStart(2, '0')}>{group.eyebrow}</Eyebrow>
+              <Heading as="h2" size="md" id={`${group.id}-h`} className="mt-4">
+                {group.label}
+              </Heading>
+            </div>
+            <div className="min-w-0 lg:col-span-8">
+              <QuestionList items={group.items} />
             </div>
           </div>
-        </SectionShell>
+        </Section>
       ))}
-      <div className="bg-cream-300 px-5 py-14 text-center md:px-11">
-        <h2 className="font-display text-display-md text-primary-900">Still have a question?</h2>
-        <a
-          href="mailto:ben@sproutflow-studio.com"
-          className="mt-5 inline-flex border-b border-primary-700 pb-1 font-semibold text-primary-800"
-        >
-          Email Ben directly
-        </a>
-        <span className="mx-3 text-text-muted">or</span>
-        <BookCallLink data-cta="faq" className="font-semibold text-primary-800">
-          book a 15-minute call
-        </BookCallLink>
-        <p className="mt-4 text-sm text-text-muted">
-          Prefer writing it down?{' '}
-          <Link
-            href={INQUIRY_PATH}
-            data-cta="faq-inquiry"
-            className="font-semibold text-primary-800 underline underline-offset-2"
-          >
-            Send the details
-          </Link>
+
+      <Section tone="sunlight" rhythm="tight" labelledBy="faq-more-h">
+        <Heading as="h2" size="md" id="faq-more-h">
+          Still have a question?
+        </Heading>
+        <p className={`mt-3 max-w-[60ch] font-body text-body-lg ${SOFT_TEXT}`}>
+          Ask me directly. I read every message myself and reply within one business day.
         </p>
-      </div>
+        <div className="mt-4 flex flex-col items-start gap-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
+          <Link href={bookingHref()} data-cta="faq" className={TEXT_LINK_CLASS}>
+            {BOOKING_CTA_LABEL}
+          </Link>
+          <a href="mailto:ben@sproutflow-studio.com" className={`${TEXT_LINK_CLASS} [overflow-wrap:anywhere]`}>
+            Email ben@sproutflow-studio.com
+          </a>
+          <Link href={INQUIRY_PATH} data-cta="faq-inquiry" className={TEXT_LINK_CLASS}>
+            Send the details in writing
+          </Link>
+        </div>
+      </Section>
+
       <FooterCta />
       <Footer />
     </>

@@ -18,7 +18,7 @@ const RESULT: WebsiteCheckResult = {
   host: 'bayouroofing.example',
   finalUrl: 'https://www.bayouroofing.example/',
   outcome: 'checked',
-  offer: 'website-rescue',
+  offer: 'starter',
   checks: [
     { id: 'loads', label: 'It loads', status: 'pass', line: 'Your homepage loaded in 1.4 seconds from my server.' },
     {
@@ -26,7 +26,7 @@ const RESULT: WebsiteCheckResult = {
       label: 'It is secure',
       status: 'fail',
       line: "Your site's security certificate is expired, so browsers show a warning before the page.",
-      fix: 'Website Rescue fixes this.',
+      fix: 'A starter landing page fixes this.',
     },
     { id: 'mobile', label: 'It fits a phone', status: 'pass', line: 'Your site tells phones to fit the page to the screen.' },
     {
@@ -102,7 +102,7 @@ describe('WebsiteCheck flow', () => {
 
     // Results, worst first, and the one offer.
     expect(screen.getByText("Your site's security certificate is expired, so browsers show a warning before the page.")).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Website Rescue' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Starter landing page' })).toBeInTheDocument()
     expect(screen.getByRole('status')).toHaveTextContent('Done. 1 need a fix, 1 worth a look, 4 look good.')
 
     // The report request.

@@ -1,23 +1,30 @@
 /**
  * MEDIUM PRIORITY TESTS: Offers, booking CTAs, and hero proof
  *
- * Website Rescue is a published fixed-price offer, so its price must stay
- * consistent across the tiers band and structured data. Hero stats must be
- * real client results read from published data, never typed into the
- * component. Every pricing and hero CTA must follow the booking fallback:
- * /inquiry when NEXT_PUBLIC_CAL_LINK is "off", /book otherwise.
+ * The Starter landing page is a published fixed-price offer, so its price
+ * must match between data/catalog.ts and structured data. Homepage proof
+ * (getHomeProof, which replaced the v2 hero stats) must be real client
+ * results read from published data, never typed into a component. Every
+ * pricing and hero CTA must follow the booking fallback: /inquiry when
+ * NEXT_PUBLIC_CAL_LINK is "off", /book otherwise.
  */
 
 import { render, screen } from '@testing-library/react'
-import HeroSection from '@/components/sections/HeroSection'
-import TiersSection from '@/components/sections/TiersSection'
+import HomeHero from '@/components/home/HomeHero'
+import ProofStrip from '@/components/home/ProofStrip'
+import WorkSection from '@/components/home/WorkSection'
 import StructuredData from '@/components/StructuredData'
-import { websiteRescue } from '@/data/offers'
-import { heroStats, leadingFigure } from '@/data/heroStats'
+import { getOffer } from '@/data/catalog'
+import { getHomeProof, homeWork, leadingFigure } from '@/data/home'
 import { projectProof } from '@/data/projectProof'
 import { testimonials } from '@/data/testimonials'
-import { tiers } from '@/data/tiers'
 import { BOOKING_CTA_LABEL } from '@/lib/constants'
+
+// The Lead Machine is owned by the `hero` worker and has its own tests.
+jest.mock('@/components/home/hero-machine', () => {
+  const Stub = () => <div data-testid="hero-machine" />
+  return { __esModule: true, HeroMachine: Stub, default: Stub }
+})
 
 const ORIGINAL = process.env.NEXT_PUBLIC_CAL_LINK
 
@@ -38,85 +45,11 @@ const BOOKING_CASES: Array<[string, string | undefined, string]> = [
   ['booking configured', 'sproutflow/15min', '/book'],
 ]
 
-describe('Offers - Website Rescue data', () => {
-  it('has the expected shape and fixed price', () => {
-    expect(websiteRescue.id).toBe('website-rescue')
-    expect(websiteRescue.name).toBe('Website Rescue')
-    expect(websiteRescue.price).toBe('$1,500')
-    expect(websiteRescue.priceNote).toBe('fixed, live 10 business days after your content arrives')
-    expect(websiteRescue.audience).toContain('contractors and home-service businesses')
-    expect(websiteRescue.includes).toEqual([
-      'Five pages on the domain you already own',
-      'A quote form that reaches your phone and email',
-      'Google Business Profile cleanup',
-      'Mobile-first build you own outright',
-    ])
-  })
-
-  it('contains no em dashes', () => {
-    const copy = [websiteRescue.audience, websiteRescue.name, websiteRescue.priceNote, ...websiteRescue.includes]
-    copy.forEach((text) => expect(text).not.toContain('—'))
-  })
-})
-
-describe('Offers - TiersSection', () => {
-  it('renders the Website Rescue band with its price and includes', () => {
-    setCalLink('off')
-    render(<TiersSection />)
-
-    const band = screen.getByRole('region', {
-      name: 'Website Rescue',
-    }) as HTMLElement
-    expect(band.querySelector('h3')).toHaveTextContent('Website Rescue')
-    expect(band).toHaveTextContent('$1,500')
-    expect(band).toHaveTextContent(websiteRescue.priceNote)
-    expect(band).toHaveTextContent(websiteRescue.audience)
-    const items = Array.from(band.querySelectorAll('li')).map((li) => li.textContent)
-    expect(items).toEqual(websiteRescue.includes)
-  })
-
-  it('places the band before the tier cards', () => {
-    const { container } = render(<TiersSection />)
-    const band = container.querySelector('#website-rescue')
-    const firstCard = container.querySelector('article')
-    expect(band).not.toBeNull()
-    expect(firstCard).not.toBeNull()
-    // DOCUMENT_POSITION_FOLLOWING: the card comes after the band.
-    expect(band!.compareDocumentPosition(firstCard!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
-    expect(container.querySelectorAll('article').length).toBe(tiers.length)
-  })
-
-  BOOKING_CASES.forEach(([caseLabel, calLink, href]) => {
-    it(`points the band and every tier CTA at the booking href (${caseLabel})`, () => {
-      setCalLink(calLink)
-      const { container } = render(<TiersSection />)
-
-      // The form fallback keeps the tier prefill; /book never carries a query.
-      const expected = (id: string) => (href === '/inquiry' ? `/inquiry?tier=${id}` : href)
-
-      const bandCta = container.querySelector('a[data-cta="website-rescue"]')
-      expect(bandCta).toHaveAttribute('href', expected('website-rescue'))
-
-      tiers.forEach((tier) => {
-        const cta = container.querySelector(`a[data-cta="tier-${tier.id}"]`)
-        expect(cta).not.toBeNull()
-        expect(cta).toHaveAttribute('href', expected(tier.id))
-        const label = tier.id === 'lead-flow-audit' ? 'Book the audit' : `Ask about ${tier.name}`
-        expect(cta).toHaveTextContent(label)
-      })
-
-      if (href === '/book') {
-        expect(container.querySelectorAll('a[href*="?tier="]').length).toBe(0)
-      }
-    })
-  })
-})
-
-describe('Offers - HeroSection', () => {
+describe('Offers - HomeHero', () => {
   BOOKING_CASES.forEach(([caseLabel, calLink, href]) => {
     it(`primary CTA uses the booking href (${caseLabel})`, () => {
       setCalLink(calLink)
-      render(<HeroSection />)
+      render(<HomeHero />)
 
       const cta = screen.getByText(BOOKING_CTA_LABEL).closest('a')
       expect(cta).toHaveAttribute('href', href)
@@ -124,19 +57,30 @@ describe('Offers - HeroSection', () => {
     })
   })
 
-  it('keeps client work as the secondary CTA', () => {
-    render(<HeroSection />)
-    expect(screen.getByText('See client work').closest('a')).toHaveAttribute('href', '/work')
+  it('keeps client work one click from the homepage', () => {
+    // The v3 hero's secondary CTA is the website check; client work sits in
+    // WorkSection, where each client links to its case study.
+    const { container } = render(<WorkSection />)
+    const ids = [homeWork.featuredProjectId, ...homeWork.cardIds]
+    ids.forEach((id) => {
+      const project = projectProof.find((entry) => entry.id === id)!
+      expect(container.querySelector(`a[href="${project.href}"]`)).toBeInTheDocument()
+    })
+    expect(screen.getByText('Second Line Psychiatry').closest('a')).toHaveAttribute(
+      'href',
+      '/case-studies/second-line-psychiatry',
+    )
   })
 
-  it('renders the three client result stats and none of the old filler', () => {
-    const { container } = render(<HeroSection />)
-    const values = Array.from(container.querySelectorAll('dl dd > span:first-child')).map((el) => el.textContent)
-    expect(values).toEqual(['35%', '50%', '2x'])
+  it('renders the client result figures and none of the old filler', () => {
+    const { container } = render(<ProofStrip />)
+    const values = Array.from(container.querySelectorAll('li p span.font-mono')).map((el) => el.textContent)
+    expect(values).toEqual(['50%', '30%', '35%'])
 
     expect(screen.getByText('DJN Services')).toBeInTheDocument()
     expect(screen.getAllByText('Second Line Psychiatry').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Nealy Event Decor').length).toBeGreaterThan(0)
+    // Nealy's 2x estimate is gone; its result is the owner's own words.
+    expect(container.textContent).not.toContain('2x')
 
     expect(container.textContent).not.toContain('projects shipped live')
     expect(container.textContent).not.toContain('with the founder')
@@ -145,33 +89,47 @@ describe('Offers - HeroSection', () => {
   })
 })
 
-describe('Offers - Hero stats trace back to published data', () => {
+describe('Offers - Homepage proof traces back to published data', () => {
   it('reads each figure from the matching source string', () => {
-    expect(heroStats.map((stat) => stat.value)).toEqual(['35%', '50%', '2x'])
-    heroStats.forEach((stat) => {
-      expect(stat.source.startsWith(stat.value)).toBe(true)
+    const proof = getHomeProof()
+    expect(proof.map((item) => item.figure)).toEqual(['50%', '30%', null, '35%'])
+    proof.forEach((item) => {
+      if (item.figure) {
+        expect(item.result.startsWith(item.figure)).toBe(true)
+        expect(`${item.figure} ${item.rest}`).toBe(item.result)
+      } else {
+        expect(item.rest).toBe(item.result)
+      }
     })
   })
 
   it('uses the DJN testimonial metric', () => {
     const djn = testimonials.find((entry) => entry.id === 'djn-services')
     expect(djn?.metric).toBe('35% increase in total bookings')
-    expect(heroStats[0].value).toBe('35%')
-    expect(heroStats[0].note).toBe('DJN Services')
-    expect(heroStats[0].source).toBe(djn?.metric)
+    const item = getHomeProof().find((entry) => entry.project.id === 'djn-services')!
+    expect(item.figure).toBe('35%')
+    expect(item.project.name).toBe('DJN Services')
+    expect(item.result).toBe(djn?.metric)
   })
 
   it('uses the Second Line Psychiatry and Nealy project results', () => {
     const slp = projectProof.find((entry) => entry.id === 'second-line-psychiatry')
     const nealy = projectProof.find((entry) => entry.id === 'nealy-events')
     expect(slp?.result).toBe('50% more qualified inquiries')
-    expect(nealy?.result).toBe('2x consultation requests')
-    expect(heroStats[1].value).toBe('50%')
-    expect(heroStats[1].note).toBe('Second Line Psychiatry')
-    expect(heroStats[1].source).toBe(slp?.result)
-    expect(heroStats[2].value).toBe('2x')
-    expect(heroStats[2].note).toBe('Nealy Event Decor')
-    expect(heroStats[2].source).toBe(nealy?.result)
+    expect(nealy?.result).toBe('Fully booked for next month')
+    const proof = getHomeProof()
+    const slpItem = proof.find((entry) => entry.project.id === 'second-line-psychiatry')!
+    expect(slpItem.figure).toBe('50%')
+    expect(slpItem.project.name).toBe('Second Line Psychiatry')
+    expect(slpItem.result).toBe(slp?.result)
+    // Nealy's result has no leading figure now (the 2x estimate is gone), so none is invented.
+    const nealyItem = proof.find((entry) => entry.project.id === 'nealy-events')!
+    expect(nealyItem.result).toBe(nealy?.result)
+    expect(nealyItem.figure).toBeNull()
+  })
+
+  it('drops an item whose published source is missing', () => {
+    expect(getHomeProof([{ projectId: 'no-such-project', from: 'projectResult' }])).toEqual([])
   })
 
   it('only reads a leading figure, never invents one', () => {
@@ -183,18 +141,19 @@ describe('Offers - Hero stats trace back to published data', () => {
 })
 
 describe('Offers - Structured data', () => {
-  it('lists Website Rescue in the offer catalog with a USD price of 1500', () => {
+  it('lists the Starter landing page in the offer catalog with a USD price of 500', () => {
     const { container } = render(<StructuredData />)
     const scripts = Array.from(container.querySelectorAll('script[type="application/ld+json"]'))
     const org = scripts.map((script) => JSON.parse(script.textContent || '{}')).find((schema) => schema.hasOfferCatalog)
 
+    const starter = getOffer('starter')!
     const offer = org.hasOfferCatalog.itemListElement.find(
-      (item: { itemOffered?: { name?: string } }) => item.itemOffered?.name === 'Website Rescue',
+      (item: { itemOffered?: { name?: string } }) => item.itemOffered?.name === starter.name,
     )
     expect(offer).toBeDefined()
     expect(offer['@type']).toBe('Offer')
-    expect(offer.price).toBe('1500')
-    expect(Number(offer.price)).toBe(1500)
+    expect(offer.price).toBe('500')
+    expect(Number(offer.price)).toBe(starter.prices[0].amount)
     expect(offer.priceCurrency).toBe('USD')
     expect(offer.itemOffered['@type']).toBe('Service')
     expect(offer.itemOffered.description).not.toContain('—')
