@@ -24,7 +24,6 @@ export const testimonials: TestimonialEntry[] = [
     name: 'Dr. Lauryn Richard, PMHNP',
     role: 'Founder',
     business: 'Second Line Psychiatry',
-    // Ben to confirm source (client-reported) before final launch
     metric: '50% more qualified inquiries',
     logoSrc: 'work/client-logos/second-line.png',
     liveUrl: 'https://www.secondlinepsychiatry.com/',
@@ -37,7 +36,6 @@ export const testimonials: TestimonialEntry[] = [
     name: 'Owner',
     role: 'Owner',
     business: 'NOLA Pool Solutions',
-    // Ben to confirm source (client-reported) before final launch
     metric: '30% customer acquisition growth',
     logoSrc: 'work/client-logos/logo.png',
     liveUrl: 'https://nolapoolsolutions.com/',

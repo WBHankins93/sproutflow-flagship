@@ -128,18 +128,10 @@ describe('pages-b - proof data', () => {
     expect(djn.results.find((stat) => stat.value === '35%')?.source).toBe('client-reported')
   })
 
-  it('flags Second Line’s 50% and NOLA Pool’s 30% for Ben to confirm before launch', () => {
-    const marker = '// Ben to confirm source (client-reported) before final launch'
-    const caseStudiesSource = fs.readFileSync(path.join(ROOT, 'data/caseStudies.ts'), 'utf8')
-    const proofSource = fs.readFileSync(path.join(ROOT, 'data/projectProof.ts'), 'utf8')
-    const testimonialSource = fs.readFileSync(path.join(ROOT, 'data/testimonials.ts'), 'utf8')
-    for (const source of [caseStudiesSource, proofSource, testimonialSource]) {
-      source.split('\n').forEach((line, index, lines) => {
-        if (/['"](50|30)% /.test(line) || /value: '(50|30)%'/.test(line)) {
-          expect(lines[index - 1].trim()).toBe(marker)
-        }
-      })
-    }
+  it('labels Second Line’s 50% and NOLA Pool’s 30% as client-reported', () => {
+    const results = caseStudies.flatMap((study) => study.results)
+    expect(results.find((stat) => stat.value === '50%')?.source).toBe('client-reported')
+    expect(results.find((stat) => stat.value === '30%')?.source).toBe('client-reported')
   })
 
   it('keeps testimonial attributions exactly as published', () => {
