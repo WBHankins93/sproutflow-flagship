@@ -73,14 +73,12 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'second-line-psychiatry',
     clientName: 'Second Line Psychiatry',
-    // Ben to confirm source (client-reported) before final launch
     headline: '50% more qualified inquiries for a New Orleans telehealth practice',
     headlineSource: 'client-reported',
     summary:
       'Second Line Psychiatry is a telehealth psychiatry practice serving families in New Orleans. The practice had no current website and new patients arrived through referrals alone. I designed and built a trauma-informed, privacy-first website with booking connected to the practice’s Google Business profile. After launch, the practice reported 50% more qualified patient inquiries.',
     heroImage: 'work/client-logos/second-line-project.png',
     heroStats: [
-      // Ben to confirm source (client-reported) before final launch
       { value: '50%', label: 'More qualified inquiries', source: 'client-reported' },
       { value: 'Privacy-first', label: 'Design built for sensitive care decisions', source: 'delivered' },
       { value: 'New Orleans', label: 'Rooted in local culture', source: 'delivered' },
@@ -95,7 +93,6 @@ export const caseStudies: CaseStudy[] = [
       'A visual identity inspired by New Orleans second line traditions',
     ],
     results: [
-      // Ben to confirm source (client-reported) before final launch
       { value: '50%', label: 'Increase in qualified patient inquiries', source: 'client-reported' },
       { value: 'Connected', label: 'Booking available from the Google Business profile', source: 'delivered' },
       { value: 'Live', label: 'Serving families across the New Orleans area', source: 'delivered' },
@@ -112,7 +109,6 @@ export const caseStudies: CaseStudy[] = [
     cardBlurb:
       'A trauma-informed telehealth presence that helps families trust the practice before the first call. The practice reported 50% more qualified inquiries after launch.',
     cardStats: [
-      // Ben to confirm source (client-reported) before final launch
       { value: '50%', label: 'More qualified inquiries', source: 'client-reported' },
       { value: '4 wks', label: 'Delivery', source: 'delivered' },
     ],
@@ -123,14 +119,12 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'nola-pool-solutions',
     clientName: 'NOLA Pool Solutions',
-    // Ben to confirm source (client-reported) before final launch
     headline: '30% customer acquisition growth, starting from no website at all',
     headlineSource: 'client-reported',
     summary:
       'NOLA Pool Solutions is a pool maintenance and renovation company serving the New Orleans metro area. The business ran entirely on word of mouth with no website. I built a lead capture site that establishes credibility, helps prospects choose the right service, and collects the details needed for a quote. The site went live in three weeks, and the owner reported 30% growth in customer acquisition.',
     heroImage: 'work/client-logos/nps-project.png',
     heroStats: [
-      // Ben to confirm source (client-reported) before final launch
       { value: '30%', label: 'Customer acquisition growth', source: 'client-reported' },
       { value: '3 weeks', label: 'From nothing to live', source: 'delivered' },
       { value: 'One path', label: 'Service details flow into a quote request', source: 'delivered' },
@@ -145,7 +139,6 @@ export const caseStudies: CaseStudy[] = [
       'Automated email notifications when a quote request is submitted',
     ],
     results: [
-      // Ben to confirm source (client-reported) before final launch
       { value: '30%', label: 'Growth in customer acquisition', source: 'client-reported' },
       { value: '3 weeks', label: 'From no website to a live customer path', source: 'delivered' },
       { value: 'Direct', label: 'Quote details now arrive through one intake flow', source: 'delivered' },
@@ -162,7 +155,6 @@ export const caseStudies: CaseStudy[] = [
     cardBlurb:
       'From no web presence to a live site in three weeks, with an intake flow that collects quote details before the first call. The owner reported 30% customer acquisition growth.',
     cardStats: [
-      // Ben to confirm source (client-reported) before final launch
       { value: '30%', label: 'Acquisition growth', source: 'client-reported' },
       { value: '3 wks', label: 'Delivery', source: 'delivered' },
     ],

@@ -36,7 +36,6 @@ export const projectProof: ProjectProof[] = [
     id: 'second-line-psychiatry',
     name: 'Second Line Psychiatry',
     location: 'New Orleans, Louisiana',
-    // Ben to confirm source (client-reported) before final launch
     result: '50% more qualified inquiries',
     resultSource: 'client-reported',
     screenshot: 'work/client-logos/second-line-project.png',
@@ -58,7 +57,6 @@ export const projectProof: ProjectProof[] = [
     id: 'nola-pool-solutions',
     name: 'NOLA Pool Solutions',
     location: 'New Orleans metro',
-    // Ben to confirm source (client-reported) before final launch
     result: '30% customer acquisition growth',
     resultSource: 'client-reported',
     screenshot: 'work/client-logos/nps-project.png',
