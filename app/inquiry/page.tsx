@@ -3,7 +3,7 @@ import { FileSearch, MessageSquareText, ReceiptText } from 'lucide-react';
 import { InquiryForm } from '@/components/inquiry/InquiryForm';
 import { Footer } from '@/components/layout/Footer';
 import { BookCallLink } from '@/components/ui/BookCallLink';
-import { customQuote, formatShortPrice, getOffer, toOfferKey, type OfferKey } from '@/data/catalog';
+import { customQuote, formatShortPrice, getOffer, toLookName, toOfferKey, type OfferKey } from '@/data/catalog';
 import { BOOKING_CTA_LABEL, isBookingConfigured } from '@/lib/constants';
 import { toProjectType } from '@/types/inquiry';
 import { Eyebrow, Heading, MarginNote, Section } from '@/components/v3';
@@ -25,8 +25,11 @@ const steps = [
   },
 ];
 
-/** What the visitor asked about, from data/catalog.ts: the name and price, or the custom quote. */
-function offerContext(key: OfferKey): { line: string; submitted: string } {
+/**
+ * What the visitor asked about, from data/catalog.ts: the name and price, or the custom quote.
+ * `look` is a display name already checked by toLookName; only the Starter offer has looks.
+ */
+function offerContext(key: OfferKey, look?: string): { line: string; submitted: string } {
   if (key === 'custom') {
     return {
       line: `${customQuote.heading} Describe it below in your own words, and I’ll come back with options.`,
@@ -35,20 +38,29 @@ function offerContext(key: OfferKey): { line: string; submitted: string } {
   }
   const offer = getOffer(key)!;
   const price = formatShortPrice(offer);
-  return { line: `${offer.name}, ${price}. ${offer.priceNote ?? offer.line}`, submitted: `${offer.name} (${price})` };
+  const lookName = key === 'starter' ? look : undefined;
+  return {
+    line: `${offer.name}, ${lookName ? `${lookName} look, ` : ''}${price}. ${offer.priceNote ?? offer.line}`,
+    submitted: `${offer.name} (${price})${lookName ? `, ${lookName} look` : ''}`,
+  };
 }
 
-type Props = { searchParams: Promise<{ path?: string; offer?: string | string[]; tier?: string | string[] }> };
+type Props = {
+  searchParams: Promise<{ path?: string; offer?: string | string[]; tier?: string | string[]; look?: string | string[] }>;
+};
 
 /**
  * `offer=starter|audit|care|custom` names the offer. Old `tier=` links still
  * work: website-rescue is the starter page, lead-capture-system and anything
  * unknown are a custom quote (data/catalog.ts LEGACY_OFFER_KEYS).
+ * `look=workbench|front-door|practice|studio` is the Starter look chosen on
+ * /starter; it is used only for the starter offer and only when it is one of
+ * those four (toLookName).
  */
 export default async function InquiryPage({ searchParams }: Props) {
-  const { path, offer, tier } = await searchParams;
+  const { path, offer, tier, look } = await searchParams;
   const offerKey = toOfferKey(offer) ?? toOfferKey(tier);
-  const context = offerKey ? offerContext(offerKey) : null;
+  const context = offerKey ? offerContext(offerKey, toLookName(look)) : null;
   // Project type prefill (types/inquiry.ts): the service path first, then the offer. A custom quote is prefilled too.
   const initialProjectType = toProjectType(path) || (offerKey ? toProjectType(offerKey) : '');
   return (

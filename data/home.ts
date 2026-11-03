@@ -116,6 +116,8 @@ export const homeOffers = {
   /** Accessible name for the three fixed-price cards. */
   fixedLabel: 'Fixed-price offers',
   cta: 'Book a call',
+  /** The Starter card's button: it opens /starter instead of booking a call. */
+  starterCta: 'See the four looks',
   included: 'What’s included',
   /** Label over the custom quote's three steps. */
   howItWorks: 'How it works',

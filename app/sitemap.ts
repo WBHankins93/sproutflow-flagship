@@ -3,7 +3,7 @@ import { caseStudies } from '@/data/caseStudies';
 import { listedProjectProof } from '@/data/projectProof';
 import { servicePaths } from '@/data/servicePaths';
 import { getPublishedResources } from '@/data/resources';
-import { BOOKING_PATH, isBookingConfigured } from '@/lib/constants';
+import { BOOKING_PATH, STARTER_PATH, isBookingConfigured } from '@/lib/constants';
 import { SITE_URL } from '@/lib/site';
 
 const siteUrl = SITE_URL;
@@ -91,6 +91,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
           },
         ]
       : []),
+    // Served from a separate deployment through a rewrite (next.config.js);
+    // the sample pages under /starter/ stay out.
+    {
+      url: `${siteUrl}${STARTER_PATH}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
     {
       url: `${siteUrl}/check`,
       lastModified: new Date(),

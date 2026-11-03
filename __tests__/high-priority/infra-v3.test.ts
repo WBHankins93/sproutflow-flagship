@@ -120,6 +120,7 @@ describe('sitemap', () => {
       '/check',
       '/book',
       '/inquiry',
+      '/starter',
     ]
     expected.forEach((path) => expect(list).toContain(`${WWW}${path}`))
   })
@@ -131,6 +132,12 @@ describe('sitemap', () => {
       (path) => expect(list).not.toContain(`${WWW}${path}`),
     )
     expect(new Set(list).size).toBe(list.length)
+  })
+
+  it('lists /starter but not the sample pages under it', () => {
+    const list = urls()
+    expect(list).toContain(`${WWW}/starter`)
+    expect(list.filter((url) => url.startsWith(`${WWW}/starter/`))).toEqual([])
   })
 })
 
@@ -144,6 +151,16 @@ describe('robots.txt', () => {
     // Only non-page paths are disallowed.
     expect(rules[0].disallow).toEqual(['/api/', '/admin/'])
     expect(config.sitemap).toBe(`${WWW}/sitemap.xml`)
+  })
+})
+
+describe('rewrites', () => {
+  it('serves /starter and everything under it from the looks site', async () => {
+    const rewrites = await require('../../next.config.js').rewrites()
+    expect(rewrites).toEqual([
+      { source: '/starter', destination: 'https://sproutflow-looks.vercel.app/starter' },
+      { source: '/starter/:path*', destination: 'https://sproutflow-looks.vercel.app/starter/:path*' },
+    ])
   })
 })
 

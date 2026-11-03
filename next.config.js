@@ -5,8 +5,18 @@ function isBookingOff(value) {
   return trimmed === '' || trimmed === 'off';
 }
 
+// The Starter page and its sample pages are a separate Vercel project (the
+// "looks" site). The main site serves them at /starter by proxying to it.
+const LOOKS_ORIGIN = 'https://sproutflow-looks.vercel.app';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async rewrites() {
+    return [
+      { source: '/starter', destination: `${LOOKS_ORIGIN}/starter` },
+      { source: '/starter/:path*', destination: `${LOOKS_ORIGIN}/starter/:path*` },
+    ];
+  },
   async redirects() {
     // /how-we-work is a real page in v3, so it is not redirected.
     return [
