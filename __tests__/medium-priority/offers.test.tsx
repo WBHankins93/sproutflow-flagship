@@ -6,7 +6,8 @@
  * (getHomeProof, which replaced the v2 hero stats) must be real client
  * results read from published data, never typed into a component. Every
  * pricing and hero CTA must follow the booking fallback: /inquiry when
- * NEXT_PUBLIC_CAL_LINK is "off", /book otherwise.
+ * NEXT_PUBLIC_CAL_LINK is "off", /book otherwise. The one exception is the
+ * Starter card, which shows the four looks at /starter.
  */
 
 import { render, screen } from '@testing-library/react'
@@ -14,7 +15,8 @@ import HomeHero from '@/components/home/HomeHero'
 import ProofStrip from '@/components/home/ProofStrip'
 import WorkSection from '@/components/home/WorkSection'
 import StructuredData from '@/components/StructuredData'
-import { getOffer } from '@/data/catalog'
+import OfferMenu from '@/components/home/OfferMenu'
+import { fixedOffers, getOffer } from '@/data/catalog'
 import { getHomeProof, homeWork, leadingFigure } from '@/data/home'
 import { projectProof } from '@/data/projectProof'
 import { testimonials } from '@/data/testimonials'
@@ -86,6 +88,37 @@ describe('Offers - HomeHero', () => {
     expect(container.textContent).not.toContain('with the founder')
     expect(container.textContent).not.toContain('quote before work')
     expect(container.textContent).not.toContain('100%')
+  })
+})
+
+describe('Offers - OfferMenu CTAs', () => {
+  const squash = (text: string | null | undefined) => (text ?? '').replace(/\s+/g, ' ').trim()
+
+  BOOKING_CASES.forEach(([caseLabel, calLink, href]) => {
+    it(`the Starter button links to /starter, whatever the booking setting (${caseLabel})`, () => {
+      setCalLink(calLink)
+      const { container } = render(<OfferMenu />)
+      const starter = getOffer('starter')!
+      const cta = container.querySelector(`a[data-cta="offer-${starter.id}"]`)!
+      expect(cta).toHaveAttribute('href', '/starter')
+      expect(cta.textContent).toContain('See the four looks')
+      // Keeps the accessible context the other cards have.
+      expect(squash(cta.textContent)).toBe(`See the four looks about ${starter.name}`)
+      expect(cta.querySelector('.sr-only')).toHaveTextContent(`about ${starter.name}`)
+    })
+
+    it(`other offers still follow the booking fallback (${caseLabel})`, () => {
+      setCalLink(calLink)
+      const { container } = render(<OfferMenu />)
+      const others = fixedOffers.filter((offer) => offer.key !== 'starter')
+      expect(others.map((offer) => offer.key)).toEqual(['audit', 'care'])
+      others.forEach((offer) => {
+        const expected = href === '/inquiry' ? `/inquiry?offer=${offer.key}` : '/book'
+        const cta = container.querySelector(`a[data-cta="offer-${offer.id}"]`)!
+        expect(cta).toHaveAttribute('href', expected)
+        expect(squash(cta.textContent)).toBe(`Book a call about ${offer.name}`)
+      })
+    })
   })
 })
 

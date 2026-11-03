@@ -11,7 +11,7 @@ import {
   type OfferKey,
 } from '@/data/catalog';
 import { homeOffers } from '@/data/home';
-import { INQUIRY_PATH, getBookingHref } from '@/lib/constants';
+import { INQUIRY_PATH, STARTER_PATH, getBookingHref } from '@/lib/constants';
 import { NUMERAL_CLASS } from './styles';
 
 // Pine section (Sunlit forest, 29 Oct): cream text, prices in Fira Code Sun
@@ -78,6 +78,19 @@ function OfferCard({ offer }: { offer: CatalogOffer }) {
     </ul>
   );
 
+  // Starter is the one card that does not book a call: it shows the four looks
+  // at /starter. A plain <a>, not <Link>: that page is another deployment
+  // behind a rewrite (next.config.js), so there is nothing to prefetch or route to client-side.
+  const isStarter = offer.key === 'starter';
+  const ctaClass = `${LINK_CLASS} relative z-10 col-start-1 row-start-1 justify-self-start`;
+  const ctaContent = (
+    <>
+      {isStarter ? homeOffers.starterCta : homeOffers.cta}
+      <span className="sr-only"> about {offer.name}</span>
+      <ArrowRight className="h-4 w-4" aria-hidden="true" />
+    </>
+  );
+
   return (
     <article
       id={offer.id}
@@ -95,15 +108,15 @@ function OfferCard({ offer }: { offer: CatalogOffer }) {
       <p className="mt-1 font-body text-body-sm text-cream-300 md:mt-2">{offer.line}</p>
       <div className="mt-3 hidden md:block">{list}</div>
       <div className="mt-auto grid pt-1 md:pt-3">
-        <Link
-          href={offerBookingHref(offer.key)}
-          data-cta={`offer-${offer.id}`}
-          className={`${LINK_CLASS} relative z-10 col-start-1 row-start-1 justify-self-start`}
-        >
-          {homeOffers.cta}
-          <span className="sr-only"> about {offer.name}</span>
-          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
+        {isStarter ? (
+          <a href={STARTER_PATH} data-cta={`offer-${offer.id}`} className={ctaClass}>
+            {ctaContent}
+          </a>
+        ) : (
+          <Link href={offerBookingHref(offer.key)} data-cta={`offer-${offer.id}`} className={ctaClass}>
+            {ctaContent}
+          </Link>
+        )}
         <details className="group col-start-1 row-start-1 md:hidden">
           <summary
             className={`ml-auto flex min-h-[44px] w-max cursor-pointer list-none items-center gap-1 font-body text-body-sm font-semibold text-cream-300 ${FOCUS} [&::-webkit-details-marker]:hidden`}

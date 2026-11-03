@@ -153,9 +153,15 @@ describe('Homepage - booking CTAs', () => {
       expect(container.querySelector('a[data-cta="book"]')).toHaveAttribute('href', base)
 
       fixedOffers.forEach((offer) => {
-        const expected = base === '/inquiry' ? `/inquiry?offer=${offer.key}` : '/book'
         const cta = container.querySelector(`a[data-cta="offer-${offer.id}"]`)
         expect(cta).not.toBeNull()
+        if (offer.key === 'starter') {
+          // The Starter card shows the four looks instead of booking (offers.test.tsx).
+          expect(cta).toHaveAttribute('href', '/starter')
+          expect(squash(cta!.textContent)).toBe(`See the four looks about ${offer.name}`)
+          return
+        }
+        const expected = base === '/inquiry' ? `/inquiry?offer=${offer.key}` : '/book'
         expect(cta).toHaveAttribute('href', expected)
         expect(squash(cta!.textContent)).toBe(`Book a call about ${offer.name}`)
       })

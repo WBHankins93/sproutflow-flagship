@@ -233,6 +233,24 @@ export function getOffer(idOrKey: string): CatalogOffer | undefined {
   return fixedOffers.find((offer) => offer.id === idOrKey || offer.key === idOrKey);
 }
 
+/** The four Starter looks a visitor can choose on /starter. `slug` is the `/inquiry?look=` value. */
+export const STARTER_LOOKS: readonly { slug: string; name: string }[] = [
+  { slug: 'workbench', name: 'Workbench' },
+  { slug: 'front-door', name: 'Front Door' },
+  { slug: 'practice', name: 'Practice' },
+  { slug: 'studio', name: 'Studio' },
+];
+
+/**
+ * Reads a `look=` value: the display name for one of the four slugs, else
+ * undefined. The value comes from the URL, so it reaches the page only when it
+ * matches a slug exactly. An array (a repeated `look=`) or anything else is dropped.
+ */
+export function toLookName(value: string | string[] | undefined): string | undefined {
+  if (typeof value !== 'string') return undefined;
+  return STARTER_LOOKS.find((look) => look.slug === value)?.name;
+}
+
 /**
  * Offer ids from before the 29 Oct restructure, mapped to the new keys, so old
  * links (`/inquiry?tier=website-rescue`) and old check results keep working.
