@@ -12,6 +12,9 @@ export const BOOKING_PATH = '/book';
 /** Route that hosts the written inquiry form. Always available. */
 export const INQUIRY_PATH = '/inquiry';
 
+/** The Starter page. Served from a separate deployment through a rewrite in next.config.js. */
+export const STARTER_PATH = '/starter';
+
 /** Full label for primary booking CTAs. */
 export const BOOKING_CTA_LABEL = 'Book a 15-minute call';
 
