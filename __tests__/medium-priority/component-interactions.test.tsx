@@ -120,10 +120,18 @@ describe('Component Interactions - Hero proof', () => {
 })
 
 describe('Component Interactions - FAQ', () => {
-  it('should not publish price markers in visible copy or schema', () => {
+  it('should publish current offer prices with matching FAQ schema and no retired prices', () => {
     const { container } = render(<FAQPage />)
 
-    expect(container.textContent).not.toContain('$')
+    expect(screen.getByRole('button', { name: 'Is every website $1,500?' })).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'What do I receive from a Lead Flow Audit?' }))
+    expect(screen.getByText(/For \$500, you receive a map/)).toBeInTheDocument()
+    const schema = JSON.parse(container.querySelector('script[type="application/ld+json"]')?.textContent || '{}')
+    schema.mainEntity.forEach((entry: { name: string; acceptedAnswer: { text: string } }) => {
+      const question = screen.getByRole('button', { name: entry.name })
+      if (question.getAttribute('aria-expanded') !== 'true') fireEvent.click(question)
+      expect(question.parentElement).toHaveTextContent(entry.acceptedAnswer.text)
+    })
     expect(container.innerHTML).not.toContain('$850')
     expect(container.innerHTML).not.toContain('$200')
   })

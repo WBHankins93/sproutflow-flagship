@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { bookingContextQuery } from '@/lib/booking-context';
 import { FileSearch, MessageSquareText, ReceiptText } from 'lucide-react';
 import { InquiryForm } from '@/components/inquiry/InquiryForm';
 import { Footer } from '@/components/layout/Footer';
@@ -33,10 +34,13 @@ const steps = [
   },
 ];
 
-type Props = { searchParams: Promise<{ path?: string; tier?: string }> };
+type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 
 export default async function InquiryPage({ searchParams }: Props) {
-  const { path, tier } = await searchParams;
+  const contextQuery = bookingContextQuery(await searchParams);
+  const context = new URLSearchParams(contextQuery);
+  const path = context.get('path');
+  const tier = context.get('tier');
   const initialProjectType = (path && pathMap[path]) || (tier && tierMap[tier]) || '';
   return (
     <>
@@ -46,7 +50,7 @@ export default async function InquiryPage({ searchParams }: Props) {
             <p className="text-eyebrow uppercase text-accent-700">Start with what you know</p>
             <h1 className="mt-5 font-display text-display-lg text-primary-900">Tell me what needs to work better.</h1>
             <p className="mt-5 text-body-lg text-text-secondary">
-              You can stop after the first checkpoint. A polished brief is not required.
+              Three short steps. Only your name and email are required; you can skip the other questions.
             </p>
             <ol className="mt-10 border-t border-primary-900/20">
               {steps.map(({ icon: Icon, title, body }, index) => (
@@ -64,12 +68,13 @@ export default async function InquiryPage({ searchParams }: Props) {
                 </li>
               ))}
             </ol>
-            <p className="mt-6 text-sm text-text-muted">I reply within one business day.</p>
+            <p className="mt-6 text-sm text-text-secondary">I reply within one business day.</p>
             {isBookingConfigured() && (
               <p className="mt-4 text-sm text-text-secondary" data-testid="inquiry-booking-line">
                 Rather talk it through?{' '}
                 <BookCallLink
                   data-cta="inquiry-aside"
+                  inquiryQuery={contextQuery}
                   className="font-semibold text-primary-800 underline underline-offset-2"
                 >
                   {BOOKING_CTA_LABEL}

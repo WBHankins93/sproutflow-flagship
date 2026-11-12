@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { servicePaths } from '@/data/servicePaths';
-import Pill from '@/components/ui/Pill';
 import AccentPhrase from '@/components/ui/AccentPhrase';
 import ServiceMedia from './ServiceMedia';
 
@@ -21,18 +20,19 @@ export default function ServicesGrid() {
           <ServiceMedia path={path.id} height={200} className="rounded-none" />
           <div className="flex flex-1 flex-col p-6">
             <span className="font-mono text-mono-meta text-accent-300">0{index + 1}</span>
-            <p className="mt-3 text-eyebrow uppercase text-white/55">{path.eyebrow}</p>
+            <p className="mt-3 text-eyebrow uppercase text-white/75">{path.eyebrow}</p>
             <h3 className="mt-2 font-display text-display-sm text-cream-300">
               <AccentPhrase accent={path.titleAccent}>{path.title}</AccentPhrase>
             </h3>
-            <p className="mt-4 text-body-lg text-white/[0.68]">{path.outcome}</p>
-            <div className="mt-5 flex flex-wrap gap-2">
+            <p className="mt-4 text-body-lg text-white/80">{path.outcome}</p>
+            <ul className="mt-5 space-y-2 text-sm leading-6 text-white/[0.85]">
               {path.capabilities.map((capability) => (
-                <Pill key={capability} variant="ink">
+                <li key={capability} className="flex items-start gap-3">
+                  <span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-accent-300" aria-hidden="true" />
                   {capability}
-                </Pill>
+                </li>
               ))}
-            </div>
+            </ul>
             <Link
               href={`/services/${path.id}`}
               className="group mt-auto inline-flex min-h-11 items-center gap-2 border-b border-accent-400 pb-1 pt-6 font-semibold text-white"

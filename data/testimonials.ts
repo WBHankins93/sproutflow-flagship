@@ -5,7 +5,9 @@ export interface TestimonialEntry {
   name: string;
   role: string;
   business: string;
+  /** Only publish figures explicitly present in the client quote, attributed as client-reported. */
   metric?: string;
+  context?: string;
   logoSrc?: string;
   liveUrl?: string;
 }
@@ -19,7 +21,6 @@ export const testimonials: TestimonialEntry[] = [
     name: 'Dr. Lauryn Richard, PMHNP',
     role: 'Founder',
     business: 'Second Line Psychiatry',
-    metric: '50% more qualified inquiries',
     logoSrc: 'work/client-logos/second-line.png',
     liveUrl: 'https://www.secondlinepsychiatry.com/',
   },
@@ -31,7 +32,6 @@ export const testimonials: TestimonialEntry[] = [
     name: 'Owner',
     role: 'Owner',
     business: 'NOLA Pool Solutions',
-    metric: '30% customer acquisition growth',
     logoSrc: 'work/client-logos/logo.png',
     liveUrl: 'https://nolapoolsolutions.com/',
   },
@@ -54,7 +54,8 @@ export const testimonials: TestimonialEntry[] = [
     name: 'Owner',
     role: 'Owner',
     business: 'DJN Services LLC',
-    metric: '35% increase in total bookings',
+    metric: 'Client-reported: 35% increase in total bookings',
+    context: 'Booking growth is reported by the client in this testimonial; the measurement period and methodology have not been published.',
     logoSrc: 'work/client-logos/djn-logo.webp',
     liveUrl: 'https://djnservicesllc.com/',
   },

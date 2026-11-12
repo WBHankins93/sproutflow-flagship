@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react';
 import PageHeader from '@/components/ui/PageHeader';
 import SectionShell from '@/components/ui/SectionShell';
 import ServiceMedia from '@/components/services/ServiceMedia';
+import ServiceOfferDetails from '@/components/services/ServiceOfferDetails';
 import ProjectRow from '@/components/ui/ProjectRow';
 import FaqAccordion from '@/components/ui/FaqAccordion';
 import FooterCta from '@/components/ui/FooterCta';
@@ -103,7 +104,7 @@ export default async function ServicePathPage({ params }: Props) {
             </ul>
           </div>
           <div className="lg:col-span-6 lg:col-start-7">
-            <p className="text-eyebrow uppercase text-text-muted">What is included</p>
+            <p className="text-eyebrow uppercase text-text-muted">Capabilities we can scope</p>
             <div className="mt-5 grid border-t border-primary-900/15">
               {service.capabilities.map((capability) => (
                 <p key={capability} className="border-b border-primary-900/15 py-4 text-body-lg text-primary-900">
@@ -115,13 +116,15 @@ export default async function ServicePathPage({ params }: Props) {
         </div>
       </SectionShell>
 
+      <ServiceOfferDetails path={service.id} />
+
       <SectionShell index="02" label="what it looks like" variant="ink">
         <ServiceMedia path={service.id} height={480} />
       </SectionShell>
 
       <SectionShell index="03" label="how it runs" variant="cream" labelledBy="service-process-heading">
         <h2 id="service-process-heading" className="font-display text-display-md text-primary-900">
-          Four checkpoints, phrased for this work.
+          From scope to a working handoff.
         </h2>
         <ol className="mt-10 grid gap-px border border-primary-900/15 bg-primary-900/15 sm:grid-cols-2 lg:grid-cols-4">
           {service.checkpoints.map((checkpoint, index) => (

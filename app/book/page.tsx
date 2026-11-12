@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { bookingContextQuery, bookingContextLabel, withBookingContext } from '@/lib/booking-context';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { CalEmbed } from '@/components/booking/CalEmbed';
@@ -18,10 +19,15 @@ const covers = [
   'A straight answer on price and timing.',
 ];
 
-export default function BookPage() {
+type Props = { searchParams?: Promise<Record<string, string | string[] | undefined>> };
+
+export default async function BookPage({ searchParams }: Props) {
+  const contextQuery = bookingContextQuery((await searchParams) ?? {});
+  const selectedService = bookingContextLabel(contextQuery);
+  const inquiryHref = withBookingContext(INQUIRY_PATH, contextQuery);
   const calLink = getCalLink();
   if (!calLink) {
-    redirect(INQUIRY_PATH);
+    redirect(inquiryHref);
   }
 
   return (
@@ -30,7 +36,7 @@ export default function BookPage() {
         <div className="mx-auto grid max-w-[1186px] gap-12 px-5 md:px-11 lg:grid-cols-12">
           <aside className="lg:col-span-4">
             <p className="text-eyebrow uppercase text-accent-700">15 minutes with Ben</p>
-            <h1 className="mt-5 font-display text-display-lg text-primary-900">Pick a time that works.</h1>
+            <h1 className="mt-5 font-display text-display-lg text-primary-900">{selectedService ? `Let’s discuss ${selectedService}.` : 'Pick a time that works.'}</h1>
             <p className="mt-5 text-body-lg text-text-secondary">
               A short call with me, no prep required. Here is what we will cover.
             </p>
@@ -46,7 +52,7 @@ export default function BookPage() {
               <p className="font-semibold text-primary-900">Prefer to write it out?</p>
               <p className="mt-1 text-sm text-text-secondary">
                 <Link
-                  href={INQUIRY_PATH}
+                  href={inquiryHref}
                   data-cta="book-inquiry"
                   className="font-semibold text-primary-900 underline underline-offset-4"
                 >

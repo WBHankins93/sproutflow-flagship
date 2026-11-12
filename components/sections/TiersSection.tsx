@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { getTestimonialForCaseStudy, getTestimonialByline } from '@/data/testimonials';
 import { ArrowRight, Check } from 'lucide-react';
 import SectionShell from '@/components/ui/SectionShell';
 import { BookCallLink } from '@/components/ui/BookCallLink';
@@ -11,6 +13,7 @@ import { websiteRescue } from '@/data/offers';
  * category into a concrete first purchase.
  */
 export default function TiersSection() {
+  const careTestimonial = getTestimonialForCaseStudy('nola-pool-solutions');
   return (
     <SectionShell index="03" label="a clear starting point" variant="cream" tone="raised" labelledBy="tiers-heading">
       <div className="mb-12 grid gap-7 lg:grid-cols-12 lg:items-end">
@@ -63,6 +66,7 @@ export default function TiersSection() {
           </BookCallLink>
         </div>
       </div>
+      <p className="mb-8 text-body-sm text-text-secondary">Need a CMS, store, or a broader rebuild? <Link href="/services/websites" className="font-semibold text-primary-800 underline underline-offset-4">Compare Rescue and custom website scope</Link>.</p>
       <div className="grid gap-5 lg:grid-cols-12 lg:items-stretch">
         {tiers.map((tier) => (
           <article
@@ -76,14 +80,14 @@ export default function TiersSection() {
             <h3 className={`font-display text-h4 ${tier.id === 'lead-capture-system' ? 'text-cream-300' : 'text-primary-900'}`}>
               {tier.name}
             </h3>
-            <p className="mt-1 text-body-sm font-semibold text-accent-700">{tier.tagline}</p>
-            <p className={`mt-4 text-body-sm ${tier.id === 'lead-capture-system' ? 'text-white/70' : 'text-text-secondary'}`}>
+            <p className={`mt-1 text-body-sm font-semibold ${tier.id === 'lead-capture-system' ? 'text-accent-300' : 'text-accent-700'}`}>{tier.tagline}</p>
+            <p className={`mt-4 text-body-sm ${tier.id === 'lead-capture-system' ? 'text-white/80' : 'text-text-secondary'}`}>
               {tier.goodFit}
             </p>
             <p className={`mt-5 font-display text-h4 ${tier.id === 'lead-capture-system' ? 'text-white' : 'text-primary-900'}`}>
               {tier.price}
             </p>
-            <p className={`mt-1 text-xs ${tier.id === 'lead-capture-system' ? 'text-white/55' : 'text-text-muted'}`}>
+            <p className={`mt-1 text-xs ${tier.id === 'lead-capture-system' ? 'text-white/80' : 'text-text-muted'}`}>
               {tier.priceNote}
             </p>
             <ul className="mt-5 space-y-2.5">
@@ -92,7 +96,7 @@ export default function TiersSection() {
                   key={item}
                   className={`flex items-start gap-2 text-body-sm ${tier.id === 'lead-capture-system' ? 'text-white/75' : 'text-text-secondary'}`}
                 >
-                  <Check className="mt-0.5 h-4 w-4 flex-none text-accent-700" aria-hidden="true" />
+                  <Check className={`mt-0.5 h-4 w-4 flex-none ${tier.id === 'lead-capture-system' ? 'text-accent-300' : 'text-accent-700'}`} aria-hidden="true" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -104,11 +108,23 @@ export default function TiersSection() {
                 tier.id === 'lead-capture-system' ? 'text-white' : 'text-primary-900'
               }`}
             >
-              {tier.id === 'lead-flow-audit' ? 'Book the audit' : `Ask about ${tier.name}`}
+              {tier.id === 'lead-flow-audit' ? 'Discuss an audit' : `Ask about ${tier.name}`}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
             </BookCallLink>
           </article>
         ))}
+      </div>
+      <div className="mt-8 grid gap-8 border-t border-primary-900/20 pt-8 md:grid-cols-2">
+        <div>
+          <h3 className="font-display text-h4 text-primary-900">Agree what care covers.</h3>
+          <p className="mt-3 text-body-sm text-text-secondary">Your care agreement defines monitoring, failure alerts, response expectations, reporting, included changes, and separate software costs.</p>
+          <Link href="/services/growth-support" className="mt-4 inline-flex min-h-11 items-center font-semibold text-primary-800 underline underline-offset-4">See support responsibilities</Link>
+        </div>
+        {careTestimonial && <figure>
+          <blockquote className="text-body-sm text-text-secondary">“{careTestimonial.quote}”</blockquote>
+          <figcaption className="mt-4 text-body-sm font-semibold text-primary-900">{getTestimonialByline(careTestimonial)}</figcaption>
+          <Link href={`/case-studies/${careTestimonial.caseStudySlug}`} className="mt-2 inline-flex min-h-11 items-center text-body-sm text-primary-800 underline underline-offset-4">Read the website and upkeep story</Link>
+        </figure>}
       </div>
     </SectionShell>
   );

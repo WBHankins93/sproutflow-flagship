@@ -3,7 +3,7 @@
  *
  * Website Rescue is a published fixed-price offer, so its price must stay
  * consistent across the tiers band and structured data. Hero stats must be
- * real client results read from published data, never typed into the
+ * project facts read from published data, never unverified growth claims in the
  * component. Every pricing and hero CTA must follow the booking fallback:
  * /inquiry when NEXT_PUBLIC_CAL_LINK is "off", /book otherwise.
  */
@@ -13,8 +13,10 @@ import HeroSection from '@/components/sections/HeroSection'
 import TiersSection from '@/components/sections/TiersSection'
 import StructuredData from '@/components/StructuredData'
 import { websiteRescue } from '@/data/offers'
-import { heroStats, leadingFigure } from '@/data/heroStats'
-import { projectProof } from '@/data/projectProof'
+import { heroStats } from '@/data/heroStats'
+import { listedProjectProof, projectProof } from '@/data/projectProof'
+import { caseStudies } from '@/data/caseStudies'
+import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import { testimonials } from '@/data/testimonials'
 import { tiers } from '@/data/tiers'
 import { BOOKING_CTA_LABEL } from '@/lib/constants'
@@ -91,8 +93,8 @@ describe('Offers - TiersSection', () => {
       setCalLink(calLink)
       const { container } = render(<TiersSection />)
 
-      // The form fallback keeps the tier prefill; /book never carries a query.
-      const expected = (id: string) => (href === '/inquiry' ? `/inquiry?tier=${id}` : href)
+      // Keep the selected offer through either booking or the form fallback.
+      const expected = (id: string) => `${href}?tier=${id}`
 
       const bandCta = container.querySelector('a[data-cta="website-rescue"]')
       expect(bandCta).toHaveAttribute('href', expected('website-rescue'))
@@ -101,12 +103,12 @@ describe('Offers - TiersSection', () => {
         const cta = container.querySelector(`a[data-cta="tier-${tier.id}"]`)
         expect(cta).not.toBeNull()
         expect(cta).toHaveAttribute('href', expected(tier.id))
-        const label = tier.id === 'lead-flow-audit' ? 'Book the audit' : `Ask about ${tier.name}`
+        const label = tier.id === 'lead-flow-audit' ? 'Discuss an audit' : `Ask about ${tier.name}`
         expect(cta).toHaveTextContent(label)
       })
 
       if (href === '/book') {
-        expect(container.querySelectorAll('a[href*="?tier="]').length).toBe(0)
+        expect(container.querySelectorAll('a[href*="?tier="]').length).toBe(tiers.length + 1)
       }
     })
   })
@@ -129,56 +131,37 @@ describe('Offers - HeroSection', () => {
     expect(screen.getByText('See client work').closest('a')).toHaveAttribute('href', '/work')
   })
 
-  it('renders the three client result stats and none of the old filler', () => {
+  it('renders project facts without standalone growth claims', () => {
     const { container } = render(<HeroSection />)
     const values = Array.from(container.querySelectorAll('dl dd > span:first-child')).map((el) => el.textContent)
-    expect(values).toEqual(['35%', '50%', '2x'])
-
-    expect(screen.getByText('DJN Services')).toBeInTheDocument()
-    expect(screen.getAllByText('Second Line Psychiatry').length).toBeGreaterThan(0)
-    expect(screen.getAllByText('Nealy Event Decor').length).toBeGreaterThan(0)
-
-    expect(container.textContent).not.toContain('projects shipped live')
-    expect(container.textContent).not.toContain('with the founder')
-    expect(container.textContent).not.toContain('quote before work')
-    expect(container.textContent).not.toContain('100%')
+    expect(values).toEqual(heroStats.map((stat) => stat.value))
+    expect(screen.getAllByText('featured live projects').length).toBeGreaterThan(0)
+    expect(/35%|50%|2x/.test(container.textContent || '')).toBe(false)
   })
 })
 
-describe('Offers - Hero stats trace back to published data', () => {
-  it('reads each figure from the matching source string', () => {
-    expect(heroStats.map((stat) => stat.value)).toEqual(['35%', '50%', '2x'])
-    heroStats.forEach((stat) => {
-      expect(stat.source.startsWith(stat.value)).toBe(true)
-    })
+describe('Offers - Proof provenance', () => {
+  it('counts only listed live work and links capability facts to project records', () => {
+    const live = listedProjectProof.filter((project) => project.status === 'Live')
+    expect(heroStats[0].value).toBe(String(live.length))
+    expect(heroStats[0].source).toBe(live.map((project) => project.name).join(', '))
+    for (const stat of heroStats.slice(1)) {
+      expect(projectProof.find((project) => project.name === stat.note)?.result).toBe(stat.source)
+    }
   })
 
-  it('uses the DJN testimonial metric', () => {
-    const djn = testimonials.find((entry) => entry.id === 'djn-services')
-    expect(djn?.metric).toBe('35% increase in total bookings')
-    expect(heroStats[0].value).toBe('35%')
-    expect(heroStats[0].note).toBe('DJN Services')
-    expect(heroStats[0].source).toBe(djn?.metric)
+  it('does not republish unsubstantiated growth figures in project copy or metadata', () => {
+    expect(/50%|30%|2x|doubled|#1/.test(JSON.stringify(caseStudies))).toBe(false)
+    expect(/50%|30%|2x/.test(JSON.stringify(projectProof))).toBe(false)
+    expect(/35%|50%|30%|2x/.test(JSON.stringify(heroStats))).toBe(false)
   })
 
-  it('uses the Second Line Psychiatry and Nealy project results', () => {
-    const slp = projectProof.find((entry) => entry.id === 'second-line-psychiatry')
-    const nealy = projectProof.find((entry) => entry.id === 'nealy-events')
-    expect(slp?.result).toBe('50% more qualified inquiries')
-    expect(nealy?.result).toBe('2x consultation requests')
-    expect(heroStats[1].value).toBe('50%')
-    expect(heroStats[1].note).toBe('Second Line Psychiatry')
-    expect(heroStats[1].source).toBe(slp?.result)
-    expect(heroStats[2].value).toBe('2x')
-    expect(heroStats[2].note).toBe('Nealy Event Decor')
-    expect(heroStats[2].source).toBe(nealy?.result)
-  })
-
-  it('only reads a leading figure, never invents one', () => {
-    expect(leadingFigure('35% increase in total bookings')).toBe('35%')
-    expect(leadingFigure('2x consultation requests')).toBe('2x')
-    expect(leadingFigure('Website launched in 2 weeks')).toBeNull()
-    expect(leadingFigure('Custom Shopify storefront')).toBeNull()
+  it('keeps the original client-reported DJN quote with measurement context', () => {
+    const djn = testimonials.find((entry) => entry.id === 'djn-services')!
+    expect(djn.quote).toContain('35% increase in total bookings')
+    expect(djn.metric).toBe('Client-reported: 35% increase in total bookings')
+    render(<TestimonialsSection />)
+    expect(screen.getByText(djn.context!)).toBeInTheDocument()
   })
 })
 

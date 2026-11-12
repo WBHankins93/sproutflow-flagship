@@ -162,7 +162,7 @@ export const servicePaths: ServicePath[] = [
       {
         question: 'What is included in ongoing maintenance?',
         answer:
-          'Hosting, updates, monitoring, and content changes, plus search and performance reviews. It stays optional, and you keep ownership of the domain, site, and connected accounts whether or not you keep me on.',
+          'Care can cover hosting, updates, monitoring, content changes, and performance reviews. Your written agreement defines the monitored systems, alerts, response expectations, reporting, and included changes, with software costs listed separately. Ongoing care stays optional.',
       },
       {
         question: 'How do we decide what to improve next?',

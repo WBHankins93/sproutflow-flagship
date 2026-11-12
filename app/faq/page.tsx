@@ -1,3 +1,4 @@
+import { supportScope, projectResponsibilities } from '@/data/offerDetails';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import PageHeader from '@/components/ui/PageHeader';
@@ -19,6 +20,8 @@ const groups: { label: string; items: FaqItem[] }[] = [
   {
     label: 'Pricing and budget',
     items: [
+      { question: 'Is every website $1,500?', answer: 'No. Website Rescue is a focused five-page offer for contractors and home-service businesses. Custom websites, stores, extra pages, and connected tools are quoted separately. The written quote defines content work, revisions, exclusions, and any separate hosting or software costs.' },
+      { question: 'What do I receive from a Lead Flow Audit?', answer: 'For $500, you receive a map of the current inquiry-to-booking path, a review of tools and handoffs, a prioritized gap list, and a plan with a fixed build quote. The fee is credited toward a build; the written agreement confirms how the credit is applied and when the audit is delivered.' },
       {
         question: 'How do you decide what a project should include?',
         answer:
@@ -54,6 +57,7 @@ const groups: { label: string; items: FaqItem[] }[] = [
   {
     label: 'Working together',
     items: [
+      { question: 'How involved do I need to be?', answer: projectResponsibilities.map((item) => `${item.title}: ${item.body}`).join(' ') },
       {
         question: 'Do you work with businesses outside New Orleans?',
         answer:
@@ -69,6 +73,7 @@ const groups: { label: string; items: FaqItem[] }[] = [
   {
     label: 'After launch',
     items: [
+      { question: 'Who notices failures, and what happens if you are unavailable?', answer: supportScope },
       {
         question: 'Do you handle hosting and maintenance after launch?',
         answer:

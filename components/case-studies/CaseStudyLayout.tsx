@@ -207,6 +207,7 @@ export default function CaseStudyLayout({ caseStudy }: { caseStudy: CaseStudy })
               “{testimonial.quote}”
             </blockquote>
             <figcaption className="mt-7 text-text-secondary">{getTestimonialByline(testimonial)}</figcaption>
+            {testimonial.context && <p className="mt-4 text-sm text-text-secondary">{testimonial.context}</p>}
           </figure>
         </SectionShell>
       )}

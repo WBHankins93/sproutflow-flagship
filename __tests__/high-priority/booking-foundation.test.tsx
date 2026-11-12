@@ -143,14 +143,14 @@ describe('BookCallLink', () => {
 })
 
 describe('/book page', () => {
-  it('redirects to /inquiry when booking is not configured', () => {
-    expect(() => BookPage()).toThrow(REDIRECT_ERROR)
+  it('redirects to /inquiry when booking is not configured', async () => {
+    expect(await BookPage({}).catch((error: Error) => error.message)).toBe(`${REDIRECT_ERROR}:/inquiry`)
     expect(mockRedirect).toHaveBeenCalledWith('/inquiry')
   })
 
-  it('renders the scheduler and fallbacks when configured', () => {
+  it('renders the scheduler and fallbacks when configured', async () => {
     setCalLink('https://cal.com/sproutflow/15min')
-    render(BookPage())
+    render(await BookPage({}))
 
     expect(mockRedirect).not.toHaveBeenCalled()
     expect(screen.getByRole('heading', { level: 1, name: 'Pick a time that works.' })).toBeInTheDocument()

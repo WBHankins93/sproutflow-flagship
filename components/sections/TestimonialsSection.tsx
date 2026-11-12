@@ -22,6 +22,7 @@ export default function TestimonialsSection() {
                 {testimonial.name === testimonial.role ? testimonial.business : `${testimonial.role}, ${testimonial.business}`}
               </p>
             </figcaption>
+            {testimonial.context && <p className="mt-4 text-sm text-text-secondary">{testimonial.context}</p>}
           </figure>
         ))}
       </div>

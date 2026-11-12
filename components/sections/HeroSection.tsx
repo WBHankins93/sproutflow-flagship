@@ -18,10 +18,10 @@ export default function HeroSection() {
   const stats = heroStats.map(({ value, label, note }) => ({ value, label, note }));
 
   return (
-    <section className="grain rings relative overflow-hidden bg-ink-900 text-white">
-      <div className="relative mx-auto grid max-w-[1440px] items-center gap-14 px-5 py-16 md:px-11 md:py-20 lg:min-h-[calc(100svh-88px)] lg:grid-cols-12">
+    <section className="grain rings relative isolate overflow-hidden bg-ink-900 text-white">
+      <div className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-14 px-5 py-16 md:px-11 md:py-20 lg:min-h-[calc(100svh-88px)] lg:grid-cols-12">
         <div className="lg:col-span-6">
-          <p className="flex items-center gap-3 text-eyebrow uppercase text-white/55">
+          <p className="flex items-center gap-3 text-eyebrow uppercase text-white/75">
             <span className="h-px w-8 bg-accent-400" aria-hidden="true" />
             New Orleans studio · Working directly with Ben
           </p>
@@ -29,7 +29,7 @@ export default function HeroSection() {
             Make it easier for customers to{' '}
             <span className="font-accent font-normal italic text-accent-300">choose you.</span>
           </h1>
-          <p className="mt-7 max-w-xl text-body-lg text-white/[0.68]">
+          <p className="mt-7 max-w-xl text-body-lg text-white/80">
             Sproutflow builds websites, intake flows, and follow-up systems for small businesses that need customers to
             take the next step.
           </p>

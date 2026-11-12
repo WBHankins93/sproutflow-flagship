@@ -1,3 +1,4 @@
+import { projectResponsibilities } from '@/data/offerDetails';
 import SectionShell from '@/components/ui/SectionShell';
 
 const steps = [
@@ -29,7 +30,7 @@ export default function ProcessSection() {
             <span className="font-accent font-normal italic text-accent-700">takes shape.</span>
           </h2>
           <p className="mt-6 max-w-xl text-body-lg text-text-secondary">
-            The process is small on purpose. Each checkpoint answers a decision before the next one begins.
+            Stay involved in the decisions that affect your business. I handle the implementation between reviews.
           </p>
         </div>
         <ol className="relative lg:col-span-7">
@@ -53,6 +54,14 @@ export default function ProcessSection() {
             ))}
           </div>
         </ol>
+      </div>
+      <div className="mt-12 grid gap-8 border-t border-primary-900/20 pt-8 md:grid-cols-2">
+        {projectResponsibilities.map((item) => (
+          <div key={item.title}>
+            <h3 className="font-display text-h4 text-primary-900">{item.title}</h3>
+            <p className="mt-3 text-body-sm text-text-secondary">{item.body}</p>
+          </div>
+        ))}
       </div>
     </SectionShell>
   );

@@ -73,6 +73,7 @@ export default function Testimonial({
           <Quote className="mb-4 h-8 w-8 text-primary-500" aria-hidden="true" />
           &ldquo;{testimonial.quote}&rdquo;
         </blockquote>
+        {testimonial.context && <p className="mt-4 text-sm text-gray-600">{testimonial.context}</p>}
       </div>
     </figure>
   );

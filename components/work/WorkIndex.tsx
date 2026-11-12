@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import { listedProjectProof } from '@/data/projectProof';
 import ProjectRow from '@/components/ui/ProjectRow';
 
-const filters = ['All', 'Websites', 'Shopify', 'Systems', 'Ongoing care'];
+const filters = ['All', ...Array.from(new Set(listedProjectProof.flatMap((project) => project.filterTags)))];
 
 export default function WorkIndex() {
   const [active, setActive] = useState('All');

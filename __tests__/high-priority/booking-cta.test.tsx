@@ -162,8 +162,8 @@ for (const { label, calLink, bookingHref, configured } of states) {
       const { container } = render(page)
 
       const primary = cta(container, `service-${service.id}`)
-      // The form fallback keeps the service prefill; /book never carries a query.
-      const expectedPrimary = bookingHref === '/inquiry' ? `/inquiry?path=${service.id}` : bookingHref
+      // Both booking and the form fallback keep the service prefill.
+      const expectedPrimary = `${bookingHref}?path=${service.id}`
       expect(primary).toHaveAttribute('href', expectedPrimary)
       expect(primary).toHaveTextContent(BOOKING_CTA_LABEL)
 

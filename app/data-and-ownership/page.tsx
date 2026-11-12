@@ -30,6 +30,10 @@ const sections = [
     'Managed hosting and database providers handle backups when their service includes them. If backups matter to daily operations, the project can include a written plan for snapshots, exports, and recovery before launch.',
   ],
   [
+    'Support and continuity',
+    'Before support begins, we need to agree on the systems covered, failure-alert recipients, response expectations, and a handoff plan if I am unavailable. Keep an owner-controlled account for each critical service. The handoff documents the services and access needed so another provider can understand the setup.',
+  ],
+  [
     'If we part ways',
     'You can leave with your data. I help export the information you need, transfer ownership where the provider supports it, and remove Sproutflow access after the handoff is complete.',
   ],

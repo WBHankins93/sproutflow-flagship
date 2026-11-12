@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import { BOOKING_CTA_LABEL, INQUIRY_PATH, getBookingHref } from '@/lib/constants';
+import { withBookingContext } from '@/lib/booking-context';
+import { BOOKING_CTA_LABEL, getBookingHref } from '@/lib/constants';
 
 type BookCallLinkProps = {
   className?: string;
@@ -10,8 +11,8 @@ type BookCallLinkProps = {
   /** Accessible name when the visible text is abbreviated (e.g. the mobile header pill). */
   'aria-label'?: string;
   /**
-   * Query string (without `?`) added only when the link falls back to
-   * /inquiry, so the form keeps its path prefill, e.g. `tier=lead-flow-audit`.
+   * Service query (without `?`) preserved through booking and inquiry,
+   * e.g. `tier=lead-flow-audit`. Unknown fields and values are discarded.
    */
   inquiryQuery?: string;
 };
@@ -28,7 +29,7 @@ export function BookCallLink({
   inquiryQuery,
 }: BookCallLinkProps) {
   const base = getBookingHref();
-  const href = base === INQUIRY_PATH && inquiryQuery ? `${base}?${inquiryQuery}` : base;
+  const href = withBookingContext(base, inquiryQuery ?? '');
   return (
     <Link href={href} className={className} data-cta={dataCta} aria-label={ariaLabel}>
       {children ?? BOOKING_CTA_LABEL}

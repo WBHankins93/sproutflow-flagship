@@ -59,12 +59,12 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: 'second-line-psychiatry',
     clientName: 'Second Line Psychiatry',
-    headline: '50% more qualified inquiries for a New Orleans telehealth practice',
+    headline: 'A clear path from finding a telehealth practice to booking care',
     summary:
-      'Second Line Psychiatry is a telehealth psychiatry practice serving families in New Orleans. The practice had no current website and new patients arrived through referrals alone. We designed and built a trauma-informed, privacy-first website with booking connected to the practice’s Google Business profile. After launch, qualified patient inquiries grew 50%, and the team now spends its first conversations on care, not on explaining the basics.',
+      'Second Line Psychiatry is a telehealth psychiatry practice serving families in New Orleans. The practice had no current website and new patients arrived through referrals alone. We designed and built a trauma-informed, privacy-first website with booking connected to the practice’s Google Business profile. The site gives families a place to understand the practice and take the next step toward care.',
     heroImage: 'work/client-logos/second-line-project.png',
     heroStats: [
-      { value: '50%', label: 'More qualified inquiries' },
+      { value: 'Booking', label: 'Connected to the Google Business profile' },
       { value: 'Privacy-first', label: 'Design built for sensitive care decisions' },
       { value: 'New Orleans', label: 'Rooted in local culture' },
     ],
@@ -78,8 +78,8 @@ export const caseStudies: CaseStudy[] = [
       'A visual identity inspired by New Orleans second line traditions',
     ],
     results: [
-      { value: '50%', label: 'Increase in qualified patient inquiries' },
-      { value: 'Better fit', label: 'Inquiries arrive pre-qualified and informed' },
+      { value: 'Connected', label: 'Booking available from the Google Business profile' },
+      { value: 'Clearer', label: 'Practice information available before the first call' },
       { value: 'Live', label: 'Serving families across the New Orleans area' },
     ],
     liveUrl: 'https://www.secondlinepsychiatry.com/',
@@ -92,24 +92,24 @@ export const caseStudies: CaseStudy[] = [
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     cardImage: 'work/client-logos/second-line-project.png',
     cardBlurb:
-      'A trauma-informed telehealth presence that helps families trust the practice before the first call. Qualified inquiries grew 50% after launch.',
+      'A trauma-informed telehealth presence that helps families trust the practice before the first call. Booking connects with the practice’s Google Business profile.',
     cardStats: [
-      { value: '50%', label: 'More qualified inquiries' },
+      { value: 'Booking', label: 'Connected to the Google Business profile' },
       { value: '4 wks', label: 'Delivery' },
     ],
-    metaTitle: 'Second Line Psychiatry Case Study: 50% More Qualified Inquiries',
+    metaTitle: 'Second Line Psychiatry Case Study: Website and Booking Path',
     metaDescription:
-      'How Second Line Psychiatry, a New Orleans telehealth practice, grew qualified patient inquiries 50% with a trauma-informed, privacy-first website built by Sproutflow Studio.',
+      'A trauma-informed website and connected booking path for Second Line Psychiatry, a New Orleans telehealth practice, built by Sproutflow Studio.',
   },
   {
     slug: 'nola-pool-solutions',
     clientName: 'NOLA Pool Solutions',
-    headline: '30% customer acquisition growth, starting from no website at all',
+    headline: 'From word of mouth to a website with a clear quote request path',
     summary:
-      'NOLA Pool Solutions is a pool maintenance and renovation company serving the New Orleans metro area. The business ran entirely on word of mouth with no website. We built a lead capture site that establishes credibility, helps prospects choose the right service, and collects the details needed for a quote. The site went live in three weeks, and customer acquisition grew 30%.',
+      'NOLA Pool Solutions is a pool maintenance and renovation company serving the New Orleans metro area. The business ran entirely on word of mouth with no website. We built a lead capture site that establishes credibility, helps prospects choose the right service, and collects the details needed for a quote. The site went live in three weeks with service information and a dedicated quote request flow.',
     heroImage: 'work/client-logos/nps-project.png',
     heroStats: [
-      { value: '30%', label: 'Customer acquisition growth' },
+      { value: 'Quote form', label: 'Collects service and project details' },
       { value: '3 weeks', label: 'From nothing to live' },
       { value: 'One path', label: 'Service details flow into a quote request' },
     ],
@@ -120,10 +120,10 @@ export const caseStudies: CaseStudy[] = [
       'Service packaging that pre-qualifies prospects before they reach out',
       'Trust signals up front: licensing, metro-area expertise, response time',
       'A local SEO foundation targeting New Orleans metro pool service searches',
-      'Automated email notifications so no inquiry sits unanswered',
+      'Automated email notifications when a quote request is submitted',
     ],
     results: [
-      { value: '30%', label: 'Growth in customer acquisition' },
+      { value: 'Online', label: 'Service information and quote requests in one place' },
       { value: '3 weeks', label: 'From no website to a live customer path' },
       { value: 'Direct', label: 'Quote details now arrive through one intake flow' },
     ],
@@ -137,25 +137,25 @@ export const caseStudies: CaseStudy[] = [
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Formspree', 'Resend', 'Vercel'],
     cardImage: 'work/client-logos/nps-project.png',
     cardBlurb:
-      'From no web presence to a 30% lift in customer acquisition. The new intake flow collects quote details before the first call.',
+      'From no web presence to a dedicated service website. The new intake flow collects quote details before the first call.',
     cardStats: [
-      { value: '30%', label: 'Acquisition growth' },
+      { value: 'Quote form', label: 'Lead capture' },
       { value: '3 wks', label: 'Delivery' },
     ],
-    metaTitle: 'NOLA Pool Solutions Case Study: 30% Customer Acquisition Growth',
+    metaTitle: 'NOLA Pool Solutions Case Study: Website and Quote Request Flow',
     metaDescription:
-      'How NOLA Pool Solutions went from no website to 30% customer acquisition growth and a #1 local Google ranking with a lead capture site built by Sproutflow Studio in New Orleans.',
+      'How NOLA Pool Solutions went from no website to a service site with a quote request flow, built by Sproutflow Studio for the New Orleans metro area.',
   },
   {
     slug: 'nealy-events',
     clientName: 'Nealy Event Decor',
-    // Metric is an estimate approved by Ben (June 2026); adjust if the client reports differently.
-    headline: 'Consultation requests doubled for a luxury event studio',
+    // The former 2x claim was a founder-approved estimate, not a documented client measurement. See docs/review-proof-integrity.md.
+    headline: 'A luxury event showcase with inventory the team can manage',
     summary:
-      'Nealy Event Decor creates luxury custom fabrications for high-end events in Dallas: bespoke arches, bars, and premium rentals. We designed and built a website with editorial gallery layouts and an inventory system the team updates themselves. The site launched in six weeks and now presents the brand at the level of the work. Consultation requests have doubled since launch.',
+      'Nealy Event Decor creates luxury custom fabrications for high-end events in Dallas: bespoke arches, bars, and premium rentals. We designed and built a website with editorial gallery layouts and an inventory system the team updates themselves. The site launched in six weeks and now presents the brand at the level of the work.',
     heroImage: 'work/client-logos/nealy-project.png',
     heroStats: [
-      { value: '2x', label: 'Consultation requests since launch' },
+      { value: 'Browse', label: 'Inventory organized by piece and style' },
       { value: '6 weeks', label: 'Design to launch' },
       { value: 'In-house', label: 'Inventory managed by the team' },
     ],
@@ -168,7 +168,7 @@ export const caseStudies: CaseStudy[] = [
       'A story-driven brand experience that positions Nealy as a luxury studio',
     ],
     results: [
-      { value: '2x', label: 'Consultation requests since launch' },
+      { value: 'Browse', label: 'Inventory organized by piece and style' },
       { value: 'In-house', label: 'Inventory updates handled by the team, no developer needed' },
       { value: '6 weeks', label: 'From kickoff to a launch-ready luxury brand' },
     ],
@@ -182,14 +182,14 @@ export const caseStudies: CaseStudy[] = [
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Sanity CMS', 'Vercel'],
     cardImage: 'work/client-logos/nealy-project.png',
     cardBlurb:
-      'A luxury fabrication showcase with editorial galleries and a self-managed inventory system. Consultation requests have doubled since launch.',
+      'A luxury fabrication showcase with editorial galleries and a self-managed inventory system.',
     cardStats: [
-      { value: '2x', label: 'Consultation requests' },
+      { value: 'CMS', label: 'Team-managed inventory' },
       { value: '6 wks', label: 'Delivery' },
     ],
-    metaTitle: 'Nealy Event Decor Case Study: Consultation Requests Doubled',
+    metaTitle: 'Nealy Event Decor Case Study: Showcase and Inventory CMS',
     metaDescription:
-      'How Nealy Event Decor, a luxury event fabrication studio in Dallas, doubled consultation requests with an editorial brand site and a self-managed inventory CMS by Sproutflow Studio.',
+      'An editorial brand site and a self-managed inventory CMS for Nealy Event Decor, a luxury event fabrication studio in Dallas, built by Sproutflow Studio.',
   },
   {
     slug: 'djn-services',
@@ -200,7 +200,7 @@ export const caseStudies: CaseStudy[] = [
     heroImage: 'work/client-logos/djn-new-home-page.png',
     heroImageFit: 'contain',
     heroStats: [
-      { value: '20 yrs', label: 'In business before going digital' },
+      { value: '20 yrs', label: 'Company experience highlighted on the site' },
       { value: '2 weeks', label: 'Delivery timeline' },
       { value: 'Quote form', label: 'Captures leads while the owner is working' },
     ],
@@ -210,7 +210,7 @@ export const caseStudies: CaseStudy[] = [
       'A homepage that leads with the 20-year track record and veteran ownership',
       'Services packaged visually with clear pricing and a clear next step',
       'A quote form as the primary action, capturing leads while the owner works',
-      'Instant email notifications so every inquiry gets a fast response',
+      'Email notifications when a quote request is submitted',
     ],
     results: [
       { value: '2 weeks', label: 'From outdated template to live website' },
