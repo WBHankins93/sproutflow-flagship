@@ -381,10 +381,11 @@ describe('Homepage - work, own site, Ben and book', () => {
     expect(screen.getByText('7 years keeping software running at large companies, including IBM')).toBeInTheDocument()
   })
 
-  it('ends with the call, a phone number and three short answers', () => {
+  it('ends with the call, a phone number and four short answers', () => {
     const { container } = render(<BookSection />)
     expect(container.querySelector('a[href="tel:+15043261676"]')).toHaveTextContent('(504) 326-1676')
-    expect(container.querySelectorAll('dt').length).toBe(3)
+    expect(container.querySelectorAll('dt').length).toBe(4)
+    expect(container).toHaveTextContent(/Are you taking new work/i)
     expect(container).toHaveTextContent(/fixed/i)
     expect(container).toHaveTextContent(/owns/i)
     expect(container).toHaveTextContent(/How fast/i)

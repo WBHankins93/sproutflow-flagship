@@ -81,6 +81,9 @@ export default function HomeHero() {
             <ButtonLink href={homeHero.secondaryCta.href} variant="secondary" data-cta="hero-check">
               {homeHero.secondaryCta.label}
             </ButtonLink>
+            <p className="basis-full font-body text-body-sm text-[#4A574D]" data-call-note>
+              {homeHero.callNote}
+            </p>
           </div>
         </div>
 

@@ -109,7 +109,7 @@ export const fixedOffers: CatalogOffer[] = [
     category: 'websites',
     name: 'Starter landing page',
     summary:
-      'One page on your own domain with up to 6 sections (what you do, services, photos, reviews, about, contact), tap-to-call and a quote form that reaches your phone and email. Built from my starter templates and live within 5 business days after your content arrives.',
+      'One page on your own domain with up to 6 sections (what you do, services, photos, reviews, about, contact), tap-to-call and a quote form that reaches your phone and email. Built from my starter templates and live within 2 weeks after your content arrives.',
     line: 'One page that gets you found and called.',
     includes: [
       'One page on your domain, up to 6 sections',
@@ -118,7 +118,7 @@ export const fixedOffers: CatalogOffer[] = [
       'One round of changes',
     ],
     prices: [{ amount: 500 }],
-    priceNote: 'Live within 5 business days after content arrives.',
+    priceNote: 'Live within 2 weeks after content arrives.',
   },
   {
     key: 'audit',
@@ -157,7 +157,7 @@ export const customQuote: CustomQuote = {
   name: 'Custom quote',
   heading: 'Bring me the problem.',
   summary:
-    'Everything without a fixed price: multi-page sites, booking, catalogs and online stores, galleries, lead capture and follow-up systems, custom business software and System Care. Quoted after a 15-minute call, with written options at fixed prices within 2 business days, paid in parts.',
+    'Everything without a fixed price: multi-page sites, booking, catalogs and online stores, galleries, lead capture and follow-up systems, custom business software and System Care. Quoted after a 15-minute call, with written options at fixed prices within 5 business days, paid in parts.',
   intro: 'Everything else is built around your business. Tell me what is getting in the way and I’ll lay out options.',
   examples: [
     'Multi-page sites',
@@ -171,7 +171,7 @@ export const customQuote: CustomQuote = {
   range: 'Most projects land between $1,500 and $6,000, paid in parts.',
   steps: [
     { title: '15-minute call', body: 'You tell me the problem. I ask a few questions.' },
-    { title: 'Written options', body: 'Fixed prices for each, within 2 business days.' },
+    { title: 'Written options', body: 'Fixed prices for each, within 5 business days.' },
     { title: 'Pick one', body: 'You pay in parts, not all up front.' },
   ],
   primaryCta: 'Book a 15-minute call',

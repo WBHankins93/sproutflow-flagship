@@ -76,7 +76,8 @@ export default function AboutPage() {
           <div className="min-w-0 space-y-5 font-body text-body-lg text-primary-900 lg:col-span-7">
             <p>
               I spent seven years keeping software running at large companies, including IBM. That work taught me to scope
-              honestly, ship on a date, and leave behind something the next person can maintain.
+              honestly, ship on a date, and leave behind something the next person can maintain. I now work full time as an engineer and run
+              Sproutflow on weekends.
             </p>
             <p>
               Big companies are strict about the parts nobody brags about. You write the scope down. You agree what done

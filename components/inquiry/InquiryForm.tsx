@@ -234,7 +234,7 @@ export function InquiryForm({
         <p className="font-mono text-label uppercase text-[#4A574D] [font-variant-ligatures:none]">Project received</p>
         <h2 className="mt-4 font-display text-display-md font-normal text-primary-900">Thanks. Your project is in.</h2>
         <p className="mt-4 max-w-xl text-[#4A574D]">
-          I will review the details and reply within one business day.
+          I read every message myself and will reply within 5 business days.
         </p>
         {isBookingConfigured() && (
           <p className="mt-4 max-w-xl text-[#4A574D]">

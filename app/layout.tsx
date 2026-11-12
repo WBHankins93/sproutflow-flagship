@@ -2,6 +2,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/layout/Header';
+import AvailabilityNotice from '@/components/layout/AvailabilityNotice';
 import StructuredData from '@/components/StructuredData';
 import { Analytics } from '@vercel/analytics/next';
 import { SITE_URL } from '@/lib/site';
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         className={`${fontVariables} antialiased font-body`}
       >
         <StructuredData />
+        <AvailabilityNotice />
         <Header />
         <main>{children}</main>
         <Analytics />

@@ -96,7 +96,7 @@ export function ReportRequest({ result }: { result: WebsiteCheckResult }) {
           Your report is on its way.
         </h3>
         <p className={`mt-3 [overflow-wrap:anywhere] ${softTextClass}`}>
-          I will send the full marked-up report to {sentTo} within one business day. It comes from
+          I will send the full marked-up report to {sentTo} within 5 business days. It comes from
           me, Ben, so keep an eye out for a personal email.
         </p>
         <p className="mt-4 text-primary-900">Want to go through it together?</p>
@@ -181,7 +181,7 @@ export function ReportRequest({ result }: { result: WebsiteCheckResult }) {
           {sending ? 'Sending…' : 'Email me the report'}
         </button>
         <p id={promiseId} className={`text-sm ${softTextClass}`}>
-          I will send the full marked-up report within one business day.
+          I will send the full marked-up report within 5 business days.
         </p>
         <p id={privacyId} className="flex gap-2 text-sm text-text-muted">
           <LockKeyhole className="mt-0.5 h-4 w-4 flex-none" aria-hidden="true" />

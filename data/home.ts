@@ -9,6 +9,7 @@
 import type { RedlineMarkSpec } from '@/components/redline';
 import { projectProof, type ProjectProof } from './projectProof';
 import { getTestimonialForCaseStudy } from './testimonials';
+import { availability } from './availability';
 
 export const homeHero = {
   eyebrow: 'Sproutflow Studio · Websites, lead systems and care',
@@ -18,6 +19,7 @@ export const homeHero = {
   underline: 'Find the leaks.',
   sub: 'I’m Ben. I find where your website loses customers, fix it at a fixed price, and keep it working after launch.',
   primaryCta: 'Book a 15-minute call',
+  callNote: availability.callNote,
   secondaryCta: { label: 'Check your website free', href: '/check' },
   note: 'hi, I’m Ben. You’ll talk to me.',
   photoAlt: 'Ben Hankins, founder of Sproutflow Studio',
@@ -223,6 +225,7 @@ export const homeBen = {
   paragraphs: [
     'I’m Ben Hankins, and Sproutflow Studio is just me. I take the first call, find what’s costing you customers, build the fix, and I’m the one who picks up after launch. No account managers, no handoffs.',
     'I write the plan in plain English, test the work on real phones, and keep watching it once it’s live. You get straight answers on price and timing from the person doing the work.',
+    availability.aboutLine,
   ],
   credentials: '7 years keeping software running at large companies, including IBM',
   /** A verbatim, contiguous excerpt of this testimonial's quote. Attribution comes from data/testimonials.ts. */
@@ -259,7 +262,12 @@ export const homeBook = {
       id: 'speed',
       question: 'How fast can it be live?',
       answer:
-        'A starter landing page is live within 5 business days after your content arrives. Larger sites and lead systems take longer, and the written quote says exactly when.',
+        'A starter landing page is live within 2 weeks after your content arrives. Larger sites and lead systems take longer, and the written quote says exactly when.',
+    },
+    {
+      id: 'availability',
+      question: availability.faq.question,
+      answer: availability.faq.answer,
     },
   ],
 };

@@ -36,7 +36,7 @@ const HOW_STEPS: { title: string; body: string; detail?: string }[] = [
   },
   {
     title: 'Written options at fixed prices',
-    body: 'Within 2 business days I send written options, each with the scope, a fixed price and a timeline. You pick one, and you pay in parts, not all up front.',
+    body: 'Within 5 business days I send written options, each with the scope, a fixed price and a timeline. You pick one, and you pay in parts, not all up front.',
     detail: `The ${starter.name.toLowerCase()} and the ${getOffer('audit')!.name} skip this step: they cost what the menu says.`,
   },
   {
