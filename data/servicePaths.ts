@@ -176,7 +176,7 @@ export const servicePaths: ServicePath[] = [
     ],
     ctaLabel: 'Ask about care',
     offersHeading: 'A fixed monthly price, sized to your site.',
-    offersSub: 'Site Care is optional after launch, and you keep ownership of everything either way.',
+    offersSub: 'Site Care is open to current clients only right now, and you keep ownership of everything either way.',
     metaTitle: 'Website Care & Maintenance',
     metaDescription:
       'Site Care for small business websites: I watch your forms, domain and email, keep things updated and fix what breaks. You keep ownership of everything.',

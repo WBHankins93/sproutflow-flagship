@@ -11,7 +11,7 @@ import { Eyebrow, Heading, MarginNote, Section } from '@/components/v3';
 export const metadata: Metadata = {
   title: 'Start a Project',
   description:
-    'Tell me what needs to work better. Name and email are the only required fields. Reply within one business day.',
+    'Tell me what needs to work better. Name and email are the only required fields. Reply within 5 business days.',
   alternates: { canonical: '/inquiry' },
 };
 
@@ -99,7 +99,7 @@ export default async function InquiryPage({ searchParams }: Props) {
             <MarginNote arrow="none" className="mt-6">
               I read every one myself
             </MarginNote>
-            <p className="mt-4 text-sm text-[#4A574D]">I reply within one business day.</p>
+            <p className="mt-4 text-sm text-[#4A574D]">I reply within 5 business days.</p>
             {isBookingConfigured() && (
               <p className="mt-4 text-sm text-[#4A574D]" data-testid="inquiry-booking-line">
                 Rather talk it through?{' '}

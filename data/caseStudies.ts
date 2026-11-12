@@ -172,7 +172,7 @@ export const caseStudies: CaseStudy[] = [
     headline: 'Fully booked for next month, with inventory the team runs itself',
     headlineSource: 'client-reported',
     summary:
-      'Nealy Event Decor creates luxury custom fabrications for high-end events in Dallas: bespoke arches, bars, and premium rentals. I designed and built a website with editorial gallery layouts and an inventory system the team updates themselves. The site launched in six weeks and presents the brand at the level of the work. Since launch, the owner says bookings have grown and the studio is fully booked for next month.',
+      'Nealy Event Decor creates luxury custom fabrications for high-end events in South Louisiana: bespoke arches, bars, and premium rentals. I designed and built a website with editorial gallery layouts and an inventory system the team updates themselves. The site launched in six weeks and presents the brand at the level of the work. Since launch, the owner says bookings have grown and the studio is fully booked for next month.',
     heroImage: 'work/client-logos/nealy-project.png',
     heroStats: [
       { value: 'Fully booked', label: 'For next month, in the owner’s words', source: 'client-reported' },
@@ -197,7 +197,7 @@ export const caseStudies: CaseStudy[] = [
       timeline: '6 weeks',
       services: 'Web Design, CMS Setup, Conversion Strategy',
       industry: 'Event Planning & Luxury Rentals',
-      location: 'Dallas, TX',
+      location: 'South Louisiana',
     },
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Sanity CMS', 'Vercel'],
     cardImage: 'work/client-logos/nealy-project.png',
@@ -209,7 +209,7 @@ export const caseStudies: CaseStudy[] = [
     ],
     metaTitle: 'Nealy Event Decor Case Study: Fully Booked for Next Month',
     metaDescription:
-      'An editorial brand site and a team-managed inventory CMS for Nealy Event Decor, a luxury event fabrication studio in Dallas, built by Sproutflow Studio in six weeks. The owner reports being fully booked for next month.',
+      'An editorial brand site and a team-managed inventory CMS for Nealy Event Decor, a luxury event fabrication studio in South Louisiana, built by Sproutflow Studio in six weeks. The owner reports being fully booked for next month.',
   },
   {
     slug: 'djn-services',

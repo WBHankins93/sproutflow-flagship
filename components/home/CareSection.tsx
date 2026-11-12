@@ -1,6 +1,7 @@
 import { ButtonLink, Eyebrow, Heading, Section } from '@/components/v3';
 import { formatAmount, getCategory, getOffer } from '@/data/catalog';
 import { homeCare } from '@/data/home';
+import { availability } from '@/data/availability';
 import { homeBookingHref } from './booking';
 
 /** 6. "Websites break quietly": why care exists, with two generic, true examples. */
@@ -27,6 +28,9 @@ export default function CareSection() {
               .
             </p>
           )}
+          <p className="mt-2 max-w-[52ch] font-body text-body font-semibold text-primary-900" data-care-note>
+            {availability.careNote}
+          </p>
           <ButtonLink
             href={homeBookingHref(getCategory('care').servicePath)}
             variant="secondary"

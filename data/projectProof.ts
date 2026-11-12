@@ -77,7 +77,7 @@ export const projectProof: ProjectProof[] = [
   {
     id: 'nealy-events',
     name: 'Nealy Event Decor',
-    location: 'Dallas, Texas',
+    location: 'South Louisiana',
     // From the owner's testimonial ("already fully booked for next month"). The former
     // consultation-request multiplier was Ben's estimate, not client-reported, and is gone.
     result: 'Fully booked for next month',

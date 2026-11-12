@@ -64,7 +64,7 @@ describe('Catalog - decided prices', () => {
     const starter = getOffer('starter')!
     expect(starter.prices).toEqual([{ amount: 500 }])
     expect(formatOfferPrice(starter)).toBe('$500')
-    expect(starter.priceNote).toBe('Live within 5 business days after content arrives.')
+    expect(starter.priceNote).toBe('Live within 2 weeks after content arrives.')
     expect(starter.includes).toContain('One round of changes')
     expect(starter.summary).toContain('up to 6 sections (what you do, services, photos, reviews, about, contact)')
     expect(starter.summary).toContain('starter templates')
@@ -123,7 +123,7 @@ describe('Catalog - custom quote', () => {
 
   it('explains how it works in three steps and steers to a call', () => {
     expect(customQuote.steps.map((step) => step.title)).toEqual(['15-minute call', 'Written options', 'Pick one'])
-    expect(customQuote.steps[1].body).toContain('within 2 business days')
+    expect(customQuote.steps[1].body).toContain('within 5 business days')
     expect(customQuote.steps[2].body).toContain('in parts')
     expect(customQuote.primaryCta).toBe('Book a 15-minute call')
     expect(customQuote.secondaryCta).toEqual({ label: 'Describe your problem', href: '/inquiry?offer=custom' })
@@ -199,7 +199,7 @@ describe('Catalog - phone line and included list', () => {
       '$150/mo for larger sites',
     ])
     const starter = getIncludedItems(getOffer('starter')!)
-    expect(starter[starter.length - 1]).toBe('Live within 5 business days after content arrives.')
+    expect(starter[starter.length - 1]).toBe('Live within 2 weeks after content arrives.')
   })
 })
 

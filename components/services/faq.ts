@@ -7,6 +7,7 @@
 
 import { customQuote, formatOfferPrice, formatShortPrice, getOffer, type CatalogOffer } from '@/data/catalog';
 import { homeTrust } from '@/data/home';
+import { availability } from '@/data/availability';
 import type { Question } from './QuestionList';
 
 export interface FaqGroup {
@@ -23,7 +24,7 @@ function offer(key: 'starter' | 'audit' | 'care'): CatalogOffer {
   return found;
 }
 
-/** "Live within 5 business days after content arrives." to "live within 5 business days after content arrives". */
+/** "Live within 2 weeks after content arrives." to "live within 2 weeks after content arrives". */
 function lower(sentence: string): string {
   return sentence.charAt(0).toLowerCase() + sentence.slice(1).replace(/\.$/, '');
 }
@@ -43,7 +44,7 @@ export function buildFaqGroups(): FaqGroup[] {
       items: [
         {
           question: 'How much does a website cost?',
-          answer: `The ${starter.name.toLowerCase()} is ${starterPrice}. Anything bigger, like a multi-page site, booking or an online store, is a custom quote: after a 15-minute call I send written options at fixed prices within 2 business days. ${customQuote.range}`,
+          answer: `The ${starter.name.toLowerCase()} is ${starterPrice}. Anything bigger, like a multi-page site, booking or an online store, is a custom quote: after a 15-minute call I send written options at fixed prices within 5 business days. ${customQuote.range}`,
         },
         {
           question: `What is in the ${starter.name.toLowerCase()}?`,
@@ -65,13 +66,17 @@ export function buildFaqGroups(): FaqGroup[] {
       label: 'Process and timing',
       items: [
         {
+          question: availability.faq.question,
+          answer: availability.faq.answer,
+        },
+        {
           question: 'How fast can it be live?',
           answer: `A ${starter.name.toLowerCase()} is ${lower(starter.priceNote ?? starter.line)}. Larger sites and lead systems take longer, and the written option says exactly when.`,
         },
         {
           question: 'What happens after I book a call?',
           answer:
-            'We talk for 15 minutes about what is getting in the way. Within 2 business days you get written options with fixed prices. Once you pick one, I build it with a check-in every week, then launch it with 30 days of fixes.',
+            'We talk for 15 minutes about what is getting in the way. Within 5 business days you get written options with fixed prices. Once you pick one, I build it with a check-in every week, then launch it with 30 days of fixes.',
         },
         {
           question: 'What do I need to have ready?',

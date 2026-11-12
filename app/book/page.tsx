@@ -5,6 +5,7 @@ import { CalEmbed } from '@/components/booking/CalEmbed';
 import { Footer } from '@/components/layout/Footer';
 import { Eyebrow, Heading, MarginNote, Section } from '@/components/v3';
 import { BOOKING_PATH, INQUIRY_PATH, getCalLink } from '@/lib/constants';
+import { availability } from '@/data/availability';
 
 export const metadata: Metadata = {
   title: 'Book a 15-minute call',
@@ -35,7 +36,7 @@ export default function BookPage() {
               Pick a time that works.
             </Heading>
             <p className="mt-5 max-w-[60ch] text-body-lg text-[#4A574D]">
-              A short call with me, no prep required. Here is what we will cover.
+              A short call with me, no prep required. {availability.callNote} Here is what we will cover.
             </p>
             <ol className="mt-10 border-t border-primary-900/20">
               {covers.map((item, index) => (
@@ -63,7 +64,7 @@ export default function BookPage() {
                 >
                   Send me the details instead
                 </Link>
-                . I reply within one business day.
+                . I reply within 5 business days.
               </p>
             </div>
           </aside>

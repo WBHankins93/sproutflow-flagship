@@ -9,6 +9,7 @@ import {
   type CatalogPrice,
 } from '@/data/catalog';
 import { NUMERAL_CLASS, ON_PINE_SOFT, bookingHref } from './styles';
+import { availability } from '@/data/availability';
 
 // Pine section, like the homepage offer menu: Birch text, prices in Fira Code
 // Sun gold (9.12:1), cards on a lighter pine (#315037). Red pen never appears
@@ -50,6 +51,11 @@ function OfferCard({ offer, ctaPrefix }: { offer: CatalogOffer; ctaPrefix: strin
         ))}
       </p>
       <p className="mt-2 font-body text-body text-cream-300">{offer.line}</p>
+      {offer.key === 'care' && (
+        <p className="mt-1 font-body text-body-sm font-semibold text-cream-300" data-care-note>
+          {availability.careNote}
+        </p>
+      )}
       <ul className={`mt-4 space-y-1 font-body text-body-sm ${ON_PINE_SOFT}`}>
         {getIncludedItems(offer).map((item) => (
           <li key={item} className="flex gap-2">

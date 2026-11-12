@@ -114,7 +114,7 @@ describe('WebsiteCheck flow', () => {
     await waitFor(() => {
       expect(document.activeElement).toBe(sent)
     })
-    expect(screen.getByText(/within one business day/)).toBeInTheDocument()
+    expect(screen.getByText(/within 5 business days/)).toBeInTheDocument()
 
     expect(fetchMock).toHaveBeenCalledTimes(2)
     const [formspreeUrl, init] = fetchMock.mock.calls[1] as FetchArgs

@@ -11,6 +11,7 @@ import {
   type OfferKey,
 } from '@/data/catalog';
 import { homeOffers } from '@/data/home';
+import { availability } from '@/data/availability';
 import { INQUIRY_PATH, STARTER_PATH, getBookingHref } from '@/lib/constants';
 import { NUMERAL_CLASS } from './styles';
 
@@ -106,6 +107,11 @@ function OfferCard({ offer }: { offer: CatalogOffer }) {
         </div>
       </div>
       <p className="mt-1 font-body text-body-sm text-cream-300 md:mt-2">{offer.line}</p>
+      {offer.key === 'care' && (
+        <p className="mt-1 font-body text-body-sm font-semibold text-cream-300" data-care-note>
+          {availability.careNote}
+        </p>
+      )}
       <div className="mt-3 hidden md:block">{list}</div>
       <div className="mt-auto grid pt-1 md:pt-3">
         {isStarter ? (

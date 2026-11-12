@@ -66,7 +66,7 @@ export default function FAQPage() {
           Still have a question?
         </Heading>
         <p className={`mt-3 max-w-[60ch] font-body text-body-lg ${SOFT_TEXT}`}>
-          Ask me directly. I read every message myself and reply within one business day.
+          Ask me directly. I read every message myself and reply within 5 business days.
         </p>
         <div className="mt-4 flex flex-col items-start gap-1 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6">
           <Link href={bookingHref()} data-cta="faq" className={TEXT_LINK_CLASS}>
